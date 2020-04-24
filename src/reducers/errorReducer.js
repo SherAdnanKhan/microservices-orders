@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: null
-      }
+      };
+    default:
+      return state;
   }
 }

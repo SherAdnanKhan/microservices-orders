@@ -1,4 +1,4 @@
-import { START_LOADING, STOP_LOADING } from "../constants.js/actionTypes";
+import { START_LOADING, STOP_LOADING } from "../constants/actionTypes";
 
 export const startLoading = () => {
   return {

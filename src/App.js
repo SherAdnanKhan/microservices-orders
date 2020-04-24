@@ -1,14 +1,17 @@
 import React from 'react';
 import './App.css';
+import LoginForm from './components/auth/loginForm';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import RegisterForm from './components/auth/registerForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h2> Welcome to Meuzmnet! </h2>
-        <p> Create your own studio and manage your Art gallary. </p>
-      </header>
-    </div>
+    <Switch>
+      <Route exact path='/login' component={LoginForm} />
+      <Route exact path='/register' component={RegisterForm} />
+      <Redirect exact from='/' to='/login' />
+    </Switch>
+
   );
 }
 

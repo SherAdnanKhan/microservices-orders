@@ -1,0 +1,312 @@
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-regular-400.eot);
+  src: url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-regular-400.eot#iefix) format("embedded-opentype"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-regular-400.woff2) format("woff2"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-regular-400.woff) format("woff"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-regular-400.ttf) format("truetype"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-regular-400.svg#fontawesome) format("svg");
+}
+
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  src: url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-solid-900.eot);
+  src: url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-solid-900.eot#iefix) format("embedded-opentype"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-solid-900.woff2) format("woff2"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-solid-900.woff) format("woff"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-solid-900.ttf) format("truetype"), url(https://use.fontawesome.com/releases/v5.1.1/webfonts/fa-solid-900.svg#fontawesome) format("svg");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+
+@bodyBG: #000000;
+@fontColor: #ffffff;
+@gray: #a5a5a5;
+@fontFamily: 'Montserrat', sans-serif;
+@defaultFontSize: 1em;
+
+@desktop:   ~"only screen and (min-width: 960px) and (max-width: 1380px)";
+@tablet:    ~"only screen and (min-width: 769px) and (max-width: 959px)";
+@mobile:    ~"only screen (max-width: 768px)";
+
+body {
+  margin: 0;
+  padding: 0;
+  background: @bodyBG;
+  color: @fontColor;
+  font-family: @fontFamily;
+  font-size: @defaultFontSize;
+  font-variant: small-caps;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+h2 {
+  font-size: 1.1em;
+  font-weight: normal;
+}
+.return {
+  padding: 18px;
+  border-bottom: 1px solid #333333;
+  a {
+    text-decoration: none;
+    color: @fontColor;
+  }
+}
+.wrapper {
+  width: calc(100% - 40px);
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.loginScreen {
+  margin-top: 40px;
+  text-align: center;
+  width: 100%;
+  h2 {
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  form {
+    margin-top: 30px;
+    width: 100%;
+    label {
+      width: 100%;
+      text-align: left;
+      display: inline-block;
+      margin-bottom: 15px;
+      &[for="password"] {
+        position: relative;
+      }
+      .passwordEye {
+        position: absolute;
+        right: 15px;
+        top: 40px;
+        color: #ffffff;
+        user-select: none;
+        cursor: pointer;
+      }
+      input {
+        width: calc(100% - 22px);
+        background: black;
+        color: white;
+        padding: 15px 10px;
+        font-size: 1em;
+        font-variant: small-caps;
+        font-family: @fontFamily;
+        border-radius: 5px;
+        border: 1px solid gray;
+        margin-top: 3px;
+        &[type="password"] {
+          user-select: none;
+        }
+      }
+    }
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: #ffffff30;
+      border: 1px solid gray;
+      border-radius: 6px;
+      margin-top: 10px;
+      color: gray;
+      font-variant: small-caps;
+      font-size: 1.1em;
+    }
+    .error {
+      width: calc(100% - 22px);
+      margin: 0px auto;
+      padding: 10px;
+      border: 1px solid white;
+      color: white;
+      background: black;
+      border-radius: 5px;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+  }
+  .rightLeftLine {
+    font-size: 14px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    margin: 20px auto;
+  }
+
+  .rightLeftLine:before,
+  .rightLeftLine:after {
+    background-color: rgba(128, 128, 128, .4);
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+
+  .rightLeftLine:before {
+    right: 1.5em;
+    margin-left: -50%;
+  }
+
+  .rightLeftLine:after {
+    left: 1.5em;
+    margin-right: -50%;
+  }
+
+  .registerBtn {
+    a {
+      width: 100%;
+      padding: 15px 0;
+      color: white;
+      background: black;
+      transition: 0.5s;
+      border: 1px groove white;
+      border-radius: 25px;
+      text-decoration: none;
+      display: block;
+    }
+  }
+  .forgotPassword {
+    margin-top: 20px;
+    a {
+      text-decoration: none;
+      color: @gray;
+    }
+  }
+}
+
+@-webkit-keyframes cube {
+  0% {}
+  100% {
+    -webkit-transform: rotatey(360deg);
+    -ms-transform: rotatey(360deg);
+    transform: rotatey(360deg);
+  }
+}
+@keyframes cube {
+  0% { }
+  100% {
+    -webkit-transform: rotatey(360deg);
+    -ms-transform: rotatey(360deg);
+    transform: rotatey(360deg);
+  }
+}
+
+.procu {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  margin: 10px auto 20px auto;
+  .scene {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    -ms-perspective: 400px;
+    -moz-perspective: 400px;
+    -webkit-perspective: 400px;
+    perspective: 400px;
+    transition: 0.3s all ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
+    .cube {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-animation-name: cube;
+      -webkit-animation-duration: 30s;
+      -webkit-animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-direction: normal;
+      animation-name: cube;
+      animation-duration: 30s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: normal;
+      .cube-face{
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        overflow: hidden;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        opacity: .9;
+        border: 4px solid transparent;
+        transition: .5s;
+        &.cube-face-front {
+          background-color: black;
+          -webkit-transform: translate3d(0,0, 78px);
+          -ms-transform: translate3d(0,0, 78px);
+          transform: translate3d(0,0, 78px);
+        }
+        &.cube-face-back {
+          background-color: black;
+          -webkit-transform: rotatey(180deg) translate3d(0,0,78px);
+          -ms-transform: rotatey(180deg) translate3d(0,0,78px);
+          transform: rotatey(180deg) translate3d(0,0,78px);
+        }
+        &.cube-face-left {
+          background-color: black;
+          -webkit-transform: rotatey(-90deg) translate3d(0,0,78px);
+          -ms-transform: rotatey(-90deg) translate3d(0,0,78px);
+          transform: rotatey(-90deg) translate3d(0,0,78px);
+        }
+        &.cube-face-right{
+          background-color: black;
+          -webkit-transform: rotatey(90deg) translate3d(0,0,78px);
+          -ms-transform: rotatey(90deg) translate3d(0,0,78px);
+          transform: rotatey(90deg) translate3d(0,0,78px);
+        }
+      }
+    }
+  }
+
+}
+* {
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.registerationScreen {
+  height: calc(100vh - 58px);
+  text-align: center;
+  .view {
+    width: 100%;
+    align-self: center;
+    .logo {
+      max-width: 90px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+      }
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #fff;
+      border-radius: 36px;
+      margin-top: 10px;
+      font-variant: small-caps;
+      font-size: 1em;
+      border: 1px solid #000;
+    }
+  }
+}
