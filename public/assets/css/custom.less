@@ -58,6 +58,28 @@ h2 {
   display: flex;
   flex-wrap: wrap;
 }
+.home {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 450px;
+  width: 100%;
+  max-height: 450px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  .animatedLogo {
+    align-self: self-end;
+    width: 100%;
+    text-align: center;
+  }
+  .coming {
+    align-self: flex-end;
+    width: 100%;
+  }
+}
 
 .loginScreen {
   margin-top: 40px;
@@ -94,8 +116,6 @@ h2 {
         color: white;
         padding: 15px 10px;
         font-size: 1em;
-        font-variant: small-caps;
-        font-family: @fontFamily;
         border-radius: 5px;
         border: 1px solid gray;
         margin-top: 3px;
