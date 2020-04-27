@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 // import Input from '../common/input';
 
 const LoginForm = () => {
@@ -81,7 +82,7 @@ const LoginForm = () => {
                 onChange={handleChange} />
             </label>
             <button
-              className="btn"
+              className={!validate() ? 'btn btn-validate' : 'btn'}
               name="login_user"
               disabled={validate()}
               style={{ backgroundColor: 'rgba(61, 61, 61, 0.4)', color: 'rgba(128, 128, 128, 0.3)' }}
@@ -96,7 +97,7 @@ const LoginForm = () => {
             </div>
 
             <div className="forgotPassword">
-              <a href="forgot.php">Forgot password?</a>
+              <Link to="/forgot">Forgot password?</ Link>
             </div>
           </form>
         </div>
