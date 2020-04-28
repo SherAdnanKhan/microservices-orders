@@ -93,7 +93,7 @@ const LoginForm = () => {
             <div className="rightLeftLine">  or  </div>
 
             <div className="registerBtn">
-              <a href="register.html">Create New Artist Account</a>
+              <Link to="/register">Create New Artist Account</Link>
             </div>
 
             <div className="forgotPassword">

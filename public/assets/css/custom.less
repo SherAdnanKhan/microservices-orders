@@ -24,7 +24,7 @@
 
 @desktop:   ~"only screen and (min-width: 960px) and (max-width: 1380px)";
 @tablet:    ~"only screen and (min-width: 769px) and (max-width: 959px)";
-@mobile:    ~"only screen (max-width: 768px)";
+@mobile:    ~"only screen and (max-width: 768px)";
 
 body {
   margin: 0;
@@ -46,9 +46,12 @@ h2 {
 .return {
   padding: 18px;
   border-bottom: 1px solid #333333;
-  a {
-    text-decoration: none;
+  span {
     color: @fontColor;
+    cursor: pointer;
+  }
+  &[current-step="1"] {
+    visibility: hidden;
   }
 }
 .wrapper {
@@ -305,19 +308,98 @@ h2 {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.is-invalid {
+  border: 2px solid orchid !important;
+}
+.is-valid {
+  border: 2px solid green;
+}
+
 .registerationScreen {
   height: calc(100vh - 58px);
   text-align: center;
   .view {
     width: 100%;
-    align-self: center;
-    .logo {
-      max-width: 90px;
-      margin: 0 auto;
-      img {
-        width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    [step] {
+      width: 100%;
+      // display: none;
+      &[active="true"] {
+        display: block;
       }
     }
+    [step="1"] {
+      align-self: flex-end;
+      .logo {
+        max-width: 90px;
+        margin: 0 auto;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    [step="2"],
+    [step="3"],
+    [step="4"],
+    [step="5"],
+    [step="6"],
+    [step="7"] {
+      align-self: flex-end;
+      text-align: left;
+      &.fullWidth {
+        label {
+          width: calc(100% - 13px);
+        }
+      }
+      label {
+        width: calc(50% - 13px);
+        text-align: left;
+        display: inline-block;
+        margin: 5px;
+        @media @mobile {
+          width: calc(100% - 10px);
+        }
+        .labelText {
+          margin-right: auto;
+          display: block;
+        }
+        input {
+          width: calc(100% - 22px);
+          border-radius: 5px;
+          padding: 10px;
+          max-width: 100%;
+          text-align: left;
+          background: #000000;
+          color: #ffffff;
+        }
+      }
+      .error {
+        color: orchid;
+        text-align: center;
+        padding: 10px;
+      }
+      .avatar {
+        border: 1px solid #ffffff;
+        max-width: 200px;
+        height: 200px;
+        border-radius: 5px;
+        margin: 20px auto;
+        overflow: hidden;
+        display: block;
+        img {
+          height: auto;
+          max-width: 205px;
+        }
+      }
+      input[type="file"] {
+        display: none;
+      }
+    }
+  }
+  .action {
+    width: 100%;
+    align-self: flex-start;
     .btn {
       width: 100%;
       padding: 10px;
@@ -327,6 +409,7 @@ h2 {
       font-variant: small-caps;
       font-size: 1em;
       border: 1px solid #000;
+      cursor: pointer;
     }
   }
 }
