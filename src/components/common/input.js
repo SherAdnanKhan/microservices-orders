@@ -1,20 +1,23 @@
-// import React from 'react'
-// import { Form } from 'react-bootstrap';
+import React from 'react'
 
-// const Input = ({ name, label, error, type = 'text', ...rest }) => {
-//   console.log("error: ", error);
-//   return (
-//     <Form.Group controlId={name}>
-//       {label && <Form.Label>{label}</Form.Label>}
-//       <Form.Control type={type} name={name} {...rest} className={error && 'invalid-input'} />
+const Input = ({ id, name, label, error, children, type = 'text', ...rest }) => {
+  console.log(rest);
+  return (
+    <>
+      <label htmlFor={id}>
+        <span className="labelText" > {label} </span>
+        {children && children}
+        <input
+          type={type}
+          name={name}
+          id={id}
+          className={error && "is-invalid"}
+          {...rest}
+        />
+      </label >
+      {error && <div className="error"> {error}</div>}
+    </>
+  );
+};
 
-//       {error &&
-//         <small className="text-danger">
-//           {error}
-//         </small>
-//       }
-//     </Form.Group>
-//   );
-// };
-
-// export default Input;
+export default Input;

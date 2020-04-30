@@ -12,7 +12,7 @@ function App() {
       <Route exact path='/login' component={LoginForm} />
       <Route exact path='/forgot' component={ForgotPasswordForm} />
       <Route exact path='/register' component={RegisterForm} />
-      <Route exact path='/change-password' component={ChangePassword} />
+      <Route exact path='/settings/change-password' component={ChangePassword} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
     </Switch>

@@ -8,12 +8,12 @@ const RegisterForm = () => {
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     username: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirm_password: '',
     avatar: ''
   });
 
@@ -21,16 +21,16 @@ const RegisterForm = () => {
     const errors = {};
 
     if (step === 2) {
-      if (!data.firstName && !data.lastName) {
+      if (!data.first_name && !data.last_name) {
         errors.name = 'Please fill first and last name.';
-        errors.firstName = true;
-        errors.lastName = true;
-      } else if (!data.firstName) {
+        errors.first_name = true;
+        errors.last_name = true;
+      } else if (!data.first_name) {
         errors.name = 'Please fill first name.';
-        errors.firstName = true;
-      } else if (!data.lastName) {
+        errors.first_name = true;
+      } else if (!data.last_name) {
         errors.name = 'Please fill last name.';
-        errors.lastName = true;
+        errors.last_name = true;
       }
     } else if (step === 3) {
       if (!data.username) {
@@ -45,8 +45,8 @@ const RegisterForm = () => {
     } else if (step === 5) {
       if (data.password.length < 8) {
         errors.password = 'Password must have at least eight characters';
-      } else if (data.password !== data.confirmPassword) {
-        errors.confirmPassword = 'Password and confirm password do not match.';
+      } else if (data.password !== data.confirm_password) {
+        errors.confirm_password = 'Password and confirm password do not match.';
       }
     } else if (step === 6) {
       if (!data.avatar) {
@@ -103,25 +103,25 @@ const RegisterForm = () => {
           {step === 2 &&
             <div className="animated" step={2}>
               <h3>What is your Real Name?</h3>
-              <label htmlFor="firstName">
+              <label htmlFor="first_name">
                 <span className="labelText">First Name</span>
                 <input
                   type="text"
-                  name="firstName"
-                  className={errors.firstName && 'is-invalid'}
-                  id="firstName"
-                  value={data.firstName}
+                  name="first_name"
+                  className={errors.first_name && 'is-invalid'}
+                  id="first_name"
+                  value={data.first_name}
                   onChange={handleChange}
                 />
               </label>
-              <label htmlFor="lastname">
+              <label htmlFor="last_name">
                 <span className="labelText">Last Name</span>
                 <input
                   type="text"
-                  name="lastName"
-                  id="lastname"
-                  className={errors.lastName && 'is-invalid'}
-                  value={data.lastName}
+                  name="last_name"
+                  id="last_name"
+                  className={errors.last_name && 'is-invalid'}
+                  value={data.last_name}
                   onChange={handleChange}
                 />
               </label>
@@ -179,14 +179,14 @@ const RegisterForm = () => {
                 <span className="labelText">Confirm Password</span>
                 <input
                   type="password"
-                  name="confirmPassword"
+                  name="confirm_password"
                   id="password_2"
-                  className={errors.confirmPassword && "is-invalid"}
-                  value={data.confirmPassword}
+                  className={errors.confirm_password && "is-invalid"}
+                  value={data.confirm_password}
                   onChange={handleChange}
                 />
               </label>
-              {errors.confirmPassword && <div className="error"> {errors.confirmPassword} </div>}
+              {errors.confirm_password && <div className="error"> {errors.confirm_password} </div>}
             </div>
           }
           {step === 6 &&
