@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { emailWithDomains } from '../../constants/regex';
+import Input from '../common/input';
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -73,7 +74,6 @@ const RegisterForm = () => {
 
     if (!errors) {
       if (step < 7) {
-        console.log("adsadadad");
         setStep(step => step + 1);
       }
     }
@@ -103,103 +103,91 @@ const RegisterForm = () => {
           {step === 2 &&
             <div className="animated" step={2}>
               <h3>What is your Real Name?</h3>
-              <label htmlFor="first_name">
-                <span className="labelText">First Name</span>
-                <input
-                  type="text"
-                  name="first_name"
-                  className={errors.first_name && 'is-invalid'}
-                  id="first_name"
-                  value={data.first_name}
-                  onChange={handleChange}
-                />
-              </label>
-              <label htmlFor="last_name">
-                <span className="labelText">Last Name</span>
-                <input
-                  type="text"
-                  name="last_name"
-                  id="last_name"
-                  className={errors.last_name && 'is-invalid'}
-                  value={data.last_name}
-                  onChange={handleChange}
-                />
-              </label>
+              <Input
+                name="first_name"
+                id="first_name"
+                label="First Name"
+                value={data.first_name}
+                onChange={handleChange}
+                error={errors.first_name}
+                showError={false}
+              />
+              <Input
+                name="last_name"
+                id="last_name"
+                label="Last Name"
+                value={data.last_name}
+                onChange={handleChange}
+                error={errors.last_name}
+                showError={false}
+              />
               {errors.name && <div className="error"> {errors.name} </div>}
             </div>
           }
           {step === 3 &&
             <div className="animated fullWidth" step={3}>
-              <label htmlFor="username">
-                <span className="labelText">Select an Artistname</span>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  className={errors.username && 'is-invalid'}
-                  value={data.username}
-                  onChange={handleChange}
-                />
-              </label>
-              {errors.username && <div className="error"> {errors.username} </div>}
+              <Input
+                name="username"
+                id="username"
+                label="Select an Artistname"
+                value={data.username}
+                onChange={handleChange}
+                error={errors.username}
+              />
             </div>
           }
           {step === 4 &&
             <div className="animated fullWidth" step={4}>
-              <label htmlFor="email">
-                <span className="labelText">Email</span>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  className={errors.email && 'is-invalid'}
-                  value={data.email}
-                  onChange={handleChange}
-                />
-              </label>
-              {errors.email && <div className="error"> {errors.email} </div>}
+              <Input
+                name="email"
+                id="email"
+                label="Email"
+                value={data.email}
+                onChange={handleChange}
+                error={errors.email}
+              />
             </div>
           }
           {step === 5 &&
             <div className="animated fullWidth" step={5}>
-              <label htmlFor="password_1">
-                <span className="labelText">Create a Password</span>
-                <input
-                  type="password"
-                  name="password"
-                  id="password_1"
-                  className={errors.password && "is-invalid"}
-                  value={data.password}
-                  onChange={handleChange}
-                />
-              </label>
-              {errors.password && <div className="error"> {errors.password} </div>}
-
-              <label htmlFor="password_2">
-                <span className="labelText">Confirm Password</span>
-                <input
-                  type="password"
-                  name="confirm_password"
-                  id="password_2"
-                  className={errors.confirm_password && "is-invalid"}
-                  value={data.confirm_password}
-                  onChange={handleChange}
-                />
-              </label>
-              {errors.confirm_password && <div className="error"> {errors.confirm_password} </div>}
+              <Input
+                type="password"
+                name="password"
+                id="password_1"
+                label="Create a Password"
+                value={data.password}
+                onChange={handleChange}
+                error={errors.password}
+              />
+              <Input
+                type="password"
+                name="confirm_password"
+                id="password_2"
+                label="Confirm Password"
+                value={data.confirm_password}
+                onChange={handleChange}
+                error={errors.confirm_password}
+              />
             </div>
           }
           {step === 6 &&
             <div className="animated fullWidth" step={6} >
-              <h3>Click avatar to add your own profile pic</h3>
-              <label htmlFor="avatar" className={errors.avatar ? "avatar clickable is-invalid" : "avatar clickable"}>
-                {data.avatar && <img src={data.avatar} alt="avatar" />}
-              </label>
-              <input type="file" name="avatar" id="avatar" accept=".png, .jpg, .jpeg" onChange={handleChange} />
-              {errors.avatar && <div className="error"> {errors.avatar} </div>}
+              <Input
+                type="file"
+                name="avatar"
+                id="avatar"
+                accept=".png, .jpg, .jpeg"
+                onChange={handleChange}
+                error={errors.avatar}
+              >
+                <h3>Click avatar to add your own profile pic</h3>
+                <label htmlFor="avatar" className={errors.avatar ? "avatar clickable is-invalid" : "avatar clickable"}>
+                  {data.avatar && <img src={data.avatar} alt="avatar" />}
+                </label>
+              </Input>
             </div>
           }
-          <div className="animated fullWidth" step={7} />
+          {/* <div className="animated fullWidth" step={7} /> */}
         </form>
         <div className="action">
           <button
