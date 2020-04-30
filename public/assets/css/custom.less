@@ -94,7 +94,6 @@ h2 {
     z-index: 2;
     width: 100%;
   }
-
   form {
     margin-top: 30px;
     width: 100%;
@@ -131,11 +130,9 @@ h2 {
     .btn {
       width: 100%;
       padding: 15px;
-      background: #ffffff30;
-      border: 1px solid gray;
-      border-radius: 6px;
+      border: 1px groove white;
+      border-radius: 30px;
       margin-top: 10px;
-      color: gray;
       font-variant: small-caps;
       font-size: 1.1em;
     }
@@ -182,8 +179,9 @@ h2 {
 
   .registerBtn {
     a {
-      width: 100%;
+      width: 95%;
       padding: 15px 0;
+      margin: 0 auto;
       color: white;
       background: black;
       transition: 0.5s;
@@ -195,6 +193,7 @@ h2 {
   }
   .forgotPassword {
     margin-top: 20px;
+    margin-bottom: 20px;
     a {
       text-decoration: none;
       color: @gray;
@@ -218,6 +217,23 @@ h2 {
     transform: rotatey(360deg);
   }
 }
+
+//common 
+@keyframes enabledEffect {
+  from {background-color: #ffffff30; color: gray;}
+  to {background-color: white; color: black;}
+}
+.btnEnabled {
+  animation-name: enabledEffect;
+  animation-duration: 1s ;
+}
+
+.btnDisabled {
+  background-color: #ffffff30;
+  color: gray;
+}
+
+//end-common
 
 .procu {
   position: relative;
@@ -464,29 +480,76 @@ h2 {
   }
 }
 
-
-// forgot password screeen
-.header {
-  width: 90vw;
-  margin: 30px auto 0px;
-  color: white;
-  background: black;
+.forgotPasswordScreen {
   text-align: center;
-  border-bottom: none;
-  border-radius: 10px 10px 0px 0px;
-  padding: 20px;
-}
 
-#trouble {
-  font-family: montserrat;
-  font-size: 14px;
+  .header {
+    width: 90vw;
+    margin: 30px auto 0px;
+    color: white;
+    background: black;
+    text-align: center;
+    border-bottom: none;
+    border-radius: 10px 10px 0px 0px;
+    padding: 20px;
+  }
 
-  a {
-    color: violet;
+  form {
+    margin-top: 30px;
+    width: 100%;
+    label {
+      width: 100%;
+      text-align: left;
+      display: inline-block;
+      margin-bottom: 15px; 
+      input {
+        width: calc(100% - 22px);
+        background: black;
+        color: white;
+        padding: 15px 10px;
+        font-size: 1em;
+        border-radius: 5px;
+        border: 1px solid gray;
+        margin-top: 3px;
+      }
+    }
+    
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .btn {
+      width: 80vw;
+      padding: 10px;
+      font-size: 15px;
+      color: black;
+      background: white;
+      transition: .5s;
+      border: 1px groove white;
+      border-radius: 25px;
+    }
+
+    .error {
+      color: orchid;
+      text-align: center;
+      padding: 10px;
+    }
+  }
+
+  #trouble {
+    font-family: montserrat;
+    font-size: 14px;
+  
+    a {
+      color: violet;
+    }
+  }
+
+  p {
+    margin-top: 35px;
   }
 }
 
-a {
-  color: white;
-  text-decoration: none;
-}
+
+
