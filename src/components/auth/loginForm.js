@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Input from '../common/input';
 
 const LoginForm = () => {
   const [data, setData] = useState({ username: '', password: '' });
@@ -56,30 +57,26 @@ const LoginForm = () => {
             {/* <div className="error">
               Wrong username/password combination
             </div> */}
-
-            <label htmlFor="username">
-              <span className="labelText">Artistname or Email</span>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                value={data.username}
-                onChange={handleChange}
-              />
-            </label>
-
-            <label htmlFor="password">
-              <span className="labelText">Password</span>
+            <Input
+              name="username"
+              id="username"
+              label="Artistname or Email"
+              value={data.username}
+              onChange={handleChange}
+            />
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              label="password"
+              value={data.password}
+              onChange={handleChange}
+            >
               <span className="passwordEye" eye="off">
                 <i className="far fa-eye-slash"></i>
               </span>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={data.password}
-                onChange={handleChange} />
-            </label>
+            </Input>
+
             <button
               className={!validate() ? 'btn btnEnabled' : 'btn btnDisabled'}
               name="login_user"

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Input from '../common/input';
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
@@ -38,16 +39,13 @@ const ForgotPasswordForm = () => {
           <h2>Forgot Password?</h2>
         </div>
         <form className="form" onSubmit={handleSubmit}>
-          <label htmlFor="email">
-            Enter your e-mail address below to reset you password
-            <input
-              type="text"
-              name="email"
-              id="email"
-              value={email}
-              onChange={handleChange}
-            />
-          </label>
+          <Input
+            name="email"
+            id="email"
+            label="Enter your e-mail address below to reset you password"
+            value={email}
+            onChange={handleChange}
+          />
           {/* <div className="message"></div> */}
           <button
             id="submit"

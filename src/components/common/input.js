@@ -1,7 +1,6 @@
 import React from 'react'
 
-const Input = ({ id, name, label, error, children, type = 'text', ...rest }) => {
-  console.log(rest);
+const Input = ({ id, name, label, error, showError = true, children, type = 'text', ...rest }) => {
   return (
     <>
       <label htmlFor={id}>
@@ -15,7 +14,7 @@ const Input = ({ id, name, label, error, children, type = 'text', ...rest }) => 
           {...rest}
         />
       </label >
-      {error && <div className="error"> {error}</div>}
+      {showError && error && <div className="error"> {error} </div>}
     </>
   );
 };

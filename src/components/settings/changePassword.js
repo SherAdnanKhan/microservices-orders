@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Input from '../common/input';
 
 const ChangePassword = () => {
   const [data, setData] = useState({
@@ -58,43 +59,34 @@ const ChangePassword = () => {
   return (
     <div className="wrapper changePasswordScreen">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="currentPassword">
-          Current Password
-          <input
-            type="password"
-            name="currentPassword"
-            id="currentPassword"
-            className={errors.currentPassword && 'is-invalid'}
-            value={data.currentPassword}
-            onChange={handleChange}
-          />
-          {errors.currentPassword && <div className="error"> {errors.currentPassword} </div>}
-        </label>
-        <label htmlFor="newPassword">
-          New Password
-          <input
-            type="password"
-            name="newPassword"
-            id="newPassword"
-            className={errors.newPassword && 'is-invalid'}
-            value={data.newPassword}
-            onChange={handleChange}
-          />
-          {errors.newPassword && <div className="error"> {errors.newPassword} </div>}
-        </label>
-        <label htmlFor="confirmPassword">
-          Confirm New Password
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            className={errors.confirmPassword && 'is-invalid'}
-            value={data.confirmPassword}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.confirmPassword && <div className="error"> {errors.confirmPassword} </div>}
-        <button className={validate() ? 'btn btnDisabled' : 'btn btnEnabled'} disabled={!validate()}> Change Password</button>
+        <Input
+          type="password"
+          name="currentPassword"
+          id="currentPassword"
+          label="Current Password"
+          value={data.currentPassword}
+          onChange={handleChange}
+          error={errors.currentPassword}
+        />
+        <Input
+          type="password"
+          name="newPassword"
+          id="newPassword"
+          label="New Password"
+          value={data.newPassword}
+          onChange={handleChange}
+          error={errors.newPassword}
+        />
+        <Input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          label="Confirm New Password"
+          value={data.confirmPassword}
+          onChange={handleChange}
+          error={errors.confirmPassword}
+        />
+        <button className={validate() ? 'btn btnDisabled' : 'btn btnEnabled'} disabled={validate()}> Change Password</button>
       </form>
     </div>
   )
