@@ -33,6 +33,7 @@ const ChangePassword = () => {
         break;
       case 'newPassword':
         newErrors.newPassword = input.value.length < 8 ? 'Password must have at least eight characters.' : '';
+        // if (input.value === 8) newErrors.confirmPassword = data.confirmPassword !== input.value ? 'Password and confirm password do not match.' : '';
         break;
       case 'confirmPassword':
         newErrors.confirmPassword = data.newPassword !== input.value ? 'Password and confirm password do not match.' : '';
@@ -86,7 +87,7 @@ const ChangePassword = () => {
           onChange={handleChange}
           error={errors.confirmPassword}
         />
-        <button className={validate() ? 'btn btnDisabled' : 'btn btnEnabled'} disabled={validate()}> Change Password</button>
+        <button className="btn" disabled={validate()}> Change Password</button>
       </form>
     </div>
   )
