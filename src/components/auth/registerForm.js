@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
 import { emailWithDomains } from '../../constants/regex';
 import Input from '../common/input';
+import Spinner from '../common/spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../../actions/authActions';
 
 const RegisterForm = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const {
+    loading: { loading },
+    error: { error }
+  } = useSelector(state => state);
 
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
@@ -17,6 +25,13 @@ const RegisterForm = () => {
     confirm_password: '',
     avatar: ''
   });
+
+  useEffect(() => {
+    if (error) {
+      setErrors(error);
+      console.log(error);
+    }
+  }, [error]);
 
   const validate = () => {
     const errors = {};
@@ -75,6 +90,8 @@ const RegisterForm = () => {
     if (!errors) {
       if (step < 7) {
         setStep(step => step + 1);
+      } else {
+        dispatch(register(data));
       }
     }
     setErrors(errors || {});
@@ -185,9 +202,11 @@ const RegisterForm = () => {
                   {data.avatar && <img src={data.avatar} alt="avatar" />}
                 </label>
               </Input>
+
             </div>
           }
           {/* <div className="animated fullWidth" step={7} /> */}
+          {loading && <Spinner />}
         </form>
         <div className="action">
           <button

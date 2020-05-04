@@ -43,6 +43,11 @@ h2 {
   font-size: 1.1em;
   font-weight: normal;
 }
+
+input {
+  outline: none;
+}
+
 .return {
   padding: 18px;
   border-bottom: 1px solid #333333;
@@ -135,7 +140,17 @@ h2 {
       margin-top: 10px;
       font-variant: small-caps;
       font-size: 1.1em;
+      background-color: #ffffff30; 
+      color: gray;
+      transition: all ;
+      transition-duration: 1s;
     }
+
+    .btn:enabled{
+      background-color: white; 
+      color: black;
+    }
+
     .error {
       width: calc(100% - 22px);
       margin: 0px auto;
@@ -219,19 +234,21 @@ h2 {
 }
 
 //common 
-@keyframes enabledEffect {
-  from {background-color: #ffffff30; color: gray;}
-  to {background-color: white; color: black;}
-}
-.btnEnabled {
-  animation-name: enabledEffect;
-  animation-duration: 1s ;
-}
+// @keyframes enabledEffect {
+//   from {background-color: #ffffff30; color: gray;}
+//   to {background-color: white; color: black;}
+// }
+// .btnEnabled {
+//    background-color: white; color: black;
 
-.btnDisabled {
-  background-color: #ffffff30;
-  color: gray;
-}
+//   // animation-name: enabledEffect;
+//   // animation-duration: 1s ;
+// }
+
+// .btnDisabled {
+//   background-color: #ffffff30;
+//   color: gray;
+// }
 
 //end-common
 
@@ -461,16 +478,15 @@ h2 {
       margin-top: 10px;
       font-variant: small-caps;
       font-size: 1.1em;
-    }
-
-    // .btnEnabled {
-    //   background-color: gray;
-    //   color: white;
-    // }
-
-    .btnDisabled {
       background-color: black;
       color: gray;
+      transition: all;
+      transition-duration: 1s;
+    }
+
+    .btn:enabled{
+      background-color: white; 
+      color: black;
     }
 
     .error {

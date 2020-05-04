@@ -1,16 +1,31 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Link, Redirect } from 'react-router-dom';
 import Input from '../common/input';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../common/spinner';
+import { login, getCurrentUser } from '../../actions/authActions';
 
 const LoginForm = () => {
-  const [data, setData] = useState({ username: '', password: '' });
+  const [data, setData] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const {
+    loading: { loading },
+    error: { error }
+  } = useSelector(state => state);
   // const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (error) {
+      // setErrors(error);
+      console.log(error);
+    }
+  }, [error]);
 
   const validate = () => {
     const errors = {};
 
-    if (!data.username) {
-      errors.username = 'Please enter an artistname or email.';
+    if (!data.email) {
+      errors.email = 'Please enter an artistname or email.';
     }
 
     if (!data.password) {
@@ -26,17 +41,12 @@ const LoginForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const errors = validate();
-
-    if (!errors) {
-
-    }
-
-    // setErrors(errors || {});
+    dispatch(login(data));
   };
 
   return (
     <>
+      {getCurrentUser() && <Redirect to="/home" />}
       <div className="wrapper">
         <div className="loginScreen">
           <h1>Meuzm</h1>
@@ -54,14 +64,16 @@ const LoginForm = () => {
           <h2>LOGIN</h2>
 
           <form onSubmit={handleSubmit}>
-            {/* <div className="error">
-              Wrong username/password combination
-            </div> */}
+            {error &&
+              <div className="error">
+                {error.errors["email"][0]}
+              </div>
+            }
             <Input
-              name="username"
-              id="username"
+              name="email"
+              id="email"
               label="Artistname or Email"
-              value={data.username}
+              value={data.email}
               onChange={handleChange}
             />
             <Input
@@ -78,13 +90,13 @@ const LoginForm = () => {
             </Input>
 
             <button
-              className={!validate() ? 'btn btnEnabled' : 'btn btnDisabled'}
+              className="btn"
               name="login_user"
               disabled={validate()}
             >
               Login
             </button>
-
+            {loading && <Spinner />}
             <div className="rightLeftLine">  or  </div>
 
             <div className="registerBtn">
