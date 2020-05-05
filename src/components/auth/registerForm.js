@@ -33,6 +33,16 @@ const RegisterForm = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (localStorage.data) {
+      setData(JSON.parse(localStorage.getItem('data')));
+    }
+
+    if (localStorage.step) {
+      setStep(JSON.parse(localStorage.getItem('step')))
+    }
+  }, []);
+
   const validate = () => {
     const errors = {};
 
@@ -83,13 +93,26 @@ const RegisterForm = () => {
     }
   }
 
+  const handleBackPress = () => {
+    if (step === 1) {
+      return history.push('/login');
+    }
+
+    setStep(step => step - 1);
+    localStorage.setItem('step', JSON.stringify(step - 1));
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
     const errors = validate();
 
     if (!errors) {
       if (step < 7) {
+        localStorage.setItem('step', JSON.stringify(step + 1));
+        localStorage.setItem('data', JSON.stringify(data));
+
         setStep(step => step + 1);
+
       } else {
         dispatch(register(data));
       }
@@ -99,7 +122,7 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <div className="return" onClick={() => step === 1 ? history.push('/login') : setStep(step => step - 1)}>
+      <div className="return" onClick={handleBackPress}>
         <span>
           <i className="fas fa-arrow-left" />
         </span>
