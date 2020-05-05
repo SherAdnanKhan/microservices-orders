@@ -37,14 +37,14 @@ $(document).on('click', '.passwordEye', async function () {
 //   console.log('currentStep', currentStep);
 // });
 
-$(document).ready(function () {
-  $('.view').keydown(function (event) {
-    if (event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-});
+// $(document).ready(function () {
+//   $('.view').keydown(function (event) {
+//     if (event.keyCode == 13) {
+//       event.preventDefault();
+//       return false;
+//     }
+//   });
+// });
 
 // async function getCurrentStepNo() {
 //   return $('.registerationScreen div[active="true"]').attr('step');
