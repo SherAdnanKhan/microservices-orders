@@ -66,7 +66,8 @@ const LoginForm = () => {
           <form onSubmit={handleSubmit}>
             {error &&
               <div className="error">
-                {error.errors["email"][0]}
+                {error.errors.email && error.errors.email[0]}
+                {error.errors.error && error.message}
               </div>
             }
             <Input
