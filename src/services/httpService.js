@@ -2,6 +2,7 @@ import axios from 'axios';
 import store from '../store';
 import { startLoading, stopLoading } from '../actions/loadingActions';
 import { setError, clearError } from '../actions/errorActions';
+import { getFormattedErrors } from '../utils/helperFunctions';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -29,7 +30,7 @@ axios.interceptors.response.use(
     }
 
     store.dispatch(stopLoading());
-    store.dispatch(setError(error.response && error.response.data));
+    store.dispatch(setError(getFormattedErrors(error.response && error.response.data)));
 
     return Promise.reject(error);
   }
@@ -41,4 +42,4 @@ export default {
   put: axios.put,
   patch: axios.patch,
   delete: axios.delete
-}
+};

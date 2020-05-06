@@ -1,6 +1,6 @@
 import http from "../services/httpService"
 import { userKey, tokenKey } from "../constants/keys"
-import isEmpty from "../utils/helperFunctions";
+import { isEmpty } from "../utils/helperFunctions";
 
 export const register = credentials => dispatch => {
   http
@@ -13,7 +13,6 @@ export const register = credentials => dispatch => {
       window.location.href = '/welcome';
     })
     .catch(res => {
-      console.log(res.response);
     });
 };
 
@@ -25,7 +24,6 @@ export const login = credentials => dispatch => {
       window.location.href = '/lobby';
     })
     .catch(res => {
-      console.log(res.response);
     });
 };
 
