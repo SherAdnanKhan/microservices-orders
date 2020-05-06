@@ -14,6 +14,7 @@ const RegisterForm = () => {
     error: { error }
   } = useSelector(state => state);
 
+  const [image, setImage] = useState('');
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
@@ -23,24 +24,18 @@ const RegisterForm = () => {
     email: '',
     password: '',
     confirm_password: '',
-    avatar: '',
-    image: ''
+    avatar: null,
   });
 
-  useEffect(() => {
-    if (error) {
-      setErrors(error);
-      console.log(error);
-    }
-  }, [error]);
 
   useEffect(() => {
     if (localStorage.data) {
-      setData(JSON.parse(localStorage.getItem('data')));
+      setData(JSON.parse(localStorage.getItem('data')))
     }
 
     if (localStorage.step) {
-      setStep(JSON.parse(localStorage.getItem('step')));
+      const previousStep = JSON.parse(localStorage.getItem('step'));
+      previousStep === 7 ? setStep(previousStep - 1) : setStep(previousStep);
     } else {
       setStep(1);
     }
@@ -95,12 +90,9 @@ const RegisterForm = () => {
   }
 
   const handleChange = ({ target: input }) => {
-    if (input.type === 'file') {
-      if (input.files[0]) {
-        setData({ ...data, [input.name]: input.files[0], image: URL.createObjectURL(input.files[0]) });
-        // const data = JSON.parse(localStorage.getItem('data'));
-        // // data.i
-      }
+    if (input.type === 'file' && input.files[0]) {
+      setData({ ...data, [input.name]: input.files[0] });
+      setImage(URL.createObjectURL(input.files[0]))
     } else {
       setData({ ...data, [input.name]: input.value });
     }
@@ -118,12 +110,13 @@ const RegisterForm = () => {
   const handleNextPress = () => {
     const errors = validate();
 
-    if (!errors) {
-      if (step < 7) {
-        setStep(step => step + 1);
-        localStorage.setItem('step', JSON.stringify(step + 1));
-        localStorage.setItem('data', JSON.stringify(data));
-      }
+    if (!errors && step < 7) {
+      setStep(step => step + 1);
+      const newData = { ...data };
+      delete newData.avatar;
+
+      localStorage.setItem('step', JSON.stringify(step + 1));
+      localStorage.setItem('data', JSON.stringify(newData));
     }
     setErrors(errors || {});
   }
@@ -133,9 +126,8 @@ const RegisterForm = () => {
     const formData = new FormData();
 
     for (let key in data) {
-      if (key !== 'image') formData.append(key, data[key]);
+      formData.append(key, data[key]);
     }
-
     dispatch(register(formData));
   }
 
@@ -149,7 +141,7 @@ const RegisterForm = () => {
           </span>
         </div>
         <div className="wrapper registerationScreen">
-          <form className="view" enctype="multipart/form-data" onSubmit={handleSubmit}>
+          <form className="view" onSubmit={handleSubmit}>
             {step === 1 &&
               <div className="animated" step={1} active="true">
                 <div className="logo">
@@ -158,7 +150,7 @@ const RegisterForm = () => {
                 <h3>Join Meuzm</h3>
                 <p>
                   Lets open your Studio up in a few easy steps
-          </p>
+                </p>
               </div>
             }
             {step === 2 &&
@@ -243,7 +235,7 @@ const RegisterForm = () => {
                 >
                   <h3>Click avatar to add your own profile pic</h3>
                   <label htmlFor="avatar" className={errors.avatar ? "avatar clickable is-invalid" : "avatar clickable"}>
-                    {data.avatar && <img src={data.image} alt="avatar" />}
+                    {data.avatar && <img src={image} alt="avatar" />}
                   </label>
                 </Input>
               </div>
@@ -257,10 +249,22 @@ const RegisterForm = () => {
                     Create Studio
                   </button>
                 </div>
+                {loading && <Spinner />}
+                {error &&
+                  <>
+                    <div className="error">
+                      {error.username && <p> Artistname &#34;{data.username}&#34; already exist</p>}
+                      {error.email && <p> Email &#34;{data.email}&#34; already exist </p>}
+                      {error.avatar && <p>{error.avatar} </p>}
+                    </div>
+                    {/* <div className="error">
+                    </div> */}
+                  </>
+                }
               </div>
             }
-            {loading && <Spinner />}
           </form>
+
           {step < 7 &&
             <div className="action">
               <button
@@ -271,6 +275,7 @@ const RegisterForm = () => {
              </button>
             </div>
           }
+
         </div>
       </div>
     </>
