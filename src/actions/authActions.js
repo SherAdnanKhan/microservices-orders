@@ -4,10 +4,13 @@ import isEmpty from "../utils/helperFunctions";
 
 export const register = credentials => dispatch => {
   http
-    .post('api/register', credentials)
+    .post('api/register', credentials, {})
     .then(res => {
+      localStorage.removeItem('step');
+      localStorage.removeItem('data');
+
       setCurrentUser(res.data.data);
-      window.location.href = '/home';
+      window.location.href = '/welcome';
     })
     .catch(res => {
       console.log(res.response);
@@ -19,7 +22,7 @@ export const login = credentials => dispatch => {
     .post('api/login', credentials)
     .then(res => {
       setCurrentUser(res.data.data);
-      window.location.href = '/home';
+      window.location.href = '/lobby';
     })
     .catch(res => {
       console.log(res.response);
