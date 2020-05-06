@@ -14,7 +14,7 @@ const RegisterForm = () => {
     error: { error }
   } = useSelector(state => state);
 
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState('./assets/images/avataricon.png');
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
@@ -235,7 +235,7 @@ const RegisterForm = () => {
                 >
                   <h3>Click avatar to add your own profile pic</h3>
                   <label htmlFor="avatar" className={errors.avatar ? "avatar clickable is-invalid" : "avatar clickable"}>
-                    {data.avatar && <img src={image} alt="avatar" />}
+                    <img src={image} alt="avatar" />
                   </label>
                 </Input>
               </div>
