@@ -35,6 +35,19 @@ export const forgotPassword = (email, callback) => dispatch => {
     });
 };
 
+export const changePassword = (credentials, callback) => dispatch => {
+  http
+    .post('api/change-password', credentials)
+    .then(res => {
+      callback(res.data);
+    });
+}
+
+export const getAuthToken = () => {
+  const token = JSON.parse(localStorage.getItem(tokenKey));
+  return token ? token : null;
+}
+
 export const getCurrentUser = () => {
   const user = JSON.parse(localStorage.getItem(userKey));
   const token = JSON.parse(localStorage.getItem(tokenKey));
