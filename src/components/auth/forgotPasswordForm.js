@@ -1,33 +1,31 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import Input from '../common/input';
+import { useDispatch, useSelector } from 'react-redux';
+import { forgotPassword } from '../../actions/authActions';
+import Spinner from '../common/spinner';
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const dispatch = useDispatch();
+  const {
+    loading: { loading },
+    error: { error }
+  } = useSelector(state => state);
 
   const handleChange = ({ target: input }) => {
     setEmail(input.value);
   };
 
-  const validate = () => {
-    let error = '';
-
-    if (!email) {
-      error = 'Please enter your email.';
-    }
-
-    return error;
-  };
-
   const handleSubmit = e => {
     e.preventDefault();
-    const errors = validate();
 
-    if (!errors) {
+    if (success)
+      setSuccess('');
 
-    }
-
-    // setErrors(errors || {});
+    dispatch(forgotPassword({ email }, response => setSuccess(response.message)));
   };
 
   return (
@@ -39,6 +37,17 @@ const ForgotPasswordForm = () => {
           <h2>Forgot Password?</h2>
         </div>
         <form className="form" onSubmit={handleSubmit}>
+          {success &&
+            <div className="success">
+              {success}
+            </div>
+          }
+          {error &&
+            <div className="error">
+              {error.email && error.email}
+              {error.message && error.message}
+            </div>
+          }
           <Input
             name="email"
             id="email"
@@ -54,6 +63,7 @@ const ForgotPasswordForm = () => {
           >
             Send
           </button>
+          {loading && <Spinner />}
           <div>
 
           </div>
