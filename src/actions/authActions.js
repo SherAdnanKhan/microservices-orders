@@ -27,6 +27,14 @@ export const login = credentials => dispatch => {
     });
 };
 
+export const forgotPassword = (email, callback) => dispatch => {
+  http
+    .post('api/forgot-password', email)
+    .then(res => {
+      callback(res.data);
+    });
+};
+
 export const getCurrentUser = () => {
   const user = JSON.parse(localStorage.getItem(userKey));
   const token = JSON.parse(localStorage.getItem(tokenKey));
