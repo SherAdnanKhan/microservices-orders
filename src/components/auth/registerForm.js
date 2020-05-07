@@ -5,6 +5,7 @@ import Input from '../common/input';
 import Spinner from '../common/spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, getCurrentUser } from '../../actions/authActions';
+import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -27,6 +28,12 @@ const RegisterForm = () => {
     avatar: null,
   });
 
+  //this hook will call when we reload our page so that we can easily save our form data in a localstorage
+
+  useWindowUnloadEffect(() => {
+    localStorage.setItem('step', JSON.stringify(step));
+    localStorage.setItem('data', JSON.stringify({ ...data, avatar: null }));
+  }, true)
 
   useEffect(() => {
     if (localStorage.data) {
@@ -104,7 +111,7 @@ const RegisterForm = () => {
     }
 
     setStep(step => step - 1);
-    localStorage.setItem('step', JSON.stringify(step - 1));
+    // localStorage.setItem('step', JSON.stringify(step - 1));
   }
 
   const handleNextPress = () => {
@@ -112,11 +119,6 @@ const RegisterForm = () => {
 
     if (!errors && step < 7) {
       setStep(step => step + 1);
-      const newData = { ...data };
-      delete newData.avatar;
-
-      localStorage.setItem('step', JSON.stringify(step + 1));
-      localStorage.setItem('data', JSON.stringify(newData));
     }
     setErrors(errors || {});
   }
@@ -257,14 +259,11 @@ const RegisterForm = () => {
                       {error.email && <p> Email &#34;{data.email}&#34; already exist </p>}
                       {error.avatar && <p>{error.avatar} </p>}
                     </div>
-                    {/* <div className="error">
-                    </div> */}
                   </>
                 }
               </div>
             }
           </form>
-
           {step < 7 &&
             <div className="action">
               <button
@@ -275,7 +274,6 @@ const RegisterForm = () => {
              </button>
             </div>
           }
-
         </div>
       </div>
     </>
