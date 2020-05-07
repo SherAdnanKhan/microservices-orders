@@ -3,13 +3,20 @@ import store from '../store';
 import { startLoading, stopLoading } from '../actions/loadingActions';
 import { setError, clearError } from '../actions/errorActions';
 import { getFormattedErrors } from '../utils/helperFunctions';
+import { getAuthToken } from '../actions/authActions';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(request => {
+  const token = getAuthToken();
+
+  if (token)
+    request.headers.common['Authorization'] = `Bearer ${token}`;
+
+  request.headers.common['Accept'] = 'application/json';
+
   store.dispatch(startLoading());
   store.dispatch(clearError());
-  // request.common.headers['Accept'] = 'application/json';
 
   return request;
 }, null);

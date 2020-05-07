@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
 import Input from '../common/input';
+import { useSelector, useDispatch } from 'react-redux';
+import { changePassword } from '../../actions/authActions';
+import Spinner from '../common/spinner';
 
 const ChangePassword = () => {
-  const [data, setData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  });
+  const [success, setSuccess] = useState('');
   const [errors, setErrors] = useState({});
+
+  const [data, setData] = useState({
+    old_password: '',
+    password: '',
+    confirm_password: ''
+  });
+
+  const dispatch = useDispatch();
+  const {
+    loading: { loading },
+    error: { error }
+  } = useSelector(state => state);
 
   const validate = () => {
     const errors = {};
 
-    if (!data.currentPassword) {
-      errors.currentPassword = 'Required';
+    if (!data.old_password) {
+      errors.old_password = 'Required';
     }
-    if (data.newPassword.length < 8) {
-      errors.newPassword = 'Password must have at least eight characters';
-    } else if (data.newPassword !== data.confirmPassword) {
-      errors.confirmPassword = 'Password and confirm password do not match.';
+    if (data.password.length < 8) {
+      errors.password = 'Password must have at least eight characters';
+    } else if (data.password !== data.confirm_password) {
+      errors.confirm_password = 'Password and confirm password do not match.';
     }
 
     return Object.keys(errors).length === 0 ? null : errors;
@@ -28,15 +39,14 @@ const ChangePassword = () => {
     const newErrors = { ...errors };
 
     switch (input.name) {
-      case 'currentPassword':
-        newErrors.currentPassword = !input.value ? 'Required.' : '';
+      case 'old_password':
+        newErrors.old_password = !input.value ? 'Required.' : '';
         break;
-      case 'newPassword':
-        newErrors.newPassword = input.value.length < 8 ? 'Password must have at least eight characters.' : '';
-        // if (input.value === 8) newErrors.confirmPassword = data.confirmPassword !== input.value ? 'Password and confirm password do not match.' : '';
+      case 'password':
+        newErrors.password = input.value.length < 8 ? 'Password must have at least eight characters.' : '';
         break;
-      case 'confirmPassword':
-        newErrors.confirmPassword = data.newPassword !== input.value ? 'Password and confirm password do not match.' : '';
+      case 'confirm_password':
+        newErrors.confirm_password = data.password !== input.value ? 'Password and confirm password do not match.' : '';
         break;
       default:
         break;
@@ -55,39 +65,47 @@ const ChangePassword = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (success)
+      setSuccess('');
+
+    dispatch(changePassword(data, response => setSuccess(response.message)));
   }
 
   return (
     <div className="wrapper changePasswordScreen">
       <form onSubmit={handleSubmit}>
+        {success && <div className="success"> {success} </div>}
+        {error && <div className="error"> {error.message && error.message} </div>}
         <Input
           type="password"
-          name="currentPassword"
-          id="currentPassword"
+          name="old_password"
+          id="old_password"
           label="Current Password"
-          value={data.currentPassword}
+          value={data.old_password}
           onChange={handleChange}
-          error={errors.currentPassword}
+          error={errors.old_password}
         />
         <Input
           type="password"
-          name="newPassword"
-          id="newPassword"
+          name="password"
+          id="password"
           label="New Password"
-          value={data.newPassword}
+          value={data.password}
           onChange={handleChange}
-          error={errors.newPassword}
+          error={errors.password}
         />
         <Input
           type="password"
-          name="confirmPassword"
-          id="confirmPassword"
+          name="confirm_password"
+          id="confirm_password"
           label="Confirm New Password"
-          value={data.confirmPassword}
+          value={data.confirm_password}
           onChange={handleChange}
-          error={errors.confirmPassword}
+          error={errors.confirm_password}
         />
         <button className="btn" disabled={validate()}> Change Password</button>
+        {loading && <Spinner />}
       </form>
     </div>
   )
