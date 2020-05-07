@@ -8,6 +8,7 @@ import ChangePassword from './components/settings/changePassword';
 import ProtectedRoute from './components/common/protectedRoute';
 import Welcome from './components/welcome';
 import Lobby from './components/lobby';
+import AddExibition from "./components/addExibition";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route exact path='/register' component={RegisterForm} />
       <ProtectedRoute exact path="/welcome" component={Welcome} />
       <ProtectedRoute exact path="/lobby" component={Lobby} />
+      <ProtectedRoute exact path="/addexibition" component={AddExibition} />
       <Route exact path='/settings/change-password' component={ChangePassword} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
