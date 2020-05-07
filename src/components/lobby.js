@@ -107,16 +107,16 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=5">
                     <div className="cube">
-                      <div onclick="Akif()" className="cube-face  cube-face-front">
+                      <div className="cube-face  cube-face-front">
                         <img alt="" src="./assets/images/dummyData/01.jpg" height="100%" />
                       </div>
-                      <div onclick="Akif()" className="cube-face  cube-face-back" style={{ borderColor: 'gold' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gold' }}>
                         <img alt="" src="./assets/images/dummyData/01.jpg" height="100%" />
                       </div>
-                      <div onclick="Akif()" className="cube-face  cube-face-left" style={{ borderColor: 'gold' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gold' }}>
                         <img alt="" src="./assets/images/dummyData/01.jpg" height="100%" />
                       </div>
-                      <div onclick="Akif()" className="cube-face  cube-face-right" style={{ borderColor: 'gold' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gold' }}>
                         <img alt="" src="./assets/images/dummyData/01.jpg" height="100%" />
                       </div>
                     </div>
@@ -133,42 +133,16 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=6">
                     <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div className="cuna">
-                <div className="namerow"> Ali</div>
-                <div className="artrow" />
-              </div>
-            </div>
-            <div className="cubescroll">
-              <div className="procu_">
-                <div className="scene">
-                  <a href="studio.php?idstudio=6">
-                    <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
                     </div>
@@ -185,42 +159,16 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=6">
                     <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div className="cuna">
-                <div className="namerow"> Ali</div>
-                <div className="artrow" />
-              </div>
-            </div>
-            <div className="cubescroll">
-              <div className="procu_">
-                <div className="scene">
-                  <a href="studio.php?idstudio=6">
-                    <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
                     </div>
@@ -237,42 +185,16 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=6">
                     <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div className="cuna">
-                <div className="namerow"> Ali</div>
-                <div className="artrow" />
-              </div>
-            </div>
-            <div className="cubescroll">
-              <div className="procu_">
-                <div className="scene">
-                  <a href="studio.php?idstudio=6">
-                    <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
                     </div>
@@ -289,42 +211,16 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=6">
                     <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div className="cuna">
-                <div className="namerow"> Ali</div>
-                <div className="artrow" />
-              </div>
-            </div>
-            <div className="cubescroll">
-              <div className="procu_">
-                <div className="scene">
-                  <a href="studio.php?idstudio=6">
-                    <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
                     </div>
@@ -341,42 +237,16 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=6">
                     <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <div className="cuna">
-                <div className="namerow"> Ali</div>
-                <div className="artrow" />
-              </div>
-            </div>
-            <div className="cubescroll">
-              <div className="procu_">
-                <div className="scene">
-                  <a href="studio.php?idstudio=6">
-                    <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
-                      </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
                     </div>
@@ -393,16 +263,146 @@ const Lobby = () => {
                 <div className="scene">
                   <a href="studio.php?idstudio=6">
                     <div className="cube">
-                      <div onclick="Ali()" className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
-                      <div onclick="Ali()" className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="cuna">
+                <div className="namerow"> Ali</div>
+                <div className="artrow" />
+              </div>
+            </div>
+            <div className="cubescroll">
+              <div className="procu_">
+                <div className="scene">
+                  <a href="studio.php?idstudio=6">
+                    <div className="cube">
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="cuna">
+                <div className="namerow"> Ali</div>
+                <div className="artrow" />
+              </div>
+            </div>
+            <div className="cubescroll">
+              <div className="procu_">
+                <div className="scene">
+                  <a href="studio.php?idstudio=6">
+                    <div className="cube">
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="cuna">
+                <div className="namerow"> Ali</div>
+                <div className="artrow" />
+              </div>
+            </div>
+            <div className="cubescroll">
+              <div className="procu_">
+                <div className="scene">
+                  <a href="studio.php?idstudio=6">
+                    <div className="cube">
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="cuna">
+                <div className="namerow"> Ali</div>
+                <div className="artrow" />
+              </div>
+            </div>
+            <div className="cubescroll">
+              <div className="procu_">
+                <div className="scene">
+                  <a href="studio.php?idstudio=6">
+                    <div className="cube">
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="cuna">
+                <div className="namerow"> Ali</div>
+                <div className="artrow" />
+              </div>
+            </div>
+            <div className="cubescroll">
+              <div className="procu_">
+                <div className="scene">
+                  <a href="studio.php?idstudio=6">
+                    <div className="cube">
+                      <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
+                        <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
+                      </div>
+                      <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
                         <img alt="" src="./assets/images/dummyData/02.jpg" height="100%" />
                       </div>
                     </div>
@@ -421,15 +421,17 @@ const Lobby = () => {
               <div className="scenesmall">
                 <a href="studio.php?idstudio=4&gal=1">
                   <div className="cubesmallmove">
-                    <div className="cube-facesmall  cube-face-frontsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="Image/sal2Screenshot 2020-04-06 at 15.42.56.png" height="100%" /></div>
-                    <div className="cube-facesmall  cube-face-backsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="Image/sal2Screenshot 2020-04-06 at 15.42.56.png" height="100%" /></div>
-                    <div className="cube-facesmall  cube-face-leftsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="Image/sal2Screenshot 2020-04-06 at 15.42.56.png" height="100%" /></div>
-                    <div className="cube-facesmall  cube-face-rightsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="Image/sal2Screenshot 2020-04-06 at 15.42.56.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-frontsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="./assets/images/dummyData/01.jpg" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-backsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="./assets/images/dummyData/01.jpg" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-leftsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="./assets/images/dummyData/01.jpg" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-rightsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}><img alt="" src="./assets/images/dummyData/01.jpg" height="100%" /></div>
                   </div>
                 </a>
               </div>
             </div>
-            <div className="blocker" id={915} onclick="imgOpsBye(815, 915)" />
+
+            {/* onClick="imgOpsBye(815, 915)" */}
+            <div className="blocker" id={915} />
             <div className="exhibitartname">
               <span className="artof" id="artof" />
             </div>
