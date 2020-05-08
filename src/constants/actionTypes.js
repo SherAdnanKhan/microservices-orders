@@ -9,3 +9,6 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 //loading
 export const START_LOADING = 'START_LOADING';
 export const STOP_LOADING = 'STOP_LOADING';
+
+//Art Types
+export const GET_ART = 'GET_ART';
