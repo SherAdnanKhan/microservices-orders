@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const Ind = () => {
   return (
@@ -8,16 +9,22 @@ const Ind = () => {
           <div className="scenefull">
             <div className="cubefull">
               <div className="cube-facefull  bordermenufeel cube-face-frontfull" style={{ borderColor: 'red' }}>
-                <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+                 <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
               </div>
               <div className="cube-facefull  bordermenufeel cube-face-backfull" style={{ borderColor: 'red' }}>
-                <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+               <Link to="/artselection">
+                 <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+               </Link>  
               </div>
               <div className="cube-facefull  bordermenufeel cube-face-leftfull" style={{ borderColor: 'red' }}>
-                <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+                <Link to="/artselection">
+                  <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+                </Link>
               </div>
               <div className="cube-facefull bordermenufeel cube-face-rightfull" style={{ borderColor: 'red' }}>
-                <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+               <Link to="/artselection">
+                  <img alt="" src="./assets/images/dummyData/03.png" height="100%" />
+               </Link>
               </div>
             </div>
           </div>
@@ -28,31 +35,47 @@ const Ind = () => {
       Second line
       </div>
       <div className="happy">
-        <img alt="" src="./assets/images/expressions/iconyellow.png" color="gold" />
-        Happy
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/iconyellow.png" color="gold" />
+        </Link>
+          Happy
+        
       </div>
       <div className="confused">
-        <img alt="" src="./assets/images/expressions/icongray.png" color="gray" />
-        Confused
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/icongray.png" color="gray" />
+        </Link>  
+          Confused
+        
       </div>
       <div className="excited">
-        <img alt="" src="./assets/images/expressions/iconorange.png" color="orange" />
-        Excited
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/iconorange.png" color="orange" />
+        </Link>
+          Excited
       </div>
       <div className="serene">
-        <img alt="" src="./assets/images/expressions/icongreen.png" color="limegreen" />
-        Serene
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/icongreen.png" color="limegreen" />
+        </Link>
+          Serene
       </div>
       <div className="angry">
-        <img alt="" src="./assets/images/expressions/iconred.png" color="red" />
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/iconred.png" color="red" />
+        </Link>
         Angry
       </div>
       <div className="sad">
-        <img alt="" src="./assets/images/expressions/iconblue.png" color="dodgerblue" />
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/iconblue.png" color="dodgerblue" />
+        </Link>
         Sad
       </div>
       <div className="inspired">
-        <img alt="" src="./assets/images/expressions/iconpurple.png" color="purple" />
+        <Link to="/artselection">
+          <img alt="" src="./assets/images/expressions/iconpurple.png" color="purple" />
+        </Link>
       Sad
       </div>
     </div>
