@@ -5,11 +5,11 @@ export const getArt = () => dispatch => {
   http
     .get('arts')
     .then(res => {
-      if (res.data.success) {
-        dispatch({
-          type: GET_ART,
-          payload: res.data.data
-        })
+      if(res.data.success){
+       dispatch({
+         type: GET_ART,
+         payload: res.data.data
+       })
       }
     })
     .catch(res => {
