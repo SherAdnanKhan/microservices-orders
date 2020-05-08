@@ -96,7 +96,7 @@ const Lobby = () => {
                 <a href="#__searchHistory">Search History</a>
               </li>
               <li>
-                <a href="#__logout" onClick={() => logout()}>Logout</a>
+                <Link to="" onClick={() => logout()}>Logout</Link>
               </li>
             </ul>
           </nav>

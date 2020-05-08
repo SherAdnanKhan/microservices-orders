@@ -50,7 +50,8 @@ $(document).on('click', '.passwordEye', async function () {
 //   return $('.registerationScreen div[active="true"]').attr('step');
 // }
 
-$(document).on('click', '.feelIcon', async function () {
+$(document).on('click', '.feelIcon', async function (e) {
+  e.preventDefault();
   $('.colorChangerScreen').show();
 });
 
