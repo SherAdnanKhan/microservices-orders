@@ -3,7 +3,7 @@ import { GET_ART } from "../constants/actionTypes";
 
 export const getArt = () => dispatch => {
   http
-    .get('/api/art')
+    .get('arts')
     .then(res => {
       if (res.data.success) {
         dispatch({
@@ -16,10 +16,10 @@ export const getArt = () => dispatch => {
     });
 };
 
-export const newArt = (value, history) => dispatch => {
+export const newArt = (value) => dispatch => {
   http
-    .post('api/art', { name: value })
+    .post('arts', { name: value })
     .then(res => {
-      history.push('/lobby');
+      window.location.href = '/lobby';
     });
 };
