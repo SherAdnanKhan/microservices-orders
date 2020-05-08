@@ -18,12 +18,12 @@ function App() {
       <Route exact path='/login' component={LoginForm} />
       <Route exact path='/forgot' component={ForgotPasswordForm} />
       <Route exact path='/register' component={RegisterForm} />
+      <ProtectedRoute exact path='/settings/change-password' component={ChangePassword} />
       <ProtectedRoute exact path="/welcome" component={Welcome} />
       <ProtectedRoute exact path="/lobby" component={Lobby} />
       <ProtectedRoute exact path="/ind" component={Ind} />
       <ProtectedRoute exact path="/addexibition" component={AddExibition} />
-      <ProtectedRoute exact path="/artSelection" component={ArtSelection} />
-      <Route exact path='/settings/change-password' component={ChangePassword} />
+      <ProtectedRoute exact path="/art-selection" component={ArtSelection} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
     </Switch>

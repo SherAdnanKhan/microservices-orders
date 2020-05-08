@@ -1,5 +1,5 @@
 import http from "../services/httpService"
-import { userKey, tokenKey } from "../constants/keys"
+import { userKey, tokenKey, avatarKey } from "../constants/keys"
 import { isEmpty } from "../utils/helperFunctions";
 
 export const register = credentials => dispatch => {
@@ -51,13 +51,15 @@ export const getAuthToken = () => {
 export const getCurrentUser = () => {
   const user = JSON.parse(localStorage.getItem(userKey));
   const token = JSON.parse(localStorage.getItem(tokenKey));
+  const avatars = JSON.parse(localStorage.getItem(avatarKey));
 
-  return (isEmpty(user) || isEmpty(token)) ? null : user;
+  return (isEmpty(user) || isEmpty(token) || !avatars) ? null : { user, avatars };
 };
 
-const setCurrentUser = ({ user, token }) => {
+const setCurrentUser = ({ user, token, avatars }) => {
   localStorage.setItem(userKey, JSON.stringify(user));
   localStorage.setItem(tokenKey, JSON.stringify(token));
+  localStorage.setItem(avatarKey, JSON.stringify(avatars))
 };
 
 export const logout = () => {

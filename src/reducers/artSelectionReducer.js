@@ -7,7 +7,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ART:
-      console.log("action.payload",action.payload)
       return {
         ...state,
         artName: action.payload
