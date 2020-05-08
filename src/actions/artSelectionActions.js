@@ -1,7 +1,6 @@
 import http from "../services/httpService"
 import { GET_ART } from "../constants/actionTypes";
 
-
 export const getArt = () => dispatch => {
   http
     .get('/api/art')
@@ -19,12 +18,8 @@ export const getArt = () => dispatch => {
 
 export const newArt = (value, history) => dispatch => {
   http
-    .post('api/art',{name:value})
+    .post('api/art', { name: value })
     .then(res => {
-      if(res.data.success){
-       history.push('/lobby');
-      }
-    })
-    .catch(res => {
+      history.push('/lobby');
     });
 };
