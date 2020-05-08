@@ -17,9 +17,10 @@ const ArtSelection = ({ history }) => {
 
   useEffect(() => {
     dispatch(getArt());
+    
   }, [dispatch]);
 
-  function MainArtClick(e, id) {
+  function MainArtClick(e,id){
     e.preventDefault();
     setClickMain(id);
   }
