@@ -12,18 +12,15 @@ const ArtSelection = ({history}) =>{
   const [selectSubArtName,setSubArt] = useState("");
   const [clickMainArt,setClickMain] = useState(0);
   const [name,setName] = useState("");
-  const [subArt,setSubArr] = useState({name: "" ,parent_id: null});
   const allArts = useSelector(({artSelections}) => artSelections.artName);
 
-  console.log(history);
   useEffect(() => {
 
     dispatch(getArt());
     
-  }, []);
+  }, [dispatch]);
 
   function MainArtClick(e,id){
-    console.log("agya");
     e.preventDefault();
     setClickMain(id);
   }
@@ -78,9 +75,6 @@ const ArtSelection = ({history}) =>{
               name="enterArt"
               value={name}
               placeholder="Enter Art"
-              onClick={(e) => {
-                setSubArr("");
-              }}
               onChange={
                 (e) =>
                 {
