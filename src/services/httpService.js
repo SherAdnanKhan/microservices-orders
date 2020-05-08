@@ -20,13 +20,11 @@ axios.interceptors.request.use(request => {
 
   return request;
 }, null);
-
 axios.interceptors.response.use(
   response => {
     store.dispatch(stopLoading());
     return response;
   },
-
   error => {
     const expectedError =
       error.response &&

@@ -9,6 +9,7 @@ import ProtectedRoute from './components/common/protectedRoute';
 import Welcome from './components/welcome';
 import Lobby from './components/lobby';
 import AddExibition from "./components/addExibition";
+import ArtSelection from "./components/artSelection";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <ProtectedRoute exact path="/welcome" component={Welcome} />
       <ProtectedRoute exact path="/lobby" component={Lobby} />
       <ProtectedRoute exact path="/addexibition" component={AddExibition} />
+      <ProtectedRoute exact path="/artSelection" component={ArtSelection} />
       <Route exact path='/settings/change-password' component={ChangePassword} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
