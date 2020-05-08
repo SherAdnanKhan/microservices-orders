@@ -18,12 +18,8 @@ export const getArt = () => dispatch => {
 
 export const newArt = (value, history) => dispatch => {
   http
-    .post('api/art',{name:value})
+    .post('api/art', { name: value })
     .then(res => {
-      if(res.data.success){
-       history.push('/lobby');
-      }
-    })
-    .catch(res => {
+      history.push('/lobby');
     });
 };
