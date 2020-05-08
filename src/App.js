@@ -10,6 +10,7 @@ import Welcome from './components/welcome';
 import Lobby from './components/lobby';
 import AddExibition from "./components/addExibition";
 import ArtSelection from "./components/artSelection";
+import Ind from './components/ind';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route exact path='/register' component={RegisterForm} />
       <ProtectedRoute exact path="/welcome" component={Welcome} />
       <ProtectedRoute exact path="/lobby" component={Lobby} />
+      <ProtectedRoute exact path="/ind" component={Ind} />
       <ProtectedRoute exact path="/addexibition" component={AddExibition} />
       <ProtectedRoute exact path="/artSelection" component={ArtSelection} />
       <Route exact path='/settings/change-password' component={ChangePassword} />
