@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import LoginForm from './components/auth/loginForm';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import RegisterForm from './components/auth/registerForm';
@@ -8,8 +8,12 @@ import ProtectedRoute from './components/common/protectedRoute';
 import ArtSelection from "./components/artSelection";
 import Ind from './components/ind';
 import Dashboard from './components/dashboard/dashboard';
+import history from "./components/common/history";
 
 function App() {
+  useEffect(() => {
+    document.title = `Meuzmnet: ${history.location.pathname.split('/')[1]}`
+   }, []);
   return (
     <Switch>
       <Route exact path='/login' component={LoginForm} />
