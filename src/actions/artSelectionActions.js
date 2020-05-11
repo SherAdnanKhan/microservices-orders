@@ -27,7 +27,7 @@ export const newArt = (value) => dispatch => {
 };
 export const selectArt = (value) => dispatch => {
   http
-    .post('/api/arts/user-art-selection', value )
+    .post('/arts/user-art-selection', value )
     .then(res => {
       window.location.href = '/dashboard/lobby';
     });

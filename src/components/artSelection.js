@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { getCurrentUser } from '../actions/authActions';
 import { useSelector, useDispatch } from "react-redux"
-import { getArt, newArt } from "../actions/artSelectionActions";
+import { getArt, newArt,selectArt } from "../actions/artSelectionActions";
 
 
 const ArtSelection = () => {
@@ -32,23 +32,20 @@ const ArtSelection = () => {
     setName("");
     setSubName("");
   }
+
   function HandleNext(e){
     e.preventDefault();
     let value = selectedArtName.length > 0
-    ? {name: selectedArtName} 
+    ? selectArt({art_id: clickMainArt}) 
     : selectSubArtName.length > 0
-    ? {name: selectSubArtName, parent_id:clickMainArt} 
+    ? selectArt({art_id: clickMainArt}) 
     : subArtRadio 
-    ? {name: subName, parent_id:clickMainArt} 
+    ? newArt({name: subName, parent_id:clickMainArt}) 
     :  mainArtRadio 
-    ? {name} 
+    ? newArt({name}) 
     : {};
-    if(Object.keys(value).length === 0){
-      alert("Please select on radio button")
-    }else {
-      dispatch(newArt(value))
-    }
-   
+  
+    dispatch(value)
   }
 
   return (
@@ -61,7 +58,9 @@ const ArtSelection = () => {
       <div className="art-selection-table">
         {allArts && allArts.map((art, i) => (
           <Fragment key={i}>
-            <div onClick={(e) => MainArtClick(e, art.id)} onDoubleClick={(e) => MainArtClick(e, null)}
+            <div onClick={(e) =>
+            { e.stopPropagation();
+               MainArtClick(e, art.id)}} onDoubleClick={(e) => MainArtClick(e, null)}
               className="art-selection-table-element"
               key={art.id}>
               <hr />
