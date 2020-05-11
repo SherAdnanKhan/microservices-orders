@@ -20,10 +20,9 @@ function App() {
       <Route exact path='/register' component={RegisterForm} />
       <ProtectedRoute exact path="/welcome" component={Ind} />
       <ProtectedRoute exact path="/lobby" component={Lobby} />
-      {/* <ProtectedRoute exact path="/ind" component={Ind} /> */}
       <ProtectedRoute exact path="/addexibition" component={AddExibition} />
       <ProtectedRoute exact path="/artselection" component={ArtSelection} />
-      <Route exact path='/settings/change-password' component={ChangePassword} />
+      <ProtectedRoute exact path='/settings/change-password' component={ChangePassword} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
     </Switch>

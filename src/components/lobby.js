@@ -3,7 +3,7 @@ import { logout } from '../actions/authActions';
 import { Link } from 'react-router-dom';
 import Avatar from './common/avatar';
 
-const Lobby = ({ avatars }) => {
+const Lobby = ({ user: { avatars } }) => {
   return (
     <>
       <div>
