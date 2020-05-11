@@ -7,10 +7,15 @@ import { getArt, newArt } from "../actions/artSelectionActions";
 const ArtSelection = () => {
   const dispatch = useDispatch();
   const userName = getCurrentUser()?.username;
-  const [selectedArtName, setSelectedArt] = useState("");
-  const [selectSubArtName, setSubArt] = useState("");
+  const [selectedArt, setSelectedArt] = useState("");
+  const [selectedSubArt, setSelectedSubArt] = useState("");
+  const [selectedArtName, setSelectedArtName] = useState("");
+  const [selectSubArtName, setSubArtName] = useState("");
   const [clickMainArt, setClickMain] = useState(0);
   const [name, setName] = useState("");
+  const [subName, setSubName] = useState("");
+  const [subArtRadio,setSubArtRadio] = useState(false);
+  const [mainArtRadio,setMainArtRadio] = useState(false)
   // const [subArt, setSubArr] = useState({ name: "", parent_id: null });
   const allArts = useSelector(({ artSelections }) => artSelections.artName);
 
@@ -19,9 +24,31 @@ const ArtSelection = () => {
 
   }, [dispatch]);
 
+  
+
   function MainArtClick(e, id) {
     e.preventDefault();
     setClickMain(id);
+    setName("");
+    setSubName("");
+  }
+  function HandleNext(e){
+    e.preventDefault();
+    let value = selectedArtName.length > 0
+    ? {name: selectedArtName} 
+    : selectSubArtName.length > 0
+    ? {name: selectSubArtName, parent_id:clickMainArt} 
+    : subArtRadio 
+    ? {name: subName, parent_id:clickMainArt} 
+    :  mainArtRadio 
+    ? {name} 
+    : {};
+    if(Object.keys(value).length === 0){
+      alert("Please select on radio button")
+    }else {
+      dispatch(newArt(value))
+    }
+   
   }
 
   return (
@@ -41,11 +68,19 @@ const ArtSelection = () => {
               <input
                 type="radio"
                 name="artName"
-                checked={art.id === selectedArtName ? true : false}
-                onChange={() => setSelectedArt(art.id)}
+                checked={art.id === selectedArt ? true : false}
+                onChange={() => {
+                  setSelectedArt(art.id);
+                  setSelectedArtName(art.name);
+                  setSelectedSubArt("");
+                  setSubArtName("")
+                  setSubArtRadio(false);
+                  setMainArtRadio(false)
+                }}
               />
               <label>{art.name}</label>
             </div>
+            <div>
             {art.children?.map((subart, j) => (
               <div
                 key={j}
@@ -54,12 +89,48 @@ const ArtSelection = () => {
                 <input
                   type="radio"
                   name="sub artName"
-                  checked={subart.id === selectSubArtName ? true : false}
-                  onChange={() => setSubArt(subart.id)}
+                  checked={subart.id === selectedSubArt ? true : false}
+                  onChange={() => {
+                    setSelectedSubArt(subart.id);
+                    setSubArtName(subart.name)
+                    setSelectedArt("");
+                    setSelectedArtName("");
+                    setSubArtRadio(false);
+                    setMainArtRadio(false)
+                  }}
                 />
                 <label>{subart.name}</label>
               </div>
             ))}
+         <div className="art-selection-table-sub-element" style={{display: art.id === clickMainArt ? "block" : "none"}} >
+          <input
+            type="radio"
+            name="artsubRadio"
+            checked={subArtRadio}
+            onChange={(e) => {
+              setSubArtRadio(!subArtRadio);
+              setSelectedArt("");
+              setSelectedArtName("");
+              setSelectedSubArt("");
+              setSubArtName("")
+              setMainArtRadio(false)
+            }}
+          />
+          <input
+            style={{ backgroundColor: "black", color: "white", border: "0px" }}
+            type="text"
+            name="enterArt"
+            value={subName}
+            placeholder="Enter Art"
+            onChange={
+              (e) => {
+                setName("");
+                setSubName(e.target.value);
+              }}
+              />
+              </div>
+
+            </div>
           </Fragment>
         ))}
         <div className="art-selection-table-element" >
@@ -67,6 +138,17 @@ const ArtSelection = () => {
           <input
             type="radio"
             name="artName"
+            checked={mainArtRadio}
+            onChange={() =>
+               {
+                 setMainArtRadio(!mainArtRadio);
+                 setSelectedArt("");
+                 setSelectedArtName("");
+                 setSelectedSubArt("");
+                 setSubArtName("");
+                 setSubArtRadio(false);
+                 
+                } }
           />
           <input
             style={{ backgroundColor: "black", color: "white", border: "0px" }}
@@ -74,18 +156,19 @@ const ArtSelection = () => {
             name="enterArt"
             value={name}
             placeholder="Enter Art"
-            // onClick={(e) => {
-            //   setSubArr("");
-            // }}
             onChange={
               (e) => {
+                setSubName("");
                 setName(e.target.value);
               }}
           />
         </div>
       </div>
       <div className="art-selection-nextBtn">
-        <button disabled={!name.length > 0 ? true : false} onClick={() => dispatch(newArt(name))}>Next</button>
+        <button disabled={!selectedArtName.length > 0 &&  !selectSubArtName.length > 0 && subArtRadio && mainArtRadio} 
+        onClick= { (e) => HandleNext(e)}>Next</button>
+
+       
       </div>
     </div>
   )
