@@ -75,3 +75,8 @@ $(document).on('click', '.menuBlock', function () {
     $(this).find('.fas').removeClass('fa-arrow-left fa-ellipsis-v').addClass('fa-ellipsis-v');
   }
 });
+
+$(document).on('click', 'nav a ', function () {
+  $('nav').hide();
+  $('.menuBlock').find('.fas').removeClass('fa-arrow-left fa-ellipsis-v').addClass('fa-ellipsis-v');
+});
