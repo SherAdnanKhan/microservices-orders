@@ -5,8 +5,6 @@ import RightBorder from './layout/rightBorder';
 import Footer from './layout/footer';
 import { useLocation } from 'react-router-dom';
 
-
-
 const Main = () => {
   const location = useLocation();
   const split = location.pathname.split('/');
