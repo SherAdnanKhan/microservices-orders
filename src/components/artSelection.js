@@ -2,10 +2,9 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { getCurrentUser } from '../actions/authActions';
 import { useSelector, useDispatch } from "react-redux"
 import { getArt, newArt } from "../actions/artSelectionActions";
-import { withRouter } from 'react-router-dom';
 
 
-const ArtSelection = ({ history }) => {
+const ArtSelection = () => {
   const dispatch = useDispatch();
   const userName = getCurrentUser()?.username;
   const [selectedArtName, setSelectedArt] = useState("");
@@ -86,10 +85,10 @@ const ArtSelection = ({ history }) => {
         </div>
       </div>
       <div className="art-selection-nextBtn">
-        <button disabled={!name.length > 0 ? true : false} onClick={() => dispatch(newArt(name, history))}>Next</button>
+        <button disabled={!name.length > 0 ? true : false} onClick={() => dispatch(newArt(name))}>Next</button>
       </div>
     </div>
   )
 }
-export default withRouter(ArtSelection);
+export default ArtSelection;
 

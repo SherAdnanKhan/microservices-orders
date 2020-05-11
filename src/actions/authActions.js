@@ -4,7 +4,7 @@ import { isEmpty } from "../utils/helperFunctions";
 
 export const register = credentials => dispatch => {
   http
-    .post('api/register', credentials, {})
+    .post('auth/register', credentials, {})
     .then(res => {
       localStorage.removeItem('step');
       localStorage.removeItem('data');
@@ -18,7 +18,7 @@ export const register = credentials => dispatch => {
 
 export const login = credentials => dispatch => {
   http
-    .post('api/login', credentials)
+    .post('auth/login', credentials)
     .then(res => {
       setCurrentUser(res.data.data);
       window.location.href = '/lobby';
@@ -29,7 +29,7 @@ export const login = credentials => dispatch => {
 
 export const forgotPassword = (email, callback) => dispatch => {
   http
-    .post('api/forgot-password', email)
+    .post('auth/forgot-password', email)
     .then(res => {
       callback(res.data);
     });
@@ -37,7 +37,7 @@ export const forgotPassword = (email, callback) => dispatch => {
 
 export const changePassword = (credentials, callback) => dispatch => {
   http
-    .post('api/change-password', credentials)
+    .post('auth/change-password', credentials)
     .then(res => {
       callback(res.data);
     });
