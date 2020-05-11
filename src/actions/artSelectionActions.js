@@ -21,7 +21,15 @@ export const newArt = (value) => dispatch => {
   http
     .post('/arts', value )
     .then(res => {
-      window.location.href = '/lobby';
+      window.location.href = '/dashboard/lobby';
     });
   }
 };
+export const selectArt = (value) => dispatch => {
+  http
+    .post('/api/arts/user-art-selection', value )
+    .then(res => {
+      window.location.href = '/dashboard/lobby';
+    });
+};
+
