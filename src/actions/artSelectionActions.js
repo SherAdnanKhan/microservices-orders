@@ -17,9 +17,11 @@ export const getArt = () => dispatch => {
 };
 
 export const newArt = (value) => dispatch => {
+  if(value){
   http
-    .post('/arts', { name: value })
+    .post('/arts', value )
     .then(res => {
       window.location.href = '/lobby';
     });
+  }
 };
