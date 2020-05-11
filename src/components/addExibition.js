@@ -23,27 +23,25 @@ const AddExibit = () => {
 
   return (
     <Fragment>
-      <div>
-        <span>
+      <div className="exibition-page-header">
+        <span className="exibition-exit-icon">
           <i className="fas fa-arrow-left"></i>
         </span>
-        <span>Exhibit Your Art {userName}</span>
+        <span className="exibition-header-name">Exhibit Your Art {userName}</span>
       </div>
       <br />
       <br />
-      <form onSubmit={Submit}>
-        <div>
-          <div>
+      <form className="exibition-page-form" onSubmit={Submit}>
+          <div className="exibition-top-textboxes">
             <div>
               <input type="file" id="file" name="picture" accept="image/*" value={picture} onChange={(e) => setPiucture(e.target.value)} />
               <img id="preview" src="galleryadd.png" alt="" />
             </div>
-            <div>
-              <input type="text" placeholder="Give this art a title.." name="title" value={title} onChange={(e) => setTitle(e.target.value)} autoComplete="off" />
-              <textarea placeholder="Tell us something about this work..." name="about" value={about} onChange={(e) => setAbout(e.target.value)} autoComplete="off"></textarea>
+            <div className="exibition-form-input">
+              <input className="exibition-title-input" type="text" placeholder="Give this art a title.." name="title" value={title} onChange={(e) => setTitle(e.target.value)} autoComplete="off" />
+              <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="about" value={about} onChange={(e) => setAbout(e.target.value)} autoComplete="off"></textarea>
             </div>
           </div>
-        </div>
         <hr />
         <br />
         <p> Choose Gallery</p>
