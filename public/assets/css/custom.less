@@ -1624,16 +1624,19 @@ img {
 
 .exibition-page-header{
   background-color: red;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   padding: 25px 0px;
+  display: block;
   .exibition-exit-icon{
-    display: block;
-    text-align: left;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 10px;
   }
   .exibition-header-name{
+    display: flex;
     justify-content: center;
+    font-size: 18px;
   }
 }
 .exibition-page-form{
@@ -1643,23 +1646,31 @@ img {
   .exibition-top-textboxes{
    display: flex;
    flex-direction: row;
+   width: 100%;
    .exibition-form-input{
      display: flex;
      flex-direction: column;
+     width: 80%;
      .exibition-title-input{
        border: 0.5px solid white;
        border-radius: 5px;
-       width: 900px;
+       width: 90%;
        padding: 10px 5px;
        margin: 2px 0px;
        font-size: 12px;
        color: white;
        background-color: black;
      }
+     .exibition-input-dropdown{
+       width: 90%;
+       color: white;
+       font-size: 12px;
+       background-color: black;
+     }
      .exibition-description-input{
       border: 0.5px solid white;
       border-radius: 5px;
-      width: 900px;
+      width: 90%;
       height: 50vh;
       padding: 10px 5px;
       margin: 2px 0px;
@@ -1670,5 +1681,47 @@ img {
    }
   }
 }
+.exibition-gallery-header{
+  border-top: 1px solid white;
+  margin: 45px auto;
+  width: 90%;
+  text-align: center;
+}
+.exibition-gallery-utilties{
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 45px;
+  width: 90%;
+  justify-content: center;
+  border-bottom: 1px solid white;
+  .exibition-gallery-item {
+    background-color:red; 
+    color:white;
+    border-radius:35px; 
+    padding:10px 20px;
+    margin:10px;
+  }
+}
+.exibition-button-div{
+  margin: 10px auto;
+  width: 50%;
+  .exibition-button{
+    background-color: red;
+    padding: 10px 30px;
+    color: white;
+    font-size: 16px;
+    border: 2px solid green;
+    border-radius: 45px;
+    text-align: center;
+    margin: 10px auto 0px auto;
+    width: 100%;
+  }
+}
+.exibtion-footer{
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
 
 // Add Exibition Page End
