@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { getCurrentUser } from "../../actions/authActions";
+import {useDispatch,useSelector} from "react-redux"
+import {artSearch} from "../../actions/artSelectionActions"
 
 const AddExibit = () => {
-  const userName = getCurrentUser()?.username;
+  const dispatch = useDispatch();
+  const listCategory = useSelector(({artSelections}) => artSelections.ListOfArts?.data?.arts);
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [about, setAbout] = useState('');
@@ -28,7 +30,7 @@ const AddExibit = () => {
           <span className="exibition-exit-icon">
             <i className="fas fa-arrow-left"></i>
           </span>
-          <span className="exibition-header-name">Exhibit Your Art {userName}</span>
+          <span className="exibition-header-name">Exhibit Your Art</span>
         </div>
         <br />
         <br />
@@ -46,14 +48,21 @@ const AddExibit = () => {
                     list="categories" 
                     name="categories" 
                     value={category} 
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                      dispatch(artSearch(e.target.value))
+                    }}
                 />
                   <datalist className="exibition-input-dropdown" placeholder="Art Catehory" id="categories">
-                   <option className="exibition-input-dropdown" value="Internet Explorer"/>
-                   <option value="Firefox"/>
-                   <option value="Chrome"/>
-                   <option value="Opera"/>
-                   <option value="Safari"/>
+                    {
+                      listCategory?.map((cat) =>(
+                        <Fragment>
+                           <option className="exibition-input-dropdown" key={cat.id} value={cat.name} />
+                        </Fragment>
+                       
+                      ))
+                    }
+                  
                 </datalist>
               <input className="exibition-title-input" type="text" placeholder="Give this art a title.." name="title" value={title} onChange={(e) => setTitle(e.target.value)} autoComplete="off" />
               <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="about" value={about} onChange={(e) => setAbout(e.target.value)} autoComplete="off"></textarea>

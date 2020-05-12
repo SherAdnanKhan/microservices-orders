@@ -12,3 +12,6 @@ export const STOP_LOADING = 'STOP_LOADING';
 
 //Art Types
 export const GET_ART = 'GET_ART';
+
+// Art Search
+export const ART_SEARCH = 'ART_SEARCH';
