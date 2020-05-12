@@ -1,326 +1,38 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFavouriteUsers } from '../../actions/lobbyActions';
+import UserCube from '../common/userCube';
+import Spinner from '../common/spinner';
 
 const Lobby = () => {
   const user = useContext(UserContext);
 
+  const dispatch = useDispatch();
+  const {
+    lobby: { favouriteUsers },
+    loading: { loading }
+  } = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(getFavouriteUsers());
+  }, [dispatch]);
+
   return (
     <>
-      <div className="base" id="sec">
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=5">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front">
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gold' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gold' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gold' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow">WebDesign/Programmer</div>
-          </div>
+      {!loading ?
+        <div className="base" id="sec">
+          {favouriteUsers &&
+            favouriteUsers.map((user, index) => (
+              <UserCube user={user} key={index} />
+            ))
+          }
+        </div> :
+        <div style={{ marginBottom: '15px' }}>
+          <Spinner />
         </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-        <div className="cubescroll">
-          <div className="procu_">
-            <div className="scene">
-              <a href="studio.php?idstudio=6">
-                <div className="cube">
-                  <div className="cube-face  cube-face-front" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-back" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-left" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                  <div className="cube-face  cube-face-right" style={{ borderColor: 'gray' }}>
-                    <img alt="" src="/assets/images/dummyData/sal.jpg" height="100%" />
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="cuna">
-            <div className="namerow"> Sal </div>
-            <div className="artrow" />
-          </div>
-        </div>
-      </div>
+      }
 
       <Avatar avatars={user.avatars && user.avatars} />
 
