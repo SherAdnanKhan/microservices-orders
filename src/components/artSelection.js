@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { getCurrentUser } from '../actions/authActions';
 import { useSelector, useDispatch } from "react-redux"
-import { getArt, newArt } from "../actions/artSelectionActions";
+import { getArt, newArt,selectArt } from "../actions/artSelectionActions";
 
 
 const ArtSelection = () => {
@@ -32,23 +32,21 @@ const ArtSelection = () => {
     setName("");
     setSubName("");
   }
+
   function HandleNext(e){
     e.preventDefault();
     let value = selectedArtName.length > 0
-    ? {name: selectedArtName} 
+    ? selectArt({art_id: clickMainArt}) 
     : selectSubArtName.length > 0
-    ? {name: selectSubArtName, parent_id:clickMainArt} 
+    ? selectArt({art_id: clickMainArt}) 
     : subArtRadio 
-    ? {name: subName, parent_id:clickMainArt} 
+    ? newArt({name: subName, parent_id:clickMainArt}) 
     :  mainArtRadio 
-    ? {name} 
+    ? newArt({name}) 
     : {};
-    if(Object.keys(value).length === 0){
-      alert("Please select on radio button")
-    }else {
-      dispatch(newArt(value))
+    if(value !== {}){
+      dispatch(value)
     }
-   
   }
 
   return (
@@ -61,7 +59,7 @@ const ArtSelection = () => {
       <div className="art-selection-table">
         {allArts && allArts.map((art, i) => (
           <Fragment key={i}>
-            <div onClick={(e) => MainArtClick(e, art.id)} onDoubleClick={(e) => MainArtClick(e, null)}
+            <div 
               className="art-selection-table-element"
               key={art.id}>
               <hr />
@@ -78,7 +76,9 @@ const ArtSelection = () => {
                   setMainArtRadio(false)
                 }}
               />
-              <label>{art.name}</label>
+              <label onClick={(e) =>
+            { e.stopPropagation();
+               MainArtClick(e, art.id)}} onDoubleClick={(e) => MainArtClick(e, null)} >{art.name}</label>
             </div>
             <div>
             {art.children?.map((subart, j) => (
@@ -108,12 +108,14 @@ const ArtSelection = () => {
             name="artsubRadio"
             checked={subArtRadio}
             onChange={(e) => {
+              if(subName){
               setSubArtRadio(!subArtRadio);
               setSelectedArt("");
               setSelectedArtName("");
               setSelectedSubArt("");
               setSubArtName("")
               setMainArtRadio(false)
+              }
             }}
           />
           <input
@@ -140,15 +142,14 @@ const ArtSelection = () => {
             name="artName"
             checked={mainArtRadio}
             onChange={() =>
-               {
-                 setMainArtRadio(!mainArtRadio);
-                 setSelectedArt("");
-                 setSelectedArtName("");
-                 setSelectedSubArt("");
-                 setSubArtName("");
-                 setSubArtRadio(false);
-                 
-                } }
+               { if(name){
+                setMainArtRadio(!mainArtRadio);
+                setSelectedArt("");
+                setSelectedArtName("");
+                setSelectedSubArt("");
+                setSubArtName("");
+                setSubArtRadio(false);
+               }}}
           />
           <input
             style={{ backgroundColor: "black", color: "white", border: "0px" }}
@@ -165,10 +166,9 @@ const ArtSelection = () => {
         </div>
       </div>
       <div className="art-selection-nextBtn">
-        <button disabled={!selectedArtName.length > 0 &&  !selectSubArtName.length > 0 && subArtRadio && mainArtRadio} 
+        <button 
+        disabled={selectedArtName.length === 0  && selectSubArtName.length === 0 && !subArtRadio && !mainArtRadio} 
         onClick= { (e) => HandleNext(e)}>Next</button>
-
-       
       </div>
     </div>
   )
