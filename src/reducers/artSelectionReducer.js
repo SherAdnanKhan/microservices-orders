@@ -1,7 +1,8 @@
-import { GET_ART } from "../constants/actionTypes";
+import { GET_ART, ART_SEARCH } from "../constants/actionTypes";
 
 const initialState = {
-  artName: null
+  artName: null,
+  ListOfArts: []
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,11 @@ export default (state = initialState, action) => {
         ...state,
         artName: action.payload
       };
+      case ART_SEARCH:
+        return {
+          ...state,
+          ListOfArts: action.payload
+        };
     default:
       return state;
   }
