@@ -1,26 +1,40 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState,useEffect } from "react";
 import {useDispatch,useSelector} from "react-redux"
-import {artSearch} from "../../actions/artSelectionActions"
+import {artSearch,getGalleries,artPost} from "../../actions/exibitionAction"
 
 const AddExibit = () => {
   const dispatch = useDispatch();
-  const listCategory = useSelector(({artSelections}) => artSelections.ListOfArts?.data?.arts);
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [about, setAbout] = useState('');
-  const [picture, setPiucture] = useState([]);
-  const [radioSelect, setRadioSelect] = useState(0);
-  const untitle = [
-    { name: "Untitled 1", value: 1 },
-    { name: "Untitled 2", value: 2 },
-    { name: "Untitled 3", value: 3 },
-    { name: "Untitled 4", value: 4 },
-    { name: "Untitled 5", value: 5 },
-    { name: "Untitled 6", value: 6 }
-  ];
+  const listCategory = useSelector(({exibition}) => exibition.ListOfArts?.data?.arts);
+  const listGalleries = useSelector(({exibition}) => exibition.ListOfGalleries?.data);
+  const [data,setData] = useState({
+    title:"",
+    art_id:"",
+    description:"",
+    image:null,
+    gallery_id:""
+  })
+  
+  const handleChange = ({ target: input }) => {
+    if (input.type === 'file' && input.files[0]) {
+      setData({ ...data, [input.name]: input.files[0] });
+    } else {
+      setData({ ...data, [input.name]: input.value });
+    }
+  }
+
+
+  useEffect(() => {
+    dispatch(getGalleries())
+  }, [dispatch]);
+  
 
   function Submit(e) {
     e.preventDefault();
+    const formData = new FormData();
+    for (let key in data) {
+      formData.append(key, data[key]);
+    }
+    dispatch(artPost(formData))
   }
 
   return (
@@ -40,20 +54,26 @@ const AddExibit = () => {
               <label>
                 <img id="preview" src="/assets/images/input-image.png" alt="" />
               </label>
-              <input type="file" id="file" name="picture" accept="image/*" value={picture} onChange={(e) => setPiucture(e.target.value)} />
+              <input 
+                  type="file"  
+                  name="avatar"
+                  id="avatar"
+                  accept=".png, .jpg, .jpeg"  
+                  onChange={handleChange}
+               />
             </div>
             <div className="exibition-form-input">
                 <input 
                     className="exibition-title-input"
-                    list="categories" 
-                    name="categories" 
-                    value={category} 
+                    list="art_id" 
+                    name="art_id" 
+                    value={data.art_id} 
                     onChange={(e) => {
-                      setCategory(e.target.value);
+                      handleChange(e);
                       dispatch(artSearch(e.target.value))
                     }}
                 />
-                  <datalist className="exibition-input-dropdown" placeholder="Art Catehory" id="categories">
+                  <datalist className="exibition-input-dropdown" placeholder="Art Catehory" id="art_id">
                     {
                       listCategory?.map((cat) =>(
                         <Fragment>
@@ -64,8 +84,8 @@ const AddExibit = () => {
                     }
                   
                 </datalist>
-              <input className="exibition-title-input" type="text" placeholder="Give this art a title.." name="title" value={title} onChange={(e) => setTitle(e.target.value)} autoComplete="off" />
-              <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="about" value={about} onChange={(e) => setAbout(e.target.value)} autoComplete="off"></textarea>
+              <input className="exibition-title-input" type="text" placeholder="Give this art a title.." name="title" value={data.title} onChange={handleChange} autoComplete="off" />
+              <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="description" value={data.description} onChange={handleChange} autoComplete="off"></textarea>
             </div>
           </div>
           
@@ -74,10 +94,10 @@ const AddExibit = () => {
         </div>
           <div className="exibition-gallery-utilties">
             {
-              untitle.map((val, index) => (
+              listGalleries?.map((val, index) => (
                 <Fragment>
                    <div className="exibition-gallery-item" key={index}>
-                     <input type="radio" name="gallery" value={val.value} checked={radioSelect === val.value ? true : false} onChange={(e) => { setRadioSelect(val.value) }} /><span > {val.value}: {val.name}  </span>
+                     <input type="radio" name="gallery_id" value={val.id} checked={data.gallery_id === val.id ? true : false} onChange={handleChange} /><span > {val.title}  </span>
                    </div>
                 </Fragment>
                

@@ -8,8 +8,8 @@ import Spinner from './common/spinner';
 const ArtSelection = () => {
   const dispatch = useDispatch();
   const userName = getCurrentUser()?.username;
-  const [selectedArt, setSelectedArt] = useState("");
-  const [selectedSubArt, setSelectedSubArt] = useState("");
+  const [selectedArt, setSelectedArt] = useState(0);
+  const [selectedSubArt, setSelectedSubArt] = useState(0);
   const [selectedArtName, setSelectedArtName] = useState("");
   const [selectSubArtName, setSubArtName] = useState("");
   const [clickMainArt, setClickMain] = useState(0);
@@ -39,9 +39,9 @@ const ArtSelection = () => {
   function HandleNext(e) {
     e.preventDefault();
     let value = selectedArtName.length > 0
-      ? selectArt({ art_id: clickMainArt })
+      ? selectArt({ art_id: selectedArt })
       : selectSubArtName.length > 0
-        ? selectArt({ art_id: clickMainArt })
+        ? selectArt({ art_id: selectedSubArt })
         : subArtRadio
           ? newArt({ name: subName, parent_id: clickMainArt })
           : mainArtRadio
