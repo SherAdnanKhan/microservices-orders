@@ -19,7 +19,7 @@ export const login = credentials => () => {
     .post('/auth/login', credentials)
     .then(res => {
       setCurrentUser(res.data.data);
-      window.location.href = '/lobby';
+      window.location.href = '/dashboard/lobby';
     });
 };
 

@@ -17,9 +17,19 @@ export const getArt = () => dispatch => {
 };
 
 export const newArt = (value) => dispatch => {
+  if(value){
   http
-    .post('/arts', { name: value })
+    .post('/arts', value )
     .then(res => {
-      window.location.href = '/lobby';
+      window.location.href = '/dashboard/lobby';
+    });
+  }
+};
+export const selectArt = (value) => dispatch => {
+  http
+    .post('/arts/user-art-selection', value )
+    .then(res => {
+      window.location.href = '/dashboard/lobby';
     });
 };
+
