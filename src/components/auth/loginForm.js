@@ -46,7 +46,7 @@ const LoginForm = () => {
 
   return (
     <>
-      {getCurrentUser() && <Redirect to="/home" />}
+      {getCurrentUser() && <Redirect to="/dashboard/lobby" />}
       <div className="wrapper">
         <div className="loginScreen">
           <h1>Meuzm</h1>
