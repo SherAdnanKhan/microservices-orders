@@ -15,8 +15,8 @@ const Main = () => {
     switch (split[2]) {
       case 'lobby':
         return import('./lobby');
-      // case 'exibition':
-      //   return import('./addExibition');
+      case 'my-studio':
+        return import('./myStudio');
       case 'change-password':
         return import('./settings/changePassword');
       default:
