@@ -130,6 +130,7 @@ const RegisterForm = () => {
     for (let key in data) {
       formData.append(key, data[key]);
     }
+    
     dispatch(register(formData));
   }
 

@@ -12,9 +12,9 @@ export const artSearch = (art) => dispatch => {
     });
 };
 
-export const artPost = (cridentials) => dispatch => {
+export const artPost = (cridentials) => () => {
   http
-    .post('/api/posts', {cridentials},{})
+    .post('/posts', cridentials,{})
     .then(res => {
      console.log("the res",res);
     });
