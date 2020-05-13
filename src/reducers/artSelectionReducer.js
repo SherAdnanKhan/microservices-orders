@@ -1,8 +1,9 @@
-import { GET_ART, ART_SEARCH } from "../constants/actionTypes";
+import { GET_ART, ART_SEARCH,SELECT_USER } from "../constants/actionTypes";
 
 const initialState = {
   artName: null,
-  ListOfArts: []
+  ListOfArts: [],
+  selectedArt:[]
 };
 
 export default (state = initialState, action) => {
@@ -17,6 +18,11 @@ export default (state = initialState, action) => {
           ...state,
           ListOfArts: action.payload
         };
+      case SELECT_USER:
+        return {
+            ...state,
+            selectedArt: action.payload
+         };
     default:
       return state;
   }

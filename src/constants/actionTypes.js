@@ -16,5 +16,9 @@ export const GET_ART = 'GET_ART';
 // Art Search
 export const ART_SEARCH = 'ART_SEARCH';
 
+export const GET_GALLERIES = 'GET_GALLERIES';
+
+// ART SELECT
+export const SELECT_USER = "SELECT_USER";
 //Fav users and gallaries
 export const GET_FAV_USERS = 'GET_FAV_USERS';
