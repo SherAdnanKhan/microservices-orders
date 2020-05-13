@@ -1,22 +1,22 @@
 import http from "../services/httpService"
-import { ART_SEARCH,GET_GALLERIES } from "../constants/actionTypes";
+import { ART_SEARCH, GET_GALLERIES } from "../constants/actionTypes";
 
 export const artSearch = (art) => dispatch => {
   http
-    .get('/arts/search', {params:{art}})
+    .get('/arts/search', { params: { art } })
     .then(res => {
       dispatch({
-        type:ART_SEARCH,
-        payload:res.data,
+        type: ART_SEARCH,
+        payload: res.data,
       })
     });
 };
 
-export const artPost = (cridentials) => () => {
+export const artPost = (data, history) => () => {
   http
-    .post('/posts', cridentials,{})
+    .post('/posts', data, {})
     .then(res => {
-     console.log("the res",res);
+      history.push('/dashboard/my-studio');
     });
 };
 
@@ -25,8 +25,8 @@ export const getGalleries = () => dispatch => {
     .get('/galleries/my-gallery')
     .then(res => {
       dispatch({
-        type:GET_GALLERIES,
-        payload:res.data,
+        type: GET_GALLERIES,
+        payload: res.data,
       })
     });
 };
