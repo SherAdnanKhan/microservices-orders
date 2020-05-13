@@ -1,17 +1,19 @@
 import React, { Fragment, useState,useEffect } from "react";
 import {useDispatch,useSelector} from "react-redux"
 import {artSearch,getGalleries,artPost} from "../../actions/exibitionAction"
+import InputAutoComplete from "../common/autoComplete";
 
 const AddExibit = () => {
   const dispatch = useDispatch();
   const listCategory = useSelector(({exibition}) => exibition.ListOfArts?.data?.arts);
+  console.log("listCategory",listCategory)
   const listGalleries = useSelector(({exibition}) => exibition.ListOfGalleries?.data);
   let initialData = {
     title:"",
     description:"",
     gallery_id:0,
     image:null,
-    art_id: 1
+    art_id: null
   }
   const [arts,setArts] = useState("");
   const [artId,setArtId] = useState(-1);
@@ -26,6 +28,16 @@ const AddExibit = () => {
     }else {
       setData({ ...data, [input.name]: input.value });
     }
+  }
+
+  function handleAutoChange(e){
+    setArts(e.target.value);
+    dispatch(artSearch(e.target.value));
+  }
+
+  function handleAutoSelect(val,item){
+    setData({...data,art_id:item.id}); 
+    setArts(val) 
   }
 
 
@@ -98,27 +110,14 @@ const AddExibit = () => {
                />
             </div>
             <div className="exibition-form-input">
-                {/* <input 
-                    className="exibition-title-input"
-                    list="art_id" 
-                    name="art_id" 
-                    value={arts} 
-                    onChange={(e) => {
-                      handleChange(e);
-                      setArts(e.target.value)
-                      dispatch(artSearch(e.target.value))
-                    }}
-                />
-                  <datalist className="exibition-input-dropdown" placeholder="Art Catehory" id="art_id" onChange={(e) => console.log("clicked")}>
-                    {
-                      listCategory?.map((cat) =>(
-                        <Fragment>
-                           <option className="exibition-input-dropdown" key={cat.id} value={cat.name} />
-                        </Fragment>
-                       
-                      ))
-                    }
-                </datalist> */}
+            <InputAutoComplete 
+                columeName="name" 
+                ListArray={listCategory}
+                ItemId="id"
+                valueToDisplay = {arts}
+                value={data.art_id}
+                Change = {handleAutoChange} 
+                Select = {handleAutoSelect} />   
               <input className="exibition-title-input" type="text" placeholder="Give this art a title.." name="title" value={data.title} onChange={handleChange} autoComplete="off" />
               <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="description" value={data.description} onChange={handleChange} autoComplete="off"></textarea>
             </div>
