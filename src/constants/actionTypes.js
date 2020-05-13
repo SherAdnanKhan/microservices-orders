@@ -22,3 +22,6 @@ export const GET_GALLERIES = 'GET_GALLERIES';
 export const SELECT_USER = "SELECT_USER";
 //Fav users and gallaries
 export const GET_FAV_USERS = 'GET_FAV_USERS';
+
+//My studio
+export const GET_MY_STUDIO = 'GET_MY_STUDIO'; 
