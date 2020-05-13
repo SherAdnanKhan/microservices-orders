@@ -6,7 +6,6 @@ import InputAutoComplete from "../common/autoComplete";
 const AddExibit = () => {
   const dispatch = useDispatch();
   const listCategory = useSelector(({exibition}) => exibition.ListOfArts?.data?.arts);
-  console.log("listCategory",listCategory)
   const listGalleries = useSelector(({exibition}) => exibition.ListOfGalleries?.data);
   let initialData = {
     title:"",
@@ -16,7 +15,6 @@ const AddExibit = () => {
     art_id: null
   }
   const [arts,setArts] = useState("");
-  const [artId,setArtId] = useState(-1);
   const [error,setError] = useState("");
   const [data,setData] = useState(initialData)
   

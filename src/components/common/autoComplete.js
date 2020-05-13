@@ -2,7 +2,6 @@ import React from "react";
 import Autocomplete from "react-autocomplete";
 
 const InputAutoComplete = ({ columeName, ListArray, ItemId, valueToDisplay, value, valueSetter, Change, Select}) =>{
-  console.log("columeName",columeName)
   return ( 
   <Autocomplete
   inputProps={{ 
