@@ -2007,126 +2007,131 @@ img {
 }
 
 // Start tutorial page style
-.left-menu {
-  position: fixed;
-  width: 100px;
-  top: 0;
-  left: -100px;
-  height: 100vh;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  flex-direction: column;
-  z-index: 10;
-  border-radius: 0 50% 50% 0;
-  box-shadow: 1px 0px 3px rgba(61,61,61,1);
-  background-color: limegreen;
-  padding-right: 10px;
-  transition: all;
-  transition-duration: 0.5s;
-}
-.right-menu {
-  position: fixed;
-  width: 100px;
-  top: 0;
-  right: -100px;
-  height: 100vh;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  z-index: 10;
-  border-radius: 50% 0 0 50%;
-  box-shadow: 1px 0px 3px rgba(61,61,61,1);
-  background-color: limegreen;
-  padding-left: 10px;
-  transition: all;
-  transition-duration: 0.5s;
-}
-.botom-menu {
-  position: fixed;
-  width: 100%;
-  bottom: -41px;
-  left: 0;
-  height: 50px;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  border-radius: 50% 50% 0 0;
-  box-shadow: 1px 0px 3px rgba(61,61,61,1);
-  background-color: limegreen;
-  padding-left: 10px;
-  transition: all;
-  transition-duration: 0.5s;
-}
-.icons{
-  margin: 10px 0;
-  img{
-    width: 25px;
-    transition:all ease-in-out .3s;
-    &:hover{
-      transform: scale(1.5);
-    }
-  }
-}
-.add-left{
-  left: -69px;
-}
-.add-right{
-  right: -69px;
-}
-.add-botom{
-  bottom: 0px;
-}
-.content{
-  width: 100%;
-}
-.tabs-bar{
-  width: 100%;
-  position: fixed;
-  ul{
-    width: 90%;
-    margin: 20px auto;
+
+.tutorialScreen {
+  .left-menu {
+    position: fixed;
+    width: 100px;
+    top: 0;
+    left: -100px;
+    height: 100vh;
+    display: -webkit-flex;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    z-index: 10;
+    border-radius: 0 50% 50% 0;
+    box-shadow: 1px 0px 3px rgba(61,61,61,1);
+    background-color: limegreen;
+    padding-right: 10px;
+    transition: all;
+    transition-duration: 0.5s;
+  }
+  .right-menu {
+    position: fixed;
+    width: 100px;
+    top: 0;
+    right: -100px;
+    height: 100vh;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    z-index: 10;
+    border-radius: 50% 0 0 50%;
+    box-shadow: 1px 0px 3px rgba(61,61,61,1);
+    background-color: limegreen;
+    padding-left: 10px;
+    transition: all;
+    transition-duration: 0.5s;
+  }
+  .botom-menu {
+    position: fixed;
+    width: 100%;
+    bottom: -41px;
+    left: 0;
+    height: 50px;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0;
-    li{
-      list-style-type: none;
-      div{
-        width: 10px;
-        height: 10px;
-        border: 1px solid white;
-        border-radius: 50%;
-        cursor: pointer;
+    z-index: 10;
+    border-radius: 50% 50% 0 0;
+    box-shadow: 1px 0px 3px rgba(61,61,61,1);
+    background-color: limegreen;
+    padding-left: 10px;
+    transition: all;
+    transition-duration: 0.5s;
+  }
+  .icons{
+    margin: 10px 0;
+    img{
+      width: 25px;
+      transition:all ease-in-out .3s;
+      &:hover{
+        transform: scale(1.5);
       }
     }
   }
+  .add-left{
+    left: -69px;
+  }
+  .add-right{
+    right: -69px;
+  }
+  .add-botom{
+    bottom: 0px;
+  }
+  .content{
+    width: 100%;
+  }
+  .tabs-bar{
+    width: 100%;
+    position: fixed;
+    ul{
+      width: 90%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0;
+      li{
+        list-style-type: none;
+        div{
+          width: 10px;
+          height: 10px;
+          border: 1px solid white;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .tabs2 , .tabs3 , .tabs4 , .tabs5 , .tabs6 , .tabs7 , .tabs8 , .tabs9{
+    text-align: center;
+  }
+  p , button{
+    background-color: limegreen;
+    padding: 10px;
+    border-radius: 50px;
+    width: 70%;
+    text-align: center;
+    margin: 160px auto;
+    border: none;
+    color: @fontColor;
+  }
+  .tabs8 img{
+    width: 30px;
+  }
+  .dotactive{
+    width: 10px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background: #fff;
+  }
 }
-.tabs2 , .tabs3 , .tabs4 , .tabs5 , .tabs6 , .tabs7 , .tabs8 , .tabs9{
-  text-align: center;
-}
-p , button{
-  background-color: limegreen;
-  padding: 10px;
-  border-radius: 50px;
-  width: 70%;
-  text-align: center;
-  margin: 160px auto;
-  border: none;
-  color: @fontColor;
-}
-.tabs8 img{
-  width: 30px;
-}
-.dotactive{
-  width: 10px;
-  height: 10px;
-  border: 1px solid white;
-  border-radius: 50%;
-  background: #fff;
-}
+
+
