@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavouriteUsers } from '../../actions/lobbyActions';
+import { getFavouriteUsers } from '../../actions/userActions';
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
 
@@ -11,7 +11,7 @@ const Lobby = () => {
 
   const dispatch = useDispatch();
   const {
-    lobby: { favouriteUsers },
+    user: { favouriteUsers },
     loading: { loading }
   } = useSelector(state => state);
 

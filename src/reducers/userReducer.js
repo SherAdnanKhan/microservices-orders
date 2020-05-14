@@ -1,7 +1,8 @@
-import { GET_FAV_USERS } from "../constants/actionTypes";
+import { GET_FAV_USERS, GET_ALL_USERS } from "../constants/actionTypes";
 
 const initialState = {
-  favouriteUsers: null
+  favouriteUsers: null,
+  users: null
 };
 
 export default (state = initialState, action) => {
@@ -10,6 +11,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         favouriteUsers: action.payload
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.payload
       };
     default:
       return state;

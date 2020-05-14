@@ -7,7 +7,7 @@ const NavBar = () => {
     <nav>
       <ul className="dropdownM">
         <li>
-          <a href="#__account">Account</a>
+          <Link to="/dashboard/my-studio">My Studio</Link>
         </li>
         <li>
           <Link to="/dashboard/change-password">Change Password</Link>
