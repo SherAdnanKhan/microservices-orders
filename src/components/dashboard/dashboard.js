@@ -11,7 +11,7 @@ const Dashboard = ({ user }) => {
       <Switch>
         <Route exact path="/dashboard/change-password" component={Main} />
         <Route exact path="/dashboard/lobby" component={Main} />
-        <Route exact path="/dashboard/exibition/new" component={addExibition} />
+        <Route exact path="/dashboard/exhibition/new" component={addExibition} />
         <Route exact path="/dashboard/start-favas" component={StartFaves} />
         <Route exact path="/dashboard/my-studio" component={Main} />
         <Redirect exact from="/dashboard" to="/dashboard/lobby" />
