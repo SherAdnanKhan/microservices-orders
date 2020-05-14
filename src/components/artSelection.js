@@ -3,11 +3,14 @@ import { getCurrentUser } from '../actions/authActions';
 import { useSelector, useDispatch } from "react-redux"
 import { getArt, newArt, selectArt } from "../actions/artSelectionActions";
 import Spinner from './common/spinner';
+import { useHistory } from 'react-router-dom';
 
 
 const ArtSelection = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const userName = getCurrentUser()?.username;
+
   const [selectedArt, setSelectedArt] = useState(0);
   const [selectedSubArt, setSelectedSubArt] = useState(0);
   const [selectedArtName, setSelectedArtName] = useState("");
@@ -27,8 +30,6 @@ const ArtSelection = () => {
 
   }, [dispatch]);
 
-
-
   function MainArtClick(e, id) {
     e.preventDefault();
     setClickMain(id);
@@ -39,16 +40,16 @@ const ArtSelection = () => {
   function HandleNext(e) {
     e.preventDefault();
     let value = selectedArtName.length > 0
-      ? selectArt({ art_id: selectedArt })
+      ? selectArt({ art_id: selectedArt }, history)
       : selectSubArtName.length > 0
-        ? selectArt({ art_id: selectedSubArt })
+        ? selectArt({ art_id: selectedSubArt }, history)
         : subArtRadio
-          ? newArt({ name: subName, parent_id: clickMainArt })
+          ? newArt({ name: subName, parent_id: clickMainArt }, history)
           : mainArtRadio
-            ? newArt({ name })
+            ? newArt({ name }, history)
             : {};
     if (value !== {}) {
-      dispatch(value)
+      dispatch(value);
     }
   }
 
