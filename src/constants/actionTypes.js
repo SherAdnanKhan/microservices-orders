@@ -20,8 +20,10 @@ export const GET_GALLERIES = 'GET_GALLERIES';
 
 // ART SELECT
 export const SELECT_USER = "SELECT_USER";
-//Fav users and gallaries
+
+//Users 
 export const GET_FAV_USERS = 'GET_FAV_USERS';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
 
 //My studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO'; 

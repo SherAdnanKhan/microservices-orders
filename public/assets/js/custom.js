@@ -66,6 +66,7 @@ $(document).on('click', '.colorChangerScreen img[color]', async function () {
 });
 
 $(document).on('click', '.menuBlock', function () {
+  console.log("yes");
   const checkNav = $('nav').css('display');
   if (checkNav == 'none') {
     $('nav').show();
@@ -80,3 +81,27 @@ $(document).on('click', 'nav a ', function () {
   $('nav').hide();
   $('.menuBlock').find('.fas').removeClass('fa-arrow-left fa-ellipsis-v').addClass('fa-ellipsis-v');
 });
+
+$(document).on('click', '#search', function () {
+  $("#search-bar").css("display", "flex");
+  $("#main-menu").hide();
+  $("#search-result").show();
+});
+
+$(document).on('click', '#go-back', function () {
+  $("#search-bar").css("display", "none");
+  $("#main-menu").show();
+  $("#search-result").hide();
+});
+
+// $("#search").click(function () {
+//   console.log("yes");
+//   $("#search-bar").css("display", "flex");
+//   $("#main-menu").hide();
+//   $("#search-result").show();
+// });
+// $("#go-back").click(function () {
+//   $("#search-bar").css("display", "none");
+//   $("#main-menu").show();
+//   $("#search-result").hide();
+// });
