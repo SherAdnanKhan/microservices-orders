@@ -42,14 +42,14 @@ const MyStudio = () => {
                   </label>
                   <div className="faved-btn">
                     <Link to="#">
-                      <div>
+                      <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
                     Faved by
                   </div>
                       {myStudio && <span>{myStudio.fav_by_count}</span>}
                     </Link>
                     <Link to="#">
-                      <div>
+                      <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
                     Faved
                   </div>
@@ -87,14 +87,14 @@ const MyStudio = () => {
                   </label>
                   <div className="faved-btn">
                     <Link to="#">
-                      <div>
+                      <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
                     Faved by
                   </div>
                       {myStudio && <span>{myStudio.fav_by_count}</span>}
                     </Link>
                     <Link to="#">
-                      <div>
+                      <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
                     Faved
                   </div>
