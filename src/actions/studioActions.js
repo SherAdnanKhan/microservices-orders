@@ -5,7 +5,6 @@ export const getMyStudio = () => dispatch => {
   http
     .get('/my-studio')
     .then(res => {
-      // console.log(res.data);
       dispatch({
         type: GET_MY_STUDIO,
         payload: res.data.data

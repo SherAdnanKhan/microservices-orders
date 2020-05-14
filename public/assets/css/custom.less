@@ -2219,4 +2219,80 @@ img {
   }
 }
 
+// start of Start Faves
+.start-favas{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  .start-favas-box{
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 350px;
+    margin: 5px auto;
+  }
+  .start-favas-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #515452;
+    align-items: center;
+    border: 2px solid #515452;
+    border-radius: 10px;
+    padding: 0px;
+    width: 30%;
+    margin: 5px auto;
+
+    .start-favas-card-header{
+      background-color: black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 1px 0px;
+      width: 100%;
+    }
+    .start-favas-card-body{
+      display: flex;
+      flex-direction: column;
+      width: 30vw;
+      .start-favas-card-images{
+        display: flex;
+        flex-direction: row;
+        .start-favas-card-single{
+          width: 70%;
+        }
+        .card-images-set{
+          display: flex;
+          flex-direction: column;
+          width: 25%;
+          height: 40vh;
+          overflow:scroll
+        }
+      }
+      h2{
+        text-align: center;
+      }
+    }
+    .start-favas-card-footer{
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+     
+      img{
+        text-align: center;
+        margin: 2px auto;
+      }
+    }
+
+  }
+}
+// end of Start Faves
+
 
