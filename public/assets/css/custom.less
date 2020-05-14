@@ -290,25 +290,25 @@ input {
         border: 4px solid transparent;
         transition: .5s;
         &.cube-face-front {
-          background-color: black;
+          // background-color: black;
           -webkit-transform: translate3d(0,0, 78px);
           -ms-transform: translate3d(0,0, 78px);
           transform: translate3d(0,0, 78px);
         }
         &.cube-face-back {
-          background-color: black;
+          // background-color: black;
           -webkit-transform: rotatey(180deg) translate3d(0,0,78px);
           -ms-transform: rotatey(180deg) translate3d(0,0,78px);
           transform: rotatey(180deg) translate3d(0,0,78px);
         }
         &.cube-face-left {
-          background-color: black;
+          // background-color: black;
           -webkit-transform: rotatey(-90deg) translate3d(0,0,78px);
           -ms-transform: rotatey(-90deg) translate3d(0,0,78px);
           transform: rotatey(-90deg) translate3d(0,0,78px);
         }
         &.cube-face-right{
-          background-color: black;
+          // background-color: black;
           -webkit-transform: rotatey(90deg) translate3d(0,0,78px);
           -ms-transform: rotatey(90deg) translate3d(0,0,78px);
           transform: rotatey(90deg) translate3d(0,0,78px);
@@ -602,7 +602,7 @@ input {
   overflow-y: auto;
   position: relative;
   &.gold {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: @color_gold;
     }
     .top {
@@ -617,7 +617,7 @@ input {
     }
   }
   &.orange {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: #ffa500;
     }
     .top {
@@ -632,7 +632,7 @@ input {
     }
   }
   &.gray {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: #808080;
     }
     .top {
@@ -647,7 +647,7 @@ input {
     }
   }
   &.limegreen {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: #32cd32;
     }
     .top {
@@ -662,7 +662,7 @@ input {
     }
   }
   &.red {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: #ff0000;
     }
     .top {
@@ -677,7 +677,7 @@ input {
     }
   }
   &.purple {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: #800080;
     }
     .top {
@@ -692,7 +692,7 @@ input {
     }
   }
   &.dodgerblue {
-    .top, .left, .right, .bottom {
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right{
       background: #1e90ff;
     }
     .top {
@@ -1768,7 +1768,7 @@ img {
         color: @fontColor;
         div{
         width: 80px;
-        background: orange;
+        // background: orange;
         color: @fontColor;
         border-radius: 50px;
         border: 1px solid #fff;
@@ -1794,7 +1794,7 @@ img {
 }
 
 .editstudio-btn{
-  background: orange;
+  // background: orange;
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -1803,7 +1803,7 @@ img {
   button{
     cursor: pointer;
     width: 75%;
-    background: orange;
+    background: transparent;
     border-radius: 50px;
     border: 1px groove white;
     color: #fff;
@@ -1837,7 +1837,7 @@ img {
   }
 }
 .total-post{
-  background: orange;
+  // background: orange;
   display: flex;
   justify-content: start;
   align-items: center;
