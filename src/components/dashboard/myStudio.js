@@ -115,16 +115,16 @@ const MyStudio = () => {
             {edit &&
               <div className="screen">
                 <div className="scr-inner">
-                  <div className="item-box">
+                  <div className="item-box item-box-1">
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
-                  <div className="item-box">
+                  <div className="item-box item-box-2">
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
-                  <div className="item-box">
+                  <div className="item-box item-box-3">
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
-                  <div className="item-box">
+                  <div className="item-box item-box-4">
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
                 </div>
@@ -133,25 +133,25 @@ const MyStudio = () => {
             {!edit &&
               <div className="edit-screen">
                 <div className="scr-inner">
-                  <div className="item-box">
+                  <div className="item-box item-box-1">
                     <div className="editTool Edit">
                       <img src="/assets/images/paintbrush.png" alt="" />
                     </div>
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
-                  <div className="item-box">
+                  <div className="item-box item-box-2">
                     <div className="editTool Edit">
                       <img src="/assets/images/paintbrush.png" alt="" />
                     </div>
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
-                  <div className="item-box">
+                  <div className="item-box item-box-3">
                     <div className="editTool Edit">
                       <img src="/assets/images/paintbrush.png" alt="" />
                     </div>
                     <img src="/assets/images/galleryicon.png" alt="" />
                   </div>
-                  <div className="item-box">
+                  <div className="item-box item-box-4">
                     <div className="editTool Edit">
                       <img src="/assets/images/paintbrush.png" alt="" />
                     </div>
@@ -168,6 +168,9 @@ const MyStudio = () => {
             <div className="gallery">
               <p>Select a Gallery</p>
               <p>Total posts: 2</p>
+            </div>
+            <div className="heart-icon">
+              <img src="/assets/images/catfave.png" />
             </div>
           </div>
           <div className="wrapper">
