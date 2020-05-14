@@ -1830,8 +1830,13 @@ img {
       overflow: hidden;
       opacity: .6;
       display: flex;
+      transition: all ease-in-out .3s;
+      cursor: pointer;
       img{
         width: 100%;
+      }
+      &:hover{
+        transform: scale(1.09);
       }
     }
   }
@@ -1957,10 +1962,16 @@ img {
       display: flex;
       background: #2d2d2d;
       position: relative;
+      transition: all ease-in-out .3s;
+      cursor: pointer;
       img{
         width: 100%;
       }
+      &:hover{
+        transform: scale(1.09);
+      }
     }
+    
   }
 }
 
