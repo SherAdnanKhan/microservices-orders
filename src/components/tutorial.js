@@ -17,7 +17,7 @@ const Tutorial = () => {
   ]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper tutorialScreen">
       <div
         className={
           activeTab === 2 || activeTab === 3
