@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import LoginForm from './components/auth/loginForm';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import RegisterForm from './components/auth/registerForm';
@@ -9,11 +9,12 @@ import ArtSelection from "./components/artSelection";
 import Ind from './components/ind';
 import Dashboard from './components/dashboard/dashboard';
 import history from "./components/common/history";
+import Tutorial from './components/tutorial';
 
 function App() {
   useEffect(() => {
     document.title = `Meuzmnet: ${history.location.pathname.split('/')[1]}`
-   }, []);
+  }, []);
   return (
     <Switch>
       <Route exact path='/login' component={LoginForm} />
@@ -22,6 +23,7 @@ function App() {
       <ProtectedRoute exact path="/welcome" component={Ind} />
       <ProtectedRoute exact path="/artselection" component={ArtSelection} />
       <ProtectedRoute path='/dashboard/:page?' component={Dashboard} />
+      <Route path="/tutorial" component={Tutorial} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
     </Switch>
