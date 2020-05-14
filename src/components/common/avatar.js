@@ -79,10 +79,10 @@ const Avatar = ({ avatars }) => {
           </div>
 
           {/* onClick="imgOpsBye(815, 915)" */}
-          <div className="blocker" id={915} />
+          {/* <div className="blocker" id={915} />
           <div className="exhibitartname">
             <span className="artof" id="artof" />
-          </div>
+          </div> */}
         </div>
       }
     </>
