@@ -21,7 +21,7 @@ export const newArt = (value, history) => dispatch => {
     http
       .post('/arts', value)
       .then(res => {
-        history.push('/tutorial');
+        history.push('/dashboard/start-favas');
       });
   }
 };
@@ -37,7 +37,7 @@ export const selectArt = (value, history) => dispatch => {
         type: SELECT_USER,
         payload: [id, name]
       })
-      history.push('/tutorial');
+      history.push('/dashboard/start-favas');
     });
 };
 
