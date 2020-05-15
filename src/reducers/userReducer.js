@@ -19,7 +19,6 @@ export default (state = initialState, action) => {
         users: action.payload
       };
       case GET_OTEHR_FAV_USER:
-        console.log("action.payload",action.payload)
         return {
           ...state,
           otherFavouriteUsers: action.payload
