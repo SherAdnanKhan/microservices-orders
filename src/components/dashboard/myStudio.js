@@ -22,8 +22,6 @@ const MyStudio = () => {
 
   let url = window.location.href.split('/')[5];
 
-  console.log('studioUser', studioUser)
-
   useEffect(() => {
     if (!myStudio)
       dispatch(getMyStudio());
@@ -58,11 +56,11 @@ const MyStudio = () => {
                       url === 'user' 
                       ? studioUser &&
                          <div className="procu">
-                          <ProfileCube avatars={ studioUser.avatars } />
+                          <ProfileCube avatars={ studioUser?.avatars } />
                         </div>
                       :  myStudio &&
                          <div className="procu">
-                          <ProfileCube avatars={ studioUser.avatars } />
+                          <ProfileCube avatars={ myStudio?.user?.avatars } />
                         </div> 
                     } 
                   <div>
@@ -72,8 +70,8 @@ const MyStudio = () => {
                 <div className="profilebioname">
                   {url && 
                     url === 'user' 
-                    ? studioUser && <span className="nameof" id="nameof"> {studioUser.first_name}</span> 
-                    :  myStudio && <span className="nameof" id="nameof"> {myStudio.user.username}</span> 
+                    ? studioUser && <span className="nameof" id="nameof"> {studioUser?.first_name}</span> 
+                    :  myStudio && <span className="nameof" id="nameof"> {myStudio?.user?.username}</span> 
                   } 
                   <br />
                   <span className="artof" id="artof">Cosplay/1213</span>

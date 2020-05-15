@@ -1,7 +1,8 @@
-import { GET_FAV_USERS, GET_ALL_USERS, GET_OTEHR_FAV_USER, GET_USER_ART_NAME } from "../constants/actionTypes";
+import { GET_FAV, GET_ALL_USERS, GET_OTEHR_FAV_USER, GET_USER_ART_NAME } from "../constants/actionTypes";
 
 const initialState = {
   favouriteUsers: null,
+  favouriteGalleries: null,
   users: null,
   otherFavouriteUsers:null,
   userArtName:""
@@ -10,10 +11,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_FAV_USERS:
+    case GET_FAV:
       return {
         ...state,
-        favouriteUsers: action.payload
+        favouriteUsers: action.payload.all_faved_users,
+        favouriteGalleries: action.payload.user_with_faved_galleries
       };
     case GET_ALL_USERS:
       return {
