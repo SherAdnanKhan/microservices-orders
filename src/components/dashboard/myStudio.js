@@ -14,8 +14,9 @@ const MyStudio = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(getMyStudio());
-  }, [dispatch]);
+    if (!myStudio)
+      dispatch(getMyStudio());
+  }, [dispatch, myStudio]);
 
   return (
     <div>
@@ -170,7 +171,7 @@ const MyStudio = () => {
               <p>Total posts: 2</p>
             </div>
             <div className="heart-icon">
-              <img src="/assets/images/catfave.png" />
+              <img src="/assets/images/catfave.png" alt="" />
             </div>
           </div>
           <div className="wrapper">
