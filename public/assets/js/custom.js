@@ -94,28 +94,28 @@ $(document).on('click', '#go-back', function () {
 });
 
 
-$(document).on('click', '.item-box-1', function () {
+$(document).on('click', '.item-box-1', function (e) {
   $(".item-box-1").css({"transform": "scale(1.2)" , "z-index": "9"});
   $(".item-box-2").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-3").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-4").css({"transform": "scale(1)" , "z-index": "1"});
   e.stopPropagation();
 });
-$(document).on('click', '.item-box-2', function () {
+$(document).on('click', '.item-box-2', function (e) {
   $(".item-box-2").css({"transform": "scale(1.2)" , "z-index": "9"});
   $(".item-box-1").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-3").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-4").css({"transform": "scale(1)" , "z-index": "1"});
   e.stopPropagation();
 });
-$(document).on('click', '.item-box-3', function () {
+$(document).on('click', '.item-box-3', function (e) {
   $(".item-box-3").css({"transform": "scale(1.2)" , "z-index": "9"});
   $(".item-box-2").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-1").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-4").css({"transform": "scale(1)" , "z-index": "1"});
   e.stopPropagation();
 });
-$(document).on('click', '.item-box-4', function () {
+$(document).on('click', '.item-box-4', function (e) {
   $(".item-box-4").css({"transform": "scale(1.2)" , "z-index": "9"});
   $(".item-box-2").css({"transform": "scale(1)" , "z-index": "1"});
   $(".item-box-3").css({"transform": "scale(1)" , "z-index": "1"});
@@ -126,6 +126,14 @@ $(document).click(function(){
   $(".item-box-1 , .item-box-2 , .item-box-3 , .item-box-4").css("transform", "scale(1)");
 });
 
+$(document).on('click', '.item-box', function () {
+  $(".my-studio-edit").show();
+  $(".edit-user-page").hide();
+});
+$(document).on('click', '.go-to-profile', function () {
+  $(".my-studio-edit").hide();
+  $(".edit-user-page").show();
+});
 
 // $("#search").click(function () {
 //   console.log("yes");
