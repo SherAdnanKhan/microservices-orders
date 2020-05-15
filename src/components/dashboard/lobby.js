@@ -5,9 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFavouriteUsers } from '../../actions/userActions';
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
+import {artSearch} from "../../actions/exibitionAction";
 
 const Lobby = () => {
   const user = useContext(UserContext);
+  const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
+  const userArtData = useSelector((state) => state);
+
+  console.log("user data",userArtData);
 
   const dispatch = useDispatch();
   const {
@@ -17,6 +22,7 @@ const Lobby = () => {
 
   useEffect(() => {
     dispatch(getFavouriteUsers());
+    dispatch(artSearch(1))
   }, [dispatch]);
 
   return (
