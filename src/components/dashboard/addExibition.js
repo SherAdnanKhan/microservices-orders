@@ -89,7 +89,7 @@ const AddExibit = () => {
       <Fragment>
         <div className="exibition-page-header">
           <span className="exibition-exit-icon">
-            <i className="fas fa-arrow-left"></i>
+            <i className="fas fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')}></i>
           </span>
           <span className="exibition-header-name">Exhibit Your Art</span>
         </div>

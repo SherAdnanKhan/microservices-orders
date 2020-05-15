@@ -2297,4 +2297,103 @@ img {
 }
 // end of Start Faves
 
+// Faving page start
+.favas{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .favas-row{
+    display: flex;
+    flex-direction: row;
+    .favas-box{
+      border: 7px solid rgba(61,61,61,.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50%;
+      height: 100vh;
+      text-align: center;
+      margin: 15px 10px;
+      .favas-avatar{
+        margin: 10px auto;
+      }
+      div p {
+        margin: 0px auto;
+      }
+    }
+  }
 
+ 
+}
+// Faving page end
+
+
+// Start Edit Profile page style
+
+.edit-profile-page{
+  .header-bar{
+    background: #00cd4f;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .back-icon{
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+    }
+  }
+  .edit-profile{
+    width: 100%;
+    margin: 50px 0;
+    text-align: center;
+    .scr-inner{
+      display: flex;
+      width: 95%;
+      margin: 0 auto;
+      justify-content: space-between;
+      .item-box{
+        flex-basis: 24%;
+        border: 2px solid #00cd4f;
+        opacity: 0.6;
+        display: flex;
+        background: #2d2d2d;
+        position: relative;
+        img{
+          width: 100%;
+        }
+      }
+    }
+    button{
+      width: 60%;
+      margin: 0 auto;
+      border: none;
+      border-radius: 50px;
+      background: #00cd4f;
+      color: @fontColor;
+      font-size: 18px;
+      padding: 10px;
+      margin-top: 20px;
+      border: 1px solid #ffffff;
+      cursor: pointer;
+    }
+  }
+  .editTool {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0,0,0,.3);
+    top: -10px;
+    right: -5px;
+    z-index: 300;
+    padding: 5px;
+    img {
+      height: 100%;
+    }
+  }
+}
+
+//End edit profile

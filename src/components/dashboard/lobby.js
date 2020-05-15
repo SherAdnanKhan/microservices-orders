@@ -21,9 +21,11 @@ const Lobby = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(getFavouriteUsers());
+    if (!favouriteUsers){
+      dispatch(getFavouriteUsers());
+    }
     dispatch(artSearch(1))
-  }, [dispatch]);
+  }, [dispatch, favouriteUsers])
 
   return (
     <>

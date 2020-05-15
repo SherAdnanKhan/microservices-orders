@@ -27,3 +27,6 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 
 //My studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO'; 
+
+// Faves
+export const GET_FAVES = 'GET_FAVES';
