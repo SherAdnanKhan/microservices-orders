@@ -33,7 +33,7 @@ const Lobby = () => {
   }
 
   return (
-    <>
+    <div className="lobby-page">
       {!loading ?
         <div className="base" id="sec">
           {favouriteUsers &&
@@ -74,7 +74,7 @@ const Lobby = () => {
           <img src="/assets/images/icons/LogoIconWhite.png" alt="support" />
         </a>
       </div>
-    </>
+    </div>
   );
 };
 
