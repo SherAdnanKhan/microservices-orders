@@ -16,8 +16,9 @@ const Lobby = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(getFavouriteUsers());
-  }, [dispatch]);
+    if (!favouriteUsers)
+      dispatch(getFavouriteUsers());
+  }, [dispatch, favouriteUsers]);
 
   return (
     <>
