@@ -23,6 +23,7 @@ const Lobby = () => {
   }, [dispatch, favouriteUsers]);
 
   function handleLink(data){
+    console.log("main function",data);
     dispatch(selectUserForStudio(data));
   }
 
