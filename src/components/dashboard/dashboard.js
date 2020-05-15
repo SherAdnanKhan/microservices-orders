@@ -5,6 +5,7 @@ import Main from './Main';
 import addExibition from "./addExibition";
 import StartFaves from "./startFavas";
 
+
 const Dashboard = ({ user }) => {
   return (
     <UserContext.Provider value={user}>
@@ -14,6 +15,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/exhibition/new" component={addExibition} />
         <Route exact path="/dashboard/start-favas" component={StartFaves} />
         <Route exact path="/dashboard/my-studio" component={Main} />
+        <Route exact path="/dashboard/faving" component={Main} />
         <Redirect exact from="/dashboard" to="/dashboard/lobby" />
       </Switch>
     </UserContext.Provider>
