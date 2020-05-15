@@ -24,7 +24,6 @@ const MyStudio = () => {
   } = useSelector(state => state);
 
   let url = window.location.href.split('/')[5];
-  console.log("galleryImages",galleryImages.images)
 
   useEffect(() => {
     if (!myStudio)
@@ -204,17 +203,17 @@ const MyStudio = () => {
               }
             </div>
           </div>
-          {/* <div className="wrapper">
+          <div className="wrapper">
             <div className="screen">
               <div className="scr-inner">
                 {galleryImages?.map((gallery, index) => (
                   <div key={index}>
-                    <img src={ `${gallery?.images.path}`} alt="" />
+                    <img src={ `${gallery?.image.path}`} alt="" style={{width:'20%'}} />
                   </div>
                 ))}
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="wrapper">
             <p className="footer-text">production of: QuetzalArtz x R&amp;R </p>
           </div>
