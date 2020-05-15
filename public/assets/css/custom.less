@@ -602,7 +602,7 @@ input {
   overflow-y: auto;
   position: relative;
   &.gold {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img, .actions button{
       background: @color_gold;
     }
     .edit-profile-page{
@@ -623,7 +623,7 @@ input {
     }
   }
   &.orange {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar  , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar  , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img, .actions button{
       background: #ffa500;
     }
     .edit-profile-page{
@@ -643,7 +643,7 @@ input {
     }
   }
   &.gray {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img,.actions button{
       background: #808080;
     }
     .edit-profile-page{
@@ -663,7 +663,7 @@ input {
     }
   }
   &.limegreen {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header  , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header  , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img, .actions button{
       background: #32cd32;
     }
     .edit-profile-page{
@@ -683,7 +683,7 @@ input {
     }
   }
   &.red {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img, .actions button{
       background: #ff0000;
     }
     .edit-profile-page{
@@ -703,7 +703,7 @@ input {
     }
   }
   &.purple {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img, .actions button{
       background: #800080;
     }
     .edit-profile-page{
@@ -723,7 +723,7 @@ input {
     }
   }
   &.dodgerblue {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button , .header-bar , .edit-profile button , .studioHead img, .actions button{
       background: #1e90ff; 
     }
     .edit-profile-page{
@@ -2508,6 +2508,29 @@ img {
     }
   }
   .update-image{
+    .hide {
+      display: none;
+    }
+    .show {
+      display: block;
+    }
+    .actions {
+      button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+        border-radius: 30px;
+        color: white;
+        font-size: 100%;
+      }
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      margin-bottom: 5%;
+    }
     .up-img-box{
       width: 96%;
       height: 1000px;

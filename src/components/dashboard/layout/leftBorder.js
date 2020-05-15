@@ -1,10 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const LeftBorder = () => {
+  const history = useHistory();
   return (
     <div className="left">
-      <img alt="" src="/assets/images/lobbyicon.png" />
-      <img alt="" src="/assets/images/newstudioicon.png" />
+      <img alt="" src="/assets/images/lobbyicon.png" onClick={() => history.push('/dashboard/lobby')} />
+      <img alt="" src="/assets/images/newstudioicon.png" onClick={() => history.push('/dashboard/my-studio')} />
     </div>
   );
 };
