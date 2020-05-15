@@ -4,14 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../actions/studioActions';
 import ProfileCube from '../common/profileCube';
 import Spinner from '../common/spinner';
+import { getGalleries } from '../../actions/exibitionAction';
+import Gallery from '../common/gallery';
 
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
+  const [activeGallery, setActiveGallery] = useState('');
 
   const history = useHistory();
   const dispatch = useDispatch();
   const {
     studio: { myStudio },
+    exibition: { ListOfGalleries: { data: galleries } },
     loading: { loading }
   } = useSelector(state => state);
 
@@ -20,6 +24,18 @@ const MyStudio = () => {
       dispatch(getMyStudio());
   }, [dispatch, myStudio]);
 
+  useEffect(() => {
+    if (!galleries)
+      dispatch(getGalleries());
+    else
+      console.log(galleries)
+
+  }, [galleries, dispatch])
+
+
+  const handleGalleryChange = gallery => {
+    setActiveGallery(gallery);
+  }
   return (
     <div>
       {loading && <Spinner />}
@@ -34,7 +50,7 @@ const MyStudio = () => {
                   </div>
                 }
                 <div className="profilebioname">
-                  <span className="nameof" id="nameof">usman Ejaz</span>
+                  {myStudio && <span className="nameof" id="nameof"> {myStudio.user.username}</span>}
                   <br />
                   <span className="artof" id="artof">Cosplay/1213</span>
                 </div>
@@ -44,18 +60,18 @@ const MyStudio = () => {
                     <input type="text" name="username" id="addbio" />
                   </label>
                   <div className="faved-btn">
-                    <Link to="#">
+                    <Link to="/dashboard/faving/by">
                       <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
-                    Faved by
-                  </div>
+                        Faved by
+                      </div>
                       {myStudio && <span>{myStudio.fav_by_count}</span>}
                     </Link>
-                    <Link to="#">
+                    <Link to="/dashboard/faving">
                       <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
-                    Faved
-                  </div>
+                        Faved
+                      </div>
                       {myStudio && <span>{myStudio.favs_count}</span>}
                     </Link>
                   </div>
@@ -76,7 +92,7 @@ const MyStudio = () => {
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
-                  <span className="nameof" id="nameof">usman Ejaz</span>
+                  {myStudio && <span className="nameof" id="nameof">{myStudio.user.username}</span>}
                   <br />
                   <span className="artof" id="artof">Cosplay/1213</span>
                 </div>
@@ -92,15 +108,15 @@ const MyStudio = () => {
                     <Link to="#">
                       <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
-                    Faved by
-                  </div>
+                        Faved by
+                      </div>
                       {myStudio && <span>{myStudio.fav_by_count}</span>}
                     </Link>
                     <Link to="#">
                       <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
-                    Faved
-                  </div>
+                        Faved
+                      </div>
                       {myStudio && <span>{myStudio.favs_count}</span>}
                     </Link>
                   </div>
@@ -109,71 +125,37 @@ const MyStudio = () => {
             }
           </div>
           <div className="editstudio-btn">
-            <button onClick={() => setEdit(!edit)}>
+            <button onClick={() => {
+              setEdit(!edit);
+              setActiveGallery('');
+            }}>
               <img src="/assets/images/paintbrush.png" alt="" />
               {edit ? "Edit Studio" : "View Studio"}
             </button>
           </div>
           <div className="wrapper">
-            {edit &&
-              <div className="screen">
-                <div className="scr-inner">
-                  <div className="item-box item-box-1">
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                  <div className="item-box item-box-2">
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                  <div className="item-box item-box-3">
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                  <div className="item-box item-box-4">
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                </div>
-              </div>
-            }
-            {!edit &&
-              <div className="edit-screen">
-                <div className="scr-inner">
-                  <div className="item-box item-box-1">
-                    <div className="editTool Edit">
-                      <img src="/assets/images/paintbrush.png" alt="" />
-                    </div>
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                  <div className="item-box item-box-2">
-                    <div className="editTool Edit">
-                      <img src="/assets/images/paintbrush.png" alt="" />
-                    </div>
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                  <div className="item-box item-box-3">
-                    <div className="editTool Edit">
-                      <img src="/assets/images/paintbrush.png" alt="" />
-                    </div>
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                  <div className="item-box item-box-4">
-                    <div className="editTool Edit">
-                      <img src="/assets/images/paintbrush.png" alt="" />
-                    </div>
-                    <img src="/assets/images/galleryicon.png" alt="" />
-                  </div>
-                </div>
-              </div>
-            }
+            <Gallery
+              galleries={galleries}
+              edit={edit}
+              onGalleryChange={handleGalleryChange}
+            />
           </div>
           <div className="total-post">
             <div className="icon-side">
               <i className="fas fa-square" />
             </div>
             <div className="gallery">
-              <p>Select a Gallery</p>
-              <p>Total posts: 2</p>
+              {!activeGallery &&
+                <>
+                  <p>Select a Gallery</p>
+                  <p>Total posts: 2</p>
+                </>
+              }
+              {activeGallery && <p>{activeGallery.title}</p>}
             </div>
+
             <div className="heart-icon">
-              <img src="/assets/images/catfave.png" alt="" />
+              {activeGallery && <img src="/assets/images/add.png" className="clickable" alt="" />}
             </div>
           </div>
           <div className="wrapper">

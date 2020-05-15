@@ -5,6 +5,7 @@ import InputAutoComplete from "../common/autoComplete";
 import { useHistory } from "react-router-dom";
 
 const AddExibit = () => {
+  const [color, setColor] = useState('red');
   const history = useHistory();
   const dispatch = useDispatch();
   const listCategory = useSelector(({ exibition }) => exibition.ListOfArts?.data?.arts);
@@ -84,8 +85,15 @@ const AddExibit = () => {
 
   }
 
+  useEffect(() => {
+    if (localStorage.color)
+      setColor(JSON.parse(localStorage.getItem('color')));
+  }, []);
+
+
+
   return (
-    <div>
+    <div className={`frameReady ${color}`}>
       <Fragment>
         <div className="exibition-page-header">
           <span className="exibition-exit-icon">
