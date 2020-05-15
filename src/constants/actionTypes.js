@@ -24,9 +24,8 @@ export const SELECT_USER = "SELECT_USER";
 //Users 
 export const GET_FAV_USERS = 'GET_FAV_USERS';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_OTEHR_FAV_USER = 'GET_OTEHR_FAV_USER';
 
 //My studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO'; 
 
-// Faves
-export const GET_FAVES = 'GET_FAVES';

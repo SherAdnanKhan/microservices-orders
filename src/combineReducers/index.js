@@ -5,7 +5,6 @@ import artSelectionReducer from "../reducers/artSelectionReducer";
 import exibitionReducer from "../reducers/exibitionReducer";
 import studioReducer from '../reducers/studioReducer';
 import userReducer from '../reducers/userReducer';
-import favasReducer from "../reducers/favasReducer";
 
 export default combineReducers({
   error: errorReducer,
@@ -14,5 +13,4 @@ export default combineReducers({
   exibition: exibitionReducer,
   user: userReducer,
   studio: studioReducer,
-  favas: favasReducer
 }); 

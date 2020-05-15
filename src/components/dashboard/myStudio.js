@@ -44,14 +44,14 @@ const MyStudio = () => {
                     <input type="text" name="username" id="addbio" />
                   </label>
                   <div className="faved-btn">
-                    <Link to="#">
+                    <Link to="/dashboard/faving/by">
                       <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
                     Faved by
                   </div>
                       {myStudio && <span>{myStudio.fav_by_count}</span>}
                     </Link>
-                    <Link to="#">
+                    <Link to="/dashboard/faving">
                       <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
                     Faved

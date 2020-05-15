@@ -1,4 +1,4 @@
-import { GET_FAV_USERS, GET_ALL_USERS } from "../constants/actionTypes";
+import { GET_FAV_USERS, GET_ALL_USERS, GET_OTEHR_FAV_USER } from "../constants/actionTypes";
 import http from "../services/httpService";
 
 export const getFavouriteUsers = () => dispatch => {
@@ -20,5 +20,35 @@ export const getAllUsers = query => dispatch => {
         type: GET_ALL_USERS,
         payload: res.data.data.users
       });
+    });
+};
+
+export const getOtherFavouriteUsers = () => dispatch => {
+  http
+    .get('/favs/get-faves')
+    .then(res => {
+      if (res.data.success) {
+        dispatch({
+          type: GET_OTEHR_FAV_USER,
+          payload: res.data.data.faves
+        })
+      }
+    })
+    .catch(res => {
+    });
+};
+
+export const getOtherFavouriteByUsers = () => dispatch => {
+  http
+    .get('/favs/get-faved-by')
+    .then(res => {
+      if (res.data.success) {
+          dispatch({
+            type: GET_OTEHR_FAV_USER,
+            payload: res.data.data.faves
+          })
+      }
+    })
+    .catch(res => {
     });
 };
