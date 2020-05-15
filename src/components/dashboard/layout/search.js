@@ -39,7 +39,12 @@ const Search = () => {
           users.map((user, index) => (
             <div key={index} className="result-box">
               <div className="profile-pic">
-                <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
+                <Link to={`/dashboard/my-studio/user`} 
+                onClick={ () => 
+                  {
+                    handleLink(user);
+                    setQuery('');
+                  }}>
                   <Avatar avatars={user?.avatars} />
                 </Link>
                 <div>

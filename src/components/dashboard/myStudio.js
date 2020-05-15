@@ -6,6 +6,7 @@ import ProfileCube from '../common/profileCube';
 import Spinner from '../common/spinner';
 import { getGalleries } from '../../actions/exibitionAction';
 import Gallery from '../common/gallery';
+import { getGallery, makeFav } from "../../actions/galleryActions";
 
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
@@ -17,7 +18,9 @@ const MyStudio = () => {
     studio: { myStudio },
     exibition: { ListOfGalleries: { data: galleries } },
     loading: { loading },
-    studio: { studioUser }
+    studio: { studioUser },
+    gallery: { galleryImages }
+
   } = useSelector(state => state);
 
   let url = window.location.href.split('/')[5];
@@ -35,6 +38,7 @@ const MyStudio = () => {
 
 
   const handleGalleryChange = gallery => {
+    dispatch(getGallery(gallery.slug));
     setActiveGallery(gallery);
   }
 
@@ -158,6 +162,7 @@ const MyStudio = () => {
               galleries={galleries}
               edit={edit}
               onGalleryChange={handleGalleryChange}
+              url={url}
             />
           </div>
           <div className="total-post">
@@ -175,7 +180,18 @@ const MyStudio = () => {
             </div>
 
             <div className="heart-icon">
-              {activeGallery &&
+              {
+                url && 
+                url === 'user' && 
+                <img
+                  src="/assets/images/catfave.png"
+                  className="clickable"
+                  onClick={() => makeFav(activeGallery.slug)}
+                  alt=""
+                />
+              }
+              {!url && 
+               activeGallery &&
                 <img
                   src="/assets/images/add.png"
                   className="clickable"
@@ -183,6 +199,17 @@ const MyStudio = () => {
                   alt=""
                 />
               }
+            </div>
+          </div>
+          <div className="wrapper">
+            <div className="screen">
+              <div className="scr-inner">
+                {galleryImages?.map((gallery, index) => (
+                  <div key={index}>
+                    <img src={ `${gallery?.image.path}`} alt="" style={{width:'20%'}} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="wrapper">
