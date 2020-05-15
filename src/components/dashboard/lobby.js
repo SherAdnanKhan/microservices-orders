@@ -7,9 +7,13 @@ import { selectUserForStudio } from "../../actions/studioActions";
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
 import { Link } from "react-router-dom";
+import {getUserArtById} from "../../actions/userActions"
 
 const Lobby = () => {
   const user = useContext(UserContext);
+  const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
+  const userArtName = useSelector(({user}) => user?.userArtName?.name);
+
 
   const dispatch = useDispatch();
   const {
@@ -18,9 +22,11 @@ const Lobby = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    if (!favouriteUsers)
+    if (!favouriteUsers){
       dispatch(getFavouriteUsers());
-  }, [dispatch, favouriteUsers]);
+    }
+    dispatch(getUserArtById(user_art_id))
+  }, [dispatch, favouriteUsers,user_art_id])
 
   function handleLink(data){
     console.log("main function",data);
@@ -47,6 +53,7 @@ const Lobby = () => {
       }
 
       <Avatar avatars={user.avatars && user.avatars} />
+      <p style={{textAlign:'center'}}>Art Name: {userArtName}</p>
 
       <div className="middleBody">
       </div>

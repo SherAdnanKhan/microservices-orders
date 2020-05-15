@@ -179,7 +179,14 @@ const MyStudio = () => {
             </div>
 
             <div className="heart-icon">
-              {activeGallery && <img src="/assets/images/add.png" className="clickable" alt="" />}
+              {activeGallery &&
+                <img
+                  src="/assets/images/add.png"
+                  className="clickable"
+                  onClick={() => history.push(`/dashboard/exhibition/${activeGallery.id}`)}
+                  alt=""
+                />
+              }
             </div>
           </div>
           <div className="wrapper">
