@@ -1,4 +1,4 @@
-import { GET_FAV_USERS, GET_ALL_USERS } from "../constants/actionTypes";
+import { GET_FAV_USERS, GET_ALL_USERS, GET_USER_ART_NAME } from "../constants/actionTypes";
 import http from "../services/httpService";
 
 export const getFavouriteUsers = () => dispatch => {
@@ -22,3 +22,16 @@ export const getAllUsers = query => dispatch => {
       });
     });
 };
+
+export const getUserArtById = (id) => dispatch => {
+  http
+  .get('/arts',{params:{id}})
+  .then(res => {
+    console.log("res",res)
+    // dispatch({
+    //   type: GET_USER_ART_NAME,
+    //   payload: res.data
+    // })
+  }
+  )
+}

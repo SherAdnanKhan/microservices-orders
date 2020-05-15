@@ -6,6 +6,7 @@ import { getFavouriteUsers } from '../../actions/userActions';
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
 import {artSearch} from "../../actions/exibitionAction";
+import {getUserArtById} from "../../actions/userActions"
 
 const Lobby = () => {
   const user = useContext(UserContext);
@@ -24,7 +25,7 @@ const Lobby = () => {
     if (!favouriteUsers){
       dispatch(getFavouriteUsers());
     }
-    dispatch(artSearch(1))
+    dispatch(getUserArtById(user_art_id))
   }, [dispatch, favouriteUsers])
 
   return (
