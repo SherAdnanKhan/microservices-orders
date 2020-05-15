@@ -33,8 +33,6 @@ const MyStudio = () => {
   useEffect(() => {
     if (!galleries)
       dispatch(getGalleries());
-    else
-      console.log(galleries)
 
   }, [galleries, dispatch])
 
@@ -56,27 +54,27 @@ const MyStudio = () => {
                   <div>
                     <img src="/assets/images/strqicon.png" alt="" />
                   </div>
-                    {url && 
-                      url === 'user' 
-                      ? studioUser &&
-                         <div className="procu">
-                          <ProfileCube avatars={ studioUser?.avatars } />
-                        </div>
-                      :  myStudio &&
-                         <div className="procu">
-                          <ProfileCube avatars={ myStudio?.user?.avatars } />
-                        </div> 
-                    } 
+                  {url &&
+                    url === 'user'
+                    ? studioUser &&
+                    <div className="procu">
+                      <ProfileCube avatars={studioUser?.avatars} />
+                    </div>
+                    : myStudio &&
+                    <div className="procu">
+                      <ProfileCube avatars={myStudio?.user?.avatars} />
+                    </div>
+                  }
                   <div>
                     <img src="/assets/images/mzflash.png" alt="" />
                   </div>
                 </div>
                 <div className="profilebioname">
-                  {url && 
-                    url === 'user' 
-                    ? studioUser && <span className="nameof" id="nameof"> {studioUser?.first_name}</span> 
-                    :  myStudio && <span className="nameof" id="nameof"> {myStudio?.user?.username}</span> 
-                  } 
+                  {url &&
+                    url === 'user'
+                    ? studioUser && <span className="nameof" id="nameof"> {studioUser?.first_name}</span>
+                    : myStudio && <span className="nameof" id="nameof"> {myStudio?.user?.username}</span>
+                  }
                   <br />
                   <span className="artof" id="artof">Cosplay/1213</span>
                 </div>
