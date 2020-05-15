@@ -56,7 +56,7 @@ const Search = () => {
             </div>
           ))
         }
-        <hr />
+        
       </div>
     </>
   );
