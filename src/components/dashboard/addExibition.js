@@ -2,10 +2,11 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { artSearch, getGalleries, artPost } from "../../actions/exibitionAction"
 import InputAutoComplete from "../common/autoComplete";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 const AddExibit = () => {
   const [color, setColor] = useState('red');
+  const { params: { id } } = useRouteMatch();
   const history = useHistory();
   const dispatch = useDispatch();
   const listCategory = useSelector(({ exibition }) => exibition.ListOfArts?.data?.arts);
@@ -44,6 +45,7 @@ const AddExibit = () => {
 
   useEffect(() => {
     dispatch(getGalleries())
+
   }, [dispatch]);
 
   function validated() {
@@ -86,11 +88,19 @@ const AddExibit = () => {
   }
 
   useEffect(() => {
-    if (localStorage.color)
+    if (localStorage.color) {
       setColor(JSON.parse(localStorage.getItem('color')));
-  }, []);
+    }
 
-
+    if (id !== 'new') {
+      setData(data => {
+        return {
+          ...data,
+          gallery_id: parseInt(id)
+        }
+      });
+    }
+  }, [id]);
 
   return (
     <div className={`frameReady ${color}`}>
@@ -125,8 +135,16 @@ const AddExibit = () => {
                 valueToDisplay={arts}
                 value={data.art_id}
                 Change={handleAutoChange}
-                Select={handleAutoSelect} />
-              <input className="exibition-title-input" type="text" placeholder="Give this art a title.." name="title" value={data.title} onChange={handleChange} autoComplete="off" />
+                Select={handleAutoSelect}
+              />
+              <input
+                className="exibition-title-input"
+                type="text"
+                placeholder="Give this art a title.."
+                name="title" value={data.title}
+                onChange={handleChange}
+                autoComplete="off"
+              />
               <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="description" value={data.description} onChange={handleChange} autoComplete="off"></textarea>
             </div>
           </div>
