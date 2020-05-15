@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../actions/studioActions';
 import ProfileCube from '../common/profileCube';
@@ -7,6 +7,8 @@ import Spinner from '../common/spinner';
 
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
+
+  const history = useHistory();
   const dispatch = useDispatch();
   const {
     studio: { myStudio },
@@ -64,8 +66,8 @@ const MyStudio = () => {
               <div className="edit-studioScreen">
                 {myStudio &&
                   <div className="procu">
-                    <div className="editTool Edit">
-                      <img src="/assets/images/paintbrush.png" alt="" />
+                    <div className="editTool Edit" onClick={() => history.push('/dashboard/my-studio/profile')}>
+                      <img src="/assets/images/paintbrush.png" alt="" className="clickable" />
                     </div>
                     <ProfileCube avatars={myStudio.user.avatars} />
                   </div>
