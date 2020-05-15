@@ -1,4 +1,4 @@
-import { GET_MY_STUDIO } from "../constants/actionTypes";
+import { GET_MY_STUDIO, SELECT_STUDIO_USER } from "../constants/actionTypes";
 import http from "../services/httpService";
 
 export const getMyStudio = () => dispatch => {
@@ -11,3 +11,11 @@ export const getMyStudio = () => dispatch => {
       });
     });
 };
+
+export const selectUserForStudio = (data) => dispatch =>{
+  console.log("action",data)
+  dispatch({
+    type: SELECT_STUDIO_USER,
+    payload: data
+  })
+}

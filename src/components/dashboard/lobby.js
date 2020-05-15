@@ -3,8 +3,10 @@ import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavouriteUsers } from '../../actions/userActions';
+import { selectUserForStudio } from "../../actions/studioActions";
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
+import { Link } from "react-router-dom";
 
 const Lobby = () => {
   const user = useContext(UserContext);
@@ -20,13 +22,21 @@ const Lobby = () => {
       dispatch(getFavouriteUsers());
   }, [dispatch, favouriteUsers]);
 
+  function handleLink(data){
+    dispatch(selectUserForStudio(data));
+  }
+
+  console.log("user",favouriteUsers)
+
   return (
     <>
       {!loading ?
         <div className="base" id="sec">
           {favouriteUsers &&
             favouriteUsers.map((user, index) => (
-              <UserCube user={user} key={index} />
+              <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
+                 <UserCube user={user} key={index} />
+              </Link>
             ))
           }
         </div> :

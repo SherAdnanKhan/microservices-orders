@@ -16,8 +16,13 @@ const MyStudio = () => {
   const {
     studio: { myStudio },
     exibition: { ListOfGalleries: { data: galleries } },
-    loading: { loading }
+    loading: { loading },
+    studio: { studioUser }
   } = useSelector(state => state);
+
+  let url = window.location.href.split('/')[5];
+
+  console.log('studioUser',studioUser)
 
   useEffect(() => {
     if (!myStudio)
@@ -36,6 +41,7 @@ const MyStudio = () => {
   const handleGalleryChange = gallery => {
     setActiveGallery(gallery);
   }
+
   return (
     <div>
       {loading && <Spinner />}
@@ -44,7 +50,7 @@ const MyStudio = () => {
           <div className="wrapper">
             {edit &&
               <div className="studioScreen">
-                {myStudio &&
+                {url && url === 'user' ? studioUser : myStudio &&
                   <div className="procu">
                     <ProfileCube avatars={myStudio.user.avatars} />
                   </div>
@@ -60,7 +66,7 @@ const MyStudio = () => {
                     <input type="text" name="username" id="addbio" />
                   </label>
                   <div className="faved-btn">
-                    <Link to="/dashboard/faving/by">
+                    <Link to={`/dashboard/faving/${'by'}`}>
                       <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
                         Faved by

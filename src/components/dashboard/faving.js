@@ -9,11 +9,8 @@ const Favas = (props) =>{
   const favas = useSelector(({ user }) => user?.otherFavouriteUsers)
   const { loading } = useSelector(state => state.loading);
 
-
-
   let url = window.location.href;
   
-
   useEffect(() => {
     if(url.split('/')[5] && url.split('/')[5] === 'by'){
       dispatch(getOtherFavouriteByUsers())
