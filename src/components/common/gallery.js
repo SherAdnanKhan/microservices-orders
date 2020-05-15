@@ -8,7 +8,7 @@ const Gallery = ({ galleries, edit, onGalleryChange }) => {
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
               <div key={index} className={`item-box item-box-${index + 1}`} onClick={() => onGalleryChange(gallery)}>
-                <img src="/assets/images/galleryicon.png" alt="" />
+                <img src="/assets/images/avataricongreen.png" alt="" />
               </div>
             ))}
           </div>
@@ -22,7 +22,7 @@ const Gallery = ({ galleries, edit, onGalleryChange }) => {
                 <div className="editTool Edit">
                   <img src="/assets/images/paintbrush.png" alt="" />
                 </div>
-                <img src="/assets/images/galleryicon.png" alt="" />
+                <img src="/assets/images/avataricongreen.png" alt="" />
               </div>
             ))}
           </div>

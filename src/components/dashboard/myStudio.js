@@ -16,8 +16,13 @@ const MyStudio = () => {
   const {
     studio: { myStudio },
     exibition: { ListOfGalleries: { data: galleries } },
-    loading: { loading }
+    loading: { loading },
+    studio: { studioUser }
   } = useSelector(state => state);
+
+  let url = window.location.href.split('/')[5];
+
+  console.log('studioUser', studioUser)
 
   useEffect(() => {
     if (!myStudio)
@@ -36,6 +41,7 @@ const MyStudio = () => {
   const handleGalleryChange = gallery => {
     setActiveGallery(gallery);
   }
+
   return (
     <div>
       {loading && <Spinner />}
@@ -44,13 +50,31 @@ const MyStudio = () => {
           <div className="wrapper">
             {edit &&
               <div className="studioScreen">
-                {myStudio &&
-                  <div className="procu">
-                    <ProfileCube avatars={myStudio.user.avatars} />
+                <div className="studioHead">
+                  <div>
+                    <img src="/assets/images/strqicon.png" alt="" />
                   </div>
-                }
+                    {url && 
+                      url === 'user' 
+                      ? studioUser &&
+                         <div className="procu">
+                          <ProfileCube avatars={ studioUser.avatars } />
+                        </div>
+                      :  myStudio &&
+                         <div className="procu">
+                          <ProfileCube avatars={ studioUser.avatars } />
+                        </div> 
+                    } 
+                  <div>
+                    <img src="/assets/images/mzflash.png" alt="" />
+                  </div>
+                </div>
                 <div className="profilebioname">
-                  {myStudio && <span className="nameof" id="nameof"> {myStudio.user.username}</span>}
+                  {url && 
+                    url === 'user' 
+                    ? studioUser && <span className="nameof" id="nameof"> {studioUser.first_name}</span> 
+                    :  myStudio && <span className="nameof" id="nameof"> {myStudio.user.username}</span> 
+                  } 
                   <br />
                   <span className="artof" id="artof">Cosplay/1213</span>
                 </div>
@@ -60,7 +84,7 @@ const MyStudio = () => {
                     <input type="text" name="username" id="addbio" />
                   </label>
                   <div className="faved-btn">
-                    <Link to="/dashboard/faving/by">
+                    <Link to={`/dashboard/faving/${'by'}`}>
                       <div className="faved-by-btn">
                         <img src="/assets/images/favers.png" alt="" />
                         Faved by
