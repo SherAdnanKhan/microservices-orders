@@ -124,6 +124,9 @@ $(document).on('click', '.item-box-4', function (e) {
 });
 $(document).click(function(){
   $(".item-box-1 , .item-box-2 , .item-box-3 , .item-box-4").css("transform", "scale(1)");
+  $(".left").css("left", "-42px");
+  $(".right").css("right", "-42px");
+  $(".bottom").css("bottom", "-42px");
 });
 
 $(document).on('click', '.item-box', function () {
@@ -133,6 +136,25 @@ $(document).on('click', '.item-box', function () {
 $(document).on('click', '.go-to-profile', function () {
   $(".my-studio-edit").hide();
   $(".edit-user-page").show();
+});
+
+$(document).on('click', '.left', function (e) {
+  $(".left").css("left", "0px");
+  $(".right").css("right", "-42px");
+  $(".bottom").css("bottom", "-42px");
+  e.stopPropagation();
+});
+$(document).on('click', '.right', function (e) {
+  $(".right").css("right", "0px");
+  $(".bottom").css("bottom", "-42px");
+  $(".left").css("left", "-42px");
+  e.stopPropagation();
+});
+$(document).on('click', '.bottom', function (e) {
+  $(".bottom").css("bottom", "0px");
+  $(".left").css("left", "-42px");
+  $(".right").css("right", "-42px");
+  e.stopPropagation();
 });
 
 // $("#search").click(function () {
