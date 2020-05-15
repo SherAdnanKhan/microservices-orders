@@ -52,18 +52,12 @@ const Search = () => {
                 </div>
               </div>
               <div className="other-pic">
-                <Link to="#">
-                  <img src="/assets/images/other-1.png" alt="" />
-                </Link>
-                <Link to="#">
-                  <img src="/assets/images/other-1.png" alt="" />
-                </Link>
-                <Link to="#">
-                  <img src="/assets/images/other-1.png" alt="" />
-                </Link>
-                <Link to="#">
-                  <img src="/assets/images/other-1.png" alt="" />
-                </Link>
+                {user.posts_images_random.map((post_image, index_key) => (
+                  <Link key={index_key} to="#">
+                    <img src={post_image.path} alt="" />
+                  </Link>
+                ))}
+                
               </div>
             </div>
           ))
