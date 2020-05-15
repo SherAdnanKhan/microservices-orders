@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavouriteUsers } from '../../actions/userActions';
+import { getFavourites } from '../../actions/userActions';
 import { selectUserForStudio } from "../../actions/studioActions";
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
@@ -23,17 +23,14 @@ const Lobby = () => {
 
   useEffect(() => {
     if (!favouriteUsers){
-      dispatch(getFavouriteUsers());
+      dispatch(getFavourites());
     }
     dispatch(getUserArtById(user_art_id))
   }, [dispatch, favouriteUsers,user_art_id])
 
   function handleLink(data){
-    console.log("main function",data);
     dispatch(selectUserForStudio(data));
   }
-
-  console.log("user",favouriteUsers)
 
   return (
     <>

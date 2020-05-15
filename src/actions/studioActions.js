@@ -13,7 +13,6 @@ export const getMyStudio = () => dispatch => {
 };
 
 export const selectUserForStudio = (data) => dispatch =>{
-  console.log("action",data)
   dispatch({
     type: SELECT_STUDIO_USER,
     payload: data
