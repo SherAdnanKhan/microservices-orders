@@ -31,7 +31,7 @@ const StartFaves = () =>{
         <h2>Gallery</h2>
       </div>
       <div class="f-footer">
-        <Link to="/dashboard/lobby">
+        <Link to="/tutorial">
           <img style={{ display: 'flex',justifyContent: 'center', margin: 'auto'}} 
                src="/assets/images/catfave.png" 
                alt="avatar" 
