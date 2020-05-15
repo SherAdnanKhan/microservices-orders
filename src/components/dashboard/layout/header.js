@@ -25,7 +25,7 @@ const Header = () => {
       <Search />
 
       <NavBar />
-     
+      <hr className="do-not-delete" />
     </>
   );
 };
