@@ -7,7 +7,7 @@ import { selectUserForStudio } from "../../actions/studioActions";
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
 import { Link } from "react-router-dom";
-import {getUserArtById} from "../../actions/userActions"
+import { getUserArtById } from "../../actions/userActions"
 
 const Lobby = () => {
   const user = useContext(UserContext);

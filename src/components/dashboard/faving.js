@@ -1,8 +1,10 @@
 import React, {useEffect} from "react";
-import {getOtherFavouriteUsers,getOtherFavouriteByUsers} from "../../actions/userActions";
+import { getOtherFavouriteUsers, getOtherFavouriteByUsers } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from '../common/avatar';
 import Spinner from '../common/spinner';
+import { selectUserForStudio } from "../../actions/studioActions";
+import { Link } from "react-router-dom";
 
 const Favas = (props) =>{
   const dispatch = useDispatch();
@@ -19,20 +21,26 @@ const Favas = (props) =>{
     }   
   }, [dispatch,url]);
 
+  const handleLink = (data) => {
+    dispatch(selectUserForStudio(data));
+  }
+
   return (
     <div className="favas">
       { 
         !loading && (
           favas?.length > 0 ? (
           <div className="favas-row">
-          { favas?.map(( val,index ) => (
+          { favas?.map(( user, index ) => (
             <div className="favas-box">
                <div className="favas-avatar">
-                 <Avatar avatars={val?.avatars} />
+                 <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
+                   <Avatar avatars={user?.avatars} />
+                 </Link>
                </div>
              <div>
-               <p>{val?.first_name}</p>
-               <p>{val?.art?.name}</p>
+               <p>{user?.first_name}</p>
+               <p>{user?.art?.name}</p>
                <p>Faving Gallery</p>
                <p>2</p>
              </div>
