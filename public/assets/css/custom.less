@@ -602,7 +602,7 @@ input {
   overflow-y: auto;
   position: relative;
   &.gold {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button{
       background: @color_gold;
     }
     .top {
@@ -617,7 +617,7 @@ input {
     }
   }
   &.orange {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar  , .exibition-page-header , .exibition-gallery-item , .exibition-button{
       background: #ffa500;
     }
     .top {
@@ -632,7 +632,7 @@ input {
     }
   }
   &.gray {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button{
       background: #808080;
     }
     .top {
@@ -647,7 +647,7 @@ input {
     }
   }
   &.limegreen {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header  , .exibition-gallery-item , .exibition-button{
       background: #32cd32;
     }
     .top {
@@ -662,7 +662,7 @@ input {
     }
   }
   &.red {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button{
       background: #ff0000;
     }
     .top {
@@ -677,7 +677,7 @@ input {
     }
   }
   &.purple {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button{
       background: #800080;
     }
     .top {
@@ -692,7 +692,7 @@ input {
     }
   }
   &.dodgerblue {
-    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar{
+    .top, .left, .right, .bottom , .total-post , .editstudio-btn , .faved-by-btn , .cube-face-front , .cube-face-back , .cube-face-left , .cube-face-right  , .search-bar , .exibition-page-header , .exibition-gallery-item , .exibition-button{
       background: #1e90ff;
     }
     .top {
@@ -1705,21 +1705,22 @@ img {
 // Add Exibition Page Start
 
 .exibition-page-header{
-  background-color: red;
-  padding: 25px 0px;
-  display: block;
-  .exibition-exit-icon{
-    display: flex;
-    justify-content: start;
+  display: flex;
+    justify-content: center;
     align-items: center;
-    margin-left: 10px;
-    margin-top: 10px;
+    height: 50px;
+  .exibition-exit-icon{
+    position: absolute;
+    left: 15px;
   }
   .exibition-header-name{
     display: flex;
     justify-content: center;
     font-size: 18px;
   }
+
+
+
 }
 .exibition-page-form{
   display: flex;
@@ -1777,7 +1778,7 @@ img {
   justify-content: center;
   border-bottom: 1px solid white;
   .exibition-gallery-item {
-    background-color:red; 
+    // background-color:red; 
     color:white;
     border-radius:35px; 
     padding:10px 20px;
@@ -1788,11 +1789,11 @@ img {
   margin: 10px auto;
   width: 50%;
   .exibition-button{
-    background-color: red;
+    // background-color: red;
     padding: 10px 30px;
     color: white;
     font-size: 16px;
-    border: 2px solid green;
+    border: none;
     border-radius: 45px;
     text-align: center;
     margin: 10px auto 0px auto;
