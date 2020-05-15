@@ -4,6 +4,7 @@ import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import Footer from './layout/footer';
 import { useLocation } from 'react-router-dom';
+import ChangeColor from './layout/changeColor';
 
 
 const Main = () => {
@@ -16,7 +17,9 @@ const Main = () => {
       case 'lobby':
         return import('./lobby');
       case 'my-studio':
-        return import('./myStudio');
+        return split[3] === 'profile'
+          ? import('./profile')
+          : import('./myStudio');
       case 'change-password':
         return import('./settings/changePassword');
         case 'faving':
@@ -38,7 +41,8 @@ const Main = () => {
 
   return (
     <div className={`frameReady ${color}`}>
-      <Header onColorChange={handleColorChange} />
+      <Header />
+      <ChangeColor onColorChange={handleColorChange} />
       <LeftBorder />
       <RightBorder />
       <Suspense fallback={<div></div>}>

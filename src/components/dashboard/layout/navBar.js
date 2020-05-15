@@ -10,6 +10,9 @@ const NavBar = () => {
           <Link to="/dashboard/my-studio">My Studio</Link>
         </li>
         <li>
+          <Link to="/dashboard/my-studio/profile">My Profile</Link>
+        </li>
+        <li>
           <Link to="/dashboard/change-password">Change Password</Link>
         </li>
         <li>
