@@ -2221,37 +2221,33 @@ img {
     background: #fff;
   }
 }
-
-// start of Start Faves
-.start-favas{
+// Start Fav Page Start
+.fav-page{
   display: flex;
-  flex-direction: row;
-  height: 100vh;
   justify-content: center;
   align-items: center;
-  .start-favas-box{
-    background-color: black;
+  padding: 40px 0;
+  .f-text-box{
+    flex: 1;
+    max-width: 350px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid white;
     border-radius: 10px;
     padding: 10px;
-    max-width: 350px;
-    margin: 5px auto;
   }
-  .start-favas-card{
+  .f-image-box{
     display: flex;
     flex-direction: column;
-    background-color: #515452;
     align-items: center;
     border: 2px solid #515452;
     border-radius: 10px;
     padding: 0px;
     width: 30%;
     margin: 5px auto;
-
-    .start-favas-card-header{
+    .f-header{
       background-color: black;
       display: flex;
       flex-direction: row;
@@ -2259,44 +2255,50 @@ img {
       margin: 1px 0px;
       width: 100%;
     }
-    .start-favas-card-body{
-      display: flex;
-      flex-direction: column;
-      width: 30vw;
-      .start-favas-card-images{
+    .f-gallery-box{
+      width: 100%;
+      background: #444;
+      text-align: center;
+      .f-img-box{
         display: flex;
         flex-direction: row;
-        .start-favas-card-single{
+        .main-img{
           width: 70%;
+          height: 250px;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 100%;
+          }      
         }
-        .card-images-set{
+        .other-img{
+          width: 30%;
+          height: 250px;
+          overflow-y:scroll;
           display: flex;
           flex-direction: column;
-          width: 25%;
-          height: 40vh;
-          overflow:scroll
+          img{
+            width: 100%;
+          }
         }
       }
-      h2{
-        text-align: center;
-      }
     }
-    .start-favas-card-footer{
-      background-color: black;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-     
+    .f-footer{
+      width: 100%;
       img{
+        width: 70px;
+        margin-top: 5px;
+      }
+      .f-footer-text{
         text-align: center;
-        margin: 2px auto;
       }
     }
-
   }
 }
-// end of Start Faves
+
+// Start Fav Page End
 
 // Faving page start
 .favas{

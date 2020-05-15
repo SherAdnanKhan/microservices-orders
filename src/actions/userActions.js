@@ -25,13 +25,12 @@ export const getAllUsers = query => dispatch => {
 
 export const getUserArtById = (id) => dispatch => {
   http
-  .get('/arts',{params:{id}})
+  .get(`/arts/art/${id}`)
   .then(res => {
-    console.log("res",res)
-    // dispatch({
-    //   type: GET_USER_ART_NAME,
-    //   payload: res.data
-    // })
+    dispatch({
+      type: GET_USER_ART_NAME,
+      payload: res.data.data.art
+    })
   }
   )
 }

@@ -1,10 +1,12 @@
-import { GET_FAV_USERS, GET_ALL_USERS, GET_OTEHR_FAV_USER } from "../constants/actionTypes";
+import { GET_FAV_USERS, GET_ALL_USERS, GET_OTEHR_FAV_USER, GET_USER_ART_NAME } from "../constants/actionTypes";
 
 const initialState = {
   favouriteUsers: null,
   users: null,
-  otherFavouriteUsers:null
+  otherFavouriteUsers:null,
+  userArtName:""
 };
+
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -22,6 +24,11 @@ export default (state = initialState, action) => {
         return {
           ...state,
           otherFavouriteUsers: action.payload
+        };
+      case GET_USER_ART_NAME:
+        return {
+          ...state,
+          userArtName: action.payload
         };
     default:
       return state;

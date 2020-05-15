@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFavouriteUsers } from '../../actions/userActions';
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
-import {artSearch} from "../../actions/exibitionAction";
 import {getUserArtById} from "../../actions/userActions"
 
 const Lobby = () => {
   const user = useContext(UserContext);
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
-  const userArtData = useSelector((state) => state);
+  const userArtName = useSelector(({user}) => user?.userArtName?.name);
 
-  console.log("user data",userArtData);
 
   const dispatch = useDispatch();
   const {
@@ -26,7 +24,7 @@ const Lobby = () => {
       dispatch(getFavouriteUsers());
     }
     dispatch(getUserArtById(user_art_id))
-  }, [dispatch, favouriteUsers])
+  }, [dispatch, favouriteUsers,user_art_id])
 
   return (
     <>
@@ -44,6 +42,7 @@ const Lobby = () => {
       }
 
       <Avatar avatars={user.avatars && user.avatars} />
+      <p style={{textAlign:'center'}}>Art Name: {userArtName}</p>
 
       <div className="middleBody">
       </div>
