@@ -56,7 +56,7 @@ const UserCube = ({ user }) => {
                     </div>
                   </>
                 }
-                {user.avatars.length === 4 &&
+                {user.avatars.length >= 4 &&
                   <>
                     <div className="cube-face  cube-face-front">
                       <img alt="" src={user.avatars[0].path} height="100%" />

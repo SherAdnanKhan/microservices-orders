@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrUpdateProfile } from '../../actions/studioActions';
+import { createOrUpdateProfile, deleteProfileImage } from '../../actions/studioActions';
 import Spinner from '../common/spinner';
 
 const Profile = () => {
@@ -21,9 +21,7 @@ const Profile = () => {
   }, [avatars, images])
 
   const handleImageSelect = (image) => {
-    if (image) {
-      setSelectedImage(image);
-    }
+    setSelectedImage(image || {});
   }
 
   const handleChange = ({ target: input }) => {
@@ -33,6 +31,10 @@ const Profile = () => {
       image.avatar = input.files[0];
       setSelectedImage(image);
     }
+  }
+
+  const handleDelete = () => {
+    dispatch(deleteProfileImage(selectedImage.id, history));
   }
 
   const handleSubmit = () => {
@@ -84,7 +86,7 @@ const Profile = () => {
                 <img
                   src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
                   alt=""
-                  onClick={() => handleImageSelect(images[3])}
+                  onClick={() => handleImageSelect(images[2])}
                 />
               </div>
               <div className="item-box">
@@ -99,7 +101,7 @@ const Profile = () => {
               </div>
             </div>
             <p>Select a profile picture change</p>
-            <button>
+            <button onClick={() => history.push('/dashboard/my-studio')}>
               <i className="fa fa-check" />
               Done
             </button>
@@ -119,21 +121,23 @@ const Profile = () => {
               <div className="up-img-box">
                 <img className="update-pic" src={selectedImage ? selectedImage.path : "/assets/images/avataricongray.png"} alt="" />
                 <div className={selectedImage.avatar ? " hide" : "add-nag-icon"}>
-                  <div className="nag">
-                    <div className="nag-icon">
-                      <img alt="" src="/assets/images/minus.png" />
+                  {selectedImage.id &&
+                    <div className="nag">
+                      <div className="nag-icon">
+                        <img alt="" src="/assets/images/minus.png" onClick={handleDelete} />
+                      </div>
+                      <div className="nag-btn">
+                        Remove profile picture
+                      </div>
                     </div>
-                    <div className="nag-btn">
-                      Remove profile picture
-                </div>
-                  </div>
+                  }
                   <div className="nag">
                     <div className="nag-icon">
                       <img alt="" src="/assets/images/plus.png" />
                     </div>
                     <div className="nag-btn">
-                      Remove profile picture
-                </div>
+                      {selectedImage.id ? "Update profile picture" : "Add profile picture"}
+                    </div>
                     <input type="file" size={60} onChange={handleChange} />
                   </div>
                 </div>

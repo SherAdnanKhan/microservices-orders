@@ -35,4 +35,15 @@ export const getUserStudio = (slug) => dispatch => {
        payload: res.data.data
      })
     });
+  }
+export const deleteProfileImage = (id, history) => () => {
+  http
+    .delete(`/my-studio/avatar/${id}`)
+    .then(res => {
+      const user = getCurrentUser();
+      user.avatars = user.avatars.filter(avatar => avatar.id !== id);
+      localStorage.setItem(userKey, JSON.stringify(user));
+
+      history.push('/dashboard/my-studio/profile');
+    });
 }

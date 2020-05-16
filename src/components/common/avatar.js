@@ -57,7 +57,7 @@ const Avatar = ({ avatars }) => {
                       </div>
                     </>
                   }
-                  {avatars.length === 4 &&
+                  {avatars.length >= 4 &&
                     <>
                       <div className="cube-facesmall  cube-face-frontsmall" style={{ borderColor: 'orange', boxShadow: '1px 1px 10px orange, -1px -1px 10px orange' }}>
                         <img alt="" src={avatars[0].path} height="100%" />
