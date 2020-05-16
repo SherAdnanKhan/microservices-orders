@@ -53,13 +53,13 @@ const MyStudio = () => {
             <div className="studioScreen">
               <div className="studioHead">
                 <div>
-                  <img src="/assets/images/strqicon.png" alt="" />
+                  
                 </div>
                 <div className="procu">
                   {myStudio && <ProfileCube avatars={myStudio.user.avatars} />}
                 </div>
                 <div>
-                  <img src="/assets/images/mzflash.png" alt="" />
+                 
                 </div>
               </div>
               {myStudio &&
