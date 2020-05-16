@@ -12,7 +12,7 @@ import { getUserArtById } from "../../actions/userActions"
 const Lobby = () => {
   const user = useContext(UserContext);
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
-  const userArtName = useSelector(({user}) => user?.userArtName?.name);
+  const userArtName = useSelector(({ user }) => user?.userArtName?.name);
 
 
   const dispatch = useDispatch();
@@ -22,35 +22,32 @@ const Lobby = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    if (!favouriteUsers){
+    if (!favouriteUsers) {
       dispatch(getFavourites());
     }
     dispatch(getUserArtById(user_art_id))
-  }, [dispatch, favouriteUsers,user_art_id])
+  }, [dispatch, favouriteUsers, user_art_id])
 
-  function handleLink(data){
+  function handleLink(data) {
     dispatch(selectUserForStudio(data));
   }
 
   return (
     <div className="lobby-page">
-      {!loading ?
-        <div className="base" id="sec">
-          {favouriteUsers &&
-            favouriteUsers.map((user, index) => (
-              <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
-                 <UserCube user={user} key={index} />
-              </Link>
-            ))
-          }
-        </div> :
-        <div style={{ marginBottom: '15px' }}>
-          <Spinner />
-        </div>
-      }
+      {loading && <Spinner />}
+
+      <div className="base" id="sec">
+        {favouriteUsers &&
+          favouriteUsers.map((user, index) => (
+            <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
+              <UserCube user={user} key={index} />
+            </Link>
+          ))
+        }
+      </div>
 
       <Avatar avatars={user.avatars && user.avatars} />
-      <p style={{textAlign:'center'}}>Art Name: {userArtName}</p>
+      <p style={{ textAlign: 'center' }}>Art Name: {userArtName}</p>
 
       <div className="middleBody">
       </div>

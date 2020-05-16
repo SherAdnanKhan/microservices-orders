@@ -130,13 +130,14 @@ const RegisterForm = () => {
     for (let key in data) {
       formData.append(key, data[key]);
     }
-    
+
     dispatch(register(formData));
   }
 
   return (
     <>
       {getCurrentUser() && <Redirect to="/home" />}
+      {loading && <Spinner />}
       <div>
         <div className="return" onClick={handleBackPress}>
           <span>
@@ -252,7 +253,6 @@ const RegisterForm = () => {
                     Create Studio
                   </button>
                 </div>
-                {loading && <Spinner />}
                 {error &&
                   <>
                     <div className="error">
