@@ -174,10 +174,8 @@ const MyStudio = () => {
               />
             }
           </div>
-        </div>
-         
-
-         
+        </div>   
+              
         </div>
         <div className="wrapper">
           <div className="screen">
