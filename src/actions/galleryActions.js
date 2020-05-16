@@ -1,4 +1,4 @@
-import { GET_GALLERY } from "../constants/actionTypes";
+import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY } from "../constants/actionTypes";
 import http from "../services/httpService";
 
 export const getGallery = (utilite) => dispatch => {
@@ -14,7 +14,7 @@ export const getGallery = (utilite) => dispatch => {
 
 export const makeFav = (gallery_id) => dispatch => {
   http
-    .get(`/galleries/fav`,{gallery_id})
+    .get(`/galleries/fav`, { gallery_id })
     .then(res => {
       // dispatch({
       //   type: MAKE_FAV,
@@ -22,3 +22,26 @@ export const makeFav = (gallery_id) => dispatch => {
       // });
     });
 };
+
+export const favGallery = data => dispatch => {
+  http
+    .post('/galleries/fav', data)
+    .then(res => {
+      dispatch({
+        type: FAV_GALLERY,
+        payload: true
+      });
+    });
+};
+
+export const unfavGallery = data => dispatch => {
+  http
+    .post('/galleries/unfav', data)
+    .then(res => {
+      dispatch({
+        type: UNFAV_GALLERY,
+        payload: false
+      });
+    });
+};
+

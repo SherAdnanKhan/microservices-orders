@@ -94,37 +94,36 @@ $(document).on('click', '#go-back', function () {
   $("#search-result").hide();
 });
 
+// $(document).on('click', '.item-box-1', function (e) {
+//   $(".item-box-1").css({ "transform": "scale(1.2)", "z-index": "9" });
+//   $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
+//   e.stopPropagation();
+// });
+// $(document).on('click', '.item-box-2', function (e) {
+//   $(".item-box-2").css({ "transform": "scale(1.2)", "z-index": "9" });
+//   $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
+//   e.stopPropagation();
+// });
+// $(document).on('click', '.item-box-3', function (e) {
+//   $(".item-box-3").css({ "transform": "scale(1.2)", "z-index": "9" });
+//   $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
+//   e.stopPropagation();
+// });
+// $(document).on('click', '.item-box-4', function (e) {
+//   $(".item-box-4").css({ "transform": "scale(1.2)", "z-index": "9" });
+//   $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
+//   $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
+//   e.stopPropagation();
+// });
 
-$(document).on('click', '.item-box-1', function (e) {
-  $(".item-box-1").css({ "transform": "scale(1.2)", "z-index": "9" });
-  $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
-  e.stopPropagation();
-});
-$(document).on('click', '.item-box-2', function (e) {
-  $(".item-box-2").css({ "transform": "scale(1.2)", "z-index": "9" });
-  $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
-  e.stopPropagation();
-});
-$(document).on('click', '.item-box-3', function (e) {
-  $(".item-box-3").css({ "transform": "scale(1.2)", "z-index": "9" });
-  $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
-  e.stopPropagation();
-});
-$(document).on('click', '.item-box-4', function (e) {
-  $(".item-box-4").css({ "transform": "scale(1.2)", "z-index": "9" });
-  $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
-  $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
-  e.stopPropagation();
-});
 $(document).click(function () {
-  $(".item-box-1 , .item-box-2 , .item-box-3 , .item-box-4").css("transform", "scale(1)");
   $(".left").css("left", "-42px");
   $(".right").css("right", "-42px");
   $(".bottom").css("bottom", "-42px");
@@ -158,14 +157,3 @@ $(document).on('click', '.bottom', function (e) {
   e.stopPropagation();
 });
 
-// $("#search").click(function () {
-//   console.log("yes");
-//   $("#search-bar").css("display", "flex");
-//   $("#main-menu").hide();
-//   $("#search-result").show();
-// });
-// $("#go-back").click(function () {
-//   $("#search-bar").css("display", "none");
-//   $("#main-menu").show();
-//   $("#search-result").hide();
-// });

@@ -1,13 +1,16 @@
 import React from 'react';
 
-const Gallery = ({ galleries, edit, onGalleryChange }) => {
+const Gallery = ({ galleries, edit, onGalleryChange, activeGallery }) => {
   return (
     <>
       {edit && galleries &&
         <div className="screen">
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
-              <div key={index} className={`item-box item-box-${index + 1}`} onClick={() => onGalleryChange(gallery)}>
+              <div
+                key={index}
+                className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
+                onClick={() => onGalleryChange(gallery)}>
                 <img src="/assets/images/galleryicon.png" alt="" />
               </div>
             ))}
