@@ -1,5 +1,6 @@
 import { GET_FAV, GET_ALL_USERS, GET_USER_ART_NAME, GET_OTEHR_FAV_USER } from "../constants/actionTypes";
 import http from "../services/httpService";
+import { getUserStudio } from "./studioActions"
 
 export const getFavourites = () => dispatch => {
   http
@@ -64,31 +65,25 @@ export const getOtherFavouriteByUsers = () => dispatch => {
     });
 };
 
-export const makeUserFav = (faved_to) => dispatch => {
+export const makeUserFav = (faved_to,slug) => dispatch => {
   http
     .post('/favs',{faved_to})
     .then(res => {
-      // if (res.data.success) {
-      //     dispatch({
-      //       type: GET_OTEHR_FAV_USER,
-      //       payload: res.data.data.faves
-      //     })
-      // }
+      if(res.data.success){
+      dispatch(getUserStudio(slug));
+      }
     })
     .catch(res => {
     });
 };
 
-export const UserUnFav = (faved_to) => dispatch => {
+export const UserUnFav = (faved_to,slug) => dispatch => {
   http
     .delete(`/favs/${faved_to}`)
     .then(res => {
-      // if (res.data.success) {
-      //     dispatch({
-      //       type: GET_OTEHR_FAV_USER,
-      //       payload: res.data.data.faves
-      //     })
-      // }
+      if(res.data.success){
+      dispatch(getUserStudio(slug));
+      }
     })
     .catch(res => {
     });
