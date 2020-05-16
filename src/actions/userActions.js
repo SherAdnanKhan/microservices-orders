@@ -68,7 +68,6 @@ export const makeUserFav = (faved_to) => dispatch => {
   http
     .post('/favs',{faved_to})
     .then(res => {
-      console.log("res",res);
       // if (res.data.success) {
       //     dispatch({
       //       type: GET_OTEHR_FAV_USER,
