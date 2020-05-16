@@ -39,10 +39,17 @@ const MyStudio = () => {
   }
 
   return (
-    <div>
+    <div className="my-studio">
       <div>
+        <div className="header-bar">
+          <div className="back-icon">
+            <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} />
+          </div>
+          {myStudio && <p>Edit Your Profile Cube {myStudio.user.username}</p>}
+        </div>
         {loading && <Spinner />}
         <div className="wrapper">
+
           {edit &&
             <div className="studioScreen">
               <div className="studioHead">
@@ -56,11 +63,13 @@ const MyStudio = () => {
                   <img src="/assets/images/mzflash.png" alt="" />
                 </div>
               </div>
-              <div className="profilebioname">
-                {myStudio && <span className="nameof" id="nameof"> {myStudio.user.username}</span>}
-                <br />
-                <span className="artof" id="artof">Cosplay/1213</span>
-              </div>
+              {myStudio &&
+                <div className="profilebioname">
+                  <span className="nameof" id="nameof"> {myStudio.user.username}</span>
+                  <br />
+                  <span className="artof" id="artof">{myStudio.user.art.name}</span>
+                </div>
+              }
               <form method="post" action="login.php">
                 <label htmlFor="addbio" className="addbio-input">
                   <span className="labelText">Click edit Studio to add a bio.</span>
@@ -158,7 +167,7 @@ const MyStudio = () => {
               onGalleryChange={handleGalleryChange}
             />
           </div> */}
-           <div className="gallery">
+          <div className="gallery">
             {!activeGallery &&
               <>
                 <p>Select a Gallery</p>
@@ -177,24 +186,24 @@ const MyStudio = () => {
               />
             }
           </div>
-        </div>   
-              
         </div>
-        <div className="wrapper">
-          <div className="screen">
-            <div className="scr-inner">
-              {galleryImages?.map((gallery, index) => (
-                <div key={index}>
-                  <img src={`${gallery?.image.path}`} alt="" style={{ width: '20%' }} />
-                </div>
-              ))}
-            </div>
+
+      </div>
+      <div className="wrapper">
+        <div className="screen">
+          <div className="scr-inner">
+            {galleryImages?.map((gallery, index) => (
+              <div key={index}>
+                <img src={`${gallery?.image.path}`} alt="" style={{ width: '20%' }} />
+              </div>
+            ))}
           </div>
         </div>
-        <div className="wrapper">
-          <p className="footer-text">production of: QuetzalArtz x R&amp;R </p>
-        </div>
       </div>
+      <div className="wrapper">
+        <p className="footer-text">production of: QuetzalArtz x R&amp;R </p>
+      </div>
+    </div>
   );
 };
 

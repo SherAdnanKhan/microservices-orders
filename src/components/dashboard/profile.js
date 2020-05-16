@@ -4,15 +4,21 @@ import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrUpdateProfile, deleteProfileImage } from '../../actions/studioActions';
 import Spinner from '../common/spinner';
+import LeftBorder from './layout/leftBorder';
+import RightBorder from './layout/rightBorder';
+import Footer from './layout/footer';
 
 const Profile = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { loading } = useSelector(state => state.loading);
+
   const { avatars } = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState({});
+  const [color, setColor] = useState('red');
+  const { loading } = useSelector(state => state.loading);
 
   useEffect(() => {
     if (avatars)
@@ -47,76 +53,84 @@ const Profile = () => {
     dispatch(createOrUpdateProfile(data, history));
   }
 
+  useEffect(() => {
+    if (localStorage.color)
+      setColor(JSON.parse(localStorage.getItem('color')));
+  }, []);
+
   return (
-    <div className="edit-profile-page">
-      <div className="edit-user-page">
-        <div className="header-bar">
-          <div className="back-icon">
-            <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/my-studio')} />
-          </div>
-          <p>Edit Your Profile Cube Usman</p>
-        </div>
-        <div className="wrapper">
-          <div className="edit-profile">
-            <div className="scr-inner">
-              <div className="item-box">
-                <div className="editTool Edit">
-                  <img src="/assets/images/paintbrush.png" alt="" />
-                </div>
-                <img
-                  src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
-                  alt=""
-                  onClick={() => handleImageSelect(images[0])}
-                />
-              </div>
-              <div className="item-box">
-                <div className="editTool Edit">
-                  <img src="/assets/images/paintbrush.png" alt="" />
-                </div>
-                <img
-                  src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
-                  alt=""
-                  onClick={() => handleImageSelect(images[1])}
-                />
-              </div>
-              <div className="item-box">
-                <div className="editTool Edit">
-                  <img src="/assets/images/paintbrush.png" alt="" />
-                </div>
-                <img
-                  src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
-                  alt=""
-                  onClick={() => handleImageSelect(images[2])}
-                />
-              </div>
-              <div className="item-box">
-                <div className="editTool Edit">
-                  <img src="/assets/images/paintbrush.png" alt="" />
-                </div>
-                <img
-                  src={images[3] ? images[3].path : "/assets/images/avataricon.png"}
-                  alt=""
-                  onClick={() => handleImageSelect(images[3])}
-                />
-              </div>
+    <div className={`frameReady ${color}`}>
+      <LeftBorder />
+      <RightBorder />
+      <div className="edit-profile-page">
+        {loading && <Spinner />}
+        <div className="edit-user-page">
+          <div className="header-bar">
+            <div className="back-icon">
+              <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/my-studio')} />
             </div>
-            <p>Select a profile picture change</p>
-            <button onClick={() => history.push('/dashboard/my-studio')}>
-              <i className="fa fa-check" />
+            <p>Edit Your Profile Cube {user.username}</p>
+          </div>
+          <div className="wrapper">
+            <div className="edit-profile">
+              <div className="scr-inner">
+                <div className="item-box">
+                  <div className="editTool Edit">
+                    <img src="/assets/images/paintbrush.png" alt="" />
+                  </div>
+                  <img
+                    src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
+                    alt=""
+                    onClick={() => handleImageSelect(images[0])}
+                  />
+                </div>
+                <div className="item-box">
+                  <div className="editTool Edit">
+                    <img src="/assets/images/paintbrush.png" alt="" />
+                  </div>
+                  <img
+                    src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
+                    alt=""
+                    onClick={() => handleImageSelect(images[1])}
+                  />
+                </div>
+                <div className="item-box">
+                  <div className="editTool Edit">
+                    <img src="/assets/images/paintbrush.png" alt="" />
+                  </div>
+                  <img
+                    src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
+                    alt=""
+                    onClick={() => handleImageSelect(images[2])}
+                  />
+                </div>
+                <div className="item-box">
+                  <div className="editTool Edit">
+                    <img src="/assets/images/paintbrush.png" alt="" />
+                  </div>
+                  <img
+                    src={images[3] ? images[3].path : "/assets/images/avataricon.png"}
+                    alt=""
+                    onClick={() => handleImageSelect(images[3])}
+                  />
+                </div>
+              </div>
+              <p>Select a profile picture change</p>
+              <button onClick={() => history.push('/dashboard/my-studio')}>
+                <i className="fa fa-check" />
               Done
             </button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="my-studio-edit">
-        <div className="header-bar">
-          <div className="back-icon go-to-profile">
-            <i className="fa fa-arrow-left" />
+        <div className="my-studio-edit">
+          <div className="header-bar">
+            <div className="back-icon go-to-profile">
+              <i className="fa fa-arrow-left" />
+            </div>
+            <p>Edit your Profile Cube {user.username}</p>
           </div>
-          <p>Edit your Profile Cube  Usman</p>
-        </div>
-        <div className="wrapper update-image">
-          {!loading &&
+          <div className="wrapper update-image">
             <>
               <div className="up-img-box">
                 <img className="update-pic" src={selectedImage ? selectedImage.path : "/assets/images/avataricongray.png"} alt="" />
@@ -145,17 +159,14 @@ const Profile = () => {
 
               <div className={selectedImage.avatar ? "actions" : "actions hide"}>
                 <button onClick={handleSubmit} className="clickable">Save</button>
-                <button className="clickable" onClick={() => history.replace('/dashboard/my-studio/profile')}>Cancel</button>
+                <button className="clickable" onClick={() => window.location.reload()}>Try again</button>
               </div>
             </>
-          }
-        </div>
-        {loading &&
-          <div>
-            <Spinner />
           </div>
-        }
+
+        </div>
       </div>
+      <Footer />
     </div >
   );
 };

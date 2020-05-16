@@ -4,6 +4,7 @@ import UserContext from '../../context/userContext';
 import Main from './Main';
 import addExibition from "./addExibition";
 import StartFaves from "./startFavas";
+import Profile from './profile';
 
 
 const Dashboard = ({ user }) => {
