@@ -6,7 +6,6 @@ import addExibition from "./addExibition";
 import StartFaves from "./startFavas";
 import Profile from './profile';
 
-
 const Dashboard = ({ user }) => {
   return (
     <UserContext.Provider value={user}>
