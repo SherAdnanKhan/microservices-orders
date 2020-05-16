@@ -9,7 +9,7 @@ import { getUserStudio } from "../../actions/studioActions";
 import UserStudioGallery from "../common/userStudioGallery";
 
 const Studio = () => {
-  const [edit, setEdit] = useState(true);
+  const [edit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
 
   const { params: { slug } } = useRouteMatch();
@@ -57,7 +57,7 @@ const Studio = () => {
                     </div>
                   }
                   <div>
-                    <Link to="/dashboard/mz-flash">
+                    <Link to={`/dashboard/mz-flash/${slug}`}>
                       <img src="/assets/images/mzflash.png" alt="" />
                     </Link>
                   </div>
@@ -138,13 +138,7 @@ const Studio = () => {
             }
           </div>
           <div className="editstudio-btn">
-            <button onClick={() => {
-              setEdit(!edit);
-              setActiveGallery('');
-            }}>
-              <img src="/assets/images/paintbrush.png" alt="" />
-              {edit ? "Edit Studio" : "View Studio"}
-            </button>
+            <div style={{height:'40px'}}></div>
           </div>
           <div className="wrapper">
             {
@@ -165,10 +159,10 @@ const Studio = () => {
               {!activeGallery &&
                 <>
                   <p>Select a Gallery</p>
-              <p>Total posts: {userStudio.user.posts_count}</p>
+              <p>Total posts: {galleries && galleries.length}</p>
                 </>
               }
-              {activeGallery && <p>{activeGallery.title}</p>}
+              {activeGallery && <p>Total Post: {activeGallery.posts_count}</p>}
             </div>
             }
             <div className="heart-icon">
