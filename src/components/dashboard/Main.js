@@ -28,9 +28,12 @@ const Main = () => {
         return import('./Studio');
       case 'mz-flash':
         return import('./mzFlash');
+      case 'strokes':
+        return import('./stokes');
       default:
         return import('./lobby');
     }
+    
   });
 
   useEffect(() => {

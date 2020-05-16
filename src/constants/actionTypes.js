@@ -37,3 +37,6 @@ export const GET_GALLERY = "GET_GALLERY";
 export const MAKE_FAV = "MAKE_FAV";
 export const FAV_GALLERY = "FAV_GALLERY";
 export const UNFAV_GALLERY = "UNFAV_GALLERY";
+
+// Strokes
+export const GET_STROKES = "GET_STROKES";

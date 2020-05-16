@@ -11,7 +11,6 @@ import Spinner from '../common/spinner';
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
-
   const history = useHistory();
   const dispatch = useDispatch();
   const {
@@ -188,7 +187,7 @@ const MyStudio = () => {
             {galleryImages &&
               galleryImages.posts.map((gallery, index) => (
                 <div key={index}>
-                  <img src={`${gallery?.image.path}`} alt="" style={{ width: '20%' }} />
+                  <img src={`${gallery?.image.path}`} alt="" style={{ width: '300px', height: "300px" }} />
                 </div>
               ))}
           </div>
