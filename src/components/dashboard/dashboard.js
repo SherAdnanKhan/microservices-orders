@@ -4,6 +4,7 @@ import UserContext from '../../context/userContext';
 import Main from './Main';
 import addExibition from "./addExibition";
 import StartFaves from "./startFavas";
+import Profile from './profile';
 
 
 const Dashboard = ({ user }) => {
@@ -18,7 +19,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/studio/:slug" component={Main} />
         <Route exact path="/dashboard/faving" component={Main} />
         <Route exact path="/dashboard/faving/:name" component={Main} />
-        <Route exact path="/dashboard/my-studio/profile" component={Main} />
+        <Route exact path="/dashboard/my-studio/profile" component={Profile} />
         <Redirect exact from="/dashboard" to="/dashboard/lobby" />
       </Switch>
     </UserContext.Provider>
