@@ -26,6 +26,8 @@ const Main = () => {
         return import('./faving');
       case 'studio':
         return import('./Studio');
+      case 'mz-flash':
+        return import('./mzFlash');
       default:
         return import('./lobby');
     }

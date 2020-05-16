@@ -6,6 +6,7 @@ import Spinner from '../common/spinner';
 import { getGalleries } from '../../actions/exibitionAction';
 import { getGallery, makeFav } from "../../actions/galleryActions";
 import { getUserStudio } from "../../actions/studioActions";
+import UserStudioGallery from "../common/userStudioGallery";
 
 const Studio = () => {
   const [edit, setEdit] = useState(true);
@@ -33,8 +34,7 @@ const Studio = () => {
 
   }, [galleries, dispatch])
 
-  function handleGallery(e,gallery){
-    e.preventDefault();
+  const handleGalleryChange = gallery => {
     setActiveGallery(gallery);
     dispatch(getGallery(gallery.slug))
   }
@@ -57,7 +57,9 @@ const Studio = () => {
                     </div>
                   }
                   <div>
-                    <img src="/assets/images/mzflash.png" alt="" />
+                    <Link to="/dashboard/mz-flash">
+                      <img src="/assets/images/mzflash.png" alt="" />
+                    </Link>
                   </div>
                 </div>
                 <div className="profilebioname">
@@ -146,9 +148,11 @@ const Studio = () => {
           </div>
           <div className="wrapper">
             {
-             userStudio && userStudio.user && userStudio.user.galleries.map((gal,index) =>(
-               <img src="/assets/images/avataricongreen.png" alt="" key={index} onClick={(e) => handleGallery(e,gal)} />
-             )) 
+              <UserStudioGallery
+                 galleries={galleries}
+                 edit={edit}
+                 onGalleryChange={handleGalleryChange}
+              />
             }
            
           </div>
@@ -192,7 +196,7 @@ const Studio = () => {
               <div className="scr-inner">
                 {galleryImages?.map((gallery, index) => (
                   <div key={index}>
-                    <img src={ `${gallery?.image.path}`} alt="" style={{width:'20%'}} />
+                    <img src={ `${gallery?.image.path}`} alt="" style={{width:'30%'}} />
                   </div>
                 ))}
               </div>
