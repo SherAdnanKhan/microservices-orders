@@ -1,11 +1,11 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+// import { useSelector, useDispatch } from "react-redux"
 
 const MzFlash = () => {
-  const dispatch = useDispatch();
-  const {
-    studio: { userStudio }
-  } = useSelector(state => state);
+  // const dispatch = useDispatch();
+  // const {
+  //   studio: { userStudio }
+  // } = useSelector(state => state);
 
   return (
     <div className="mz-flash-page">

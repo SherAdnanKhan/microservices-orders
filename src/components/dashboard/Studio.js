@@ -40,7 +40,7 @@ const Studio = () => {
   }
 
   return (
-    <div>
+    <div className="my-studio">
       {loading && <Spinner />}
       {!loading &&
         <div>
