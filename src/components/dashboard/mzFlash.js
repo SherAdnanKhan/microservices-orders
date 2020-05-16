@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 import ProfileCube from '../common/profileCube';
-import { makeUserFav } from "../../actions/userActions";
+import { makeUserFav, UserUnFav } from "../../actions/userActions";
 
 const MzFlash = () => {
   const dispatch = useDispatch();
@@ -9,8 +9,12 @@ const MzFlash = () => {
     studio: { userStudio }
   } = useSelector(state => state);
 
-  function handleFave(){
-    dispatch(makeUserFav())
+  function handleFave(id){
+    dispatch(makeUserFav(id))
+  }
+
+  function handleUnFave(id){
+    dispatch(UserUnFav(id))
   }
 
   return (
@@ -32,7 +36,7 @@ const MzFlash = () => {
         <div className="fav-btn-div">
           {
             userStudio && userStudio.has_faved 
-              ? (<button className="fav-btn" onClick={() => handleFave(userStudio.user.id)}>UNFAVE</button>) 
+              ? (<button className="fav-btn" onClick={() => handleUnFave(userStudio.user.id)}>UNFAVE</button>) 
               : <button className="fav-btn" onClick={() => handleFave(userStudio.user.id)}>FAVE</button>
           }
         </div>

@@ -78,3 +78,18 @@ export const makeUserFav = (faved_to) => dispatch => {
     .catch(res => {
     });
 };
+
+export const UserUnFav = (faved_to) => dispatch => {
+  http
+    .delete(`/favs/${faved_to}`)
+    .then(res => {
+      // if (res.data.success) {
+      //     dispatch({
+      //       type: GET_OTEHR_FAV_USER,
+      //       payload: res.data.data.faves
+      //     })
+      // }
+    })
+    .catch(res => {
+    });
+};

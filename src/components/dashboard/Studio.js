@@ -197,7 +197,7 @@ const Studio = () => {
               <div className="scr-inner">
                 {galleryImages?.map((gallery, index) => (
                   <div key={index}>
-                    <img src={ `${gallery?.image.path}`} alt="" style={{width:'30%'}} />
+                    <img src={ `${gallery?.image.path}`} alt="" style={{width:'300px',height:"300px"}} />
                   </div>
                 ))}
               </div>

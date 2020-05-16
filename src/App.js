@@ -13,7 +13,14 @@ import Tutorial from './components/tutorial';
 
 function App() {
   useEffect(() => {
-    document.title = `Meuzmnet: ${history.location.pathname.split('/')[1]}`
+    let url1 = history.location.pathname.split('/')[2];
+    let url2 = history.location.pathname.split('/')[1];
+    if(url1){
+      document.title = `Meuzm: ${url1}`
+    }else{
+      document.title = `Meuzm: ${url2}`
+    }
+    
   }, []);
   return (
     <Switch>
