@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import ProfileCube from '../common/profileCube';
 import { makeUserFav, UserUnFav } from "../../actions/userActions";
+import { useRouteMatch } from 'react-router-dom';
+import { getUserStudio } from "../../actions/studioActions";
 
 const MzFlash = () => {
   const dispatch = useDispatch();
@@ -9,13 +11,21 @@ const MzFlash = () => {
     studio: { userStudio }
   } = useSelector(state => state);
 
+  const { params: { slug } } = useRouteMatch();
+
   function handleFave(id){
+    dispatch(getUserStudio(slug));
     dispatch(makeUserFav(id))
   }
 
   function handleUnFave(id){
+    dispatch(getUserStudio(slug));
     dispatch(UserUnFav(id))
   }
+
+  useEffect(() => {
+    dispatch(getUserStudio(slug));
+}, [dispatch,slug]);
 
   return (
     <div className="mz-flash-page">
