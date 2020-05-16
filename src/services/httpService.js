@@ -30,12 +30,15 @@ axios.interceptors.response.use(
       error.response &&
       error.response.status >= 400 &&
       error.response.status < 500;
+
     if (!expectedError) {
       alert('An unexpected error has occured.');
     }
 
+    if (expectedError) {
+      store.dispatch(setError(getFormattedErrors(error.response && error.response.data)));
+    }
     store.dispatch(stopLoading());
-    store.dispatch(setError(getFormattedErrors(error.response && error.response.data)));
 
     return Promise.reject(error);
   }
