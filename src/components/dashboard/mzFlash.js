@@ -17,6 +17,9 @@ const mzFlash = () => {
          <button className="fav-btn">FAVE</button>
         </div>
       </div>
+      <div className="fav-bar">
+        <h3>MZ FLASH</h3>
+      </div>
     </div>
   )
 
