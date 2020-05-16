@@ -63,3 +63,18 @@ export const getOtherFavouriteByUsers = () => dispatch => {
     .catch(res => {
     });
 };
+
+export const makeUserFav = (faved_to) => dispatch => {
+  http
+    .post('/favs',{faved_to})
+    .then(res => {
+      // if (res.data.success) {
+      //     dispatch({
+      //       type: GET_OTEHR_FAV_USER,
+      //       payload: res.data.data.faves
+      //     })
+      // }
+    })
+    .catch(res => {
+    });
+};

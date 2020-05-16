@@ -154,22 +154,23 @@ const Studio = () => {
                  onGalleryChange={handleGalleryChange}
               />
             }
-           
           </div>
           <div className="total-post">
             <div className="icon-side">
               <i className="fas fa-square" />
             </div>
-            <div className="gallery">
+            {
+              userStudio && 
+              <div className="gallery">
               {!activeGallery &&
                 <>
                   <p>Select a Gallery</p>
-                  <p>Total posts: 2</p>
+              <p>Total posts: {userStudio.user.posts_count}</p>
                 </>
               }
               {activeGallery && <p>{activeGallery.title}</p>}
             </div>
-
+            }
             <div className="heart-icon">
               {activeGallery &&
                 slug &&
