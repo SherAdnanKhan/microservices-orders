@@ -53,13 +53,13 @@ const MyStudio = () => {
             <div className="studioScreen">
               <div className="studioHead">
                 <div>
-                  
+
                 </div>
                 <div className="procu">
                   {myStudio && <ProfileCube avatars={myStudio.user.avatars} />}
                 </div>
                 <div>
-                 
+
                 </div>
               </div>
               {myStudio &&
@@ -152,6 +152,7 @@ const MyStudio = () => {
           <Gallery
             galleries={galleries}
             edit={edit}
+            activeGallery={activeGallery}
             onGalleryChange={handleGalleryChange}
           />
         </div>
@@ -159,13 +160,6 @@ const MyStudio = () => {
           <div className="icon-side">
             <i className="fas fa-square" />
           </div>
-          {/* <div className="wrapper">
-            <Gallery
-              galleries={galleries}
-              edit={edit}
-              onGalleryChange={handleGalleryChange}
-            />
-          </div> */}
           <div className="gallery">
             {!activeGallery &&
               <>
@@ -191,11 +185,12 @@ const MyStudio = () => {
       <div className="wrapper">
         <div className="screen">
           <div className="scr-inner">
-            {galleryImages?.map((gallery, index) => (
-              <div key={index}>
-                <img src={`${gallery?.image.path}`} alt="" style={{ width: '20%' }} />
-              </div>
-            ))}
+            {galleryImages &&
+              galleryImages.posts.map((gallery, index) => (
+                <div key={index}>
+                  <img src={`${gallery?.image.path}`} alt="" style={{ width: '20%' }} />
+                </div>
+              ))}
           </div>
         </div>
       </div>
