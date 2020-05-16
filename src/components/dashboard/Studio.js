@@ -24,9 +24,9 @@ const Studio = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    if (!userStudio)
+    // if (!userStudio)
       dispatch(getUserStudio(slug));
-  }, [dispatch, userStudio,slug]);
+  }, [dispatch,slug]);
 
   useEffect(() => {
     if (!galleries)
