@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ProfileCube = ({ avatars }) => {
-  console.log(avatars)
   return (
 
     <div className="scene">

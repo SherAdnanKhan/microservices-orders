@@ -24,7 +24,6 @@ const Profile = () => {
     if (image) {
       setSelectedImage(image);
     }
-    console.log("image ", image);
   }
 
   const handleChange = ({ target: input }) => {

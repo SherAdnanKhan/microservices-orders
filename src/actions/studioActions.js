@@ -27,11 +27,9 @@ export const createOrUpdateProfile = (data, history) => () => {
 };
 
 export const getUserStudio = (slug) => dispatch => {
-  console.log("slug",slug);
   http
     .get(`/studios/${slug}`)
     .then(res => {
-     console.log("res",res);
      dispatch({
        type: GET_USER_STUDIO,
        payload: res.data.data
