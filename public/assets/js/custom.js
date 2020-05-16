@@ -66,7 +66,6 @@ $(document).on('click', '.colorChangerScreen img[color]', async function () {
 });
 
 $(document).on('click', '.menuBlock', function () {
-  console.log("yes");
   const checkNav = $('nav').css('display');
   if (checkNav == 'none') {
     $('nav').show();

@@ -30,9 +30,8 @@ const Lobby = () => {
   return (
     <div className="lobby-page">
       {loading && <Spinner />}
-
-      <div className="base" id="sec">
-        {favouriteUsers &&
+       <div className="base" id="sec">
+         {favouriteUsers &&
             favouriteUsers.map((user, index) => (
               <Link to={`/dashboard/studio/${user.slug}`} key={index} >
                  <UserCube user={user}  />
@@ -40,12 +39,9 @@ const Lobby = () => {
             ))
           }
       </div>
-
       <Avatar avatars={user.avatars && user.avatars} />
       <p style={{ textAlign: 'center' }}>{userArtName}</p>
-
-      <div className="middleBody">
-      </div>
+      <div className="middleBody"></div>
       <div className="smallCube">
         <div className="procusmaller">
           <div className="scenesmaller">
@@ -60,7 +56,6 @@ const Lobby = () => {
           </div>
         </div>
       </div>
-
       <div className="assist">
         <a href="#__">
           <img src="/assets/images/icons/LogoIconWhite.png" alt="support" />
@@ -69,5 +64,4 @@ const Lobby = () => {
     </div>
   );
 };
-
 export default Lobby;
