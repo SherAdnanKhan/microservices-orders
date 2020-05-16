@@ -85,44 +85,46 @@ $(document).on('click', 'nav a ', function () {
 $(document).on('click', '#search', function () {
   $("#search-bar").css("display", "flex");
   $("#main-menu").hide();
+  $(".do-not-delete").hide();
   $("#search-result").show();
 });
 $(document).on('click', '#go-back', function () {
   $("#search-bar").css("display", "none");
   $("#main-menu").show();
+  $(".do-not-delete").show();
   $("#search-result").hide();
 });
 
 
 $(document).on('click', '.item-box-1', function (e) {
-  $(".item-box-1").css({"transform": "scale(1.2)" , "z-index": "9"});
-  $(".item-box-2").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-3").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-4").css({"transform": "scale(1)" , "z-index": "1"});
+  $(".item-box-1").css({ "transform": "scale(1.2)", "z-index": "9" });
+  $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
   e.stopPropagation();
 });
 $(document).on('click', '.item-box-2', function (e) {
-  $(".item-box-2").css({"transform": "scale(1.2)" , "z-index": "9"});
-  $(".item-box-1").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-3").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-4").css({"transform": "scale(1)" , "z-index": "1"});
+  $(".item-box-2").css({ "transform": "scale(1.2)", "z-index": "9" });
+  $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
   e.stopPropagation();
 });
 $(document).on('click', '.item-box-3', function (e) {
-  $(".item-box-3").css({"transform": "scale(1.2)" , "z-index": "9"});
-  $(".item-box-2").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-1").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-4").css({"transform": "scale(1)" , "z-index": "1"});
+  $(".item-box-3").css({ "transform": "scale(1.2)", "z-index": "9" });
+  $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-4").css({ "transform": "scale(1)", "z-index": "1" });
   e.stopPropagation();
 });
 $(document).on('click', '.item-box-4', function (e) {
-  $(".item-box-4").css({"transform": "scale(1.2)" , "z-index": "9"});
-  $(".item-box-2").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-3").css({"transform": "scale(1)" , "z-index": "1"});
-  $(".item-box-1").css({"transform": "scale(1)" , "z-index": "1"});
+  $(".item-box-4").css({ "transform": "scale(1.2)", "z-index": "9" });
+  $(".item-box-2").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-3").css({ "transform": "scale(1)", "z-index": "1" });
+  $(".item-box-1").css({ "transform": "scale(1)", "z-index": "1" });
   e.stopPropagation();
 });
-$(document).click(function(){
+$(document).click(function () {
   $(".item-box-1 , .item-box-2 , .item-box-3 , .item-box-4").css("transform", "scale(1)");
   $(".left").css("left", "-42px");
   $(".right").css("right", "-42px");

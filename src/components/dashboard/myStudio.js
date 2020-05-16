@@ -45,11 +45,10 @@ const MyStudio = () => {
           <div className="back-icon">
             <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} />
           </div>
-          {myStudio && <p>Edit Your Profile Cube {myStudio.user.username}</p>}
+          {myStudio && <p>{myStudio.user.username}</p>}
         </div>
         {loading && <Spinner />}
         <div className="wrapper">
-
           {edit &&
             <div className="studioScreen">
               <div className="studioHead">
