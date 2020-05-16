@@ -19,6 +19,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/faving" component={Main} />
         <Route exact path="/dashboard/faving/:name" component={Main} />
         <Route exact path="/dashboard/my-studio/profile" component={Main} />
+        <Route exact path="/dashboard/mz-flash" component={Main} />
         <Redirect exact from="/dashboard" to="/dashboard/lobby" />
       </Switch>
     </UserContext.Provider>

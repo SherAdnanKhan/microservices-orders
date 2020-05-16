@@ -57,7 +57,9 @@ const Studio = () => {
                     </div>
                   }
                   <div>
-                    <img src="/assets/images/mzflash.png" alt="" />
+                    <Link to="/dashboard/mz-flash">
+                      <img src="/assets/images/mzflash.png" alt="" />
+                    </Link>
                   </div>
                 </div>
                 <div className="profilebioname">
