@@ -27,24 +27,6 @@ const Lobby = () => {
     dispatch(getUserArtById(user_art_id))
   }, [dispatch, favouriteUsers, user_art_id])
 
-  // return (
-  //   <div className="lobby-page">
-  //     {!loading ?
-  //       <div className="base" id="sec">
-  //         {favouriteUsers &&
-  //           favouriteUsers.map((user, index) => (
-  //             <Link to={`/dashboard/studio/${user.slug}`} key={index} >
-  //                <UserCube user={user}  />
-  //             </Link>
-  //           ))
-  //         }
-  //       </div> :
-  //       <div style={{ marginBottom: '15px' }}>
-  //         <Spinner />
-  //       </div>
-  //     }
-  
-
   return (
     <div className="lobby-page">
       {loading && <Spinner />}
