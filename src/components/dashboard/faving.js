@@ -29,7 +29,7 @@ const Favas = (props) =>{
           { favas?.map(( user, index ) => (
             <div className="favas-box">
                <div className="favas-avatar">
-                 <Link to={`/dashboard/user-studio/${user.slug}`} >
+                 <Link to={`/dashboard/studio/${user.slug}`} key={index} >
                    <Avatar avatars={user?.avatars} />
                  </Link>
                </div>

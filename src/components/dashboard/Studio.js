@@ -7,7 +7,7 @@ import { getGalleries } from '../../actions/exibitionAction';
 import { getGallery, makeFav } from "../../actions/galleryActions";
 import { getUserStudio } from "../../actions/studioActions";
 
-const MyStudio = () => {
+const Studio = () => {
   const [edit, setEdit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
 
@@ -208,4 +208,4 @@ const MyStudio = () => {
   );
 };
 
-export default MyStudio;
+export default Studio;

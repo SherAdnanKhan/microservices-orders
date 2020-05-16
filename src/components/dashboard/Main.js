@@ -24,8 +24,8 @@ const Main = () => {
         return import('./settings/changePassword');
       case 'faving':
         return import('./faving');
-      case 'user-studio':
-        return import('./userStudio');
+      case 'studio':
+        return import('./Studio');
       default:
         return import('./lobby');
     }

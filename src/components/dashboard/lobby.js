@@ -33,8 +33,8 @@ const Lobby = () => {
         <div className="base" id="sec">
           {favouriteUsers &&
             favouriteUsers.map((user, index) => (
-              <Link to={`/dashboard/user-studio/${user.slug}`} key={index}>
-                 <UserCube user={user} />
+              <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+                 <UserCube user={user}  />
               </Link>
             ))
           }
