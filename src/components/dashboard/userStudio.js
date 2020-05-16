@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMyStudio } from '../../actions/studioActions';
 import ProfileCube from '../common/profileCube';
 import Spinner from '../common/spinner';
 import { getGalleries } from '../../actions/exibitionAction';
-import Gallery from '../common/gallery';
 import { getGallery, makeFav } from "../../actions/galleryActions";
+import { getUserStudio } from "../../actions/studioActions";
 
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
 
+  const { params: { slug } } = useRouteMatch();
+
   const history = useHistory();
   const dispatch = useDispatch();
   const {
-    studio: { myStudio },
+    studio: { userStudio },
     exibition: { ListOfGalleries: { data: galleries } },
     loading: { loading },
-    studio: { studioUser },
     gallery: { galleryImages }
 
   } = useSelector(state => state);
 
-  let url = window.location.href.split('/')[5];
-
   useEffect(() => {
-    if (!myStudio)
-      dispatch(getMyStudio());
-  }, [dispatch, myStudio]);
+    if (!userStudio)
+      dispatch(getUserStudio(slug));
+  }, [dispatch, userStudio,slug]);
 
   useEffect(() => {
     if (!galleries)
@@ -36,10 +34,10 @@ const MyStudio = () => {
 
   }, [galleries, dispatch])
 
-
-  const handleGalleryChange = gallery => {
-    dispatch(getGallery(gallery.slug));
+  function handleGallery(e,gallery){
+    e.preventDefault();
     setActiveGallery(gallery);
+    dispatch(getGallery(gallery.slug))
   }
 
   return (
@@ -54,15 +52,9 @@ const MyStudio = () => {
                   <div>
                     <img src="/assets/images/strqicon.png" alt="" />
                   </div>
-                  {url &&
-                    url === 'user'
-                    ? studioUser &&
+                  { userStudio &&
                     <div className="procu">
-                      <ProfileCube avatars={studioUser?.avatars} />
-                    </div>
-                    : myStudio &&
-                    <div className="procu">
-                      <ProfileCube avatars={myStudio?.user?.avatars} />
+                      <ProfileCube avatars={userStudio?.user?.avatars} />
                     </div>
                   }
                   <div>
@@ -70,13 +62,9 @@ const MyStudio = () => {
                   </div>
                 </div>
                 <div className="profilebioname">
-                  {url &&
-                    url === 'user'
-                    ? studioUser && <span className="nameof" id="nameof"> {studioUser?.first_name}</span>
-                    : myStudio && <span className="nameof" id="nameof"> {myStudio?.user?.username}</span>
-                  }
+                  { userStudio && <span className="nameof" id="nameof"> {userStudio?.user?.username}</span> }
                   <br />
-                  <span className="artof" id="artof">Cosplay/1213</span>
+                  <span className="artof" id="artof">{userStudio?.user?.art?.name}</span>
                 </div>
                 <form method="post" action="login.php">
                   <label htmlFor="addbio" className="addbio-input">
@@ -89,14 +77,14 @@ const MyStudio = () => {
                         <img src="/assets/images/favers.png" alt="" />
                         Faved by
                       </div>
-                      {myStudio && <span>{myStudio.fav_by_count}</span>}
+                      {userStudio && <span>{userStudio?.fav_by_count}</span>}
                     </Link>
                     <Link to="/dashboard/faving">
                       <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
                         Faved
                       </div>
-                      {myStudio && <span>{myStudio.favs_count}</span>}
+                      {userStudio && <span>{userStudio?.favs_count}</span>}
                     </Link>
                   </div>
                 </form>
@@ -104,21 +92,21 @@ const MyStudio = () => {
             }
             {!edit &&
               <div className="edit-studioScreen">
-                {myStudio &&
+                {userStudio &&
                   <div className="procu">
                     <div className="editTool Edit" onClick={() => history.push('/dashboard/my-studio/profile')}>
                       <img src="/assets/images/paintbrush.png" alt="" className="clickable" />
                     </div>
-                    <ProfileCube avatars={myStudio.user.avatars} />
+                    <ProfileCube avatars={userStudio?.user?.avatars} />
                   </div>
                 }
                 <div className="profilebioname">
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
-                  {myStudio && <span className="nameof" id="nameof">{myStudio.user.username}</span>}
+                  {userStudio && <span className="nameof" id="nameof">{userStudio?.user?.username}</span>}
                   <br />
-                  <span className="artof" id="artof">Cosplay/1213</span>
+                  <span className="artof" id="artof">{userStudio?.user?.art?.name}</span>
                 </div>
                 <form method="post" action="login.php">
                   <label htmlFor="addbio" className="addbio-input">
@@ -134,14 +122,14 @@ const MyStudio = () => {
                         <img src="/assets/images/favers.png" alt="" />
                         Faved by
                       </div>
-                      {myStudio && <span>{myStudio.fav_by_count}</span>}
+                      {userStudio && <span>{userStudio?.fav_by_count}</span>}
                     </Link>
                     <Link to="#">
                       <div className="faved-by-btn">
                         <img src="/assets/images/faving.png" alt="" />
                         Faved
                       </div>
-                      {myStudio && <span>{myStudio.favs_count}</span>}
+                      {userStudio && <span>{userStudio?.favs_count}</span>}
                     </Link>
                   </div>
                 </form>
@@ -158,11 +146,12 @@ const MyStudio = () => {
             </button>
           </div>
           <div className="wrapper">
-            <Gallery
-              galleries={galleries}
-              edit={edit}
-              onGalleryChange={handleGalleryChange}
-            />
+            {
+             userStudio && userStudio.user && userStudio.user.galleries.map((gal,index) =>(
+               <img src="/assets/images/avataricongreen.png" alt="" key={index} onClick={(e) => handleGallery(e,gal)} />
+             )) 
+            }
+           
           </div>
           <div className="total-post">
             <div className="icon-side">
@@ -179,9 +168,8 @@ const MyStudio = () => {
             </div>
 
             <div className="heart-icon">
-              {
-                url && 
-                url === 'user' && 
+              {activeGallery &&
+                slug &&
                 <img
                   src="/assets/images/catfave.png"
                   className="clickable"
@@ -189,8 +177,8 @@ const MyStudio = () => {
                   alt=""
                 />
               }
-              {!url && 
-               activeGallery &&
+              {activeGallery && 
+                !slug &&
                 <img
                   src="/assets/images/add.png"
                   className="clickable"

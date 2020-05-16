@@ -3,7 +3,6 @@ import { getOtherFavouriteUsers, getOtherFavouriteByUsers } from "../../actions/
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from '../common/avatar';
 import Spinner from '../common/spinner';
-import { selectUserForStudio } from "../../actions/studioActions";
 import { Link } from "react-router-dom";
 
 const Favas = (props) =>{
@@ -21,10 +20,6 @@ const Favas = (props) =>{
     }   
   }, [dispatch,url]);
 
-  const handleLink = (data) => {
-    dispatch(selectUserForStudio(data));
-  }
-
   return (
     <div className="favas">
       { 
@@ -34,7 +29,7 @@ const Favas = (props) =>{
           { favas?.map(( user, index ) => (
             <div className="favas-box">
                <div className="favas-avatar">
-                 <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
+                 <Link to={`/dashboard/user-studio/${user.slug}`} >
                    <Avatar avatars={user?.avatars} />
                  </Link>
                </div>

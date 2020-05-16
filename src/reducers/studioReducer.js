@@ -1,8 +1,8 @@
-import { GET_MY_STUDIO, SELECT_STUDIO_USER } from "../constants/actionTypes";
+import { GET_MY_STUDIO, GET_USER_STUDIO } from "../constants/actionTypes";
 
 const initialState = {
   myStudio: null,
-  studioUser: null
+  userStudio: null
 };
 
 export default (state = initialState, action) => {
@@ -12,10 +12,10 @@ export default (state = initialState, action) => {
         ...state,
         myStudio: action.payload
       };
-    case SELECT_STUDIO_USER:
+    case GET_USER_STUDIO:
       return {
         ...state,
-        studioUser: action.payload
+        userStudio: action.payload
       };
     default:
       return state;

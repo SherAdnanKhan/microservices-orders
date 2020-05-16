@@ -14,8 +14,8 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/lobby" component={Main} />
         <Route exact path="/dashboard/exhibition/:id" component={addExibition} />
         <Route exact path="/dashboard/start-favas" component={StartFaves} />
-        <Route exact path="/dashboard/my-studio/" component={Main} />
-        <Route exact path="/dashboard/my-studio/user" component={Main} />
+        <Route exact path="/dashboard/my-studio" component={Main} />
+        <Route exact path="/dashboard/user-studio/:slug" component={Main} />
         <Route exact path="/dashboard/faving" component={Main} />
         <Route exact path="/dashboard/faving/:name" component={Main} />
         <Route exact path="/dashboard/my-studio/profile" component={Main} />

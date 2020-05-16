@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
-import { selectUserForStudio } from "../../../actions/studioActions";
 
 const Search = () => {
   const [query, setQuery] = useState('');
@@ -13,10 +12,6 @@ const Search = () => {
   const handleChange = ({ target: input }) => {
     dispatch(getAllUsers(input.value));
     setQuery(input.value);
-  }
-
-  const handleLink = (data) => {
-    dispatch(selectUserForStudio(data));
   }
 
   return (
@@ -39,12 +34,7 @@ const Search = () => {
           users.map((user, index) => (
             <div key={index} className="result-box">
               <div className="profile-pic">
-                <Link to={`/dashboard/my-studio/user`} 
-                onClick={ () => 
-                  {
-                    handleLink(user);
-                    setQuery('');
-                  }}>
+                <Link to={`/dashboard/user-studio/${user.slug}`} >
                   <Avatar avatars={user?.avatars} />
                 </Link>
                 <div>

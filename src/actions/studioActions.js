@@ -1,4 +1,4 @@
-import { GET_MY_STUDIO, SELECT_STUDIO_USER } from "../constants/actionTypes";
+import { GET_MY_STUDIO, GET_USER_STUDIO } from "../constants/actionTypes";
 import http from "../services/httpService";
 import { getCurrentUser } from "./authActions";
 import { userKey } from "../constants/keys";
@@ -26,10 +26,15 @@ export const createOrUpdateProfile = (data, history) => () => {
     });
 };
 
-export const selectUserForStudio = (data) => dispatch => {
-  console.log("action", data)
-  dispatch({
-    type: SELECT_STUDIO_USER,
-    payload: data
-  })
+export const getUserStudio = (slug) => dispatch => {
+  console.log("slug",slug);
+  http
+    .get(`/studios/${slug}`)
+    .then(res => {
+     console.log("res",res);
+     dispatch({
+       type: GET_USER_STUDIO,
+       payload: res.data.data
+     })
+    });
 }
