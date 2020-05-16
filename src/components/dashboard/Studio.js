@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileCube from '../common/profileCube';
-import Spinner from '../common/spinner';
 import { getGalleries } from '../../actions/exibitionAction';
 import { getGallery, favGallery, unfavGallery } from "../../actions/galleryActions";
 import { getUserStudio } from "../../actions/studioActions";
@@ -11,7 +10,6 @@ import UserStudioGallery from "../common/userStudioGallery";
 const Studio = () => {
   const [edit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
-
   const { params: { slug } } = useRouteMatch();
 
   const history = useHistory();
@@ -19,7 +17,6 @@ const Studio = () => {
   const {
     studio: { userStudio },
     exibition: { ListOfGalleries: { data: galleries } },
-    loading: { loading },
     gallery: { galleryImages }
 
   } = useSelector(state => state);
@@ -49,7 +46,6 @@ const Studio = () => {
 
   return (
     <div className="my-studio">
-      {loading && <Spinner />}
       <div>
         <div className="header-bar">
           <div className="back-icon">

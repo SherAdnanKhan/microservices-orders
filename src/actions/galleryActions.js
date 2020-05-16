@@ -12,17 +12,6 @@ export const getGallery = (utilite) => dispatch => {
     });
 };
 
-export const makeFav = (gallery_id) => dispatch => {
-  http
-    .get(`/galleries/fav`, { gallery_id })
-    .then(res => {
-      // dispatch({
-      //   type: MAKE_FAV,
-      //   payload: res.data.data
-      // });
-    });
-};
-
 export const favGallery = data => dispatch => {
   http
     .post('/galleries/fav', data)
