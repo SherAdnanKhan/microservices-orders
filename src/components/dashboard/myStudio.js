@@ -151,7 +151,14 @@ const MyStudio = () => {
           <div className="icon-side">
             <i className="fas fa-square" />
           </div>
-          <div className="gallery">
+          {/* <div className="wrapper">
+            <Gallery
+              galleries={galleries}
+              edit={edit}
+              onGalleryChange={handleGalleryChange}
+            />
+          </div> */}
+           <div className="gallery">
             {!activeGallery &&
               <>
                 <p>Select a Gallery</p>
@@ -160,7 +167,6 @@ const MyStudio = () => {
             }
             {activeGallery && <p>{activeGallery.title}</p>}
           </div>
-
           <div className="heart-icon">
             {activeGallery &&
               <img
@@ -171,6 +177,8 @@ const MyStudio = () => {
               />
             }
           </div>
+        </div>   
+              
         </div>
         <div className="wrapper">
           <div className="screen">
@@ -187,7 +195,6 @@ const MyStudio = () => {
           <p className="footer-text">production of: QuetzalArtz x R&amp;R </p>
         </div>
       </div>
-    </div >
   );
 };
 

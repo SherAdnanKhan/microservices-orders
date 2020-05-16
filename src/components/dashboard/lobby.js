@@ -3,7 +3,6 @@ import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites } from '../../actions/userActions';
-import { selectUserForStudio } from "../../actions/studioActions";
 import UserCube from '../common/userCube';
 import Spinner from '../common/spinner';
 import { Link } from "react-router-dom";
@@ -28,9 +27,23 @@ const Lobby = () => {
     dispatch(getUserArtById(user_art_id))
   }, [dispatch, favouriteUsers, user_art_id])
 
-  function handleLink(data) {
-    dispatch(selectUserForStudio(data));
-  }
+  // return (
+  //   <div className="lobby-page">
+  //     {!loading ?
+  //       <div className="base" id="sec">
+  //         {favouriteUsers &&
+  //           favouriteUsers.map((user, index) => (
+  //             <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+  //                <UserCube user={user}  />
+  //             </Link>
+  //           ))
+  //         }
+  //       </div> :
+  //       <div style={{ marginBottom: '15px' }}>
+  //         <Spinner />
+  //       </div>
+  //     }
+  
 
   return (
     <div className="lobby-page">
@@ -38,16 +51,16 @@ const Lobby = () => {
 
       <div className="base" id="sec">
         {favouriteUsers &&
-          favouriteUsers.map((user, index) => (
-            <Link to={`/dashboard/my-studio/user`} onClick={() => handleLink(user)}>
-              <UserCube user={user} key={index} />
-            </Link>
-          ))
-        }
+            favouriteUsers.map((user, index) => (
+              <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+                 <UserCube user={user}  />
+              </Link>
+            ))
+          }
       </div>
 
       <Avatar avatars={user.avatars && user.avatars} />
-      <p style={{ textAlign: 'center' }}>Art Name: {userArtName}</p>
+      <p style={{ textAlign: 'center' }}>{userArtName}</p>
 
       <div className="middleBody">
       </div>

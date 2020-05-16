@@ -30,6 +30,7 @@ export const GET_OTEHR_FAV_USER = 'GET_OTEHR_FAV_USER';
 //My studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO'; 
 export const SELECT_STUDIO_USER = 'SELECT_STUDIO_USER';
+export const GET_USER_STUDIO = 'GET_USER_STUDIO';
 
 // Gallery
 export const GET_GALLERY = "GET_GALLERY";
