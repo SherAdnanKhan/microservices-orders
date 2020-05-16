@@ -47,6 +47,7 @@ const LoginForm = () => {
   return (
     <>
       {getCurrentUser() && <Redirect to="/dashboard/lobby" />}
+      {loading && <Spinner />}
       <div className="wrapper">
         <div className="loginScreen">
           <h1>Meuzm</h1>
@@ -97,7 +98,6 @@ const LoginForm = () => {
             >
               Login
             </button>
-            {loading && <Spinner />}
             <div className="rightLeftLine">  or  </div>
 
             <div className="registerBtn">

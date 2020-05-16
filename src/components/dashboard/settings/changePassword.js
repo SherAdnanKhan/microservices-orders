@@ -74,6 +74,7 @@ const ChangePassword = () => {
 
   return (
     <>
+      {loading && <Spinner />}
       <div className="wrapper changePasswordScreen">
         <form onSubmit={handleSubmit}>
           {success && <div className="success"> {success} </div>}
@@ -106,7 +107,6 @@ const ChangePassword = () => {
             error={errors.confirm_password}
           />
           <button className="btn" disabled={validate()}> Change Password</button>
-          {loading && <Spinner />}
         </form>
       </div>
     </>

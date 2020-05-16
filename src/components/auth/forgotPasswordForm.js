@@ -30,9 +30,9 @@ const ForgotPasswordForm = () => {
 
   return (
     <div className="wrapper">
+      {loading && <Spinner />}
+
       <div className="forgotPasswordScreen">
-        {/* Hello world */}
-        {/* <img src="avataricongray.png" height="100%" style={{ display: "none" }} /> */}
         <div className="header">
           <h2>Forgot Password?</h2>
         </div>
@@ -55,7 +55,6 @@ const ForgotPasswordForm = () => {
             value={email}
             onChange={handleChange}
           />
-          {/* <div className="message"></div> */}
           <button
             id="submit"
             type="submit"
@@ -63,15 +62,8 @@ const ForgotPasswordForm = () => {
           >
             Send
           </button>
-          {loading && <Spinner />}
           <div>
-
           </div>
-          {/* <div className="sendload">
-              <svg className="loader" width={40} height={40}>
-                <circle cx={20} cy={20} r={15}></circle>
-              </svg>
-            </div> */}
           <p>
             Return to <Link to="/login">Login page</Link>
           </p>
