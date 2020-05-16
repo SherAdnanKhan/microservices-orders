@@ -6,6 +6,7 @@ import ProfileCube from '../common/profileCube';
 import { getGalleries } from '../../actions/exibitionAction';
 import Gallery from '../common/gallery';
 import { getGallery } from "../../actions/galleryActions";
+import Spinner from '../common/spinner';
 
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
@@ -15,6 +16,7 @@ const MyStudio = () => {
   const dispatch = useDispatch();
   const {
     studio: { myStudio },
+    loading: { loading },
     exibition: { ListOfGalleries: { data: galleries } },
     gallery: { galleryImages }
 
@@ -39,6 +41,7 @@ const MyStudio = () => {
   return (
     <div>
       <div>
+        {loading && <Spinner />}
         <div className="wrapper">
           {edit &&
             <div className="studioScreen">
