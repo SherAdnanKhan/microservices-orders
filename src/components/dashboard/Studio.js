@@ -24,7 +24,6 @@ const Studio = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    // if (!userStudio)
       dispatch(getUserStudio(slug));
   }, [dispatch,slug]);
 
