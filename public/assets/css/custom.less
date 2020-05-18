@@ -959,12 +959,12 @@ input {
   display: none;
   display: none;
   position: absolute;
-  width: 100%;
+  width: 80%;
   z-index: 20;
   background: #000000a3;
 }
 .result-box{
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 20px 0;
     .profile-pic{
@@ -2675,66 +2675,89 @@ img {
 }
 // MZ FLASH END
 
-//STOKES START
-.stokes-page{
+// Post View START
+.post-page{
  width: 100%;
  height: 100vh;
  display: flex;
  flex-direction: column;
  justify-content: flex-start;
  background-color: rgb(174, 174, 174);
-.stoke-head{
+.post-head{
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   margin: 25px auto;
   background-color: black;
 }
-.stoke-body{
+.post-body{
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.stoke-footer{
+.post-footer{
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
   margin: 25px auto;
   background-color: black;
-  .stoke-icon-div{
+  .post-footer-bar{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    .stoke-icon-set{
-      width: 5%;
-      .stoke-color-icon{
-        width: 50%;
-        background-color: white;
-        height: auto;
-        color: white;
-        margin: 0px auto;
+    .poster-footer-stokes-btn{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      img{
+        width: 12%;
       }
-      .stoke-non-color-icon{
-        width: 50%;
-        height: auto;
-        color: white;
-        margin: 0px auto;
+      p{
+        text-align: center;
       }
     }
-    .stoke-non-color-icon{
-      width: 3%;
-      height: auto;
-      color: white;
+    .post-footer-icons{
+      text-align: center;
+      .stoke-non-color-icon{
+        width: 30%;
+      }
     }
     
   }
+  // .post-icon-div{
+  //   width: 100%;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-around;
+  //   .post-icon-set{
+  //     width: 5%;
+  //     .post-color-icon{
+  //       width: 50%;
+  //       background-color: white;
+  //       height: auto;
+  //       color: white;
+  //       margin: 0px auto;
+  //     }
+  //     .post-non-color-icon{
+  //       width: 50%;
+  //       height: auto;
+  //       color: white;
+  //       margin: 0px auto;
+  //     }
+  //   }
+  //   .post-non-color-icon{
+  //     width: 3%;
+  //     height: auto;
+  //     color: white;
+  //   }
+  // }
 }
 }
 
-// STOKES END
+// Post View End
 
 // Privacy Start
 

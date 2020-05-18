@@ -28,8 +28,8 @@ const Main = () => {
         return import('./studio/studio');
       case 'mz-flash':
         return import('./mzFlash');
-      case 'strokes':
-        return import('./stokes');
+      case 'viewpost':
+        return import('./viewPost/viewPost');
       case 'privacy':
         return import('./privacy');
       default:
