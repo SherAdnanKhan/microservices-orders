@@ -10,6 +10,7 @@ export const getFavourites = () => dispatch => {
         type: GET_FAV,
         payload: res.data.data
       });
+      console.log(res.data.data);
     });
 };
 

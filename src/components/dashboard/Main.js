@@ -15,7 +15,7 @@ const Main = () => {
   const Component = lazy(() => {
     switch (split[2]) {
       case 'lobby':
-        return import('./lobby');
+        return import('./lobby/lobby');
       case 'my-studio':
         return split[3] === 'profile'
           ? import('./profile')
@@ -33,7 +33,7 @@ const Main = () => {
       case 'privacy':
         return import('./privacy');
       default:
-        return import('./lobby');
+        return import('./lobby/lobby');
     }
 
   });
