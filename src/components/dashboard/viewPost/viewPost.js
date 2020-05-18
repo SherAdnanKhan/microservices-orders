@@ -3,9 +3,9 @@ import { useRouteMatch } from "react-router-dom";
 import { getPost,makeStoke ,unStoke} from "../../../actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from '../../common/spinner';
-import ViewFooter from "./viewPostFooter";
-import ViewPortHead from "./viewPostHead";
-import ViewPostBody from "./viewPostBody";
+import PostFooter from "./postFooter";
+import ViewPortHead from "./postHead";
+import ViewPostBody from "./postBody";
 
 const ViewPost = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ return (
      <ViewPostBody 
         post={post}
      />
-     <ViewFooter 
+     <PostFooter 
         post={ post } 
         handleStoke={handleStoke} 
         handleUnStoke={handleUnStoke} 
