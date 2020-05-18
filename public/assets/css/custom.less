@@ -2735,3 +2735,77 @@ img {
 }
 
 // STOKES END
+
+// Privacy Start
+
+.privacy{
+  .privacy-header{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+  }
+  .gallery-section{
+    .toggle-data{
+      width: 100%;
+      border-bottom: 1px solid #ccc;
+      .data-box{
+        display: flex;
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+        .fa-times{
+          border: 1px solid #ccc;
+          padding: 6px 9px;
+          margin-right: 20px;
+        }
+        .lock-bar{
+          display: flex;
+          margin-left: auto;
+          margin-right: 50px;
+          .fa-lock-open{
+            width: 30px;
+            height: 30px;
+            background: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+            margin-right: 10px;
+          }
+          .fa-chevron-up{
+            display: none;
+          }
+        }
+      }
+      .show-data{
+        text-align: center;
+        display: none;
+        .g-privacy-btn{
+          padding: 10px;
+          display: flex;
+          justify-content: space-around;
+          button{
+            width: 200px;
+            background: #000;
+            color: #fff;
+            padding: 9px;
+            border-radius: 50px;
+            position: relative;
+            i{
+              position: absolute;
+              right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.gallery-section img{
+  margin-right: 20px;
+  width: 35px;
+}
+
+//Privacy End

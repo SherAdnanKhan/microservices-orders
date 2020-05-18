@@ -30,6 +30,8 @@ const Main = () => {
         return import('./mzFlash');
       case 'strokes':
         return import('./stokes');
+      case 'privacy':
+        return import('./privacy');
       default:
         return import('./lobby');
     }
