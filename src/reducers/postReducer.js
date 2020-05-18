@@ -1,7 +1,7 @@
 import { GET_STROKES } from "../constants/actionTypes";
 
 const initialState = {
-  strokes: null,
+  post: null,
 };
 
 export default (state = initialState, action) => {
