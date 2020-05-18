@@ -1,4 +1,4 @@
-import { GET_GALLERY, FAV_GALLERY, UNFAV_GALLERY } from "../constants/actionTypes";
+import { GET_GALLERY, FAV_GALLERY, UNFAV_GALLERY, CLEAR_GALLERY } from "../constants/actionTypes";
 
 const initialState = {
   gallery: null
@@ -7,6 +7,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_GALLERY:
+      return {
+        ...state,
+        gallery: action.payload
+      };
+    case CLEAR_GALLERY:
       return {
         ...state,
         gallery: action.payload

@@ -9,7 +9,6 @@ import { getUserArtById } from "../../../actions/userActions"
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
-  // const userArtName = useSelector(({ user }) => user?.userArtName?.name);
   const dispatch = useDispatch();
   const {
     user: { favouriteUsers, favouriteGalleries },
@@ -26,28 +25,28 @@ const Lobby = () => {
   return (
     <div className="lobby-page">
       {loading && <Spinner />}
-       <div className="base" id="sec">
-         {favouriteUsers &&
-            favouriteUsers.map((user, index) => (
-              <Link to={`/dashboard/studio/${user.slug}`} key={index} >
-                 <UserCube user={user}  />
-              </Link>
-            ))
-          }
+      <div className="base" id="sec">
+        {favouriteUsers &&
+          favouriteUsers.map((user, index) => (
+            <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+              <UserCube user={user} />
+            </Link>
+          ))
+        }
       </div>
       {favouriteGalleries &&
         favouriteGalleries.fav_galleries.map((gallery, index) => (
           <div key={index}>
             {gallery.posts.map((post, post_index) => (
               <div key={post_index}>
-                <LobbyPosts post={post}/>
+                <LobbyPosts post={post} />
               </div>
             ))
             }
           </div>
         ))
       }
-      
+
       <div className="assist">
         <a href="#__">
           <img src="/assets/images/icons/LogoIconWhite.png" alt="support" />

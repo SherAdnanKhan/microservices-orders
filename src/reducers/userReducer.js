@@ -1,11 +1,11 @@
-import { GET_FAV, GET_ALL_USERS, GET_OTEHR_FAV_USER, GET_USER_ART_NAME } from "../constants/actionTypes";
+import { GET_FAV, GET_ALL_USERS, GET_OTEHR_FAV_USER, GET_USER_ART_NAME, CLEAR_USERS } from "../constants/actionTypes";
 
 const initialState = {
   favouriteUsers: null,
   favouriteGalleries: null,
   users: null,
-  otherFavouriteUsers:null,
-  userArtName:""
+  otherFavouriteUsers: null,
+  userArtName: ""
 };
 
 
@@ -22,16 +22,21 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
-      case GET_OTEHR_FAV_USER:
-        return {
-          ...state,
-          otherFavouriteUsers: action.payload
-        };
-      case GET_USER_ART_NAME:
-        return {
-          ...state,
-          userArtName: action.payload
-        };
+    case CLEAR_USERS:
+      return {
+        ...state,
+        users: action.payload
+      };
+    case GET_OTEHR_FAV_USER:
+      return {
+        ...state,
+        otherFavouriteUsers: action.payload
+      };
+    case GET_USER_ART_NAME:
+      return {
+        ...state,
+        userArtName: action.payload
+      };
     default:
       return state;
   }

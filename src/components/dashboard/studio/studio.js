@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getGalleries } from '../../../actions/exibitionAction';
-import { getGallery, favGallery, unfavGallery } from "../../../actions/galleryActions";
+import { getGallery, favGallery, unfavGallery, clearGallery } from "../../../actions/galleryActions";
 import { getUserStudio } from "../../../actions/studioActions";
 import Gallery from "./galleries";
 import Post from '../../common/posts';
@@ -18,20 +17,15 @@ const Studio = () => {
   const dispatch = useDispatch();
   const {
     studio: { userStudio },
-    exibition: { ListOfGalleries: { data: galleries } },
     gallery: { gallery }
-
   } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(getUserStudio(slug));
+    return () => {
+      dispatch(clearGallery());
+    }
   }, [dispatch, slug]);
-
-  useEffect(() => {
-    if (!galleries)
-      dispatch(getGalleries());
-
-  }, [galleries, dispatch])
 
   const handleGalleryChange = gallery => {
     setActiveGallery(gallery);
@@ -54,12 +48,12 @@ const Studio = () => {
         slug={slug}
       />
       <Gallery
-        galleries={galleries}
+        galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}
       />
       <PostBar
-        galleries={galleries}
+        galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         gallery={gallery}
         onPostLike={handleLike}

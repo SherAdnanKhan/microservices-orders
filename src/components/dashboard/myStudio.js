@@ -62,7 +62,14 @@ const MyStudio = () => {
                 <div className="profilebioname">
                   <span className="nameof" id="nameof"> {myStudio.user.username} </span>
                   <br />
-                  <span className="artof" id="artof"> {myStudio.user.art && myStudio.user.art.name} </span>
+                  <span className="artof" id="artof">
+                    {myStudio.user.art &&
+                      <>
+                        {myStudio.user.art.parent && myStudio.user.art.parent.name + '/'}
+                        {myStudio.user.art.name}
+                      </>
+                    }
+                  </span>
                 </div>
               }
               <form method="post" action="login.php">
