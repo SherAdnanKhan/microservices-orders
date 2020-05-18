@@ -1,7 +1,7 @@
 import React from 'react';
-import Avatar from "../../common/avatar"
+import Avatar from "../../common/avatar";
 
-const ViewPortHead = ({ post }) =>{
+const PostHead = ({ post }) =>{
 
   return (
       <div className="post-head"> 
@@ -21,4 +21,4 @@ const ViewPortHead = ({ post }) =>{
       </div>
     )
   }
-export default ViewPortHead;
+export default PostHead;

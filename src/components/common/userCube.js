@@ -5,7 +5,6 @@ const UserCube = ({ user }) => {
     <div className="cubescroll">
       <div className="procu_">
         <div className="scene">
-          <a href="studio.php?idstudio=5">
             {user.avatars && user.avatars.length > 0 &&
               <div className="cube">
                 {user.avatars.length === 1 &&
@@ -73,7 +72,6 @@ const UserCube = ({ user }) => {
                   </>
                 }
               </div>}
-          </a>
         </div>
       </div>
       <div className="cuna">

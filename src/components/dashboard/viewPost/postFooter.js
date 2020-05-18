@@ -1,6 +1,6 @@
 import React from "react";
 
-const ViewPortFooter = ({ post, handleStoke, handleUnStoke }) => {
+const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
 
   return(
       <div className="post-footer">
@@ -35,4 +35,4 @@ const ViewPortFooter = ({ post, handleStoke, handleUnStoke }) => {
      </div>
   )
 }
-export default ViewPortFooter
+export default PostFooter;
