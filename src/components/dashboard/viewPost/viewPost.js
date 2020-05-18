@@ -30,9 +30,6 @@ const ViewPost = () => {
      dispatch(makeStoke(ID,id));
    }
 
-   console.log("post",post)
-
-
 return (
   <div className="post-page">
      {loading && <Spinner />}

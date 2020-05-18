@@ -5,9 +5,7 @@ export const getPost = (post) => dispatch => {
   http
     .get(`/posts/${post}`)
     .then(res => {
-      console.log("full res",res)
       if(res.data.success){
-        console.log("res",res.data.data)
         dispatch({
           type: GET_POST,
           payload: res.data.data
