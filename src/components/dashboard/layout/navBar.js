@@ -16,7 +16,7 @@ const NavBar = () => {
           <Link to="/dashboard/change-password">Change Password</Link>
         </li>
         <li>
-          <a href="#__privacy">Privacy</a>
+          <a href="/dashboard/privacy">Privacy</a>
         </li>
         <li>
           <a href="#__security">Security</a>

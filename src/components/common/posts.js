@@ -9,7 +9,7 @@ const Post = ({ gallery }) => {
           {gallery &&
             gallery.posts.map((post, index) => (
               <div key={index}>
-                <Link to={`/dashboard/strokes/${post.slug}`}>
+                <Link to={`/dashboard/viewpost/${post.slug}`}>
                   <img src={`${post.image.path}`} alt="" style={{ width: '300px', height: "300px" }} />
                 </Link>
               </div>
