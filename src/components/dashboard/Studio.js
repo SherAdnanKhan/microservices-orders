@@ -206,7 +206,9 @@ const Studio = () => {
               {galleryImages &&
                 galleryImages.posts.map((gallery, index) => (
                   <div key={index}>
-                    <img src={`${gallery.image.path}`} alt="" style={{ width: '300px', height: "300px" }} />
+                    <Link to={`/dashboard/strokes/${gallery.slug}`}>
+                      <img src={`${gallery.image.path}`} alt="" style={{ width: '300px', height: "300px" }} />
+                    </Link>
                   </div>
                 ))}
             </div>

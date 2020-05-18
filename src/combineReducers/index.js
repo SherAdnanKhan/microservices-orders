@@ -6,6 +6,7 @@ import exibitionReducer from "../reducers/exibitionReducer";
 import studioReducer from '../reducers/studioReducer';
 import userReducer from '../reducers/userReducer';
 import galleryReducer from "../reducers/galleryReducer";
+import stokeReducer from "../reducers/strokesReducer";
 
 export default combineReducers({
   error: errorReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   exibition: exibitionReducer,
   user: userReducer,
   studio: studioReducer,
-  gallery: galleryReducer
+  gallery: galleryReducer,
+  stoke: stokeReducer
 }); 
