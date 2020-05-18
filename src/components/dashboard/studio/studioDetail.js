@@ -26,7 +26,14 @@ const StudioDetail = ({ userStudio, slug }) => {
             <div className="profilebioname">
               <span className="nameof" id="nameof"> {userStudio.user.username}</span>
               <br />
-              <span className="artof" id="artof">{userStudio.user.art && userStudio.user.art.name}</span>
+              <span className="artof" id="artof">
+                {userStudio.user.art &&
+                  <>
+                    {userStudio.user.art.parent && userStudio.user.art.parent.name + '/'}
+                    {userStudio.user.art.name}
+                  </>
+                }
+              </span>
             </div>
           }
           <form>

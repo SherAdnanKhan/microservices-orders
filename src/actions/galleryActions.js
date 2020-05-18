@@ -1,7 +1,7 @@
-import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY } from "../constants/actionTypes";
+import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY, CLEAR_GALLERY } from "../constants/actionTypes";
 import http from "../services/httpService";
 
-export const getGallery = (utilite) => dispatch => {
+export const getGallery = utilite => dispatch => {
   http
     .get(`/galleries/${utilite}`)
     .then(res => {
@@ -10,6 +10,10 @@ export const getGallery = (utilite) => dispatch => {
         payload: res.data.data
       });
     });
+};
+
+export const clearGallery = () => {
+  return { type: CLEAR_GALLERY, payload: null };
 };
 
 export const favGallery = data => dispatch => {
