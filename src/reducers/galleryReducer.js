@@ -1,7 +1,7 @@
 import { GET_GALLERY, FAV_GALLERY, UNFAV_GALLERY } from "../constants/actionTypes";
 
 const initialState = {
-  galleryImages: null
+  gallery: null
 };
 
 export default (state = initialState, action) => {
@@ -9,21 +9,21 @@ export default (state = initialState, action) => {
     case GET_GALLERY:
       return {
         ...state,
-        galleryImages: action.payload
+        gallery: action.payload
       };
     case FAV_GALLERY:
       return {
         ...state,
-        galleryImages: {
-          ...state.galleryImages,
+        gallery: {
+          ...state.gallery,
           has_faved: action.payload
         }
       };
     case UNFAV_GALLERY:
       return {
         ...state,
-        galleryImages: {
-          ...state.galleryImages,
+        gallery: {
+          ...state.gallery,
           has_faved: action.payload
         }
       };
