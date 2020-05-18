@@ -25,7 +25,7 @@ const Main = () => {
       case 'faving':
         return import('./faving');
       case 'studio':
-        return import('./Studio');
+        return import('./studio/studio');
       case 'mz-flash':
         return import('./mzFlash');
       case 'strokes':
@@ -35,7 +35,7 @@ const Main = () => {
       default:
         return import('./lobby');
     }
-    
+
   });
 
   useEffect(() => {
