@@ -15,7 +15,7 @@ const MyStudio = () => {
   const {
     studio: { myStudio },
     exibition: { ListOfGalleries: { data: galleries } },
-    gallery: { galleryImages }
+    gallery: { gallery }
 
   } = useSelector(state => state);
 
@@ -60,9 +60,9 @@ const MyStudio = () => {
               </div>
               {myStudio &&
                 <div className="profilebioname">
-                  <span className="nameof" id="nameof"> {myStudio.user.username}</span>
+                  <span className="nameof" id="nameof"> {myStudio.user.username} </span>
                   <br />
-                  <span className="artof" id="artof">{myStudio.user.art.name}</span>
+                  <span className="artof" id="artof"> {myStudio.user.art && myStudio.user.art.name} </span>
                 </div>
               }
               <form method="post" action="login.php">
@@ -181,8 +181,8 @@ const MyStudio = () => {
       <div className="wrapper">
         <div className="screen">
           <div className="scr-inner">
-            {galleryImages &&
-              galleryImages.posts.map((gallery, index) => (
+            {gallery &&
+              gallery.posts.map((gallery, index) => (
                 <div key={index}>
                   <img src={`${gallery?.image.path}`} alt="" style={{ width: '300px', height: "300px" }} />
                 </div>

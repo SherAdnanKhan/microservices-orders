@@ -13,23 +13,29 @@ export const getGallery = (utilite) => dispatch => {
 };
 
 export const favGallery = data => dispatch => {
+  dispatch({ type: FAV_GALLERY, payload: true });
+
   http
     .post('/galleries/fav', data)
-    .then(res => {
+    .then()
+    .catch(err => {
       dispatch({
-        type: FAV_GALLERY,
-        payload: true
+        type: UNFAV_GALLERY,
+        payload: false
       });
     });
 };
 
 export const unfavGallery = data => dispatch => {
+  dispatch({ type: UNFAV_GALLERY, payload: false });
+
   http
     .post('/galleries/unfav', data)
-    .then(res => {
+    .then()
+    .catch(err => {
       dispatch({
-        type: UNFAV_GALLERY,
-        payload: false
+        type: FAV_GALLERY,
+        payload: true
       });
     });
 };
