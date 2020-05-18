@@ -79,6 +79,14 @@ const UserCube = ({ user }) => {
       <div className="cuna">
         <div className="namerow"> {user.first_name} </div>
         <div className="artrow"> {user.last_name} </div>
+        <div>
+          {user.art &&
+            <>
+              {user.art.parent && <> {user.art.parent.name + '/'} </>}
+              {user.art.name && <> {user.art.name} </>}
+            </>
+          }
+        </div>
       </div>
     </div >
   );

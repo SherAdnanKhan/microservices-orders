@@ -30,12 +30,17 @@ export const getUserStudio = (slug) => dispatch => {
   http
     .get(`/studios/${slug}`)
     .then(res => {
-     dispatch({
-       type: GET_USER_STUDIO,
-       payload: res.data.data
-     })
+      dispatch({
+        type: GET_USER_STUDIO,
+        payload: res.data.data
+      })
     });
-  }
+}
+
+export const clearUserStudio = () => {
+  return
+}
+
 export const deleteProfileImage = (id, history) => () => {
   http
     .delete(`/my-studio/avatar/${id}`)

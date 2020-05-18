@@ -14,7 +14,7 @@ const PostBar = ({ gallery, activeGallery, galleries, onPostLike }) => {
             <p>Total posts: {galleries && galleries.length}</p>
           </>
         }
-        {activeGallery && <p>Total Post: {activeGallery.posts_count}</p>}
+        {activeGallery && <p>Total Post: {activeGallery.posts.length}</p>}
       </div>
       <div className="heart-icon">
         {activeGallery &&
