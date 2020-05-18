@@ -6,17 +6,17 @@ const PostHead = ({ post }) =>{
   return (
       <div className="post-head"> 
         { post && 
-          <>
-            { post && post.post && post.post.user && <p>{post.post.user.username}</p>}
+          <div style={{ display:"flex" , flexDirection:"row", width:'80%'  }} >
+            { post && post.post && post.post.user && <p >{post.post.user.username}</p>}
             { post && post.post && post.post.user.avatars &&  <Avatar avatars={post.post.user.avatars} />}
             { post && 
                 post.post && 
                   post.post.user && 
                     post.post.user.art.parent 
-                    ? <p>{post.post.user.art.parent.name}/{post.post.user.art}</p>
+                    ? <p  >{post.post.user.art.parent.name}/{post.post.user.art}</p>
                     : post.post.user.art.name && <p>{post.post.user.art.name}</p>
             }
-          </>
+          </div>
         }
       </div>
     )

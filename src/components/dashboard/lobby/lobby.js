@@ -9,7 +9,6 @@ import { getUserArtById } from "../../../actions/userActions"
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
-
   const dispatch = useDispatch();
   const {
     user: { favouriteUsers, favouriteGalleries },

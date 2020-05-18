@@ -2683,12 +2683,26 @@ img {
  flex-direction: column;
  justify-content: flex-start;
  background-color: rgb(174, 174, 174);
+ .veiw-post-header-bar{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   background-color: red;
+   border: 1px solid black;
+   .view-back-icon{
+     text-align: left;
+   }
+   p{
+     text-align: center;
+     margin-top: 25px;
+   }
+ }
 .post-head{
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: center;
-  margin: 25px auto;
+  margin: 0px auto 25px auto;
   background-color: black;
 }
 .post-body{
@@ -2712,6 +2726,12 @@ img {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      .post-color-icon{
+        background-color: white;
+      }
+      .post-non-color-icon{
+        background-color: black;
+      }
       img{
         width: 12%;
       }
@@ -2721,8 +2741,8 @@ img {
     }
     .post-footer-icons{
       text-align: center;
-      .stoke-non-color-icon{
-        width: 30%;
+      .post-non-color-icon{
+        width: 12%;
       }
     }
     
