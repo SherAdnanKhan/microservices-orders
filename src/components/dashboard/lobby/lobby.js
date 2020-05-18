@@ -1,6 +1,4 @@
-import React, { useContext, useEffect } from 'react'
-// import Avatar from '../common/avatar';
-// import UserContext from '../../context/userContext';
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites } from '../../../actions/userActions';
 import UserCube from '../../common/userCube';
@@ -10,11 +8,8 @@ import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions"
 
 const Lobby = () => {
-  // const user = useContext(UserContext);
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
-  const userArtName = useSelector(({ user }) => user?.userArtName?.name);
-
-
+  // const userArtName = useSelector(({ user }) => user?.userArtName?.name);
   const dispatch = useDispatch();
   const {
     user: { favouriteUsers, favouriteGalleries },

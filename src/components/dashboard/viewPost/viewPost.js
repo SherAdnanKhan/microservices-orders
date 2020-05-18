@@ -6,6 +6,7 @@ import Spinner from '../../common/spinner';
 import ViewFooter from "./viewPostFooter";
 import ViewPortHead from "./viewPostHead";
 import ViewPostBody from "./viewPostBody";
+import ViewPostHeader from "./viewPostHeader";
 
 const ViewPost = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const ViewPost = () => {
 return (
   <div className="post-page">
      {loading && <Spinner />}
+     <ViewPostHeader post={post} />
      <ViewPortHead 
         post={post} 
      />

@@ -25,10 +25,10 @@ const ViewPortFooter = ({ post, handleStoke, handleUnStoke }) => {
          <p>strokes {post && post.post && post.post.stroke_users_count}</p>
        </div> 
        <div className="post-footer-icons">
-         <img className="stoke-non-color-icon" src="/assets/images/crit1.png" alt="" />
+         <img className="post-non-color-icon" src="/assets/images/crit1.png" alt="" />
        </div> 
        <div className="post-footer-icons">
-         <img className="stoke-non-color-icon" src="/assets/images/ncommnicon.png" alt="" />
+         <img className="post-non-color-icon" src="/assets/images/ncommnicon.png" alt="" />
        </div>
        </div>
        { post && post.post && post.post.title && <div> <h3>{post.post.title}</h3> </div> } 
