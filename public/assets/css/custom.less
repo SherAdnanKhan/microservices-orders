@@ -959,12 +959,12 @@ input {
   display: none;
   display: none;
   position: absolute;
-  width: 100%;
+  width: 80%;
   z-index: 20;
   background: #000000a3;
 }
 .result-box{
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding: 20px 0;
     .profile-pic{
@@ -2687,7 +2687,7 @@ img {
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-around;
+  justify-content: center;
   margin: 25px auto;
   background-color: black;
 }
@@ -2703,33 +2703,57 @@ img {
   align-items: center;
   margin: 25px auto;
   background-color: black;
-  .post-icon-div{
+  .post-footer-bar{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    .post-icon-set{
-      width: 5%;
-      .post-color-icon{
-        width: 50%;
-        background-color: white;
-        height: auto;
-        color: white;
-        margin: 0px auto;
+    .poster-footer-stokes-btn{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      img{
+        width: 12%;
       }
-      .post-non-color-icon{
-        width: 50%;
-        height: auto;
-        color: white;
-        margin: 0px auto;
+      p{
+        text-align: center;
       }
     }
-    .post-non-color-icon{
-      width: 3%;
-      height: auto;
-      color: white;
+    .post-footer-icons{
+      text-align: center;
+      .stoke-non-color-icon{
+        width: 30%;
+      }
     }
+    
   }
+  // .post-icon-div{
+  //   width: 100%;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-around;
+  //   .post-icon-set{
+  //     width: 5%;
+  //     .post-color-icon{
+  //       width: 50%;
+  //       background-color: white;
+  //       height: auto;
+  //       color: white;
+  //       margin: 0px auto;
+  //     }
+  //     .post-non-color-icon{
+  //       width: 50%;
+  //       height: auto;
+  //       color: white;
+  //       margin: 0px auto;
+  //     }
+  //   }
+  //   .post-non-color-icon{
+  //     width: 3%;
+  //     height: auto;
+  //     color: white;
+  //   }
+  // }
 }
 }
 

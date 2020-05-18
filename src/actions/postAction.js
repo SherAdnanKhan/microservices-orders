@@ -1,14 +1,18 @@
-import { GET_STROKES } from "../constants/actionTypes";
+import { GET_POST } from "../constants/actionTypes";
 import http from "../services/httpService";
 
-export const getStokes = (post) => dispatch => {
+export const getPost = (post) => dispatch => {
   http
     .get(`/posts/${post}`)
     .then(res => {
-      dispatch({
-        type: GET_STROKES,
-        payload: res.data.data
-      });
+      console.log("full res",res)
+      if(res.data.success){
+        console.log("res",res.data.data)
+        dispatch({
+          type: GET_POST,
+          payload: res.data.data
+        });
+      }
     });
 };
 
@@ -16,7 +20,7 @@ export const makeStoke = (post_id,id) => dispatch => {
   http
     .post('/post/stroke',{post_id})
     .then(res => {
-      dispatch(getStokes(id))
+      dispatch(getPost(id))
     });
 };
 
@@ -24,6 +28,6 @@ export const unStoke = (post_id,id) => dispatch => {
   http
     .post('/post/unstroke',{post_id})
     .then(res => {
-      dispatch(getStokes(id))
+      dispatch(getPost(id))
     });
 };

@@ -1,4 +1,4 @@
-import { GET_STROKES } from "../constants/actionTypes";
+import { GET_POST } from "../constants/actionTypes";
 
 const initialState = {
   post: null,
@@ -6,10 +6,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_STROKES:
+    case GET_POST:
       return {
         ...state,
-        strokes: action.payload
+        post: action.payload
       };
     default:
       return state;

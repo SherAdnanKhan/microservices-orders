@@ -29,7 +29,7 @@ const Main = () => {
       case 'mz-flash':
         return import('./mzFlash');
       case 'viewpost':
-        return import('./viewPost');
+        return import('./viewPost/viewPost');
       case 'privacy':
         return import('./privacy');
       default:
