@@ -5,7 +5,7 @@ import { getMyStudio } from '../../actions/studioActions';
 import ProfileCube from '../common/profileCube';
 import { getGalleries } from '../../actions/exibitionAction';
 import Gallery from '../common/gallery';
-import { getGallery } from "../../actions/galleryActions";
+import { getGallery, clearGallery } from "../../actions/galleryActions";
 
 const MyStudio = () => {
   const [edit, setEdit] = useState(true);
@@ -27,6 +27,10 @@ const MyStudio = () => {
   useEffect(() => {
     if (!galleries)
       dispatch(getGalleries());
+
+    return () => {
+      dispatch(clearGallery());
+    }
   }, [galleries, dispatch])
 
 
