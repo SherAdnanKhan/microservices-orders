@@ -7,6 +7,7 @@ async function loader(option) {
   }
 }
 
+
 async function requireOnce(file, functionName, args) {
   await $.getScript(file);
   const getRes = await window[functionName](args);
@@ -157,3 +158,6 @@ $(document).on('click', '.bottom', function (e) {
   e.stopPropagation();
 });
 
+$(document).on('click', '.result-box', function () {
+  $("#search-bar").hide();
+});
