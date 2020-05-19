@@ -1,8 +1,9 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { artSearch, getGalleries, artPost } from "../../actions/exibitionAction"
 import InputAutoComplete from "../common/autoComplete";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import UserContext from "../../context/userContext";
 
 const AddExibit = () => {
   const [color, setColor] = useState('red');
@@ -20,7 +21,9 @@ const AddExibit = () => {
   }
   const [arts, setArts] = useState("");
   const [error, setError] = useState("");
-  const [data, setData] = useState(initialData)
+  const [data, setData] = useState(initialData);
+
+  const user = useContext(UserContext);
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file' && input.files[0]) {
@@ -88,9 +91,8 @@ const AddExibit = () => {
   }
 
   useEffect(() => {
-    if (localStorage.color) {
-      setColor(JSON.parse(localStorage.getItem('color')));
-    }
+
+    setColor(user.feel_color);
 
     if (id !== 'new') {
       setData(data => {
@@ -100,7 +102,7 @@ const AddExibit = () => {
         }
       });
     }
-  }, [id]);
+  }, [id, user]);
 
   return (
     <div className={`frameReady ${color}`}>
@@ -119,14 +121,14 @@ const AddExibit = () => {
               <div className="exibition-input">
                 <img id="preview" src="/assets/images/input-image.png" alt="dummy" />
                 <input
-                type="file"
-                name="image"
-                id="image"
-                accept=".png, .jpg, .jpeg"
-                onChange={handleChange}
-              />
+                  type="file"
+                  name="image"
+                  id="image"
+                  accept=".png, .jpg, .jpeg"
+                  onChange={handleChange}
+                />
               </div>
-              
+
             </div>
             <div className="exibition-form-input">
               <InputAutoComplete
