@@ -160,4 +160,5 @@ $(document).on('click', '.bottom', function (e) {
 
 $(document).on('click', '.result-box', function () {
   $("#search-bar").hide();
+  $("#main-menu").show();
 });
