@@ -57,6 +57,7 @@ const Studio = () => {
         activeGallery={activeGallery}
         gallery={gallery}
         onPostLike={handleLike}
+        totalPosts={userStudio && userStudio.user.posts_count}
       />
       <Post gallery={gallery} />
       <StudioFooter />

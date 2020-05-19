@@ -2,7 +2,7 @@ import React from 'react';
 
 const Gallery = ({ galleries, edit, onGalleryChange, activeGallery }) => {
   return (
-    <>
+    <div className="wrapper">
       {edit && galleries &&
         <div className="screen">
           <div className="scr-inner">
@@ -31,7 +31,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery }) => {
           </div>
         </div>
       }
-    </>
+    </div>
   );
 };
 
