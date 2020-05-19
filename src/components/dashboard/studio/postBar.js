@@ -1,7 +1,7 @@
 import React from 'react';
 import Like from '../../common/like';
 
-const PostBar = ({ gallery, activeGallery, galleries, onPostLike }) => {
+const PostBar = ({ gallery, activeGallery, galleries, onPostLike, totalPosts }) => {
   return (
     <div className="total-post">
       <div className="icon-side">
@@ -11,7 +11,7 @@ const PostBar = ({ gallery, activeGallery, galleries, onPostLike }) => {
         {!activeGallery &&
           <>
             <p>Select a Gallery</p>
-            <p>Total posts: {galleries && galleries.length}</p>
+            <p>Total posts: {totalPosts}</p>
           </>
         }
         {activeGallery && <p>Total Post: {activeGallery.posts.length}</p>}

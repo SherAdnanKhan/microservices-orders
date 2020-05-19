@@ -30,7 +30,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                 {userStudio.user.art &&
                   <>
                     {userStudio.user.art.parent && userStudio.user.art.parent.name + '/'}
-                    {userStudio.user.art.name}
+                    {userStudio.user.art.name && userStudio.user.art.name}
                   </>
                 }
               </span>

@@ -19,7 +19,7 @@ const Main = () => {
       case 'my-studio':
         return split[3] === 'profile'
           ? import('./profile')
-          : import('./myStudio');
+          : import('./myStudio/myStudio');
       case 'change-password':
         return import('./settings/changePassword');
       case 'faving':
