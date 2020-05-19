@@ -3,18 +3,17 @@ import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 
 const LobbyPosts = ({ post }) => {
-  console.log(post.user.avatars);
   return (
     <div className="post-page">
       <div className="post-head">
-        <p>{post.user.username}</p>
+        <p>{post && post.user.username}</p>
         <Link to={`/dashboard/studio/${post.user.slug}`} >
-          <Avatar avatars={post.user.avatars} />
+          <Avatar avatars={post && post.user.avatars && post.user.avatars} />
         </Link>
         {post &&
           post.user &&
-          post.user.art.parent
-          ? <p>{post.user.art.parent.name}/{post.user.art}</p>
+          post.user.art
+          ? <p>{post.user.art.parent && post.user.art.parent.name}/{post.user.art.name}</p>
           : post.user.art.name && <p>{post.user.art.name}</p>
         }
       </div>
