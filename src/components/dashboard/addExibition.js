@@ -115,17 +115,18 @@ const AddExibit = () => {
         <br />
         <form className="exibition-page-form" onSubmit={Submit}>
           <div className="exibition-top-textboxes">
-            <div style={{ textAlign: "center" }}>
-              <label>
+            <div className="exbition-img" style={{ textAlign: "center" }}>
+              <div className="exibition-input">
                 <img id="preview" src="/assets/images/input-image.png" alt="dummy" />
-              </label>
-              <input
+                <input
                 type="file"
                 name="image"
                 id="image"
                 accept=".png, .jpg, .jpeg"
                 onChange={handleChange}
               />
+              </div>
+              
             </div>
             <div className="exibition-form-input">
               <InputAutoComplete
