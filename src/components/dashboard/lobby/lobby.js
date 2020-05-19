@@ -16,11 +16,9 @@ const Lobby = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    if (!favouriteUsers) {
-      dispatch(getFavourites());
-    }
+    dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id))
-  }, [dispatch, favouriteUsers, user_art_id, favouriteGalleries])
+  }, [dispatch, user_art_id]);
 
   return (
     <div className="lobby-page">
