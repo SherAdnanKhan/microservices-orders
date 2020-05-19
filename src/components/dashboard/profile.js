@@ -54,9 +54,8 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    if (localStorage.color)
-      setColor(JSON.parse(localStorage.getItem('color')));
-  }, []);
+    setColor(user.feel_color);
+  }, [user]);
 
   return (
     <div className={`frameReady ${color}`}>
