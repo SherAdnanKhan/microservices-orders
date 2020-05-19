@@ -4,6 +4,8 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery }) => {
   return (
     <div className="wrapper">
       {edit && galleries &&
+
+        
         <div className="screen">
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
@@ -15,7 +17,10 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery }) => {
               </div>
             ))}
           </div>
+
+          
         </div>
+        
       }
       {!edit && galleries &&
         <div className="edit-screen">

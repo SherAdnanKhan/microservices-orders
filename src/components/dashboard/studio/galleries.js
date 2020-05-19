@@ -15,7 +15,12 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery }) => {
               </div>
             ))}
           </div>
+
+         
+
         </div>
+
+        
       }
     </div>
   );
