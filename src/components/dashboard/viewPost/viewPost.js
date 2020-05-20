@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
 import { getPost, makeStoke, unStoke } from "../../../actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
-import Spinner from '../../common/spinner';
 import PostFooter from "./postFooter";
 import ViewPortHead from "./postHead";
 import ViewPostBody from "./postBody";
 import ViewPostHeader from "./postHeader";
+import Comment from './comments';
 
 
 const ViewPost = () => {
@@ -15,7 +15,6 @@ const ViewPost = () => {
 
   const {
     postView: { post },
-    loading: { loading }
   } = useSelector(state => state);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ const ViewPost = () => {
 
   return (
     <div className="post-page">
-      {loading && <Spinner />}
       <ViewPostHeader post={post} />
       <ViewPortHead
         post={post}
@@ -47,6 +45,7 @@ const ViewPost = () => {
         handleStoke={handleStoke}
         handleUnStoke={handleUnStoke}
       />
+      <Comment />
     </div>
   )
 }
