@@ -39,7 +39,7 @@ const Studio = () => {
   }
 
   return (
-    <div className="my-studio">
+    <div className="studio">
       <StudioHeader
         userStudio={userStudio}
       />
