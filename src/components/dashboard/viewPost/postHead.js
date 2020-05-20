@@ -5,7 +5,7 @@ const PostHead = ({ post }) => {
   return (
     <div className="post-head">
       {post &&
-        <div className="post-heder-inner">
+        <div className="post-head-inner" >
           {post && post.post && post.post.user && <p >{post.post.user.username}</p>}
           {post && post.post && post.post.user.avatars && <Avatar avatars={post.post.user.avatars} />}
           {post &&
