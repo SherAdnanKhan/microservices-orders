@@ -20,6 +20,9 @@ const LobbyPosts = ({ post }) => {
       <div className="post-body">
         {post.image && post.image.path && <img src={post.image.path} alt="" stye={{ width: "100%", heigth: "100%" }} />}
       </div>
+      <div className="onearttitle">
+        <p>Second</p>
+      </div>
     </div>
   );
 }
