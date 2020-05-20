@@ -5,10 +5,10 @@ const StudioFooter = ({ gallery }) => {
     <>
       <div className="wrapper">
         <div className="screen">
-          <div className="">
+          <div className="post-picture">
             {gallery &&
               gallery.posts.map((gallery, index) => (
-                <div className="post-picture" key={index} >
+                <div className="" key={index} >
                   <img src={`${gallery?.image.path}`} alt="" />
                   </div>
               ))}
