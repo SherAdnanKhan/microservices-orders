@@ -5,12 +5,12 @@ const StudioFooter = ({ gallery }) => {
     <>
       <div className="wrapper">
         <div className="screen">
-          <div className="scr-inner">
+          <div className="">
             {gallery &&
               gallery.posts.map((gallery, index) => (
-                <div key={index}>
-                  <img src={`${gallery?.image.path}`} alt="" style={{ width: '300px', height: "300px" }} />
-                </div>
+                <div className="post-picture" key={index} >
+                  <img src={`${gallery?.image.path}`} alt="" />
+                  </div>
               ))}
           </div>
         </div>
