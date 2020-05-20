@@ -1,7 +1,8 @@
-import { GET_POST, STROKE_POST, UNSTROKE_POST } from "../constants/actionTypes";
+import { GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS } from "../constants/actionTypes";
 
 const initialState = {
   post: null,
+  comments: null
 };
 
 export default (state = initialState, action) => {
@@ -34,6 +35,16 @@ export default (state = initialState, action) => {
             stroke_users_count: state.post.post.stroke_users_count - 1
           }
         }
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [...state.comments, action.payload]
+      };
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: action.payload
       };
     default:
       return state;

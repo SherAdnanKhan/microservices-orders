@@ -45,7 +45,7 @@ const ViewPost = () => {
         handleStoke={handleStoke}
         handleUnStoke={handleUnStoke}
       />
-      <Comment />
+      <Comment post={post && post.post} />
     </div>
   )
 }
