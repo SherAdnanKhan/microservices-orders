@@ -6,8 +6,8 @@ const StudioDetail = ({ userStudio, slug }) => {
   return (
     <>
       <div className="wrapper">
-        <div className="studioScreen">
-          <div className="studioHead">
+        <div className="studio-Screen">
+          <div className="studio-Head">
             <div>
               <img src="/assets/images/strqicon.png" alt="" />
             </div>
@@ -41,7 +41,7 @@ const StudioDetail = ({ userStudio, slug }) => {
               <span className="labelText">Click edit Studio to add a bio.</span>
               <input type="text" name="username" id="addbio" />
             </label>
-            <div className="faved-btn">
+            <div className="stuion-faved-btn">
               <Link to={`/dashboard/faving/${'by'}`}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/favers.png" alt="" />
@@ -60,7 +60,7 @@ const StudioDetail = ({ userStudio, slug }) => {
           </form>
         </div>
       </div>
-      <div className="editstudio-btn">
+      <div className="studio-editstudio-btn">
         <div style={{ height: '40px' }}></div>
       </div>
     </>
