@@ -45,3 +45,7 @@ export const CLEAR_GALLERY = "CLEAR_GALLERY";
 export const GET_POST = "GET_POST";
 export const STROKE_POST = 'STROKE_POST';
 export const UNSTROKE_POST = 'UNSTROKE_POST';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const GET_COMMENTS = 'GET_COMMENTS';
+
+
