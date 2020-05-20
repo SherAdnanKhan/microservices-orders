@@ -38,6 +38,7 @@ const Studio = () => {
       : dispatch(favGallery({ gallery_id: activeGallery.id }));
   }
 
+  
   return (
     <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
       <StudioHeader

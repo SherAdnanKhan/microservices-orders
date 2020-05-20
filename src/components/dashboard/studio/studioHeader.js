@@ -5,7 +5,7 @@ const StudioHeader = ({ userStudio }) => {
   const history = useHistory();
 
   return (
-    <div className="header-bar">
+    <div className="studio-header-bar">
       <div className="back-icon">
         <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} />
       </div>
