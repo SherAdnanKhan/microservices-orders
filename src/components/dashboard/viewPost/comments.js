@@ -31,7 +31,7 @@ const Comment = () => {
 
         </div>
         <div className="big-image">
-          <img src="/assets/images/avataricongray.png" alt="" />
+          <img src="/assets/images/gray.png" alt="" />
           <div className="right-box">
           </div>
         </div>
@@ -55,7 +55,7 @@ const Comment = () => {
       <div className="comments-box">
         <div className="comment-bar">
           <div className="commnent-img">
-            <img src="/assets/images/avataricongray.png" alt="" />
+            <img src="/assets/images/gray.png" alt="" />
             <i className="fa fa-times close-comment"></i>
           </div>
           <div className="comment-sec">

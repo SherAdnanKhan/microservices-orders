@@ -39,7 +39,7 @@ const Studio = () => {
   }
 
   return (
-    <div className="studio">
+    <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
       <StudioHeader
         userStudio={userStudio}
       />
@@ -51,6 +51,7 @@ const Studio = () => {
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}
+        color={userStudio && userStudio.user.feel_color}
       />
       <PostBar
         galleries={userStudio && userStudio.user.galleries}
