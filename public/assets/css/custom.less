@@ -2249,6 +2249,24 @@ img {
       }
     }
   }
+  .show-list{
+    display: none;
+    .s-l-header{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 60%;
+      margin: 0 auto;
+      p{
+        white-space: nowrap;
+      }
+    }
+    .list-body{
+      img{
+        width: 100%;
+      }
+    }
+  }
 }
 .total-post{
   // background: orange;
@@ -2260,7 +2278,10 @@ img {
   .icon-side{
     width: 20%;
     text-align: center;
+    display: flex;
+    justify-content: center;
   }
+  
   .gallery{
     width: 60%;
     text-align: center;
@@ -2435,7 +2456,7 @@ img {
 }
 
 .total-post{
-  background: orange;
+  // background: orange;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -2446,6 +2467,8 @@ img {
     width: 20%;
     text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
     img{
       width: 20px;
       cursor: pointer;
