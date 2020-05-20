@@ -1,4 +1,4 @@
-import { GET_POST } from "../constants/actionTypes";
+import { GET_POST, STROKE_POST, UNSTROKE_POST } from "../constants/actionTypes";
 
 const initialState = {
   post: null,
@@ -10,6 +10,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         post: action.payload
+      };
+    case STROKE_POST:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          has_stroke: action.payload
+        }
+      };
+    case UNSTROKE_POST:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          has_stroke: action.payload
+        }
       };
     default:
       return state;
