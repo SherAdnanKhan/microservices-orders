@@ -132,7 +132,7 @@ const Profile = () => {
           <div className="wrapper update-image">
             <>
               <div className="up-img-box">
-                <img className="update-pic" src={selectedImage ? selectedImage.path : "/assets/images/avataricongray.png"} alt="" />
+                <img className="update-pic" src={selectedImage ? selectedImage.path : "/assets/images/gray.png"} alt="" />
                 <div className={selectedImage.avatar ? " hide" : "add-nag-icon"}>
                   {selectedImage.id &&
                     <div className="nag">

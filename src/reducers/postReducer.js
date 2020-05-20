@@ -16,7 +16,11 @@ export default (state = initialState, action) => {
         ...state,
         post: {
           ...state.post,
-          has_stroke: action.payload
+          has_stroke: action.payload,
+          post: {
+            ...state.post.post,
+            stroke_users_count: state.post.post.stroke_users_count + 1
+          }
         }
       };
     case UNSTROKE_POST:
@@ -24,7 +28,11 @@ export default (state = initialState, action) => {
         ...state,
         post: {
           ...state.post,
-          has_stroke: action.payload
+          has_stroke: action.payload,
+          post: {
+            ...state.post.post,
+            stroke_users_count: state.post.post.stroke_users_count - 1
+          }
         }
       };
     default:

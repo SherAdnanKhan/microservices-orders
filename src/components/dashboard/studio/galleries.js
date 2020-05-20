@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Gallery = ({ galleries, onGalleryChange, activeGallery }) => {
+const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
   return (
     <div className="wrapper">
       {galleries &&
@@ -11,16 +11,16 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery }) => {
                 key={index}
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
-                <img src="/assets/images/avataricongreen.png" alt="" />
+                <img src={`/assets/images/${color}.png`} alt="" />
               </div>
             ))}
           </div>
 
-         
+
 
         </div>
 
-        
+
       }
     </div>
   );
