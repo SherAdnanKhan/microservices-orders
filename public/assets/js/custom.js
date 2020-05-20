@@ -162,14 +162,14 @@ $(document).on('click', '.result-box', function () {
   // $("#search-bar").hide();
   $("#main-menu").show();
 });
-// $(document).on('click', '.fa-square', function () {
-//   $(".fa-square").hide();
-//   $(".user-list-view , .fa-th").show();
-// });
-// $(document).on('click', '.fa-th', function () {
-//   $(".user-list-view , .fa-th").hide();
-//   $(".fa-square").show();
-// });
+$(document).on('click', '.fa-square', function () {
+  $(".fa-square , .post-picture").hide();
+  $(".show-list , .fa-th").show();
+});
+$(document).on('click', '.fa-th', function () {
+  $(".show-list , .fa-th").hide();
+  $(".fa-square , .post-picture").show();
+});
 
 $(document).on('click', '.open-commet', function () {
   $(".comments-box").show();

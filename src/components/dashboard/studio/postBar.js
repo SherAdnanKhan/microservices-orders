@@ -6,6 +6,7 @@ const PostBar = ({ gallery, activeGallery, galleries, onPostLike, totalPosts }) 
     <div className="total-post">
       <div className="icon-side">
         <i className="fas fa-square" />
+        <i className="fas fa-th" />
       </div>
       <div className="gallery">
         {!activeGallery &&
