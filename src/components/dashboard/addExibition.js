@@ -19,7 +19,7 @@ const AddExibit = () => {
     image: null,
     art_id: null
   }
-  const [arts, setArts] = useState("");
+  // const [arts, setArts] = useState("");
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
   const [data, setData] = useState(initialData);
@@ -37,14 +37,14 @@ const AddExibit = () => {
     }
   }
 
-  function handleAutoChange(e) {
-    setArts(e.target.value);
-    dispatch(artSearch(e.target.value));
+  function handleAutoChange(value) {
+    // setArts(value);
+    dispatch(artSearch(value));
   }
 
-  function handleAutoSelect(val, item) {
-    setData({ ...data, art_id: item.id });
-    setArts(val)
+  function handleAutoSelect(option) {
+    setData({ ...data, art_id: option.id });
+    // setArts(option.name)
   }
 
 
@@ -53,46 +53,46 @@ const AddExibit = () => {
 
   }, [dispatch]);
 
-  function validated() {
+  const hasErrors = () => {
     if (!data.title) {
-      setError("Please Enter title!");
-      return false;
+      return "Please enter title.";
     }
-    if (!data.description) {
-      setError("Please Enter description!");
-      return false;
-    }
-    if (!data.gallery_id) {
-      setError("Please Select a Gallery!");
-      return false;
-    }
-    if (!data.image) {
-      setError("Please Enter image!");
-      return false;
-    }
-    if (!data.art_id) {
-      setError("Please Enter Art Category!");
-      return false;
-    }
-    return true;
-  }
 
+    if (!data.description) {
+      return "Please enter description.";
+    }
+
+    if (!data.gallery_id) {
+      return "Please select a Gallery.";
+    }
+
+    if (!data.image) {
+      return "Please select an image.";
+    }
+
+    if (!data.art_id) {
+      return "Please choose an art.";
+    }
+
+    return false;
+  }
 
   const Submit = (e) => {
     e.preventDefault();
-    if (validated()) {
+    const error = hasErrors();
+
+    if (!error) {
       const formData = new FormData();
       for (let key in data) {
         formData.append(key, data[key]);
       }
       setData(initialData);
-      setError("");
       dispatch(artPost(formData, history))
     }
+    setError(error || '');
   }
 
   useEffect(() => {
-
     setColor(user.feel_color);
 
     if (id !== 'new') {
@@ -133,14 +133,13 @@ const AddExibit = () => {
             </div>
             <div className="exibition-form-input">
               <InputAutoComplete
-                columeName="name"
-                ListArray={listCategory}
-                ItemId="id"
-                valueToDisplay={arts}
-                value={data.art_id}
-                Change={handleAutoChange}
-                Select={handleAutoSelect}
+                options={listCategory}
+                displayProperty="name"
+                placeholder="Choose an art"
+                onChange={handleAutoChange}
+                onSelect={handleAutoSelect}
               />
+
               <input
                 className="exibition-title-input"
                 type="text"
