@@ -34,8 +34,33 @@ const ChatBox = () => {
 
   return (
     <div className="chat-box">
+      <div className="chat-header">
+        <i class="fa fa-arrow-left" />
+        
+        <div className="artcubecase">
+            <div className="procusmallmove">
+              <div className="scenesmall">
+                <a href="studio.php?idstudio=4&gal=1">
+                  <div className="cubesmallmove">
+                    <div className="cube-facesmall  cube-face-frontsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-backsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-leftsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-rightsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="user-Status"> 
+            <p>User Name</p>
+            <span>Time Ago Active</span>
+          </div>
+          <div className="call-btn"> 
+            <button>video Call</button>
+            <button>Draw</button>
+          </div>
+      </div>
       <div className="chat-container">
-
         <div className="chat-uesr">
             <div className="artcubecase">
             <div className="procusmallmove">
@@ -95,6 +120,9 @@ const ChatBox = () => {
         </div>
       </div>
       <div className="message-input">
+        
+          <i className="fa fa-plus add-items-btn"  />
+      
         <input
           autoFocus
           placeholder="Type a message"
@@ -106,6 +134,20 @@ const ChatBox = () => {
         />
         <button>Post</button>
       </div>
+
+      <div className="add-img-vid-box">
+          <i className="fa fa-times close-add-box"/>
+          <div>
+            <img alt="" src="/assets/images/plus.png" />
+            Add Image
+          </div>
+          <div>
+            <img alt="" src="/assets/images/plus.png" />
+            Add Video
+          </div>
+      </div>
+
+
     </div>
   );
 };
