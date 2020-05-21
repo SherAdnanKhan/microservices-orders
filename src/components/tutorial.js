@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 
-const Tutorial = () => {
+const Tutorial = ({ user }) => {
   const history = useHistory();
   const [activeTab, setActiveTab] = useState(1);
   const [tabs] = useState([
@@ -17,7 +17,7 @@ const Tutorial = () => {
   ]);
 
   return (
-    <div className="wrapper tutorialScreen">
+    <div className={`wrapper tutorialScreen ${user.feel_color}`}>
       <div
         className={
           activeTab === 2 || activeTab === 3
