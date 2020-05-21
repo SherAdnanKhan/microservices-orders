@@ -38,7 +38,7 @@ const Studio = () => {
       : dispatch(favGallery({ gallery_id: activeGallery.id }));
   }
 
-  
+
   return (
     <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
       <StudioHeader
@@ -61,7 +61,10 @@ const Studio = () => {
         onPostLike={handleLike}
         totalPosts={userStudio && userStudio.user.posts_count}
       />
-      <Post gallery={gallery} />
+      <Post
+        gallery={gallery}
+        user={userStudio && userStudio.user}
+      />
       <StudioFooter />
     </div>
   );
