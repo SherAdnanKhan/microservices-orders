@@ -19,6 +19,7 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getPost(id))
+
   }, [dispatch, id]);
 
   const handleUnStoke = (e, ID) => {
@@ -32,7 +33,7 @@ const ViewPost = () => {
   }
 
   return (
-    <div className="post-page">
+    <div className={`post-page ${post && post.post.user.feel_color}`}>
       <ViewPostHeader post={post} />
       <ViewPortHead
         post={post}
