@@ -38,6 +38,8 @@ const Main = () => {
         return import('./viewPost/viewPost');
       case 'privacy':
         return import('./privacy');
+      case 'chat':
+        return import('./chatBox');
       default:
         return import('./lobby/lobby');
     }

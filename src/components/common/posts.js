@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Post = ({ gallery }) => {
   return (
-    <div className="wrapper  ">
+    <div className="wrapper">
       <div className="screen">
         <div className="post-picture">
           {gallery &&
@@ -16,31 +16,29 @@ const Post = ({ gallery }) => {
             ))}
         </div>
 
-
         <div className="show-list">
-            <div className="s-l-header">
-              <p>user name</p>
-              <div className="artcubecase">
-                <div className="procusmallmove">
-                  <div className="scenesmall">
-                    <a href="studio.php?idstudio=4&gal=1">
-                      <div className="cubesmallmove">
-                        <div className="cube-facesmall  cube-face-frontsmall" ><img src="/assets/images/logowhite.png" height="100%" /></div>
-                        <div className="cube-facesmall  cube-face-backsmall" ><img src="/assets/images/logowhite.png" height="100%" /></div>
-                        <div className="cube-facesmall  cube-face-leftsmall" ><img src="/assets/images/logowhite.png" height="100%" /></div>
-                        <div className="cube-facesmall  cube-face-rightsmall"><img src="/assets/images/logowhite.png" height="100%" /></div>
-                      </div>
-                    </a>
-                  </div>
+          <div className="s-l-header">
+            <p>user name</p>
+            <div className="artcubecase">
+              <div className="procusmallmove">
+                <div className="scenesmall">
+                  <a href="studio.php?idstudio=4&gal=1">
+                    <div className="cubesmallmove">
+                      <div className="cube-facesmall  cube-face-frontsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                      <div className="cube-facesmall  cube-face-backsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                      <div className="cube-facesmall  cube-face-leftsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                      <div className="cube-facesmall  cube-face-rightsmall"><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                    </div>
+                  </a>
                 </div>
               </div>
-              <p>Postion</p>
             </div>
-            <div className="list-body">
-              <img src="/assets/images/limegreen.png" />
-            </div>
+            <p>Postion</p>
+          </div>
+          <div className="list-body">
+            <img src="/assets/images/limegreen.png" alt="" />
+          </div>
         </div>
-
       </div>
     </div>
   )
