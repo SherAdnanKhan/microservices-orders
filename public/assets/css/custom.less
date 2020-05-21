@@ -3239,8 +3239,9 @@ img {
 //chat box
 
 .chat-box {
+  
   .chat-container {
-    border: 1px solid white;
+    border-bottom: 1px solid #444;
     width: 95%;
     margin: 15px auto 0 auto;
     min-height: 80vh;
@@ -3248,28 +3249,71 @@ img {
     padding: 20px;
     box-sizing: border-box;  
     overflow-y: auto;
+    .chat-uesr{
+      text-align: center;
+      border-bottom: 1px solid #444;
+      padding-bottom: 20px;
+      p{
+        margin: 0;
+      }
+      span{
+        font-size: 20px;
+      }
+    }
     .message-row {
       padding: 20px;
       box-sizing: border-box;
       margin-bottom: 5px;
 
-      .incoming,
-      .outgoing {
-        border: 1px solid white;    
-        max-width: 30%;
-        padding: 10px;
-        box-sizing: border-box;
-        text-align: left;
-        word-wrap: break-word;
-        clear: both;
-        border-radius: 10px 10px 0 10px;
-      }
+     
       .incoming { 
         float: left;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .artcubecase{
+          margin: 0px 14px 0 0;
+          height: auto;
+        }
+        p{
+          background-color: rgba(128,0,128,.3);
+          border: 2px solid purple;
+          border: 1px solid white;    
+          width: auto;
+          padding: 10px;
+          box-sizing: border-box;
+          text-align: left;
+          word-wrap: break-word;
+          clear: both;
+          border-radius: 10px 10px 10px 0;
+        }
       }
     
       .outgoing {
         float: right;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row-reverse;
+        p{
+          background: limegreen;
+          border: 2px solid #7cff7c;
+          border: 1px solid white;    
+          width: auto;
+          padding: 10px;
+          box-sizing: border-box;
+          text-align: left;
+          word-wrap: break-word;
+          clear: both;
+          border-radius: 10px 10px 0 10px;
+        }
+        img{
+          width: 25px;
+          border: 1px solid #ccc;
+          margin-left: 10px;
+        }
       }
 
       &.group:before,
@@ -3288,20 +3332,35 @@ img {
 
     }
   }
-  input[type="text"] {
-    display: block;
-    border: 1px solid white;
+  .message-input{
+    display: flex;
     width: 95%;
-    margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: black;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 100%;
-    font-variant: small-caps;
-    color: white;
-    &::placeholder {
+    margin: 15px auto 0 auto;
+    input[type="text"] {
+      display: block;
+      border: 1px solid #444;
+      width: 78%;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: black;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 100%;
+      font-variant: small-caps;
       color: white;
+      border-radius: 10px;
+      &::placeholder {
+        color: white;
+      }
+    }
+    button{
+      border: 1px solid #444;
+      border-radius: 50px;
+      width: 20%;
+      background: none;
+      color: #444;
+      font-size: 18px;
     }
   }
+  
 }

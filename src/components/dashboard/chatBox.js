@@ -35,6 +35,28 @@ const ChatBox = () => {
   return (
     <div className="chat-box">
       <div className="chat-container">
+
+        <div className="chat-uesr">
+            <div className="artcubecase">
+            <div className="procusmallmove">
+              <div className="scenesmall">
+                <a href="studio.php?idstudio=4&gal=1">
+                  <div className="cubesmallmove">
+                    <div className="cube-facesmall  cube-face-frontsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-backsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-leftsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    <div className="cube-facesmall  cube-face-rightsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="chat-uesr-name">
+            <p>	You are now Strqing with </p>
+            <span>AriesQuetz</span>
+          </div>
+        </div>
+
         {messages.map((msg, index) => (
           <div key={index} className="message-row group">
             <div className="outgoing">
@@ -42,27 +64,48 @@ const ChatBox = () => {
             </div>
           </div>
         ))}
-        <div className="message-row">
+        <div className="message-row group">
           <div className="incoming">
-            hellolasjdlsadjlkasjdkljkladsjlkajsdskdjaskld
+            <div className="artcubecase">
+              <div className="procusmallmove">
+                <div className="scenesmall">
+                  <a href="studio.php?idstudio=4&gal=1">
+                    <div className="cubesmallmove">
+                      <div className="cube-facesmall  cube-face-frontsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                      <div className="cube-facesmall  cube-face-backsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                      <div className="cube-facesmall  cube-face-leftsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                      <div className="cube-facesmall  cube-face-rightsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p>hellolasjdlsadjlkasjdkljkladsjlkajsdskdjaskld</p>
           </div>
         </div>
 
-        <div className="message-row">
+        <div className="message-row group">
+            
           <div className="outgoing">
-            hi
+            <div className="send-icon">
+              <img alt="" src="/assets/images/limegreen.png" />
+            </div>
+            <p>hi</p>
           </div>
         </div>
       </div>
-      <input
-        autoFocus
-        placeholder="Type a message"
-        type="text"
-        name="message"
-        value={message}
-        onChange={e => setMessage(e.target.value)}
-        onKeyUp={handleEnter}
-      />
+      <div className="message-input">
+        <input
+          autoFocus
+          placeholder="Type a message"
+          type="text"
+          name="message"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          onKeyUp={handleEnter}
+        />
+        <button>Post</button>
+      </div>
     </div>
   );
 };
