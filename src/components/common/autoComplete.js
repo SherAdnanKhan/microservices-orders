@@ -1,31 +1,62 @@
-import React from "react";
-import Autocomplete from "react-autocomplete";
+import React, { useState, useEffect } from "react";
 
-const InputAutoComplete = ({ columeName, ListArray, ItemId, valueToDisplay, value, valueSetter, Change, Select}) =>{
-  return ( 
-  <Autocomplete
-  inputProps={{ 
-    style:
-    {
-      width: '90%',
-      color:"white",
-      backgroundColor:"black",
-      borderRadius:"8px",
-      border: "1px solid white",
-      padding:"10px 5px",
-      margin:"5px auto"
+const InputAutoComplete = ({ options, displayProperty, onChange, onSelect, placeholder }) => {
+  const [list, setList] = useState([]);
+  const [selected, setSelected] = useState('');
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+
+  useEffect(() => {
+    if (options) {
+      setList(options)
     }
+
+  }, [options])
+  const handleChange = ({ target: input }) => {
+    setSelected(input.value);
+    onChange(input.value);
+  }
+
+  const handleSelect = option => {
+    setSelected(option[displayProperty]);
+    onSelect(option);
+    setList(null);
+  }
+
+  return (
+    <div className="autocomplete">
+      <input type="text"
+        placeholder={placeholder}
+        value={selected}
+        onChange={handleChange}
+        onKeyUp={e => {
+          if (e.keyCode === 40) {
+            if (highlightedIndex < options.length - 1) {
+              setHighlightedIndex(highlightedIndex => highlightedIndex + 1)
+            }
+          } else if (e.keyCode === 38) {
+            if (highlightedIndex > 0) {
+              setHighlightedIndex(highlightedIndex => highlightedIndex - 1)
+            }
+          } else if (e.keyCode === 13) {
+            handleSelect(options[highlightedIndex]);
+          }
         }}
-    getItemValue={(item) => item[columeName] ? item[columeName] : ""}
-    items={ListArray ? ListArray : [] }
-    renderItem={(item, isHighlighted) =>
-      <div key={item[ItemId]} style={{ background: isHighlighted ? 'white' : "black",color: isHighlighted ? "black" : "white" }}>
-        {item[columeName]}
+      />
+      <div className="suggestions">
+        {list &&
+          list.map((option, index) => (
+            <div
+              className={option === options[highlightedIndex] ? "highlight" : ""}
+              key={index}
+              onMouseOver={() => setHighlightedIndex(index)}
+              onClick={() => handleSelect(option)}
+            >
+              {option[displayProperty]}
+            </div>
+          ))}
+
       </div>
-   }
-  value={valueToDisplay}
-  onChange={(e) => Change(e)}
-  onSelect={(val,item) => Select(val,item) }
-  />)
+    </div>
+  )
 }
 export default InputAutoComplete
