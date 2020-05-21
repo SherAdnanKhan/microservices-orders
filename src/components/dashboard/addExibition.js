@@ -21,12 +21,14 @@ const AddExibit = () => {
   }
   const [arts, setArts] = useState("");
   const [error, setError] = useState("");
+  const [image, setImage] = useState("");
   const [data, setData] = useState(initialData);
 
   const user = useContext(UserContext);
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file' && input.files[0]) {
+      setImage(URL.createObjectURL(input.files[0]));
       setData({ ...data, [input.name]: input.files[0] });
     } else if (input.type === 'radio') {
       setData({ ...data, [input.name]: parseInt(input.value) });
@@ -87,7 +89,6 @@ const AddExibit = () => {
       setError("");
       dispatch(artPost(formData, history))
     }
-
   }
 
   useEffect(() => {
@@ -119,7 +120,7 @@ const AddExibit = () => {
           <div className="exibition-top-textboxes">
             <div className="exbition-img" style={{ textAlign: "center" }}>
               <div className="exibition-input">
-                <img id="preview" src="/assets/images/input-image.png" alt="dummy" />
+                <img id="preview" src={image ? image : '/assets/images/input-image.png'} alt="dummy" />
                 <input
                   type="file"
                   name="image"
