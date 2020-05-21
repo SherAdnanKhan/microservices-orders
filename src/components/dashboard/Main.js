@@ -40,6 +40,8 @@ const Main = () => {
         return import('./privacy');
       case 'chat':
         return import('./chatBox');
+      case 'group-chat':
+        return import('./chatBox');
       default:
         return import('./lobby/lobby');
     }
