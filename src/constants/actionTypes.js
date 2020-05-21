@@ -33,6 +33,9 @@ export const GET_MY_STUDIO = 'GET_MY_STUDIO';
 export const SELECT_STUDIO_USER = 'SELECT_STUDIO_USER';
 export const GET_USER_STUDIO = 'GET_USER_STUDIO';
 export const CLEAR_USER_STUDIO = 'CLEAR_USER_STUDIO';
+export const FAV_USER = 'FAV_USER';
+export const UNFAV_USER = 'UNFAV_USER';
+
 
 // Gallery
 export const GET_GALLERY = "GET_GALLERY";

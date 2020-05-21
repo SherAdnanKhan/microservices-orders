@@ -1,4 +1,4 @@
-import { GET_MY_STUDIO, GET_USER_STUDIO } from "../constants/actionTypes";
+import { GET_MY_STUDIO, GET_USER_STUDIO, FAV_USER, UNFAV_USER } from "../constants/actionTypes";
 
 const initialState = {
   myStudio: null,
@@ -16,6 +16,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userStudio: action.payload
+      };
+    case FAV_USER:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          has_faved: action.payload,
+          favs_count: state.userStudio.favs_count + 1
+        }
+      };
+    case UNFAV_USER:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          has_faved: action.payload,
+          favs_count: state.userStudio.favs_count - 1
+        }
       };
     default:
       return state;

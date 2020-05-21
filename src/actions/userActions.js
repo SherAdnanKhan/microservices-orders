@@ -1,6 +1,9 @@
-import { GET_FAV, GET_ALL_USERS, GET_USER_ART_NAME, GET_OTEHR_FAV_USER, CLEAR_USERS } from "../constants/actionTypes";
 import http from "../services/httpService";
-import { getUserStudio } from "./studioActions"
+import {
+  GET_FAV, GET_ALL_USERS, GET_USER_ART_NAME,
+  GET_OTEHR_FAV_USER, CLEAR_USERS, FAV_USER,
+  UNFAV_USER
+} from "../constants/actionTypes";
 
 export const getFavourites = () => dispatch => {
   http
@@ -26,7 +29,7 @@ export const getAllUsers = query => dispatch => {
 
 export const clearUsers = () => {
   return { type: CLEAR_USERS, payload: null };
-}
+};
 
 export const getUserArtById = (id) => dispatch => {
   http
@@ -35,10 +38,10 @@ export const getUserArtById = (id) => dispatch => {
       dispatch({
         type: GET_USER_ART_NAME,
         payload: res.data.data.art
-      })
-    }
-    )
-}
+      });
+    });
+};
+
 export const getOtherFavouriteUsers = () => dispatch => {
   http
     .get('/favs/get-faves')
@@ -49,8 +52,6 @@ export const getOtherFavouriteUsers = () => dispatch => {
           payload: res.data.data.faves
         })
       }
-    })
-    .catch(res => {
     });
 };
 
@@ -62,33 +63,29 @@ export const getOtherFavouriteByUsers = () => dispatch => {
         dispatch({
           type: GET_OTEHR_FAV_USER,
           payload: res.data.data.faves
-        })
+        });
       }
-    })
-    .catch(res => {
     });
 };
 
-export const makeUserFav = (faved_to, slug) => dispatch => {
+export const favUser = faved_to => dispatch => {
+  dispatch({ type: FAV_USER, payload: true });
+
   http
     .post('/favs', { faved_to })
-    .then(res => {
-      if (res.data.success) {
-        dispatch(getUserStudio(slug));
-      }
-    })
+    .then()
     .catch(res => {
+      dispatch({ type: UNFAV_USER, payload: false });
     });
 };
 
-export const UserUnFav = (faved_to, slug) => dispatch => {
+export const unfavUser = faved_to => dispatch => {
+  dispatch({ type: UNFAV_USER, payload: false });
+
   http
     .delete(`/favs/${faved_to}`)
-    .then(res => {
-      if (res.data.success) {
-        dispatch(getUserStudio(slug));
-      }
-    })
+    .then()
     .catch(res => {
+      dispatch({ type: FAV_USER, payload: true });
     });
 };
