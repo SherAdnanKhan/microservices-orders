@@ -30,7 +30,7 @@ function App() {
       <ProtectedRoute exact path="/welcome" component={Welcome} />
       <ProtectedRoute exact path="/artselection" component={ArtSelection} />
       <ProtectedRoute path='/dashboard/:page?' component={Dashboard} />
-      <Route path="/tutorial" component={Tutorial} />
+      <ProtectedRoute path="/tutorial" component={Tutorial} />
       <Route exact path='/home' component={Home} />
       <Redirect exact from='/' to='/home' />
     </Switch>

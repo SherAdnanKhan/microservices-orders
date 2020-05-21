@@ -21,7 +21,7 @@ const LobbyPosts = ({ post }) => {
         {post.image && post.image.path && <img src={post.image.path} alt="" stye={{ width: "100%", heigth: "100%" }} />}
       </div>
       <div className="onearttitle">
-        <p>Second</p>
+        <p>{post && post.title}</p>
       </div>
     </div>
   );
