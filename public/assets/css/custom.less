@@ -3235,3 +3235,73 @@ img {
     }
   }
 }
+
+//chat box
+
+.chat-box {
+  .chat-container {
+    border: 1px solid white;
+    width: 95%;
+    margin: 15px auto 0 auto;
+    min-height: 80vh;
+    max-height: 80vh;
+    padding: 20px;
+    box-sizing: border-box;  
+    overflow-y: auto;
+    .message-row {
+      padding: 20px;
+      box-sizing: border-box;
+      margin-bottom: 5px;
+
+      .incoming,
+      .outgoing {
+        border: 1px solid white;    
+        max-width: 30%;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: left;
+        word-wrap: break-word;
+        clear: both;
+        border-radius: 10px 10px 0 10px;
+      }
+      .incoming { 
+        float: left;
+      }
+    
+      .outgoing {
+        float: right;
+      }
+
+      &.group:before,
+      &.group:after {
+        content: "";
+        display: table;
+      }
+
+      &.group:after {
+        clear: both;
+      }
+
+      &.group {
+        zoom: 1;
+      }
+
+    }
+  }
+  input[type="text"] {
+    display: block;
+    border: 1px solid white;
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    font-variant: small-caps;
+    color: white;
+    &::placeholder {
+      color: white;
+    }
+  }
+}

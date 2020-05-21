@@ -1,15 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 
 const StudioDetail = ({ userStudio, slug }) => {
+  const history = useHistory();
+
   return (
     <>
       <div className="wrapper">
         <div className="studio-Screen">
           <div className="studio-Head">
             <div>
-              <img src="/assets/images/strqicon.png" alt="" />
+              <img
+                src="/assets/images/strqicon.png" alt=""
+                onClick={() => history.push('/dashboard/chat')}
+              />
             </div>
             {userStudio &&
               <div className="procu">

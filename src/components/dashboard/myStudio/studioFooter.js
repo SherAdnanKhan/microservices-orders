@@ -10,7 +10,7 @@ const StudioFooter = ({ gallery }) => {
               gallery.posts.map((gallery, index) => (
                 <div className="" key={index} >
                   <img src={`${gallery?.image.path}`} alt="" />
-                  </div>
+                </div>
               ))}
           </div>
 
@@ -22,10 +22,10 @@ const StudioFooter = ({ gallery }) => {
                   <div className="scenesmall">
                     <a href="studio.php?idstudio=4&gal=1">
                       <div className="cubesmallmove">
-                        <div className="cube-facesmall  cube-face-frontsmall" ><img src="/assets/images/logowhite.png" height="100%" /></div>
-                        <div className="cube-facesmall  cube-face-backsmall" ><img src="/assets/images/logowhite.png" height="100%" /></div>
-                        <div className="cube-facesmall  cube-face-leftsmall" ><img src="/assets/images/logowhite.png" height="100%" /></div>
-                        <div className="cube-facesmall  cube-face-rightsmall"><img src="/assets/images/logowhite.png" height="100%" /></div>
+                        <div className="cube-facesmall  cube-face-frontsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                        <div className="cube-facesmall  cube-face-backsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                        <div className="cube-facesmall  cube-face-leftsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
+                        <div className="cube-facesmall  cube-face-rightsmall"><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
                       </div>
                     </a>
                   </div>
@@ -34,15 +34,10 @@ const StudioFooter = ({ gallery }) => {
               <p>Postion</p>
             </div>
             <div className="list-body">
-              <img src="/assets/images/limegreen.png" />
+              <img src="/assets/images/limegreen.png" alt="" />
             </div>
+          </div>
         </div>
-
-
-        </div>
-
-
-        
       </div>
       <div className="wrapper">
         <p className="footer-text">production of: QuetzalArtz x R&amp;R </p>
