@@ -20,6 +20,7 @@ const Comment = ({ post }) => {
     };
 
     dispatch(createComment(data));
+    setComment('');
   };
 
   return (
