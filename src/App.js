@@ -32,7 +32,7 @@ function App() {
       <ProtectedRoute path='/dashboard/:page?' component={Dashboard} />
       <ProtectedRoute path="/tutorial" component={Tutorial} />
       <Route exact path='/home' component={Home} />
-      <Redirect exact from='/' to='/home' />
+      <Redirect exact from='/' to='/welcome' />
     </Switch>
   );
 }
