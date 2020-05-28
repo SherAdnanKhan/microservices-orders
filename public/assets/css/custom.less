@@ -1847,9 +1847,6 @@ img {
     justify-content: center;
     font-size: 18px;
   }
-
-
-
 }
 .exibition-page-form{
   display: flex;
@@ -1882,17 +1879,17 @@ img {
      width: 80%;
 
      .autocomplete {
-      //  border: 1px  solid white;
        width: 95%;
        position: relative;
 
        input {
         position: relative;
         display: block;
-        width: 98%;
+        width: 100%;
         border-radius: 5px;
         border: 1px  solid white;
         padding: 10px 5px;
+        box-sizing: border-box;
         background-color: black;
         color: white;
         font-size: 100%;
@@ -1911,9 +1908,6 @@ img {
         z-index: 20;
         background-color: black;
         color: white;
-        max-height: 50vh;
-        overflow-y: scroll;
-        scroll-behavior: smooth;
         
         div {
           border-bottom: 1px solid white;
@@ -1923,6 +1917,12 @@ img {
           &.highlight { 
             background-color: white;
             color: black;
+          }
+
+          input[type="checkbox"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
           }
         }
       }

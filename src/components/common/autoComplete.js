@@ -28,9 +28,9 @@ const InputAutoComplete = ({ options, displayProperty, onChange, onSelect, place
         placeholder={placeholder}
         value={selected}
         onChange={handleChange}
-        onKeyUp={e => {
+        onKeyDown={e => {
           if (e.keyCode === 40) {
-            if (highlightedIndex < options.length - 1) {
+            if (highlightedIndex < list.length - 1) {
               setHighlightedIndex(highlightedIndex => highlightedIndex + 1)
             }
           } else if (e.keyCode === 38) {
@@ -54,7 +54,6 @@ const InputAutoComplete = ({ options, displayProperty, onChange, onSelect, place
               {option[displayProperty]}
             </div>
           ))}
-
       </div>
     </div>
   )
