@@ -71,7 +71,7 @@ const MyStudio = () => {
         activeGallery={activeGallery}
         totalPosts={myStudio && myStudio.user.posts_count}
       />
-      <StudioFooter gallery={gallery} />
+      <StudioFooter gallery={gallery} user={myStudio && myStudio.user} />
     </div>
   );
 };

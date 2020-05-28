@@ -1,6 +1,7 @@
 import React from 'react';
+import Avatar from '../../common/avatar';
 
-const StudioFooter = ({ gallery }) => {
+const StudioFooter = ({ gallery, user }) => {
   return (
     <>
       <div className="wrapper">
@@ -16,26 +17,23 @@ const StudioFooter = ({ gallery }) => {
 
           <div className="show-list">
             <div className="s-l-header">
-              <p>user name</p>
-              <div className="artcubecase">
-                <div className="procusmallmove">
-                  <div className="scenesmall">
-                    <a href="studio.php?idstudio=4&gal=1">
-                      <div className="cubesmallmove">
-                        <div className="cube-facesmall  cube-face-frontsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
-                        <div className="cube-facesmall  cube-face-backsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
-                        <div className="cube-facesmall  cube-face-leftsmall" ><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
-                        <div className="cube-facesmall  cube-face-rightsmall"><img src="/assets/images/logowhite.png" height="100%" alt="" /></div>
-                      </div>
-                    </a>
-                  </div>
+              <p>{user && user.username}</p>
+              <Avatar avatars={user && user.avatars} />
+              {user && user.art &&
+                <>
+                  {user.art.parent && user.art.parent.name + '/'}
+                  {user.art.name && user.art.name}
+                </>
+              }
+            </div>
+            {gallery &&
+              gallery.posts.map((post, index) => (
+                <div className="list-body" key={index}>
+                  <img src={post.image.path} alt="" />
+                  <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
                 </div>
-              </div>
-              <p>Postion</p>
-            </div>
-            <div className="list-body">
-              <img src="/assets/images/limegreen.png" alt="" />
-            </div>
+              ))
+            }
           </div>
         </div>
       </div>

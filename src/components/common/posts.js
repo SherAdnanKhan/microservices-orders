@@ -30,7 +30,7 @@ const Post = ({ gallery, user }) => {
           </div>
           {gallery &&
             gallery.posts.map((post, index) => (
-              <div className="list-body">
+              <div className="list-body" key={index}>
                 <img src={post.image.path} alt="" />
                 <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
               </div>
