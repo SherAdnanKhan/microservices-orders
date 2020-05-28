@@ -9,11 +9,12 @@ const InputAutoComplete = ({ options, displayProperty, onChange, onSelect, place
     if (options) {
       setList(options)
     }
+  }, [options]);
 
-  }, [options])
   const handleChange = ({ target: input }) => {
     setSelected(input.value);
     onChange(input.value);
+    setHighlightedIndex(0);
   }
 
   const handleSelect = option => {

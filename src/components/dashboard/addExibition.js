@@ -119,7 +119,7 @@ const AddExibit = () => {
         <form className="exibition-page-form" onSubmit={Submit}>
           <div className="exibition-top-textboxes">
             <div className="exbition-img" style={{ textAlign: "center" }}>
-              <div className="exibition-input">
+              <label htmlFor="image" className="exibition-input clickable">
                 <img id="preview" src={image ? image : '/assets/images/input-image.png'} alt="dummy" />
                 <input
                   type="file"
@@ -128,7 +128,7 @@ const AddExibit = () => {
                   accept=".png, .jpg, .jpeg"
                   onChange={handleChange}
                 />
-              </div>
+              </label >
 
             </div>
             <div className="exibition-form-input">
@@ -156,14 +156,19 @@ const AddExibit = () => {
             <p> Choose Gallery</p>
           </div>
           <div className="exibition-gallery-utilties">
-            {
-              listGalleries?.map((val, index) => (
-                <Fragment key={index}>
-                  <div className="exibition-gallery-item">
-                    <input type="radio" name="gallery_id" value={val.id} checked={data.gallery_id === val.id ? true : false} onChange={handleChange} /><span > {val.title}  </span>
-                  </div>
-                </Fragment>
-
+            {listGalleries &&
+              listGalleries.map((val, index) => (
+                <label key={index} className="exibition-gallery-item clickable" >
+                  <input
+                    type="radio"
+                    name="gallery_id"
+                    id={val.id}
+                    value={val.id}
+                    checked={data.gallery_id === val.id ? true : false}
+                    onChange={handleChange}
+                  />
+                  <span> {val.title} </span>
+                </label>
               ))
             }
           </div>
@@ -176,7 +181,7 @@ const AddExibit = () => {
           <p>production of: QuetzalArtz x R&R</p>
         </footer>
       </Fragment>
-    </div>
+    </div >
   );
 };
 
