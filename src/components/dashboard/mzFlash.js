@@ -28,7 +28,7 @@ const MzFlash = () => {
   }, [dispatch, slug]);
 
   return (
-    <div className="mz-flash-page">
+    <div className={`mz-flash-page ${userStudio && userStudio.user.feel_color}`}>
       <>
         <div className="mz-flash-head">
           {userStudio &&
