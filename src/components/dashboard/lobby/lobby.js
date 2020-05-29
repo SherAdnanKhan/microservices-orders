@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites } from '../../../actions/userActions';
 import UserCube from '../../common/userCube';
-import Spinner from '../../common/spinner';
 import LobbyPosts from './lobbyPosts';
 import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions"
@@ -11,8 +10,7 @@ const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const {
-    user: { favouriteUsers, favouriteGalleries },
-    loading: { loading }
+    user: { favouriteUsers, favouriteGalleries }
   } = useSelector(state => state);
 
   useEffect(() => {
@@ -22,7 +20,6 @@ const Lobby = () => {
 
   return (
     <div className="lobby-page">
-      {loading && <Spinner />}
       <div className="base" id="sec">
         {favouriteUsers &&
           favouriteUsers.map((user, index) => (
