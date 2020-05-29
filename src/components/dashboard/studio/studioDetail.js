@@ -13,7 +13,7 @@ const StudioDetail = ({ userStudio, slug }) => {
             <div>
               <img
                 src="/assets/images/strqicon.png" alt=""
-                onClick={() => history.push('/dashboard/chat')}
+                onClick={() => history.push(`/dashboard/chat/${userStudio && userStudio.user.slug}`)}
               />
             </div>
             {userStudio &&

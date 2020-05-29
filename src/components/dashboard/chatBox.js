@@ -1,27 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
-import { useHistory } from 'react-router-dom';
-// import io from 'socket.io-client';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getConversation } from '../../actions/conversationActions';
+import io from 'socket.io-client';
 
 const ChatBox = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { conversation } = useSelector(state => state.conversation);
 
-  // const url = process.env.REACT_APP_API_URL;
-  // const [socket] = useState(io.connect(url));
+  const url = process.env.REACT_APP_SOCKET_URL;
+  const [socket, setSocket] = useState('');
 
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
-
+  const { params: { slug } } = useRouteMatch();
 
   useEffect(() => {
-    // socket.on('join', () => {
+    if (slug) {
+      dispatch(getConversation(slug));
+    }
+  }, [slug, dispatch]);
 
-    // });
+  useEffect(() => {
+    if (conversation) {
+      console.log(conversation);
+    }
+  }, [conversation]);
 
-    // return () => {
-    //   socket.emit('disconnect');
-    // }
-  });
+  useEffect(() => {
+    if (!socket) {
+      setSocket(io.connect(url));
+    }
+
+    if (socket) {
+      if (conversation) {
+        socket.emit('join', { room: conversation.id }, () => {
+          console.log(`Group with id ${conversation.id}  joined `);
+        });
+      }
+    }
+
+    return () => {
+      if (socket) {
+        socket.emit('disconnect');
+      }
+    }
+  }, [socket, url, conversation]);
 
   const handleEnter = e => {
     if (e.keyCode === 13) {
@@ -88,14 +114,27 @@ const ChatBox = () => {
           </div>
         </div>
 
-        {messages.map((msg, index) => (
+        {/* {messages.map((msg, index) => (
           <div key={index} className="message-row group">
             <div className="outgoing">
               {msg}
             </div>
           </div>
-        ))}
-        <div className="message-row group">
+        ))} */}
+
+        {conversation &&
+          conversation.messages.map(message => (
+            <div className="message-row group">
+              <div className="outgoing">
+                <div className="send-icon">
+                  <img alt="" src="/assets/images/limegreen.png" />
+                </div>
+                <p>hi</p>
+              </div>
+            </div>
+          ))
+        }
+        {/* <div className="message-row group">
           <div className="incoming">
             <div className="artcubecase">
               <div className="procusmallmove">
@@ -116,14 +155,13 @@ const ChatBox = () => {
         </div>
 
         <div className="message-row group">
-
           <div className="outgoing">
             <div className="send-icon">
               <img alt="" src="/assets/images/limegreen.png" />
             </div>
             <p>hi</p>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="message-input">
 
