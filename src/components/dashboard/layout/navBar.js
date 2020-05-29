@@ -40,7 +40,7 @@ const NavBar = () => {
           <a href="#__searchHistory">Search History</a>
         </li>
         <li>
-          <Link to="" onClick={() => logout()}>Logout</Link>
+          <Link className="logout" to="" onClick={() => logout()}>Logout</Link>
         </li>
       </ul>
     </nav>

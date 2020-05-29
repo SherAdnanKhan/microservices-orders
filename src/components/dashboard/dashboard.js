@@ -24,6 +24,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/privacy" component={Main} />
         <Route exact path="/dashboard/chat" component={Main} />
         <Route exact path="/dashboard/group-chat" component={Main} />
+        <Route exact path="/dashboard/conversations" component={Main} />
         <Redirect exact from="/dashboard" to="/dashboard/lobby" />
       </Switch>
     </UserContext.Provider>
