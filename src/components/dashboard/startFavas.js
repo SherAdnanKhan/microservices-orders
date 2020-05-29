@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import UserContext from '../../context/userContext';
 
 const StartFaves = () => {
+  const user = useContext(UserContext);
+
   return (
     <div className="wrapper fav-page">
       <div className="f-text-box">
         <h3 className="f-title">GETTING STARTED</h3>
-        <p className="f-paragrah">Welcome usman there are many other exibitions for you to see and enjoy and many other artist for you to meet</p>
+        <p className="f-paragrah">Welcome {user.username} there are many other exibitions for you to see and enjoy and many other artist for you to meet</p>
         <h1>>></h1>
       </div>
       <div className="f-image-box">
         <div className="f-header">
           <h4>Aries</h4>
-          <p>hfjksdf</p>
           <h4>Web Designer/Programmer</h4>
         </div>
         <div className="f-gallery-box">
