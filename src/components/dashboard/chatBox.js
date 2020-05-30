@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import $ from 'jquery';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getConversation, updateConversation } from '../../actions/conversationActions';
+import { getConversation, updateConversation, clearConversation } from '../../actions/conversationActions';
 import io from 'socket.io-client';
+import Avatar from '../common/avatar';
+import UserContext from '../../context/userContext';
 // import { UPDATE_CONVERSATION } from '../../constants/actionTypes';
 //import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 
 const ChatBox = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { conversation, messages } = useSelector(state => state.conversation);
+  const { conversation, messages, user } = useSelector(state => state.conversation);
+  const currentUser = useContext(UserContext);
 
-  const url = process.env.REACT_APP_SOCKET_URL;
+  const url = "http://184.169.228.69:8080/";
   const [socket, setSocket] = useState('');
 
   // const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
+  const [joined, setJoined] = useState(false);
   const { params: { slug } } = useRouteMatch();
 
   useEffect(() => {
@@ -31,37 +35,44 @@ const ChatBox = () => {
     }
 
     if (socket) {
-      if (conversation && conversation.id) {
-        console.log("GY")
-        socket.emit('join', { room: conversation && conversation.id }, () => {
+      if (conversation) {
+        socket.emit('join', { room: conversation.id }, () => {
           console.log(`Group with id ${conversation.id}  joined `);
         });
 
         socket.on('recieveMessage', (data) => {
-          // console.log("recieve: ", data);
           dispatch(updateConversation(data));
         })
       }
     }
 
     return () => {
-      if (socket) {
+      if (socket && conversation) {
+        socket.emit('leave', { room: conversation.id });
         socket.emit('disconnect');
-        // dispatch(clearConversation());
+        setSocket('');
+        dispatch(clearConversation());
+        setJoined(false);
       }
     }
-  }, [socket, url, conversation, dispatch]);
+  }, [socket, url, conversation, dispatch, joined]);
 
 
   const handleEnter = e => {
     if (e.keyCode === 13) {
-      // const newMessages = [...messages, message];
-      // setMessages(newMessages);
-      // setMessage('');
 
-      socket.emit('sendMessage', ({ message: e.target.value, room: conversation.id }), () => {
-        setMessage('');
-      });
+      if (conversation) {
+        const data = {
+          message: e.target.value,
+          user: currentUser,
+          room: conversation.id
+        };
+
+        socket.emit('sendMessage', data, () => {
+          setMessage('');
+        });
+      }
+
 
       $('.chat-container').stop().animate({
         scrollTop: $('.chat-container')[0].scrollHeight
@@ -77,22 +88,10 @@ const ChatBox = () => {
           onClick={() => history.replace(`/dashboard/studio/${slug}`)}
         />
 
-        <div className="artcubecase">
-          <div className="procusmallmove">
-            <div className="scenesmall">
-              <a href="studio.php?idstudio=4&gal=1">
-                <div className="cubesmallmove">
-                  <div className="cube-facesmall  cube-face-frontsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                  <div className="cube-facesmall  cube-face-backsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                  <div className="cube-facesmall  cube-face-leftsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                  <div className="cube-facesmall  cube-face-rightsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+        {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
+
         <div className="user-Status">
-          <p>User Name</p>
+          {user && <p>{user.username}</p>}
           <span>Time Ago Active</span>
         </div>
         <div className="call-btn">
@@ -102,23 +101,10 @@ const ChatBox = () => {
       </div>
       <div className="chat-container">
         <div className="chat-uesr">
-          <div className="artcubecase">
-            <div className="procusmallmove">
-              <div className="scenesmall">
-                <a href="studio.php?idstudio=4&gal=1">
-                  <div className="cubesmallmove">
-                    <div className="cube-facesmall  cube-face-frontsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                    <div className="cube-facesmall  cube-face-backsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                    <div className="cube-facesmall  cube-face-leftsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                    <div className="cube-facesmall  cube-face-rightsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
+          {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
           <div className="chat-uesr-name">
             <p>	You are now Strqing with </p>
-            <span>AriesQuetz</span>
+            {user && <span>{user.username}</span>}
           </div>
         </div>
 
@@ -131,53 +117,35 @@ const ChatBox = () => {
         ))} */}
 
         {messages &&
-          messages.map((message, index) => (
-            <div
-              className="message-row group"
-              key={index}
-            >
-              <div className="outgoing">
-                <div className="send-icon">
-                  <img alt="" src="/assets/images/limegreen.png" />
-                </div>
-                <p>{message.message}</p>
-              </div>
+          messages.map((data, index) => (
+            <div key={index}>
+              {data.user.id === currentUser.id
+                ? (
+                  <div
+                    className="message-row group"
+                  >
+                    <div className="outgoing">
+                      <div className="send-icon">
+                        <img alt="" src={`/assets/images/${currentUser.feel_color}.png`} />
+                      </div>
+                      <p>{data.message}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="message-row group">
+                    <div className="incoming">
+                      <Avatar avatars={data.user.avatars} />
+                      <p>{data.message}</p>
+                    </div>
+                  </div>
+                )
+              }
             </div>
           ))
         }
-        {/* <div className="message-row group">
-          <div className="incoming">
-            <div className="artcubecase">
-              <div className="procusmallmove">
-                <div className="scenesmall">
-                  <a href="studio.php?idstudio=4&gal=1">
-                    <div className="cubesmallmove">
-                      <div className="cube-facesmall  cube-face-frontsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                      <div className="cube-facesmall  cube-face-backsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                      <div className="cube-facesmall  cube-face-leftsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                      <div className="cube-facesmall  cube-face-rightsmall" ><img alt="" src="/assets/images/logowhite.png" height="100%" /></div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <p>hellolasjdlsadjlkasjdkljkladsjlkajsdskdjaskld</p>
-          </div>
-        </div>
-
-        <div className="message-row group">
-          <div className="outgoing">
-            <div className="send-icon">
-              <img alt="" src="/assets/images/limegreen.png" />
-            </div>
-            <p>hi</p>
-          </div>
-        </div> */}
       </div>
       <div className="message-input">
-
         <i className="fa fa-plus add-items-btn" />
-
         <input
           autoFocus
           placeholder="Type a message"
@@ -201,8 +169,6 @@ const ChatBox = () => {
             Add Video
           </div>
       </div>
-
-
     </div>
   );
 };

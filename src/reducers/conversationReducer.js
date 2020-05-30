@@ -2,7 +2,8 @@ import { GET_CONVERSATION, UPDATE_CONVERSATION, CLEAR_CONVERSATION } from "../co
 
 const initialState = {
   conversation: null,
-  messages: null,
+  user: null,
+  messages: [],
   conversations: null
 };
 
@@ -11,8 +12,9 @@ export default (state = initialState, action) => {
     case GET_CONVERSATION:
       return {
         ...state,
-        conversation: action.payload,
-        messages: action.payload.messages
+        conversation: action.payload.conversation,
+        messages: action.payload.conversation.messages,
+        user: action.payload.user
       };
     case UPDATE_CONVERSATION:
       return {
@@ -23,7 +25,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         conversation: null,
-        messages: null
+        messages: [],
+        user: null
       };
     default:
       return state;

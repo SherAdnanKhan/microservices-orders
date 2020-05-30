@@ -1458,6 +1458,62 @@ img {
       width: 30px;
       height: 30px;
       perspective: 200px;
+      &.orange {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color:#ffa500;
+            box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
+          }
+        }
+      }
+      &.red {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color:#ff0000;
+            box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
+          }
+        }
+      }
+      &.gold {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color:@color_gold;
+            box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
+          }
+        }
+      }
+      &.gray {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color: #808080;
+            box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
+          }
+        }
+      }
+      &.limegreen {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color: #32CD32;
+            box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
+          }
+        }
+      }
+      &.purple {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color: #800080;
+            box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
+          }
+        }
+      }
+      &.dodgerblue {
+        .cubesmallmove {
+          .cube-facesmall {
+            border-color: #1E90FF;
+            box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
+          }
+        }
+      }
       &:hover {
         transform: scale(1.3);
         transition: .3s;
@@ -3518,7 +3574,6 @@ img {
       padding: 20px;
       box-sizing: border-box;
       margin-bottom: 5px;
-
      
       .incoming { 
         float: left;
@@ -3551,6 +3606,49 @@ img {
         justify-content: center;
         align-items: center;
         flex-direction: row-reverse;
+        &.orange { 
+          p {
+            border-color:#ffa500;
+            box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
+          }
+        }
+        &.red {
+          p {
+            border-color:#ff0000;
+            box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
+          }        
+        }
+        &.gold {
+          p {
+            border-color:@color_gold;
+            box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
+          }
+        }
+        &.gray {
+          p {
+            border-color: #808080;
+            box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
+          }
+        }
+        &.limegreen {
+          p {
+            border-color: #32CD32;
+            box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
+          }
+        }
+        &.purple {
+          p {
+            border-color: #800080;
+            box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
+          }
+        }
+        &.dodgerblue {  
+          p {
+            border-color: #1E90FF;
+            box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
+          }  
+        }
+
         p{
           background: limegreen;
           border: 2px solid #7cff7c;

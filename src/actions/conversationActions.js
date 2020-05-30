@@ -7,16 +7,20 @@ export const getConversation = slug => dispatch => {
     .then(res => {
       dispatch({
         type: GET_CONVERSATION,
-        payload: res.data.data.conversation
+        payload: res.data.data
       });
     });
 };
 
 export const updateConversation = data => dispatch => {
-  return dispatch({
+  dispatch({
     type: UPDATE_CONVERSATION,
     payload: data
   });
+
+  http
+    .post('/chats/message', { message: data.message, conversation_id: data.room })
+    .then()
 };
 
 export const clearConversation = () => dispatch => {
