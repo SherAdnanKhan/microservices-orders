@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getConversation } from '../../actions/conversationActions';
+import { getConversation, updateConversation } from '../../actions/conversationActions';
 import io from 'socket.io-client';
+// import { UPDATE_CONVERSATION } from '../../constants/actionTypes';
+//import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 
 const ChatBox = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { conversation } = useSelector(state => state.conversation);
+  const { conversation, messages } = useSelector(state => state.conversation);
 
   const url = process.env.REACT_APP_SOCKET_URL;
   const [socket, setSocket] = useState('');
 
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const { params: { slug } } = useRouteMatch();
 
@@ -24,36 +26,42 @@ const ChatBox = () => {
   }, [slug, dispatch]);
 
   useEffect(() => {
-    if (conversation) {
-      console.log(conversation);
-    }
-  }, [conversation]);
-
-  useEffect(() => {
     if (!socket) {
       setSocket(io.connect(url));
     }
 
     if (socket) {
-      if (conversation) {
-        socket.emit('join', { room: conversation.id }, () => {
+      if (conversation && conversation.id) {
+        console.log("GY")
+        socket.emit('join', { room: conversation && conversation.id }, () => {
           console.log(`Group with id ${conversation.id}  joined `);
         });
+
+        socket.on('recieveMessage', (data) => {
+          // console.log("recieve: ", data);
+          dispatch(updateConversation(data));
+        })
       }
     }
 
     return () => {
       if (socket) {
         socket.emit('disconnect');
+        // dispatch(clearConversation());
       }
     }
-  }, [socket, url, conversation]);
+  }, [socket, url, conversation, dispatch]);
+
 
   const handleEnter = e => {
     if (e.keyCode === 13) {
-      const newMessages = [...messages, message];
-      setMessages(newMessages);
-      setMessage('');
+      // const newMessages = [...messages, message];
+      // setMessages(newMessages);
+      // setMessage('');
+
+      socket.emit('sendMessage', ({ message: e.target.value, room: conversation.id }), () => {
+        setMessage('');
+      });
 
       $('.chat-container').stop().animate({
         scrollTop: $('.chat-container')[0].scrollHeight
@@ -66,7 +74,7 @@ const ChatBox = () => {
       <div className="chat-header">
         <i
           className="fa fa-arrow-left clickable"
-          onClick={() => history.goBack()}
+          onClick={() => history.replace(`/dashboard/studio/${slug}`)}
         />
 
         <div className="artcubecase">
@@ -122,14 +130,17 @@ const ChatBox = () => {
           </div>
         ))} */}
 
-        {conversation &&
-          conversation.messages.map(message => (
-            <div className="message-row group">
+        {messages &&
+          messages.map((message, index) => (
+            <div
+              className="message-row group"
+              key={index}
+            >
               <div className="outgoing">
                 <div className="send-icon">
                   <img alt="" src="/assets/images/limegreen.png" />
                 </div>
-                <p>hi</p>
+                <p>{message.message}</p>
               </div>
             </div>
           ))
