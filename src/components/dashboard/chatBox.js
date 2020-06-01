@@ -53,10 +53,11 @@ class ChatBox extends Component {
     const { conversation } = this.props.conversation;
     if (e.keyCode === 13) {
       if (conversation) {
+
         const data = {
           message: e.target.value,
-          user: this.context,
-          room: conversation.id
+          user_id: this.context.id,
+          conversation_id: conversation.id
         };
 
         this.state.socket.emit('sendMessage', data, () => {
