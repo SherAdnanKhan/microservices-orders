@@ -6,6 +6,7 @@ import Avatar from '../../common/avatar';
 
 const Search = () => {
   const [query, setQuery] = useState('');
+
   const dispatch = useDispatch();
   const { users } = useSelector(state => state.user);
 

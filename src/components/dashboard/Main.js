@@ -44,6 +44,8 @@ const Main = () => {
         return import('./chatBox');
       case 'conversations':
         return import('./conversation');
+      case 'settings':
+        return import('./layout/navBar');
       default:
         return import('./lobby/lobby');
     }
