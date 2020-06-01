@@ -32,7 +32,7 @@ class ChatBox extends Component {
 
       this.state.socket.on('recieveMessage', (data) => {
         this.props.updateConversation(data);
-        console.log("recieved: ", data);
+        console.log("yes ", data);
       });
     }
   }
@@ -56,8 +56,8 @@ class ChatBox extends Component {
 
         const data = {
           message: e.target.value,
-          user_id: this.context.id,
-          conversation_id: conversation.id
+          user: this.context,
+          room: conversation.id
         };
 
         this.state.socket.emit('sendMessage', data, () => {
