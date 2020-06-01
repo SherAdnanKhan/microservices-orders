@@ -178,7 +178,7 @@ const AddExibit = () => {
           </div>
         </form>
         <footer className="exibtion-footer">
-          <p>production of: QuetzalArtz x R&R</p>
+          <p>Meuzm</p>
         </footer>
       </Fragment>
     </div >

@@ -38,7 +38,7 @@ const StudioFooter = ({ gallery, user }) => {
         </div>
       </div>
       <div className="wrapper">
-        <p className="footer-text">production of: QuetzalArtz x R&amp;R </p>
+        <p className="footer-text"> Meuzm </p>
       </div>
     </>
   );

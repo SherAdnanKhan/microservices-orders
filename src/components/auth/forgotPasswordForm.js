@@ -77,7 +77,7 @@ const ForgotPasswordForm = () => {
         </p>
 
         <footer>
-          <p>production of: QuetzalArtz x R&amp;R </p>
+          <p>Meuzm</p>
         </footer>
       </div>
     </div>
