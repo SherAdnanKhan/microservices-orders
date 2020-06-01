@@ -17,7 +17,9 @@ export const updateConversation = data => dispatch => {
     type: UPDATE_CONVERSATION,
     payload: data
   });
+};
 
+export const createMessage = data => () => {
   http
     .post('/chats/message', { message: data.message, conversation_id: data.room, user_id: data.user.id })
     .then();
@@ -25,4 +27,4 @@ export const updateConversation = data => dispatch => {
 
 export const clearConversation = () => dispatch => {
   dispatch({ type: CLEAR_CONVERSATION, payload: null });
-}
+};
