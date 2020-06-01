@@ -31,7 +31,6 @@ class ChatBox extends Component {
       });
 
       this.state.socket.on('recieveMessage', (data) => {
-        this.props.updateConversation(data);
         console.log("yes ", data);
       });
     }
@@ -62,6 +61,7 @@ class ChatBox extends Component {
 
         this.state.socket.emit('sendMessage', data, () => {
           this.setState({ message: '' });
+          this.props.updateConversation(data);
         });
       }
 
