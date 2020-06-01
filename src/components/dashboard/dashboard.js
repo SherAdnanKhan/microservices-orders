@@ -5,6 +5,7 @@ import Main from './Main';
 import addExibition from "./addExibition";
 import StartFaves from "./startFavas";
 import Profile from './profile';
+import NavBar from './layout/navBar';
 
 const Dashboard = ({ user }) => {
   return (
@@ -25,6 +26,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/chat/:slug" component={Main} />
         <Route exact path="/dashboard/group-chat" component={Main} />
         <Route exact path="/dashboard/conversations" component={Main} />
+        <Route exact path="/dashboard/settings" component={NavBar} />
         <Redirect exact from="/dashboard" to="/dashboard/lobby" />
       </Switch>
     </UserContext.Provider>
