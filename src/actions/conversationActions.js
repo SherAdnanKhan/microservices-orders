@@ -19,8 +19,8 @@ export const updateConversation = data => dispatch => {
   });
 
   http
-    .post('/chats/message', { message: data.message, conversation_id: data.room })
-    .then()
+    .post('/chats/message', { message: data.message, conversation_id: data.room, user_id: data.user.id })
+    .then();
 };
 
 export const clearConversation = () => dispatch => {
