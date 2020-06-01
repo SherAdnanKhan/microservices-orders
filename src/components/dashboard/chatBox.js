@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getConversation, updateConversation, clearConversation } from '../../actions/conversationActions';
+import { getConversation, updateConversation, clearConversation, createMessage } from '../../actions/conversationActions';
 import io from 'socket.io-client';
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
@@ -31,7 +31,8 @@ class ChatBox extends Component {
       });
 
       this.state.socket.on('recieveMessage', (data) => {
-        console.log("yes ", data);
+        console.log("yes xsd", data);
+        this.props.updateConversation(data);
       });
     }
   }
@@ -61,7 +62,7 @@ class ChatBox extends Component {
 
         this.state.socket.emit('sendMessage', data, () => {
           this.setState({ message: '' });
-          this.props.updateConversation(data);
+          this.props.createMessage(data);
         });
       }
 
@@ -176,5 +177,6 @@ export default connect(
   mapStateToProps, {
   getConversation,
   updateConversation,
-  clearConversation
+  clearConversation,
+  createMessage
 })(withRouter(ChatBox));
