@@ -4,7 +4,7 @@ const Avatar = ({ avatars, feelColor = 'red' }) => {
   return (
     <>
       {avatars && avatars.length > 0 &&
-        <div className="artcubecase">
+        <div className={`artcubecase ${feelColor}`}>
           <div className="procusmallmove">
             <div className={`scenesmall ${feelColor}`}>
               <div className="cubesmallmove">

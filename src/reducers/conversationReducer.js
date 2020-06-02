@@ -1,4 +1,9 @@
-import { GET_CONVERSATION, UPDATE_CONVERSATION, CLEAR_CONVERSATION } from "../constants/actionTypes";
+import {
+  GET_CONVERSATION,
+  UPDATE_CONVERSATION,
+  CLEAR_CONVERSATION,
+  GET_ALL_CONVERSATIONS
+} from "../constants/actionTypes";
 
 const initialState = {
   conversation: null,
@@ -15,6 +20,11 @@ export default (state = initialState, action) => {
         conversation: action.payload.conversation,
         messages: action.payload.conversation.messages,
         user: action.payload.user
+      };
+    case GET_ALL_CONVERSATIONS:
+      return {
+        ...state,
+        conversations: action.payload
       };
     case UPDATE_CONVERSATION:
       return {
