@@ -3575,93 +3575,197 @@ img {
       .incoming { 
         float: left;
         max-width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+        .user-message {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .time {
+          margin-top: 0;
+          background-color: none;
+        }
+
         .artcubecase{
           margin: 0px 14px 0 0;
           height: auto;
         }
-        p{
-          background-color: rgba(128,0,128,.3);
-          border: 2px solid purple;
-          border: 1px solid white;    
-          width: auto;
-          padding: 10px;
-          box-sizing: border-box;
-          text-align: left;
-          word-wrap: break-word;
-          clear: both;
-          border-radius: 10px 10px 10px 0;
+
+        &.orange {
+          .user-message {
+            p {
+              background: #ffa500;
+              border-color:#ffa500;
+              box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
+            }
+          } 
+        }
+        &.red {
+          .user-message {
+            p {
+              background: #ff0000;
+              border-color:#ff0000;
+              box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
+            }        
+          }
+        }
+        &.gold {
+          .user-message {
+            p {
+              background: @color_gold;
+              border-color:@color_gold;
+              box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
+            }
+          }
+        }
+        &.gray {
+          .user-message {
+            p {
+              background: #808080;
+              border-color: #808080;
+              box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
+            }
+          }
+        }
+        &.limegreen {
+          .user-message {
+            p {
+              background: #32CD32;
+              border-color: #32CD32;
+              box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
+            }
+          }
+        }
+        &.purple {
+          .user-message{
+            p {
+              background: #800080;
+              border-color: #800080;
+              box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
+            }
+          }
+        }
+        &.dodgerblue {  
+          .user-message {
+            p {
+              background: #1E90FF;
+              border-color: #1E90FF;
+              box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
+            }  
+          }
+        }
+        .user-message {
+          p {
+            // background-color: rgba(128,0,128,.3);
+            // border: 2px solid purple;
+            // border: 1px solid white;    
+            width: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: left;
+            word-wrap: break-word;
+            clear: both;
+            border-radius: 10px 10px 10px 0;
+          }
         }
       }
     
       .outgoing {
         float: right;
         max-width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row-reverse;
-        &.orange { 
-          p {
-            border-color:#ffa500;
-            box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
-          }
+
+        .user-message {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row-reverse;
+        }
+
+        .time {
+          margin-top: 0;
+          background-color: none;
+        }
+
+        &.orange {
+          .user-message {
+            p {
+              background: #ffa500;
+              border-color:#ffa500;
+              box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
+            }
+          } 
         }
         &.red {
-          p {
-            border-color:#ff0000;
-            box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
-          }        
+          .user-message {
+            p {
+              background: #ff0000;
+              border-color:#ff0000;
+              box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
+            }        
+          }
         }
         &.gold {
-          p {
-            border-color:@color_gold;
-            box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
+          .user-message {
+            p {
+              background: @color_gold;
+              border-color:@color_gold;
+              box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
+            }
           }
         }
         &.gray {
-          p {
-            border-color: #808080;
-            box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
+          .user-message {
+            p {
+              background: #808080;
+              border-color: #808080;
+              box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
+            }
           }
         }
         &.limegreen {
-          p {
-            border-color: #32CD32;
-            box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
+          .user-message {
+            p {
+              background: #32CD32;
+              border-color: #32CD32;
+              box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
+            }
           }
         }
         &.purple {
-          p {
-            border-color: #800080;
-            box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
+          .user-message{
+            p {
+              background: #800080;
+              border-color: #800080;
+              box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
+            }
           }
         }
         &.dodgerblue {  
+          .user-message {
+            p {
+              background: #1E90FF;
+              border-color: #1E90FF;
+              box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
+            }  
+          }
+        }
+        .user-message {
           p {
-            border-color: #1E90FF;
-            box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
-          }  
-        }
-
-        p{
-          background: limegreen;
-          border: 2px solid #7cff7c;
-          border: 1px solid white;    
-          width: auto;
-          padding: 10px;
-          box-sizing: border-box;
-          text-align: left;
-          word-wrap: break-word;
-          clear: both;
-          border-radius: 10px 10px 0 10px;
-        }
-        img{
-          width: 25px;
-          border: 1px solid #ccc;
-          margin-left: 10px;
+            border: 1px solid white;    
+            width: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: left;
+            word-wrap: break-word;
+            clear: both;
+            border-radius: 10px 10px 0 10px;
+          }
+          img{
+            width: 25px;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+          }
         }
       }
 
