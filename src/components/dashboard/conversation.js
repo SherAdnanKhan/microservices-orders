@@ -4,6 +4,7 @@ import { getAllConversations } from '../../actions/conversationActions';
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
 import Spinner from '../common/spinner';
+import { formatTime } from '../../utils/helperFunctions';
 
 const Conversation = () => {
   const currentUser = useContext(UserContext);
@@ -16,23 +17,6 @@ const Conversation = () => {
   useEffect(() => {
     dispatch(getAllConversations());
   }, [dispatch]);
-
-  const formatTime = dateTime => {
-    let date = new Date(dateTime);
-    var hours = date.getHours();
-    var minuts = date.getMinutes();
-    var isAmOrPm = "AM";
-
-    if (hours >= 12) {
-      hours = hours - 12;
-      isAmOrPm = "PM";
-    }
-
-    if (hours === 0) {
-      hours = 12;
-    }
-    return `${hours}:${minuts} ${isAmOrPm} `;
-  }
 
   return (
     <div className="conversation">

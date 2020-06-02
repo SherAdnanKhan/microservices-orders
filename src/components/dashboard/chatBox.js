@@ -6,6 +6,7 @@ import { getConversation, updateConversation, clearConversation, createMessage }
 import io from 'socket.io-client';
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
+import { formatTime } from '../../utils/helperFunctions';
 
 class ChatBox extends Component {
   // url = "http://localhost:8080";
@@ -115,18 +116,24 @@ class ChatBox extends Component {
                     <div
                       className="message-row group"
                     >
-                      <div className="outgoing">
-                        <div className="send-icon">
-                          <img alt="" src={`/assets/images/${currentUser.feel_color}.png`} />
+                      <div className={`outgoing ${data.user.feel_color}`}>
+                        <div className="user-message">
+                          <div className="send-icon">
+                            <img alt="" src={`/assets/images/${data.user.feel_color}.png`} />
+                          </div>
+                          <p>{data.message}</p>
                         </div>
-                        <p>{data.message}</p>
+                        {data.created_at && <p className='time'>{formatTime(data.created_at)}</p>}
                       </div>
                     </div>
                   ) : (
                     <div className="message-row group">
-                      <div className="incoming">
-                        <Avatar avatars={data.user.avatars} />
-                        <p>{data.message}</p>
+                      <div className={`incoming ${data.user.feel_color}`}>
+                        <div className="user-message">
+                          <Avatar avatars={data.user.avatars} feelColor={data.user.feel_color} />
+                          <p>{data.message}</p>
+                        </div>
+                        {data.created_at && <p className='time'>{formatTime(data.created_at)}</p>}
                       </div>
                     </div>
                   )
