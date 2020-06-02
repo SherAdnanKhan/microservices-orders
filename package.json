@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "history": "^4.10.1",
     "jquery": "^3.5.0",
+    "moment": "^2.26.0",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

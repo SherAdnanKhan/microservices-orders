@@ -4,7 +4,8 @@ import { getAllConversations } from '../../actions/conversationActions';
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
 import Spinner from '../common/spinner';
-import { formatTime } from '../../utils/helperFunctions';
+import { formatTime, formatDate } from '../../utils/helperFunctions';
+import { Link } from 'react-router-dom';
 
 const Conversation = () => {
   const currentUser = useContext(UserContext);
@@ -18,31 +19,53 @@ const Conversation = () => {
     dispatch(getAllConversations());
   }, [dispatch]);
 
+  const getDateOrTime = date => {
+    const current = new Date();
+    const incoming = new Date(date);
+
+    if (current.getDate() === incoming.getDate()) {
+      console.log('yes')
+      return formatTime(date);
+    }
+    return formatDate(date);
+  }
+
   return (
     <div className="conversation">
       {loading && <Spinner />}
+      {(!conversations || conversations.length === 0) &&
+        <div className="logo">
+          <img src="/assets/images/strqicon.png" alt="" />
+          <p> Find an Artist to Strq </p>
+        </div>
+      }
       <div className="setMarginTop" />
       <div className="chatMsgLists">
-
         {conversations &&
           conversations.map((conversation, index) => (
             <div className="singleMsg" key={index}>
-              <span className="notify">
-                9
-              </span>
+              {conversation.unread_messages_logs_count > 0 &&
+                <span className="notify">
+                  {conversation.unread_messages_logs_count}
+                </span>
+              }
               {conversation.participants.length > 0 &&
                 <>
                   {conversation.participants[0].id !== currentUser.id &&
-                    <Avatar
-                      avatars={conversation.participants[0].avatars}
-                      feelColor={conversation.participants[0].feel_color}
-                    />
+                    <Link to={`/dashboard/chat/${conversation.participants[0].slug}`}>
+                      <Avatar
+                        avatars={conversation.participants[0].avatars}
+                        feelColor={conversation.participants[0].feel_color}
+                      />
+                    </Link>
                   }
                   {conversation.participants[1].id !== currentUser.id &&
-                    <Avatar
-                      avatars={conversation.participants[1].avatars}
-                      feelColor={conversation.participants[1].feel_color}
-                    />
+                    <Link to={`/dashboard/chat/${conversation.participants[1].slug}`}>
+                      <Avatar
+                        avatars={conversation.participants[1].avatars}
+                        feelColor={conversation.participants[1].feel_color}
+                      />
+                    </Link>
                   }
                 </>
               }
@@ -64,10 +87,9 @@ const Conversation = () => {
                 }
               </div>
               <div className="dateTime">
-                {/* 9:48 AM */}
                 {conversation.messages.length > 0 &&
                   <>
-                    {formatTime(conversation.messages[conversation.messages.length - 1].created_at)}
+                    {getDateOrTime(conversation.messages[conversation.messages.length - 1].created_at)}
                   </>
                 }
               </div>
@@ -110,7 +132,7 @@ const Conversation = () => {
           </div>
         </div > */}
       </div>
-    </div>
+    </div >
   );
 };
 
