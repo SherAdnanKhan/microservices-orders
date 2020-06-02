@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 export const isEmpty = value =>
   value === undefined ||
@@ -33,3 +34,7 @@ export const formatTime = dateTime => {
   }
   return `${hours}:${minuts} ${isAmOrPm} `;
 };
+
+export const formatDate = date => {
+  return moment(date).format("MMM Do");
+}

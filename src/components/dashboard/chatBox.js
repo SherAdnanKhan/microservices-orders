@@ -6,7 +6,7 @@ import { getConversation, updateConversation, clearConversation, createMessage }
 import io from 'socket.io-client';
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
-import { formatTime } from '../../utils/helperFunctions';
+import { formatTime, formatDate } from '../../utils/helperFunctions';
 
 class ChatBox extends Component {
   // url = "http://localhost:8080";
@@ -39,10 +39,12 @@ class ChatBox extends Component {
   }
 
   componentCleanup = () => {
+    const { conversation } = this.props.conversation;
+
+    conversation && this.state.socket.emit('leave', { room: conversation.id });
+    this.state.socket.emit('disconnect');
     this.setState({ message: '' });
     this.props.clearConversation();
-    this.state.socket.emit('leave', { room: this.props.conversation.conversation.id });
-    this.state.socket.emit('disconnect');
   }
 
   componentWillUnmount() {
@@ -77,7 +79,6 @@ class ChatBox extends Component {
     const { message } = this.state;
     const currentUser = this.context;
     const { history } = this.props;
-    const { slug } = this.props.match.params;
     const { user, messages } = this.props.conversation
 
     return (
@@ -85,7 +86,7 @@ class ChatBox extends Component {
         <div className="chat-header">
           <i
             className="fa fa-arrow-left clickable"
-            onClick={() => history.replace(`/dashboard/studio/${slug}`)}
+            onClick={() => history.goBack()}
           />
 
           {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
@@ -123,7 +124,11 @@ class ChatBox extends Component {
                           </div>
                           <p>{data.message}</p>
                         </div>
-                        {data.created_at && <p className='time'>{formatTime(data.created_at)}</p>}
+                        {data.created_at &&
+                          <p className='time'>
+                            {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
+                          </p>
+                        }
                       </div>
                     </div>
                   ) : (
@@ -133,7 +138,11 @@ class ChatBox extends Component {
                           <Avatar avatars={data.user.avatars} feelColor={data.user.feel_color} />
                           <p>{data.message}</p>
                         </div>
-                        {data.created_at && <p className='time'>{formatTime(data.created_at)}</p>}
+                        {data.created_at &&
+                          <p className='time'>
+                            {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
+                          </p>
+                        }
                       </div>
                     </div>
                   )
