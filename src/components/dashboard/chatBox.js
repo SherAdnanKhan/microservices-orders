@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getConversation, updateConversation, clearConversation, createMessage } from '../../actions/conversationActions';
+import { getConversation, updateConversation, clearConversation, createMessage, uploadImage } from '../../actions/conversationActions';
 import io from 'socket.io-client';
 import Avatar from '../common/avatar';
 import UserContext from '../../context/userContext';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
+import Spinner from '../common/spinner';
 
 class ChatBox extends Component {
   // url = "http://localhost:8080";
@@ -75,14 +76,31 @@ class ChatBox extends Component {
     }
   };
 
+  handleUpload = ({ target: input }) => {
+    if (input.name === 'image') {
+      if (input.files[0]) {
+        const data = new FormData();
+        data.append('image', input.files[0]);
+
+        this.props.uploadImage(data,
+          image => {
+            this.setState({ message: image.image_path });
+          },
+          err => {
+            console.log(err);
+          })
+      }
+    }
+  }
   render() {
     const { message } = this.state;
     const currentUser = this.context;
     const { history } = this.props;
-    const { user, messages } = this.props.conversation
+    const { user, messages, loading } = this.props.conversation
 
     return (
       <div className="chat-box">
+        {loading && <Spinner />}
         <div className="chat-header">
           <i
             className="fa fa-arrow-left clickable"
@@ -167,14 +185,15 @@ class ChatBox extends Component {
 
         <div className="add-img-vid-box">
           <i className="fa fa-times close-add-box" />
-          <div>
+          <label>
             <img alt="" src="/assets/images/plus.png" />
             Add Image
-          </div>
-          <div>
+            <input type="file" name="image" onChange={this.handleUpload} />
+          </label>
+          <label>
             <img alt="" src="/assets/images/plus.png" />
             Add Video
-          </div>
+          </label>
         </div>
       </div>
     );
@@ -194,5 +213,6 @@ export default connect(
   getConversation,
   updateConversation,
   clearConversation,
-  createMessage
+  createMessage,
+  uploadImage
 })(withRouter(ChatBox));

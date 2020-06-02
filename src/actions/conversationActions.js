@@ -3,7 +3,9 @@ import {
   GET_CONVERSATION,
   UPDATE_CONVERSATION,
   CLEAR_CONVERSATION,
-  GET_ALL_CONVERSATIONS
+  GET_ALL_CONVERSATIONS,
+  START_IMAGE_LOADER,
+  STOP_IMAGE_LOADER
 } from "../constants/actionTypes";
 
 export const getAllConversations = () => dispatch => {
@@ -44,4 +46,19 @@ export const createMessage = data => () => {
 
 export const clearConversation = () => dispatch => {
   dispatch({ type: CLEAR_CONVERSATION, payload: null });
+};
+
+export const uploadImage = (image, success, faliure) => dispatch => {
+  dispatch({ type: START_IMAGE_LOADER });
+
+  http
+    .post('/chats/message/image', image, {})
+    .then(res => {
+      dispatch({ type: STOP_IMAGE_LOADER });
+      success(res.data.data.image);
+    })
+    .catch(err => {
+      dispatch({ type: STOP_IMAGE_LOADER });
+      faliure(err.response)
+    });
 };

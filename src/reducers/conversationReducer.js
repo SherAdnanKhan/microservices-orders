@@ -2,7 +2,9 @@ import {
   GET_CONVERSATION,
   UPDATE_CONVERSATION,
   CLEAR_CONVERSATION,
-  GET_ALL_CONVERSATIONS
+  GET_ALL_CONVERSATIONS,
+  START_IMAGE_LOADER,
+  STOP_IMAGE_LOADER
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -37,6 +39,16 @@ export default (state = initialState, action) => {
         conversation: null,
         messages: [],
         user: null
+      };
+    case START_IMAGE_LOADER:
+      return {
+        ...state,
+        loading: true
+      };
+    case STOP_IMAGE_LOADER:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;
