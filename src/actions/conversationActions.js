@@ -1,5 +1,22 @@
 import http from "../services/httpService"
-import { GET_CONVERSATION, UPDATE_CONVERSATION, CLEAR_CONVERSATION } from "../constants/actionTypes";
+import {
+  GET_CONVERSATION,
+  UPDATE_CONVERSATION,
+  CLEAR_CONVERSATION,
+  GET_ALL_CONVERSATIONS
+} from "../constants/actionTypes";
+
+export const getAllConversations = () => dispatch => {
+  http
+    .get('/chats')
+    .then(res => {
+      console.log(res.data.data.conversations);
+      dispatch({
+        type: GET_ALL_CONVERSATIONS,
+        payload: res.data.data.conversations
+      });
+    });
+};
 
 export const getConversation = slug => dispatch => {
   http
