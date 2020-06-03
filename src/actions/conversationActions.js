@@ -39,8 +39,16 @@ export const updateConversation = data => dispatch => {
 };
 
 export const createMessage = data => () => {
+  const payload = {
+    message: data.message,
+    conversation_id: data.room,
+    user_id: data.user.id,
+    message_type: data.type,
+    url: data.url
+  };
+
   http
-    .post('/chats/message', { message: data.message, conversation_id: data.room, user_id: data.user.id })
+    .post('/chats/message', payload)
     .then();
 };
 
@@ -48,11 +56,17 @@ export const clearConversation = () => dispatch => {
   dispatch({ type: CLEAR_CONVERSATION, payload: null });
 };
 
-export const uploadImage = (image, success, faliure) => dispatch => {
+export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
   dispatch({ type: START_IMAGE_LOADER });
 
+  const config = {
+    onUploadProgress: progressEvent => {
+      onUpload(Math.floor((progressEvent.loaded * 100) / progressEvent.total));
+    }
+  };
+
   http
-    .post('/chats/message/image', image, {})
+    .post('/chats/message/image', image, config)
     .then(res => {
       dispatch({ type: STOP_IMAGE_LOADER });
       success(res.data.data.image);

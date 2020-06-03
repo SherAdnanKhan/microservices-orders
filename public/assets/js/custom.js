@@ -181,9 +181,9 @@ $(document).on('click', '.close-comment', function () {
   $(".comments-box").hide();
 });
 
-$(document).on('click', '.add-items-btn', function () {
-  $(".add-img-vid-box").css("display", "flex");;
-});
-$(document).on('click', '.close-add-box', function () {
-  $(".add-img-vid-box").css("display", "none");;
-});
+// $(document).on('click', '.add-items-btn', function () {
+//   $(".add-img-vid-box").css("display", "flex");;
+// });
+// $(document).on('click', '.close-add-box', function () {
+//   $(".add-img-vid-box").css("display", "none");;
+// });
