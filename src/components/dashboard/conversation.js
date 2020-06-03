@@ -97,42 +97,8 @@ const Conversation = () => {
           ))
         }
 
-        {/* <div className="singleMsg" >
-          <div className="artcubecase dodgerblue">
-            <div className="procusmallmove">
-              <div className="scenesmall">
-                <a href="#__">
-                  <div className="cubesmallmove">
-                    <div className="cube-facesmall cube-face-frontsmall">
-                      <img src="/assets/images/dummyData/03.png" height="100%" alt="" />
-                    </div>
-                    <div className="cube-facesmall cube-face-backsmall">
-                      <img src="/assets/images/dummyData/03.png" height="100%" alt="" />
-                    </div>
-                    <div className="cube-facesmall cube-face-leftsmall">
-                      <img src="/assets/images/dummyData/03.png" height="100%" alt="" />
-                    </div>
-                    <div className="cube-facesmall cube-face-rightsmall">
-                      <img src="/assets/images/dummyData/03.png" height="100%" alt="" />
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="exhibitartname">
-              <span className="artof" id="artof" />
-            </div>
-          </div>
-          <div className="msg">
-            <div className="name">Name: asdfasdf</div>
-          asdf
-        </div>
-          <div className="dateTime">
-            9:48 AM
-          </div>
-        </div > */}
       </div>
-    </div >
+    </div>
   );
 };
 
