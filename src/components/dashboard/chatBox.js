@@ -192,7 +192,17 @@ class ChatBox extends Component {
                           <div className={`incoming ${data.user.feel_color}`}>
                             <div className="user-message">
                               <Avatar avatars={data.user.avatars} feelColor={data.user.feel_color} />
-                              <div className="text">{data.message}</div>
+                              <div className="text">
+                                {data.message}
+                                {data.type === 1 &&
+                                  <div className="msgImg">
+                                    <img
+                                      src={data.url}
+                                      alt=""
+                                    />
+                                  </div>
+                                }
+                              </div>
                             </div>
                             {data.created_at &&
                               <p className='time'>
