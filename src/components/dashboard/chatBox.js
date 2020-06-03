@@ -3,27 +3,25 @@ import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getConversation, updateConversation, clearConversation, createMessage, uploadImage, uploadVideo } from '../../actions/conversationActions';
-import io from 'socket.io-client';
 import Avatar from '../common/avatar';
-import UserContext from '../../context/userContext';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
 import Spinner from '../common/spinner';
+import SocketContext from '../../context/socketContext';
+import { getCurrentUser } from '../../actions/authActions';
+
 
 class ChatBox extends Component {
-  // url = "http://localhost:8080";
 
   state = {
     image: '',
     video: '',
     message: '',
-    socket: '',
     hidden: false
   };
 
   componentDidMount() {
-    window.addEventListener('beforeunload', this.componentCleanup);
     this.props.getConversation(this.props.match.params.slug);
-    this.setState({ socket: io.connect(process.env.REACT_APP_SOCKET_URL) });
+    this.setState({ socket: this.context });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -61,19 +59,19 @@ class ChatBox extends Component {
 
   componentWillUnmount() {
     this.componentCleanup();
-    window.removeEventListener('beforeunload', this.componentCleanup);
   }
 
   sendMessage = e => {
     const { image, video, message } = this.state;
     const { conversation } = this.props.conversation;
+    const user = getCurrentUser();
 
     if (conversation) {
       const data = {
         message,
         url: image || video || '',
         type: image ? 1 : video ? 2 : 0,
-        user: this.context,
+        user,
         room: conversation.id
       };
 
@@ -138,7 +136,7 @@ class ChatBox extends Component {
   }
   render() {
     const { message, image, hidden } = this.state;
-    const currentUser = this.context;
+    const currentUser = getCurrentUser();
     const { history } = this.props;
     const { user, messages, loading } = this.props.conversation
 
@@ -302,7 +300,7 @@ const mapStateToProps = state => {
   }
 };
 
-ChatBox.contextType = UserContext;
+ChatBox.contextType = SocketContext;
 
 export default connect(
   mapStateToProps, {

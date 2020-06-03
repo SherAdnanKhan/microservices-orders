@@ -12,7 +12,9 @@ export const getAllConversations = () => dispatch => {
   http
     .get('/chats')
     .then(res => {
-      console.log(res.data.data.conversations);
+      console.log('Hello');
+      localStorage.setItem('conversations', JSON.stringify(res.data.data.conversations));
+
       dispatch({
         type: GET_ALL_CONVERSATIONS,
         payload: res.data.data.conversations

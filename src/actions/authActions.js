@@ -1,6 +1,7 @@
 import http from "../services/httpService";
 import { userKey, tokenKey } from "../constants/keys";
 import { isEmpty } from "../utils/helperFunctions";
+import { getAllConversations } from "./conversationActions";
 
 export const register = credentials => () => {
   http
@@ -14,12 +15,12 @@ export const register = credentials => () => {
     });
 };
 
-export const login = credentials => () => {
+export const login = credentials => dispatch => {
   http
     .post('/auth/login', credentials)
     .then(res => {
+      dispatch(getAllConversations())
       setCurrentUser(res.data.data);
-      window.location.href = '/dashboard/lobby';
     });
 };
 
