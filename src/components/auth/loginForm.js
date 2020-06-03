@@ -54,10 +54,10 @@ const LoginForm = () => {
           <div className="procu">
             <div className="scene">
               <div className="cube">
-                <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent' }}><img src="./assets/images/logowhite.png" alt="" /></div>
-                <div className="cube-face  cube-face-back" style={{ borderColor: 'transparent' }}><img src="./assets/images/logowhite.png" alt="" /></div>
-                <div className="cube-face  cube-face-left" style={{ borderColor: 'transparent' }}><img src="./assets/images/logowhite.png" alt="" /></div>
-                <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent', background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-back" style={{ borderColor: 'transparent'  , background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-left" style={{ borderColor: 'transparent'  , background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent' , background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
               </div>
             </div>
           </div>
