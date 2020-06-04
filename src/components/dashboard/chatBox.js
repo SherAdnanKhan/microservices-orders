@@ -8,7 +8,7 @@ import { formatTime, formatDate } from '../../utils/helperFunctions';
 import Spinner from '../common/spinner';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
-
+import io from 'socket.io-client';
 
 class ChatBox extends Component {
 
@@ -21,7 +21,7 @@ class ChatBox extends Component {
 
   componentDidMount() {
     this.props.getConversation(this.props.match.params.slug);
-    this.setState({ socket: this.context });
+    this.setState({ socket: io.connect(process.env.REACT_APP_SOCKET_URL) });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -53,7 +53,7 @@ class ChatBox extends Component {
 
     conversation && this.state.socket.emit('leave', { room: conversation.id });
     this.state.socket.emit('disconnect');
-    this.setState({ message: '' });
+    this.setState({ message: '', socket: '' });
     this.props.clearConversation();
   }
 
