@@ -4,8 +4,8 @@ import {
   UPDATE_CONVERSATION,
   CLEAR_CONVERSATION,
   GET_ALL_CONVERSATIONS,
-  START_IMAGE_LOADER,
-  STOP_IMAGE_LOADER
+  START_FILE_LOADER,
+  STOP_FILE_LOADER
 } from "../constants/actionTypes";
 
 export const getAllConversations = () => dispatch => {
@@ -59,7 +59,7 @@ export const clearConversation = () => dispatch => {
 };
 
 export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
-  dispatch({ type: START_IMAGE_LOADER });
+  dispatch({ type: START_FILE_LOADER });
 
   const config = {
     onUploadProgress: progressEvent => {
@@ -70,17 +70,17 @@ export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
   http
     .post('/chats/message/image', image, config)
     .then(res => {
-      dispatch({ type: STOP_IMAGE_LOADER });
+      dispatch({ type: STOP_FILE_LOADER });
       success(res.data.data.image);
     })
     .catch(err => {
-      dispatch({ type: STOP_IMAGE_LOADER });
+      dispatch({ type: STOP_FILE_LOADER });
       faliure(err.response)
     });
 };
 
 export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
-  dispatch({ type: START_IMAGE_LOADER });
+  dispatch({ type: START_FILE_LOADER });
 
   const config = {
     onUploadProgress: progressEvent => {
@@ -91,11 +91,11 @@ export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
   http
     .post('/chats/message/video', video, config)
     .then(res => {
-      dispatch({ type: STOP_IMAGE_LOADER });
+      dispatch({ type: STOP_FILE_LOADER });
       success(res.data.data);
     })
     .catch(err => {
-      dispatch({ type: STOP_IMAGE_LOADER });
+      dispatch({ type: STOP_FILE_LOADER });
       faliure(err.response)
     });
 };
