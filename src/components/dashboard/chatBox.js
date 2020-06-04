@@ -76,10 +76,17 @@ class ChatBox extends Component {
           room: conversation.id
         };
 
-        this.state.socket.emit('sendMessage', data, () => {
-          this.setState({ message: '', image: '' });
-          this.props.createMessage(data);
-        });
+        this.props.createMessage(data,
+          (result) => {
+            const newData = result.message;
+
+            newData.user = result.user;
+            newData.room = result.message.conversation_id
+            this.setState({ message: '', image: '', video: '' });
+
+            this.state.socket.emit('sendMessage', newData, () => {
+            });
+          });
       }
     }
 

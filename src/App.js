@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LoginForm from './components/auth/loginForm';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import RegisterForm from './components/auth/registerForm';
 import Home from './components/home';
 import ForgotPasswordForm from './components/auth/forgotPasswordForm';
@@ -13,7 +13,8 @@ import Tutorial from './components/tutorial';
 import io from 'socket.io-client';
 import { getCurrentUser } from './actions/authActions';
 import SocketContext from './context/socketContext';
-import toast from './utils/toast';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [socket, setSocket] = useState('');
@@ -44,7 +45,15 @@ function App() {
         const found = conversations.find(conversation => conversation.id === data.room);
 
         if (found && getCurrentUser().id !== data.user.id) {
-          toast.success('You have new message');
+          toast(() => {
+            return (
+              <Link
+                to={`/dashboard/chat/${data.user.slug}`}
+                style={{ textDecoration: 'none', color: getCurrentUser().feel_color }}>
+                You have new message from {data.user.username}
+              </Link>
+            )
+          });
         }
       });
     }
@@ -60,6 +69,7 @@ function App() {
   return (
 
     <SocketContext.Provider value={socket}>
+      <ToastContainer autoClose={5000} />
       <Switch>
         <Route exact path='/login' component={LoginForm} />
         <Route exact path='/forgot' component={ForgotPasswordForm} />
