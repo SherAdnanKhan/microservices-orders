@@ -24,6 +24,7 @@
 @defaultFontSize: 1em;
 @color_gold: #ffd700;
 @desktopWidth: 1300px;
+@feelDist:36vw;
 
 @desktop:   ~"only screen and (min-width: 960px) and (max-width: 1380px)";
 @tablet:    ~"only screen and (min-width: 769px) and (max-width: 959px)";
@@ -1019,48 +1020,53 @@ input {
     transform: translate(-50%, -50%);
     width: 100%;
     height: auto;
-    .seventy,
-    .ninety {
-      margin: 0 auto;
-      display: flex;
-      .l {
-        text-align: left;
-        width: 100%;
-        max-width: 50%;
-      }
-      .r {
-        text-align: right;
-        width: 100%;
-        max-width: 50%;
-      }
-      img {
-        width: 100%;
-        max-width: 100px;
-        cursor: pointer;
-      }
+
+    .feelImg div {
+       display:block;
+       position:absolute;
+       top:50%;
+       left:50%;
+       width:26vw;
+       height:26vw;
+       margin:-13vw;
+     img {
+      height:100%;
+     }
     }
-    .ninety {
-      width: 90%;
-    }
-    .seventy {
-      width: 50%;
-    }
-    .single {
-      text-align: center;
-      margin: 0 auto;
-      .c {
-        margin: 0 auto;
-        width: 100%;
-        max-width: 50%;
+
+      .gold {
+      transform: rotate(225deg) translate(@feelDist) rotate(-225deg);
       }
-      img {
-        width: 100%;
-        max-width: 100px;
-        cursor: pointer;
+
+     .orange {
+      transform: rotate(180deg) translate(@feelDist) rotate(-180deg);
       }
+
+     .red {
+      transform: rotate(135deg) translate(@feelDist) rotate(-135deg);
+      }
+     .purple {
+      transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
+      }
+
+     .blue {
+      transform: rotate(45deg) translate(@feelDist) rotate(-45deg);
+      }
+
+     .green {
+      transform: translate(@feelDist) ;
+      }
+
+     .gray {
+      transform: rotate(315deg) translate(@feelDist) rotate(-315deg);
+      }
+
+
+
+
     }
   }
-}
+
 
 .smallCube {
   margin-top: 100px;
