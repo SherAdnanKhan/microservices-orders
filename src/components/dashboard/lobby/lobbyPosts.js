@@ -8,7 +8,7 @@ const LobbyPosts = ({ post }) => {
       <div className="post-head">
         <p>{post.user.username}</p>
         <Link to={`/dashboard/studio/${post.user.slug}`} >
-          <Avatar avatars={post.user.avatars && post.user.avatars} />
+          <Avatar avatars={post.user.avatars && post.user.avatars} feelColor={post.user.feel_color} />
         </Link>
         {post.user.art &&
           <>

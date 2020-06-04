@@ -83,13 +83,13 @@ class ChatBox extends Component {
           room: conversation.id
         };
 
+        this.setState({ message: '', image: '', video: '' });
         this.props.createMessage(data,
           (result) => {
             const newData = result.message;
 
             newData.user = result.user;
             newData.room = result.message.conversation_id
-            this.setState({ message: '', image: '', video: '' });
 
             this.state.socket.emit('sendMessage', newData, () => {
             });
@@ -207,7 +207,7 @@ class ChatBox extends Component {
                                 {data.message}
                                 {data.type === 1 &&
                                   <div className="msgImg">
-                                    <a href={data.url}>
+                                    <a href={data.url} target="_blank" rel="noopener noreferrer">>
                                       <img
                                         src={data.url}
                                         alt=""
@@ -242,7 +242,7 @@ class ChatBox extends Component {
                                 {data.message}
                                 {data.type === 1 &&
                                   <div className="msgImg">
-                                    <a href={data.url}>
+                                    <a href={data.url} target="_blank" rel="noopener noreferrer">>
                                       <img
                                         src={data.url}
                                         alt=""

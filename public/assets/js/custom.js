@@ -84,6 +84,7 @@ $(document).on('click', 'nav a ', function () {
 
 $(document).on('click', '#search', function () {
   $("#search-bar").css("display", "flex");
+  $("#search-field").focus();
   $("#main-menu").hide();
   $(".do-not-delete").hide();
   $('nav').hide();

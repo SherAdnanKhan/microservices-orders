@@ -29,6 +29,7 @@ const Search = () => {
         <div className="search-input">
           <input
             type="text"
+            id="search-field"
             value={query}
             onChange={handleChange}
             placeholder="Search" />
