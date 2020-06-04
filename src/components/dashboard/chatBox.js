@@ -15,7 +15,7 @@ class ChatBox extends Component {
   state = {
     image: '',
     video: '',
-    message: '',
+    message: ' ',
     hidden: false
   };
 
@@ -67,18 +67,20 @@ class ChatBox extends Component {
     const user = getCurrentUser();
 
     if (conversation) {
-      const data = {
-        message,
-        url: image || video || '',
-        type: image ? 1 : video ? 2 : 0,
-        user,
-        room: conversation.id
-      };
+      if (message || image || video) {
+        const data = {
+          message,
+          url: image || video || '',
+          type: image ? 1 : video ? 2 : 0,
+          user,
+          room: conversation.id
+        };
 
-      this.state.socket.emit('sendMessage', data, () => {
-        this.setState({ message: '', image: '' });
-        this.props.createMessage(data);
-      });
+        this.state.socket.emit('sendMessage', data, () => {
+          this.setState({ message: '', image: '' });
+          this.props.createMessage(data);
+        });
+      }
     }
 
     $('.chat-container').stop().animate({
@@ -126,6 +128,7 @@ class ChatBox extends Component {
             console.log(progress);
           },
           video => {
+            console.log(video);
             this.setState({ video: video.video_path, hidden: false });
           },
           err => {
@@ -135,7 +138,7 @@ class ChatBox extends Component {
     }
   }
   render() {
-    const { message, image, hidden } = this.state;
+    const { message, image, hidden, video } = this.state;
     const currentUser = getCurrentUser();
     const { history } = this.props;
     const { user, messages, loading } = this.props.conversation
@@ -194,6 +197,15 @@ class ChatBox extends Component {
                                     />
                                   </div>
                                 }
+                                {data.type === 2 &&
+                                  <div className="msgVideo">
+                                    <video width="320" height="240" controls>
+                                      <source src={data.url} type="video/mp4" />
+                                      <source src={data.url} type="video/ogg" />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                  </div>
+                                }
                               </div>
                             </div>
                             {data.created_at &&
@@ -218,6 +230,15 @@ class ChatBox extends Component {
                                     />
                                   </div>
                                 }
+                                {data.type === 2 &&
+                                  <div className="msgVideo">
+                                    <video width="320" height="240" controls>
+                                      <source src={data.url} type="video/mp4" />
+                                      <source src={data.url} type="video/ogg" />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                  </div>
+                                }
                               </div>
                             </div>
                             {data.created_at &&
@@ -239,12 +260,7 @@ class ChatBox extends Component {
         <div className="message-input">
           <i
             className="fa fa-plus add-items-btn"
-            onClick={() => {
-              this.setState({ hidden: true }, () => {
-                console.log($('.chat-container'));
-
-              })
-            }}
+            onClick={() => this.setState({ hidden: true })}
           />
           <input
             autoFocus
@@ -270,8 +286,18 @@ class ChatBox extends Component {
           </div>
         }
 
-        {
-          hidden &&
+        {video &&
+          <div className="video-preview">
+            <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
+            <video width="320" height="240" controls>
+              <source src={video} type="video/mp4" />
+              <source src={video} type="video/ogg" />
+                  Your browser does not support the video tag.
+            </video>
+          </div>
+        }
+
+        {hidden &&
           <div className="add-img-vid-box">
             <i
               className="fa fa-times close-add-box"

@@ -3,8 +3,8 @@ import {
   UPDATE_CONVERSATION,
   CLEAR_CONVERSATION,
   GET_ALL_CONVERSATIONS,
-  START_IMAGE_LOADER,
-  STOP_IMAGE_LOADER
+  START_FILE_LOADER,
+  STOP_FILE_LOADER
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -40,12 +40,12 @@ export default (state = initialState, action) => {
         messages: [],
         user: null
       };
-    case START_IMAGE_LOADER:
+    case START_FILE_LOADER:
       return {
         ...state,
         loading: true
       };
-    case STOP_IMAGE_LOADER:
+    case STOP_FILE_LOADER:
       return {
         ...state,
         loading: false
