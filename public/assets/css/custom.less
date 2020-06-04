@@ -25,10 +25,14 @@
 @color_gold: #ffd700;
 @desktopWidth: 1300px;
 @feelDist:36vw;
+@feelDistWide:36vh;
+
 
 @desktop:   ~"only screen and (min-width: 960px) and (max-width: 1380px)";
 @tablet:    ~"only screen and (min-width: 769px) and (max-width: 959px)";
 @mobile:    ~"only screen and (max-width: 768px)";
+@landscape: ~"only screen and (orientation:landscape)";
+
 
 body {
   margin: 0;
@@ -1019,7 +1023,7 @@ input {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    height: auto;
+    height: 100%;
 
     .feelImg div {
        display:block;
@@ -1029,6 +1033,11 @@ input {
        width:26vw;
        height:26vw;
        margin:-13vw;
+       @media @landscape {
+         width:26vh;
+	 height:26vh;
+	 margin:-13vh;
+       }
      img {
       height:100%;
      }
@@ -1036,29 +1045,56 @@ input {
 
       .gold {
       transform: rotate(225deg) translate(@feelDist) rotate(-225deg);
+      @media @landscape {
+      transform: rotate(225deg) translate(@feelDistWide) rotate(-225deg);
+      }
       }
 
      .orange {
       transform: rotate(180deg) translate(@feelDist) rotate(-180deg);
+      @media @landscape {
+      transform: rotate(180deg) translate(@feelDistWide) rotate(-180deg);
+      }
+
       }
 
      .red {
       transform: rotate(135deg) translate(@feelDist) rotate(-135deg);
+      @media @landscape {
+      transform: rotate(135deg) translate(@feelDistWide) rotate(-135deg);
+      }
+
       }
      .purple {
       transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
+      @media @landscape {
+      transform: rotate(90deg) translate(@feelDistWide) rotate(-90deg);
+      }
+
       }
 
      .blue {
       transform: rotate(45deg) translate(@feelDist) rotate(-45deg);
+      @media @landscape {
+      transform: rotate(45deg) translate(@feelDistWide) rotate(-45deg);
+      }
+
       }
 
      .green {
-      transform: translate(@feelDist) ;
+      transform: translate(@feelDist);
+      @media @landscape {
+      transform: translate(@feelDistWide);
+      }
+
       }
 
      .gray {
       transform: rotate(315deg) translate(@feelDist) rotate(-315deg);
+      @media @landscape {
+      transform: rotate(315deg) translate(@feelDistWide) rotate(-315deg);
+      }
+
       }
 
 
