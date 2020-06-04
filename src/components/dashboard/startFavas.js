@@ -14,7 +14,7 @@ const StartFaves = () => {
     if (!recommendedGalleries)
       dispatch(getRecommendedGalleries())
     console.log(recommendedGalleries);
-  }, [recommendedGalleries])
+  }, [dispatch, recommendedGalleries])
 
   return (
     <div className="wrapper fav-page">
