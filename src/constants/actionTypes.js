@@ -43,6 +43,7 @@ export const MAKE_FAV = "MAKE_FAV";
 export const FAV_GALLERY = "FAV_GALLERY";
 export const UNFAV_GALLERY = "UNFAV_GALLERY";
 export const CLEAR_GALLERY = "CLEAR_GALLERY";
+export const RECOMMEND_GALLERIES = "RECOMMEND_GALLERIES";
 
 // Post
 export const GET_POST = "GET_POST";
