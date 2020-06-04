@@ -40,7 +40,7 @@ export const updateConversation = data => dispatch => {
   });
 };
 
-export const createMessage = data => () => {
+export const createMessage = (data, success) => () => {
   const payload = {
     message: data.message,
     conversation_id: data.room,
@@ -51,7 +51,7 @@ export const createMessage = data => () => {
 
   http
     .post('/chats/message', payload)
-    .then();
+    .then(res => success && success(res.data.data));
 };
 
 export const clearConversation = () => dispatch => {

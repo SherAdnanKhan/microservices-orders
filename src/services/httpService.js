@@ -4,6 +4,7 @@ import { startLoading, stopLoading } from '../actions/loadingActions';
 import { setError, clearError } from '../actions/errorActions';
 import { getFormattedErrors } from '../utils/helperFunctions';
 import { getAuthToken } from '../actions/authActions';
+import { toast } from "react-toastify";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
@@ -32,7 +33,7 @@ axios.interceptors.response.use(
       error.response.status < 500;
 
     if (!expectedError) {
-      alert('An unexpected error has occured.');
+      toast.error('An unexpected error has occured.')
     }
 
     if (expectedError) {
