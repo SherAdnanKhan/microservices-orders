@@ -34,8 +34,15 @@ class ChatBox extends Component {
       });
 
       this.state.socket.on('recieveMessage', (data) => {
+        this.state.socket.emit("onRead", data, () => {
+
+        });
         console.log("yes xsd", data);
         this.props.updateConversation(data);
+      });
+
+      this.state.socket.on('read', (data) => {
+        console.log("seen");
       });
     }
 
@@ -120,10 +127,11 @@ class ChatBox extends Component {
             this.setState({ image: image.image_path, hidden: false });
           },
           err => {
-            console.log(err);
+            this.setState({ hidden: false });
           })
       }
     }
+
     if (input.name === 'video') {
       if (input.files[0]) {
         const data = new FormData();
@@ -139,11 +147,12 @@ class ChatBox extends Component {
             this.setState({ video: video.video_path, hidden: false });
           },
           err => {
-            console.log(err);
+            this.setState({ hidden: false });
           })
       }
     }
   }
+
   render() {
     const { message, image, hidden, video } = this.state;
     const currentUser = getCurrentUser();
@@ -198,10 +207,12 @@ class ChatBox extends Component {
                                 {data.message}
                                 {data.type === 1 &&
                                   <div className="msgImg">
-                                    <img
-                                      src={data.url}
-                                      alt=""
-                                    />
+                                    <a href={data.url}>
+                                      <img
+                                        src={data.url}
+                                        alt=""
+                                      />
+                                    </a>
                                   </div>
                                 }
                                 {data.type === 2 &&
@@ -231,10 +242,12 @@ class ChatBox extends Component {
                                 {data.message}
                                 {data.type === 1 &&
                                   <div className="msgImg">
-                                    <img
-                                      src={data.url}
-                                      alt=""
-                                    />
+                                    <a href={data.url}>
+                                      <img
+                                        src={data.url}
+                                        alt=""
+                                      />
+                                    </a>
                                   </div>
                                 }
                                 {data.type === 2 &&
@@ -286,14 +299,16 @@ class ChatBox extends Component {
           </button>
         </div>
 
-        {image &&
+        {
+          image &&
           <div className="image-preview">
             <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
             <img src={image} alt="" />
           </div>
         }
 
-        {video &&
+        {
+          video &&
           <div className="video-preview">
             <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
             <video width="320" height="240" controls>
@@ -304,7 +319,8 @@ class ChatBox extends Component {
           </div>
         }
 
-        {hidden &&
+        {
+          hidden &&
           <div className="add-img-vid-box">
             <i
               className="fa fa-times close-add-box"
@@ -318,7 +334,7 @@ class ChatBox extends Component {
             <label>
               <img alt="" src="/assets/images/plus.png" />
               Add Video
-              <input type="file" name="video" onChange={this.handleUpload} accept="video/*" />
+              <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
             </label>
           </div>
         }
