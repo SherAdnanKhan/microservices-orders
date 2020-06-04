@@ -19,20 +19,8 @@ export const getFormattedErrors = error => {
 };
 
 export const formatTime = dateTime => {
-  let date = new Date(dateTime);
-  let hours = date.getHours();
-  let minuts = date.getMinutes();
-  let isAmOrPm = "AM";
-
-  if (hours >= 12) {
-    hours = hours - 12;
-    isAmOrPm = "PM";
-  }
-
-  if (hours === 0) {
-    hours = 12;
-  }
-  return `${hours}:${minuts} ${isAmOrPm} `;
+  const time = moment(dateTime).format('hh:mm A');
+  return time;
 };
 
 export const formatDate = date => {
