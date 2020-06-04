@@ -1,4 +1,4 @@
-import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY, CLEAR_GALLERY } from "../constants/actionTypes";
+import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY, CLEAR_GALLERY, RECOMMEND_GALLERIES } from "../constants/actionTypes";
 import http from "../services/httpService";
 
 export const getGallery = utilite => dispatch => {
@@ -40,6 +40,17 @@ export const unfavGallery = data => dispatch => {
       dispatch({
         type: FAV_GALLERY,
         payload: true
+      });
+    });
+};
+
+export const getRecommendedGalleries = data => dispatch => {
+  http
+    .get(`/galleries/recommended/galleries`)
+    .then(res => {
+      dispatch({
+        type: RECOMMEND_GALLERIES,
+        payload: res.data.data
       });
     });
 };

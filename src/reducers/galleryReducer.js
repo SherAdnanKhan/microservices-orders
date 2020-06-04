@@ -1,7 +1,8 @@
-import { GET_GALLERY, FAV_GALLERY, UNFAV_GALLERY, CLEAR_GALLERY } from "../constants/actionTypes";
+import { GET_GALLERY, FAV_GALLERY, UNFAV_GALLERY, CLEAR_GALLERY, RECOMMEND_GALLERIES } from "../constants/actionTypes";
 
 const initialState = {
-  gallery: null
+  gallery: null,
+  recommendedGalleries: null
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +32,11 @@ export default (state = initialState, action) => {
           ...state.gallery,
           has_faved: action.payload
         }
+      };
+    case RECOMMEND_GALLERIES:
+      return {
+        ...state,
+        recommendedGalleries: action.payload
       };
     default:
       return state;
