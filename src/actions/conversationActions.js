@@ -1,4 +1,5 @@
 import http from "../services/httpService"
+import { toast } from "react-toastify";
 import {
   GET_CONVERSATION,
   UPDATE_CONVERSATION,
@@ -40,7 +41,7 @@ export const updateConversation = data => dispatch => {
   });
 };
 
-export const createMessage = data => () => {
+export const createMessage = (data, success) => () => {
   const payload = {
     message: data.message,
     conversation_id: data.room,
@@ -51,7 +52,7 @@ export const createMessage = data => () => {
 
   http
     .post('/chats/message', payload)
-    .then();
+    .then(res => success && success(res.data.data));
 };
 
 export const clearConversation = () => dispatch => {
@@ -75,7 +76,8 @@ export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: STOP_FILE_LOADER });
-      faliure(err.response)
+      faliure(err.response);
+      toast.error("Something failed while uploading");
     });
 };
 
@@ -95,6 +97,7 @@ export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
       success(res.data.data);
     })
     .catch(err => {
+      toast.error("Something failed while uploading");
       dispatch({ type: STOP_FILE_LOADER });
       faliure(err.response)
     });
