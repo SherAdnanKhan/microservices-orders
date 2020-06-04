@@ -78,3 +78,24 @@ export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
       faliure(err.response)
     });
 };
+
+export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
+  dispatch({ type: START_IMAGE_LOADER });
+
+  const config = {
+    onUploadProgress: progressEvent => {
+      onUpload(Math.floor((progressEvent.loaded * 100) / progressEvent.total));
+    }
+  };
+
+  http
+    .post('/chats/message/video', video, config)
+    .then(res => {
+      dispatch({ type: STOP_IMAGE_LOADER });
+      success(res.data.data);
+    })
+    .catch(err => {
+      dispatch({ type: STOP_IMAGE_LOADER });
+      faliure(err.response)
+    });
+};

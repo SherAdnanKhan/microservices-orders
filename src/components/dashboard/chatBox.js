@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getConversation, updateConversation, clearConversation, createMessage, uploadImage } from '../../actions/conversationActions';
+import { getConversation, updateConversation, clearConversation, createMessage, uploadImage, uploadVideo } from '../../actions/conversationActions';
 import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
 import Spinner from '../common/spinner';
@@ -109,6 +109,24 @@ class ChatBox extends Component {
           },
           image => {
             this.setState({ image: image.image_path, hidden: false });
+          },
+          err => {
+            console.log(err);
+          })
+      }
+    }
+    if (input.name === 'video') {
+      if (input.files[0]) {
+        const data = new FormData();
+        data.append('video', input.files[0]);
+        //console.log(input.files);
+
+        this.props.uploadVideo(data,
+          progress => {
+            console.log(progress);
+          },
+          video => {
+            this.setState({ video: video.video_path, hidden: false });
           },
           err => {
             console.log(err);
@@ -262,11 +280,12 @@ class ChatBox extends Component {
             <label>
               <img alt="" src="/assets/images/plus.png" />
               Add Image
-              <input type="file" name="image" onChange={this.handleUpload} />
+              <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
             </label>
             <label>
               <img alt="" src="/assets/images/plus.png" />
               Add Video
+              <input type="file" name="video" onChange={this.handleUpload} accept="video/*" />
             </label>
           </div>
         }
@@ -289,5 +308,6 @@ export default connect(
   updateConversation,
   clearConversation,
   createMessage,
-  uploadImage
+  uploadImage,
+  uploadVideo
 })(withRouter(ChatBox));
