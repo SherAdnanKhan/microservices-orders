@@ -63,3 +63,5 @@ export const READ_MESSAGE = 'READ_MESSAGE';
 //Image upload
 export const START_FILE_LOADER = 'START_FILE_LOADER';
 export const STOP_FILE_LOADER = 'STOP_FILE_LOADER';
+
+export const UPDATE_COUNT = 'UPDATE_COUNT'; 

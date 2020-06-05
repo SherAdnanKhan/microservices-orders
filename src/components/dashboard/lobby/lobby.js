@@ -10,7 +10,7 @@ const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const {
-    user: { favouriteUsers, favouriteGalleries }
+    user: { favouriteUsers, favouriteGalleries, unreadCount }
   } = useSelector(state => state);
 
   useEffect(() => {
@@ -20,15 +20,16 @@ const Lobby = () => {
 
   return (
     <div className="lobby-page">
-      <div className="popUpChatMsg">
-        <a href="#__">
-          <img src="/assets/images/icons/strqicon.png" alt="" />
-        </a>
-        <div className="noticeicons">
-          <div className="noticecountright">2</div>
+      {unreadCount > 0 &&
+        <div className="popUpChatMsg">
+          <a href="#__">
+            <img src="/assets/images/strqicon.png" alt="" />
+          </a>
+          <div className="noticeicons">
+            <div className="noticecountright">{unreadCount}</div>
+          </div>
         </div>
-      </div>
-
+      }
       <div className="base" id="sec">
         {favouriteUsers &&
           favouriteUsers.map((user, index) => (

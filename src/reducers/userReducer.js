@@ -1,13 +1,20 @@
-import { GET_FAV, GET_ALL_USERS, GET_OTEHR_FAV_USER, GET_USER_ART_NAME, CLEAR_USERS } from "../constants/actionTypes";
+import {
+  GET_FAV,
+  GET_ALL_USERS,
+  GET_OTEHR_FAV_USER,
+  GET_USER_ART_NAME,
+  CLEAR_USERS,
+  UPDATE_COUNT
+} from "../constants/actionTypes";
 
 const initialState = {
   favouriteUsers: null,
   favouriteGalleries: null,
+  unreadCount: 0,
   users: null,
   otherFavouriteUsers: null,
   userArtName: ""
 };
-
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,7 +22,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         favouriteUsers: action.payload.all_faved_users,
-        favouriteGalleries: action.payload.user_with_faved_galleries
+        favouriteGalleries: action.payload.user_with_faved_galleries,
+        unreadCount: action.payload.user_with_count_unread
       };
     case GET_ALL_USERS:
       return {
@@ -36,6 +44,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userArtName: action.payload
+      };
+    case UPDATE_COUNT:
+      return {
+        ...state,
+        unreadCount: state.unreadCount + 1
       };
     default:
       return state;

@@ -2,7 +2,8 @@ import http from "../services/httpService";
 import {
   GET_FAV, GET_ALL_USERS, GET_USER_ART_NAME,
   GET_OTEHR_FAV_USER, CLEAR_USERS, FAV_USER,
-  UNFAV_USER
+  UNFAV_USER,
+  UPDATE_COUNT
 } from "../constants/actionTypes";
 
 export const getFavourites = () => dispatch => {
@@ -89,3 +90,7 @@ export const unfavUser = faved_to => dispatch => {
       dispatch({ type: FAV_USER, payload: true });
     });
 };
+
+export const updateCounter = () => {
+  return { type: UPDATE_COUNT };
+}
