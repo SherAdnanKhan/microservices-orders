@@ -51,7 +51,7 @@ const MyStudio = () => {
 
   return (
     <div className="my-studio">
-      <StudioHeader />
+      <StudioHeader myStudio={myStudio && myStudio} />
       {edit
         ? <EditProfile myStudio={myStudio} />
         : <ViewProfile myStudio={myStudio} />
