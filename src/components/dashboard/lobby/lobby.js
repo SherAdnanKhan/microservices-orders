@@ -22,9 +22,9 @@ const Lobby = () => {
     <div className="lobby-page">
       {unreadCount > 0 &&
         <div className="popUpChatMsg">
-          <a href="#__">
+          <Link to="/dashboard/conversations">
             <img src="/assets/images/strqicon.png" alt="" />
-          </a>
+          </Link>
           <div className="noticeicons">
             <div className="noticecountright">{unreadCount}</div>
           </div>
