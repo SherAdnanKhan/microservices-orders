@@ -27,7 +27,6 @@ function App() {
     } else {
       document.title = `Meuzm: ${url2}`
     }
-
   }, []);
 
   useEffect(() => {

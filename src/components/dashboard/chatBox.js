@@ -23,6 +23,7 @@ class ChatBox extends Component {
   state = {
     image: '',
     video: '',
+    document: '',
     message: ' ',
     hidden: false,
     progress: 0
@@ -78,7 +79,7 @@ class ChatBox extends Component {
   }
 
   sendMessage = e => {
-    const { image, video, message } = this.state;
+    const { image, video, message, document } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 
@@ -86,20 +87,20 @@ class ChatBox extends Component {
       if (message || image || video) {
         const data = {
           message,
-          url: image || video || '',
-          type: image ? 1 : video ? 2 : 0,
+          url: image || video || (document && document.path) || '',
+          type: image ? 1 : video ? 2 : document ? 3 : 0,
           user,
           room: conversation.id
         };
 
-        this.setState({ message: '', image: '', video: '' });
+        this.setState({ message: '', image: '', video: '', document: '' });
+
         this.props.createMessage(data,
           (result) => {
             const newData = result.message;
 
             newData.user = result.user;
             newData.room = result.message.conversation_id
-
             this.state.socket.emit('sendMessage', newData, () => {
             });
           });
@@ -135,7 +136,10 @@ class ChatBox extends Component {
         },
         result => {
           console.log(result);
-          this.setState({ [result.doc_type]: result.path, progress: 0 });
+          if (result.doc_type === 'document')
+            this.setState({ [result.doc_type]: result, progress: 0 });
+          else
+            this.setState({ [result.doc_type]: result.path, progress: 0 });
         },
         err => {
           this.setState({ progress: 0 });
@@ -144,7 +148,7 @@ class ChatBox extends Component {
   }
 
   render() {
-    const { message, image, hidden, video, progress } = this.state;
+    const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
     const { history } = this.props;
     const { user, messages } = this.props.conversation
@@ -196,7 +200,7 @@ class ChatBox extends Component {
                                 {data.message}
                                 {data.type === 1 &&
                                   <div className="msgImg">
-                                    <a href={data.url} target="_blank" rel="noopener noreferrer">>
+                                    <a href={data.url} target="_blank" rel="noopener noreferrer">
                                       <img
                                         src={data.url}
                                         alt=""
@@ -213,6 +217,19 @@ class ChatBox extends Component {
                                       <source src={data.url} type="video/mpeg" />
                                       Your browser does not support the video tag.
                                     </video>
+                                  </div>
+                                }
+                                {data.type === 3 &&
+                                  <div className="msgDocument">
+                                    <i className="fas fa-file-alt"></i>
+                                    <a
+                                      href={data.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      Document
+                                    </a>
                                   </div>
                                 }
                               </div>
@@ -252,6 +269,19 @@ class ChatBox extends Component {
                                     </video>
                                   </div>
                                 }
+                                {data.type === 3 &&
+                                  <div className="msgDocument">
+                                    <i className="fas fa-file-alt"></i>
+                                    <a
+                                      href={data.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      style={{ textDecoration: 'none' }}
+                                    >
+                                      Document
+                                    </a>
+                                  </div>
+                                }
                               </div>
                             </div>
                             {data.created_at &&
@@ -273,7 +303,7 @@ class ChatBox extends Component {
         {progress > 0 &&
           <div>
             <div className={`progressBar ${currentUser.feel_color}`}>
-              <span className="text"> {progress} </span>
+              <span className="text"> {progress}% </span>
               <div className="percent" style={{ width: `${progress}%` }}></div>
             </div>
           </div>
@@ -319,9 +349,16 @@ class ChatBox extends Component {
           </div>
         }
 
+        {document &&
+          <div className="document-preview">
+            <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
+            <i className="fas fa-file-alt"></i>
+            <div> {document.doc_name && document.doc_name}</div>
+          </div>
+        }
+
         {hidden &&
           <div className="add-img-vid-box">
-
             <i
               className="fa fa-times close-add-box"
               onClick={() => this.setState({ hidden: false })}
@@ -335,6 +372,11 @@ class ChatBox extends Component {
               <img alt="" src="/assets/images/plus.png" />
               Add Video
               <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
+            </label>
+            <label>
+              <img alt="" src="/assets/images/plus.png" />
+              Add Document
+              <input type="file" name="video" onChange={this.handleUpload} accept=".pdf,.doc,.docx" />
             </label>
           </div>
         }

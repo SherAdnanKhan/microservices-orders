@@ -20,6 +20,15 @@ const Lobby = () => {
 
   return (
     <div className="lobby-page">
+      <div className="popUpChatMsg">
+        <a href="#__">
+          <img src="/assets/images/icons/strqicon.png" alt="" />
+        </a>
+        <div className="noticeicons">
+          <div className="noticecountright">2</div>
+        </div>
+      </div>
+
       <div className="base" id="sec">
         {favouriteUsers &&
           favouriteUsers.map((user, index) => (

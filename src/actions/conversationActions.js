@@ -14,7 +14,7 @@ export const getAllConversations = () => dispatch => {
   http
     .get('/chats')
     .then(res => {
-      console.log('Hello');
+      console.log(res.data.data);
       localStorage.setItem('conversations', JSON.stringify(res.data.data.conversations));
 
       dispatch({
