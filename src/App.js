@@ -15,9 +15,12 @@ import { getCurrentUser } from './actions/authActions';
 import SocketContext from './context/socketContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { updateCounter } from './actions/userActions';
+import { useDispatch } from 'react-redux';
 
 function App() {
   const [socket, setSocket] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let url1 = history.location.pathname.split('/')[2];
@@ -44,6 +47,7 @@ function App() {
         const found = conversations.find(conversation => conversation.id === data.room);
 
         if (found && getCurrentUser().id !== data.user.id) {
+          dispatch(updateCounter())
           toast(() => {
             return (
               <Link
@@ -63,7 +67,7 @@ function App() {
         setSocket('');
       }
     }
-  }, [socket])
+  }, [socket, dispatch])
 
   return (
 

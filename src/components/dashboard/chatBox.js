@@ -376,7 +376,12 @@ class ChatBox extends Component {
             <label>
               <img alt="" src="/assets/images/plus.png" />
               Add Document
-              <input type="file" name="video" onChange={this.handleUpload} accept=".pdf,.doc,.docx" />
+              <input
+                type="file"
+                name="video"
+                onChange={this.handleUpload}
+                accept=".pdf,.doc,.docx,.xlsx,.xlsm,.xlsb,.xltx,.csv"
+              />
             </label>
           </div>
         }
