@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getConversation, updateConversation, clearConversation, createMessage, uploadImage, uploadVideo } from '../../actions/conversationActions';
 import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
-import Spinner from '../common/spinner';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
 import io from 'socket.io-client';
+
+import {
+  getConversation,
+  updateConversation,
+  clearConversation,
+  createMessage,
+  uploadImage,
+  uploadFile,
+  readMessage
+} from '../../actions/conversationActions';
 
 class ChatBox extends Component {
 
@@ -16,7 +24,8 @@ class ChatBox extends Component {
     image: '',
     video: '',
     message: ' ',
-    hidden: false
+    hidden: false,
+    progress: 0
   };
 
   componentDidMount() {
@@ -34,15 +43,15 @@ class ChatBox extends Component {
       });
 
       this.state.socket.on('recieveMessage', (data) => {
-        this.state.socket.emit("onRead", data, () => {
-
-        });
-        console.log("yes xsd", data);
         this.props.updateConversation(data);
+        this.state.socket.emit("onRead", data, () => {
+        });
       });
 
       this.state.socket.on('read', (data) => {
-        console.log("seen");
+
+        console.log("seen: ", data);
+        this.props.readMessage(data);
       });
     }
 
@@ -114,54 +123,34 @@ class ChatBox extends Component {
   }
 
   handleUpload = ({ target: input }) => {
-    if (input.name === 'image') {
-      if (input.files[0]) {
-        const data = new FormData();
-        data.append('image', input.files[0]);
+    this.setState({ hidden: false });
 
-        this.props.uploadImage(data,
-          progress => {
-            console.log(progress);
-          },
-          image => {
-            this.setState({ image: image.image_path, hidden: false });
-          },
-          err => {
-            this.setState({ hidden: false });
-          })
-      }
-    }
+    if (input.files[0]) {
+      const data = new FormData();
+      data.append('file_upload', input.files[0]);
 
-    if (input.name === 'video') {
-      if (input.files[0]) {
-        const data = new FormData();
-        data.append('video', input.files[0]);
-        //console.log(input.files);
-
-        this.props.uploadVideo(data,
-          progress => {
-            console.log(progress);
-          },
-          video => {
-            console.log(video);
-            this.setState({ video: video.video_path, hidden: false });
-          },
-          err => {
-            this.setState({ hidden: false });
-          })
-      }
+      this.props.uploadFile(data,
+        progress => {
+          this.setState({ progress });
+        },
+        result => {
+          console.log(result);
+          this.setState({ [result.doc_type]: result.path, progress: 0 });
+        },
+        err => {
+          this.setState({ progress: 0 });
+        })
     }
   }
 
   render() {
-    const { message, image, hidden, video } = this.state;
+    const { message, image, hidden, video, progress } = this.state;
     const currentUser = getCurrentUser();
     const { history } = this.props;
-    const { user, messages, loading } = this.props.conversation
+    const { user, messages } = this.props.conversation
 
     return (
       <div className="chat-box">
-        {loading && <Spinner />}
         {!hidden &&
           <>
             <div className="chat-header">
@@ -220,6 +209,8 @@ class ChatBox extends Component {
                                     <video width="320" height="240" controls>
                                       <source src={data.url} type="video/mp4" />
                                       <source src={data.url} type="video/ogg" />
+                                      <source src={data.url} type="video/mov" />
+                                      <source src={data.url} type="video/mpeg" />
                                       Your browser does not support the video tag.
                                     </video>
                                   </div>
@@ -255,6 +246,8 @@ class ChatBox extends Component {
                                     <video width="320" height="240" controls>
                                       <source src={data.url} type="video/mp4" />
                                       <source src={data.url} type="video/ogg" />
+                                      <source src={data.url} type="video/mov" />
+                                      <source src={data.url} type="video/mpeg" />
                                       Your browser does not support the video tag.
                                     </video>
                                   </div>
@@ -275,6 +268,15 @@ class ChatBox extends Component {
               }
             </div>
           </>
+        }
+
+        {progress > 0 &&
+          <div>
+            <div className={`progressBar ${currentUser.feel_color}`}>
+              <span className="text"> {progress} </span>
+              <div className="percent" style={{ width: `${progress}%` }}></div>
+            </div>
+          </div>
         }
 
         <div className="message-input">
@@ -299,16 +301,14 @@ class ChatBox extends Component {
           </button>
         </div>
 
-        {
-          image &&
+        {image &&
           <div className="image-preview">
             <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
             <img src={image} alt="" />
           </div>
         }
 
-        {
-          video &&
+        {video &&
           <div className="video-preview">
             <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
             <video width="320" height="240" controls>
@@ -319,9 +319,9 @@ class ChatBox extends Component {
           </div>
         }
 
-        {
-          hidden &&
+        {hidden &&
           <div className="add-img-vid-box">
+
             <i
               className="fa fa-times close-add-box"
               onClick={() => this.setState({ hidden: false })}
@@ -358,5 +358,6 @@ export default connect(
   clearConversation,
   createMessage,
   uploadImage,
-  uploadVideo
+  uploadFile,
+  readMessage
 })(withRouter(ChatBox));
