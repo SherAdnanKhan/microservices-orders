@@ -6,7 +6,8 @@ import {
   CLEAR_CONVERSATION,
   GET_ALL_CONVERSATIONS,
   START_FILE_LOADER,
-  STOP_FILE_LOADER
+  STOP_FILE_LOADER,
+  READ_MESSAGE
 } from "../constants/actionTypes";
 
 export const getAllConversations = () => dispatch => {
@@ -81,7 +82,7 @@ export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
     });
 };
 
-export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
+export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
   dispatch({ type: START_FILE_LOADER });
 
   const config = {
@@ -91,7 +92,7 @@ export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
   };
 
   http
-    .post('/chats/message/video', video, config)
+    .post('/chats/message/uploads', video, config)
     .then(res => {
       dispatch({ type: STOP_FILE_LOADER });
       success(res.data.data);
@@ -102,3 +103,7 @@ export const uploadVideo = (video, onUpload, success, faliure) => dispatch => {
       faliure(err.response)
     });
 };
+
+export const readMessage = data => {
+  return { type: READ_MESSAGE, payload: data };
+}

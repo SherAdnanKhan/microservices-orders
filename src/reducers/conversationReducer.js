@@ -4,7 +4,8 @@ import {
   CLEAR_CONVERSATION,
   GET_ALL_CONVERSATIONS,
   START_FILE_LOADER,
-  STOP_FILE_LOADER
+  STOP_FILE_LOADER,
+  READ_MESSAGE
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -49,6 +50,28 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false
+      };
+    case READ_MESSAGE:
+      console.log('message: ', action)
+      return {
+        ...state,
+        messages: state.messages?.map(message => {
+          if (message.id === action.payload.id) {
+            return {
+              ...message,
+              messages_logs: message.messages_logs?.map(log => {
+                if (log.user_id === action.payload.user.id) {
+                  return {
+                    ...log,
+                    status: 1
+                  }
+                }
+                return log
+              })
+            }
+          }
+          return message;
+        })
       };
     default:
       return state;
