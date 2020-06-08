@@ -178,7 +178,12 @@ const AddExibit = () => {
               ))
             }
           </div>
-          <p style={{ color: "red", fontSize: "18px" }} >{error}</p>
+          {error &&
+            <div className={`error ${user.feel_color}`}>
+              <div className="message"> {error} </div>
+            </div>
+          }
+          {/* <p style={{ color: "red", fontSize: "18px" }} >{error}</p> */}
           <div className="exibition-button-div" id="submit" >
             <button className="exibition-button" type="submit" id="addex">Exhibit 》</button>
           </div>
