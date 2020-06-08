@@ -37,22 +37,33 @@ class ChatBox extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
+    const currentUser = getCurrentUser();
+
+    // console.log(this.props.conversation.messages);
+
 
     if (currentConversation && currentConversation !== previos) {
       localStorage.setItem('activeConversation', currentConversation.id);
+
       this.state.socket.emit('join', { room: currentConversation.id }, () => {
         console.log(`Group with id ${currentConversation.id}  joined `);
       });
 
       this.state.socket.on('recieveMessage', (data) => {
+        console.log("recieve: ", data);
         this.props.updateConversation(data);
-        this.state.socket.emit("onRead", data, () => {
-        });
+
+        if (data.user.id !== currentUser.id) {
+          console.log(data.user);
+          console.log(currentUser);
+          this.state.socket.emit("onRead", data, () => {
+          });
+        }
       });
 
       this.state.socket.on('read', (data) => {
-
         console.log("seen: ", data);
+        // console.log("user ", data.messages_logs[0].user_id);
         this.props.readMessage(data);
       });
     }
@@ -198,7 +209,12 @@ class ChatBox extends Component {
                           <div className={`outgoing ${data.user.feel_color}`}>
                             <div className="user-message">
                               <div className="send-icon">
-                                <img alt="" src={`/assets/images/${data.user.feel_color}.png`} />
+                                {data.messages_logs.length > 0
+                                  ? data.messages_logs[0].status === 1
+                                    ? <img alt="" src={`/assets/images/${data.user.feel_color}.png`} />
+                                    : <img alt="" src="/assets/images/avataricon.png" />
+                                  : <img alt="/assets/images/avataricon.png" />
+                                }
                               </div>
                               <div className="text">
                                 {data.message}
@@ -243,6 +259,7 @@ class ChatBox extends Component {
                                 {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
                               </p>
                             }
+
                           </div>
                         </div>
                       ) : (
