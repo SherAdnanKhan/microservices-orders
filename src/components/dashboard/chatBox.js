@@ -15,7 +15,8 @@ import {
   createMessage,
   uploadImage,
   uploadFile,
-  readMessage
+  readMessage,
+  readAll
 } from '../../actions/conversationActions';
 
 class ChatBox extends Component {
@@ -39,9 +40,6 @@ class ChatBox extends Component {
     const { conversation: previos } = prevProps.conversation;
     const currentUser = getCurrentUser();
 
-    // console.log(this.props.conversation.messages);
-
-
     if (currentConversation && currentConversation !== previos) {
       localStorage.setItem('activeConversation', currentConversation.id);
 
@@ -49,22 +47,28 @@ class ChatBox extends Component {
         console.log(`Group with id ${currentConversation.id}  joined `);
       });
 
+      this.state.socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => {
+        console.log("Read all");
+      });
+
       this.state.socket.on('recieveMessage', (data) => {
         console.log("recieve: ", data);
         this.props.updateConversation(data);
 
         if (data.user.id !== currentUser.id) {
-          console.log(data.user);
-          console.log(currentUser);
           this.state.socket.emit("onRead", data, () => {
           });
         }
       });
 
       this.state.socket.on('read', (data) => {
-        console.log("seen: ", data);
-        // console.log("user ", data.messages_logs[0].user_id);
         this.props.readMessage(data);
+      });
+
+      this.state.socket.on('readAll', (data) => {
+        if (data.user.id !== currentUser.id) {
+          this.props.readAll(data);
+        }
       });
     }
 
@@ -427,5 +431,6 @@ export default connect(
   createMessage,
   uploadImage,
   uploadFile,
-  readMessage
+  readMessage,
+  readAll
 })(withRouter(ChatBox));
