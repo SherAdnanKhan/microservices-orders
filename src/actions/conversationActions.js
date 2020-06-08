@@ -7,7 +7,8 @@ import {
   GET_ALL_CONVERSATIONS,
   START_FILE_LOADER,
   STOP_FILE_LOADER,
-  READ_MESSAGE
+  READ_MESSAGE,
+  READ_ALL
 } from "../constants/actionTypes";
 
 export const getAllConversations = () => dispatch => {
@@ -106,4 +107,8 @@ export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
 
 export const readMessage = data => {
   return { type: READ_MESSAGE, payload: data };
+}
+
+export const readAll = data => {
+  return { type: READ_ALL, payload: data };
 }
