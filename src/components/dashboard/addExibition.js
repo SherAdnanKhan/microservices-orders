@@ -1,17 +1,22 @@
-import React, { Fragment, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { artSearch, getGalleries, artPost } from "../../actions/exibitionAction"
 import InputAutoComplete from "../common/autoComplete";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import UserContext from "../../context/userContext";
+import Spinner from "../common/spinner";
 
 const AddExibit = () => {
   const [color, setColor] = useState('red');
   const { params: { id } } = useRouteMatch();
+
   const history = useHistory();
   const dispatch = useDispatch();
+
   const listCategory = useSelector(({ exibition }) => exibition.ListOfArts?.data?.arts);
   const listGalleries = useSelector(({ exibition }) => exibition.ListOfGalleries?.data);
+  const { loading } = useSelector(state => state.loading);
+
   let initialData = {
     title: "",
     description: "",
@@ -107,7 +112,8 @@ const AddExibit = () => {
 
   return (
     <div className={`frameReady ${color}`}>
-      <Fragment>
+      {loading && <Spinner />}
+      <>
         <div className="exibition-page-header">
           <span className="exibition-exit-icon">
             <i className="fas fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')}></i>
@@ -180,7 +186,7 @@ const AddExibit = () => {
         <footer className="exibtion-footer">
           <p>Meuzm</p>
         </footer>
-      </Fragment>
+      </>
     </div >
   );
 };
