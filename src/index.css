@@ -16,7 +16,7 @@
   background-color: #00000098;
 }
 
-.customSpinner svg {
+.customSpinner .smallCube {
   position: absolute;
   margin: 0 auto;
   width: 15%;

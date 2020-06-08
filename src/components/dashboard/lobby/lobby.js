@@ -4,7 +4,7 @@ import { getFavourites } from '../../../actions/userActions';
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';
 import { Link } from "react-router-dom";
-import { getUserArtById } from "../../../actions/userActions"
+import { getUserArtById } from "../../../actions/userActions";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -57,7 +57,21 @@ const Lobby = () => {
           <img src="/assets/images/icons/LogoIconWhite.png" alt="support" />
         </a>
       </div>
-    </div>
+      <div className="smallCube">
+        <div className="procusmaller">
+          <div className="scenesmaller">
+            <div className="cubesmallerload">
+              <div id="frontload" className="cube-facesmallerload cube-face-frontsmaller tutorfeel cube-face-frontsmallerload"></div>
+              <div id="backload" className="cube-facesmallerload cube-face-backsmaller tutorfeel cube-face-backsmallerload"></div>
+              <div id="leftload" className="cube-facesmallerload cube-face-leftsmaller tutorfeel cube-face-leftsmallerload"></div>
+              <div id="rightload" className="cube-facesmallerload cube-face-rightsmaller tutorfeel cube-face-rightsmallerload"></div>
+              <div id="topload" className="cube-facesmallerload cutsmaller tutorfeel cutsmallerload"></div>
+              <div id="bottomload" className="cube-facesmallerload cubsmaller tutorfeel cubsmallerload"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div >
   );
 };
 export default Lobby;

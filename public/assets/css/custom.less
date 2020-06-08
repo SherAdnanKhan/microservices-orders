@@ -1015,6 +1015,8 @@ input {
     }
   }
 }
+
+
 @keyframes shake{
   0% {transform:translate(0px ,2px);}
   50% {transform:translate(0,0px);}
@@ -1200,124 +1202,123 @@ input {
       }
 
       }
-
-
-
-
     }
   }
 
-
-.smallCube {
-  margin-top: 100px;
-  text-align: center;
-  .scenesmaller {
-    display: inline-block;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    width: 14px;
-    height: 14px;
-    perspective: 200px;
-    .cubesmallerload {
-      width: 18px;
-      height: 18px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation-name: cubesmaller;
-      animation-duration: 5s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      animation-direction: normal;
-      .cube-facesmallerload {
-        width: inherit;
-        height: inherit;
-        position: absolute;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        opacity: .9;
-        box-shadow: 0 0 1px rgba(0, 0, 0, .5), -0 -0 1px rgba(0, 0, 0, .5);
-        // background-color: dodgerblue;
-        &.cube-face-frontsmaller {
-          transform: translate3d(0, 0, 9px);
-        }
-        &.tutorfeel {
-          transition: .5s;
-          color: white;
-        }
-        &.cube-face-frontsmallerload {
-          transform: translate3d(0, 0, 9px);
-          animation: open;
-          animation-duration: 2s;
-          animation-timing-function: linear;
-          animation-delay: 0;
-          animation-iteration-count: 3;
-          animation-direction: normal;
-        }
-        &.cube-face-backsmaller {
-          transform: rotatey(180deg) translate3d(0, 0, 9px);
-        }
-        &.cube-face-backsmallerload {
-          transform: rotatey(180deg) translate3d(0, 0, 9px);
-          animation: open2;
-          animation-duration: 2s;
-          animation-timing-function: linear;
-          animation-delay: 0;
-          animation-iteration-count: 3;
-          animation-direction: normal;
-        }
-        &.cube-face-leftsmaller {
-          transform: rotatey(-90deg) translate3d(0, 0, 9px);
-        }
-        &.cube-face-leftsmallerload {
-          transform: rotatey(-90deg) translate3d(0, 0, 9px);
-          animation: open4;
-          animation-duration: 2s;
-          animation-timing-function: linear;
-          animation-delay: 0;
-          animation-iteration-count: 3;
-          animation-direction: normal;
-        }
-        &.cube-face-rightsmaller {
-          transform: rotatey(90deg) translate3d(0, 0, 9px);
-        }
-        &.cube-face-rightsmallerload {
-          transform: rotatey(90deg) translate3d(0, 0, 9px);
-          animation: open3;
-          animation-duration: 2s;
-          animation-timing-function: linear;
-          animation-delay: 0;
-          animation-iteration-count: 3;
-          animation-direction: normal;
-        }
-        &.cutsmaller {
-          transform: rotatex(90deg) translate3d(0, 0, 9px);
-        }
-        &.cutsmallerload {
-          transform: rotatex(90deg) translate3d(0, 0, 9px);
-          animation: open5;
-          animation-duration: 2s;
-          animation-timing-function: linear;
-          animation-delay: 0;
-          animation-iteration-count: 3;
-          animation-direction: normal;
-        }
-        &.cubsmaller {
-          transform: rotatex(-90deg) translate3d(0, 0, 9px);
-        }
-        &.cubsmallerload {
-          transform: rotatex(-90deg) translate3d(0, 0, 9px);
-          animation: open6;
-          animation-duration: 2s;
-          animation-timing-function: linear;
-          animation-iteration-count: 3;
-          animation-direction: normal;
+  .smallCube {
+    margin-top: 100px;
+    text-align: center;
+    &.defaultColorForLogin {
+      .tutorfeel {
+        background-color: red;
+      }
+    }
+    .scenesmaller {
+      display: inline-block;
+      margin-left: 5vw;
+      margin-right: 5vw;
+      width: 14px;
+      height: 14px;
+      perspective: 200px;
+      .cubesmallerload {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation-name: cubesmaller;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        .cube-facesmallerload {
+          width: inherit;
+          height: inherit;
+          position: absolute;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          opacity: .9;
+          box-shadow: 0 0 1px rgba(0, 0, 0, .5), -0 -0 1px rgba(0, 0, 0, .5);
+          // background-color: dodgerblue;
+          &.cube-face-frontsmaller {
+            transform: translate3d(0, 0, 9px);
+          }
+          &.tutorfeel {
+            transition: .5s;
+            color: white;
+          }
+          &.cube-face-frontsmallerload {
+            transform: translate3d(0, 0, 9px);
+            animation: open;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 3;
+            animation-direction: normal;
+          }
+          &.cube-face-backsmaller {
+            transform: rotatey(180deg) translate3d(0, 0, 9px);
+          }
+          &.cube-face-backsmallerload {
+            transform: rotatey(180deg) translate3d(0, 0, 9px);
+            animation: open2;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 3;
+            animation-direction: normal;
+          }
+          &.cube-face-leftsmaller {
+            transform: rotatey(-90deg) translate3d(0, 0, 9px);
+          }
+          &.cube-face-leftsmallerload {
+            transform: rotatey(-90deg) translate3d(0, 0, 9px);
+            animation: open4;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 3;
+            animation-direction: normal;
+          }
+          &.cube-face-rightsmaller {
+            transform: rotatey(90deg) translate3d(0, 0, 9px);
+          }
+          &.cube-face-rightsmallerload {
+            transform: rotatey(90deg) translate3d(0, 0, 9px);
+            animation: open3;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 3;
+            animation-direction: normal;
+          }
+          &.cutsmaller {
+            transform: rotatex(90deg) translate3d(0, 0, 9px);
+          }
+          &.cutsmallerload {
+            transform: rotatex(90deg) translate3d(0, 0, 9px);
+            animation: open5;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-delay: 0;
+            animation-iteration-count: 3;
+            animation-direction: normal;
+          }
+          &.cubsmaller {
+            transform: rotatex(-90deg) translate3d(0, 0, 9px);
+          }
+          &.cubsmallerload {
+            transform: rotatex(-90deg) translate3d(0, 0, 9px);
+            animation: open6;
+            animation-duration: 2s;
+            animation-timing-function: linear;
+            animation-iteration-count: 3;
+            animation-direction: normal;
+          }
         }
       }
     }
   }
-}
-
 
 @keyframes cubesmaller {
   0% {}
