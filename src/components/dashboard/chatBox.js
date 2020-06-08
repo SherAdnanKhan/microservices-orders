@@ -39,6 +39,7 @@ class ChatBox extends Component {
     const { conversation: previos } = prevProps.conversation;
 
     if (currentConversation && currentConversation !== previos) {
+      localStorage.setItem('activeConversation', currentConversation.id);
       this.state.socket.emit('join', { room: currentConversation.id }, () => {
         console.log(`Group with id ${currentConversation.id}  joined `);
       });
@@ -68,6 +69,7 @@ class ChatBox extends Component {
   componentCleanup = () => {
     const { conversation } = this.props.conversation;
 
+    localStorage.removeItem('activeConversation');
     conversation && this.state.socket.emit('leave', { room: conversation.id });
     this.state.socket.emit('disconnect');
     this.setState({ message: '', socket: '' });
@@ -100,7 +102,9 @@ class ChatBox extends Component {
             const newData = result.message;
 
             newData.user = result.user;
-            newData.room = result.message.conversation_id
+            newData.room = result.message.conversation_id;
+            newData.reciver = this.props.match.params.slug;
+
             this.state.socket.emit('sendMessage', newData, () => {
             });
           });

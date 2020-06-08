@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 function App() {
   const [socket, setSocket] = useState('');
   const dispatch = useDispatch();
+  const currentUser = getCurrentUser();
 
   useEffect(() => {
     let url1 = history.location.pathname.split('/')[2];
@@ -33,30 +34,29 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!socket && getCurrentUser()) {
+    if (!socket && currentUser) {
       setSocket(io.connect(process.env.REACT_APP_SOCKET_URL));
     }
 
     if (socket) {
-      socket.emit('joinNotification', 'notify', () => {
+      socket.emit('joinUser', currentUser, () => {
         console.log("notification joined. ");
       });
 
       socket.on('notify', data => {
-        const conversations = JSON.parse(localStorage.getItem('conversations'));
-        const found = conversations.find(conversation => conversation.id === data.room);
+        const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
 
-        if (found && getCurrentUser().id !== data.user.id) {
-          dispatch(updateCounter())
+        if (activeConversation !== data.room) {
           toast(() => {
             return (
               <Link
                 to={`/dashboard/chat/${data.user.slug}`}
-                style={{ textDecoration: 'none', color: getCurrentUser().feel_color }}>
+                style={{ textDecoration: 'none', color: currentUser.feel_color }}>
                 You have new message from {data.user.username}
               </Link>
             )
           });
+          dispatch(updateCounter());
         }
       });
     }
@@ -64,10 +64,11 @@ function App() {
     return () => {
       if (socket) {
         socket.emit('disconnect');
+        socket.emit('userLeft', currentUser);
         setSocket('');
       }
     }
-  }, [socket, dispatch])
+  }, [socket, dispatch, currentUser])
 
   return (
 
