@@ -2,7 +2,7 @@ import { GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS } from 
 
 const initialState = {
   post: null,
-  comments: null
+  comments: []
 };
 
 export default (state = initialState, action) => {
