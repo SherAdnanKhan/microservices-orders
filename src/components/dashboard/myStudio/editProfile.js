@@ -34,7 +34,13 @@ const EditProfile = ({ myStudio }) => {
         <form method="post" action="login.php">
           <label htmlFor="addbio" className="addbio-input">
             <span className="labelText">Click edit Studio to add a bio.</span>
-            <input type="text" name="username" id="addbio" />
+            <input
+              type="text"
+              name="username"
+              id="addbio"
+              value={myStudio && myStudio.user.bio ? myStudio.user.bio : ''}
+              disabled
+            />
           </label>
           <div className="faved-btn">
             <Link to={`/dashboard/faving/${'by'}`}>

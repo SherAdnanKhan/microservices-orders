@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
+import { updateBio } from '../../../actions/studioActions';
+import { useDispatch } from 'react-redux';
 
 const ViewProfile = ({ myStudio }) => {
+  const [bio, setBio] = useState('');
+
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (myStudio && myStudio.user.bio) {
+      setBio(bio => bio = myStudio.user.bio);
+    }
+  }, [myStudio]);
+
+  const handleSave = () => {
+    console.log(bio);
+    dispatch(updateBio(bio));
+  }
+
   return (
     <div className="wrapper">
       <div className="edit-studioScreen">
@@ -23,13 +40,21 @@ const ViewProfile = ({ myStudio }) => {
           <br />
           <span className="artof" id="artof">Cosplay/1213</span>
         </div>
-        <form method="post" action="login.php">
+        <form onSubmit={e => e.preventDefault()}>
           <label htmlFor="addbio" className="addbio-input">
-            <div className="editTool Edit">
+            <div
+              className="editTool Edit clickable"
+              onClick={handleSave}>
               <img src="/assets/images/paintbrush.png" alt="" />
             </div>
             <span className="labelText">Click edit Studio to add a bio.</span>
-            <input type="text" name="username" id="addbio" />
+            <input
+              type="text"
+              name="username"
+              id="addbio"
+              value={bio}
+              onChange={e => setBio(e.target.value)}
+            />
           </label>
           <div className="faved-btn">
             <Link to="#">

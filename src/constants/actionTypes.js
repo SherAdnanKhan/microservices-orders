@@ -27,6 +27,7 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const CLEAR_USERS = 'CLEAR_USERS';
 export const GET_USER_ART_NAME = 'GET_USER_ART_NAME';
 export const GET_OTEHR_FAV_USER = 'GET_OTEHR_FAV_USER';
+export const UPDATE_BIO = 'UPDATE_BIO';
 
 //Studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO';
