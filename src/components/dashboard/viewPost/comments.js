@@ -85,7 +85,10 @@ const Comment = ({ post }) => {
               comments.map((comment, index) => (
                 <div className="user-commet" key={index}>
                   <div className="user-cude">
-                    <Avatar avatars={comment.user.avatars && comment.user.avatars} />
+                    <Avatar
+                      avatars={comment.user.avatars && comment.user.avatars}
+                      feelColor={comment.user.feel_color}
+                    />
                   </div>
                   <div className="comment-info">
                     <p>{comment.user.username} : <span>{comment.description}</span> </p>
