@@ -43,9 +43,9 @@ export const getUserArtById = (id) => dispatch => {
     });
 };
 
-export const getOtherFavouriteUsers = () => dispatch => {
+export const getOtherFavouriteUsers = (username) => dispatch => {
   http
-    .get('/favs/get-faves')
+    .get(`/favs/get-faves?username=${username}`)
     .then(res => {
       if (res.data.success) {
         dispatch({
@@ -56,9 +56,9 @@ export const getOtherFavouriteUsers = () => dispatch => {
     });
 };
 
-export const getOtherFavouriteByUsers = () => dispatch => {
+export const getOtherFavouriteByUsers = (username) => dispatch => {
   http
-    .get('/favs/get-faved-by')
+    .get(`/favs/get-faved-by?username=${username}`)
     .then(res => {
       if (res.data.success) {
         dispatch({
