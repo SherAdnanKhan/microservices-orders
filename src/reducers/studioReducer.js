@@ -1,4 +1,4 @@
-import { GET_MY_STUDIO, GET_USER_STUDIO, FAV_USER, UNFAV_USER } from "../constants/actionTypes";
+import { GET_MY_STUDIO, GET_USER_STUDIO, FAV_USER, UNFAV_USER, UPDATE_BIO } from "../constants/actionTypes";
 
 const initialState = {
   myStudio: null,
@@ -11,6 +11,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         myStudio: action.payload
+      };
+    case UPDATE_BIO:
+      return {
+        ...state,
+        myStudio: {
+          ...state.myStudio,
+          user: {
+            ...state.myStudio.user,
+            bio: action.payload
+          }
+        }
       };
     case GET_USER_STUDIO:
       return {

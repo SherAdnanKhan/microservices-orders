@@ -41,10 +41,16 @@ const StudioDetail = ({ userStudio, slug }) => {
               </span>
             </div>
           }
-          <form>
+          <form onSubmit={e => e.preventDefault()}>
             <label htmlFor="addbio" className="addbio-input">
-              <span className="labelText">Click edit Studio to add a bio.</span>
-              <input type="text" name="username" id="addbio" />
+              <span className="labelText"> user bio</span>
+              <input
+                type="text"
+                name="username"
+                id="addbio"
+                value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
+                disabled
+              />
             </label>
             <div className="stuion-faved-btn">
               <Link to={`/dashboard/faving/${'by'}`}>

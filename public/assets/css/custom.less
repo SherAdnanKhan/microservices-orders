@@ -1074,9 +1074,12 @@ input {
 #search-result{
   display: none;
   display: none;
-  position: absolute;
+  position: fixed;
+  top: 50px;
   width: 100%;
   z-index: 20;
+  max-height: 92vh;
+  overflow-y: scroll;
   background: #000000a3;
 }
 .result-box{
