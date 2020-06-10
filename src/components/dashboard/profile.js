@@ -7,6 +7,7 @@ import Spinner from '../common/spinner';
 import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import Footer from './layout/footer';
+import ImageCropper from '../common/imageCropper';
 
 const Profile = () => {
   const history = useHistory();
@@ -15,7 +16,9 @@ const Profile = () => {
   const { avatars } = useContext(UserContext);
   const user = useContext(UserContext);
 
+  const [toggle, setToggle] = useState(false)
   const [images, setImages] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
   const [selectedImage, setSelectedImage] = useState({});
   const [color, setColor] = useState('red');
   const { loading } = useSelector(state => state.loading);
@@ -34,7 +37,9 @@ const Profile = () => {
     if (input.files[0]) {
       const image = { ...selectedImage };
       image.path = URL.createObjectURL(input.files[0]);
-      image.avatar = input.files[0];
+
+      setToggle(true);
+      setImageUrl(URL.createObjectURL(input.files[0]))
       setSelectedImage(image);
     }
   }
@@ -53,6 +58,19 @@ const Profile = () => {
     dispatch(createOrUpdateProfile(data, history));
   }
 
+  const handleCompleteCrop = croppedImage => {
+    const image = { ...selectedImage };
+    image.path = URL.createObjectURL(croppedImage);
+    image.avatar = croppedImage;
+
+    setSelectedImage(image);
+  };
+
+  const handleBackPress = () => {
+    setToggle(false);
+    history.push('/dashboard/my-studio');
+  }
+
   useEffect(() => {
     setColor(user.feel_color);
   }, [user]);
@@ -66,7 +84,7 @@ const Profile = () => {
         <div className="edit-user-page">
           <div className="header-bar">
             <div className="back-icon">
-              <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/my-studio')} />
+              <i className="fa fa-arrow-left clickable" onClick={handleBackPress} />
             </div>
             <p>Edit Your Profile Cube {user.username}</p>
           </div>
@@ -132,6 +150,12 @@ const Profile = () => {
           <div className="wrapper update-image">
             <>
               <div className="up-img-box">
+                <ImageCropper
+                  toggle={toggle}
+                  imageUrl={imageUrl}
+                  onToggle={(value) => setToggle(value)}
+                  onCompleteCrop={handleCompleteCrop}
+                />
                 <img className="update-pic" src={selectedImage ? selectedImage.path : "/assets/images/gray.png"} alt="" />
                 <div className={selectedImage.avatar ? " hide" : "add-nag-icon"}>
                   {selectedImage.id &&
