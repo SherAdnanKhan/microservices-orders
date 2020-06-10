@@ -37,7 +37,7 @@ const Main = () => {
       case 'viewpost':
         return import('./viewPost/viewPost');
       case 'privacy':
-        return import('./privacy');
+        return import('./privacy/privacy');
       case 'chat':
         return import('./chatBox');
       case 'group-chat':

@@ -66,4 +66,7 @@ export const READ_ALL = 'READ_ALL';
 export const START_FILE_LOADER = 'START_FILE_LOADER';
 export const STOP_FILE_LOADER = 'STOP_FILE_LOADER';
 
-export const UPDATE_COUNT = 'UPDATE_COUNT'; 
+export const UPDATE_COUNT = 'UPDATE_COUNT';
+
+//Privacy
+export const GET_PRIVACIES = 'GET_PRIVACIES';

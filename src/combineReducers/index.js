@@ -8,6 +8,7 @@ import userReducer from '../reducers/userReducer';
 import galleryReducer from "../reducers/galleryReducer";
 import postReducer from "../reducers/postReducer";
 import conversationReducer from '../reducers/conversationReducer';
+import privacyReducer from '../reducers/privacyReducer';
 
 export default combineReducers({
   error: errorReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   studio: studioReducer,
   gallery: galleryReducer,
   postView: postReducer,
-  conversation: conversationReducer
+  conversation: conversationReducer,
+  privacies: privacyReducer
 }); 
