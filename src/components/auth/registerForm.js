@@ -6,6 +6,8 @@ import Spinner from '../common/spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, getCurrentUser } from '../../actions/authActions';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
+import ImageCropper from '../common/imageCropper';
+import { isEmpty } from '../../utils/helperFunctions';
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -15,7 +17,10 @@ const RegisterForm = () => {
     error: { error }
   } = useSelector(state => state);
 
-  const [image, setImage] = useState('./assets/images/avataricon.png');
+  const [toggle, setToggle] = useState(false)
+  const [image, setImage] = useState('/assets/images/avataricon.png');
+  const [croppedImage, setCroppedImage] = useState({});
+
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [data, setData] = useState({
@@ -99,7 +104,8 @@ const RegisterForm = () => {
   const handleChange = ({ target: input }) => {
     if (input.type === 'file' && input.files[0]) {
       setData({ ...data, [input.name]: input.files[0] });
-      setImage(URL.createObjectURL(input.files[0]))
+      setImage(URL.createObjectURL(input.files[0]));
+      setToggle(true)
     } else {
       setData({ ...data, [input.name]: input.value });
     }
@@ -132,6 +138,12 @@ const RegisterForm = () => {
     }
 
     dispatch(register(formData));
+  }
+
+  const handleCompleteCrop = blob => {
+    console.log(blob)
+    setData({ ...data, avatar: blob })
+    setCroppedImage(blob);
   }
 
   return (
@@ -228,7 +240,13 @@ const RegisterForm = () => {
               </div>
             }
             {step === 6 &&
-              <div className="animated fullWidth" step={6} >
+              <div className="animated fullWidth" step={6}>
+                <ImageCropper
+                  imageUrl={image}
+                  toggle={toggle}
+                  onToggle={(value => setToggle(value))}
+                  onCompleteCrop={handleCompleteCrop}
+                />
                 <Input
                   type="file"
                   name="avatar"
@@ -239,7 +257,10 @@ const RegisterForm = () => {
                 >
                   <h3>Click avatar to add your own profile pic</h3>
                   <label htmlFor="avatar" className={errors.avatar ? "avatar clickable is-invalid" : "avatar clickable"}>
-                    <img src={image} alt="avatar" />
+                    {isEmpty(croppedImage)
+                      ? <img src={image} alt="avatar" />
+                      : <img src={URL.createObjectURL(croppedImage)} alt="avatar" />
+                    }
                   </label>
                 </Input>
               </div>
