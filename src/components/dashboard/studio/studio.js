@@ -10,9 +10,12 @@ import StudioDetail from './studioDetail';
 import StudioHeader from './studioHeader';
 import StudioFooter from './studioFooter';
 import UserContext from '../../../context/userContext';
-import { addToSuperFavs } from '../../../actions/privacyActions';
+import { addToSuperFavs, addToInviteOnly } from '../../../actions/privacyActions';
+import { getGalleries } from '../../../actions/exibitionAction';
+import GalleryModel from './galleryModel';
 
 const Studio = () => {
+  const [showModel, setShowModel] = useState(false);
   const [success, setSuccess] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
 
@@ -22,11 +25,14 @@ const Studio = () => {
   const dispatch = useDispatch();
   const {
     studio: { userStudio },
-    gallery: { gallery }
+    gallery: { gallery },
+    exibition: { ListOfGalleries: { data: myGalleries } }
   } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(getUserStudio(slug));
+    dispatch(getGalleries());
+
     return () => {
       dispatch(clearGallery());
     }
@@ -35,13 +41,13 @@ const Studio = () => {
   const handleGalleryChange = gallery => {
     setActiveGallery(gallery);
     dispatch(getGallery(gallery.slug))
-  }
+  };
 
   const handleLike = () => {
     return gallery.has_faved
       ? dispatch(unfavGallery({ gallery_id: activeGallery.id }))
       : dispatch(favGallery({ gallery_id: activeGallery.id }));
-  }
+  };
 
   const handleSuperFav = () => {
     const privacy = {
@@ -52,14 +58,39 @@ const Studio = () => {
     dispatch(addToSuperFavs(privacy, () => {
       setSuccess(true);
     }));
-  }
+  };
+
+  const handleShowModel = value => {
+    setShowModel(value);
+  };
+
+  const handleChange = ({ target: input }, galleryId) => {
+    if (input.checked) {
+      const privacy = {
+        privacy_type_id: 4,
+        user_id: currentUser.id,
+        gallery_id: galleryId
+      };
+
+      dispatch(addToInviteOnly(privacy));
+    }
+  };
 
   return (
     <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
+      {showModel &&
+        <GalleryModel
+          myGalleries={myGalleries}
+          onModelClose={handleShowModel}
+          onChange={handleChange}
+        />
+      }
       <StudioHeader
         userStudio={userStudio}
         onSuperFav={handleSuperFav}
         success={success}
+        showModel={showModel}
+        onModelOpen={handleShowModel}
       />
       <StudioDetail
         userStudio={userStudio}
