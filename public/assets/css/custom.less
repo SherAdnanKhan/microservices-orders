@@ -2464,6 +2464,25 @@ img {
     height: 50px;
     width: 100%;
     box-sizing: border-box;
+    
+    .actions {
+      position: absolute;
+      right: 10%;
+      top: 20%;
+      
+      button {
+        margin-right: 5px;
+        padding: 8px;
+        box-sizing: border-box;
+        outline: none;
+        border-radius: 35px;
+        color: white;
+        background-color: #444;
+        &:disabled{
+          color: gray;
+        }
+      }
+    }
    .back-icon {
      position: absolute;
      top: 33%;

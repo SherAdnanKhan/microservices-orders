@@ -6,6 +6,7 @@ import {
   STOP_PRIVACY_LOADING
 } from "../constants/actionTypes";
 import http from "../services/httpService";
+import { toast } from "react-toastify";
 
 export const getPrivacies = () => dispatch => {
   dispatch({ type: START_PRIVACY_LOADING });
@@ -55,5 +56,26 @@ export const changeOtherPrivacy = privacy => dispatch => {
     })
     .catch(err => {
       dispatch({ type: STOP_PRIVACY_LOADING });
+    });
+};
+
+export const addToSuperFavs = (privacy, callback) => dispatch => {
+  http
+    .post('/user/privacy/sprfvs', privacy)
+    .then(res => {
+      toast('Request sent successfully.');
+      callback && callback();
+    });
+};
+
+export const addToInviteOnly = privacy => dispatch => {
+  http
+    .get('/user/privacy/sprfvs')
+    .then(res => {
+
+
+    })
+    .catch(err => {
+
     });
 };

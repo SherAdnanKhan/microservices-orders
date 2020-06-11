@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery } from "../../../actions/galleryActions";
@@ -9,10 +9,15 @@ import PostBar from './postBar';
 import StudioDetail from './studioDetail';
 import StudioHeader from './studioHeader';
 import StudioFooter from './studioFooter';
+import UserContext from '../../../context/userContext';
+import { addToSuperFavs } from '../../../actions/privacyActions';
 
 const Studio = () => {
+  const [success, setSuccess] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
+
   const { params: { slug } } = useRouteMatch();
+  const currentUser = useContext(UserContext);
 
   const dispatch = useDispatch();
   const {
@@ -38,11 +43,23 @@ const Studio = () => {
       : dispatch(favGallery({ gallery_id: activeGallery.id }));
   }
 
+  const handleSuperFav = () => {
+    const privacy = {
+      privacy_type_id: 3,
+      user_id: currentUser.id
+    };
+
+    dispatch(addToSuperFavs(privacy, () => {
+      setSuccess(true);
+    }));
+  }
 
   return (
     <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
       <StudioHeader
         userStudio={userStudio}
+        onSuperFav={handleSuperFav}
+        success={success}
       />
       <StudioDetail
         userStudio={userStudio}
