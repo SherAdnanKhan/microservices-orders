@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StudioHeader = ({ userStudio, onSuperFav, success }) => {
+const StudioHeader = ({ userStudio, onSuperFav, success, onModelOpen }) => {
   const history = useHistory();
 
   return (
@@ -16,7 +16,11 @@ const StudioHeader = ({ userStudio, onSuperFav, success }) => {
           disabled={success}
         >
           SPRFVS </button>
-        <button> Invite only </button>
+        <button
+          onClick={() => onModelOpen(true)}
+        >
+          Invite only
+        </button>
       </div>
       <div className="heart">
         <img src="/assets/images/favebackoff.png" alt="" />

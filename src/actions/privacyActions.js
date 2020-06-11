@@ -70,12 +70,8 @@ export const addToSuperFavs = (privacy, callback) => dispatch => {
 
 export const addToInviteOnly = privacy => dispatch => {
   http
-    .get('/user/privacy/sprfvs')
+    .post('/user/privacy/invite-only', privacy)
     .then(res => {
-
-
-    })
-    .catch(err => {
-
+      toast('Invitation sent successfuly');
     });
 };
