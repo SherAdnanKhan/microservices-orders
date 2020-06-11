@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPrivacies } from "../../../actions/privacyActions";
+import { getPrivacies, changeGalleryPrivacy, changeOtherPrivacy } from "../../../actions/privacyActions";
 import GalleryPrivacy from "./galleryPrivacies";
 import OtherPrivacy from "./otherPrivacies";
+import Spinner from '../../common/spinner';
 
 const Privacy = () => {
   const [activeGallery, setActiveGallery] = useState('');
@@ -12,19 +13,30 @@ const Privacy = () => {
   const {
     userGalleries,
     privacyTypes,
-    userOtherPages
+    userOtherPages,
+    loading
   } = useSelector(state => state.privacies);
 
   useEffect(() => {
     dispatch(getPrivacies());
   }, [dispatch]);
 
+  const handleGalleryPrivacyChange = privacy => {
+    dispatch(changeGalleryPrivacy(privacy));
+  };
+
+  const handleOtherPrivacyChange = privacy => {
+    dispatch(changeOtherPrivacy(privacy));
+  };
+
   return (
     <div className="privacy">
+      {loading && <Spinner />}
       <GalleryPrivacy
         userGalleries={userGalleries}
         privacyTypes={privacyTypes}
         activeGallery={activeGallery}
+        onGalleryPrivacyChange={handleGalleryPrivacyChange}
         onActiveGallery={id => {
           id === activeGallery ? setActiveGallery('') : setActiveGallery(id);
         }}
@@ -33,6 +45,7 @@ const Privacy = () => {
         userOtherPages={userOtherPages}
         privacyTypes={privacyTypes}
         activeOtherPage={activeOtherPage}
+        onOtherPrivacyChange={handleOtherPrivacyChange}
         onActiveOtherPage={id => {
           id === activeOtherPage ? setActiveOtherPage('') : setActiveOtherPage(id);
         }}

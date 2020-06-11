@@ -1,6 +1,23 @@
 import React from 'react';
 
-const OtherPrivacy = ({ userOtherPages, activeOtherPage, onActiveOtherPage, privacyTypes }) => {
+const OtherPrivacy = ({
+  userOtherPages,
+  activeOtherPage,
+  onActiveOtherPage,
+  privacyTypes,
+  onOtherPrivacyChange
+}) => {
+
+  const handlePrivacy = (privacyType, privacyId, privacyTypeId) => {
+    const privacy = {
+      privacy_type_id: privacyTypeId,
+      privacy_type: privacyType,
+      privacy_id: privacyId
+    };
+
+    onOtherPrivacyChange(privacy);
+  }
+
   return (
     <>
       <div className="privacy-header">
@@ -20,7 +37,18 @@ const OtherPrivacy = ({ userOtherPages, activeOtherPage, onActiveOtherPage, priv
                 {other.id === 7 && <img src="/assets/images/favers.png" alt="" />}
                 <label htmlFor="">{other.name}</label>
                 <div className="lock-bar" onClick={() => onActiveOtherPage(other.id)}>
-                  <i className="fas fa-lock-open"></i>
+                  {(!other.privacy || other.privacy.privacy_type_id === 1) &&
+                    <i className="fas fa-lock-open"></i>
+                  }
+                  {(other.privacy && other.privacy.privacy_type_id === 2) &&
+                    <i className="fas fa-lock">+</i>
+                  }
+                  {(other.privacy && other.privacy.privacy_type_id === 3) &&
+                    <i className="fas fa-lock"></i>
+                  }
+                  {(other.privacy && other.privacy.privacy_type_id === 4) &&
+                    <i className="fas fa-lock">++</i>
+                  }
                   {other.id === activeOtherPage
                     ? <i className="fas fa-chevron-down down-tab3"></i>
                     : <i className="fas fa-chevron-up up-tab3" ></i>
@@ -35,25 +63,49 @@ const OtherPrivacy = ({ userOtherPages, activeOtherPage, onActiveOtherPage, priv
                       privacyTypes.map((type, index) => (
                         <div key={index}>
                           {type.id === 1 &&
-                            <button>
+                            <button
+                              onClick={() => handlePrivacy('other', other.id, type.id)}
+                              className={
+                                !other.privacy ||
+                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              }
+                            >
                               {type.name}
                               <i className="fas fa-lock-open"></i>
                             </button>
                           }
                           {type.id === 2 &&
-                            <button>
+                            <button
+                              onClick={() => handlePrivacy('other', other.id, type.id)}
+                              className={
+                                other.privacy &&
+                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              }
+                            >
                               {type.name}
                               <i className="fas fa-lock">+</i>
                             </button>
                           }
                           {type.id === 3 &&
-                            <button>
+                            <button
+                              onClick={() => handlePrivacy('other', other.id, type.id)}
+                              className={
+                                other.privacy &&
+                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              }
+                            >
                               {type.name}
                               <i className="fas fa-lock"></i>
                             </button>
                           }
                           {type.id === 4 &&
-                            <button>
+                            <button
+                              onClick={() => handlePrivacy('other', other.id, type.id)}
+                              className={
+                                other.privacy &&
+                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              }
+                            >
                               {type.name}
                               <i className="fas fa-lock">++</i>
                             </button>
