@@ -3639,10 +3639,12 @@ img {
           margin-right: 20px;
         }
         .lock-bar{
+          cursor: pointer;
           display: flex;
           margin-left: auto;
           margin-right: 50px;
-          .fa-lock-open{
+          .fa-lock-open,
+          .fa-lock{
             width: 30px;
             height: 30px;
             background: gray;
@@ -3651,17 +3653,19 @@ img {
             align-items: center;
             border-radius: 100px;
             margin-right: 10px;
+            padding: 5px;
           }
         }
       }
       .show-data{
         text-align: center;
-        // display: none;
         .g-privacy-btn{
           padding: 10px;
           display: flex;
           justify-content: space-around;
           button{
+            cursor: pointer;
+            outline: none;
             width: 200px;
             background: #000;
             color: #fff;
@@ -4555,4 +4559,8 @@ img {
       }
     }
   }
+}
+
+.btn-active {
+  background-color: gray !important;
 }
