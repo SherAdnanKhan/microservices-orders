@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../common/avatar';
 
-const Invited = ({ faveUserPrivacyList }) => {
+const Invited = ({ invitedUsers }) => {
   return (
     <div>
       <div className="favas-row">
-        {faveUserPrivacyList &&
-          faveUserPrivacyList.map((user, index) => (
+        {invitedUsers &&
+          invitedUsers.map((user, index) => (
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
                 <Link to={`/dashboard/studio/${user.slug}`}  >
