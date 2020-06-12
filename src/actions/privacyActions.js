@@ -3,7 +3,8 @@ import {
   CHANGE_GALLERY_PRIVACY,
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
-  STOP_PRIVACY_LOADING
+  STOP_PRIVACY_LOADING,
+  FAV_USER_PRIVACY_LIST
 } from "../constants/actionTypes";
 import http from "../services/httpService";
 import { toast } from "react-toastify";
@@ -73,5 +74,16 @@ export const addToInviteOnly = privacy => dispatch => {
     .post('/user/privacy/invite-only', privacy)
     .then(res => {
       toast('Invitation sent successfuly');
+    });
+};
+
+export const getFavUserPrivacyList = (privacyTypeId, status) => dispatch => {
+  http
+    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .then(res => {
+      dispatch({
+        type: FAV_USER_PRIVACY_LIST,
+        payload: res.data.data.faves
+      });
     });
 };

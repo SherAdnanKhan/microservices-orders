@@ -3,13 +3,15 @@ import {
   CHANGE_GALLERY_PRIVACY,
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
-  STOP_PRIVACY_LOADING
+  STOP_PRIVACY_LOADING,
+  FAV_USER_PRIVACY_LIST
 } from "../constants/actionTypes";
 
 const initialState = {
   userGalleries: null,
   privacyTypes: null,
   userOtherPages: null,
+  faveUserPrivacyList: null,
   loading: false
 };
 
@@ -45,6 +47,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false
+      };
+    case FAV_USER_PRIVACY_LIST:
+      return {
+        ...state,
+        faveUserPrivacyList: action.payload
       };
     default:
       return state;

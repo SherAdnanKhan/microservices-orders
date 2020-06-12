@@ -53,14 +53,14 @@ const StudioDetail = ({ userStudio, slug }) => {
               />
             </label>
             <div className="stuion-faved-btn">
-              <Link to='/dashboard/fave-by'>
+              <Link to='/dashboard/studio/fave-by'>
                 <div className="faved-by-btn">
                   <img src="/assets/images/favers.png" alt="" />
                 Faved by
               </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link>
-              <Link to="/dashboard/fave">
+              <Link to="/dashboard/studio/fave">
                 <div className="faved-by-btn">
                   <img src="/assets/images/faving.png" alt="" />
                 Faved
