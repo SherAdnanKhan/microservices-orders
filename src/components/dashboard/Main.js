@@ -28,8 +28,10 @@ const Main = () => {
           : import('./myStudio/myStudio');
       case 'change-password':
         return import('./settings/changePassword');
-      case 'faving':
-        return import('./faving');
+      case 'fave':
+        return import('./faves/faving');
+      case 'fave-by':
+        return import('./faves/faveBy');
       case 'studio':
         return import('./studio/studio');
       case 'mz-flash':
