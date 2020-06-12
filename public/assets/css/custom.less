@@ -3421,15 +3421,36 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
+    .actions {
+      width: 100%;
+      button {
+        padding: 6px;
+        box-sizing: border-box;
+        outline: none;
+        margin-right: 5px;
+        border-radius: 5px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 25%;
+      }
+
+      .btn-reject {
+        background-color: red;
+      }
+
+
+    }
     .favas-box{
       border: 7px solid rgba(61,61,61,.5);
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 47%;
-      height: 100vh;
+      width: 48%;
       text-align: center;
       margin: 15px 10px;
+      box-sizing: border-box;
       .favas-avatar{
         margin: 10px auto;
       }

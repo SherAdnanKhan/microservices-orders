@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../common/avatar';
 
-const Request = ({ faveUserPrivacyList }) => {
+const Request = ({ faveUserPrivacyList, onApprovedRequest }) => {
   return (
     <div>
       <div className="favas-row">
@@ -27,6 +27,14 @@ const Request = ({ faveUserPrivacyList }) => {
                 </p>
                 <p>Faving Gallery</p>
                 <p>2</p>
+              </div>
+              <div className="actions">
+                <button
+                  onClick={() => onApprovedRequest({ privacy_type_id: 3, user_id: user.id })}
+                >
+                  Approve
+                  </button>
+                <button className="btn-reject">Reject</button>
               </div>
             </div>
           ))}
