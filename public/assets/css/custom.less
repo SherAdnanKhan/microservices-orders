@@ -33,6 +33,15 @@
 @red: #FF0000;
 @purple: #800080;
 @dodgerblue: #1E90FF;
+@goldRGB:255,215,0;
+@orangeRGB:255,165,0;
+@redRGB:255,0,0;
+@purpleRGB:128,0,128;
+@dodgerblueRGB:30,144,255;
+@limegreenRGB:50,205,50;
+@grayRGB:128,128,128;
+
+
 
 
 @desktop:   ~"only screen and (min-width: 960px) and (max-width: 1380px)";
@@ -3934,6 +3943,8 @@ img {
         }
 
         .time {
+	  font-size: 12px;
+	  padding: 5px;
           margin-top: 0;
           background-color: none;
         }
@@ -3946,7 +3957,7 @@ img {
         &.orange {
           .user-message {
             .text {
-              background: #ffa500;
+              background: rgba(@orangeRGB ,.3);
               border-color:#ffa500;
               box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
             }
@@ -3955,7 +3966,7 @@ img {
         &.red {
           .user-message {
             .text {
-              background: #ff0000;
+              background: rgba(@redRGB , .3);
               border-color:#ff0000;
               box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
             }        
@@ -3964,7 +3975,7 @@ img {
         &.gold {
           .user-message {
             .text {
-              background: @color_gold;
+              background: rgba(@goldRGB , .3);
               border-color:@color_gold;
               box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
             }
@@ -3973,7 +3984,7 @@ img {
         &.gray {
           .user-message {
             .text {
-              background: #808080;
+              background: rgba(@grayRGB ,.3);
               border-color: #808080;
               box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
             }
@@ -3982,7 +3993,7 @@ img {
         &.limegreen {
           .user-message {
             .text {
-              background: #32CD32;
+              background: rgba(@limegreenRGB , .3);
               border-color: #32CD32;
               box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
             }
@@ -3991,8 +4002,8 @@ img {
         &.purple {
           .user-message{
             .text {
-              background: #800080;
-              border-color: #800080;
+              background: rgba(@purpleRGB , .3);
+              border-color:  #800080;
               box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
             }
           }
@@ -4000,7 +4011,7 @@ img {
         &.dodgerblue {  
           .user-message {
             .text {
-              background: #1E90FF;
+              background: rgba(@dodgerblueRGB , .3);
               border-color: #1E90FF;
               box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
             }  
@@ -4017,6 +4028,7 @@ img {
             text-align: left;
             word-wrap: break-word;
             clear: both;
+	    border:2px solid ;
             border-radius: 10px 10px 10px 0;
           }
         }
@@ -4059,6 +4071,8 @@ img {
         }
 
         .time {
+	  font-size: 12px;
+	  padding: 5px;
           margin-top: 0;
           background-color: none;
         }
@@ -4066,7 +4080,7 @@ img {
         &.orange {
           .user-message {
             .text {
-              background: #ffa500;
+              background: rgba(@orangeRGB , .7);
               border-color:#ffa500;
               box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
             }
@@ -4075,7 +4089,7 @@ img {
         &.red {
           .user-message {
             .text{
-              background: #ff0000;
+              background: rgba(@redRGB ,.7);
               border-color:#ff0000;
               box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
             }        
@@ -4084,7 +4098,7 @@ img {
         &.gold {
           .user-message {
             .text{
-              background: @color_gold;
+              background: rgba(@goldRGB ,.7);
               border-color:@color_gold;
               box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
             }
@@ -4093,7 +4107,7 @@ img {
         &.gray {
           .user-message {
             .text {
-              background: #808080;
+              background: rgba(@grayRGB ,.7);
               border-color: #808080;
               box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
             }
@@ -4102,7 +4116,7 @@ img {
         &.limegreen {
           .user-message {
             .text {
-              background: #32CD32;
+              background: rgba(@limegreenRGB ,.7);
               border-color: #32CD32;
               box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
             }
@@ -4111,7 +4125,7 @@ img {
         &.purple {
           .user-message{
             .text {
-              background: #800080;
+              background: rgba(@grayRGB , .07);
               border-color: #800080;
               box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
             }
@@ -4120,7 +4134,7 @@ img {
         &.dodgerblue {  
           .user-message {
             .text {
-              background: #1E90FF;
+              background: rgba(@dodgerblueRGB ,.7);
               border-color: #1E90FF;
               box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
             }  
@@ -4135,6 +4149,7 @@ img {
             text-align: left;
             word-wrap: break-word;
             clear: both;
+	    border: 2px solid;
             border-radius: 10px 10px 0 10px;
           }
           img{
