@@ -1,7 +1,12 @@
 import http from "../services/httpService";
 import {
-  GET_FAV, GET_ALL_USERS, GET_USER_ART_NAME,
-  GET_OTEHR_FAV_USER, CLEAR_USERS, FAV_USER,
+  GET_FAV,
+  GET_ALL_USERS,
+  GET_USER_ART_NAME,
+  GET_FAV_USER,
+  GET_FAV_BY_USER,
+  CLEAR_USERS,
+  FAV_USER,
   UNFAV_USER,
   UPDATE_COUNT
 } from "../constants/actionTypes";
@@ -43,26 +48,26 @@ export const getUserArtById = (id) => dispatch => {
     });
 };
 
-export const getOtherFavouriteUsers = (username) => dispatch => {
+export const getFaveUsers = username => dispatch => {
   http
     .get(`/favs/get-faves?username=${username}`)
     .then(res => {
       if (res.data.success) {
         dispatch({
-          type: GET_OTEHR_FAV_USER,
+          type: GET_FAV_USER,
           payload: res.data.data.faves
         })
       }
     });
 };
 
-export const getOtherFavouriteByUsers = (username) => dispatch => {
+export const getFaveByUsers = username => dispatch => {
   http
     .get(`/favs/get-faved-by?username=${username}`)
     .then(res => {
       if (res.data.success) {
         dispatch({
-          type: GET_OTEHR_FAV_USER,
+          type: GET_FAV_BY_USER,
           payload: res.data.data.faves
         });
       }

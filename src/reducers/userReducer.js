@@ -1,7 +1,8 @@
 import {
   GET_FAV,
   GET_ALL_USERS,
-  GET_OTEHR_FAV_USER,
+  GET_FAV_USER,
+  GET_FAV_BY_USER,
   GET_USER_ART_NAME,
   CLEAR_USERS,
   UPDATE_COUNT
@@ -12,7 +13,8 @@ const initialState = {
   favouriteGalleries: null,
   unreadCount: 0,
   users: null,
-  otherFavouriteUsers: null,
+  faveUsers: null,
+  faveByUsers: null,
   userArtName: ""
 };
 
@@ -35,10 +37,15 @@ export default (state = initialState, action) => {
         ...state,
         users: action.payload
       };
-    case GET_OTEHR_FAV_USER:
+    case GET_FAV_USER:
       return {
         ...state,
-        otherFavouriteUsers: action.payload
+        faveUsers: action.payload
+      };
+    case GET_FAV_BY_USER:
+      return {
+        ...state,
+        faveByUsers: action.payload
       };
     case GET_USER_ART_NAME:
       return {
