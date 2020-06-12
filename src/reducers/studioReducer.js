@@ -1,4 +1,11 @@
-import { GET_MY_STUDIO, GET_USER_STUDIO, FAV_USER, UNFAV_USER, UPDATE_BIO } from "../constants/actionTypes";
+import {
+  GET_MY_STUDIO,
+  GET_USER_STUDIO,
+  FAV_USER,
+  UNFAV_USER,
+  UPDATE_BIO,
+  ADD_TO_SPRFVS
+} from "../constants/actionTypes";
 
 const initialState = {
   myStudio: null,
@@ -46,6 +53,14 @@ export default (state = initialState, action) => {
           favs_count: state.userStudio.favs_count - 1
         }
       };
+    case ADD_TO_SPRFVS:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          is_sprfvs: action.payload
+        }
+      }
     default:
       return state;
   }

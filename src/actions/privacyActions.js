@@ -7,7 +7,8 @@ import {
   SPRFVS_USERS,
   USER_REQUESTS,
   INVITED_USERS,
-  REQUEST_APPROVED
+  REQUEST_APPROVED,
+  ADD_TO_SPRFVS
 } from "../constants/actionTypes";
 import http from "../services/httpService";
 import { toast } from "react-toastify";
@@ -63,12 +64,15 @@ export const changeOtherPrivacy = privacy => dispatch => {
     });
 };
 
-export const addToSuperFavs = (privacy, callback) => dispatch => {
+export const addToSuperFavs = privacy => dispatch => {
   http
     .post('/user/privacy/sprfvs', privacy)
     .then(res => {
       toast('Request sent successfully.');
-      callback && callback();
+      dispatch({
+        type: ADD_TO_SPRFVS,
+        payload: 2
+      })
     });
 };
 
