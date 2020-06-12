@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../common/avatar';
 
-const Request = ({ faveUserPrivacyList, onApprovedRequest }) => {
+const Request = ({ userRequests, onApprovedRequest }) => {
   return (
     <div>
       <div className="favas-row">
-        {faveUserPrivacyList &&
-          faveUserPrivacyList.map((user, index) => (
+        {userRequests &&
+          userRequests.map((user, index) => (
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
                 <Link to={`/dashboard/studio/${user.slug}`}  >

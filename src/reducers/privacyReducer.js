@@ -4,15 +4,19 @@ import {
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
   STOP_PRIVACY_LOADING,
-  FAV_USER_PRIVACY_LIST,
-  REQUEST_APPROVED
+  REQUEST_APPROVED,
+  SPRFVS_USERS,
+  USER_REQUESTS,
+  INVITED_USERS
 } from "../constants/actionTypes";
 
 const initialState = {
   userGalleries: null,
   privacyTypes: null,
   userOtherPages: null,
-  faveUserPrivacyList: null,
+  sprfvsUsers: null,
+  userRequests: null,
+  invitedUsers: null,
   loading: false
 };
 
@@ -49,15 +53,25 @@ export default (state = initialState, action) => {
         ...state,
         loading: false
       };
-    case FAV_USER_PRIVACY_LIST:
+    case SPRFVS_USERS:
       return {
         ...state,
-        faveUserPrivacyList: action.payload
+        sprfvsUsers: action.payload
+      };
+    case USER_REQUESTS:
+      return {
+        ...state,
+        userRequests: action.payload
+      };
+    case INVITED_USERS:
+      return {
+        ...state,
+        invitedUsers: action.payload
       };
     case REQUEST_APPROVED:
       return {
         ...state,
-        faveUserPrivacyList: state.faveUserPrivacyList.filter(user => user.id !== action.payload.user_id)
+        userRequests: state.userRequests.filter(user => user.id !== action.payload.user_id)
       };
     default:
       return state;

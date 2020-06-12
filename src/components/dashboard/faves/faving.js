@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from '../../common/spinner';
 import { useLocation } from "react-router-dom";
 import FavTabs from "./favTabs";
-import { getFavUserPrivacyList, approveRequest } from "../../../actions/privacyActions";
+import { approveRequest, getSprfvsUsers, getUserRequests, getInvitedUsers } from "../../../actions/privacyActions";
 import Faves from "./faves";
 import SPRFVS from "./sprfvs";
 import Request from './requests';
@@ -18,7 +18,7 @@ const Faving = (props) => {
   const {
     user: { faveUsers },
     loading: { loading },
-    privacies: { faveUserPrivacyList }
+    privacies: { sprfvsUsers, userRequests, invitedUsers }
   } = useSelector(state => state);
 
   const [query, setQuery] = useState('');
@@ -51,13 +51,13 @@ const Faving = (props) => {
         dispatch(getFaveUsers(""));
         break;
       case 2:
-        dispatch(getFavUserPrivacyList(3, 1));
+        dispatch(getSprfvsUsers(3, 1));
         break;
       case 3:
-        dispatch(getFavUserPrivacyList(3, 0));
+        dispatch(getUserRequests(3, 0));
         break;
       case 4:
-        dispatch(getFavUserPrivacyList(4, 1));
+        dispatch(getInvitedUsers(4, 1));
         break;
       default:
         break;
@@ -84,18 +84,18 @@ const Faving = (props) => {
       }
       {activeTab === 2 &&
         <SPRFVS
-          faveUserPrivacyList={faveUserPrivacyList}
+          sprfvsUsers={sprfvsUsers}
         />
       }
       {activeTab === 3 &&
         <Request
-          faveUserPrivacyList={faveUserPrivacyList}
+          userRequests={userRequests}
           onApprovedRequest={handleApprovedRequest}
         />
       }
       {activeTab === 4 &&
         <Invited
-          faveUserPrivacyList={faveUserPrivacyList}
+          invitedUsers={invitedUsers}
         />
       }
     </div>

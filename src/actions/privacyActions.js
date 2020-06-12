@@ -4,7 +4,9 @@ import {
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
   STOP_PRIVACY_LOADING,
-  FAV_USER_PRIVACY_LIST,
+  SPRFVS_USERS,
+  USER_REQUESTS,
+  INVITED_USERS,
   REQUEST_APPROVED
 } from "../constants/actionTypes";
 import http from "../services/httpService";
@@ -78,12 +80,34 @@ export const addToInviteOnly = privacy => dispatch => {
     });
 };
 
-export const getFavUserPrivacyList = (privacyTypeId, status) => dispatch => {
+export const getSprfvsUsers = (privacyTypeId, status) => dispatch => {
   http
     .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
     .then(res => {
       dispatch({
-        type: FAV_USER_PRIVACY_LIST,
+        type: SPRFVS_USERS,
+        payload: res.data.data.faves
+      });
+    });
+};
+
+export const getUserRequests = (privacyTypeId, status) => dispatch => {
+  http
+    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .then(res => {
+      dispatch({
+        type: USER_REQUESTS,
+        payload: res.data.data.faves
+      });
+    });
+};
+
+export const getInvitedUsers = (privacyTypeId, status) => dispatch => {
+  http
+    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .then(res => {
+      dispatch({
+        type: INVITED_USERS,
         payload: res.data.data.faves
       });
     });
