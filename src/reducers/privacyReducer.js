@@ -4,7 +4,8 @@ import {
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
   STOP_PRIVACY_LOADING,
-  FAV_USER_PRIVACY_LIST
+  FAV_USER_PRIVACY_LIST,
+  REQUEST_APPROVED
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -52,6 +53,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         faveUserPrivacyList: action.payload
+      };
+    case REQUEST_APPROVED:
+      return {
+        ...state,
+        faveUserPrivacyList: state.faveUserPrivacyList.filter(user => user.id !== action.payload.user_id)
       };
     default:
       return state;

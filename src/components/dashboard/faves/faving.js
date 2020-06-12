@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from '../../common/spinner';
 import { useLocation } from "react-router-dom";
 import FavTabs from "./favTabs";
-import { getFavUserPrivacyList } from "../../../actions/privacyActions";
+import { getFavUserPrivacyList, approveRequest } from "../../../actions/privacyActions";
 import Faves from "./faves";
 import SPRFVS from "./sprfvs";
 import Request from './requests';
@@ -38,6 +38,11 @@ const Faving = (props) => {
   const handleChange = ({ target: input }) => {
     setQuery(input.value);
     dispatch(getFaveUsers(input.value))
+  };
+
+  const handleApprovedRequest = (request) => {
+    console.log(request);
+    dispatch(approveRequest(request));
   };
 
   const handleTabChange = id => {
@@ -85,6 +90,7 @@ const Faving = (props) => {
       {activeTab === 3 &&
         <Request
           faveUserPrivacyList={faveUserPrivacyList}
+          onApprovedRequest={handleApprovedRequest}
         />
       }
       {activeTab === 4 &&

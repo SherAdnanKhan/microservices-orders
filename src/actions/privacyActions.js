@@ -4,7 +4,8 @@ import {
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
   STOP_PRIVACY_LOADING,
-  FAV_USER_PRIVACY_LIST
+  FAV_USER_PRIVACY_LIST,
+  REQUEST_APPROVED
 } from "../constants/actionTypes";
 import http from "../services/httpService";
 import { toast } from "react-toastify";
@@ -84,6 +85,20 @@ export const getFavUserPrivacyList = (privacyTypeId, status) => dispatch => {
       dispatch({
         type: FAV_USER_PRIVACY_LIST,
         payload: res.data.data.faves
+      });
+    });
+};
+
+export const approveRequest = request => dispatch => {
+  http
+    .post('/user/privacy/sprfvs/approved', request)
+    .then(res => {
+      console.log(res.data.data);
+      toast('You have approved request.');
+
+      dispatch({
+        type: REQUEST_APPROVED,
+        payload: request
       });
     });
 };
