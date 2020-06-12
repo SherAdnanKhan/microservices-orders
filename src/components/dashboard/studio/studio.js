@@ -16,7 +16,6 @@ import GalleryModel from './galleryModel';
 
 const Studio = () => {
   const [showModel, setShowModel] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
 
   const { params: { slug } } = useRouteMatch();
@@ -55,9 +54,7 @@ const Studio = () => {
       user_id: currentUser.id
     };
 
-    dispatch(addToSuperFavs(privacy, () => {
-      setSuccess(true);
-    }));
+    dispatch(addToSuperFavs(privacy));
   };
 
   const handleShowModel = value => {
@@ -88,7 +85,6 @@ const Studio = () => {
       <StudioHeader
         userStudio={userStudio}
         onSuperFav={handleSuperFav}
-        success={success}
         showModel={showModel}
         onModelOpen={handleShowModel}
       />
@@ -100,6 +96,7 @@ const Studio = () => {
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}
+        galleryPrivacy={userStudio && userStudio.gallery_privacy}
         color={userStudio && userStudio.user.feel_color}
       />
       <PostBar
