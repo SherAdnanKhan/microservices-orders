@@ -25,7 +25,11 @@ const Main = () => {
       case 'my-studio':
         return split[3] === 'profile'
           ? import('./profile')
-          : import('./myStudio/myStudio');
+          : split[3] === 'fave'
+            ? import('./faves/faving')
+            : split[3] === 'fave-by'
+              ? import('./faves/faveBy')
+              : import('./myStudio/myStudio');
       case 'change-password':
         return import('./settings/changePassword');
       case 'fave':
@@ -33,7 +37,11 @@ const Main = () => {
       case 'fave-by':
         return import('./faves/faveBy');
       case 'studio':
-        return import('./studio/studio');
+        return split[3] === 'fave'
+          ? import('./faves/faving')
+          : split[3] === 'fave-by'
+            ? import('./faves/faveBy')
+            : import('./studio/studio');
       case 'mz-flash':
         return import('./mzFlash');
       case 'viewpost':

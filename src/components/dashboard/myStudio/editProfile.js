@@ -7,14 +7,8 @@ const EditProfile = ({ myStudio }) => {
     <div className="wrapper">
       <div className="studioScreen">
         <div className="studioHead">
-          <div>
-
-          </div>
           <div className="procu">
             {myStudio && <ProfileCube avatars={myStudio.user.avatars} />}
-          </div>
-          <div>
-
           </div>
         </div>
         {myStudio &&
@@ -43,14 +37,14 @@ const EditProfile = ({ myStudio }) => {
             />
           </label>
           <div className="faved-btn">
-            <Link to={`/dashboard/faving/${'by'}`}>
+            <Link to='/dashboard/my-studio/fave-by'>
               <div className="faved-by-btn">
                 <img src="/assets/images/favers.png" alt="" />
                   Faved by
                 </div>
               {myStudio && <span>{myStudio.fav_by_count}</span>}
             </Link>
-            <Link to="/dashboard/faving">
+            <Link to="/dashboard/my-studio/fave">
               <div className="faved-by-btn">
                 <img src="/assets/images/faving.png" alt="" />
                   Faved

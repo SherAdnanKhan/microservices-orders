@@ -15,11 +15,13 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/lobby" component={Main} />
         <Route exact path="/dashboard/exhibition/:id" component={addExibition} />
         <Route exact path="/dashboard/start-favas" component={StartFaves} />
+        <Route exact path="/dashboard/my-studio/profile" component={Profile} />
+        <Route exact path="/dashboard/my-studio/fave" component={Main} />
+        <Route exact path="/dashboard/my-studio/fave-by" component={Main} />
         <Route exact path="/dashboard/my-studio" component={Main} />
         <Route exact path="/dashboard/studio/:slug" component={Main} />
-        <Route exact path="/dashboard/fave" component={Main} />
-        <Route exact path="/dashboard/fave-by" component={Main} />
-        <Route exact path="/dashboard/my-studio/profile" component={Profile} />
+        <Route exact path="/dashboard/studio/fave" component={Main} />
+        <Route exact path="/dashboard/studio/fave-by" component={Main} />
         <Route exact path="/dashboard/mz-flash/:slug" component={Main} />
         <Route exact path="/dashboard/viewpost/:id" component={Main} />
         <Route exact path="/dashboard/privacy" component={Main} />
