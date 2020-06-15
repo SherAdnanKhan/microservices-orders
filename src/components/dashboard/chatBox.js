@@ -275,7 +275,7 @@ class ChatBox extends Component {
                                 {data.message}
                                 {data.type === 1 &&
                                   <div className="msgImg">
-                                    <a href={data.url} target="_blank" rel="noopener noreferrer">>
+                                    <a href={data.url} target="_blank" rel="noopener noreferrer">
                                       <img
                                         src={data.url}
                                         alt=""
