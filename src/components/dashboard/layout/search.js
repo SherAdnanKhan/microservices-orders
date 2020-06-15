@@ -36,7 +36,7 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="wrapper" id="search-result">
+      <div id="search-result">
         {users &&
           users.map((user, index) => (
             <div key={index} className="result-box">

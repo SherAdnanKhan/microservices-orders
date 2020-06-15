@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
         ...state,
         gallery: {
           ...state.gallery,
-          has_faved: action.payload
+          has_faved: action.payload.hasFaved
         }
       };
     case UNFAV_GALLERY:
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         ...state,
         gallery: {
           ...state.gallery,
-          has_faved: action.payload
+          has_faved: action.payload.hasFaved
         }
       };
     case RECOMMEND_GALLERIES:

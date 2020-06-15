@@ -84,8 +84,6 @@ const Studio = () => {
       }
       <StudioHeader
         userStudio={userStudio}
-        onSuperFav={handleSuperFav}
-        showModel={showModel}
         onModelOpen={handleShowModel}
       />
       <StudioDetail
@@ -96,7 +94,6 @@ const Studio = () => {
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}
-        galleryPrivacy={userStudio && userStudio.gallery_privacy}
         color={userStudio && userStudio.user.feel_color}
       />
       <PostBar
@@ -107,8 +104,12 @@ const Studio = () => {
         totalPosts={userStudio && userStudio.user.posts_count}
       />
       <Post
+        activeGallery={activeGallery}
         gallery={gallery}
         user={userStudio && userStudio.user}
+        galleryPrivacy={userStudio && userStudio.gallery_privacy}
+        onSuperFav={handleSuperFav}
+        isSprFvs={userStudio && userStudio.is_sprfvs}
       />
       <StudioFooter />
     </div>
