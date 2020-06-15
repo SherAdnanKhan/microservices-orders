@@ -17,7 +17,10 @@ export const clearGallery = () => {
 };
 
 export const favGallery = data => dispatch => {
-  dispatch({ type: FAV_GALLERY, payload: true });
+  dispatch({
+    type: FAV_GALLERY,
+    payload: { galleryId: data.gallery_id, hasFaved: true }
+  });
 
   http
     .post('/galleries/fav', data)
@@ -31,7 +34,10 @@ export const favGallery = data => dispatch => {
 };
 
 export const unfavGallery = data => dispatch => {
-  dispatch({ type: UNFAV_GALLERY, payload: false });
+  dispatch({
+    type: UNFAV_GALLERY,
+    payload: { galleryId: data.gallery_id, hasFaved: false }
+  });
 
   http
     .post('/galleries/unfav', data)

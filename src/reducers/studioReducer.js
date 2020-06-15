@@ -4,7 +4,8 @@ import {
   FAV_USER,
   UNFAV_USER,
   UPDATE_BIO,
-  ADD_TO_SPRFVS
+  ADD_TO_SPRFVS,
+  FAV_GALLERY
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -51,6 +52,23 @@ export default (state = initialState, action) => {
           ...state.userStudio,
           has_faved: action.payload,
           favs_count: state.userStudio.favs_count - 1
+        }
+      };
+    case FAV_GALLERY:
+      console.log(action);
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          gallery_privacy: state.userStudio.gallery_privacy.map(gallery => {
+            if (gallery.gallery_id === action.payload.galleryId) {
+              return {
+                ...gallery,
+                is_allowed: 1
+              }
+            }
+            return gallery
+          })
         }
       };
     case ADD_TO_SPRFVS:

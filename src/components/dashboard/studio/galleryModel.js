@@ -1,6 +1,7 @@
 import React from 'react';
 
 const GalleryModel = ({ myGalleries, onModelClose, onChange }) => {
+  console.log(myGalleries)
   return (
     <div className="gallery-model">
       <i className="fas fa-window-close" onClick={() => onModelClose(false)}></i>

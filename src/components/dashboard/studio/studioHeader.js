@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StudioHeader = ({ userStudio, onSuperFav, onModelOpen }) => {
+const StudioHeader = ({ userStudio, onModelOpen }) => {
   const history = useHistory();
 
   return (
@@ -11,11 +11,7 @@ const StudioHeader = ({ userStudio, onSuperFav, onModelOpen }) => {
       </div>
       {userStudio && <p>{userStudio.user.username}</p>}
       <div className="actions">
-        <button
-          onClick={onSuperFav}
-          disabled={userStudio && userStudio.is_sprfvs > 0}
-        >
-          SPRFVS </button>
+
         <button
           onClick={() => onModelOpen(true)}
         >
