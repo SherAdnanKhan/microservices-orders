@@ -49,7 +49,7 @@ const Post = ({ gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprF
                 </div>
               </div>
             }
-            {(activeGallery.privacy.privacy_type_id === FAVES && !isAllowed()) &&
+            {(activeGallery?.privacy?.privacy_type_id === FAVES && !isAllowed()) &&
               <div className="privacy-actions">
                 <img
                   src="/assets/images/catfave.png"
@@ -59,7 +59,7 @@ const Post = ({ gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprF
                 <div>Fav this Gallery to view</div>
               </div>
             }
-            {(activeGallery.privacy.privacy_type_id === SPRFVS && !isAllowed()) &&
+            {(activeGallery?.privacy?.privacy_type_id === SPRFVS && !isAllowed()) &&
               <div className="privacy-actions">
                 <button
                   disabled={isSprFvs > 0}
@@ -71,7 +71,7 @@ const Post = ({ gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprF
                 <div> Only for SprFvs </div>
               </div>
             }
-            {(activeGallery.privacy.privacy_type_id === INVITE_ONLY && !isAllowed()) &&
+            {(activeGallery?.privacy?.privacy_type_id === INVITE_ONLY && !isAllowed()) &&
               <div className="privacy-actions">
                 Private Gallery Invite Only
               </div>
