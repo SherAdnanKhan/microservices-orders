@@ -9,8 +9,18 @@ const StudioFooter = ({ gallery, user }) => {
           <div className="post-picture">
             {gallery &&
               gallery.posts.map((gallery, index) => (
-                <div className="" key={index} >
-                  <img src={`${gallery?.image.path}`} alt="" />
+                <div className="" key={index}>
+                  {gallery.post_type === 2
+                    ? (
+                      <video width="320" height="240" controls>
+                        <source src={gallery?.image.path} type="video/mp4" />
+                        <source src={gallery?.image.path} type="video/ogg" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img src={`${gallery?.image.path}`} alt="" />
+                    )
+                  }
                 </div>
               ))}
           </div>
@@ -29,7 +39,17 @@ const StudioFooter = ({ gallery, user }) => {
             {gallery &&
               gallery.posts.map((post, index) => (
                 <div className="list-body" key={index}>
-                  <img src={post.image.path} alt="" />
+                  {post.post_type === 2
+                    ? (
+                      <video width="320" height="240" controls>
+                        <source src={post.image.path} type="video/mp4" />
+                        <source src={post.image.path} type="video/ogg" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img src={`${post.image.path}`} alt="" />
+                    )
+                  }
                   <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
                 </div>
               ))
