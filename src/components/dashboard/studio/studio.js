@@ -65,7 +65,7 @@ const Studio = () => {
     if (input.checked) {
       const privacy = {
         privacy_type_id: 4,
-        user_id: currentUser.id,
+        user_id: userStudio.user.id,
         gallery_id: galleryId
       };
 
@@ -80,6 +80,8 @@ const Studio = () => {
           myGalleries={myGalleries}
           onModelClose={handleShowModel}
           onChange={handleChange}
+          galleryInvitedList={userStudio && userStudio.gallery_invited_list}
+          user={userStudio && userStudio.user}
         />
       }
       <StudioHeader

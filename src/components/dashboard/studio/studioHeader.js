@@ -15,7 +15,7 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
         <button
           onClick={() => onModelOpen(true)}
         >
-          Invite only
+          Invite
         </button>
       </div>
       <div className="heart">
