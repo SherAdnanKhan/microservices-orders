@@ -22,19 +22,29 @@ const AddExibit = () => {
     description: "",
     gallery_id: 0,
     image: null,
+    video: null,
     art_id: null
   }
   // const [arts, setArts] = useState("");
-  const [error, setError] = useState("");
-  const [image, setImage] = useState("");
+  const [error, setError] = useState('');
+  const [image, setImage] = useState('');
+  const [video, setVideo] = useState('')
   const [data, setData] = useState(initialData);
 
   const user = useContext(UserContext);
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file' && input.files[0]) {
-      setImage(URL.createObjectURL(input.files[0]));
-      setData({ ...data, [input.name]: input.files[0] });
+      const fileType = input.files[0].type.split("/")[0];
+
+      if (fileType === 'image') {
+        setImage(URL.createObjectURL(input.files[0]));
+        setData({ ...data, image: input.files[0] });
+      } else {
+        setVideo(URL.createObjectURL(input.files[0]));
+        setData({ ...data, video: input.files[0] });
+      }
+
     } else if (input.type === 'radio') {
       setData({ ...data, [input.name]: parseInt(input.value) });
     } else {
@@ -71,8 +81,8 @@ const AddExibit = () => {
       return "Please select a Gallery.";
     }
 
-    if (!data.image) {
-      return "Please select an image.";
+    if (!data.image && !data.video) {
+      return "Please choose a file.";
     }
 
     if (!data.art_id) {
@@ -89,7 +99,13 @@ const AddExibit = () => {
     if (!error) {
       const formData = new FormData();
       for (let key in data) {
-        formData.append(key, data[key]);
+        if (key === 'image' || key === 'video') {
+          if (data[key]) {
+            formData.append(key, data[key]);
+          }
+        } else {
+          formData.append(key, data[key]);
+        }
       }
       setData(initialData);
       dispatch(artPost(formData, history))
@@ -125,13 +141,25 @@ const AddExibit = () => {
         <form className="exibition-page-form" onSubmit={Submit}>
           <div className="exibition-top-textboxes">
             <div className="exbition-img" style={{ textAlign: "center" }}>
-              <label htmlFor="image" className="exibition-input clickable">
-                <img id="preview" src={image ? image : '/assets/images/input-image.png'} alt="dummy" />
+              <label htmlFor="image" className="exibition-input clickable" onClick={() => console.log('label')}>
+                {video &&
+                  <video width="320" height="240" controls>
+                    <source src={video} type="video/mp4" />
+                    <source src={video} type="video/ogg" />
+                  Your browser does not support the video tag.
+                </video>
+                }
+                {!video &&
+                  <img
+                    id="preview"
+                    src={image ? image : '/assets/images/input-image.png'} alt="dummy"
+                  />
+                }
                 <input
                   type="file"
                   name="image"
                   id="image"
-                  accept=".png, .jpg, .jpeg"
+                  accept="image/*, video/*"
                   onChange={handleChange}
                 />
               </label >
