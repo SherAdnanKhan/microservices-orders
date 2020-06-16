@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery } from "../../../actions/galleryActions";
@@ -9,7 +9,6 @@ import PostBar from './postBar';
 import StudioDetail from './studioDetail';
 import StudioHeader from './studioHeader';
 import StudioFooter from './studioFooter';
-import UserContext from '../../../context/userContext';
 import { getGalleries } from '../../../actions/exibitionAction';
 import GalleryModel from './galleryModel';
 import Spinner from '../../common/spinner';
@@ -19,7 +18,6 @@ const Studio = () => {
   const [activeGallery, setActiveGallery] = useState('');
 
   const { params: { slug } } = useRouteMatch();
-  const currentUser = useContext(UserContext);
 
   const dispatch = useDispatch();
   const {
@@ -51,7 +49,7 @@ const Studio = () => {
   const handleSuperFav = () => {
     const privacy = {
       privacy_type_id: 3,
-      user_id: currentUser.id
+      user_id: userStudio && userStudio.user.id
     };
 
     dispatch(addToSuperFavs(privacy));
