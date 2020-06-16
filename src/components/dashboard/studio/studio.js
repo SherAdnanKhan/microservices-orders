@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery } from "../../../actions/galleryActions";
-import { getUserStudio } from "../../../actions/studioActions";
+import { getUserStudio, addToSuperFavs, addToInviteOnly } from "../../../actions/studioActions";
 import Gallery from "./galleries";
 import Post from '../../common/posts';
 import PostBar from './postBar';
@@ -10,9 +10,9 @@ import StudioDetail from './studioDetail';
 import StudioHeader from './studioHeader';
 import StudioFooter from './studioFooter';
 import UserContext from '../../../context/userContext';
-import { addToSuperFavs, addToInviteOnly } from '../../../actions/privacyActions';
 import { getGalleries } from '../../../actions/exibitionAction';
 import GalleryModel from './galleryModel';
+import Spinner from '../../common/spinner';
 
 const Studio = () => {
   const [showModel, setShowModel] = useState(false);
@@ -23,7 +23,7 @@ const Studio = () => {
 
   const dispatch = useDispatch();
   const {
-    studio: { userStudio },
+    studio: { userStudio, loading },
     gallery: { gallery },
     exibition: { ListOfGalleries: { data: myGalleries } }
   } = useSelector(state => state);
@@ -68,13 +68,13 @@ const Studio = () => {
         user_id: userStudio.user.id,
         gallery_id: galleryId
       };
-
       dispatch(addToInviteOnly(privacy));
     }
   };
 
   return (
     <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
+      {loading && <Spinner />}
       {showModel &&
         <GalleryModel
           myGalleries={myGalleries}

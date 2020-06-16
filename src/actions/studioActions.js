@@ -1,4 +1,12 @@
-import { GET_MY_STUDIO, GET_USER_STUDIO, UPDATE_BIO } from "../constants/actionTypes";
+import {
+  GET_MY_STUDIO,
+  GET_USER_STUDIO,
+  UPDATE_BIO,
+  ADD_TO_SPRFVS,
+  ADD_TO_INVITE_ONLY,
+  START_STUDIO_LOADER,
+  STOP_STUDIO_LOADER
+} from "../constants/actionTypes";
 import http from "../services/httpService";
 import { getCurrentUser } from "./authActions";
 import { userKey } from "../constants/keys";
@@ -49,6 +57,36 @@ export const getUserStudio = (slug) => dispatch => {
       })
     });
 }
+
+export const addToSuperFavs = privacy => dispatch => {
+  http
+    .post('/user/privacy/sprfvs', privacy)
+    .then(res => {
+      toast('Request sent successfully.');
+      dispatch({
+        type: ADD_TO_SPRFVS,
+        payload: 2
+      })
+    });
+};
+
+export const addToInviteOnly = privacy => dispatch => {
+  dispatch({ type: START_STUDIO_LOADER });
+
+  http
+    .post('/user/privacy/invite-only', privacy)
+    .then(res => {
+      dispatch({
+        type: ADD_TO_INVITE_ONLY,
+        payload: privacy.gallery_id
+      });
+      dispatch({ type: STOP_STUDIO_LOADER });
+
+      toast('Invitation sent successfuly');
+    }).catch(err => {
+      dispatch({ type: STOP_STUDIO_LOADER });
+    });
+};
 
 // export const clearUserStudio = () => {
 //   return
