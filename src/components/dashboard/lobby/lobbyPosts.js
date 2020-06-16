@@ -18,7 +18,18 @@ const LobbyPosts = ({ post }) => {
         }
       </div>
       <div className="post-body">
-        {post.image && post.image.path && <img src={post.image.path} alt="" stye={{ width: "100%", heigth: "100%" }} />}
+        {post.post_type === 2
+          ? (
+            <video width="320" height="240" controls>
+              <source src={post.image.path} type="video/mp4" />
+              <source src={post.image.path} type="video/ogg" />
+           Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img src={post.image.path} alt="" stye={{ width: "100%", heigth: "100%" }} />
+          )
+        }
+
       </div>
       <div className="onearttitle">
         <p>{post && post.title}</p>
