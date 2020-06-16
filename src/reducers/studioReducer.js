@@ -6,12 +6,16 @@ import {
   UPDATE_BIO,
   ADD_TO_SPRFVS,
   FAV_GALLERY,
-  UNFAV_GALLERY
+  UNFAV_GALLERY,
+  ADD_TO_INVITE_ONLY,
+  START_STUDIO_LOADER,
+  STOP_STUDIO_LOADER,
 } from "../constants/actionTypes";
 
 const initialState = {
   myStudio: null,
-  userStudio: null
+  userStudio: null,
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -95,6 +99,24 @@ export default (state = initialState, action) => {
           ...state.userStudio,
           is_sprfvs: action.payload
         }
+      }
+    case ADD_TO_INVITE_ONLY:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          gallery_invited_list: [...state.userStudio.gallery_invited_list, action.payload]
+        }
+      }
+    case START_STUDIO_LOADER:
+      return {
+        ...state,
+        loading: true
+      }
+    case STOP_STUDIO_LOADER:
+      return {
+        ...state,
+        loading: false
       }
     default:
       return state;

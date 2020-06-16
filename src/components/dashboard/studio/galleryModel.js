@@ -18,12 +18,20 @@ const GalleryModel = ({ myGalleries, onModelClose, onChange, galleryInvitedList,
                 <div className="gallery-row">
                   <div className="gallery-item"> Gallery {index + 1} </div>
                   <div className="actions">
-                    <input
-                      type="checkbox"
-                      disabled={hasInvited(gallery)}
-                      checked={hasInvited(gallery)}
-                      onChange={e => onChange(e, gallery.id)}
-                    />
+                    {hasInvited(gallery)
+                      ? (
+                        <input
+                          type="checkbox"
+                          disabled={hasInvited(gallery)}
+                          checked={true}
+                        />
+                      ) : (
+                        <input
+                          type="checkbox"
+                          onChange={e => onChange(e, gallery.id)}
+                        />
+                      )
+                    }
                     <label>invite</label>
                   </div>
                 </div>

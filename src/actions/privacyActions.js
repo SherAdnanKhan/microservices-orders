@@ -8,7 +8,6 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   REQUEST_APPROVED,
-  ADD_TO_SPRFVS
 } from "../constants/actionTypes";
 import http from "../services/httpService";
 import { toast } from "react-toastify";
@@ -61,26 +60,6 @@ export const changeOtherPrivacy = privacy => dispatch => {
     })
     .catch(err => {
       dispatch({ type: STOP_PRIVACY_LOADING });
-    });
-};
-
-export const addToSuperFavs = privacy => dispatch => {
-  http
-    .post('/user/privacy/sprfvs', privacy)
-    .then(res => {
-      toast('Request sent successfully.');
-      dispatch({
-        type: ADD_TO_SPRFVS,
-        payload: 2
-      })
-    });
-};
-
-export const addToInviteOnly = privacy => dispatch => {
-  http
-    .post('/user/privacy/invite-only', privacy)
-    .then(res => {
-      toast('Invitation sent successfuly');
     });
 };
 

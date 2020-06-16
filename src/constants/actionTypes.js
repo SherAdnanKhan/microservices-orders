@@ -37,7 +37,10 @@ export const GET_USER_STUDIO = 'GET_USER_STUDIO';
 export const CLEAR_USER_STUDIO = 'CLEAR_USER_STUDIO';
 export const FAV_USER = 'FAV_USER';
 export const UNFAV_USER = 'UNFAV_USER';
-
+export const ADD_TO_SPRFVS = 'ADD_TO_SPRFVS';
+export const ADD_TO_INVITE_ONLY = 'ADD_TO_INVITE_ONLY';
+export const START_STUDIO_LOADER = 'START_STUDIO_LOADER';
+export const STOP_STUDIO_LOADER = 'STOP_STUDIO_LOADER'
 
 // Gallery
 export const GET_GALLERY = "GET_GALLERY";
@@ -80,4 +83,3 @@ export const USER_REQUESTS = 'USER_REQUESTS';
 export const INVITED_USERS = 'INVITED_USERS';
 export const REQUEST_APPROVED = 'REQUEST_APPROVED';
 export const REQUEST_REJECTED = 'REQUEST_REJECTED';
-export const ADD_TO_SPRFVS = 'ADD_TO_SPRFVS';
