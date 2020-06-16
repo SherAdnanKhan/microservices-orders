@@ -1,4 +1,4 @@
-import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY, CLEAR_GALLERY, RECOMMEND_GALLERIES } from "../constants/actionTypes";
+import { GET_GALLERY, UNFAV_GALLERY, FAV_GALLERY, CLEAR_GALLERY, RECOMMEND_GALLERIES, FAV_RECOMMEND_GALLERY, UNFAV_RECOMMEND_GALLERY } from "../constants/actionTypes";
 import http from "../services/httpService";
 
 export const getGallery = utilite => dispatch => {
@@ -61,3 +61,36 @@ export const getRecommendedGalleries = data => dispatch => {
     });
 };
 
+export const favRecommendedGallery = data => dispatch => {
+  dispatch({
+    type: FAV_RECOMMEND_GALLERY,
+    payload: data
+  });
+
+  http
+    .post('/galleries/fav', { gallery_id: data.gallery.id })
+    .then()
+    .catch(err => {
+      dispatch({
+        type: UNFAV_RECOMMEND_GALLERY,
+        payload: data
+      });
+    });
+};
+
+export const unfavRecommendedGallery = data => dispatch => {
+  dispatch({
+    type: UNFAV_RECOMMEND_GALLERY,
+    payload: data
+  });
+
+  http
+    .post('/galleries/unfav', { gallery_id: data.gallery.id })
+    .then()
+    .catch(err => {
+      dispatch({
+        type: FAV_RECOMMEND_GALLERY,
+        payload: data
+      });
+    });
+};
