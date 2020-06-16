@@ -1,16 +1,20 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const ViewPostHeader = ({ post }) =>{
+const ViewPostHeader = ({ post }) => {
   const history = useHistory();
 
-  return(
+  return (
     <div className="veiw-post-header-bar">
       {/* <div className="view-back-icon"> */}
-        <i className="fa fa-arrow-left clickable view-back-icon" onClick={() => history.push('/dashboard/lobby')} />
+      <i className="fa fa-arrow-left clickable view-back-icon"
+        onClick={() => history.goBack()}
+      />
       {/* </div> */}
-  {post && post.post && <p>{post.post.title}: {post && post.post && post.post.user && post.post.user.username}</p>}
-  </div>
+      {post &&
+        <p>{post.title}: {post.user.username}</p>
+      }
+    </div>
   )
 }
 export default ViewPostHeader

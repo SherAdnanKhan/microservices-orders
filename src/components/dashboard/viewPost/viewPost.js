@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 import { getPost, makeStoke, unStoke } from "../../../actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
 import PostFooter from "./postFooter";
-import ViewPortHead from "./postHead";
+import ViewPostHead from "./postHead";
 import ViewPostBody from "./postBody";
 import ViewPostHeader from "./postHeader";
 import Comment from './comments';
@@ -19,7 +19,6 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getPost(id))
-
   }, [dispatch, id]);
 
   const handleUnStoke = (e, ID) => {
@@ -34,12 +33,14 @@ const ViewPost = () => {
 
   return (
     <div className={`post-page ${post && post.post.user.feel_color}`}>
-      <ViewPostHeader post={post} />
-      <ViewPortHead
-        post={post}
+      <ViewPostHeader
+        post={post && post.post}
+      />
+      <ViewPostHead
+        post={post && post.post}
       />
       <ViewPostBody
-        post={post}
+        post={post && post.post}
       />
       <PostFooter
         post={post}

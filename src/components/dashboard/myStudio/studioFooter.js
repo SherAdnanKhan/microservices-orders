@@ -28,7 +28,7 @@ const StudioFooter = ({ gallery, user }) => {
           <div className="show-list">
             <div className="s-l-header">
               <p>{user && user.username}</p>
-              <Avatar avatars={user && user.avatars} />
+              <Avatar avatars={user && user.avatars} feelColor={user && user.feel_color} />
               {user && user.art &&
                 <>
                   {user.art.parent && user.art.parent.name + '/'}

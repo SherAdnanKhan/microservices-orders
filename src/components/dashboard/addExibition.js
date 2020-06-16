@@ -132,7 +132,7 @@ const AddExibit = () => {
       <>
         <div className="exibition-page-header">
           <span className="exibition-exit-icon">
-            <i className="fas fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')}></i>
+            <i className="fas fa-arrow-left clickable" onClick={() => history.goBack()}></i>
           </span>
           <span className="exibition-header-name">Exhibit Your Art</span>
         </div>
