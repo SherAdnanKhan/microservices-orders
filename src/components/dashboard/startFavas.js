@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecommendedGalleries } from '../../actions/galleryActions';
+import { getRecommendedGalleries, unfavRecommendedGallery, favRecommendedGallery } from '../../actions/galleryActions';
+import { useHistory } from 'react-router-dom';
 
 
 const StartFaves = () => {
+  const history = useHistory();
   const user = useContext(UserContext);
   const dispatch = useDispatch();
   const { recommendedGalleries } = useSelector(state => state.gallery);
@@ -16,12 +17,30 @@ const StartFaves = () => {
     console.log(recommendedGalleries);
   }, [dispatch, recommendedGalleries])
 
+  const handleLike = (user, gallery) => {
+    const data = {
+      user,
+      gallery
+    };
+
+    if (gallery.has_faved) {
+      dispatch(unfavRecommendedGallery(data));
+    } else {
+      dispatch(favRecommendedGallery(data));
+    }
+  };
+
   return (
     <div className="wrapper fav-page">
       <div className="f-text-box">
         <h3 className="f-title">GETTING STARTED</h3>
         <p className="f-paragrah">Welcome {user.username} there are many other exibitions for you to see and enjoy and many other artist for you to meet</p>
-        <h1>>></h1>
+        <h1
+          onClick={() => history.push('/tutorial')}
+          className="clickable"
+        >
+          >>
+        </h1>
       </div>
       {recommendedGalleries &&
         recommendedGalleries.map((user, index) => (
@@ -45,12 +64,23 @@ const StartFaves = () => {
               <h2>{user.galleries[0].title}</h2>
             </div>
             <div className="f-footer">
-              <Link to="/tutorial">
-                <img style={{ display: 'flex', justifyContent: 'center', margin: 'auto' }}
-                  src="/assets/images/catfave.png"
-                  alt="avatar"
-                />
-              </Link>
+              {!user.galleries[0].has_faved
+                ? (
+                  <img
+                    src="/assets/images/catfave.png"
+                    className="clickable"
+                    onClick={() => handleLike(user, user.galleries[0])}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src="/assets/images/catfaveon.png"
+                    className="clickable"
+                    onClick={() => handleLike(user, user.galleries[0])}
+                    alt=""
+                  />
+                )
+              }
               <h3 className="f-footer-text">ADD TO FAV'S</h3>
             </div>
           </div>
