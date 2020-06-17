@@ -27,7 +27,10 @@ const GalleryPrivacy = ({
           userGalleries.map((gallery, index) => (
             <div className="toggle-data" key={index}>
               <div className="data-box">
-                <i className="fa fa-times"></i>
+                {gallery.image
+                  ? <img src={gallery.image.path} alt="" />
+                  : <i className="fa fa-times"></i>
+                }
                 <label htmlFor="">Gallery {index + 1}</label>
                 <div className="lock-bar" onClick={() => onActiveGallery(gallery.id)}>
                   {(!gallery.privacy || gallery.privacy.privacy_type_id === 1) &&
