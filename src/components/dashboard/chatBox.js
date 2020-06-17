@@ -210,12 +210,12 @@ class ChatBox extends Component {
                       <div
                         className="message-row group"
                       >
-                        <div className={`outgoing ${data.user.feel_color}`}>
+                        <div className={`outgoing ${data.feel_color}`}>
                           <div className="user-message">
                             <div className="send-icon">
                               {data.messages_logs.length > 0
                                 ? data.messages_logs[0].status === 1
-                                  ? <img alt="" src={`/assets/images/${data.user.feel_color}.png`} />
+                                  ? <img alt="" src={`/assets/images/${data.feel_color}.png`} />
                                   : <img alt="" src="/assets/images/avataricon.png" />
                                 : <img alt="/assets/images/avataricon.png" />
                               }
@@ -268,7 +268,7 @@ class ChatBox extends Component {
                       </div>
                     ) : (
                       <div className="message-row group">
-                        <div className={`incoming ${data.user.feel_color}`}>
+                        <div className={`incoming ${data.feel_color}`}>
                           <div className="user-message">
                             <Avatar avatars={data.user.avatars} feelColor={data.user.feel_color} />
                             <div className="text">
