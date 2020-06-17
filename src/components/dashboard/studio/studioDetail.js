@@ -1,9 +1,54 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
+import { toast } from 'react-toastify';
 
 const StudioDetail = ({ userStudio, slug }) => {
   const history = useHistory();
+
+  const hasAllowedStro = slug => {
+    if (userStudio) {
+      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Stro');
+      return (found && found.is_allowed === 1)
+        ? history.push(`/dashboard/chat/${slug}`)
+        : toast('You are not allowed to view this');
+    }
+  };
+
+  const hasAllowedMzflash = slug => {
+    if (userStudio) {
+      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Mzflash');
+      return (found && found.is_allowed === 1)
+        ? history.push(`/dashboard/mz-flash/${slug}`)
+        : toast('You are not allowed to view this');
+    }
+  };
+
+  const hasAllowedBio = () => {
+    if (userStudio) {
+      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Bio');
+      return (found && found.is_allowed === 1) ? true : false;
+    }
+    return false;
+  };
+
+  const hasAllowedFaves = () => {
+    if (userStudio) {
+      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faves');
+      return (found && found.is_allowed === 1)
+        ? history.push('/dashboard/studio/fave')
+        : toast('You are not allowed to view this');
+    }
+  };
+
+  const hasAllowedFavedBy = () => {
+    if (userStudio) {
+      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faved By');
+      return (found && found.is_allowed === 1)
+        ? history.push('/dashboard/studio/fave-by')
+        : toast('You are not allowed to view this');
+    }
+  };
 
   return (
     <>
@@ -12,8 +57,9 @@ const StudioDetail = ({ userStudio, slug }) => {
           <div className="studio-Head">
             <div>
               <img
+                className="clickable"
                 src="/assets/images/strqicon.png" alt=""
-                onClick={() => history.push(`/dashboard/chat/${userStudio && userStudio.user.slug}`)}
+                onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
               />
             </div>
             {userStudio &&
@@ -22,7 +68,7 @@ const StudioDetail = ({ userStudio, slug }) => {
               </div>
             }
             <div>
-              <Link to={`/dashboard/mz-flash/${slug}`}>
+              <Link to="#" onClick={() => hasAllowedMzflash(slug)}>
                 <img src="/assets/images/mzflash.png" alt="" />
               </Link>
             </div>
@@ -42,25 +88,27 @@ const StudioDetail = ({ userStudio, slug }) => {
             </div>
           }
           <form onSubmit={e => e.preventDefault()}>
-            <label htmlFor="addbio" className="addbio-input">
-              <span className="labelText"> user bio</span>
-              <input
-                type="text"
-                name="username"
-                id="addbio"
-                value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
-                disabled
-              />
-            </label>
+            {hasAllowedBio() &&
+              <label htmlFor="addbio" className="addbio-input">
+                <span className="labelText"> user bio</span>
+                <input
+                  type="text"
+                  name="username"
+                  id="addbio"
+                  value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
+                  disabled
+                />
+              </label>
+            }
             <div className="stuion-faved-btn">
-              <Link to='/dashboard/studio/fave-by'>
+              <Link to="#" onClick={() => hasAllowedFavedBy()}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/favers.png" alt="" />
-                Faved by
-              </div>
+                  Faved by
+                </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link>
-              <Link to="/dashboard/studio/fave">
+              <Link to="#" onClick={() => hasAllowedFaves()}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/faving.png" alt="" />
                 Faved
