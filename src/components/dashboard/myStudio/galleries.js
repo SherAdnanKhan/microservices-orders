@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen }) => {
-
   return (
     <div className="wrapper">
       {edit && galleries &&
@@ -12,7 +11,10 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                 key={index}
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
-                <img src="/assets/images/galleryicon.png" alt="" />
+                <img
+                  src={gallery.image ? gallery.image.path : '/assets/images/galleryicon.png'}
+                  alt=""
+                />
               </div>
             ))}
           </div>
@@ -25,11 +27,15 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
               <div key={index} className={`item-box item-box-${index + 1}`}>
                 <div className="editTool Edit">
                   <img
-                    src="/assets/images/paintbrush.png" alt=""
+                    src="/assets/images/paintbrush.png"
+                    alt=""
                     onClick={() => onModelOpen(gallery)}
                   />
                 </div>
-                <img src="/assets/images/galleryicon.png" alt="" />
+                <img
+                  src={gallery.image ? gallery.image.path : '/assets/images/galleryicon.png'}
+                  alt=""
+                />
               </div>
             ))}
             <h1 onClick={() => onModelOpen('')} className="clickable"> + </h1>

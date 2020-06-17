@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { artSearch, getGalleries, artPost } from "../../actions/exibitionAction"
+import { artSearch, artPost } from "../../actions/exibitionAction"
 import InputAutoComplete from "../common/autoComplete";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import Spinner from "../common/spinner";
+import { getMyGalleries } from "../../actions/galleryActions";
 
 const AddExibit = () => {
   const [color, setColor] = useState('red');
@@ -14,8 +15,10 @@ const AddExibit = () => {
   const dispatch = useDispatch();
 
   const listCategory = useSelector(({ exibition }) => exibition.ListOfArts?.data?.arts);
-  const listGalleries = useSelector(({ exibition }) => exibition.ListOfGalleries?.data);
   const { loading } = useSelector(state => state.loading);
+  const {
+    gallery: { myGalleries },
+  } = useSelector(state => state);
 
   let initialData = {
     title: "",
@@ -64,7 +67,7 @@ const AddExibit = () => {
 
 
   useEffect(() => {
-    dispatch(getGalleries())
+    dispatch(getMyGalleries())
 
   }, [dispatch]);
 
@@ -190,8 +193,8 @@ const AddExibit = () => {
             <p> Choose Gallery</p>
           </div>
           <div className="exibition-gallery-utilties">
-            {listGalleries &&
-              listGalleries.map((val, index) => (
+            {myGalleries &&
+              myGalleries.map((val, index) => (
                 <label key={index} className="exibition-gallery-item clickable" >
                   <input
                     type="radio"

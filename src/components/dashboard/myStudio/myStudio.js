@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../../actions/studioActions';
-import { getGalleries } from '../../../actions/exibitionAction';
 import Gallery from './galleries';
-import { getGallery, clearGallery } from "../../../actions/galleryActions";
+import { getGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
 import StudioHeader from './studioHeader';
 import EditProfile from './editProfile';
 import ViewProfile from './viewProfile';
@@ -23,8 +22,8 @@ const MyStudio = () => {
 
   const {
     studio: { myStudio },
-    exibition: { ListOfGalleries: { data: galleries } },
-    gallery: { gallery }
+    // exibition: { ListOfGalleries: { data: galleries } },
+    gallery: { gallery, myGalleries }
 
   } = useSelector(state => state);
 
@@ -34,13 +33,13 @@ const MyStudio = () => {
   }, [dispatch, myStudio]);
 
   useEffect(() => {
-    if (!galleries)
-      dispatch(getGalleries());
+    if (!myGalleries)
+      dispatch(getMyGalleries());
 
     return () => {
       dispatch(clearGallery());
     }
-  }, [galleries, dispatch])
+  }, [myGalleries, dispatch])
 
 
   const handleGalleryChange = gallery => {
@@ -81,7 +80,7 @@ const MyStudio = () => {
         : <ViewButton onEdit={handleEdit} />
       }
       <Gallery
-        galleries={galleries}
+        galleries={myGalleries}
         edit={edit}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}

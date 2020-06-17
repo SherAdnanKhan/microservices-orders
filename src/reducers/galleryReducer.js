@@ -5,12 +5,20 @@ import {
   CLEAR_GALLERY,
   RECOMMEND_GALLERIES,
   FAV_RECOMMEND_GALLERY,
-  UNFAV_RECOMMEND_GALLERY
+  UNFAV_RECOMMEND_GALLERY,
+  GET_MY_GALLERIES,
+  START_GALLERY_LOADER,
+  STOP_GALLERY_LOADER,
+  CREATE_GALLERY,
+  UPDATE_GALLERY,
+  REMOVE_GALLERY_IMAGE
 } from "../constants/actionTypes";
 
 const initialState = {
   gallery: null,
-  recommendedGalleries: null
+  myGalleries: null,
+  recommendedGalleries: null,
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +27,30 @@ export default (state = initialState, action) => {
       return {
         ...state,
         gallery: action.payload
+      };
+    case GET_MY_GALLERIES:
+      return {
+        ...state,
+        myGalleries: action.payload
+      };
+    case CREATE_GALLERY:
+      return {
+        ...state,
+        myGalleries: [...state.myGalleries, action.payload]
+      }
+    case UPDATE_GALLERY:
+      return {
+        ...state,
+        myGalleries: state.myGalleries.map(gallery => {
+          return gallery.id === action.payload.id ? action.payload : gallery
+        })
+      };
+    case REMOVE_GALLERY_IMAGE:
+      return {
+        ...state,
+        myGalleries: state.myGalleries.map(gallery => {
+          return gallery.id === action.payload.id ? action.payload : gallery
+        })
       };
     case CLEAR_GALLERY:
       return {
@@ -87,6 +119,16 @@ export default (state = initialState, action) => {
           }
           return user
         })
+      };
+    case START_GALLERY_LOADER:
+      return {
+        ...state,
+        loading: true
+      };
+    case STOP_GALLERY_LOADER:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;
