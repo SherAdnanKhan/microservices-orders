@@ -11,8 +11,12 @@ import EditButton from './editButton';
 import ViewButton from './viewbutton';
 import PostBar from './postBar';
 import StudioFooter from './studioFooter';
+import GalleryForm from './galleryForm';
 
 const MyStudio = () => {
+  const [show, setShow] = useState(false);
+  const [selectedGallery, setSelectedGallery] = useState('');
+
   const [edit, setEdit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
   const dispatch = useDispatch();
@@ -42,15 +46,31 @@ const MyStudio = () => {
   const handleGalleryChange = gallery => {
     dispatch(getGallery(gallery.slug));
     setActiveGallery(gallery);
-  }
+  };
 
   const handleEdit = () => {
     setEdit(!edit);
     setActiveGallery('');
-  }
+  };
+
+  const handleModelOpen = gallery => {
+    console.log(gallery);
+    setShow(true);
+    setSelectedGallery(gallery)
+  };
+
+  const handleModelClose = (value) => {
+    setShow(value);
+  };
 
   return (
     <div className="my-studio">
+      {show &&
+        <GalleryForm
+          onModelClose={handleModelClose}
+          gallery={selectedGallery}
+        />
+      }
       <StudioHeader myStudio={myStudio && myStudio} />
       {edit
         ? <EditProfile myStudio={myStudio} />
@@ -65,6 +85,7 @@ const MyStudio = () => {
         edit={edit}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}
+        onModelOpen={handleModelOpen}
       />
       <PostBar
         myStudio={myStudio}

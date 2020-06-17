@@ -4876,3 +4876,123 @@ img {
 .btn-active {
   background-color: gray !important;
 }
+
+.gallery-form {
+  .gallery-title {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  label {
+    input {
+      display: block;
+      margin: 0 auto;
+      width: 50%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid white;
+      background-color: black;
+      border-radius: 35px;
+      color: white;
+      &::placeholder {
+        color: white;
+      }
+    }
+  }
+
+  .update-image{
+    position: fixed;
+    width: 60%;
+    height: 90%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10000;
+    border: 2px solid #444;
+    background: black;
+
+    .fa-window-close {
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      z-index: 30;
+      font-size: large;
+      cursor: pointer;
+    }
+
+    .actions {
+      button {
+        display: block;
+        width: 50%;
+        margin: 10px auto 0 auto;
+        padding: 15px;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+        border-radius: 30px;
+        color: white;
+        background-color: black;
+        font-size: 100%;
+      }
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      margin-bottom: 5%;
+    }
+    .up-img-box{
+      width: 50%;
+      height: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 25px auto;
+      position: relative;
+      overflow: hidden;
+      .update-pic{
+        width: 80%;
+      }
+      
+      .add-nag-icon{
+        position: absolute;
+        display: flex;
+        .nag{
+          text-align: center;
+          margin: 0 15px;
+          position: relative;
+        }
+        .nag-icon{
+          width: 50px;
+          height: 50px;
+          padding: 5px;
+          display: block;
+          border: 1px solid white;
+          border-radius: 50%;
+          background: gray;
+          margin: 0 auto;
+          img{
+            width: 100%;
+          }
+        }
+        .nag-btn{
+          width: 120px;
+          padding: 5px;
+          display: block;
+          background: gray;
+          border-radius: 25px;
+          font-size: 14px;
+          margin: 10px auto;
+        }
+        input{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
