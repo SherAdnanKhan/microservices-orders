@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from '../../common/avatar';
 
-const Request = ({ userRequests, onApprovedRequest }) => {
+const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
   return (
     <div>
       <div className="favas-row">
@@ -34,7 +34,12 @@ const Request = ({ userRequests, onApprovedRequest }) => {
                 >
                   Approve
                   </button>
-                <button className="btn-reject">Reject</button>
+                <button
+                  className="btn-reject"
+                  onClick={() => onRejectedRequest({ privacy_type_id: 3, user_id: user.id })}
+                >
+                  Reject
+                  </button>
               </div>
             </div>
           ))}

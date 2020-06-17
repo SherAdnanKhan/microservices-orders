@@ -8,6 +8,7 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   REQUEST_APPROVED,
+  REQUEST_REJECTED
 } from "../constants/actionTypes";
 import http from "../services/httpService";
 import { toast } from "react-toastify";
@@ -100,11 +101,23 @@ export const approveRequest = request => dispatch => {
   http
     .post('/user/privacy/sprfvs/approved', request)
     .then(res => {
-      console.log(res.data.data);
       toast('You have approved request.');
 
       dispatch({
         type: REQUEST_APPROVED,
+        payload: request
+      });
+    });
+};
+
+export const rejectRequest = request => dispatch => {
+  http
+    .post('/user/privacy/sprfvs/reject', request)
+    .then(res => {
+      toast('You have reject request.');
+
+      dispatch({
+        type: REQUEST_REJECTED,
         payload: request
       });
     });

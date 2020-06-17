@@ -99,7 +99,9 @@ export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
       success(res.data.data);
     })
     .catch(err => {
-      toast.error("Something failed while uploading");
+      if (err.response.status === 400 || err.response.status === 404) {
+        toast.error("File is too large for upload.");
+      }
       dispatch({ type: STOP_FILE_LOADER });
       faliure(err.response)
     });
