@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getGallery, favGallery, unfavGallery, clearGallery } from "../../../actions/galleryActions";
+import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
 import { getUserStudio, addToSuperFavs, addToInviteOnly } from "../../../actions/studioActions";
 import Gallery from "./galleries";
 import Post from '../../common/posts';
@@ -9,7 +9,6 @@ import PostBar from './postBar';
 import StudioDetail from './studioDetail';
 import StudioHeader from './studioHeader';
 import StudioFooter from './studioFooter';
-import { getGalleries } from '../../../actions/exibitionAction';
 import GalleryModel from './galleryModel';
 import Spinner from '../../common/spinner';
 
@@ -22,13 +21,12 @@ const Studio = () => {
   const dispatch = useDispatch();
   const {
     studio: { userStudio, loading },
-    gallery: { gallery },
-    exibition: { ListOfGalleries: { data: myGalleries } }
+    gallery: { gallery, myGalleries },
   } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(getUserStudio(slug));
-    dispatch(getGalleries());
+    dispatch(getMyGalleries());
 
     return () => {
       dispatch(clearGallery());
