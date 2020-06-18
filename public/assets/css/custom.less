@@ -2843,24 +2843,39 @@ img {
 .screen {
   width: 100%;
   margin: 50px 0;
+  display: block;
+  overflow: auto;
+  // width: 100%;
+  // margin: 50px 0;
   .scr-inner{
-    display: flex;
-    width: 90%;
-    margin: 0 auto;
-    flex-basis: 20%;
+    display: inline-flex;
+    // display: flex;
+    // width: 90%;
+    // margin: 0 auto;
+    // flex-basis: 20%;
     .item-box{
-      flex-basis: 25%;
-      border: 1px solid rgba(61,61,61,.7);
-      overflow: hidden;
-      background: #000;
-      display: flex;
-      transition: all ease-in-out .3s;
-      z-index: 1;
-      overflow: hidden;
-      cursor: pointer;
+      border: 1px solid rgba(61, 61, 61, 0.7);
+    // opacity: 0.6;
+    display: inline-block;
+    background: #2d2d2d;
+    position: relative;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    height: 290px;
+    overflow: hidden;
+    width: 290px;
+      // flex-basis: 25%;
+      // border: 1px solid rgba(61,61,61,.7);
+      // overflow: hidden;
+      // background: #000;
+      // display: flex;
+      // transition: all ease-in-out .3s;
+      // z-index: 1;
+      // overflow: hidden;
+      // cursor: pointer;
       img{
         width: 100%;
-        opacity: .6;
+        // opacity: .6;
       }
     }
   }
@@ -3076,7 +3091,7 @@ img {
     .item-box{
 
       border: 1px solid rgba(61, 61, 61, 0.7);
-    opacity: 0.6;
+    // opacity: 0.6;
     display: inline-block;
     background: #2d2d2d;
     position: relative;
