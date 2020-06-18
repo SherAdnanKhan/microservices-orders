@@ -2,7 +2,7 @@ import React, { useRef, useCallback, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
-const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl }) => {
+const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl, onSkip }) => {
   const imgRef = useRef(null);
   const [crop, setCrop] = useState({ unit: '%', aspect: 15 / 15 });
 
@@ -80,6 +80,7 @@ const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl }) => {
           </div>
           <div className="model-actions">
             <button className="btn-done" onClick={() => onToggle(false)}> Done </button>
+            <button className="btn-done" onClick={() => onSkip(false)}> Skip cropping </button>
           </div>
         </div>
       }
