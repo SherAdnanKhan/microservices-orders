@@ -17,9 +17,11 @@ const RegisterForm = () => {
     error: { error }
   } = useSelector(state => state);
 
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
+  // const [skip, setSkip] = useState(true);
   const [image, setImage] = useState('/assets/images/avataricon.png');
   const [croppedImage, setCroppedImage] = useState({});
+
 
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
@@ -133,6 +135,12 @@ const RegisterForm = () => {
     e.preventDefault();
     const formData = new FormData();
 
+    if (croppedImage) {
+      data.avatar = croppedImage;
+    };
+
+    console.log(data)
+
     for (let key in data) {
       formData.append(key, data[key]);
     }
@@ -141,9 +149,16 @@ const RegisterForm = () => {
   }
 
   const handleCompleteCrop = blob => {
-    console.log(blob)
-    setData({ ...data, avatar: blob })
     setCroppedImage(blob);
+  }
+
+  const handleToggle = value => {
+    setToggle(value);
+  }
+
+  const handleSkip = value => {
+    setToggle(value);
+    setCroppedImage('');
   }
 
   return (
@@ -244,7 +259,8 @@ const RegisterForm = () => {
                 <ImageCropper
                   imageUrl={image}
                   toggle={toggle}
-                  onToggle={(value => setToggle(value))}
+                  onToggle={handleToggle}
+                  onSkip={handleSkip}
                   onCompleteCrop={handleCompleteCrop}
                 />
                 <Input
