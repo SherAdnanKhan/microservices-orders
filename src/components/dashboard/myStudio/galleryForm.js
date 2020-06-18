@@ -99,7 +99,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
                   <div className="nag-btn">
-                    Remove profile picture
+                    Remove gallery cover
                   </div>
                 </div>
               }
@@ -112,7 +112,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                   />
                 </div>
                 <div className="nag-btn">
-                  Add profile picture
+                Add gallery cover
                 </div>
                 <input
                   type="file"
