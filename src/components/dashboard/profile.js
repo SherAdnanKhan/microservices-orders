@@ -16,6 +16,7 @@ const Profile = () => {
   const { avatars } = useContext(UserContext);
   const user = useContext(UserContext);
 
+  const [croppedImage, setCroppedImage] = useState('');
   const [toggle, setToggle] = useState(false)
   const [images, setImages] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
@@ -37,6 +38,7 @@ const Profile = () => {
     if (input.files[0]) {
       const image = { ...selectedImage };
       image.path = URL.createObjectURL(input.files[0]);
+      image.avatar = input.files[0];
 
       setToggle(true);
       setImageUrl(URL.createObjectURL(input.files[0]))
@@ -53,17 +55,18 @@ const Profile = () => {
     if (selectedImage.id) {
       data.append('image_id', selectedImage.id);
     }
-    data.append('avatar', selectedImage.avatar);
+
+    if (croppedImage) {
+      data.append('avatar', croppedImage);
+    } else {
+      data.append('avatar', selectedImage.avatar);
+    }
 
     dispatch(createOrUpdateProfile(data, history));
   }
 
   const handleCompleteCrop = croppedImage => {
-    const image = { ...selectedImage };
-    image.path = URL.createObjectURL(croppedImage);
-    image.avatar = croppedImage;
-
-    setSelectedImage(image);
+    setCroppedImage(croppedImage);
   };
 
   const handleBackPress = () => {
@@ -74,6 +77,11 @@ const Profile = () => {
   useEffect(() => {
     setColor(user.feel_color);
   }, [user]);
+
+  const handleSkip = value => {
+    setToggle(value);
+    setCroppedImage('');
+  };
 
   return (
     <div className={`frameReady ${color}`}>
@@ -155,8 +163,24 @@ const Profile = () => {
                   imageUrl={imageUrl}
                   onToggle={(value) => setToggle(value)}
                   onCompleteCrop={handleCompleteCrop}
+                  onSkip={handleSkip}
                 />
-                <img className="update-pic" src={selectedImage ? selectedImage.path : "/assets/images/gray.png"} alt="" />
+                {!croppedImage
+                  ? (
+                    <img
+                      className="update-pic"
+                      src={selectedImage ? selectedImage.path : "/assets/images/gray.png"}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className="update-pic"
+                      src={URL.createObjectURL(croppedImage)}
+                      alt=""
+                    />
+                  )
+                }
+
                 <div className={selectedImage.avatar ? " hide" : "add-nag-icon"}>
                   {selectedImage.id &&
                     <div className="nag">
