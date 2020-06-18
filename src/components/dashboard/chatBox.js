@@ -349,7 +349,7 @@ class ChatBox extends Component {
           />
           <button
             onClick={this.handlePost}
-            className={`clickable btn-send ${user && user.feel_color}`}
+            className={`clickable btn-send ${currentUser.feel_color}`}
           >
             Post
           </button>
