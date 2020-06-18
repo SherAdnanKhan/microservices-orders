@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import UserCube from '../common/userCube';
+import { getFavourites } from '../../actions/userActions';
 
 const MzFlashGroup = () => {
   const [activeTab, setActiveTab] = useState(1);
+
+  const dispatch = useDispatch();
+  const {
+    user: { favouriteUsers }
+  } = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(getFavourites());
+  }, [dispatch]);
 
   return (
     <section className="mz-flash-group">
@@ -12,42 +24,15 @@ const MzFlashGroup = () => {
           <div className="box-css">
             <div id="demo">
               <div className="cv-carousel">
-                <div className="item">
-                  <h4>1</h4>
-                </div>
-                <div className="item">
-                  <h4>2</h4>
-                </div>
-                <div className="item">
-                  <h4>3</h4>
-                </div>
-                <div className="item">
-                  <h4>4</h4>
-                </div>
-                <div className="item">
-                  <h4>5</h4>
-                </div>
-                <div className="item">
-                  <h4>6</h4>
-                </div>
-                <div className="item">
-                  <h4>7</h4>
-                </div>
-                <div className="item">
-                  <h4>8</h4>
-                </div>
-                <div className="item">
-                  <h4>9</h4>
-                </div>
-                <div className="item">
-                  <h4>10</h4>
-                </div>
-                <div className="item">
-                  <h4>11</h4>
-                </div>
-                <div className="item">
-                  <h4>12</h4>
-                </div>
+                {favouriteUsers &&
+                  favouriteUsers.map((user, index) => (
+                    <div className="item">
+                      <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+                        <UserCube user={user} />
+                      </Link>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
