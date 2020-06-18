@@ -966,7 +966,7 @@ input {
   }
   .top {
     position: fixed;
-    z-index: 15;
+    z-index: 70;
     top: 0;
     left: 0;
     width: 100%;
@@ -3062,23 +3062,39 @@ img {
 }
 .edit-screen{
   width: 100%;
-  margin: 50px 0;
+    margin: 50px 0;
+    display: block;
+    overflow: auto;
+  // width: 100%;
+  // margin: 50px 0;
   .scr-inner{
-    display: flex;
-    width: 95%;
-    margin: 0 auto;
-    justify-content: space-between;
+    display: inline-flex;
+    // display: flex;
+    // width: 95%;
+    // margin: 0 auto;
+    // justify-content: space-between;
     .item-box{
-      flex-basis: 24%;
+
       border: 1px solid rgba(61, 61, 61, 0.7);
-      opacity: 0.6;
-      display: flex;
-      background: #2d2d2d;
-      position: relative;
-      transition: all ease-in-out .3s;
-      cursor: pointer;
-      height: 290px;
-      overflow: hidden;
+    opacity: 0.6;
+    display: inline-block;
+    background: #2d2d2d;
+    position: relative;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    height: 290px;
+    overflow: hidden;
+    width: 290px;
+      // flex-basis: 24%;
+      // border: 1px solid rgba(61, 61, 61, 0.7);
+      // opacity: 0.6;
+      // display: flex;
+      // background: #2d2d2d;
+      // position: relative;
+      // transition: all ease-in-out .3s;
+      // cursor: pointer;
+      // height: 290px;
+      // overflow: hidden;
       img{
         width: 100%;
       }
@@ -3095,7 +3111,7 @@ img {
   background: rgba(0,0,0,.3);
   top: -10px;
   right: -5px;
-  z-index: 0;
+  z-index: 50;
   padding: 5px;
   img {
     height: 100%;
