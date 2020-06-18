@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserCube from '../common/userCube';
 import { getFavourites } from '../../actions/userActions';
+import UserContext from '../../context/userContext';
+import Avatar from '../common/avatar';
 
 const MzFlashGroup = () => {
   const [activeTab, setActiveTab] = useState(1);
 
+  const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
   const {
     user: { favouriteUsers }
@@ -45,10 +48,14 @@ const MzFlashGroup = () => {
               onClick={() => setActiveTab(1)}
             >
               <button className="tablinks">
-                <img
+                {/* <img
                   src="https://placeimg.com/640/480/any"
                   alt="Snow"
                   className="img-css"
+                /> */}
+                <Avatar
+                  avatars={currentUser.avatars}
+                  feelColor={currentUser.feel_color}
                 />
               </button>
             </div>
@@ -57,10 +64,14 @@ const MzFlashGroup = () => {
               onClick={() => setActiveTab(2)}
             >
               <button className="tablinks">
-                <img
+                {/* <img
                   src="https://placeimg.com/640/480/any"
                   alt="Forest"
                   className="img-css"
+                /> */}
+                <Avatar
+                  avatars={currentUser.avatars}
+                  feelColor={currentUser.feel_color}
                 />
               </button>
             </div>
@@ -69,7 +80,15 @@ const MzFlashGroup = () => {
               onClick={() => setActiveTab(3)}
             >
               <button className="tablinks">
-                <img src="https://placeimg.com/640/480/any" alt="Mountains" className="img-css" />
+                {/* <img
+                  src="https://placeimg.com/640/480/any"
+                  alt="Mountains"
+                  className="img-css"
+                /> */}
+                <Avatar
+                  avatars={currentUser.avatars}
+                  feelColor={currentUser.feel_color}
+                />
               </button>
             </div>
           </div>
@@ -78,7 +97,11 @@ const MzFlashGroup = () => {
               <div className="sub-box tabcontent" id="tab1">
                 <div className="row">
                   <div className="col-3">
-                    <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                    <Avatar
+                      avatars={currentUser.avatars}
+                      feelColor={currentUser.feel_color}
+                    />
                   </div>
                   <div className="col-7">
                     <span>tab 1 content</span>
@@ -98,7 +121,11 @@ const MzFlashGroup = () => {
               <div className="sub-box tabcontent" id="tab2">
                 <div className="row">
                   <div className="col-3">
-                    <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                    <Avatar
+                      avatars={currentUser.avatars}
+                      feelColor={currentUser.feel_color}
+                    />
                   </div>
                   <div className="col-7">
                     <span>tab 2 content</span>
@@ -119,7 +146,11 @@ const MzFlashGroup = () => {
                 <div className="sub-box">
                   <div className="row">
                     <div className="col-3">
-                      <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+                      {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                      <Avatar
+                        avatars={currentUser.avatars}
+                        feelColor={currentUser.feel_color}
+                      />
                     </div>
                     <div className="col-7">
                       <span>Tab 3 content</span>
@@ -136,7 +167,11 @@ const MzFlashGroup = () => {
                 </div>
                 <div className=" sub-box row">
                   <div className="col-3">
-                    <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                    <Avatar
+                      avatars={currentUser.avatars}
+                      feelColor={currentUser.feel_color}
+                    />
                   </div>
                   <div className="col-7">
                     <span>Name</span>
@@ -152,7 +187,12 @@ const MzFlashGroup = () => {
                       <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
                     </div>
                   </div>
-                  <div className="col-2"> <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+                  <div className="col-2">
+                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                    <Avatar
+                      avatars={currentUser.avatars}
+                      feelColor={currentUser.feel_color}
+                    />
                     <div className="box-2-inner"><Link to="#" className="btn-style">Button</Link></div>
                   </div>
                 </div>
@@ -172,7 +212,11 @@ const MzFlashGroup = () => {
           <div className="sub-box">
             <div className="row">
               <div className="col-3">
-                <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+                {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                <Avatar
+                  avatars={currentUser.avatars}
+                  feelColor={currentUser.feel_color}
+                />
               </div>
               <div className="col-7">
                 <span>tab 1 content</span>
@@ -189,7 +233,11 @@ const MzFlashGroup = () => {
           </div>
           <div className=" sub-box row">
             <div className="col-3">
-              <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+              {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+              <Avatar
+                avatars={currentUser.avatars}
+                feelColor={currentUser.feel_color}
+              />
             </div>
             <div className="col-7">
               <span>Name</span>
@@ -205,7 +253,12 @@ const MzFlashGroup = () => {
                 <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
               </div>
             </div>
-            <div className="col-2"> <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
+            <div className="col-2">
+              {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+              <Avatar
+                avatars={currentUser.avatars}
+                feelColor={currentUser.feel_color}
+              />
               <div className="box-2-inner"><Link to="#" className="btn-style">Button</Link></div>
             </div>
           </div>
