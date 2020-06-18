@@ -23,6 +23,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/studio/fave" component={Main} />
         <Route exact path="/dashboard/studio/fave-by" component={Main} />
         <Route exact path="/dashboard/mz-flash/:slug" component={Main} />
+        <Route exact path="/dashboard/mz-flash-group" component={Main} />
         <Route exact path="/dashboard/viewpost/:id" component={Main} />
         <Route exact path="/dashboard/privacy" component={Main} />
         <Route exact path="/dashboard/chat/:slug" component={Main} />
