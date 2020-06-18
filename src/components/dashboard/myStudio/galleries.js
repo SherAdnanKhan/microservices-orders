@@ -38,7 +38,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                 />
               </div>
             ))}
-            <h1 onClick={() => onModelOpen('')} className="clickable"> <img src='/assets/images/add.png'/> </h1>
+            <h1 onClick={() => onModelOpen('')} className="clickable"> <img src='/assets/images/add.png' alt=""/> </h1>
           </div>
         </div>
       }
