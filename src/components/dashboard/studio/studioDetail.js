@@ -68,7 +68,10 @@ const StudioDetail = ({ userStudio, slug }) => {
               </div>
             }
             <div>
-              <Link to="#" onClick={() => hasAllowedMzflash(slug)}>
+              <Link to="#" onClick={e => {
+                e.preventDefault();
+                hasAllowedMzflash(slug)
+              }}>
                 <img src="/assets/images/mzflash.png" alt="" />
               </Link>
             </div>
@@ -101,14 +104,20 @@ const StudioDetail = ({ userStudio, slug }) => {
               </label>
             }
             <div className="stuion-faved-btn">
-              <Link to="#" onClick={() => hasAllowedFavedBy()}>
+              <Link to="#" onClick={e => {
+                e.preventDefault();
+                hasAllowedFavedBy();
+              }}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/favers.png" alt="" />
                   Faved by
                 </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link>
-              <Link to="#" onClick={() => hasAllowedFaves()}>
+              <Link to="#" onClick={e => {
+                e.preventDefault();
+                hasAllowedFaves();
+              }}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/faving.png" alt="" />
                 Faved
