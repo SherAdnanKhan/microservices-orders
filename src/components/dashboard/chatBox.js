@@ -176,7 +176,7 @@ class ChatBox extends Component {
       <div className="chat-box">
 
         <>
-          <div className="chat-header">
+          <div className={`chat-header ${user && user.feel_color}`}>
             <i
               className="fa fa-arrow-left clickable"
               onClick={() => history.goBack()}
@@ -215,7 +215,7 @@ class ChatBox extends Component {
                             <div className="send-icon">
                               {data.messages_logs.length > 0
                                 ? data.messages_logs[0].status === 1
-                                  ? <img alt="" src={`/assets/images/${data.feel_color}.png`} />
+                                  ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
                                   : <img alt="" src="/assets/images/avataricon.png" />
                                 : <img alt="/assets/images/avataricon.png" />
                               }
@@ -349,7 +349,7 @@ class ChatBox extends Component {
           />
           <button
             onClick={this.handlePost}
-            className="clickable"
+            className={`clickable btn-send ${user && user.feel_color}`}
           >
             Post
           </button>
