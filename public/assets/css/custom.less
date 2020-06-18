@@ -4110,6 +4110,39 @@ img {
     justify-content: flex-start;
     border-top: 1px solid #000;
     height: 50px;
+    position: fixed;
+    width: 100%;
+    top: 50px;
+    z-index: 10;
+
+    &.gold {      
+      background-color: @color_gold;
+    }
+
+    &.orange {
+      background-color: #FFA500;
+    }
+
+    &.gray {
+      background-color: #808080;
+    }
+    
+    &.limegreen {
+      background-color: #32CD32;
+    }
+
+    &.red {
+      background-color: #FF0000;
+    }
+
+    &.purple {
+      background-color: #800080;
+    }
+
+    &.dodgerblue {
+      background-color: #1E90FF
+    }
+
     i{
       margin: 0 53px;
     }
@@ -4438,9 +4471,11 @@ img {
     margin: 15px auto 15px auto;
     align-items: center;
     justify-content: center;
+
     i{
       cursor: pointer;
     }
+
     input[type="text"] {
       display: block;
       border: 1px solid #444;
@@ -4454,18 +4489,47 @@ img {
       font-variant: small-caps;
       color: white;
       border-radius: 10px;
+      
       &::placeholder {
         color: white;
       }
     }
-    button{
+    .btn-send{
       border: 1px solid #444;
       border-radius: 50px;
       width: 20%;
       background: none;
-      color: #444;
+      color: white;
       font-size: 18px;
       padding: 10px;
+
+      &.gold {      
+        background-color: @color_gold;
+      }
+  
+      &.orange {
+        background-color: #FFA500;
+      }
+  
+      &.gray {
+        background-color: #808080;
+      }
+      
+      &.limegreen {
+        background-color: #32CD32;
+      }
+  
+      &.red {
+        background-color: #FF0000;
+      }
+  
+      &.purple {
+        background-color: #800080;
+      }
+  
+      &.dodgerblue {
+        background-color: #1E90FF
+      }
     }
   }
 
