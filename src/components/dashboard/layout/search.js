@@ -60,11 +60,24 @@ const Search = () => {
                 </div>
               </div>
               <div className="other-pic">
-                {user.posts_images_random.map((post_image, index_key) => (
-                  <Link key={index_key} to="#">
-                    <img src={post_image.path} alt="" />
-                  </Link>
-                ))}
+                {user.posts_images_random.map((post_image, index_key) => {
+                  if (post_image.title.includes('.mp3') || post_image.title.includes('.mp4') || post_image.title.includes('.ogg')) {
+                    return (
+                      <video width="44" height="33" >
+                        <source src={post_image.path} type="video/mp4" />
+                        <source src={post_image.path} type="video/ogg" />
+                            Your browser does not support the video tag.
+                      </video>
+                    )
+                  } else {
+                    return (
+                      <Link key={index_key} to='#'>
+                        <img src={post_image.path} alt="" />
+                      </Link>
+                    )
+                  }
+                }
+                )}
 
               </div>
             </div>
