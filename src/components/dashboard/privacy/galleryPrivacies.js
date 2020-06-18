@@ -31,7 +31,7 @@ const GalleryPrivacy = ({
                   ? <img src={gallery.image.path} alt="" />
                   : <i className="fa fa-times"></i>
                 }
-                <label htmlFor="">Gallery {index + 1}</label>
+                <label htmlFor=""> {gallery.title} </label>
                 <div className="lock-bar" onClick={() => onActiveGallery(gallery.id)}>
                   {(!gallery.privacy || gallery.privacy.privacy_type_id === 1) &&
                     <i className="fas fa-lock-open"></i>
