@@ -90,6 +90,15 @@ const MzFlash = () => {
                   <p> {feed.feed} </p>
                 </div>
               </div>
+              <div className="col-2">
+                {feed.image &&
+                  <img
+                    src={feed.image.path}
+                    alt="Snow"
+                    className="img-css"
+                  />
+                }
+              </div>
             </div>
           ))}
       </>
