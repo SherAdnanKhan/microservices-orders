@@ -167,3 +167,11 @@ $(document).on('click', '.close-comment', function () {
 // $(document).on('click', '.close-add-box', function () {
 //   $(".add-img-vid-box").css("display", "none");;
 // });
+
+
+//for input
+
+$(document).on('input', '#addbio',function(){
+  this.style.width = this.value.length + "ch";
+});
+
