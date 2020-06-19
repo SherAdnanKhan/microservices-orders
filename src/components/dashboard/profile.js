@@ -17,7 +17,7 @@ const Profile = () => {
   const user = useContext(UserContext);
 
   const [croppedImage, setCroppedImage] = useState('');
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(false);
   const [images, setImages] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
   const [selectedImage, setSelectedImage] = useState({});

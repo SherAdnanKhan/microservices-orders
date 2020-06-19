@@ -3,6 +3,8 @@ import Input from '../../common/input';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGallery, createGallery, removeGalleryImage } from '../../../actions/galleryActions';
 import Spinner from '../../common/spinner';
+import ImageCropper from '../../common/imageCropper';
+import { isEmpty } from '../../../utils/helperFunctions';
 
 const GalleryForm = ({ onModelClose, gallery }) => {
   const [imageUrl, setImageUrl] = useState('/assets/images/gray.png');
@@ -15,6 +17,8 @@ const GalleryForm = ({ onModelClose, gallery }) => {
 
   const dispatch = useDispatch();
   const { loading } = useSelector(state => state.gallery);
+  const [croppedImage, setCroppedImage] = useState('');
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     if (gallery) {
@@ -34,6 +38,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
     if (input.type === 'file') {
       if (input.files[0]) {
         setData({ ...data, image: input.files[0] });
+        setToggle(true);
         setImageUrl(URL.createObjectURL(input.files[0]));
       }
     } else {
@@ -41,6 +46,18 @@ const GalleryForm = ({ onModelClose, gallery }) => {
     }
   };
 
+  const handleCompleteCrop = croppedImage => {
+    setCroppedImage(croppedImage);
+  };
+
+  const handleSkip = value => {
+    setToggle(value);
+    setCroppedImage('');
+  };
+
+  const handleToggle = value => {
+    setToggle(value);
+  }
   const handleRemove = () => {
     dispatch(removeGalleryImage(data.id, () => onModelClose(false)))
   };
@@ -63,6 +80,9 @@ const GalleryForm = ({ onModelClose, gallery }) => {
     const formData = new FormData();
 
     if (!error) {
+      if (croppedImage) {
+        data.image = croppedImage;
+      };
       for (let key in data) {
         if (key === 'image') {
           if (data[key]) {
@@ -87,11 +107,23 @@ const GalleryForm = ({ onModelClose, gallery }) => {
     <div className="gallery-form">
       {loading && <Spinner />
       }
+
       <div className="update-image">
         <i className="fas fa-window-close" onClick={() => onModelClose(false)}></i>
+        <ImageCropper
+          imageUrl={imageUrl}
+          toggle={toggle}
+          onToggle={handleToggle}
+          onSkip={handleSkip}
+          onCompleteCrop={handleCompleteCrop}
+        />
         <form onSubmit={handleSubmit}>
           <div className="up-img-box">
-            <img className="update-pic" src={imageUrl} alt="" />
+            {isEmpty(croppedImage)
+              ? <img className="update-pic" src={imageUrl} alt="gallery image" />
+              : <img className="update-pic" src={URL.createObjectURL(croppedImage)} alt="gallery image" />
+            }
+
             <div className="add-nag-icon">
               {gallery && gallery.image &&
                 <div className="nag">
@@ -112,7 +144,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                   />
                 </div>
                 <div className="nag-btn">
-                Add gallery cover
+                  Add gallery cover
                 </div>
                 <input
                   type="file"
