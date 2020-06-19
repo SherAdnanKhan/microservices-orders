@@ -171,7 +171,30 @@ $(document).on('click', '.close-comment', function () {
 
 //for input
 
-$(document).on('input', '#addbio',function(){
+$(document).on('input', '#addbio', function () {
   this.style.width = this.value.length + "ch";
+});
+
+//scroll event
+// should start at 0
+
+let position = $(window).scrollTop();
+
+$(window).scroll(function () {
+  const scroll = $(window).scrollTop();
+  if (scroll > position) {
+    $(".frameReady .bottom").css({ 'opacity': '0.5' });
+    $(".frameReady .top").css({ 'opacity': '0.5' });
+    $(".frameReady .left").css({ 'opacity': '0.5' });
+    $(".frameReady .right").css({ 'opacity': '0.5' });
+  } else {
+    if (scroll === 0) {
+      $(".frameReady .bottom").css({ 'opacity': '1' });
+      $(".frameReady .top").css({ 'opacity': '1' });
+      $(".frameReady .left").css({ 'opacity': '1' });
+      $(".frameReady .right").css({ 'opacity': '1' });
+    }
+  }
+  position = scroll;
 });
 
