@@ -174,7 +174,11 @@ $(document).on('click', '.close-comment', function () {
 $(document).on('input', '#addbio', function () {
   this.style.width = this.value.length + "ch";
 });
-
+// When the user clicks on div, open the popup
+// function mypopbtn() {
+//   var popup = document.getElementById("myPopup");
+//   popup.classList.toggle("show-pop");
+// }
 //scroll event
 // should start at 0
 
@@ -197,4 +201,5 @@ $(window).scroll(function () {
   }
   position = scroll;
 });
+
 

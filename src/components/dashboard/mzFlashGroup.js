@@ -145,13 +145,16 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 1 content</span>
-                    <span className="name-btn BT-2"><Link to="#">Button</Link></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
                     <div id="outer">
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
+                      <div className="inner popup" >
+                        <span className="name-btn"><i class="fa fa-ellipsis-v " aria-hidden="true" onclick="mypopbtn()"></i></span>
+                        <span class="popuptext" id="myPopup">A Simple Popup!</span>
+                        </div>
+                      <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
+                      <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
                     </div>
                   </div>
                 </div>
@@ -169,13 +172,13 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 2 content</span>
-                    <span className="name-btn BT-2"><Link to="#">Button</Link></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. </p>
                     <div id="outer">
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
+                      <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
+                      <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
+                      <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
                     </div>
                   </div>
                 </div>
@@ -194,13 +197,13 @@ const MzFlashGroup = () => {
                     </div>
                     <div className="col-7">
                       <span>Tab 3 content</span>
-                      <span className="name-btn BT-2"><Link to="#">Button</Link></span>
+                      <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
                       <div id="outer">
-                        <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                        <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                        <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
+                        <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
+                        <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
+                        <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
                       </div>
                     </div>
                   </div>
@@ -216,15 +219,15 @@ const MzFlashGroup = () => {
                   <div className="col-7">
                     <span>Name</span>
                     <span className="name-btn BT-2">
-                      <Link to="#">Button</Link>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                     </span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. </p>
                     <div id="outer">
                       <div className="inner">
                         <span className="name-btn">
-                          <Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
+                      <div className="inner"><span className="name-btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span></div>
                     </div>
                   </div>
                   <div className="col-2">
@@ -233,7 +236,7 @@ const MzFlashGroup = () => {
                       avatars={currentUser.avatars}
                       feelColor={currentUser.feel_color}
                     />
-                    <div className="box-2-inner"><Link to="#" className="btn-style">Button</Link></div>
+                    <div className="box-2-inner"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
                   </div>
                 </div>
               </div>
