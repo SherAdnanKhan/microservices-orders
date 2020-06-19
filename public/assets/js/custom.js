@@ -173,6 +173,5 @@ $(document).on('click', '.close-comment', function () {
 
 $(document).on('input', '#addbio',function(){
   this.style.width = this.value.length + "ch";
-  // console.log("hi his");
 });
 
