@@ -242,7 +242,23 @@ const MzFlashGroup = () => {
           </div>
         </div>
         <div className="col-4 box-3">
+        {/* <div className="message-input">
+            <i className="fa fa-plus add-items-btn" />
+            <input placeholder="Type a message" type="text" name="message" defaultValue=" " />
+            <button className="clickable btn-send">Post</button>
+          </div> */}
+          <div className="message-input">
           <form className="form-inline" onSubmit={handleSubmit}>
+          <input
+              type="text"
+              id="feed"
+              name="feed"
+              value={data.feed}
+              onChange={handleChange}
+            />
+            <br />
+
+            <input className="clickable btn-send" type="submit" defaultValue="Submit" />
             <input
               type="file"
               name="image"
@@ -255,18 +271,9 @@ const MzFlashGroup = () => {
               accept=".mp4"
               onChange={handleChange}
             />
-            <input
-              type="text"
-              id="feed"
-              name="feed"
-              value={data.feed}
-              onChange={handleChange}
-            />
-            <br />
-
-            <input type="submit" defaultValue="Submit" />
+            
           </form>
-
+          </div>
           {/* {feeds &&
             feeds.map((feed, index) => (
               <div className="sub-box" key={index}>
