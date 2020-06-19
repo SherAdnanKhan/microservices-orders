@@ -9,6 +9,7 @@ import galleryReducer from "../reducers/galleryReducer";
 import postReducer from "../reducers/postReducer";
 import conversationReducer from '../reducers/conversationReducer';
 import privacyReducer from '../reducers/privacyReducer';
+import mzFlashReducer from '../reducers/mzFlashReducer';
 
 export default combineReducers({
   error: errorReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
   gallery: galleryReducer,
   postView: postReducer,
   conversation: conversationReducer,
-  privacies: privacyReducer
+  privacies: privacyReducer,
+  mzFlash: mzFlashReducer
 }); 
