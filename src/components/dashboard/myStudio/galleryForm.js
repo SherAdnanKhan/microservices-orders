@@ -120,8 +120,8 @@ const GalleryForm = ({ onModelClose, gallery }) => {
         <form onSubmit={handleSubmit}>
           <div className="up-img-box">
             {isEmpty(croppedImage)
-              ? <img className="update-pic" src={imageUrl} alt="gallery image" />
-              : <img className="update-pic" src={URL.createObjectURL(croppedImage)} alt="gallery image" />
+              ? <img className="update-pic" src={imageUrl} alt="gallery" />
+              : <img className="update-pic" src={URL.createObjectURL(croppedImage)} alt="gallery" />
             }
 
             <div className="add-nag-icon">
