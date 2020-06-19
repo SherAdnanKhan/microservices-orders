@@ -1,12 +1,14 @@
 import {
   CREATE_FEED,
   GET_MY_FEEDS,
+  GET_USER_FEEDS,
   START_FEEDS_LOADER,
   STOP_FEEDS_LOADER
 } from "../constants/actionTypes";
 
 const initialState = {
   feeds: null,
+  userFeeds: null,
   loading: false
 };
 
@@ -16,6 +18,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         feeds: action.payload
+      };
+    case GET_USER_FEEDS:
+      return {
+        ...state,
+        userFeeds: action.payload
       };
     case CREATE_FEED:
       return {
