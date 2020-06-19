@@ -1,6 +1,7 @@
 import http from "../services/httpService";
 import {
   GET_MY_FEEDS,
+  GET_USER_FEEDS,
   CREATE_FEED,
   START_FEEDS_LOADER,
   STOP_FEEDS_LOADER
@@ -34,4 +35,14 @@ export const getMyFeeds = () => dispatch => {
     });
 };
 
+export const getUserFeeds = id => dispatch => {
+  http
+    .get(`/mzflash/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_USER_FEEDS,
+        payload: res.data.data.feeds.data
+      });
+    });
+}
 
