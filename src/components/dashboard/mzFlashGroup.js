@@ -5,7 +5,13 @@ import UserCube from '../common/userCube';
 import { getFavourites } from '../../actions/userActions';
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
-import { getMyFeeds, createFeed } from '../../actions/mzFlashActions';
+import {
+  getMyFeeds,
+  createFeed,
+  getMyFavesFeeds,
+  getMySprfvsFeeds,
+  getMySprfvsAndFavesFeeds
+} from '../../actions/mzFlashActions';
 import Spinner from '../common/spinner';
 
 const MzFlashGroup = () => {
@@ -21,17 +27,16 @@ const MzFlashGroup = () => {
   const dispatch = useDispatch();
   const {
     user: { favouriteUsers },
-    mzFlash: { feeds, loading }
+    mzFlash: { feeds, loading, favesFeeds, sprfvsFeeds, favesAndSprfvsFeeds }
   } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getMyFeeds())
+    dispatch(getMyFeeds());
+    dispatch(getMySprfvsFeeds());
+    dispatch(getMyFavesFeeds());
+    dispatch(getMySprfvsAndFavesFeeds());
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log(feeds);
-  }, [feeds]);
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file') {
@@ -98,16 +103,16 @@ const MzFlashGroup = () => {
                     <div className='scenesmall gold'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-backsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-leftsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-rightsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
                         </div>
                       </div>
                     </div>
@@ -125,21 +130,22 @@ const MzFlashGroup = () => {
                     <div className='scenesmall gold'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-backsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-leftsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-rightsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
               </button>
             </div>
             <div
@@ -178,88 +184,140 @@ const MzFlashGroup = () => {
           </div>
           <div className="box-container">
             {activeTab === 1 &&
-              <div className="sub-box tabcontent" id="tab1">
-                <div className="row">
-                  <div className="col-3">
-                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
-                    <Avatar
-                      avatars={currentUser.avatars}
-                      feelColor={currentUser.feel_color}
-                    />
-                  </div>
-                  <div className="col-7">
-                    <span>tab 1 content</span>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua. </p>
-                  </div>
-                  <div className="col-2">
-                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                  </div>
-                </div>
-              </div>
+              <>
+                {sprfvsFeeds &&
+                  sprfvsFeeds.data.map((feed, index) => (
+                    <div
+                      className="sub-box tabcontent"
+                      id="tab1"
+                      key={index}
+                    >
+                      <div className="row">
+                        <div className="col-3">
+                          {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                          <Avatar
+                            avatars={feed.user.avatars}
+                            feelColor={feed.user.feel_color}
+                          />
+                        </div>
+                        <div className="col-7">
+                          <span>Name: {feed.user.username}</span>
+                          <p> {feed.feed}</p>
+                          {feed.feed_type === 1 &&
+                            feed.image &&
+                            <img
+                              src={feed.image.path}
+                              alt="Snow"
+                              className="img-css"
+                            />
+                          }
+                          {feed.feed_type === 2 &&
+                            feed.image &&
+                            <video controls>
+                              <source src={feed.image.path} type="video/mp4" />
+                              <source src={feed.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          }
+                        </div>
+                        <div className="col-2">
+                          <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </>
             }
             {activeTab === 2 &&
-              <div className="sub-box tabcontent" id="tab2">
-                <div className="row">
-                  <div className="col-3">
-                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
-                    <Avatar
-                      avatars={currentUser.avatars}
-                      feelColor={currentUser.feel_color}
-                    />
-                  </div>
-                  <div className="col-7">
-                    <span>tab 2 content</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. </p>
-                  </div>
-                  <div className="col-2">
-                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                  </div>
-                </div>
-              </div>
+              <>
+                {favesFeeds &&
+                  favesFeeds.data.map((feed, index) => (
+                    <div
+                      className="sub-box tabcontent"
+                      id="tab2"
+                      key={index}
+                    >
+                      <div className="row">
+                        <div className="col-3">
+                          {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
+                          <Avatar
+                            avatars={feed.user.avatars}
+                            feelColor={feed.user.feel_color}
+                          />
+                        </div>
+                        <div className="col-7">
+                          <span>Name: {feed.user.username}</span>
+                          <p> {feed.feed} </p>
+                          {feed.feed_type === 1 &&
+                            feed.image &&
+                            <img
+                              src={feed.image.path}
+                              alt="Snow"
+                              className="img-css"
+                            />
+                          }
+                          {feed.feed_type === 2 &&
+                            feed.image &&
+                            <video controls>
+                              <source src={feed.image.path} type="video/mp4" />
+                              <source src={feed.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          }
+                        </div>
+                        <div className="col-2">
+                          <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </>
             }
             {activeTab === 3 &&
-              <div className="tabcontent" id="tab3">
-                <div className="sub-box">
-                  <div className="row">
-                    <div className="col-3">
-                      {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
-                      <Avatar
-                        avatars={currentUser.avatars}
-                        feelColor={currentUser.feel_color}
-                      />
+              <>
+                {favesAndSprfvsFeeds &&
+                  favesAndSprfvsFeeds.data.map((feed, index) => (
+                    <div
+                      className="tabcontent"
+                      id="tab3"
+                      key={index}
+                    >
+                      <div className=" sub-box row">
+                        <div className="col-3">
+                          <Avatar
+                            avatars={feed.user.avatars}
+                            feelColor={feed.user.feel_color}
+                          />
+                        </div>
+                        <div className="col-7">
+                          <span>Name: {feed.user.username}</span>
+                          <p>{feed.feed} </p>
+                          {feed.feed_type === 1 &&
+                            feed.image &&
+                            <img
+                              src={feed.image.path}
+                              alt="Snow"
+                              className="img-css"
+                            />
+                          }
+                          {feed.feed_type === 2 &&
+                            feed.image &&
+                            <video controls>
+                              <source src={feed.image.path} type="video/mp4" />
+                              <source src={feed.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          }
+                          <div id="outer">
+                          </div>
+                        </div>
+                        <div className="col-2">
+                          <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="col-7">
-                      <span>Tab 3 content</span>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                      incididunt ut labore et dolore magna aliqua. </p>
-                    </div>
-                    <div className="col-2">
-                      <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                    </div>
-                  </div>
-                </div>
-                <div className=" sub-box row">
-                  <div className="col-3">
-                    <Avatar
-                      avatars={currentUser.avatars}
-                      feelColor={currentUser.feel_color}
-                    />
-                  </div>
-                  <div className="col-7">
-                    <span>Name</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. </p>
-                    <div id="outer">
-                    </div>
-                  </div>
-                  <div className="col-2">
-                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                  </div>
-                </div>
-              </div>
+                  ))}
+              </>
             }
 
           </div>
@@ -329,7 +387,6 @@ const MzFlashGroup = () => {
                       Your browser does not support the video tag.
                     </video>
                   }
-
                 </div>
               </div>
             ))}
