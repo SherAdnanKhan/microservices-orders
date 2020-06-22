@@ -100,6 +100,19 @@ $(document).on('click', '#go-back', function () {
 });
 
 $(document).click(function () {
+  let scroll = $(window).scrollTop();
+  let opacity = 0.3;
+
+  if (scroll === 0) {
+    opacity = 1;
+  } else {
+    opacity = 0.3
+  }
+
+  $(".left").css("opacity", opacity);
+  $(".right").css("opacity", opacity);
+  $(".bottom").css("opacity", opacity);
+
   $(".left").css("left", "-42px");
   $(".right").css("right", "-42px");
   $(".bottom").css("bottom", "-42px");
@@ -194,22 +207,24 @@ let position = $(window).scrollTop();
 $(window).scroll(function () {
   const scroll = $(window).scrollTop();
   if (scroll > position) {
-    $(".frameReady .top").css({ 'opacity': '0.3' });
-    $(".frameReady .left")
-      .css("left", "-42px")
-      .hide();
-    $(".frameReady .right")
-      .css("right", "-42px")
-      .hide();
-    $(".frameReady .bottom")
-      .css("bottom", "-42px")
-      .hide();
+    $(".frameReady .top").css({ 'opacity': '0.5' });
+    $(".frameReady .bottom").css({ 'opacity': '0.5' });
+    $(".frameReady .left").css({ 'opacity': '0.5' });
+    $(".frameReady .right").css({ 'opacity': '0.5' });
+
+    $(".left").css("left", "-42px");
+    $(".right").css("right", "-42px");
+    $(".bottom").css("bottom", "-42px");
   } else {
     if (scroll === 0) {
       $(".frameReady .top").css({ 'opacity': '1' });
-      $(".frameReady .bottom").show();
-      $(".frameReady .left").show();
-      $(".frameReady .right").show();
+      $(".frameReady .bottom").css({ 'opacity': '1' });
+      $(".frameReady .left").css({ 'opacity': '1' });
+      $(".frameReady .right").css({ 'opacity': '1' });
+
+      $(".left").css("left", "-42px");
+      $(".right").css("right", "-42px");
+      $(".bottom").css("bottom", "-42px");
     }
   }
   position = scroll;
