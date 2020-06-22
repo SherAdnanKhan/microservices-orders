@@ -29,6 +29,7 @@ export const GET_USER_ART_NAME = 'GET_USER_ART_NAME';
 export const GET_FAV_USER = 'GET_FAV_USER';
 export const GET_FAV_BY_USER = 'GET_FAV_BY_USER';
 export const UPDATE_BIO = 'UPDATE_BIO';
+export const GET_ALL_FEELS = 'GET_ALL_FEELS';
 
 //Studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO';
@@ -93,3 +94,11 @@ export const USER_REQUESTS = 'USER_REQUESTS';
 export const INVITED_USERS = 'INVITED_USERS';
 export const REQUEST_APPROVED = 'REQUEST_APPROVED';
 export const REQUEST_REJECTED = 'REQUEST_REJECTED';
+
+//MZFLASH
+export const CREATE_FEED = 'CREATE_FEED';
+export const GET_MY_FEEDS = 'GET_MY_FEEDS';
+export const GET_USER_FEEDS = 'GET_USER_FEEDS';
+export const GET_ALL_FEEDS = 'GET_ALL_FEEDS';
+export const START_FEEDS_LOADER = 'START_FEEDS_LOADER';
+export const STOP_FEEDS_LOADER = 'STOP_FEEDS_LOADER';

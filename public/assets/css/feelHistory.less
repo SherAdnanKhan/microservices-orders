@@ -1,0 +1,42 @@
+.feel-history-page {
+  padding: 50px;
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    th {
+      text-align: left;
+      background-color: black;
+      color: white;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+      border: 0.5px solid white;
+      padding: 15px;
+      box-sizing: border-box;
+      
+      .col-item-name {
+            width: 60%;
+           }
+          .col-item-qty {
+            width: 20%;
+           }
+          .col-item-price {
+            width: 20%;
+           }
+    }
+    td {
+      border: 0.5px solid white;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    tbody {
+      tr {
+        &:hover {
+          td {
+            background-color: rgb(217, 218, 216);
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}

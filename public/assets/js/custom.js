@@ -100,6 +100,19 @@ $(document).on('click', '#go-back', function () {
 });
 
 $(document).click(function () {
+  let scroll = $(window).scrollTop();
+  let opacity = 0.3;
+
+  if (scroll === 0) {
+    opacity = 1;
+  } else {
+    opacity = 0.3
+  }
+
+  $(".left").css("opacity", opacity);
+  $(".right").css("opacity", opacity);
+  $(".bottom").css("opacity", opacity);
+
   $(".left").css("left", "-42px");
   $(".right").css("right", "-42px");
   $(".bottom").css("bottom", "-42px");
@@ -116,13 +129,16 @@ $(document).on('click', '.go-to-profile', function () {
 
 $(document).on('click', '.left', function (e) {
   $(".left").css("left", "0px");
+  $(".left").css("opacity", "1");
   $(".right").css("right", "-42px");
   $(".bottom").css("bottom", "-42px");
+
   e.stopPropagation();
 });
 
 $(document).on('click', '.right', function (e) {
   $(".right").css("right", "0px");
+  $(".right").css("opacity", "1");
   $(".bottom").css("bottom", "-42px");
   $(".left").css("left", "-42px");
   e.stopPropagation();
@@ -130,6 +146,7 @@ $(document).on('click', '.right', function (e) {
 
 $(document).on('click', '.bottom', function (e) {
   $(".bottom").css("bottom", "0px");
+  $(".bottom").css("opacity", "1");
   $(".left").css("left", "-42px");
   $(".right").css("right", "-42px");
   e.stopPropagation();
@@ -145,10 +162,12 @@ $(document).on('click', '.result-box', function () {
   $('nav').show();
   $("#main-menu").show();
 });
+
 $(document).on('click', '.fa-square', function () {
   $(".fa-square , .post-picture").hide();
   $(".show-list , .fa-th").show();
 });
+
 $(document).on('click', '.fa-th', function () {
   $(".show-list , .fa-th").hide();
   $(".fa-square , .post-picture").show();
@@ -157,6 +176,7 @@ $(document).on('click', '.fa-th', function () {
 $(document).on('click', '.open-commet', function () {
   $(".comments-box").show();
 });
+
 $(document).on('click', '.close-comment', function () {
   $(".comments-box").hide();
 });
@@ -167,3 +187,39 @@ $(document).on('click', '.close-comment', function () {
 // $(document).on('click', '.close-add-box', function () {
 //   $(".add-img-vid-box").css("display", "none");;
 // });
+
+
+//for input
+
+$(document).on('input', '#addbio', function () {
+  this.style.width = this.value.length + "ch";
+});
+// When the user clicks on div, open the popup
+// function mypopbtn() {
+//   var popup = document.getElementById("myPopup");
+//   popup.classList.toggle("show-pop");
+// }
+//scroll event
+// should start at 0
+
+let position = $(window).scrollTop();
+
+$(window).scroll(function () {
+  const scroll = $(window).scrollTop();
+  if (scroll > position) {
+    $(".frameReady .bottom").css({ 'opacity': '0.3' });
+    $(".frameReady .top").css({ 'opacity': '0.3' });
+    $(".frameReady .left").css({ 'opacity': '0.3' });
+    $(".frameReady .right").css({ 'opacity': '0.3' });
+  } else {
+    if (scroll === 0) {
+      $(".frameReady .bottom").css({ 'opacity': '1' });
+      $(".frameReady .top").css({ 'opacity': '1' });
+      $(".frameReady .left").css({ 'opacity': '1' });
+      $(".frameReady .right").css({ 'opacity': '1' });
+    }
+  }
+  position = scroll;
+});
+
+

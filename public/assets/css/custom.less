@@ -1,3 +1,4 @@
+@import 'feelHistory';
 @font-face {
   font-family: "Font Awesome 5 Free";
   font-style: normal;
@@ -88,8 +89,10 @@ input {
   width: calc(100% - 40px);
   max-width: 1380px;
   margin: 0 auto;
-  display: flex;
+  // display: flex;
   flex-wrap: wrap;
+  display: block;
+  overflow: auto;
 }
 
 //medium cube or user cube
@@ -232,6 +235,7 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     height: 50px;
+    color: white;
   }
 }
 
@@ -770,8 +774,8 @@ input {
 .frameReady {
   width: 100%;
   height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  // overflow-x: hidden;
+  // overflow-y: auto;
   position: relative;
   &.gold {
     .top, 
@@ -1116,6 +1120,8 @@ input {
     left: 0;
     width: 100%;
     height: 50px;
+    transition: all;
+    transition-duration: 0.5s;
     .feelIcon {
       position: absolute;
       right: 0;
@@ -2539,7 +2545,8 @@ img {
         display: block;
         margin: 0 auto 15px;
         input {
-          width: calc(100% - 22px);
+          width:500px;
+          max-width:700px;
           background: black;
           color: white;
           padding: 15px 10px;
@@ -2845,8 +2852,7 @@ img {
 .screen {
   width: 100%;
   margin: 50px 0;
-  display: block;
-  overflow: auto;
+ 
   // width: 100%;
   // margin: 50px 0;
   .scr-inner{
@@ -2865,7 +2871,7 @@ img {
     cursor: pointer;
     height: 290px;
     overflow: hidden;
-    width: 290px;
+    width: 325px;
       // flex-basis: 25%;
       // border: 1px solid rgba(61,61,61,.7);
       // overflow: hidden;
@@ -2997,7 +3003,8 @@ img {
       border-radius: 5px;
       position: relative;
       input {
-        width: calc(100% - 22px);
+        width:500px;
+        max-width:700px;
         background: black;
         color: white;
         padding: 15px 10px;
@@ -3080,8 +3087,8 @@ img {
 .edit-screen{
   width: 100%;
     margin: 50px 0;
-    display: block;
-    overflow: auto;
+    // display: block;
+    // overflow: auto;
   // width: 100%;
   // margin: 50px 0;
   .scr-inner{
@@ -3091,7 +3098,6 @@ img {
     // margin: 0 auto;
     // justify-content: space-between;
     .item-box{
-
       border: 1px solid rgba(61, 61, 61, 0.7);
     // opacity: 0.6;
     display: inline-block;
@@ -3562,7 +3568,7 @@ img {
       .item-box{
         flex-basis: 24%;
         // border: 2px solid #00cd4f;
-        opacity: 0.6;
+        // opacity: 0.6;
         display: flex;
         background: #2d2d2d;
         position: relative;
@@ -3663,7 +3669,7 @@ img {
         position: absolute;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,.5)
+        // background: rgba(0,0,0,.5)
       }
       .add-nag-icon{
         position: absolute;
@@ -3713,6 +3719,30 @@ img {
 .mz-flash-page{
   height: 100vh;
   width: 100%;
+
+  .box-3 {
+    border: 2px solid #C3C3C3;
+    margin-top: 50px;
+  }
+
+  .sub-box {
+		width: 80%;
+		margin-right: auto;
+		margin-left: auto;
+		border: 2px solid#C3C3C3;
+		margin-top: 10px;
+		.col-7 {
+			padding: 15px 0;
+    }
+    .col-2 {
+			text-align: center;
+		}
+  }
+
+  .img-css {
+		height: 100px;
+		width: 100px;
+	}
 
   .mz-flash-head{
     display: flex;
@@ -4431,7 +4461,7 @@ img {
         &.purple {
           .user-message{
             .text {
-              background: rgba(@grayRGB , .07);
+              background: rgba(@purpleRGB , .7);
               border-color: #800080;
               box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
             }
@@ -5113,6 +5143,9 @@ img {
 }
 
 .mz-flash-group {
+  width:95%;
+  margin-right: auto;
+  margin-left: auto;
 	.row {
 		&:after {
 			content: "";
@@ -5203,10 +5236,7 @@ img {
         border: 2px solid #C3C3C3;
         	border-bottom: 0;
       }
-			// &:nth-child(3) {
-			// 	border: 2px solid #C3C3C3;
-			// 	border-bottom: 0;
-			// }
+      .tablinks{background-color: #000;}
 		}
 		.box-container {
 			border: 2px solid#C3C3C3;
@@ -5613,5 +5643,119 @@ img {
 			margin-right: auto;
 			padding: 24px;
 		}
+  }
+  .message-input{
+    display: flex;
+    width: 95%;
+    margin: 15px auto 15px auto;
+    align-items: center;
+    justify-content: center;
+
+    i{
+      cursor: pointer;
+    }
+
+    input[type="text"] {
+      display: block;
+      border: 1px solid #444;
+      width: 72%;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: black;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 100%;
+      font-variant: small-caps;
+      color: white;
+      border-radius: 10px;
+      
+      &::placeholder {
+        color: white;
+      }
+    }
+    .btn-send{
+      border: 1px solid #444;
+      border-radius: 50px;
+      width: 20%;
+      background: none;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+
+      &.gold {      
+        background-color: @color_gold;
+      }
+  
+      &.orange {
+        background-color: #FFA500;
+      }
+  
+      &.gray {
+        background-color: #808080;
+      }
+      
+      &.limegreen {
+        background-color: #32CD32;
+      }
+  
+      &.red {
+        background-color: #FF0000;
+      }
+  
+      &.purple {
+        background-color: #800080;
+      }
+  
+      &.dodgerblue {
+        background-color: #1E90FF
+      }
+    }
+  }
+  *:focus {
+    outline: 0 !important;
+}
+
+.popup {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	.popuptext {
+		visibility: hidden ;
+		width: 100px;
+		background-color: red;
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 8px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 125%;
+		left: 70%;
+		margin-left: -80px;
+		&::after {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: #555 transparent transparent transparent;
+		}
 	}
+	.popup .show-pop{
+		visibility: visible;
+		-webkit-animation: fadeIn 1s;
+		animation: fadeIn 1s;
+	}
+}
+}
+.form-img-css{
+  height: 150px;
+  width: 45% !important;
+  margin-right:47px;
 }
