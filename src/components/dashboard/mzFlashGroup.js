@@ -145,14 +145,9 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 1 content</span>
-                    <span className="name-btn BT-2"><Link to="#">Button</Link></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
-                    <div id="outer">
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -169,14 +164,9 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 2 content</span>
-                    <span className="name-btn BT-2"><Link to="#">Button</Link></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. </p>
-                    <div id="outer">
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -194,20 +184,14 @@ const MzFlashGroup = () => {
                     </div>
                     <div className="col-7">
                       <span>Tab 3 content</span>
-                      <span className="name-btn BT-2"><Link to="#">Button</Link></span>
+                      <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
-                      <div id="outer">
-                        <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                        <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                        <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      </div>
                     </div>
                   </div>
                 </div>
                 <div className=" sub-box row">
                   <div className="col-3">
-                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
                     <Avatar
                       avatars={currentUser.avatars}
                       feelColor={currentUser.feel_color}
@@ -216,24 +200,15 @@ const MzFlashGroup = () => {
                   <div className="col-7">
                     <span>Name</span>
                     <span className="name-btn BT-2">
-                      <Link to="#">Button</Link>
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                     </span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. </p>
                     <div id="outer">
-                      <div className="inner">
-                        <span className="name-btn">
-                          <Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
                     </div>
                   </div>
                   <div className="col-2">
-                    {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
-                    <Avatar
-                      avatars={currentUser.avatars}
-                      feelColor={currentUser.feel_color}
-                    />
-                    <div className="box-2-inner"><Link to="#" className="btn-style">Button</Link></div>
+                    
                   </div>
                 </div>
               </div>
@@ -242,7 +217,19 @@ const MzFlashGroup = () => {
           </div>
         </div>
         <div className="col-4 box-3">
+       
+          <div className="message-input">
           <form className="form-inline" onSubmit={handleSubmit}>
+          <input
+              type="text"
+              id="feed"
+              name="feed"
+              value={data.feed}
+              onChange={handleChange}
+            />
+            <br />
+
+            <input className="clickable btn-send" type="submit" defaultValue="Submit" />
             <input
               type="file"
               name="image"
@@ -255,43 +242,9 @@ const MzFlashGroup = () => {
               accept=".mp4"
               onChange={handleChange}
             />
-            <input
-              type="text"
-              id="feed"
-              name="feed"
-              value={data.feed}
-              onChange={handleChange}
-            />
-            <br />
-
-            <input type="submit" defaultValue="Submit" />
+            
           </form>
-
-          {/* {feeds &&
-            feeds.map((feed, index) => (
-              <div className="sub-box" key={index}>
-                <div className="row">
-                  <div className="col-3">
-                    <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" />
-                    <Avatar
-                      avatars={currentUser.avatars}
-                      feelColor={currentUser.feel_color}
-                    />
-                  </div>
-                  <div className="col-7">
-                    <span>tab 1 content</span>
-                    <span className="name-btn BT-2"><Link to="#">Button</Link></span>
-                    <p> {feed.feed} </p>
-                    <div id="outer">
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                      <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))} */}
-
+          </div>
           {feeds &&
             feeds.map((feed, index) => (
               <div className=" sub-box row" key={index}>
@@ -304,16 +257,8 @@ const MzFlashGroup = () => {
                 </div>
                 <div className="col-7">
                   <span>Name</span>
-                  <span className="name-btn BT-2">
-                    <Link to="#">Button</Link>
-                  </span>
-                  <p>{feed.feed} </p>
-                  <div id="outer">
-                    <div className="inner">
-                      <span className="name-btn">
-                        <Link to="#">Button</Link></span></div>
-                    <div className="inner"><span className="name-btn"><Link to="#">Button</Link></span></div>
-                  </div>
+                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                  <p>{feed.feed} </p>                  
                 </div>
                 <div className="col-2">
                   {feed.image &&
@@ -323,7 +268,6 @@ const MzFlashGroup = () => {
                       className="img-css"
                     />
                   }
-                  <div className="box-2-inner"><Link to="#" className="btn-style">Button</Link></div>
                 </div>
               </div>
             ))}
