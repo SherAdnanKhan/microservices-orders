@@ -67,7 +67,7 @@ const NavBar = () => {
             <a href="#__tickets">Tickets</a>
           </li>
           <li>
-            <a href="#__feelHistory">Feel History</a>
+            <a href="/dashboard/feel-history">Feel History</a>
           </li>
           <li>
             <a href="#__vault">Vault</a>

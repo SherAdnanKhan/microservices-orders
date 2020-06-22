@@ -8,7 +8,8 @@ import {
   CLEAR_USERS,
   FAV_USER,
   UNFAV_USER,
-  UPDATE_COUNT
+  UPDATE_COUNT,
+  GET_ALL_FEELS
 } from "../constants/actionTypes";
 
 export const getFavourites = () => dispatch => {
@@ -99,3 +100,16 @@ export const unfavUser = faved_to => dispatch => {
 export const updateCounter = () => {
   return { type: UPDATE_COUNT };
 }
+
+export const getFeelHistory = (page) => dispatch => {
+  http
+    .get(`/users/list-feels?page=${page}`)
+    .then(res => {
+      if (res.data.success) {
+        dispatch({
+          type: GET_ALL_FEELS,
+          payload: res.data.data
+        })
+      }
+    });
+};

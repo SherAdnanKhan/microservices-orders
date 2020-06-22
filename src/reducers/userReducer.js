@@ -5,7 +5,8 @@ import {
   GET_FAV_BY_USER,
   GET_USER_ART_NAME,
   CLEAR_USERS,
-  UPDATE_COUNT
+  UPDATE_COUNT,
+  GET_ALL_FEELS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -56,6 +57,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         unreadCount: state.unreadCount + 1
+      };
+    case GET_ALL_FEELS:
+      return {
+        ...state,
+        feelHistory: action.payload
       };
     default:
       return state;

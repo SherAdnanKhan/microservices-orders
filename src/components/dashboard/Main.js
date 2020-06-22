@@ -58,6 +58,8 @@ const Main = () => {
         return import('./conversation');
       case 'settings':
         return import('./layout/navBar');
+      case 'feel-history':
+        return import('./feelHistory');
       default:
         return import('./lobby/lobby');
     }
