@@ -145,9 +145,12 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 1 content</span>
-                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                    
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
+                  </div>
+                  <div className="col-2">
+                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </div>
@@ -164,9 +167,11 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 2 content</span>
-                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. </p>
+                  </div>
+                  <div className="col-2">
+                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </div>
@@ -184,10 +189,12 @@ const MzFlashGroup = () => {
                     </div>
                     <div className="col-7">
                       <span>Tab 3 content</span>
-                      <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
                     </div>
+                    <div className="col-2">
+                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                  </div>
                   </div>
                 </div>
                 <div className=" sub-box row">
@@ -199,16 +206,13 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>Name</span>
-                    <span className="name-btn BT-2">
-                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                    </span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore et dolore magna aliqua. </p>
                     <div id="outer">
                     </div>
                   </div>
                   <div className="col-2">
-                    
+                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </div>
@@ -217,9 +221,9 @@ const MzFlashGroup = () => {
           </div>
         </div>
         <div className="col-4 box-3">
-       
           <div className="message-input">
           <form className="form-inline" onSubmit={handleSubmit}>
+          <i class="fa fa-plus" aria-hidden="true"></i>
           <input
               type="text"
               id="feed"
@@ -228,8 +232,8 @@ const MzFlashGroup = () => {
               onChange={handleChange}
             />
             <br />
-
             <input className="clickable btn-send" type="submit" defaultValue="Submit" />
+ 
             <input
               type="file"
               name="image"
@@ -242,9 +246,11 @@ const MzFlashGroup = () => {
               accept=".mp4"
               onChange={handleChange}
             />
-            
           </form>
+         
           </div>
+          {<img src="https://placeimg.com/640/480/any" alt="Snow" className="form-img-css" /> }
+          <iframe width="180" height="150" src="https://www.youtube.com/embed/C0DPdy98e4c" title="simple video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           {feeds &&
             feeds.map((feed, index) => (
               <div className=" sub-box row" key={index}>
@@ -257,10 +263,12 @@ const MzFlashGroup = () => {
                 </div>
                 <div className="col-7">
                   <span>Name</span>
-                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                 
                   <p>{feed.feed} </p>                  
                 </div>
+
                 <div className="col-2">
+                <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   {feed.image &&
                     <img
                       src={feed.image.path}
