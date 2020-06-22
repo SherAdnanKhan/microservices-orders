@@ -93,10 +93,26 @@ const MzFlashGroup = () => {
                   alt="Snow"
                   className="img-css"
                 /> */}
-                <Avatar
-                  avatars={currentUser.avatars}
-                  feelColor={currentUser.feel_color}
-                />
+                <div className='artcubecase gold'>
+                  <div className="procusmallmove">
+                    <div className='scenesmall gold'>
+                      <div className="cubesmallmove">
+                        <div className="cube-facesmall  cube-face-frontsmall">
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-backsmall">
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-leftsmall">
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-rightsmall">
+                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </button>
             </div>
             <div
@@ -104,15 +120,26 @@ const MzFlashGroup = () => {
               onClick={() => setActiveTab(2)}
             >
               <button className="tablinks">
-                {/* <img
-                  src="https://placeimg.com/640/480/any"
-                  alt="Forest"
-                  className="img-css"
-                /> */}
-                <Avatar
-                  avatars={currentUser.avatars}
-                  feelColor={currentUser.feel_color}
-                />
+                <div className='artcubecase gold'>
+                  <div className="procusmallmove">
+                    <div className='scenesmall gold'>
+                      <div className="cubesmallmove">
+                        <div className="cube-facesmall  cube-face-frontsmall">
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-backsmall">
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-leftsmall">
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-rightsmall">
+                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </button>
             </div>
             <div
@@ -125,10 +152,27 @@ const MzFlashGroup = () => {
                   alt="Mountains"
                   className="img-css"
                 /> */}
-                <Avatar
-                  avatars={currentUser.avatars}
-                  feelColor={currentUser.feel_color}
-                />
+
+                <div className='artcubecase gold'>
+                  <div className="procusmallmove">
+                    <div className='scenesmall gold'>
+                      <div className="cubesmallmove">
+                        <div className="cube-facesmall  cube-face-frontsmall">
+                          <img alt="" src="/assets/images/logowhite.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-backsmall">
+                          <img alt="" src="/assets/images/logowhite.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-leftsmall">
+                          <img alt="" src="/assets/images/logowhite.png" height="100%" />
+                        </div>
+                        <div className="cube-facesmall  cube-face-rightsmall">
+                          <img alt="" src="/assets/images/logowhite.png" height="100%" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </button>
             </div>
           </div>
@@ -145,12 +189,12 @@ const MzFlashGroup = () => {
                   </div>
                   <div className="col-7">
                     <span>tab 1 content</span>
-                    
+
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. </p>
                   </div>
                   <div className="col-2">
-                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </div>
@@ -171,7 +215,7 @@ const MzFlashGroup = () => {
                     incididunt ut labore et dolore magna aliqua. </p>
                   </div>
                   <div className="col-2">
-                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </div>
@@ -193,8 +237,8 @@ const MzFlashGroup = () => {
                       incididunt ut labore et dolore magna aliqua. </p>
                     </div>
                     <div className="col-2">
-                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                  </div>
+                      <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                    </div>
                   </div>
                 </div>
                 <div className=" sub-box row">
@@ -212,7 +256,7 @@ const MzFlashGroup = () => {
                     </div>
                   </div>
                   <div className="col-2">
-                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                    <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                   </div>
                 </div>
               </div>
@@ -222,34 +266,34 @@ const MzFlashGroup = () => {
         </div>
         <div className="col-4 box-3">
           <div className="message-input">
-          <form className="form-inline" onSubmit={handleSubmit}>
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          <input
-              type="text"
-              id="feed"
-              name="feed"
-              value={data.feed}
-              onChange={handleChange}
-            />
-            <br />
-            <input className="clickable btn-send" type="submit" defaultValue="Submit" />
- 
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleChange}
-            />
-            <input
-              type="file"
-              name="video"
-              accept=".mp4"
-              onChange={handleChange}
-            />
-          </form>
-         
+            <form className="form-inline" onSubmit={handleSubmit}>
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <input
+                type="text"
+                id="feed"
+                name="feed"
+                value={data.feed}
+                onChange={handleChange}
+              />
+              <br />
+              <input className="clickable btn-send" type="submit" defaultValue="Submit" />
+
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleChange}
+              />
+              <input
+                type="file"
+                name="video"
+                accept=".mp4"
+                onChange={handleChange}
+              />
+            </form>
+
           </div>
-          {<img src="https://placeimg.com/640/480/any" alt="Snow" className="form-img-css" /> }
+          {<img src="https://placeimg.com/640/480/any" alt="Snow" className="form-img-css" />}
           <iframe width="180" height="150" src="https://www.youtube.com/embed/C0DPdy98e4c" title="simple video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           {feeds &&
             feeds.map((feed, index) => (
@@ -263,19 +307,29 @@ const MzFlashGroup = () => {
                 </div>
                 <div className="col-7">
                   <span>Name</span>
-                 
-                  <p>{feed.feed} </p>                  
+
+                  <p>{feed.feed} </p>
                 </div>
 
                 <div className="col-2">
-                <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                  {feed.image &&
+                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                  {feed.feed_type === 1 &&
+                    feed.image &&
                     <img
                       src={feed.image.path}
                       alt="Snow"
                       className="img-css"
                     />
                   }
+                  {feed.feed_type === 2 &&
+                    feed.image &&
+                    <video controls>
+                      <source src={feed.image.path} type="video/mp4" />
+                      <source src={feed.image.path} type="video/ogg" />
+                      Your browser does not support the video tag.
+                    </video>
+                  }
+
                 </div>
               </div>
             ))}

@@ -91,12 +91,21 @@ const MzFlash = () => {
                 </div>
               </div>
               <div className="col-2">
-                {feed.image &&
+                {feed.feed_type === 1 &&
+                  feed.image &&
                   <img
                     src={feed.image.path}
                     alt="Snow"
                     className="img-css"
                   />
+                }
+                {feed.feed_type === 2 &&
+                  feed.image &&
+                  <video controls>
+                    <source src={feed.image.path} type="video/mp4" />
+                    <source src={feed.image.path} type="video/ogg" />
+                      Your browser does not support the video tag.
+                    </video>
                 }
               </div>
             </div>
