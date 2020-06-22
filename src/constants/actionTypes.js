@@ -29,6 +29,7 @@ export const GET_USER_ART_NAME = 'GET_USER_ART_NAME';
 export const GET_FAV_USER = 'GET_FAV_USER';
 export const GET_FAV_BY_USER = 'GET_FAV_BY_USER';
 export const UPDATE_BIO = 'UPDATE_BIO';
+export const GET_ALL_FEELS = 'GET_ALL_FEELS';
 
 //Studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO';
