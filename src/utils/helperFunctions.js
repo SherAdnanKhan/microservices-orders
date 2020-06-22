@@ -27,3 +27,7 @@ export const formatDate = date => {
   return moment(date).format("MMM Do");
 }
 
+export const formatDateTime = date => {
+  return moment(date).format("LLL");
+}
+
