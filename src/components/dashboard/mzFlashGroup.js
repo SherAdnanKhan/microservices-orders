@@ -203,7 +203,7 @@ const MzFlashGroup = () => {
         </div>
         <div className="col-4 box-3">
           <form action="#" className="form-inline">
-
+          <i class="fa fa-plus" aria-hidden="true"></i>
             <input type="text" id="fname" name="fname" defaultValue="John" /><br />
 
             <input type="submit" defaultValue="Submit" />
