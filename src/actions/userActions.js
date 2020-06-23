@@ -15,7 +15,8 @@ import {
   REQUEST_REJECTED,
   SPRFVS_USERS,
   USER_REQUESTS,
-  INVITED_USERS
+  INVITED_USERS,
+  GET_FAV_AND_SPRFVS_USERS
 } from '../constants/actionTypes';
 
 export const getFavourites = () => dispatch => {
@@ -174,3 +175,15 @@ export const rejectRequest = request => dispatch => {
       });
     });
 };
+
+export const getFaveAndSprfvsUsers = () => dispatch => {
+  http
+    .get('/mzflash/user/faves-sprfvs-users')
+    .then(res => {
+      dispatch({
+        type: GET_FAV_AND_SPRFVS_USERS,
+        payload: res.data.data.faves
+      });
+    });
+};
+

@@ -11,7 +11,8 @@ import {
   REQUEST_REJECTED,
   SPRFVS_USERS,
   USER_REQUESTS,
-  INVITED_USERS
+  INVITED_USERS,
+  GET_FAV_AND_SPRFVS_USERS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   faveByUsers: null,
   sprfvsUsers: null,
   userRequests: null,
-  invitedUsers: null
+  invitedUsers: null,
+  faveAndSprfvsUsers: null
 };
 
 export default (state = initialState, action) => {
@@ -89,6 +91,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userRequests: state.userRequests.filter(user => user.id !== action.payload.user_id)
+      };
+    case GET_FAV_AND_SPRFVS_USERS:
+      return {
+        ...state,
+        faveAndSprfvsUsers: action.payload
       };
     default:
       return state;

@@ -16,8 +16,6 @@ export const GET_ART = 'GET_ART';
 // Art Search
 export const ART_SEARCH = 'ART_SEARCH';
 
-
-
 // ART SELECT
 export const SELECT_USER = "SELECT_USER";
 
@@ -30,6 +28,7 @@ export const GET_FAV_USER = 'GET_FAV_USER';
 export const GET_FAV_BY_USER = 'GET_FAV_BY_USER';
 export const UPDATE_BIO = 'UPDATE_BIO';
 export const GET_ALL_FEELS = 'GET_ALL_FEELS';
+export const GET_FAV_AND_SPRFVS_USERS = 'GET_FAV_AND_SPRFVS_USERS';
 
 //Studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO';
@@ -98,6 +97,7 @@ export const REQUEST_REJECTED = 'REQUEST_REJECTED';
 //MZFLASH
 export const CREATE_FEED = 'CREATE_FEED';
 export const GET_MY_FEEDS = 'GET_MY_FEEDS';
+export const GET_COLLECTIVE_FEEDS = 'GET_COLLECTIVE_FEEDS';
 export const GET_USER_FEEDS = 'GET_USER_FEEDS';
 export const GET_ALL_FEEDS = 'GET_ALL_FEEDS';
 export const START_FEEDS_LOADER = 'START_FEEDS_LOADER';

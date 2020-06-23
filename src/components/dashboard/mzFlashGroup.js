@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserCube from '../common/userCube';
-import { getFavourites } from '../../actions/userActions';
+import { getFavourites, getFaveAndSprfvsUsers, getSprfvsUsers } from '../../actions/userActions';
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
 import {
-  getMyFeeds,
+  getCollectiveFeeds,
   createFeed,
   getMyFavesFeeds,
   getMySprfvsFeeds,
@@ -15,7 +15,7 @@ import {
 import Spinner from '../common/spinner';
 
 const MzFlashGroup = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(2);
 
   const [data, setData] = useState({
     feed: '',
@@ -26,13 +26,15 @@ const MzFlashGroup = () => {
   const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
   const {
-    user: { favouriteUsers },
-    mzFlash: { feeds, loading, favesFeeds, sprfvsFeeds, favesAndSprfvsFeeds }
+    user: { favouriteUsers, faveAndSprfvsUsers, sprfvsUsers },
+    mzFlash: { collectiveFeeds, loading, favesFeeds, sprfvsFeeds, favesAndSprfvsFeeds }
   } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getMyFeeds());
+    dispatch(getFaveAndSprfvsUsers());
+    dispatch(getSprfvsUsers());
+    dispatch(getCollectiveFeeds());
     dispatch(getMySprfvsFeeds());
     dispatch(getMyFavesFeeds());
     dispatch(getMySprfvsAndFavesFeeds());
@@ -52,7 +54,6 @@ const MzFlashGroup = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    console.log(data);
 
     for (let key in data) {
       if (data[key]) {
@@ -69,21 +70,57 @@ const MzFlashGroup = () => {
       <div className="row">
         <div className="col-2 box-1">
           <i className="fa fa-caret-up fa-3x"></i>
-          <div className="box-css">
-            <div id="demo">
-              <div className="cv-carousel">
-                {favouriteUsers &&
-                  favouriteUsers.map((user, index) => (
-                    <div className="item" key={index}>
-                      <Link to={`/dashboard/studio/${user.slug}`} key={index} >
-                        <UserCube user={user} />
-                      </Link>
-                    </div>
-                  ))
-                }
+          {activeTab === 1 && 
+            <div className="box-css">
+              <div id="demo">
+                <div className="cv-carousel">
+                  {sprfvsUsers &&
+                    sprfvsUsers.map((user, index) => (
+                      <div className="item" key={index}>
+                        <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+                          <UserCube user={user} />
+                        </Link>
+                      </div>
+                    ))
+                  }
+                </div>
               </div>
             </div>
-          </div>
+          }
+          {activeTab === 2 && 
+            <div className="box-css">
+              <div id="demo">
+                <div className="cv-carousel">
+                  {favouriteUsers &&
+                    favouriteUsers.map((user, index) => (
+                      <div className="item" key={index}>
+                        <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+                          <UserCube user={user} />
+                        </Link>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          }
+          {activeTab === 3 && 
+            <div className="box-css">
+              <div id="demo">
+                <div className="cv-carousel">
+                  {faveAndSprfvsUsers &&
+                    faveAndSprfvsUsers.map((user, index) => (
+                      <div className="item" key={index}>
+                        <Link to={`/dashboard/studio/${user.slug}`} key={index} >
+                          <UserCube user={user} />
+                        </Link>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          }
           <i className="fa fa-caret-down fa-3x"></i>
         </div>
         <div className="col-6 box-2 tab">
@@ -98,9 +135,9 @@ const MzFlashGroup = () => {
                   alt="Snow"
                   className="img-css"
                 /> */}
-                <div className='artcubecase gold'>
+                <div className='artcubecase white'>
                   <div className="procusmallmove">
-                    <div className='scenesmall gold'>
+                    <div className='scenesmall white'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
                           <img alt="" src="/assets/images/sprfvs.png" height="100%" />
@@ -125,9 +162,9 @@ const MzFlashGroup = () => {
               onClick={() => setActiveTab(2)}
             >
               <button className="tablinks">
-                <div className='artcubecase gold'>
+                <div className='artcubecase white'>
                   <div className="procusmallmove">
-                    <div className='scenesmall gold'>
+                    <div className='scenesmall white'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
                           <img alt="" src="/assets/images/fave_icon.png" height="100%" />
@@ -145,7 +182,6 @@ const MzFlashGroup = () => {
                     </div>
                   </div>
                 </div>
-
               </button>
             </div>
             <div
@@ -153,15 +189,9 @@ const MzFlashGroup = () => {
               onClick={() => setActiveTab(3)}
             >
               <button className="tablinks">
-                {/* <img
-                  src="https://placeimg.com/640/480/any"
-                  alt="Mountains"
-                  className="img-css"
-                /> */}
-
-                <div className='artcubecase gold'>
+                <div className='artcubecase white'>
                   <div className="procusmallmove">
-                    <div className='scenesmall gold'>
+                    <div className='scenesmall white'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
                           <img alt="" src="/assets/images/logowhite.png" height="100%" />
@@ -350,8 +380,8 @@ const MzFlashGroup = () => {
               />
             </form>
           </div>
-          {feeds &&
-            feeds.map((feed, index) => (
+          {collectiveFeeds &&
+            collectiveFeeds.data.map((feed, index) => (
               <div className=" sub-box row set-sources" key={index}>
                 <div className="col-3">
                   {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
