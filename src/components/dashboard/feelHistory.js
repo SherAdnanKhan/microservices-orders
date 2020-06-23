@@ -15,7 +15,7 @@ const FeelHistory = () => {
   }, [dispatch, page]);
 
   const handlePageChange = (page_number) => {
-    console.log(page_number);
+    console.log(page_number)
     setPage(page_number);
     dispatch(getFeelHistory(page_number));
   }
