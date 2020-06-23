@@ -1,6 +1,6 @@
-import http from "../services/httpService"
-import { GET_ART, SELECT_USER } from "../constants/actionTypes";
-import { userKey } from "../constants/keys";
+import http from '../services/httpService';
+import { GET_ART, SELECT_USER } from '../constants/actionTypes';
+import { userKey } from '../constants/keys';
 
 export const getArt = () => dispatch => {
   http
@@ -10,14 +10,12 @@ export const getArt = () => dispatch => {
         dispatch({
           type: GET_ART,
           payload: res.data.data
-        })
+        });
       }
-    })
-    .catch(res => {
     });
 };
 
-export const newArt = (value, history) => dispatch => {
+export const newArt = (value, history) => () => {
   if (value) {
     http
       .post('/arts', value)
@@ -33,15 +31,13 @@ export const selectArt = (value, history) => dispatch => {
     .post('/arts/user-art-selection', value)
     .then(res => {
       localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
-      let id = res?.data?.data?.user?.art?.id;
-      let name = res?.data?.data?.user?.art?.name;
+      let id = res.data.data.user.art.id;
+      let name = res.data.data.user.art.name;
       localStorage.setItem('art_id', id);
       dispatch({
         type: SELECT_USER,
         payload: [id, name]
-      })
+      });
       history.push('/dashboard/start-favas');
     });
 };
-
-

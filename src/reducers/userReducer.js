@@ -6,7 +6,12 @@ import {
   GET_USER_ART_NAME,
   CLEAR_USERS,
   UPDATE_COUNT,
-  GET_ALL_FEELS
+  GET_ALL_FEELS,
+  REQUEST_APPROVED,
+  REQUEST_REJECTED,
+  SPRFVS_USERS,
+  USER_REQUESTS,
+  INVITED_USERS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -16,7 +21,9 @@ const initialState = {
   users: null,
   faveUsers: null,
   faveByUsers: null,
-  userArtName: ""
+  sprfvsUsers: null,
+  userRequests: null,
+  invitedUsers: null
 };
 
 export default (state = initialState, action) => {
@@ -62,6 +69,26 @@ export default (state = initialState, action) => {
       return {
         ...state,
         feelHistory: action.payload
+      };
+    case SPRFVS_USERS:
+      return {
+        ...state,
+        sprfvsUsers: action.payload
+      };
+    case USER_REQUESTS:
+      return {
+        ...state,
+        userRequests: action.payload
+      };
+    case INVITED_USERS:
+      return {
+        ...state,
+        invitedUsers: action.payload
+      };
+    case REQUEST_APPROVED || REQUEST_REJECTED:
+      return {
+        ...state,
+        userRequests: state.userRequests.filter(user => user.id !== action.payload.user_id)
       };
     default:
       return state;

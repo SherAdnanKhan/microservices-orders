@@ -1,7 +1,7 @@
-import http from "../services/httpService";
-import { userKey, tokenKey } from "../constants/keys";
-import { isEmpty } from "../utils/helperFunctions";
-import { getAllConversations } from "./conversationActions";
+import http from '../services/httpService';
+import { userKey, tokenKey } from '../constants/keys';
+import { isEmpty } from '../utils/helperFunctions';
+import { getAllConversations } from './conversationActions';
 
 export const register = credentials => () => {
   http
@@ -19,7 +19,7 @@ export const login = credentials => dispatch => {
   http
     .post('/auth/login', credentials)
     .then(res => {
-      dispatch(getAllConversations())
+      dispatch(getAllConversations());
       setCurrentUser(res.data.data);
       window.location.href = '/dashboard';
     });
@@ -43,7 +43,7 @@ export const changePassword = (credentials, callback) => () => {
 
 export const getAuthToken = () => {
   const token = JSON.parse(localStorage.getItem(tokenKey));
-  return token ? token : null;
+  return token || null;
 };
 
 export const getCurrentUser = () => {

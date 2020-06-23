@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Tutorial = ({ user }) => {
@@ -21,8 +21,8 @@ const Tutorial = ({ user }) => {
       <div
         className={
           activeTab === 2 || activeTab === 3
-            ? "left-menu add-left"
-            : "left-menu"
+            ? 'left-menu add-left'
+            : 'left-menu'
         }
       >
         <div className="icons">
@@ -35,8 +35,8 @@ const Tutorial = ({ user }) => {
       <div
         className={
           activeTab === 4 || activeTab === 5
-            ? "right-menu add-right"
-            : "right-menu"
+            ? 'right-menu add-right'
+            : 'right-menu'
         }
       >
         <div className="icons">
@@ -46,7 +46,7 @@ const Tutorial = ({ user }) => {
           <img src="/assets/images/mzflash.png" alt="" />
         </div>
       </div>
-      <div className={activeTab === 6 ? "botom-menu add-botom" : "botom-menu"} >
+      <div className={activeTab === 6 ? 'botom-menu add-botom' : 'botom-menu'}>
         <div className="icons">
           <img src="/assets/images/add.png" alt="" />
         </div>
@@ -64,7 +64,7 @@ const Tutorial = ({ user }) => {
               <li key={tab.id}>
                 <div
                   id="tab1"
-                  className={activeTab === tab.value ? "dotactive" : ""}
+                  className={activeTab === tab.value ? 'dotactive' : ''}
                   onClick={() => setActiveTab(tab.value)}
                 />
               </li>
@@ -77,58 +77,105 @@ const Tutorial = ({ user }) => {
             </li>
           </ul>
         </div>
-        {activeTab === 1 &&
-          <div className="tabs1">
-            <p>One last thing, if you like something just give it a <strong>Stroke</strong>, as in Brush-stroke or Stroke of genius</p>
-          </div>
-        }
-        {activeTab === 2 &&
-          <div className="tabs2">
-            <p><strong>StrqChat:</strong> direct artist to artist communication</p>
-          </div>
-        }
-        {activeTab === 3 &&
-          <div className="tabs3">
-            <p> <strong>MzFlash:</strong> public messaging board,  with access to the MzFlashes of artists you are faving as well.</p>
-          </div>
-        }
-        {activeTab === 4 &&
-          <div className="tabs4">
-            <p><strong>StrqChat:</strong> direct artist to artist communication</p>
-          </div>
-        }
-        {activeTab === 5 &&
-          <div className="tabs5">
-            <p> <strong>MzFlash:</strong> public messaging board,  with access to the MzFlashes of artists you are faving as well.</p>
-          </div>
-        }
-        {activeTab === 6 &&
-          <div className="tabs6">
-            <p><strong>Exhibit:</strong> add a post to any of your galleries</p>
-          </div>
-        }
-        {activeTab === 7 &&
-          <div className="tabs7">
-            <p>Click the tabs to open them, otherwise they remain out of your way so that you may fully enjoy the exhibits</p>
-          </div>
-        }
-        {activeTab === 8 &&
-          <div className="tabs8">
-            <p>One last thing, if you like something just give it a <strong>Stroke</strong>, as in Brush-stroke or Stroke of genius</p>
-            <img src="/assets/images/strokeiconem.png" alt="" />
-          </div>
-        }
-        {activeTab === 9 &&
-          <div className="tabs9">
-            <button
-              className="clickable"
-              onClick={() => history.push('/dashboard')}>
+        {activeTab === 1
+          && (
+            <div className="tabs1">
+              <p>
+              One last thing, if you like something just give it a
+                {' '}
+                <strong>Stroke</strong>
+              , as in Brush-stroke or Stroke of genius
+              </p>
+            </div>
+          )}
+        {activeTab === 2
+          && (
+            <div className="tabs2">
+              <p>
+                <strong>StrqChat:</strong>
+                {' '}
+              direct artist to artist communication
+              </p>
+            </div>
+          )}
+        {activeTab === 3
+          && (
+            <div className="tabs3">
+              <p>
+                {' '}
+                <strong>MzFlash:</strong>
+                {' '}
+              public messaging board,
+              with access to the MzFlashes of artists you are faving as well.
+              </p>
+            </div>
+          )}
+        {activeTab === 4
+          && (
+            <div className="tabs4">
+              <p>
+                <strong>StrqChat:</strong>
+                {' '}
+              direct artist to artist communication
+              </p>
+            </div>
+          )}
+        {activeTab === 5
+          && (
+            <div className="tabs5">
+              <p>
+                {' '}
+                <strong>MzFlash:</strong>
+                {' '}
+              public messaging board,
+              with access to the MzFlashes of artists you are faving as well.
+              </p>
+            </div>
+          )}
+        {activeTab === 6
+          && (
+            <div className="tabs6">
+              <p>
+                <strong>Exhibit:</strong>
+                {' '}
+              add a post to any of your galleries
+              </p>
+            </div>
+          )}
+        {activeTab === 7
+          && (
+            <div className="tabs7">
+              <p>
+              Click the tabs to open them, otherwise they remain out of your
+              way so that you may fully enjoy the exhibits
+              </p>
+            </div>
+          )}
+        {activeTab === 8
+          && (
+            <div className="tabs8">
+              <p>
+              One last thing, if you like something just give it a
+                {' '}
+                <strong>Stroke</strong>
+              , as in Brush-stroke or Stroke of genius
+              </p>
+              <img src="/assets/images/strokeiconem.png" alt="" />
+            </div>
+          )}
+        {activeTab === 9
+          && (
+            <div className="tabs9">
+              <button
+                className="clickable"
+                onClick={() => history.push('/dashboard')}
+              >
               Enjoy Meuzm
-            </button>
-          </div>
-        }
+              </button>
+            </div>
+          )}
       </div>
-    </div >
+    </div>
   );
 };
 

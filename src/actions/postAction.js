@@ -1,5 +1,7 @@
-import { GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS } from "../constants/actionTypes";
-import http from "../services/httpService";
+import {
+  GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS
+} from '../constants/actionTypes';
+import http from '../services/httpService';
 
 export const getPost = (post) => dispatch => {
   http
@@ -14,24 +16,24 @@ export const getPost = (post) => dispatch => {
     });
 };
 
-export const makeStoke = (post_id, id) => dispatch => {
+export const makeStoke = postId => dispatch => {
   dispatch({ type: STROKE_POST, payload: true });
 
   http
-    .post('/post/stroke', { post_id })
+    .post('/post/stroke', { postId })
     .then()
-    .catch(err => {
+    .catch(() => {
       dispatch({ type: UNSTROKE_POST, payload: false });
     });
 };
 
-export const unStoke = (post_id, id) => dispatch => {
+export const unStoke = (postId) => dispatch => {
   dispatch({ type: UNSTROKE_POST, payload: false });
 
   http
-    .post('/post/unstroke', { post_id })
+    .post('/post/unstroke', { postId })
     .then()
-    .catch(err => {
+    .catch(() => {
       dispatch({ type: STROKE_POST, payload: true });
     });
 };

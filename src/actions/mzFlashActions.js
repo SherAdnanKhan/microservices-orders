@@ -1,4 +1,4 @@
-import http from "../services/httpService";
+import http from '../services/httpService';
 import {
   GET_MY_FEEDS,
   GET_USER_FEEDS,
@@ -8,7 +8,7 @@ import {
   FAVES_FEEDS,
   SPRFVS_FEEDS,
   FAVES_AND_SPRFVS_FEEDS
-} from "../constants/actionTypes";
+} from '../constants/actionTypes';
 
 export const createFeed = data => dispatch => {
   dispatch({ type: START_FEEDS_LOADER });
@@ -22,7 +22,7 @@ export const createFeed = data => dispatch => {
       });
       dispatch({ type: STOP_FEEDS_LOADER });
     })
-    .catch(err => {
+    .catch(() => {
       dispatch({ type: STOP_FEEDS_LOADER });
     });
 };
@@ -81,6 +81,3 @@ export const getMySprfvsAndFavesFeeds = () => dispatch => {
       });
     });
 };
-
-
-
