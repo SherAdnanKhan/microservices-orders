@@ -15,9 +15,9 @@ const initialState = {
   userGalleries: null,
   privacyTypes: null,
   userOtherPages: null,
-  sprfvsUsers: null,
-  userRequests: null,
-  invitedUsers: null,
+  // sprfvsUsers: null,
+  // userRequests: null,
+  // invitedUsers: null,
   loading: false
 };
 

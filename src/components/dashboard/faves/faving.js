@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { getFaveUsers } from "../../../actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
-import Spinner from '../../common/spinner';
-import { useLocation } from "react-router-dom";
-import FavTabs from "./favTabs";
+import React, { useEffect, useState } from 'react';
 import {
+  getFaveUsers,
   approveRequest,
   getSprfvsUsers,
   getUserRequests,
   getInvitedUsers,
   rejectRequest
-} from "../../../actions/privacyActions";
-import Faves from "./faves";
-import SPRFVS from "./sprfvs";
+} from '../../../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../../common/spinner';
+import { useLocation } from 'react-router-dom';
+import FavTabs from './favTabs';
+
+import Faves from './faves';
+import SPRFVS from './sprfvs';
 import Request from './requests';
 import Invited from './invited';
 
-const Faving = (props) => {
+const Faving = () => {
   const location = useLocation();
   const split = location.pathname.split('/');
 
   const dispatch = useDispatch();
   const {
-    user: { faveUsers },
+    user: {
+      faveUsers, sprfvsUsers, userRequests, invitedUsers
+    },
     loading: { loading },
-    privacies: { sprfvsUsers, userRequests, invitedUsers }
   } = useSelector(state => state);
 
   const [query, setQuery] = useState('');
@@ -38,12 +40,12 @@ const Faving = (props) => {
   ]);
 
   useEffect(() => {
-    dispatch(getFaveUsers(""))
+    dispatch(getFaveUsers(''));
   }, [dispatch]);
 
   const handleChange = ({ target: input }) => {
     setQuery(input.value);
-    dispatch(getFaveUsers(input.value))
+    dispatch(getFaveUsers(input.value));
   };
 
   const handleApprovedRequest = (request) => {
@@ -57,7 +59,7 @@ const Faving = (props) => {
   const handleTabChange = id => {
     switch (id) {
       case 1:
-        dispatch(getFaveUsers(""));
+        dispatch(getFaveUsers(''));
         break;
       case 2:
         dispatch(getSprfvsUsers(3, 1));
@@ -70,44 +72,49 @@ const Faving = (props) => {
         break;
       default:
         break;
-    };
+    }
     setActiveTab(id);
   };
 
   return (
     <div className="favas">
       {loading && <Spinner />}
-      {split[2] === 'my-studio' &&
-        <FavTabs
-          tabs={tabs}
-          activeTab={activeTab}
-          onTabChange={handleTabChange}
-        />
-      }
-      {activeTab === 1 &&
-        <Faves
-          faveUsers={faveUsers}
-          query={query}
-          onChange={handleChange}
-        />
-      }
-      {activeTab === 2 &&
-        <SPRFVS
-          sprfvsUsers={sprfvsUsers}
-        />
-      }
-      {activeTab === 3 &&
-        <Request
-          userRequests={userRequests}
-          onApprovedRequest={handleApprovedRequest}
-          onRejectedRequest={handleRejectedRequest}
-        />
-      }
-      {activeTab === 4 &&
-        <Invited
-          invitedUsers={invitedUsers}
-        />
-      }
+      {split[2] === 'my-studio'
+        && (
+          <FavTabs
+            tabs={tabs}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+          />
+        )}
+      {activeTab === 1
+        && (
+          <Faves
+            faveUsers={faveUsers}
+            query={query}
+            onChange={handleChange}
+          />
+        )}
+      {activeTab === 2
+        && (
+          <SPRFVS
+            sprfvsUsers={sprfvsUsers}
+          />
+        )}
+      {activeTab === 3
+        && (
+          <Request
+            userRequests={userRequests}
+            onApprovedRequest={handleApprovedRequest}
+            onRejectedRequest={handleRejectedRequest}
+          />
+        )}
+      {activeTab === 4
+        && (
+          <Invited
+            invitedUsers={invitedUsers}
+          />
+        )}
     </div>
   );
 };

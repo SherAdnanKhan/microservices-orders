@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import errorReducer from '../reducers/errorReducer';
 import loadingReducer from '../reducers/loadingReducer';
-import artSelectionReducer from "../reducers/artSelectionReducer";
-import exibitionReducer from "../reducers/exibitionReducer";
+import artSelectionReducer from '../reducers/artSelectionReducer';
+import exibitionReducer from '../reducers/exibitionReducer';
 import studioReducer from '../reducers/studioReducer';
 import userReducer from '../reducers/userReducer';
-import galleryReducer from "../reducers/galleryReducer";
-import postReducer from "../reducers/postReducer";
+import galleryReducer from '../reducers/galleryReducer';
+import postReducer from '../reducers/postReducer';
 import conversationReducer from '../reducers/conversationReducer';
 import privacyReducer from '../reducers/privacyReducer';
 import mzFlashReducer from '../reducers/mzFlashReducer';
@@ -23,4 +23,4 @@ export default combineReducers({
   conversation: conversationReducer,
   privacies: privacyReducer,
   mzFlash: mzFlashReducer
-}); 
+});

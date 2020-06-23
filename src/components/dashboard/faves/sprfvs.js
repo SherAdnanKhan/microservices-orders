@@ -11,12 +11,12 @@ const SPRFVS = ({ sprfvsUsers }) => {
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
                 <Link to={`/dashboard/studio/${user.slug}`}  >
-                  <Avatar avatars={user?.avatars} feelColor={user?.feel_color} />
+                  <Avatar avatars={user && user.avatars} feelColor={user && user.feel_color} />
                 </Link>
               </div>
               <div>
-                <p>{user?.first_name}</p>
-                <p>{user?.art?.name}</p>
+                <p>{user && user.first_name}</p>
+                <p>{user && user.art && user.art.name}</p>
                 <p>
                   {user.art &&
                     <>

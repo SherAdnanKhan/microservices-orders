@@ -4,9 +4,7 @@ const FavTabs = ({ tabs, activeTab, onTabChange }) => {
   return (
     <div className="fav-container">
       <div className="back-icon">
-        {/* <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} /> */}
       </div>
-      {/* {userStudio && <p>{userStudio.user.username}</p>} */}
       <div className="actions">
         {tabs &&
           tabs.map((tab, index) => (

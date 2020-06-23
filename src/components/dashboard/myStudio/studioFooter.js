@@ -13,12 +13,12 @@ const StudioFooter = ({ gallery, user }) => {
                   {gallery.post_type === 2
                     ? (
                       <video width="320" height="240" controls>
-                        <source src={gallery?.image.path} type="video/mp4" />
-                        <source src={gallery?.image.path} type="video/ogg" />
+                        <source src={gallery.image && gallery.image.path} type="video/mp4" />
+                        <source src={gallery.image && gallery.image.path} type="video/ogg" />
                         Your browser does not support the video tag.
                       </video>
                     ) : (
-                      <img src={`${gallery?.image.path}`} alt="" />
+                      <img src={`${gallery.image && gallery.image.path}`} alt="" />
                     )
                   }
                 </div>

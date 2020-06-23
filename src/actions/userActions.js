@@ -1,4 +1,5 @@
-import http from "../services/httpService";
+import http from '../services/httpService';
+import { toast } from 'react-toastify';
 import {
   GET_FAV,
   GET_ALL_USERS,
@@ -9,8 +10,13 @@ import {
   FAV_USER,
   UNFAV_USER,
   UPDATE_COUNT,
-  GET_ALL_FEELS
-} from "../constants/actionTypes";
+  GET_ALL_FEELS,
+  REQUEST_APPROVED,
+  REQUEST_REJECTED,
+  SPRFVS_USERS,
+  USER_REQUESTS,
+  INVITED_USERS
+} from '../constants/actionTypes';
 
 export const getFavourites = () => dispatch => {
   http
@@ -34,9 +40,7 @@ export const getAllUsers = query => dispatch => {
     });
 };
 
-export const clearUsers = () => {
-  return { type: CLEAR_USERS, payload: null };
-};
+export const clearUsers = () => ({ type: CLEAR_USERS, payload: null });
 
 export const getUserArtById = (id) => dispatch => {
   http
@@ -57,7 +61,7 @@ export const getFaveUsers = username => dispatch => {
         dispatch({
           type: GET_FAV_USER,
           payload: res.data.data.faves
-        })
+        });
       }
     });
 };
@@ -75,13 +79,13 @@ export const getFaveByUsers = username => dispatch => {
     });
 };
 
-export const favUser = faved_to => dispatch => {
+export const favUser = favedTo => dispatch => {
   dispatch({ type: FAV_USER, payload: true });
 
   http
-    .post('/favs', { faved_to })
+    .post('/favs', { favedTo })
     .then()
-    .catch(res => {
+    .catch(() => {
       dispatch({ type: UNFAV_USER, payload: false });
     });
 };
@@ -92,14 +96,12 @@ export const unfavUser = faved_to => dispatch => {
   http
     .delete(`/favs/${faved_to}`)
     .then()
-    .catch(res => {
+    .catch(() => {
       dispatch({ type: FAV_USER, payload: true });
     });
 };
 
-export const updateCounter = () => {
-  return { type: UPDATE_COUNT };
-}
+export const updateCounter = () => ({ type: UPDATE_COUNT });
 
 export const getFeelHistory = (page) => dispatch => {
   http
@@ -109,7 +111,66 @@ export const getFeelHistory = (page) => dispatch => {
         dispatch({
           type: GET_ALL_FEELS,
           payload: res.data.data
-        })
+        });
       }
+    });
+};
+
+export const getSprfvsUsers = (privacyTypeId, status) => dispatch => {
+  http
+    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .then(res => {
+      dispatch({
+        type: SPRFVS_USERS,
+        payload: res.data.data.faves
+      });
+    });
+};
+
+export const getUserRequests = (privacyTypeId, status) => dispatch => {
+  http
+    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .then(res => {
+      dispatch({
+        type: USER_REQUESTS,
+        payload: res.data.data.faves
+      });
+    });
+};
+
+export const getInvitedUsers = (privacyTypeId, status) => dispatch => {
+  http
+    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .then(res => {
+      dispatch({
+        type: INVITED_USERS,
+        payload: res.data.data.faves
+      });
+    });
+};
+
+export const approveRequest = request => dispatch => {
+  http
+    .post('/user/privacy/sprfvs/approved', request)
+    .then(() => {
+      toast('You have approved request.');
+
+      dispatch({
+        type: REQUEST_APPROVED,
+        payload: request
+      });
+    });
+};
+
+export const rejectRequest = request => dispatch => {
+  http
+    .post('/user/privacy/sprfvs/reject', request)
+    .then(() => {
+      toast('You have reject request.');
+
+      dispatch({
+        type: REQUEST_REJECTED,
+        payload: request
+      });
     });
 };

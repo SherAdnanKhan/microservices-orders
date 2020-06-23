@@ -14,7 +14,7 @@ const AddExibit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const listCategory = useSelector(({ exibition }) => exibition.ListOfArts?.data?.arts);
+  const listCategory = useSelector(({ exibition }) => exibition.ListOfArts && exibition.ListOfArts.data.arts);
   const { loading } = useSelector(state => state.loading);
   const {
     gallery: { myGalleries },
@@ -28,7 +28,7 @@ const AddExibit = () => {
     video: null,
     art_id: null
   }
-  // const [arts, setArts] = useState("");
+
   const [error, setError] = useState('');
   const [image, setImage] = useState('');
   const [video, setVideo] = useState('')
@@ -150,7 +150,7 @@ const AddExibit = () => {
                     <source src={video} type="video/mp4" />
                     <source src={video} type="video/ogg" />
                   Your browser does not support the video tag.
-                </video>
+                  </video>
                 }
                 {!video &&
                   <img

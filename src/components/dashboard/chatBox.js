@@ -20,7 +20,6 @@ import {
 } from '../../actions/conversationActions';
 
 class ChatBox extends Component {
-
   state = {
     image: '',
     video: '',
@@ -323,7 +322,6 @@ class ChatBox extends Component {
             }
           </div>
         </>
-
         {progress > 0 &&
           <div>
             <div className={`progressBar ${currentUser.feel_color}`}>
@@ -332,7 +330,6 @@ class ChatBox extends Component {
             </div>
           </div>
         }
-
         <div className="message-input">
           <i
             className="fa fa-plus add-items-btn"

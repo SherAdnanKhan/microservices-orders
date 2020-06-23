@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Input from '../common/input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,9 +55,9 @@ const LoginForm = () => {
             <div className="scene">
               <div className="cube">
                 <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent', background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
-                <div className="cube-face  cube-face-back" style={{ borderColor: 'transparent'  , background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
-                <div className="cube-face  cube-face-left" style={{ borderColor: 'transparent'  , background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
-                <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent' , background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-back" style={{ borderColor: 'transparent', background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-left" style={{ borderColor: 'transparent', background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
+                <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent', background: 'rgba(0,0,0,.9)' }}><img src="./assets/images/logowhite.png" alt="" /></div>
               </div>
             </div>
           </div>
@@ -65,12 +65,13 @@ const LoginForm = () => {
           <h2>LOGIN</h2>
 
           <form onSubmit={handleSubmit}>
-            {error &&
-              <div className="error">
-                {error.message && error.message}
-                {error.email && error.email}
-              </div>
-            }
+            {error
+              && (
+                <div className="error">
+                  {error.message && error.message}
+                  {error.email && error.email}
+                </div>
+              )}
             <Input
               name="email"
               id="email"
@@ -87,7 +88,7 @@ const LoginForm = () => {
               onChange={handleChange}
             >
               <span className="passwordEye" eye="off">
-                <i className="far fa-eye-slash"></i>
+                <i className="far fa-eye-slash" />
               </span>
             </Input>
 
@@ -105,7 +106,7 @@ const LoginForm = () => {
             </div>
 
             <div className="forgotPassword">
-              <Link to="/forgot">Forgot password?</ Link>
+              <Link to="/forgot">Forgot password?</Link>
             </div>
           </form>
         </div>
