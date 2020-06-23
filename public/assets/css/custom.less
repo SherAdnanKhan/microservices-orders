@@ -5161,6 +5161,46 @@ img {
   width:95%;
   margin-right: auto;
   margin-left: auto;
+  .add-img-vid-box{
+    display: flex;
+    position: fixed;
+    border: 1px solid;
+    top: 23%;
+    left: 16%;
+    background: #000;
+    width: 66%;
+    height: 80%;
+    z-index: 9;
+    justify-content: center;
+    align-items: center;
+    .close-add-box{
+      position: absolute;
+      top: 50px;
+      right: 27px;
+      border: 1px solid;
+      border-radius: 100%;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    label{
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      margin: 0 30px;
+      cursor: pointer;
+      
+      img{
+        width: 40px;
+        border: 1px solid;
+        border-radius: 100%;
+        padding: 5px;
+      }
+
+      input {
+        display: none;
+      }
+    }
+  }
   .row {
     &:after {
       content: "";
@@ -5288,8 +5328,22 @@ img {
     position: absolute;
     right: 10%;
     top: 44%;
-    left: 40%;
+    left: 53%;
     transform: translate(-50%);
+  }
+  .video{
+    position: absolute;
+    width: 160px;
+    height: 120px;
+    top: 33%;
+    left: 28%;
+    &.left-space{
+      left:38%;
+    }
+    video{
+      width:100%;
+      height:100%;
+    }
   }
   .name-btn {
     float: right;
