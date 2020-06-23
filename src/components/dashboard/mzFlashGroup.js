@@ -15,7 +15,11 @@ import {
 import Spinner from '../common/spinner';
 
 const MzFlashGroup = () => {
+  const [charCount, setCharCount] = useState(0);
   const [activeTab, setActiveTab] = useState(2);
+  const [showModel, setShowModel] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
 
   const [data, setData] = useState({
     feed: '',
@@ -42,11 +46,21 @@ const MzFlashGroup = () => {
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file') {
+      setShowModel(false);
       if (input.files[0]) {
-        setData({ ...data, [input.name]: input.files[0] });
+        if (input.name === 'image') {
+          setData({ ...data, image: input.files[0], video: null });
+          setImageUrl(URL.createObjectURL(input.files[0]));
+          setVideoUrl('');
+        } else if (input.name === 'video') {
+          setData({ ...data, video: input.files[0], image: null });
+          setVideoUrl(URL.createObjectURL(input.files[0]));
+          setImageUrl('');
+        }
       }
     } else {
       setData({ ...data, [input.name]: input.value });
+      setCharCount(input.value.length);
     }
   }
 
@@ -70,7 +84,7 @@ const MzFlashGroup = () => {
       <div className="row">
         <div className="col-2 box-1">
           <i className="fa fa-caret-up fa-3x"></i>
-          {activeTab === 1 && 
+          {activeTab === 1 &&
             <div className="box-css">
               <div id="demo">
                 <div className="cv-carousel">
@@ -87,7 +101,7 @@ const MzFlashGroup = () => {
               </div>
             </div>
           }
-          {activeTab === 2 && 
+          {activeTab === 2 &&
             <div className="box-css">
               <div id="demo">
                 <div className="cv-carousel">
@@ -104,7 +118,7 @@ const MzFlashGroup = () => {
               </div>
             </div>
           }
-          {activeTab === 3 && 
+          {activeTab === 3 &&
             <div className="box-css">
               <div id="demo">
                 <div className="cv-carousel">
@@ -243,11 +257,13 @@ const MzFlashGroup = () => {
                           }
                           {feed.feed_type === 2 &&
                             feed.image &&
-                            <video controls>
-                              <source src={feed.image.path} type="video/mp4" />
-                              <source src={feed.image.path} type="video/ogg" />
-                              Your browser does not support the video tag.
-                            </video>
+                            <div className="video left-space">
+                              <video controls>
+                                <source src={feed.image.path} type="video/mp4" />
+                                <source src={feed.image.path} type="video/ogg" />
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
                           }
                         </div>
                         <div className="col-2">
@@ -288,11 +304,13 @@ const MzFlashGroup = () => {
                           }
                           {feed.feed_type === 2 &&
                             feed.image &&
-                            <video controls>
-                              <source src={feed.image.path} type="video/mp4" />
-                              <source src={feed.image.path} type="video/ogg" />
-                              Your browser does not support the video tag.
-                            </video>
+                            <div className="video left-space">
+                              <video controls>
+                                <source src={feed.image.path} type="video/mp4" />
+                                <source src={feed.image.path} type="video/ogg" />
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
                           }
                         </div>
                         <div className="col-2">
@@ -332,11 +350,13 @@ const MzFlashGroup = () => {
                           }
                           {feed.feed_type === 2 &&
                             feed.image &&
-                            <video controls>
-                              <source src={feed.image.path} type="video/mp4" />
-                              <source src={feed.image.path} type="video/ogg" />
-                              Your browser does not support the video tag.
-                            </video>
+                            <div className="video left-space">
+                              <video controls>
+                                <source src={feed.image.path} type="video/mp4" />
+                                <source src={feed.image.path} type="video/ogg" />
+                                Your browser does not support the video tag.
+                              </video>
+                            </div>
                           }
                           <div id="outer">
                           </div>
@@ -355,30 +375,66 @@ const MzFlashGroup = () => {
         <div className="col-4 box-3">
           <div className="message-input">
             <form className="form-inline" onSubmit={handleSubmit}>
-              <i class="fa fa-plus" aria-hidden="true"></i>
+              <i
+                className="fa fa-plus"
+                aria-hidden="true"
+                onClick={() => setShowModel(true)}
+              >
+              </i>
               <input
                 type="text"
                 id="feed"
                 name="feed"
                 value={data.feed}
+                maxLength={200}
                 onChange={handleChange}
               />
               <br />
+              <span> ({charCount}/200)</span>
               <input className="clickable btn-send" type="submit" defaultValue="Submit" />
-
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleChange}
-              />
-              <input
-                type="file"
-                name="video"
-                accept=".mp4"
-                onChange={handleChange}
-              />
             </form>
+            {imageUrl &&
+              <div className="image-preview">
+                <img alt="" src={imageUrl} />
+              </div>
+            }
+            {videoUrl &&
+              <div className="video-preview">
+                <video controls>
+                  <source src={videoUrl} type="video/mp4" />
+                  <source src={videoUrl} type="video/ogg" />
+                  Your browser does not support the video tag.
+              </video>
+              </div>
+            }
+            {showModel &&
+              <div className="add-img-vid-box">
+                <i
+                  className="fa fa-times close-add-box"
+                  onClick={() => setShowModel(false)}
+                />
+                <label>
+                  <img alt="" src="/assets/images/plus.png" />
+                  Add Image
+                  <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleChange}
+                  />
+                </label>
+                <label>
+                  <img alt="" src="/assets/images/plus.png" />
+                  Add Video
+                  <input
+                    type="file"
+                    name="video"
+                    accept=".mp4"
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+            }
           </div>
           {collectiveFeeds &&
             collectiveFeeds.data.map((feed, index) => (
@@ -408,11 +464,13 @@ const MzFlashGroup = () => {
                   }
                   {feed.feed_type === 2 &&
                     feed.image &&
-                    <video controls>
-                      <source src={feed.image.path} type="video/mp4" />
-                      <source src={feed.image.path} type="video/ogg" />
-                      Your browser does not support the video tag.
-                    </video>
+                    <div className="video">
+                      <video controls>
+                        <source src={feed.image.path} type="video/mp4" />
+                        <source src={feed.image.path} type="video/ogg" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
                   }
                 </div>
               </div>
