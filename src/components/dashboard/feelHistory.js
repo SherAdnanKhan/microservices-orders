@@ -15,7 +15,6 @@ const FeelHistory = () => {
   }, [dispatch, page]);
 
   const handlePageChange = (page_number) => {
-    console.log(page_number)
     setPage(page_number);
     dispatch(getFeelHistory(page_number));
   }
@@ -23,7 +22,7 @@ const FeelHistory = () => {
   let tablePagination = "";
   if (feelHistory && feelHistory.user_feel_list) {
     let pages = Math.ceil(parseInt(feelHistory.user_feel_list.total / parseInt(feelHistory.user_feel_list.per_page)))
-    tablePagination = <Pagination pages={pages} page={page} onPageChange={handlePageChange} />
+    tablePagination = <Pagination pages={pages + 1} page={page} onPageChange={handlePageChange} />
   }
 
   return (
