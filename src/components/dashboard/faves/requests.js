@@ -10,13 +10,13 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
           userRequests.map((user, index) => (
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
-                <Link to={`/dashboard/studio/${user.slug}`}  >
-                  <Avatar avatars={user?.avatars} feelColor={user?.feel_color} />
+                <Link to={`/dashboard/studio/${user.slug}`}>
+                  <Avatar avatars={user && user.avatars} feelColor={user && user.feel_color} />
                 </Link>
               </div>
               <div>
-                <p>{user?.first_name}</p>
-                <p>{user?.art?.name}</p>
+                <p>{user.first_name}</p>
+                <p>{user.art && user.art.name}</p>
                 <p>
                   {user.art &&
                     <>
@@ -33,13 +33,13 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
                   onClick={() => onApprovedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Approve
-                  </button>
+                </button>
                 <button
                   className="btn-reject"
                   onClick={() => onRejectedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Reject
-                  </button>
+                </button>
               </div>
             </div>
           ))}

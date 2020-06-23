@@ -45,7 +45,7 @@ const Search = () => {
                   to={`/dashboard/studio/${user.slug}`}
                   onClick={handleClear}
                 >
-                  <Avatar avatars={user?.avatars} feelColor={user.feel_color} />
+                  <Avatar avatars={user && user.avatars} feelColor={user.feel_color} />
                 </Link>
                 <div>
                   <p>{user.username}</p>

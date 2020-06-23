@@ -1,15 +1,11 @@
-import { SET_ERROR, CLEAR_ERROR } from "../constants/actionTypes";
+import { SET_ERROR, CLEAR_ERROR } from '../constants/actionTypes';
 
-export const setError = error => {
-  return {
-    type: SET_ERROR,
-    payload: error
-  };
-};
+export const setError = error => ({
+  type: SET_ERROR,
+  payload: error
+});
 
-export const clearError = () => {
-  return {
-    type: CLEAR_ERROR,
-    payload: null
-  };
-};
+export const clearError = () => ({
+  type: CLEAR_ERROR,
+  payload: null
+});

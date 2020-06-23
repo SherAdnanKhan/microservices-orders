@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../common/input';
 import { useDispatch, useSelector } from 'react-redux';
+import Input from '../common/input';
 import { forgotPassword } from '../../actions/authActions';
 import Spinner from '../common/spinner';
 
@@ -12,20 +12,19 @@ const ForgotPasswordForm = () => {
   const dispatch = useDispatch();
   const {
     loading: { loading },
-    error: { error }
-  } = useSelector(state => state);
+    error: { error },
+  } = useSelector((state) => state);
 
   const handleChange = ({ target: input }) => {
     setEmail(input.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (success)
-      setSuccess('');
+    if (success) { setSuccess(''); }
 
-    dispatch(forgotPassword({ email }, response => setSuccess(response.message)));
+    dispatch(forgotPassword({ email }, (response) => setSuccess(response.message)));
   };
 
   return (
@@ -37,17 +36,19 @@ const ForgotPasswordForm = () => {
           <h2>Forgot Password?</h2>
         </div>
         <form className="form" onSubmit={handleSubmit}>
-          {success &&
-            <div className="success">
-              {success}
-            </div>
-          }
-          {error &&
-            <div className="error">
-              {error.email && error.email}
-              {error.message && error.message}
-            </div>
-          }
+          {success
+            && (
+              <div className="success">
+                {success}
+              </div>
+            )}
+          {error
+            && (
+              <div className="error">
+                {error.email && error.email}
+                {error.message && error.message}
+              </div>
+            )}
           <Input
             name="email"
             id="email"
@@ -62,10 +63,11 @@ const ForgotPasswordForm = () => {
           >
             Send
           </button>
-          <div>
-          </div>
+          <div />
           <p>
-            Return to <Link to="/login">Login page</Link>
+            Return to
+            {' '}
+            <Link to="/login">Login page</Link>
           </p>
         </form>
 
@@ -73,7 +75,7 @@ const ForgotPasswordForm = () => {
           If you encounter any problem with this form please email us the details so
           that we may rectify the problem, please include a screenshot of what your
           browser is displaying, thank you.
-          <Link to=""> Contact us</Link>
+          <Link to="#"> Contact us</Link>
         </p>
 
         <footer>

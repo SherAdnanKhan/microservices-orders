@@ -121,7 +121,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                 <div className="faved-by-btn">
                   <img src="/assets/images/faving.png" alt="" />
                 Faved
-              </div>
+                </div>
                 {userStudio && <span>{userStudio.favs_count}</span>}
               </Link>
             </div>

@@ -1530,7 +1530,7 @@ input {
     text-align: center;
     &.defaultColorForLogin {
       .tutorfeel {
-        background-color: red;
+        background-color:  white;
       }
     }
     .scenesmaller {
@@ -5248,13 +5248,17 @@ img {
 				margin-top: 10px;
 			}
 		}
-	}
+  }
+  .set-sources{
+    height:180px;
+  }
 	.sub-box {
 		width: 80%;
 		margin-right: auto;
 		margin-left: auto;
 		border: 2px solid#C3C3C3;
-		margin-top: 10px;
+    margin-top: 10px;
+    position: relative;
 		.col-7 {
 			padding: 15px 0;
 		}
@@ -5264,7 +5268,12 @@ img {
 	}
 	.img-css {
 		height: 100px;
-		width: 100px;
+    width: 100px;
+    position: absolute;
+    right: 10%;
+    top: 44%;
+    left: 40%;
+    transform: translate(-50%);
 	}
 	.name-btn {
 		float: right;
@@ -5758,4 +5767,17 @@ img {
   height: 150px;
   width: 45% !important;
   margin-right:47px;
+}
+// iframe{
+//   position: absolute;
+//   left: 60%;
+//   top: 44%;
+// }
+@media screen and (max-width: 768px) {
+	.box-1,.box-2,.box-3 {
+		width:100% !important;
+  }
+  .mz-flash-group{#demo {
+		height: 300px !important;
+	}}
 }

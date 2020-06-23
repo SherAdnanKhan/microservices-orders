@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react';
 
 export const useWindowUnloadEffect = (handler, callOnCleanup) => {
-  const cb = useRef()
+  const cb = useRef();
 
   cb.current = handler;
 
@@ -14,7 +14,6 @@ export const useWindowUnloadEffect = (handler, callOnCleanup) => {
       if (callOnCleanup) handler();
 
       window.removeEventListener('beforeunload', handler);
-    }
-  }, [cb, callOnCleanup])
+    };
+  }, [cb, callOnCleanup]);
 };
-
