@@ -349,13 +349,10 @@ const MzFlashGroup = () => {
                 onChange={handleChange}
               />
             </form>
-
           </div>
-          {<img src="https://placeimg.com/640/480/any" alt="Snow" className="form-img-css" />}
-          <iframe width="180" height="150" src="https://www.youtube.com/embed/C0DPdy98e4c" title="simple video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           {feeds &&
             feeds.map((feed, index) => (
-              <div className=" sub-box row" key={index}>
+              <div className=" sub-box row set-sources" key={index}>
                 <div className="col-3">
                   {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
                   <Avatar
