@@ -7,7 +7,8 @@ import {
   STOP_FEEDS_LOADER,
   FAVES_FEEDS,
   SPRFVS_FEEDS,
-  FAVES_AND_SPRFVS_FEEDS
+  FAVES_AND_SPRFVS_FEEDS,
+  GET_COLLECTIVE_FEEDS
 } from '../constants/actionTypes';
 
 export const createFeed = data => dispatch => {
@@ -34,6 +35,17 @@ export const getMyFeeds = () => dispatch => {
       dispatch({
         type: GET_MY_FEEDS,
         payload: res.data.data.feeds.data
+      });
+    });
+};
+
+export const getCollectiveFeeds = () => dispatch => {
+  http
+    .get('/mzflash/user/collective-feed')
+    .then(res => {
+      dispatch({
+        type: GET_COLLECTIVE_FEEDS,
+        payload: res.data.data.user_faves_feeds
       });
     });
 };

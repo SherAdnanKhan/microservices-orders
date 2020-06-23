@@ -6,11 +6,13 @@ import {
   STOP_FEEDS_LOADER,
   FAVES_FEEDS,
   SPRFVS_FEEDS,
-  FAVES_AND_SPRFVS_FEEDS
+  FAVES_AND_SPRFVS_FEEDS,
+  GET_COLLECTIVE_FEEDS
 } from "../constants/actionTypes";
 
 const initialState = {
-  feeds: null,
+  myFeeds: null,
+  collectiveFeeds: null,
   favesFeeds: null,
   sprfvsFeeds: null,
   favesAndSprfvsFeeds: null,
@@ -23,7 +25,13 @@ export default (state = initialState, action) => {
     case GET_MY_FEEDS:
       return {
         ...state,
-        feeds: action.payload
+        myFeeds: action.payload
+      };
+    case GET_COLLECTIVE_FEEDS:
+      console.log(action);
+      return {
+        ...state,
+        collectiveFeeds: action.payload
       };
     case GET_USER_FEEDS:
       return {
@@ -33,7 +41,10 @@ export default (state = initialState, action) => {
     case CREATE_FEED:
       return {
         ...state,
-        feeds: state.feeds ? [...state.feeds, action.payload] : [action.payload]
+        collectiveFeeds: {
+          ...state.collectiveFeeds,
+          data: [...state.collectiveFeeds.data, action.payload]
+        }
       };
     case FAVES_FEEDS:
       return {
