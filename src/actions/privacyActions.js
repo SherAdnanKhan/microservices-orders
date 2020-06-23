@@ -4,14 +4,8 @@ import {
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
   STOP_PRIVACY_LOADING,
-  SPRFVS_USERS,
-  USER_REQUESTS,
-  INVITED_USERS,
-  REQUEST_APPROVED,
-  REQUEST_REJECTED
-} from "../constants/actionTypes";
-import http from "../services/httpService";
-import { toast } from "react-toastify";
+} from '../constants/actionTypes';
+import http from '../services/httpService';
 
 export const getPrivacies = () => dispatch => {
   dispatch({ type: START_PRIVACY_LOADING });
@@ -25,7 +19,7 @@ export const getPrivacies = () => dispatch => {
       });
       dispatch({ type: STOP_PRIVACY_LOADING });
     })
-    .catch(err => {
+    .catch(() => {
       dispatch({ type: STOP_PRIVACY_LOADING });
     });
 };
@@ -42,7 +36,7 @@ export const changeGalleryPrivacy = privacy => dispatch => {
       });
       dispatch({ type: STOP_PRIVACY_LOADING });
     })
-    .catch(err => {
+    .catch(() => {
       dispatch({ type: STOP_PRIVACY_LOADING });
     });
 };
@@ -59,66 +53,7 @@ export const changeOtherPrivacy = privacy => dispatch => {
       });
       dispatch({ type: STOP_PRIVACY_LOADING });
     })
-    .catch(err => {
+    .catch(() => {
       dispatch({ type: STOP_PRIVACY_LOADING });
-    });
-};
-
-export const getSprfvsUsers = (privacyTypeId, status) => dispatch => {
-  http
-    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
-    .then(res => {
-      dispatch({
-        type: SPRFVS_USERS,
-        payload: res.data.data.faves
-      });
-    });
-};
-
-export const getUserRequests = (privacyTypeId, status) => dispatch => {
-  http
-    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
-    .then(res => {
-      dispatch({
-        type: USER_REQUESTS,
-        payload: res.data.data.faves
-      });
-    });
-};
-
-export const getInvitedUsers = (privacyTypeId, status) => dispatch => {
-  http
-    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
-    .then(res => {
-      dispatch({
-        type: INVITED_USERS,
-        payload: res.data.data.faves
-      });
-    });
-};
-
-export const approveRequest = request => dispatch => {
-  http
-    .post('/user/privacy/sprfvs/approved', request)
-    .then(res => {
-      toast('You have approved request.');
-
-      dispatch({
-        type: REQUEST_APPROVED,
-        payload: request
-      });
-    });
-};
-
-export const rejectRequest = request => dispatch => {
-  http
-    .post('/user/privacy/sprfvs/reject', request)
-    .then(res => {
-      toast('You have reject request.');
-
-      dispatch({
-        type: REQUEST_REJECTED,
-        payload: request
-      });
     });
 };

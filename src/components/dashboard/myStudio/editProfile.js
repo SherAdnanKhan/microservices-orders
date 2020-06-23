@@ -41,14 +41,14 @@ const EditProfile = ({ myStudio }) => {
               <div className="faved-by-btn">
                 <img src="/assets/images/favers.png" alt="" />
                   Faved by
-                </div>
+              </div>
               {myStudio && <span>{myStudio.fav_by_count}</span>}
             </Link>
             <Link to="/dashboard/my-studio/fave">
               <div className="faved-by-btn">
                 <img src="/assets/images/faving.png" alt="" />
                   Faved
-                </div>
+              </div>
               {myStudio && <span>{myStudio.favs_count}</span>}
             </Link>
           </div>

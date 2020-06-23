@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 import Avatar from './common/avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFeelColor } from '../actions/colorActions';
@@ -12,7 +12,7 @@ const Welcome = ({ user: { avatars } }) => {
 
   const handleColorChange = color => {
     dispatch(changeFeelColor(color, () => history.push('/artSelection')));
-  }
+  };
 
   return (
     <div className="selectMood">
@@ -26,7 +26,8 @@ const Welcome = ({ user: { avatars } }) => {
       </div>
 
       <div className="welcomeText">
-        Hi Welcome<br />
+        Hi Welcome
+        <br />
         Second line
       </div>
 
@@ -34,25 +35,25 @@ const Welcome = ({ user: { avatars } }) => {
         <Link to="#">
           <img alt="" src="./assets/images/expressions/iconyellow.png" color="gold" onClick={e => handleColorChange(e.currentTarget.attributes.color.value)} />
         </Link>
-          Happy
+        Happy
       </div>
       <div className="confused">
         <Link to="#">
           <img alt="" src="./assets/images/expressions/icongray.png" color="gray" onClick={e => handleColorChange(e.currentTarget.attributes.color.value)} />
         </Link>
-         Confused
+        Confused
       </div>
       <div className="excited">
         <Link to="#">
           <img alt="" src="./assets/images/expressions/iconorange.png" color="orange" onClick={e => handleColorChange(e.currentTarget.attributes.color.value)} />
         </Link>
-          Excited
+        Excited
       </div>
       <div className="serene">
         <Link to="#">
           <img alt="" src="./assets/images/expressions/icongreen.png" color="limegreen" onClick={e => handleColorChange(e.currentTarget.attributes.color.value)} />
         </Link>
-          Serene
+        Serene
       </div>
       <div className="angry">
         <Link to="#">
@@ -70,7 +71,7 @@ const Welcome = ({ user: { avatars } }) => {
         <Link to="#">
           <img alt="" src="./assets/images/expressions/iconpurple.png" color="purple" onClick={e => handleColorChange(e.currentTarget.attributes.color.value)} />
         </Link>
-         Sad
+        Sad
       </div>
     </div>
   );

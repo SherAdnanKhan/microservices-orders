@@ -1,5 +1,5 @@
-import http from "../services/httpService"
-import { toast } from "react-toastify";
+import http from '../services/httpService';
+import { toast } from 'react-toastify';
 import {
   GET_CONVERSATION,
   UPDATE_CONVERSATION,
@@ -9,13 +9,12 @@ import {
   STOP_FILE_LOADER,
   READ_MESSAGE,
   READ_ALL
-} from "../constants/actionTypes";
+} from '../constants/actionTypes';
 
 export const getAllConversations = () => dispatch => {
   http
     .get('/chats')
     .then(res => {
-      console.log(res.data.data);
       localStorage.setItem('conversations', JSON.stringify(res.data.data.conversations));
 
       dispatch({
@@ -79,7 +78,7 @@ export const uploadImage = (image, onUpload, success, faliure) => dispatch => {
     .catch(err => {
       dispatch({ type: STOP_FILE_LOADER });
       faliure(err.response);
-      toast.error("Something failed while uploading");
+      toast.error('Something failed while uploading');
     });
 };
 
@@ -100,17 +99,13 @@ export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
     })
     .catch(err => {
       if (err.response.status === 400 || err.response.status === 404) {
-        toast.error("File is too large for upload.");
+        toast.error('File is too large for upload.');
       }
       dispatch({ type: STOP_FILE_LOADER });
-      faliure(err.response)
+      faliure(err.response);
     });
 };
 
-export const readMessage = data => {
-  return { type: READ_MESSAGE, payload: data };
-}
+export const readMessage = data => ({ type: READ_MESSAGE, payload: data });
 
-export const readAll = data => {
-  return { type: READ_ALL, payload: data };
-}
+export const readAll = data => ({ type: READ_ALL, payload: data });

@@ -2,7 +2,9 @@ import React, { useRef, useCallback, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
-const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl, onSkip }) => {
+const ImageCropper = ({
+  toggle, onToggle, onCompleteCrop, imageUrl, onSkip
+}) => {
   const imgRef = useRef(null);
   const [crop, setCrop] = useState({ unit: '%', aspect: 15 / 15 });
 
@@ -14,7 +16,7 @@ const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl, onSkip }) =>
     try {
       await makeClientCrop(crop);
     } catch (ex) {
-      console.log(ex.message)
+      console.log(ex.message);
     }
   };
 
@@ -49,11 +51,10 @@ const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl, onSkip }) =>
       crop.height
     );
 
-    return new Promise((resolve, reject) => {
-
+    return new Promise((resolve) => {
       canvas.toBlob(blob => {
         if (!blob) {
-          //reject(new Error('Canvas is empty'));
+          // reject(new Error('Canvas is empty'));
           console.error('Canvas is empty');
           return;
         }
@@ -66,26 +67,27 @@ const ImageCropper = ({ toggle, onToggle, onCompleteCrop, imageUrl, onSkip }) =>
 
   return (
     <>
-      {toggle &&
-        <div className="model">
-          <div className="model-image">
-            <ReactCrop
-              src={imageUrl}
-              crop={crop}
-              onImageLoaded={handleLoad}
-              onChange={newCrop => setCrop(newCrop)}
-              onComplete={newCrop => handleComplete(newCrop)}
-              ruleOfThirds
-            />
+      {toggle
+        && (
+          <div className="model">
+            <div className="model-image">
+              <ReactCrop
+                src={imageUrl}
+                crop={crop}
+                onImageLoaded={handleLoad}
+                onChange={newCrop => setCrop(newCrop)}
+                onComplete={newCrop => handleComplete(newCrop)}
+                ruleOfThirds
+              />
+            </div>
+            <div className="model-actions">
+              <button className="btn-done" onClick={() => onToggle(false)}> Done </button>
+              <button className="btn-done" onClick={() => onSkip(false)}> Skip cropping </button>
+            </div>
           </div>
-          <div className="model-actions">
-            <button className="btn-done" onClick={() => onToggle(false)}> Done </button>
-            <button className="btn-done" onClick={() => onSkip(false)}> Skip cropping </button>
-          </div>
-        </div>
-      }
+        )}
     </>
-  )
-}
+  );
+};
 
-export default ImageCropper
+export default ImageCropper;

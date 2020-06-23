@@ -1,7 +1,7 @@
-import http from "../services/httpService"
-import { userKey } from "../constants/keys";
+import http from '../services/httpService';
+import { userKey } from '../constants/keys';
 
-export const changeFeelColor = (color, callback) => dispatch => {
+export const changeFeelColor = (color, callback) => () => {
   http
     .put(`/users/feel-color?feel_color=${color}`)
     .then(res => {
