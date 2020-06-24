@@ -48,13 +48,18 @@ const ViewProfile = ({ myStudio }) => {
               <img src="/assets/images/paintbrush.png" alt="" />
             </div>
             <span className="labelText">Click edit Studio to add a bio.</span>
-            <input
+           <div>
+	  <textarea
+	      rows="4"
+	  cols="20"
+	  wrap="hard"
               type="text"
               name="username"
               id="addbio"
               value={bio}
               onChange={e => setBio(e.target.value)}
             />
+	  </div>
           </label>
           <div className="faved-btn">
             <Link to="#">
