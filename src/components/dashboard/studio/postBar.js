@@ -1,12 +1,25 @@
 import React from 'react';
 import Like from '../../common/like';
 
-const PostBar = ({ gallery, activeGallery, galleries, onPostLike, totalPosts }) => {
+const PostBar = ({
+  gallery, activeGallery,
+  onPostLike, totalPosts, galleryPrivacy
+}) => {
+  const isAllowed = () => {
+    if (!activeGallery) return false;
+    const found = galleryPrivacy?.find(g => g.gallery_id === activeGallery.id);
+    return found && found.is_allowed === 1 ? true : false;
+  };
+
   return (
     <div className="total-post">
       <div className="icon-side">
-        <i className="fas fa-square" />
-        <i className="fas fa-th" />
+        {activeGallery && isAllowed() &&
+          <>
+            <i className="fas fa-square" />
+            <i className="fas fa-th" />
+          </>
+        }
       </div>
       <div className="gallery">
         {!activeGallery &&
@@ -15,11 +28,13 @@ const PostBar = ({ gallery, activeGallery, galleries, onPostLike, totalPosts }) 
             <p>Total posts: {totalPosts}</p>
           </>
         }
-        {activeGallery && <p>Total Post: {activeGallery.posts.length}</p>}
+        {(activeGallery && isAllowed()) &&
+          <p>Total Post: {activeGallery.posts.length}</p>
+        }
       </div>
       <div className="heart-icon">
         {activeGallery &&
-          gallery &&
+          gallery && isAllowed() &&
           <Like
             faved={gallery.has_faved}
             onLike={onPostLike}

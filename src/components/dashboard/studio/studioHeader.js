@@ -11,12 +11,12 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
       </div>
       {userStudio && <p>{userStudio.user.username}</p>}
       <div className="actions">
-
-        <button
+        <img
           onClick={() => onModelOpen(true)}
-        >
-          Invite
-        </button>
+          src="/assets/images/invite_gallery_icon.png"
+          className="clickable fav-icon"
+          alt=""
+        />
       </div>
       <div className="heart">
         <img src="/assets/images/favebackoff.png" alt="" />

@@ -102,6 +102,7 @@ const Studio = () => {
         gallery={gallery}
         onPostLike={handleLike}
         totalPosts={userStudio && userStudio.user.posts_count}
+        galleryPrivacy={userStudio && userStudio.gallery_privacy}
       />
       <Post
         activeGallery={activeGallery}
