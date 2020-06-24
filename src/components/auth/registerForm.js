@@ -135,7 +135,7 @@ const RegisterForm = () => {
     e.preventDefault();
     const formData = new FormData();
 
-    if (croppedImage) {
+    if (!isEmpty(croppedImage)) {
       data.avatar = croppedImage;
     }
 
@@ -153,6 +153,7 @@ const RegisterForm = () => {
   };
 
   const handleToggle = value => {
+    console.log(croppedImage);
     setToggle(value);
   };
 
@@ -181,7 +182,7 @@ const RegisterForm = () => {
                   </div>
                   <h3>Join Meuzm</h3>
                   <p>
-                  Lets open your Studio up in a few easy steps
+                    Lets open your Studio up in a few easy steps
                   </p>
                 </div>
               )}
@@ -299,39 +300,39 @@ const RegisterForm = () => {
                     <button
                       className="btn"
                     >
-                    Create Studio
+                      Create Studio
                     </button>
                   </div>
                   {error
-                  && (
-                    <>
-                      <div className="error">
-                        {error.username && (
-                          <p>
-                            {' '}
+                    && (
+                      <>
+                        <div className="error">
+                          {error.username && (
+                            <p>
+                              {' '}
                         Artistname &#34;
-                            {data.username}
+                              {data.username}
                         &#34; already exist
-                          </p>
-                        )}
-                        {error.email && (
-                          <p>
-                            {' '}
+                            </p>
+                          )}
+                          {error.email && (
+                            <p>
+                              {' '}
                         Email &#34;
-                            {data.email}
+                              {data.email}
                         &#34; already exist
-                            {' '}
-                          </p>
-                        )}
-                        {error.avatar && (
-                          <p>
-                            {error.avatar}
-                            {' '}
-                          </p>
-                        )}
-                      </div>
-                    </>
-                  )}
+                              {' '}
+                            </p>
+                          )}
+                          {error.avatar && (
+                            <p>
+                              {error.avatar}
+                              {' '}
+                            </p>
+                          )}
+                        </div>
+                      </>
+                    )}
                 </div>
               )}
           </form>
@@ -342,7 +343,7 @@ const RegisterForm = () => {
                   className="btn"
                   onClick={handleNextPress}
                 >
-                Next
+                  Next
                 </button>
               </div>
             )}
