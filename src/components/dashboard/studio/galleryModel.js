@@ -16,22 +16,13 @@ const GalleryModel = ({ myGalleries, onModelClose, onChange, galleryInvitedList,
             <div key={index}>
               {(gallery.privacy && gallery.privacy.privacy_type_id === INVITE_ONLY) &&
                 <div className="gallery-row">
-                  <div className="gallery-item"> Gallery {index + 1} </div>
+                  <div className="gallery-item"> {gallery.title} </div>
                   <div className="actions">
-                    {hasInvited(gallery)
-                      ? (
-                        <input
-                          type="checkbox"
-                          disabled={hasInvited(gallery)}
-                          checked={true}
-                        />
-                      ) : (
-                        <input
-                          type="checkbox"
-                          onChange={e => onChange(e, gallery.id)}
-                        />
-                      )
-                    }
+                    <input
+                      type="checkbox"
+                      onChange={e => onChange(e, gallery.id)}
+                      checked={hasInvited(gallery)}
+                    />
                     <label>invite</label>
                   </div>
                 </div>

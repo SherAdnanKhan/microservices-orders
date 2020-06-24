@@ -8,6 +8,7 @@ import {
   FAV_GALLERY,
   UNFAV_GALLERY,
   ADD_TO_INVITE_ONLY,
+  REMOVE_FROM_INVITE_ONLY,
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
 } from "../constants/actionTypes";
@@ -98,6 +99,14 @@ export default (state = initialState, action) => {
         userStudio: {
           ...state.userStudio,
           is_sprfvs: action.payload
+        }
+      }
+    case REMOVE_FROM_INVITE_ONLY:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          gallery_invited_list: state.userStudio.gallery_invited_list.filter(id => id !== action.payload)
         }
       }
     case ADD_TO_INVITE_ONLY:

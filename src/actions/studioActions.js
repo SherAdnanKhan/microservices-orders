@@ -4,6 +4,7 @@ import {
   UPDATE_BIO,
   ADD_TO_SPRFVS,
   ADD_TO_INVITE_ONLY,
+  REMOVE_FROM_INVITE_ONLY,
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER
 } from '../constants/actionTypes';
@@ -83,6 +84,24 @@ export const addToInviteOnly = privacy => dispatch => {
       dispatch({ type: STOP_STUDIO_LOADER });
 
       toast('Invitation sent successfuly');
+    }).catch(() => {
+      dispatch({ type: STOP_STUDIO_LOADER });
+    });
+};
+
+export const removeFromInviteOnly = privacy => dispatch => {
+  dispatch({ type: START_STUDIO_LOADER });
+
+  http
+    .post('/user/privacy/uninvite-only', privacy)
+    .then(() => {
+      dispatch({
+        type: REMOVE_FROM_INVITE_ONLY,
+        payload: privacy.gallery_id
+      });
+      dispatch({ type: STOP_STUDIO_LOADER });
+
+      toast('Invitation revoked successfuly');
     }).catch(() => {
       dispatch({ type: STOP_STUDIO_LOADER });
     });

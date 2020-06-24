@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
-import { getUserStudio, addToSuperFavs, addToInviteOnly } from "../../../actions/studioActions";
+import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly } from "../../../actions/studioActions";
 import Gallery from "./galleries";
 import Post from '../../common/posts';
 import PostBar from './postBar';
@@ -58,14 +58,16 @@ const Studio = () => {
   };
 
   const handleChange = ({ target: input }, galleryId) => {
-    if (input.checked) {
-      const privacy = {
-        privacy_type_id: 4,
-        user_id: userStudio.user.id,
-        gallery_id: galleryId
-      };
+    const privacy = {
+      privacy_type_id: 4,
+      user_id: userStudio.user.id,
+      gallery_id: galleryId
+    };
+
+    if (input.checked)
       dispatch(addToInviteOnly(privacy));
-    }
+    else
+      dispatch(removeFromInviteOnly(privacy));
   };
 
   return (
