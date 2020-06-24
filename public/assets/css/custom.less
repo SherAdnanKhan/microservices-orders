@@ -2546,23 +2546,24 @@ img {
       width: 100%;
     }
     form {
-      margin-top: 30px;
+      margin-top: 10px;
       width: 100%;
       label {
         width: 70%;
-        text-align: left;
-        display: block;
-        margin: 0 auto 15px;
-        input {
-          width:500px;
-          max-width:700px;
+        text-align: center;
+        display: flex;
+        margin: 0 auto 25px;
+        div {
+          width:90%;
+          max-height:auto;
+	  white-space: pre-line;
           background: black;
           color: white;
-          padding: 15px 10px;
+          padding: 15px;
           font-size: 1em;
           border-radius: 5px;
-          border: 1px solid gray;
-          margin-top: 3px;
+          border: 1px solid rgba(@grayRGB ,.5);
+          margin-top: auto;
           
         }
       }
@@ -3000,27 +3001,29 @@ img {
     width: 100%;
   }
   form {
-    margin-top: 30px;
+    margin-top: 10px;
     width: 100%;
     label {
       width: 70%;
-      text-align: left;
+      text-align: center;
       display: block;
       margin: 0 auto 15px;
       background: #2d2d2d;
-      padding: 5px;
+      padding:15px ;
       border-radius: 5px;
       position: relative;
-      input {
-        width:500px;
-        max-width:700px;
+      textarea {
+        width:90%;
+        max-width:90%;
+	height:auto;
         background: black;
+	font-family: @fontFamily;
         color: white;
-        padding: 15px 10px;
+        padding:15px ;
         font-size: 1em;
         border-radius: 5px;
         border: 1px solid gray;
-        margin-top: 3px;
+        margin:auto;
         
       }
     }
