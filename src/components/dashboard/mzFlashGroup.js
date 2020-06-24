@@ -501,11 +501,11 @@ const MzFlashGroup = () => {
                   }
                 </div>
                 <div className="flex-container">
-                  <div className="actions">
-                    <Link to="#">Comment</Link>
+                  <div className="action">
+                    <button className="comment" to="#">Comment</button>
                   </div>
                   <div className="actions-repost">
-                    <Link to="#" onClick={e => handleRepost(e, feed)}>Repost</Link>
+                    <button className="repost" onClick={e => handleRepost(e, feed)}>Repost</button>
                   </div>
                 </div>
                 <input
