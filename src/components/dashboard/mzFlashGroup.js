@@ -401,9 +401,9 @@ const MzFlashGroup = () => {
                 error={error}
               />
               <br />
-              <span> ({charCount}/200)</span>
               <input className="clickable btn-send" type="submit" defaultValue="Submit" />
             </form>
+            <div class="counter"> ({charCount}/200)</div>
             {imageUrl &&
               <div className="image-preview">
                 <img alt="" src={imageUrl} />
@@ -482,10 +482,20 @@ const MzFlashGroup = () => {
                     </div>
                   }
                 </div>
-                <div className="actions">
-                  <Link to="">Comment</Link>
-                  <Link to="">Repost</Link>
+                <div class="flex-container">
+                  <div className="actions">
+                    <Link to="">Comment</Link>
+                  </div>
+                  <div className="actions-repost">
+                    <Link to="">Repost</Link>
+                  </div>
                 </div>
+                <input
+                  type="text"
+                  id="feed"
+                  name="feed"
+                  placeholder="Enter Comment..."
+                />
               </div>
             ))}
         </div>
