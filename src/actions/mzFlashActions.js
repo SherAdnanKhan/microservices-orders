@@ -23,7 +23,7 @@ export const createFeed = data => dispatch => {
       });
       dispatch({ type: STOP_FEEDS_LOADER });
     })
-    .catch(() => {
+    .catch((err) => {
       dispatch({ type: STOP_FEEDS_LOADER });
     });
 };

@@ -5,6 +5,8 @@ import UserCube from '../common/userCube';
 import { getFavourites, getFaveAndSprfvsUsers, getSprfvsUsers } from '../../actions/userActions';
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
+import Input from '../common/input';
+
 import {
   getCollectiveFeeds,
   createFeed,
@@ -21,6 +23,7 @@ const MzFlashGroup = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
 
+  const [error, setError] = useState('');
   const [data, setData] = useState({
     feed: '',
     video: null,
@@ -64,18 +67,34 @@ const MzFlashGroup = () => {
     }
   }
 
+  const validate = () => {
+    let error = '';
+
+    if (!data.feed) {
+      error = 'Please enter your feed';
+    }
+    return error;
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
 
+    const error = validate();
     const formData = new FormData();
 
-    for (let key in data) {
-      if (data[key]) {
-        formData.append(key, data[key]);
+    if (!error) {
+      for (let key in data) {
+        if (data[key]) {
+          formData.append(key, data[key]);
+        }
       }
+      dispatch(createFeed(formData));
+      setData({ ...data, image: null, video: null, feed: '' });
+      setImageUrl('');
+      setVideoUrl('');
+      setCharCount(0);
     }
-
-    dispatch(createFeed(formData));
+    setError(error);
   };
 
   return (
@@ -372,13 +391,14 @@ const MzFlashGroup = () => {
                 onClick={() => setShowModel(true)}
               >
               </i>
-              <input
+              <Input
                 type="text"
                 id="feed"
                 name="feed"
                 value={data.feed}
-                maxLength={200}
+                maxLength={10}
                 onChange={handleChange}
+                error={error}
               />
               <br />
               <span> ({charCount}/200)</span>
