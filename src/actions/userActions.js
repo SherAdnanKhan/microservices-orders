@@ -84,7 +84,7 @@ export const favUser = favedTo => dispatch => {
   dispatch({ type: FAV_USER, payload: true });
 
   http
-    .post('/favs', { favedTo })
+    .post('/favs', { faved_to: favedTo })
     .then()
     .catch(() => {
       dispatch({ type: UNFAV_USER, payload: false });

@@ -464,8 +464,8 @@ const MzFlashGroup = () => {
                 <div className="col-3">
                   {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
                   <Avatar
-                    avatars={currentUser.avatars}
-                    feelColor={currentUser.feel_color}
+                    avatars={feed.user.avatars}
+                    feelColor={feed.user.feel_color}
                   />
                 </div>
                 {feed.parent &&
