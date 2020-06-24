@@ -32,6 +32,7 @@ const MzFlashGroup = () => {
 
   const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
+
   const {
     user: { favouriteUsers, faveAndSprfvsUsers, sprfvsUsers },
     mzFlash: { collectiveFeeds, loading, favesFeeds, sprfvsFeeds, favesAndSprfvsFeeds }
@@ -40,7 +41,7 @@ const MzFlashGroup = () => {
   useEffect(() => {
     dispatch(getFavourites());
     dispatch(getFaveAndSprfvsUsers());
-    dispatch(getSprfvsUsers());
+    dispatch(getSprfvsUsers(3, 1));
     dispatch(getCollectiveFeeds());
     dispatch(getMySprfvsFeeds());
     dispatch(getMyFavesFeeds());
@@ -95,6 +96,16 @@ const MzFlashGroup = () => {
       setCharCount(0);
     }
     setError(error);
+  };
+
+  const handleRepost = (e, feed) => {
+    e.preventDefault();
+
+    const formData = {};
+    formData.feed_id = feed.id;
+    formData.feed = feed.feed;
+
+    dispatch(createFeed(formData));
   };
 
   return (
@@ -173,16 +184,16 @@ const MzFlashGroup = () => {
                     <div className='scenesmall white'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
-                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-backsmall">
-                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-leftsmall">
-                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-rightsmall">
-                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
+                          <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
                         </div>
                       </div>
                     </div>
@@ -396,14 +407,14 @@ const MzFlashGroup = () => {
                 id="feed"
                 name="feed"
                 value={data.feed}
-                maxLength={10}
+                maxLength={200}
                 onChange={handleChange}
                 error={error}
               />
               <br />
               <input className="clickable btn-send" type="submit" defaultValue="Submit" />
             </form>
-            <div class="counter"> ({charCount}/200)</div>
+            <div className="counter"> ({charCount}/200)</div>
             {imageUrl &&
               <div className="image-preview">
                 <img alt="" src={imageUrl} />
@@ -457,12 +468,19 @@ const MzFlashGroup = () => {
                     feelColor={currentUser.feel_color}
                   />
                 </div>
+                {feed.parent &&
+                  <div className="reposted-text">
+                    {feed.user.id === currentUser.id
+                      ? <> You have reposted this feed </>
+                      : <> {feed.user.username} hase reposted this feed </>
+                    }
+                  </div>
+                }
                 <div className="col-8">
-                  <span>Name</span>
-
+                  <span>{feed.user.username}</span>
                 </div>
-                <p class="submit-text">{feed.feed} </p>
-                <div class="imgvideo-mzflash">
+                <p className="submit-text">{feed.feed} </p>
+                <div className="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
                     feed.image &&
                     <img
@@ -482,12 +500,12 @@ const MzFlashGroup = () => {
                     </div>
                   }
                 </div>
-                <div class="flex-container">
+                <div className="flex-container">
                   <div className="actions">
-                    <Link to="">Comment</Link>
+                    <Link to="#">Comment</Link>
                   </div>
                   <div className="actions-repost">
-                    <Link to="">Repost</Link>
+                    <Link to="#" onClick={e => handleRepost(e, feed)}>Repost</Link>
                   </div>
                 </div>
                 <input
@@ -500,7 +518,7 @@ const MzFlashGroup = () => {
             ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 
