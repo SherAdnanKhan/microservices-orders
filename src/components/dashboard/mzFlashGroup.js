@@ -154,16 +154,16 @@ const MzFlashGroup = () => {
                     <div className='scenesmall white'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-backsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-leftsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-rightsmall">
-                          <img alt="" src="/assets/images/sprfvs.png" height="100%" />
+                          <img alt="" src="/assets/images/SPRFVFULL.png" height="100%" />
                         </div>
                       </div>
                     </div>
@@ -181,16 +181,16 @@ const MzFlashGroup = () => {
                     <div className='scenesmall white'>
                       <div className="cubesmallmove">
                         <div className="cube-facesmall  cube-face-frontsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-backsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-leftsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
                         </div>
                         <div className="cube-facesmall  cube-face-rightsmall">
-                          <img alt="" src="/assets/images/fave_icon.png" height="100%" />
+                          <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
                         </div>
                       </div>
                     </div>
