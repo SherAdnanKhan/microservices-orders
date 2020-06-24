@@ -266,9 +266,6 @@ const MzFlashGroup = () => {
                             </div>
                           }
                         </div>
-                        <div className="col-2">
-                          <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -312,9 +309,6 @@ const MzFlashGroup = () => {
                               </video>
                             </div>
                           }
-                        </div>
-                        <div className="col-2">
-                          <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                         </div>
                       </div>
                     </div>
@@ -360,9 +354,6 @@ const MzFlashGroup = () => {
                           }
                           <div id="outer">
                           </div>
-                        </div>
-                        <div className="col-2">
-                          <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
                         </div>
                       </div>
                     </div>
@@ -446,14 +437,12 @@ const MzFlashGroup = () => {
                     feelColor={currentUser.feel_color}
                   />
                 </div>
-                <div className="col-7">
+                <div className="col-8">
                   <span>Name</span>
 
-                  <p>{feed.feed} </p>
                 </div>
-
-                <div className="col-2">
-                  <span className="name-btn BT-2"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></span>
+                <p class="submit-text">{feed.feed} </p>
+                <div class="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
                     feed.image &&
                     <img
@@ -472,6 +461,10 @@ const MzFlashGroup = () => {
                       </video>
                     </div>
                   }
+                </div>
+                <div className="actions">
+                  <Link to="">Comment</Link>
+                  <Link to="">Repost</Link>
                 </div>
               </div>
             ))}
