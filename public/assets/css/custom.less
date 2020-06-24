@@ -5263,12 +5263,12 @@ img {
     float: left;
     padding: 0 0px;
     width: 66.66666667%;
-    padding:20px 0px;
   }
   .col-9 {
     float: left;
     padding: 0 0px;
     width: 75%;
+    padding:20px 0px;
   }
   .col-10 {
     float: left;
@@ -5314,7 +5314,7 @@ img {
     input[type="text"] {
       display: block;
       border: 1px solid #444;
-      width: 72%;
+      width: 99%;
       margin: 0 auto;
       padding: 10px;
       box-sizing: border-box;
@@ -5348,14 +5348,16 @@ img {
     }
     .flex-container{
       display:flex;
-      justify-content: space-between;
-      .actions{
+      border: 1px solid;
+      padding: 8px;
+      margin: 5px;
+      .action{
         width: 50px;
         margin: 10px;
         text-align: center;
         line-height: 30px;
-        a{
-          color:white;
+        .comment{
+          padding:6px
         }
       }
       .actions-repost{
@@ -5363,8 +5365,9 @@ img {
         margin: 10px;
         text-align: center;
         line-height: 30px;
-        a{
-          color:white;
+        .repost{
+          padding:6px;
+          margin-left:10px;
         }
       }
     }

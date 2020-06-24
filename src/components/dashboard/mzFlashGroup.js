@@ -457,7 +457,7 @@ const MzFlashGroup = () => {
                     feelColor={currentUser.feel_color}
                   />
                 </div>
-                <div className="col-8">
+                <div className="col-9">
                   <span>Name</span>
 
                 </div>
@@ -483,11 +483,11 @@ const MzFlashGroup = () => {
                   }
                 </div>
                 <div class="flex-container">
-                  <div className="actions">
-                    <Link to="">Comment</Link>
+                  <div className="action">
+                    <button className="comment">Comment</button>
                   </div>
                   <div className="actions-repost">
-                    <Link to="">Repost</Link>
+                    <button className="repost">Repost</button>
                   </div>
                 </div>
                 <input
