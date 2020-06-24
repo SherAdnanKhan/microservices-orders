@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
         ...state,
         collectiveFeeds: {
           ...state.collectiveFeeds,
-          data: [...state.collectiveFeeds.data, action.payload]
+          data: [action.payload, ...state.collectiveFeeds.data]
         }
       };
     case FAVES_FEEDS:
