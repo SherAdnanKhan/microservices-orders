@@ -45,7 +45,7 @@ const Main = () => {
       case 'mz-flash':
         return import('./mzFlash');
       case 'mz-flash-group':
-        return import('./mzFlashGroup');
+        return import('./mzFlashGroup/mzFlashGroup');
       case 'viewpost':
         return import('./viewPost/viewPost');
       case 'privacy':
