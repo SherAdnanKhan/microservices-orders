@@ -275,6 +275,7 @@ const RegisterForm = () => {
                     onToggle={handleToggle}
                     onSkip={handleSkip}
                     onCompleteCrop={handleCompleteCrop}
+                    croppedImage={croppedImage}
                   />
                   <Input
                     type="file"
