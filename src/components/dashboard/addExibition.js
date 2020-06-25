@@ -14,7 +14,7 @@ const AddExibit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const listCategory = useSelector(({ exibition }) => exibition.ListOfArts && exibition.ListOfArts.data.arts);
+  const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
   const { loading } = useSelector(state => state.loading);
   const {
     gallery: { myGalleries },

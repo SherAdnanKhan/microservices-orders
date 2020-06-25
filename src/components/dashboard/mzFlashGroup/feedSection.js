@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser }) => {
   const dispatch = useDispatch();
 
+  const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [charCount, setCharCount] = useState(0);
@@ -44,7 +45,7 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
   };
 
   const handleEnter = (e, feedId) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && comment[feedId]) {
       const commentData = {
         feed_id: feedId,
         comment: comment[feedId]
@@ -214,12 +215,26 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
                 </button>
               </div>
             </div>
-            <div class="view-comment">
-              <Link to="">View Comment</Link>
-              <p>Salwa M is a frontend developer</p>
-              <p>Salwa M is a frontend developer</p>
-              <p>Salwa M is a frontend developer</p>
-              <p>salwa m is a frontend developer</p>
+            <div className="view-comment">
+              <Link
+                to="#"
+                onClick={e => {
+                  e.preventDefault();
+                  if (feed.id === activeFeedComment)
+                    setActiveFeedComment(0);
+                  else
+                    setActiveFeedComment(feed.id);
+                }}
+              >
+                View Comments
+                </Link>
+              {activeFeedComment === feed.id &&
+                <>
+                  {feed.limited_comments.map((comment, index) => (
+                    <p key={index}> {comment.comment} </p>
+                  ))}
+                </>
+              }
             </div>
             <input
               type="text"

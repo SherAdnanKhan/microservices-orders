@@ -8,7 +8,8 @@ import {
   FAVES_FEEDS,
   SPRFVS_FEEDS,
   FAVES_AND_SPRFVS_FEEDS,
-  GET_COLLECTIVE_FEEDS
+  GET_COLLECTIVE_FEEDS,
+  CREATE_FEED_COMMENT
 } from '../constants/actionTypes';
 import { toast } from 'react-toastify';
 
@@ -24,7 +25,7 @@ export const createFeed = data => dispatch => {
       });
       dispatch({ type: STOP_FEEDS_LOADER });
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: STOP_FEEDS_LOADER });
     });
 };
@@ -98,7 +99,11 @@ export const getMySprfvsAndFavesFeeds = () => dispatch => {
 export const createFeedComment = data => dispatch => {
   http
     .post('/mzflash/feed/comment', data)
-    .then(() => {
+    .then(res => {
+      dispatch({
+        type: CREATE_FEED_COMMENT,
+        payload: res.data.data.feed_comment
+      });
       toast('Comment has been created.');
     });
 };

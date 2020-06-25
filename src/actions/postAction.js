@@ -20,7 +20,7 @@ export const makeStoke = postId => dispatch => {
   dispatch({ type: STROKE_POST, payload: true });
 
   http
-    .post('/post/stroke', { postId })
+    .post('/post/stroke', { post_id: postId })
     .then()
     .catch(() => {
       dispatch({ type: UNSTROKE_POST, payload: false });
@@ -31,7 +31,7 @@ export const unStoke = (postId) => dispatch => {
   dispatch({ type: UNSTROKE_POST, payload: false });
 
   http
-    .post('/post/unstroke', { postId })
+    .post('/post/unstroke', { post_id: postId })
     .then()
     .catch(() => {
       dispatch({ type: STROKE_POST, payload: true });
