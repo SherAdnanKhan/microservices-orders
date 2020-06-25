@@ -164,6 +164,7 @@ const Profile = () => {
                   onToggle={(value) => setToggle(value)}
                   onCompleteCrop={handleCompleteCrop}
                   onSkip={handleSkip}
+                  croppedImage={croppedImage}
                 />
                 {!croppedImage
                   ? (

@@ -105,9 +105,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
 
   return (
     <div className="gallery-form">
-      {loading && <Spinner />
-      }
-
+      {loading && <Spinner />}
       <div className="update-image">
         <i className="fas fa-window-close" onClick={() => onModelClose(false)}></i>
         <ImageCropper
@@ -116,6 +114,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
           onToggle={handleToggle}
           onSkip={handleSkip}
           onCompleteCrop={handleCompleteCrop}
+          croppedImage={croppedImage}
         />
         <form onSubmit={handleSubmit}>
           <div className="up-img-box">
