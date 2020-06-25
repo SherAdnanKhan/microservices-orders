@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import Avatar from '../../common/avatar';
 import Input from '../../common/input';
 import { useDispatch } from 'react-redux';
-import { createFeed, createFeedComment } from '../../../actions/mzFlashActions';
+import { createFeed } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
 
-const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser }) => {
+const FeedSection = ({
+  collectiveFeeds, onModelChange, showModel,
+  currentUser, onCommentChange, onActiveFeedComment,
+  activeFeedComment, comments, onPostComment
+}) => {
+
   const dispatch = useDispatch();
 
-  const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [charCount, setCharCount] = useState(0);
@@ -18,7 +22,6 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
     video: null,
     image: null
   });
-  const [comment, setComment] = useState({})
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file') {
@@ -40,20 +43,8 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
     }
   };
 
-  const handleCommentChange = ({ target: input }) => {
-    setComment({ ...comment, [input.name]: input.value });
-  };
 
-  const handleEnter = (e, feedId) => {
-    if (e.keyCode === 13 && comment[feedId]) {
-      const commentData = {
-        feed_id: feedId,
-        comment: comment[feedId]
-      };
-      dispatch(createFeedComment(commentData));
-      setComment({ ...comment, [feedId]: '' });
-    }
-  }
+
 
   const validate = () => {
     let error = '';
@@ -128,8 +119,8 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
             <video controls>
               <source src={videoUrl} type="video/mp4" />
               <source src={videoUrl} type="video/ogg" />
-            Your browser does not support the video tag.
-        </video>
+              Your browser does not support the video tag.
+            </video>
           </div>
         }
         {showModel &&
@@ -140,8 +131,8 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
             />
             <label>
               <img alt="" src="/assets/images/plus.png" />
-            Add Image
-            <input
+              Add Image
+              <input
                 type="file"
                 name="image"
                 accept="image/*"
@@ -150,8 +141,8 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
             </label>
             <label>
               <img alt="" src="/assets/images/plus.png" />
-            Add Video
-            <input
+              Add Video
+              <input
                 type="file"
                 name="video"
                 accept=".mp4"
@@ -197,7 +188,7 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
                   <video controls>
                     <source src={feed.image.path} type="video/mp4" />
                     <source src={feed.image.path} type="video/ogg" />
-                  Your browser does not support the video tag.
+                    Your browser does not support the video tag.
                 </video>
                 </div>
               }
@@ -216,18 +207,14 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
               </div>
             </div>
             <div className="view-comment">
-              <Link
-                to="#"
-                onClick={e => {
-                  e.preventDefault();
-                  if (feed.id === activeFeedComment)
-                    setActiveFeedComment(0);
-                  else
-                    setActiveFeedComment(feed.id);
-                }}
-              >
-                View Comments
+              {feed.limited_comments.length > 0 &&
+                <Link
+                  to="#"
+                  onClick={e => onActiveFeedComment(e, feed.id)}
+                >
+                  View Comments
                 </Link>
+              }
               {activeFeedComment === feed.id &&
                 <>
                   {feed.limited_comments.map((comment, index) => (
@@ -240,10 +227,10 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
               type="text"
               id={feed.id}
               name={feed.id}
-              value={comment[feed.id] ? comment[feed.id] : ''}
+              value={comments[feed.id] ? comments[feed.id] : ''}
               placeholder="Enter a Comment..."
-              onChange={handleCommentChange}
-              onKeyUp={e => handleEnter(e, feed.id)}
+              onChange={onCommentChange}
+              onKeyUp={e => onPostComment(e, feed.id)}
             />
           </div>
         ))}
