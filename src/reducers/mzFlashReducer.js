@@ -61,6 +61,45 @@ export default (state = initialState, action) => {
               return feed
             }
           })
+        },
+        sprfvsFeeds: {
+          ...state.sprfvsFeeds,
+          data: state.sprfvsFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+              }
+            } else {
+              return feed
+            }
+          })
+        },
+        favesFeeds: {
+          ...state.favesFeeds,
+          data: state.favesFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+              }
+            } else {
+              return feed
+            }
+          })
+        },
+        favesAndSprfvsFeeds: {
+          ...state.favesAndSprfvsFeeds,
+          data: state.favesAndSprfvsFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+              }
+            } else {
+              return feed
+            }
+          })
         }
       };
     case FAVES_FEEDS:

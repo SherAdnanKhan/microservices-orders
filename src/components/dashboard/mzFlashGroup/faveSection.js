@@ -6,7 +6,7 @@ const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds,
   activeTab, onTabChange, onCommentChange,
   activeFeedComment, onActiveFeedComment, onPostComment,
-  comments
+  comments, onRepost
 }) => {
   return (
     <div className="col-6 box-2 tab">
@@ -140,7 +140,7 @@ const FaveSection = ({
                       <div className="actions-repost">
                         <button
                           className="repost"
-                        // onClick={e => handleRepost(e, feed)}
+                          onClick={e => onRepost(e, feed)}
                         >
                           Repost
                         </button>
@@ -165,12 +165,12 @@ const FaveSection = ({
                     </div>
                     <input
                       type="text"
-                      id={feed.id}
-                      name={feed.id}
-                      value={comments[feed.id] ? comments[feed.id] : ''}
+                      id={`fav${feed.id}`}
+                      name={`fav${feed.id}`}
+                      value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
                       placeholder="Enter a Comment..."
                       onChange={onCommentChange}
-                      onKeyUp={e => onPostComment(e, feed.id)}
+                      onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
                     />
                   </div>
                 </div>
@@ -188,7 +188,6 @@ const FaveSection = ({
                 >
                   <div className="row">
                     <div className="col-3">
-                      {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
                       <Avatar
                         avatars={feed.user.avatars}
                         feelColor={feed.user.feel_color}
@@ -223,7 +222,7 @@ const FaveSection = ({
                       <div className="actions-repost">
                         <button
                           className="repost"
-                        // onClick={e => handleRepost(e, feed)}
+                          onClick={e => onRepost(e, feed)}
                         >
                           Repost
                         </button>
@@ -248,12 +247,12 @@ const FaveSection = ({
                     </div>
                     <input
                       type="text"
-                      id={feed.id}
-                      name={feed.id}
-                      value={comments[feed.id] ? comments[feed.id] : ''}
+                      id={`fav${feed.id}`}
+                      name={`fav${feed.id}`}
+                      value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
                       placeholder="Enter a Comment..."
                       onChange={onCommentChange}
-                      onKeyUp={e => onPostComment(e, feed.id)}
+                      onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
                     />
                   </div>
                 </div>
@@ -305,7 +304,7 @@ const FaveSection = ({
                       <div className="actions-repost">
                         <button
                           className="repost"
-                        // onClick={e => handleRepost(e, feed)}
+                          onClick={e => onRepost(e, feed)}
                         >
                           Repost
                         </button>
@@ -330,12 +329,12 @@ const FaveSection = ({
                     </div>
                     <input
                       type="text"
-                      id={feed.id}
-                      name={feed.id}
-                      value={comments[feed.id] ? comments[feed.id] : ''}
+                      id={`fav${feed.id}`}
+                      name={`fav${feed.id}`}
+                      value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
                       placeholder="Enter a Comment..."
                       onChange={onCommentChange}
-                      onKeyUp={e => onPostComment(e, feed.id)}
+                      onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
                     />
                   </div>
                 </div>

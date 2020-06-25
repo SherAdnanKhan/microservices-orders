@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
   currentUser, onCommentChange, onActiveFeedComment,
-  activeFeedComment, comments, onPostComment
+  activeFeedComment, comments, onPostComment, onRepost
 }) => {
 
   const dispatch = useDispatch();
@@ -74,16 +74,6 @@ const FeedSection = ({
       setCharCount(0);
     }
     setError(error);
-  };
-
-  const handleRepost = (e, feed) => {
-    e.preventDefault();
-
-    const formData = {};
-    formData.feed_id = feed.id;
-    formData.feed = feed.feed;
-
-    dispatch(createFeed(formData));
   };
 
   return (
@@ -200,7 +190,7 @@ const FeedSection = ({
               <div className="actions-repost">
                 <button
                   className="repost"
-                  onClick={e => handleRepost(e, feed)}
+                  onClick={e => onRepost(e, feed)}
                 >
                   Repost
                 </button>
@@ -225,12 +215,12 @@ const FeedSection = ({
             </div>
             <input
               type="text"
-              id={feed.id}
-              name={feed.id}
-              value={comments[feed.id] ? comments[feed.id] : ''}
+              id={`feed${feed.id}`}
+              name={`feed${feed.id}`}
+              value={comments[`feed${feed.id}`] ? comments[`feed${feed.id}`] : ''}
               placeholder="Enter a Comment..."
               onChange={onCommentChange}
-              onKeyUp={e => onPostComment(e, feed.id)}
+              onKeyUp={e => onPostComment(e, feed.id, `feed${feed.id}`)}
             />
           </div>
         ))}
