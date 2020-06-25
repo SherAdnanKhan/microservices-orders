@@ -1,9 +1,12 @@
 import React from 'react';
 import Avatar from '../../common/avatar';
+import { Link } from 'react-router-dom';
 
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds,
-  activeTab, onTabChange
+  activeTab, onTabChange, onCommentChange,
+  activeFeedComment, onActiveFeedComment, onPostComment,
+  comments
 }) => {
   return (
     <div className="col-6 box-2 tab">
@@ -125,11 +128,50 @@ const FaveSection = ({
                           <video controls>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
-                                Your browser does not support the video tag.
-                              </video>
+                              Your browser does not support the video tag.
+                          </video>
                         </div>
                       }
                     </div>
+                    <div className="flex-container">
+                      <div className="action">
+                        <button className="comment" to="#">Comment</button>
+                      </div>
+                      <div className="actions-repost">
+                        <button
+                          className="repost"
+                        // onClick={e => handleRepost(e, feed)}
+                        >
+                          Repost
+                        </button>
+                      </div>
+                    </div>
+                    <div className="view-comment">
+                      {feed.limited_comments.length > 0 &&
+                        <Link
+                          to="#"
+                          onClick={e => onActiveFeedComment(e, feed.id)}
+                        >
+                          View Comments
+                        </Link>
+                      }
+                      {activeFeedComment === feed.id &&
+                        <>
+                          {feed.limited_comments.map((comment, index) => (
+                            <p key={index}> {comment.comment} </p>
+                          ))}
+                        </>
+                      }
+                    </div>
+                    <input
+                      type="text"
+                      id={feed.id}
+                      name={feed.id}
+                      value={comments[feed.id] ? comments[feed.id] : ''}
+                      placeholder="Enter a Comment..."
+                      onChange={onCommentChange}
+                      onKeyUp={e => onPostComment(e, feed.id)}
+                    />
                   </div>
                 </div>
               ))}
@@ -174,6 +216,45 @@ const FaveSection = ({
                         </div>
                       }
                     </div>
+                    <div className="flex-container">
+                      <div className="action">
+                        <button className="comment" to="#">Comment</button>
+                      </div>
+                      <div className="actions-repost">
+                        <button
+                          className="repost"
+                        // onClick={e => handleRepost(e, feed)}
+                        >
+                          Repost
+                        </button>
+                      </div>
+                    </div>
+                    <div className="view-comment">
+                      {feed.limited_comments.length > 0 &&
+                        <Link
+                          to="#"
+                          onClick={e => onActiveFeedComment(e, feed.id)}
+                        >
+                          View Comments
+                        </Link>
+                      }
+                      {activeFeedComment === feed.id &&
+                        <>
+                          {feed.limited_comments.map((comment, index) => (
+                            <p key={index}> {comment.comment} </p>
+                          ))}
+                        </>
+                      }
+                    </div>
+                    <input
+                      type="text"
+                      id={feed.id}
+                      name={feed.id}
+                      value={comments[feed.id] ? comments[feed.id] : ''}
+                      placeholder="Enter a Comment..."
+                      onChange={onCommentChange}
+                      onKeyUp={e => onPostComment(e, feed.id)}
+                    />
                   </div>
                 </div>
               ))}
@@ -216,9 +297,46 @@ const FaveSection = ({
                               </video>
                         </div>
                       }
-                      <div id="outer">
+                    </div>
+                    <div className="flex-container">
+                      <div className="action">
+                        <button className="comment" to="#">Comment</button>
+                      </div>
+                      <div className="actions-repost">
+                        <button
+                          className="repost"
+                        // onClick={e => handleRepost(e, feed)}
+                        >
+                          Repost
+                        </button>
                       </div>
                     </div>
+                    <div className="view-comment">
+                      {feed.limited_comments.length > 0 &&
+                        <Link
+                          to="#"
+                          onClick={e => onActiveFeedComment(e, feed.id)}
+                        >
+                          View Comments
+                        </Link>
+                      }
+                      {activeFeedComment === feed.id &&
+                        <>
+                          {feed.limited_comments.map((comment, index) => (
+                            <p key={index}> {comment.comment} </p>
+                          ))}
+                        </>
+                      }
+                    </div>
+                    <input
+                      type="text"
+                      id={feed.id}
+                      name={feed.id}
+                      value={comments[feed.id] ? comments[feed.id] : ''}
+                      placeholder="Enter a Comment..."
+                      onChange={onCommentChange}
+                      onKeyUp={e => onPostComment(e, feed.id)}
+                    />
                   </div>
                 </div>
               ))}

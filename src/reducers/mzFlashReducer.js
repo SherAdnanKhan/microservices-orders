@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                limited_comments: [...feed.limited_comments, action.payload]
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
               }
             } else {
               return feed
