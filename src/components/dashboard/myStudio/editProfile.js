@@ -25,19 +25,10 @@ const EditProfile = ({ myStudio }) => {
             </span>
           </div>
         }
-        <form method="post" action="login.php">
+        <form>
           <label htmlFor="addbio" className="addbio-input">
             <span className="labelText"></span>
-            <div
-              type="text"
-              name="username"
-              id="addbio"
-	  placeholder="hi"
-              value={myStudio && myStudio.user.bio ? myStudio.user.bio : ''}
-              disabled
-            >
-	  {myStudio && myStudio.user.bio ? myStudio.user.bio : ''}
-             </div>
+            <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
           </label>
           <div className="faved-btn">
             <Link to='/dashboard/my-studio/fave-by'>

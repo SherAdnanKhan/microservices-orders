@@ -17,8 +17,8 @@ const ViewProfile = ({ myStudio }) => {
   }, [myStudio]);
 
   const handleSave = () => {
-    console.log(bio);
-    dispatch(updateBio(bio));
+    let my_bio = bio.replace(/\n/g, '<br/>');
+    dispatch(updateBio(my_bio));
   }
 
   return (
@@ -48,18 +48,18 @@ const ViewProfile = ({ myStudio }) => {
               <img src="/assets/images/paintbrush.png" alt="" />
             </div>
             <span className="labelText">Click edit Studio to add a bio.</span>
-           <div>
-	  <textarea
-	      rows="4"
-	  cols="20"
-	  wrap="hard"
-              type="text"
-              name="username"
-              id="addbio"
-              value={bio}
-              onChange={e => setBio(e.target.value)}
-            />
-	  </div>
+            <div>
+              <textarea
+                rows="4"
+                cols="20"
+                wrap="hard"
+                type="text"
+                name="username"
+                id="addbio"
+                value={bio.replace(/<br\s*\/?>/g, '\n')}
+                onChange={e => setBio(e.target.value)}
+              />
+            </div>
           </label>
           <div className="faved-btn">
             <Link to="#">
