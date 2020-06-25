@@ -216,10 +216,10 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
             </div>
             <div class="view-comment">
               <Link to="">View Comment</Link>
-              <p>saqlain is a frontend developer</p>
-              <p>saqlain is a frontend developer</p>
-              <p>saqlain is a frontend developer</p>
-              <p>saqlain is a frontend developer</p>
+              <p>Salwa M is a frontend developer</p>
+              <p>Salwa M is a frontend developer</p>
+              <p>Salwa M is a frontend developer</p>
+              <p>salwa m is a frontend developer</p>
             </div>
             <input
               type="text"
