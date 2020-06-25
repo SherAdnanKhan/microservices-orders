@@ -18,16 +18,16 @@ const FaveSection = ({
                 <div className='scenesmall white'>
                   <div className="cubesmallmove">
                     <div className="cube-facesmall  cube-face-frontsmall">
-                      <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
+                      <img alt="" src="/assets/images/sprfvs_empty.png" height="100%" />
                     </div>
                     <div className="cube-facesmall  cube-face-backsmall">
-                      <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
+                      <img alt="" src="/assets/images/sprfvs_empty.png" height="100%" />
                     </div>
                     <div className="cube-facesmall  cube-face-leftsmall">
-                      <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
+                      <img alt="" src="/assets/images/sprfvs_empty.png" height="100%" />
                     </div>
                     <div className="cube-facesmall  cube-face-rightsmall">
-                      <img alt="" src="/assets/images/sprfvs_full.png" height="100%" />
+                      <img alt="" src="/assets/images/sprfvs_empty.png" height="100%" />
                     </div>
                   </div>
                 </div>
@@ -45,16 +45,16 @@ const FaveSection = ({
                 <div className='scenesmall white'>
                   <div className="cubesmallmove">
                     <div className="cube-facesmall  cube-face-frontsmall">
-                      <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
+                      <img alt="" src="/assets/images/fave_gallery_empty.png" height="100%" />
                     </div>
                     <div className="cube-facesmall  cube-face-backsmall">
-                      <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
+                      <img alt="" src="/assets/images/fave_gallery_empty.png" height="100%" />
                     </div>
                     <div className="cube-facesmall  cube-face-leftsmall">
-                      <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
+                      <img alt="" src="/assets/images/fave_gallery_empty.png" height="100%" />
                     </div>
                     <div className="cube-facesmall  cube-face-rightsmall">
-                      <img alt="" src="/assets/images/FaveGalleryFull.png" height="100%" />
+                      <img alt="" src="/assets/images/fave_gallery_empty.png" height="100%" />
                     </div>
                   </div>
                 </div>

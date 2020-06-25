@@ -7,7 +7,8 @@ import {
   FAVES_FEEDS,
   SPRFVS_FEEDS,
   FAVES_AND_SPRFVS_FEEDS,
-  GET_COLLECTIVE_FEEDS
+  GET_COLLECTIVE_FEEDS,
+  CREATE_FEED_COMMENT,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -28,7 +29,6 @@ export default (state = initialState, action) => {
         myFeeds: action.payload
       };
     case GET_COLLECTIVE_FEEDS:
-      console.log(action);
       return {
         ...state,
         collectiveFeeds: action.payload
@@ -44,6 +44,23 @@ export default (state = initialState, action) => {
         collectiveFeeds: {
           ...state.collectiveFeeds,
           data: [action.payload, ...state.collectiveFeeds.data]
+        }
+      };
+    case CREATE_FEED_COMMENT:
+      return {
+        ...state,
+        collectiveFeeds: {
+          ...state.collectiveFeeds,
+          data: state.collectiveFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                limited_comments: [...feed.limited_comments, action.payload]
+              }
+            } else {
+              return feed
+            }
+          })
         }
       };
     case FAVES_FEEDS:
