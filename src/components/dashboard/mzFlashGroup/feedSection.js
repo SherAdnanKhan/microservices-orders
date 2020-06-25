@@ -3,6 +3,7 @@ import Avatar from '../../common/avatar';
 import Input from '../../common/input';
 import { useDispatch } from 'react-redux';
 import { createFeed, createFeedComment } from '../../../actions/mzFlashActions';
+import { Link } from 'react-router-dom';
 
 const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser }) => {
   const dispatch = useDispatch();
@@ -162,12 +163,6 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
       {collectiveFeeds &&
         collectiveFeeds.data.map((feed, index) => (
           <div className=" sub-box row set-sources" key={index}>
-            <div className="col-3">
-              <Avatar
-                avatars={feed.user.avatars}
-                feelColor={feed.user.feel_color}
-              />
-            </div>
             {feed.parent &&
               <div className="reposted-text">
                 {feed.user.id === currentUser.id
@@ -176,6 +171,12 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
                 }
               </div>
             }
+            <div className="col-3">
+              <Avatar
+                avatars={feed.user.avatars}
+                feelColor={feed.user.feel_color}
+              />
+            </div>
             <div className="col-8">
               <span>{feed.user.username}</span>
             </div>
@@ -212,6 +213,13 @@ const FeedSection = ({ collectiveFeeds, onModelChange, showModel, currentUser })
                   Repost
                 </button>
               </div>
+            </div>
+            <div class="view-comment">
+              <Link to="">View Comment</Link>
+              <p>saqlain is a frontend developer</p>
+              <p>saqlain is a frontend developer</p>
+              <p>saqlain is a frontend developer</p>
+              <p>saqlain is a frontend developer</p>
             </div>
             <input
               type="text"
