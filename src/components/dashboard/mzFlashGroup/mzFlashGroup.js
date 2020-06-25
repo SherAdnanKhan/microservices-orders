@@ -2,19 +2,18 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites, getFaveAndSprfvsUsers, getSprfvsUsers } from '../../../actions/userActions';
 import UserContext from '../../../context/userContext';
-
-
+import Spinner from '../../common/spinner';
+import UserSection from './userSection';
+import FaveSection from './faveSection';
+import FeedSection from './feedSection';
 import {
   getCollectiveFeeds,
   getMyFavesFeeds,
   getMySprfvsFeeds,
   getMySprfvsAndFavesFeeds,
-  createFeedComment
+  createFeedComment,
+  createFeed
 } from '../../../actions/mzFlashActions';
-import Spinner from '../../common/spinner';
-import UserSection from './userSection';
-import FaveSection from './faveSection';
-import FeedSection from './feedSection';
 
 const MzFlashGroup = () => {
   const [activeTab, setActiveTab] = useState(2);
@@ -41,19 +40,20 @@ const MzFlashGroup = () => {
     dispatch(getMySprfvsAndFavesFeeds());
   }, [dispatch]);
 
-  const handleEnter = (e, feedId) => {
-    if (e.keyCode === 13 && comments[feedId]) {
+  const handleEnter = (e, feedId, comment) => {
+    if (e.keyCode === 13 && comments[comment]) {
       const commentData = {
         feed_id: feedId,
-        comment: comments[feedId]
+        comment: comments[comment]
       };
       dispatch(createFeedComment(commentData));
-      setComments({ ...comments, [feedId]: '' });
+      setComments({ ...comments, [comment]: '' });
     }
   };
 
   const handleCommentChange = ({ target: input }) => {
     setComments({ ...comments, [input.name]: input.value });
+    console.log(comments)
   };
 
   const handleActiveFeedComment = (e, feedId) => {
@@ -63,6 +63,16 @@ const MzFlashGroup = () => {
     else
       setActiveFeedComment(feedId);
   }
+
+  const handleRepost = (e, feed) => {
+    e.preventDefault();
+
+    const formData = {};
+    formData.feed_id = feed.id;
+    formData.feed = feed.feed;
+
+    dispatch(createFeed(formData));
+  };
 
   return (
     <section className="mz-flash-group">
@@ -85,6 +95,7 @@ const MzFlashGroup = () => {
           onCommentChange={handleCommentChange}
           comments={comments}
           onPostComment={handleEnter}
+          onRepost={handleRepost}
         />
         <FeedSection
           collectiveFeeds={collectiveFeeds}
@@ -96,6 +107,7 @@ const MzFlashGroup = () => {
           onCommentChange={handleCommentChange}
           comments={comments}
           onPostComment={handleEnter}
+          onRepost={handleRepost}
         />
       </div>
     </section >
