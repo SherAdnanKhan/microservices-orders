@@ -5174,7 +5174,7 @@ img {
     background: #000;
     width: 66%;
     height: 80%;
-    z-index: 9;
+    z-index: 10;
     justify-content: center;
     align-items: center;
     .close-add-box{
@@ -5346,10 +5346,15 @@ img {
     .imgvideo-mzflash{
       text-align: center;
     }
+    .view-comment{
+      margin:5px;
+      a{
+        color:white;
+      }
+    }
     .flex-container{
       display:flex;
       border: 1px solid;
-      padding: 8px;
       margin: 5px;
       .action{
         width: 50px;
@@ -5357,7 +5362,7 @@ img {
         text-align: center;
         line-height: 30px;
         .comment{
-          padding:6px
+          // padding:6px
         }
       }
       .actions-repost{
@@ -5366,13 +5371,16 @@ img {
         text-align: center;
         line-height: 30px;
         .repost{
-          padding:6px;
           margin-left:10px;
         }
       }
     }
     .submit-text{
       display: inline-block;
+    }
+    .reposted-text{
+      font-style: italic;
+      opacity: 0.4;
     }
   }
   .img-css {
@@ -5518,8 +5526,9 @@ img {
   }
   .counter{
     float:right;
-    margin-right: 6px;
+    margin-right: 98px;
     margin-top: 5px;
+    font-size:12px;
   }
   .intro {
     background: #fff;
@@ -5812,7 +5821,6 @@ img {
       font-variant: small-caps;
       color: white;
       border-radius: 10px;
-      margin-bottom:5px;
       &::placeholder {
         color: white;
       }
