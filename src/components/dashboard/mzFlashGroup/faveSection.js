@@ -162,7 +162,7 @@ const FaveSection = ({
                     </div>
                     <div className="strk-btn">
                       <Stroke
-                        hasStroke={feed.has_stroke}
+                        hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
@@ -276,7 +276,7 @@ const FaveSection = ({
                     </div>
                     <div className="strk-btn">
                       <Stroke
-                        hasStroke={feed.has_stroke}
+                        hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
@@ -390,7 +390,7 @@ const FaveSection = ({
                     </div>
                     <div className="strk-btn">
                       <Stroke
-                        hasStroke={feed.has_stroke}
+                        hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
@@ -504,7 +504,7 @@ const FaveSection = ({
                     </div>
                     <div className="strk-btn">
                       <Stroke
-                        hasStroke={feed.has_stroke}
+                        hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
