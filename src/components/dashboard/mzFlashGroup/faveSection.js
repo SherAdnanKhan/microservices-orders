@@ -104,7 +104,7 @@ const FaveSection = ({
                   key={index}
                 >
                   <div className="row">
-                    <div className="col-3">
+                    <div className="col-2">
                       {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
                       <Avatar
                         avatars={feed.user.avatars}
@@ -112,7 +112,7 @@ const FaveSection = ({
                       />
                     </div>
                     <div className="col-7">
-                      <span>Name: {feed.user.username}</span>
+                      <span> {feed.user.username}</span>
                       <p> {feed.feed}</p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -133,46 +133,49 @@ const FaveSection = ({
                         </div>
                       }
                     </div>
-                    <div className="flex-container">
-                      <div className="action">
-                        <button className="comment" to="#">Comment</button>
-                      </div>
-                      <div className="actions-repost">
-                        <button
-                          className="repost"
-                          onClick={e => onRepost(e, feed)}
-                        >
-                          Repost
-                        </button>
-                      </div>
-                    </div>
-                    <div className="view-comment">
-                      {feed.limited_comments.length > 0 &&
-                        <Link
-                          to="#"
-                          onClick={e => onActiveFeedComment(e, feed.id)}
-                        >
-                          View Comments
-                        </Link>
-                      }
-                      {activeFeedComment === feed.id &&
-                        <>
-                          {feed.limited_comments.map((comment, index) => (
-                            <p key={index}> {comment.comment} </p>
-                          ))}
-                        </>
-                      }
-                    </div>
-                    <input
-                      type="text"
-                      id={`fav${feed.id}`}
-                      name={`fav${feed.id}`}
-                      value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
-                      placeholder="Enter a Comment..."
-                      onChange={onCommentChange}
-                      onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
-                    />
                   </div>
+                  <div className="flex-container">
+                    <div className="action">
+                      <button className="comment" to="#">Comment</button>
+                    </div>
+                    <div className="strk-btn">
+                      <button className="strk" to="#">Strk</button>
+                    </div>
+                    <div className="actions-repost">
+                      <button
+                        className="repost"
+                        onClick={e => onRepost(e, feed)}
+                      >
+                        Repost
+                        </button>
+                    </div>
+                  </div>
+                  <div className="view-comment">
+                    {feed.limited_comments.length > 0 &&
+                      <Link
+                        to="#"
+                        onClick={e => onActiveFeedComment(e, feed.id)}
+                      >
+                        View Comments
+                        </Link>
+                    }
+                    {activeFeedComment === feed.id &&
+                      <>
+                        {feed.limited_comments.map((comment, index) => (
+                          <p key={index}> {comment.comment} </p>
+                        ))}
+                      </>
+                    }
+                  </div>
+                  <input
+                    type="text"
+                    id={`fav${feed.id}`}
+                    name={`fav${feed.id}`}
+                    value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
+                    placeholder="Enter a Comment..."
+                    onChange={onCommentChange}
+                    onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
+                  />
                 </div>
               ))}
           </>
@@ -187,14 +190,14 @@ const FaveSection = ({
                   key={index}
                 >
                   <div className="row">
-                    <div className="col-3">
+                    <div className="col-2">
                       <Avatar
                         avatars={feed.user.avatars}
                         feelColor={feed.user.feel_color}
                       />
                     </div>
                     <div className="col-7">
-                      <span>Name: {feed.user.username}</span>
+                      <span> {feed.user.username}</span>
                       <p> {feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -215,46 +218,49 @@ const FaveSection = ({
                         </div>
                       }
                     </div>
-                    <div className="flex-container">
-                      <div className="action">
-                        <button className="comment" to="#">Comment</button>
-                      </div>
-                      <div className="actions-repost">
-                        <button
-                          className="repost"
-                          onClick={e => onRepost(e, feed)}
-                        >
-                          Repost
-                        </button>
-                      </div>
-                    </div>
-                    <div className="view-comment">
-                      {feed.limited_comments.length > 0 &&
-                        <Link
-                          to="#"
-                          onClick={e => onActiveFeedComment(e, feed.id)}
-                        >
-                          View Comments
-                        </Link>
-                      }
-                      {activeFeedComment === feed.id &&
-                        <>
-                          {feed.limited_comments.map((comment, index) => (
-                            <p key={index}> {comment.comment} </p>
-                          ))}
-                        </>
-                      }
-                    </div>
-                    <input
-                      type="text"
-                      id={`fav${feed.id}`}
-                      name={`fav${feed.id}`}
-                      value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
-                      placeholder="Enter a Comment..."
-                      onChange={onCommentChange}
-                      onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
-                    />
                   </div>
+                  <div className="flex-container">
+                    <div className="action">
+                      <button className="comment" to="#">Comment</button>
+                    </div>
+                    <div className="strk-btn">
+                      <button className="strk" to="#">Strk</button>
+                    </div>
+                    <div className="actions-repost">
+                      <button
+                        className="repost"
+                        onClick={e => onRepost(e, feed)}
+                      >
+                        Repost
+                        </button>
+                    </div>
+                  </div>
+                  <div className="view-comment">
+                    {feed.limited_comments.length > 0 &&
+                      <Link
+                        to="#"
+                        onClick={e => onActiveFeedComment(e, feed.id)}
+                      >
+                        View Comments
+                        </Link>
+                    }
+                    {activeFeedComment === feed.id &&
+                      <>
+                        {feed.limited_comments.map((comment, index) => (
+                          <p key={index}> {comment.comment} </p>
+                        ))}
+                      </>
+                    }
+                  </div>
+                  <input
+                    type="text"
+                    id={`fav${feed.id}`}
+                    name={`fav${feed.id}`}
+                    value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
+                    placeholder="Enter a Comment..."
+                    onChange={onCommentChange}
+                    onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
+                  />
                 </div>
               ))}
           </>
@@ -264,19 +270,19 @@ const FaveSection = ({
             {favesAndSprfvsFeeds &&
               favesAndSprfvsFeeds.data.map((feed, index) => (
                 <div
-                  className="tabcontent"
+                  className="sub-box tabcontent"
                   id="tab3"
                   key={index}
                 >
-                  <div className=" sub-box row">
-                    <div className="col-3">
+                  <div className="row">
+                    <div className="col-2">
                       <Avatar
                         avatars={feed.user.avatars}
                         feelColor={feed.user.feel_color}
                       />
                     </div>
                     <div className="col-7">
-                      <span>Name: {feed.user.username}</span>
+                      <span> {feed.user.username}</span>
                       <p>{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -297,46 +303,49 @@ const FaveSection = ({
                         </div>
                       }
                     </div>
-                    <div className="flex-container">
-                      <div className="action">
-                        <button className="comment" to="#">Comment</button>
-                      </div>
-                      <div className="actions-repost">
-                        <button
-                          className="repost"
-                          onClick={e => onRepost(e, feed)}
-                        >
-                          Repost
-                        </button>
-                      </div>
-                    </div>
-                    <div className="view-comment">
-                      {feed.limited_comments.length > 0 &&
-                        <Link
-                          to="#"
-                          onClick={e => onActiveFeedComment(e, feed.id)}
-                        >
-                          View Comments
-                        </Link>
-                      }
-                      {activeFeedComment === feed.id &&
-                        <>
-                          {feed.limited_comments.map((comment, index) => (
-                            <p key={index}> {comment.comment} </p>
-                          ))}
-                        </>
-                      }
-                    </div>
-                    <input
-                      type="text"
-                      id={`fav${feed.id}`}
-                      name={`fav${feed.id}`}
-                      value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
-                      placeholder="Enter a Comment..."
-                      onChange={onCommentChange}
-                      onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
-                    />
                   </div>
+                  <div className="flex-container">
+                    <div className="action">
+                      <button className="comment" to="#">Comment</button>
+                    </div>
+                    <div className="strk-btn">
+                      <button className="strk" to="#">Strk</button>
+                    </div>
+                    <div className="actions-repost">
+                      <button
+                        className="repost"
+                        onClick={e => onRepost(e, feed)}
+                      >
+                        Repost
+                        </button>
+                    </div>
+                  </div>
+                  <div className="view-comment">
+                    {feed.limited_comments.length > 0 &&
+                      <Link
+                        to="#"
+                        onClick={e => onActiveFeedComment(e, feed.id)}
+                      >
+                        View Comments
+                        </Link>
+                    }
+                    {activeFeedComment === feed.id &&
+                      <>
+                        {feed.limited_comments.map((comment, index) => (
+                          <p key={index}> {comment.comment} </p>
+                        ))}
+                      </>
+                    }
+                  </div>
+                  <input
+                    type="text"
+                    id={`fav${feed.id}`}
+                    name={`fav${feed.id}`}
+                    value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
+                    placeholder="Enter a Comment..."
+                    onChange={onCommentChange}
+                    onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
+                  />
                 </div>
               ))}
           </>
