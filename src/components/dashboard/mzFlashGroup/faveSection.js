@@ -104,6 +104,11 @@ const FaveSection = ({
                   key={index}
                 >
                   <div className="row">
+                    {feed.parent &&
+                      <div className="reposted-text">
+                        {feed.user.username} has reposted this feed
+                      </div>
+                    }
                     <div className="col-2">
                       {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
                       <Avatar
@@ -134,6 +139,19 @@ const FaveSection = ({
                       }
                     </div>
                   </div>
+                  {feed.parent &&
+                    <div className="flex-container">
+                      <div className="action">
+                        <Avatar
+                          avatars={feed.parent.user.avatars}
+                          feelColor={feed.parent.user.feel_color}
+                        />
+                      </div>
+                      <div className="user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                      </div>
+                    </div>
+                  }
                   <div className="flex-container">
                     <div className="action">
                       <button className="comment" to="#">Comment</button>
@@ -190,6 +208,11 @@ const FaveSection = ({
                   key={index}
                 >
                   <div className="row">
+                    {feed.parent &&
+                      <div className="reposted-text">
+                        {feed.user.username} has reposted this feed
+                      </div>
+                    }
                     <div className="col-2">
                       <Avatar
                         avatars={feed.user.avatars}
@@ -219,6 +242,19 @@ const FaveSection = ({
                       }
                     </div>
                   </div>
+                  {feed.parent &&
+                    <div className="flex-container">
+                      <div className="action">
+                        <Avatar
+                          avatars={feed.parent.user.avatars}
+                          feelColor={feed.parent.user.feel_color}
+                        />
+                      </div>
+                      <div className="user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                      </div>
+                    </div>
+                  }
                   <div className="flex-container">
                     <div className="action">
                       <button className="comment" to="#">Comment</button>
@@ -275,6 +311,11 @@ const FaveSection = ({
                   key={index}
                 >
                   <div className="row">
+                    {feed.parent &&
+                      <div className="reposted-text">
+                        {feed.user.username} has reposted this feed
+                      </div>
+                    }
                     <div className="col-2">
                       <Avatar
                         avatars={feed.user.avatars}
@@ -304,6 +345,19 @@ const FaveSection = ({
                       }
                     </div>
                   </div>
+                  {feed.parent &&
+                    <div className="flex-container">
+                      <div className="action">
+                        <Avatar
+                          avatars={feed.parent.user.avatars}
+                          feelColor={feed.parent.user.feel_color}
+                        />
+                      </div>
+                      <div className="user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                      </div>
+                    </div>
+                  }
                   <div className="flex-container">
                     <div className="action">
                       <button className="comment" to="#">Comment</button>
