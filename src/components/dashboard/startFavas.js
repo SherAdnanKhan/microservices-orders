@@ -53,7 +53,7 @@ const StartFaves = () => {
 
               <div className="f-img-box">
                 <div className="main-img">
-                  <img src={user.galleries[0].posts && user.galleries[0].posts[0].image.path} alt="avatar" />
+                  <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" />
                 </div>
                 <div className="other-img">
                   {user.galleries[0].posts.map((post, in_key) => (
