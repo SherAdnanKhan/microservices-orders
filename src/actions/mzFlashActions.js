@@ -9,7 +9,9 @@ import {
   SPRFVS_FEEDS,
   FAVES_AND_SPRFVS_FEEDS,
   GET_COLLECTIVE_FEEDS,
-  CREATE_FEED_COMMENT
+  CREATE_FEED_COMMENT,
+  STROKE_FEED,
+  UNSTROKE_FEED
 } from '../constants/actionTypes';
 import { toast } from 'react-toastify';
 
@@ -36,7 +38,7 @@ export const getMyFeeds = () => dispatch => {
     .then(res => {
       dispatch({
         type: GET_MY_FEEDS,
-        payload: res.data.data.feeds.data
+        payload: res.data.data.feeds
       });
     });
 };
@@ -52,13 +54,13 @@ export const getCollectiveFeeds = () => dispatch => {
     });
 };
 
-export const getUserFeeds = id => dispatch => {
+export const getUserFeeds = slug => dispatch => {
   http
-    .get(`/mzflash/${id}`)
+    .get(`/mzflash/${slug}`)
     .then(res => {
       dispatch({
         type: GET_USER_FEEDS,
-        payload: res.data.data.feeds.data
+        payload: res.data.data.feeds
       });
     });
 };
@@ -105,5 +107,36 @@ export const createFeedComment = data => dispatch => {
         payload: res.data.data.feed_comment
       });
       toast('Comment has been created.');
+    });
+};
+
+
+export const strokeFeed = data => dispatch => {
+  dispatch({
+    type: STROKE_FEED,
+    payload: { feed_id: data.feed_id, has_stroke: true }
+  });
+
+  http
+    .post('/mzflash/feed-stroke', data)
+    .then()
+    .catch(() => {
+      dispatch({
+        type: UNSTROKE_FEED,
+        payload: { feed_id: data.feed_id, has_stroke: false }
+      })
+    });
+};
+
+export const unstrokeFeed = data => dispatch => {
+  dispatch({
+    type: UNSTROKE_FEED,
+    payload: { feed_id: data.feed_id, has_stroke: false }
+  });
+
+  http
+    .post('/mzflash/feed-unstroke', data)
+    .then(res => {
+      console.log(res.data)
     });
 };

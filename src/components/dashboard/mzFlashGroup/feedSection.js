@@ -4,11 +4,13 @@ import Input from '../../common/input';
 import { useDispatch } from 'react-redux';
 import { createFeed } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
+import Stroke from '../../common/stroke';
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
   currentUser, onCommentChange, onActiveFeedComment,
-  activeFeedComment, comments, onPostComment, onRepost
+  activeFeedComment, comments, onPostComment, onRepost,
+  onStroke, onUnstroke
 }) => {
 
   const dispatch = useDispatch();
@@ -192,21 +194,26 @@ const FeedSection = ({
                   />
                 </div>
                 <div className="user-name-parent">
-                  <p class="user-name">{feed.parent.user.username}</p>
+                  <p className="user-name">{feed.parent.user.username}</p>
                 </div>
               </div>
             }
             <div className="flex-container">
               <div className="action">
                 <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                <div class="coment-counter">
-                  123
+                <div className="coment-counter">
+                  {feed.comments_count}
                 </div>
               </div>
               <div className="strk-btn">
-                <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
-                <div class="strk-counter">
-                  456
+                <Stroke
+                  hasStroke={feed.has_stroke}
+                  className="strk-img"
+                  onStroke={() => onStroke(feed.id)}
+                  onUnstroke={() => onUnstroke(feed.id)}
+                />
+                <div className="strk-counter">
+                  {feed.stroke_users_count}
                 </div>
               </div>
               <div className="actions-repost">

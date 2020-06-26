@@ -9,6 +9,8 @@ import {
   FAVES_AND_SPRFVS_FEEDS,
   GET_COLLECTIVE_FEEDS,
   CREATE_FEED_COMMENT,
+  STROKE_FEED,
+  UNSTROKE_FEED
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -55,7 +57,8 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4),
+                comments_count: feed.comments_count + 1
               }
             } else {
               return feed
@@ -68,7 +71,8 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4),
+                comments_count: feed.comments_count + 1
               }
             } else {
               return feed
@@ -81,7 +85,8 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4),
+                comments_count: feed.comments_count + 1
               }
             } else {
               return feed
@@ -94,7 +99,22 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4)
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4),
+                comments_count: feed.comments_count + 1
+              }
+            } else {
+              return feed
+            }
+          })
+        },
+        userFeeds: {
+          ...state.userFeeds,
+          data: state.userFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4),
+                comments_count: feed.comments_count + 1
               }
             } else {
               return feed
@@ -117,6 +137,144 @@ export default (state = initialState, action) => {
         ...state,
         favesAndSprfvsFeeds: action.payload
       };
+    case STROKE_FEED:
+      return {
+        ...state,
+        collectiveFeeds: {
+          ...state.collectiveFeeds,
+          data: state.collectiveFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count + 1
+              }
+            }
+            return feed
+          })
+        },
+        favesFeeds: {
+          ...state.favesFeeds,
+          data: state.favesFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count + 1
+              }
+            }
+            return feed
+          })
+        },
+        sprfvsFeeds: {
+          ...state.sprfvsFeeds,
+          data: state.sprfvsFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count + 1
+              }
+            }
+            return feed
+          })
+        },
+        favesAndSprfvsFeeds: {
+          ...state.favesAndSprfvsFeeds,
+          data: state.favesAndSprfvsFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count + 1
+              }
+            }
+            return feed
+          })
+        },
+        userFeeds: {
+          ...state.userFeeds,
+          data: state.userFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count + 1
+              }
+            }
+            return feed
+          })
+        }
+      }
+    case UNSTROKE_FEED:
+      return {
+        ...state,
+        collectiveFeeds: {
+          ...state.collectiveFeeds,
+          data: state.collectiveFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count - 1
+              }
+            }
+            return feed
+          })
+        },
+        favesFeeds: {
+          ...state.favesFeeds,
+          data: state.favesFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count - 1
+              }
+            }
+            return feed
+          })
+        },
+        sprfvsFeeds: {
+          ...state.sprfvsFeeds,
+          data: state.sprfvsFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count - 1
+              }
+            }
+            return feed
+          })
+        },
+        favesAndSprfvsFeeds: {
+          ...state.favesAndSprfvsFeeds,
+          data: state.favesAndSprfvsFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count - 1
+              }
+            }
+            return feed
+          })
+        },
+        userFeeds: {
+          ...state.userFeeds,
+          data: state.userFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke: action.payload.has_stroke,
+                stroke_users_count: feed.stroke_users_count - 1
+              }
+            }
+            return feed
+          })
+        },
+      }
     case START_FEEDS_LOADER:
       return {
         ...state,
@@ -130,5 +288,5 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
