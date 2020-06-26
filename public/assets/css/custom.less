@@ -3932,6 +3932,10 @@ img {
 .onearttitle{
   text-align: center;
   border-bottom: 1px solid #444;
+  .lobby-icon{
+    display: flex;
+    justify-content: space-around;
+  }
 }
 .post-footer{
   display: flex;
@@ -5370,15 +5374,25 @@ img {
         color:white;
       }
     }
+    .flex-container-nested{
+      display:flex;
+      border: 1px solid;
+      margin: 5px;
+      .action-cube{
+        width:80px;
+        text-align: center;
+      }
+    }
     .flex-container{
       display:flex;
       border: 1px solid;
       margin: 5px;
+      justify-content: center;
       .user-name-parent{
         display:flex;
         align-items: center;
         margin-top:-5px;
-        margin-left:15px;
+        margin-left:30px;
       }
       .action{
         width: 50px;
@@ -5387,6 +5401,7 @@ img {
       .strk-btn{
         width: 50px;
         text-align: center;
+        margin-left:15px;
         .strk{
           margin-left:17px;
         }
@@ -5394,6 +5409,7 @@ img {
       .actions-repost{
         width: 50px;
         text-align: center;
+        margin-left:15px;
       }
       .repost{
         margin-left:15px;
