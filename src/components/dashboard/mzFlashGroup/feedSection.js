@@ -156,10 +156,12 @@ const FeedSection = ({
               </div>
             }
             <div className="col-3">
-              <Avatar
-                avatars={feed.user.avatars}
-                feelColor={feed.user.feel_color}
-              />
+              <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                <Avatar
+                  avatars={feed.user.avatars}
+                  feelColor={feed.user.feel_color}
+                />
+              </Link>
             </div>
             <div className="col-9">
               <span>{feed.user.username}</span>
