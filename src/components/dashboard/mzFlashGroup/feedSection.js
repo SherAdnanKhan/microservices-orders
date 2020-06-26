@@ -198,10 +198,10 @@ const FeedSection = ({
             }
             <div className="flex-container">
               <div className="action">
-                <button className="comment" to="#">Comment</button>
+                <img className="comment-img" alt="" src="/assets/images/crit1.png" />
               </div>
               <div className="strk-btn">
-                <button className="strk" to="#">Strk</button>
+                <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
               </div>
               <div className="actions-repost">
                 <button
