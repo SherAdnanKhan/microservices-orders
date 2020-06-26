@@ -184,8 +184,8 @@ const FeedSection = ({
               }
             </div>
             {feed.parent &&
-              <div className="flex-container">
-                <div className="action">
+              <div className="flex-container-nested">
+                <div className="action-cube">
                   <Avatar
                     avatars={feed.parent.user.avatars}
                     feelColor={feed.parent.user.feel_color}

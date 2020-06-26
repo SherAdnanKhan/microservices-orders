@@ -33,6 +33,17 @@ const LobbyPosts = ({ post }) => {
       </div>
       <div className="onearttitle">
         <p>{post && post.title}</p>
+        <div class="lobby-icon">
+          <div className="strk-btn">
+            <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" />
+          </div>
+          <div className="action">
+            <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+          </div>
+          <div className="action">
+            <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
+          </div>
+        </div>
       </div>
     </div>
   );
