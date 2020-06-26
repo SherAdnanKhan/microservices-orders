@@ -111,11 +111,12 @@ const FaveSection = ({
                       </div>
                     }
                     <div className="col-2">
-                      {/* <img src="https://placeimg.com/640/480/any" alt="Snow" className="img-css" /> */}
-                      <Avatar
-                        avatars={feed.user.avatars}
-                        feelColor={feed.user.feel_color}
-                      />
+                      <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                        <Avatar
+                          avatars={feed.user.avatars}
+                          feelColor={feed.user.feel_color}
+                        />
+                      </Link>
                     </div>
                     <div className="col-7">
                       <span> {feed.user.username}</span>
@@ -143,10 +144,12 @@ const FaveSection = ({
                   {feed.parent &&
                     <div className="flex-container">
                       <div className="action">
-                        <Avatar
-                          avatars={feed.parent.user.avatars}
-                          feelColor={feed.parent.user.feel_color}
-                        />
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          <Avatar
+                            avatars={feed.parent.user.avatars}
+                            feelColor={feed.parent.user.feel_color}
+                          />
+                        </Link>
                       </div>
                       <div className="user-name-parent">
                         <p>{feed.parent.user.username}</p>
@@ -226,10 +229,12 @@ const FaveSection = ({
                       </div>
                     }
                     <div className="col-2">
-                      <Avatar
-                        avatars={feed.user.avatars}
-                        feelColor={feed.user.feel_color}
-                      />
+                      <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                        <Avatar
+                          avatars={feed.user.avatars}
+                          feelColor={feed.user.feel_color}
+                        />
+                      </Link>
                     </div>
                     <div className="col-7">
                       <span> {feed.user.username}</span>
@@ -257,10 +262,12 @@ const FaveSection = ({
                   {feed.parent &&
                     <div className="flex-container">
                       <div className="action">
-                        <Avatar
-                          avatars={feed.parent.user.avatars}
-                          feelColor={feed.parent.user.feel_color}
-                        />
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          <Avatar
+                            avatars={feed.parent.user.avatars}
+                            feelColor={feed.parent.user.feel_color}
+                          />
+                        </Link>
                       </div>
                       <div className="user-name-parent">
                         <p>{feed.parent.user.username}</p>
@@ -340,10 +347,12 @@ const FaveSection = ({
                       </div>
                     }
                     <div className="col-2">
-                      <Avatar
-                        avatars={feed.user.avatars}
-                        feelColor={feed.user.feel_color}
-                      />
+                      <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                        <Avatar
+                          avatars={feed.user.avatars}
+                          feelColor={feed.user.feel_color}
+                        />
+                      </Link>
                     </div>
                     <div className="col-7">
                       <span> {feed.user.username}</span>
@@ -371,10 +380,12 @@ const FaveSection = ({
                   {feed.parent &&
                     <div className="flex-container">
                       <div className="action">
-                        <Avatar
-                          avatars={feed.parent.user.avatars}
-                          feelColor={feed.parent.user.feel_color}
-                        />
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          <Avatar
+                            avatars={feed.parent.user.avatars}
+                            feelColor={feed.parent.user.feel_color}
+                          />
+                        </Link>
                       </div>
                       <div className="user-name-parent">
                         <p>{feed.parent.user.username}</p>
@@ -454,10 +465,12 @@ const FaveSection = ({
                       </div>
                     }
                     <div className="col-2">
-                      <Avatar
-                        avatars={feed.user.avatars}
-                        feelColor={feed.user.feel_color}
-                      />
+                      <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                        <Avatar
+                          avatars={feed.user.avatars}
+                          feelColor={feed.user.feel_color}
+                        />
+                      </Link>
                     </div>
                     <div className="col-7">
                       <span> {feed.user.username}</span>
@@ -485,10 +498,12 @@ const FaveSection = ({
                   {feed.parent &&
                     <div className="flex-container">
                       <div className="action">
-                        <Avatar
-                          avatars={feed.parent.user.avatars}
-                          feelColor={feed.parent.user.feel_color}
-                        />
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          <Avatar
+                            avatars={feed.parent.user.avatars}
+                            feelColor={feed.parent.user.feel_color}
+                          />
+                        </Link>
                       </div>
                       <div className="user-name-parent">
                         <p>{feed.parent.user.username}</p>
