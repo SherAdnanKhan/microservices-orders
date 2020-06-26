@@ -1,5 +1,6 @@
 import React from 'react';
 import Like from '../../common/like';
+import { FAVES } from '../../../constants/privacyTypes';
 
 const PostBar = ({
   gallery, activeGallery,
@@ -33,8 +34,8 @@ const PostBar = ({
         }
       </div>
       <div className="heart-icon">
-        {activeGallery &&
-          gallery && isAllowed() &&
+        {(activeGallery?.privacy?.privacy_type_id === FAVES || isAllowed())
+          && gallery &&
           <Like
             faved={gallery.has_faved}
             onLike={onPostLike}
