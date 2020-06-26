@@ -114,7 +114,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.user.feel_color}
+                          feelColor={feed.feel_color}
                         />
                       </Link>
                     </div>
@@ -232,7 +232,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.user.feel_color}
+                          feelColor={feed.feel_color}
                         />
                       </Link>
                     </div>
@@ -350,7 +350,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.user.feel_color}
+                          feelColor={feed.feel_color}
                         />
                       </Link>
                     </div>
@@ -468,7 +468,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.user.feel_color}
+                          feelColor={feed.feel_color}
                         />
                       </Link>
                     </div>
