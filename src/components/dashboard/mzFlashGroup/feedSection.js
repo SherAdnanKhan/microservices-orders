@@ -149,7 +149,7 @@ const FeedSection = ({
               <div className="reposted-text">
                 {feed.user.id === currentUser.id
                   ? <> You have reposted this feed </>
-                  : <> {feed.user.username} hase reposted this feed </>
+                  : <> {feed.user.username} has reposted this feed </>
                 }
               </div>
             }
@@ -179,18 +179,23 @@ const FeedSection = ({
                     <source src={feed.image.path} type="video/mp4" />
                     <source src={feed.image.path} type="video/ogg" />
                     Your browser does not support the video tag.
-                </video>
+                  </video>
                 </div>
               }
             </div>
-            <div className="flex-container">
-              <div className="action">
-                <img className="nested-img" alt="" src="/assets/images/gray.png" />
+            {feed.parent &&
+              <div className="flex-container">
+                <div className="action">
+                  <Avatar
+                    avatars={feed.parent.user.avatars}
+                    feelColor={feed.parent.user.feel_color}
+                  />
+                </div>
+                <div className="user-name-parent">
+                  <p>{feed.parent.user.username}</p>
+                </div>
               </div>
-              <div className="user-name-parent">
-                <p>Salwa M</p>
-              </div>
-            </div>
+            }
             <div className="flex-container">
               <div className="action">
                 <button className="comment" to="#">Comment</button>
