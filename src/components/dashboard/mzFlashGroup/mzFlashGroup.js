@@ -12,11 +12,15 @@ import {
   getMySprfvsFeeds,
   getMySprfvsAndFavesFeeds,
   createFeedComment,
-  createFeed
+  createFeed,
+  strokeFeed,
+  unstrokeFeed,
+  getUserFeeds
 } from '../../../actions/mzFlashActions';
 
 const MzFlashGroup = () => {
   const [activeTab, setActiveTab] = useState(2);
+  const [activeUserList, setActiveUserList] = useState(2);
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
 
@@ -27,8 +31,15 @@ const MzFlashGroup = () => {
 
   const {
     user: { favouriteUsers, faveAndSprfvsUsers, sprfvsUsers },
-    mzFlash: { collectiveFeeds, loading, favesFeeds, sprfvsFeeds, favesAndSprfvsFeeds }
+    mzFlash: {
+      collectiveFeeds, loading, favesFeeds,
+      sprfvsFeeds, favesAndSprfvsFeeds, userFeeds
+    }
   } = useSelector(state => state);
+
+  useEffect(() => {
+    console.log(userFeeds);
+  }, [userFeeds]);
 
   useEffect(() => {
     dispatch(getFavourites());
@@ -62,7 +73,7 @@ const MzFlashGroup = () => {
       setActiveFeedComment(0);
     else
       setActiveFeedComment(feedId);
-  }
+  };
 
   const handleRepost = (e, feed) => {
     e.preventDefault();
@@ -74,6 +85,32 @@ const MzFlashGroup = () => {
     dispatch(createFeed(formData));
   };
 
+  const handleFeedStroke = id => {
+    const data = {
+      feed_id: id
+    };
+    dispatch(strokeFeed(data));
+    console.log(id);
+  };
+
+  const handleFeedUnstroke = id => {
+    const data = {
+      feed_id: id
+    };
+    dispatch(unstrokeFeed(data));
+  };
+
+  const handleActiveUser = user => {
+    setActiveTab(0);
+    console.log(user)
+    dispatch(getUserFeeds(user.slug));
+  };
+
+  const handleTabChange = tab => {
+    setActiveTab(tab);
+    setActiveUserList(tab);
+  };
+
   return (
     <section className="mz-flash-group">
       {loading && <Spinner />}
@@ -83,19 +120,24 @@ const MzFlashGroup = () => {
           favouriteUsers={favouriteUsers}
           sprfvsUsers={sprfvsUsers}
           faveAndSprfvsUsers={faveAndSprfvsUsers}
+          onActiveUser={handleActiveUser}
+          activeUserList={activeUserList}
         />
         <FaveSection
           sprfvsFeeds={sprfvsFeeds}
           favesFeeds={favesFeeds}
           favesAndSprfvsFeeds={favesAndSprfvsFeeds}
+          userFeeds={userFeeds}
           activeTab={activeTab}
-          onTabChange={tab => setActiveTab(tab)}
+          onTabChange={handleTabChange}
           activeFeedComment={activeFeedComment}
           onActiveFeedComment={handleActiveFeedComment}
           onCommentChange={handleCommentChange}
           comments={comments}
           onPostComment={handleEnter}
           onRepost={handleRepost}
+          onStroke={handleFeedStroke}
+          onUnstroke={handleFeedUnstroke}
         />
         <FeedSection
           collectiveFeeds={collectiveFeeds}
@@ -108,6 +150,8 @@ const MzFlashGroup = () => {
           comments={comments}
           onPostComment={handleEnter}
           onRepost={handleRepost}
+          onStroke={handleFeedStroke}
+          onUnstroke={handleFeedUnstroke}
         />
       </div>
     </section >

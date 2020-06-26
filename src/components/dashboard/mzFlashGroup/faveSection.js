@@ -1,12 +1,13 @@
 import React from 'react';
 import Avatar from '../../common/avatar';
 import { Link } from 'react-router-dom';
+import Stroke from '../../common/stroke';
 
 const FaveSection = ({
-  sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds,
+  sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
   activeTab, onTabChange, onCommentChange,
   activeFeedComment, onActiveFeedComment, onPostComment,
-  comments, onRepost
+  comments, onRepost, onStroke, onUnstroke
 }) => {
   return (
     <div className="col-6 box-2 tab">
@@ -155,14 +156,19 @@ const FaveSection = ({
                   <div className="flex-container">
                     <div className="action">
                       <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div class="coment-counter">
-                        123
+                      <div className="coment-counter">
+                        {feed.comments_count}
                       </div>
                     </div>
                     <div className="strk-btn">
-                      <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
-                      <div class="strk-counter">
-                        456
+                      <Stroke
+                        hasStroke={feed.has_stroke}
+                        className="strk-img"
+                        onStroke={() => onStroke(feed.id)}
+                        onUnstroke={() => onUnstroke(feed.id)}
+                      />
+                      <div className="strk-counter">
+                        {feed.stroke_users_count}
                       </div>
                     </div>
                     <div className="actions-repost">
@@ -264,14 +270,19 @@ const FaveSection = ({
                   <div className="flex-container">
                     <div className="action">
                       <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div class="coment-counter">
-                        123
+                      <div className="coment-counter">
+                        {feed.comments_count}
                       </div>
                     </div>
                     <div className="strk-btn">
-                      <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
-                      <div class="strk-counter">
-                        456
+                      <Stroke
+                        hasStroke={feed.has_stroke}
+                        className="strk-img"
+                        onStroke={() => onStroke(feed.id)}
+                        onUnstroke={() => onUnstroke(feed.id)}
+                      />
+                      <div className="strk-counter">
+                        {feed.stroke_users_count}
                       </div>
                     </div>
                     <div className="actions-repost">
@@ -373,14 +384,133 @@ const FaveSection = ({
                   <div className="flex-container">
                     <div className="action">
                       <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div class="coment-counter">
-                        123
+                      <div className="coment-counter">
+                        {feed.comments_count}
                       </div>
                     </div>
                     <div className="strk-btn">
-                      <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
-                      <div class="strk-counter">
-                        456
+                      <Stroke
+                        hasStroke={feed.has_stroke}
+                        className="strk-img"
+                        onStroke={() => onStroke(feed.id)}
+                        onUnstroke={() => onUnstroke(feed.id)}
+                      />
+                      <div className="strk-counter">
+                        {feed.stroke_users_count}
+                      </div>
+                    </div>
+                    <div className="actions-repost">
+                      <button
+                        className="repost"
+                        onClick={e => onRepost(e, feed)}
+                      >
+                        Repost
+                        </button>
+                    </div>
+                  </div>
+                  <div className="view-comment">
+                    {feed.limited_comments.length > 0 &&
+                      <Link
+                        to="#"
+                        onClick={e => onActiveFeedComment(e, feed.id)}
+                      >
+                        View Comments
+                        </Link>
+                    }
+                    {activeFeedComment === feed.id &&
+                      <>
+                        {feed.limited_comments.map((comment, index) => (
+                          <p key={index}> {comment.comment} </p>
+                        ))}
+                      </>
+                    }
+                  </div>
+                  <input
+                    type="text"
+                    id={`fav${feed.id}`}
+                    name={`fav${feed.id}`}
+                    value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
+                    placeholder="Enter a Comment..."
+                    onChange={onCommentChange}
+                    onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
+                  />
+                </div>
+              ))}
+          </>
+        }
+        {activeTab === 0 &&
+          <>
+            {userFeeds &&
+              userFeeds.data.map((feed, index) => (
+                <div
+                  className="sub-box tabcontent"
+                  id="tab3"
+                  key={index}
+                >
+                  <div className="row">
+                    {feed.parent &&
+                      <div className="reposted-text">
+                        {feed.user.username} has reposted this feed
+                      </div>
+                    }
+                    <div className="col-2">
+                      <Avatar
+                        avatars={feed.user.avatars}
+                        feelColor={feed.user.feel_color}
+                      />
+                    </div>
+                    <div className="col-7">
+                      <span> {feed.user.username}</span>
+                      <p>{feed.feed} </p>
+                      {feed.feed_type === 1 &&
+                        feed.image &&
+                        <img
+                          src={feed.image.path}
+                          alt="Snow"
+                          className="img-css"
+                        />
+                      }
+                      {feed.feed_type === 2 &&
+                        feed.image &&
+                        <div className="video left-space">
+                          <video controls>
+                            <source src={feed.image.path} type="video/mp4" />
+                            <source src={feed.image.path} type="video/ogg" />
+                                Your browser does not support the video tag.
+                              </video>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  {feed.parent &&
+                    <div className="flex-container">
+                      <div className="action">
+                        <Avatar
+                          avatars={feed.parent.user.avatars}
+                          feelColor={feed.parent.user.feel_color}
+                        />
+                      </div>
+                      <div className="user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                      </div>
+                    </div>
+                  }
+                  <div className="flex-container">
+                    <div className="action">
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                      <div className="coment-counter">
+                        {feed.comments_count}
+                      </div>
+                    </div>
+                    <div className="strk-btn">
+                      <Stroke
+                        hasStroke={feed.has_stroke}
+                        className="strk-img"
+                        onStroke={() => onStroke(feed.id)}
+                        onUnstroke={() => onUnstroke(feed.id)}
+                      />
+                      <div className="strk-counter">
+                        {feed.stroke_users_count}
                       </div>
                     </div>
                     <div className="actions-repost">

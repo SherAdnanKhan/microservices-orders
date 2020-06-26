@@ -28,13 +28,8 @@ const MzFlash = () => {
 
   useEffect(() => {
     dispatch(getUserStudio(slug));
+    dispatch(getUserFeeds(slug))
   }, [dispatch, slug]);
-
-  useEffect(() => {
-    if (userStudio) {
-      dispatch(getUserFeeds(userStudio.user.id))
-    }
-  }, [userStudio, dispatch]);
 
   useEffect(() => {
     console.log(userFeeds)
@@ -73,7 +68,7 @@ const MzFlash = () => {
         </div>
 
         {userFeeds &&
-          userFeeds.map((feed, index) => (
+          userFeeds.data.map((feed, index) => (
             <div className="col-4 box-3" key={index}>
               <div className="sub-box row">
                 <div className="col-3">
