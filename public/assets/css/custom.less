@@ -2940,6 +2940,25 @@ img {
       video {
         width: 100%;
       }
+      .lobby-icon{
+        display: flex;
+        justify-content: space-around;
+        overflow: hidden;
+        height: 0;
+        transition: 0.3s all ease-in-out;
+        .strk-btn {
+          .strk-img{
+            width: 30px;
+          }
+        }
+        .action{
+          .comment-img{
+            width: 30px;
+          }
+        }
+      }
+      
+
     }
   }
 }
@@ -3935,6 +3954,9 @@ img {
   .lobby-icon{
     display: flex;
     justify-content: space-around;
+    overflow: hidden;
+    height: 0;
+    transition: 0.3s all ease-in-out;
   }
 }
 .post-footer{
@@ -6059,4 +6081,7 @@ img {
   .modal-content {
     width: 100%;
   }
+}
+.lobby-icon-slide{
+  height: 70px !important;
 }
