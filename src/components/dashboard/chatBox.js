@@ -269,7 +269,7 @@ class ChatBox extends Component {
                       <div className="message-row group">
                         <div className={`incoming ${data.feel_color}`}>
                           <div className="user-message">
-                            <Avatar avatars={data.user.avatars} feelColor={data.user.feel_color} />
+                            <Avatar avatars={data.user.avatars} feelColor={data.feel_color} />
                             <div className="text">
                               {data.message}
                               {data.type === 1 &&
