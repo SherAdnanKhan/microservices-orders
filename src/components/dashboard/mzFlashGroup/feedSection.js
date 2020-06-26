@@ -192,7 +192,7 @@ const FeedSection = ({
                   />
                 </div>
                 <div className="user-name-parent">
-                  <p>{feed.parent.user.username}</p>
+                  <p class="user-name">{feed.parent.user.username}</p>
                 </div>
               </div>
             }
