@@ -159,7 +159,7 @@ const FeedSection = ({
                 feelColor={feed.user.feel_color}
               />
             </div>
-            <div className="col-8">
+            <div className="col-9">
               <span>{feed.user.username}</span>
             </div>
             <p className="submit-text">{feed.feed} </p>
@@ -185,7 +185,18 @@ const FeedSection = ({
             </div>
             <div className="flex-container">
               <div className="action">
+                <img className="nested-img" alt="" src="/assets/images/gray.png" />
+              </div>
+              <div className="user-name-parent">
+                <p>Salwa M</p>
+              </div>
+            </div>
+            <div className="flex-container">
+              <div className="action">
                 <button className="comment" to="#">Comment</button>
+              </div>
+              <div className="strk-btn">
+                <button className="strk" to="#">Strk</button>
               </div>
               <div className="actions-repost">
                 <button
