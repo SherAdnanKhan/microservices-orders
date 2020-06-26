@@ -199,9 +199,15 @@ const FeedSection = ({
             <div className="flex-container">
               <div className="action">
                 <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                <div class="coment-counter">
+                  123
+                </div>
               </div>
               <div className="strk-btn">
                 <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
+                <div class="strk-counter">
+                  456
+                </div>
               </div>
               <div className="actions-repost">
                 <button

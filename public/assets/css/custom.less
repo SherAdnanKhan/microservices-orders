@@ -5170,10 +5170,10 @@ img {
     position: fixed;
     border: 1px solid;
     top: 23%;
-    left: 16%;
+    left: 23%;
     background: #000;
-    width: 66%;
-    height: 80%;
+    width: 50%;
+    height: 70%;
     z-index: 10;
     justify-content: center;
     align-items: center;
@@ -5378,37 +5378,27 @@ img {
         display:flex;
         align-items: center;
         margin-top:-5px;
+        margin-left:15px;
       }
       .action{
         width: 50px;
-        margin: 10px;
         text-align: center;
-        line-height: 30px;
-        .comment{
-          // padding:6px
-        }
       }
       .strk-btn{
         width: 50px;
-        margin: 10px;
         text-align: center;
-        line-height: 30px;
         .strk{
           margin-left:17px;
         }
       }
       .actions-repost{
         width: 50px;
-        margin: 10px;
         text-align: center;
-        line-height: 30px;
-        .repost{
-          // margin-left:10px;
-        }
       }
-    }
-    .submit-text{
-      display: inline-block;
+      .repost{
+        margin-left:15px;
+        margin-top:7px;
+      }
     }
     .reposted-text{
       font-style: italic;
@@ -5581,16 +5571,23 @@ img {
     .strk-img {
       width:30px;
     }
+    .strk-counter{
+      opacity: 0.6;
+      font-size: 12px;
+    }
   }
   .action {
     text-align: center;
     display: block;
-    margin-top: 20px;
     .nested-img{
       width:55px;
     }
     .comment-img{
       width:30px;
+    }
+    .coment-counter{
+      opacity:0.6;
+      font-size: 12px;
     }
   }
   a.btn {
