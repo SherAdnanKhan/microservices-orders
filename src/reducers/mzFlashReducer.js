@@ -109,7 +109,7 @@ export default (state = initialState, action) => {
         },
         userFeeds: {
           ...state.userFeeds,
-          data: state.userFeeds.data.map(feed => {
+          data: state?.userFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -146,7 +146,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count + 1
               }
             }
@@ -159,7 +159,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count + 1
               }
             }
@@ -172,7 +172,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count + 1
               }
             }
@@ -185,7 +185,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count + 1
               }
             }
@@ -194,11 +194,11 @@ export default (state = initialState, action) => {
         },
         userFeeds: {
           ...state.userFeeds,
-          data: state.userFeeds.data.map(feed => {
+          data: state?.userFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count + 1
               }
             }
@@ -215,7 +215,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count - 1
               }
             }
@@ -228,7 +228,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count - 1
               }
             }
@@ -241,7 +241,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count - 1
               }
             }
@@ -254,7 +254,7 @@ export default (state = initialState, action) => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count - 1
               }
             }
@@ -263,11 +263,11 @@ export default (state = initialState, action) => {
         },
         userFeeds: {
           ...state.userFeeds,
-          data: state.userFeeds.data.map(feed => {
+          data: state?.userFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
-                has_stroke: action.payload.has_stroke,
+                has_stroke_count: action.payload.has_stroke_count,
                 stroke_users_count: feed.stroke_users_count - 1
               }
             }

@@ -38,10 +38,6 @@ const MzFlashGroup = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    console.log(userFeeds);
-  }, [userFeeds]);
-
-  useEffect(() => {
     dispatch(getFavourites());
     dispatch(getFaveAndSprfvsUsers());
     dispatch(getSprfvsUsers(3, 1));

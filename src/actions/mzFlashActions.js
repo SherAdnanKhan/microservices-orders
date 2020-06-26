@@ -114,7 +114,7 @@ export const createFeedComment = data => dispatch => {
 export const strokeFeed = data => dispatch => {
   dispatch({
     type: STROKE_FEED,
-    payload: { feed_id: data.feed_id, has_stroke: true }
+    payload: { feed_id: data.feed_id, has_stroke_count: 1 }
   });
 
   http
@@ -123,7 +123,7 @@ export const strokeFeed = data => dispatch => {
     .catch(() => {
       dispatch({
         type: UNSTROKE_FEED,
-        payload: { feed_id: data.feed_id, has_stroke: false }
+        payload: { feed_id: data.feed_id, has_stroke_count: 0 }
       })
     });
 };
@@ -131,12 +131,16 @@ export const strokeFeed = data => dispatch => {
 export const unstrokeFeed = data => dispatch => {
   dispatch({
     type: UNSTROKE_FEED,
-    payload: { feed_id: data.feed_id, has_stroke: false }
+    payload: { feed_id: data.feed_id, has_stroke_count: 0 }
   });
 
   http
     .post('/mzflash/feed-unstroke', data)
-    .then(res => {
-      console.log(res.data)
+    .then()
+    .catch(() => {
+      dispatch({
+        type: STROKE_FEED,
+        payload: { feed_id: data.feed_id, has_stroke_count: 1 }
+      });
     });
 };
