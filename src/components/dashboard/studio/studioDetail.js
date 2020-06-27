@@ -93,14 +93,15 @@ const StudioDetail = ({ userStudio, slug }) => {
           <form onSubmit={e => e.preventDefault()}>
             {hasAllowedBio() &&
               <label htmlFor="addbio" className="addbio-input">
-                <span className="labelText"> user bio</span>
-                <input
+                <span className="labelText"> </span>
+                <div
                   type="text"
                   name="username"
                   id="addbio"
                   value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
                   disabled
-                />
+                >  {userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
+                  </div>
               </label>
             }
             <div className="stuion-faved-btn">
