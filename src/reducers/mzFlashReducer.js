@@ -51,6 +51,20 @@ export default (state = initialState, action) => {
     case CREATE_FEED_COMMENT:
       return {
         ...state,
+        myFeeds: {
+          ...state.myFeeds,
+          data: state.myFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                limited_comments: [action.payload, ...feed.limited_comments].slice(0, 4),
+                comments_count: feed.comments_count + 1
+              }
+            } else {
+              return feed
+            }
+          })
+        },
         collectiveFeeds: {
           ...state.collectiveFeeds,
           data: state.collectiveFeeds.data.map(feed => {
@@ -140,6 +154,19 @@ export default (state = initialState, action) => {
     case STROKE_FEED:
       return {
         ...state,
+        myFeeds: {
+          ...state.myFeeds,
+          data: state.myFeeds.data.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke_count: action.payload.has_stroke_count,
+                stroke_users_count: feed.stroke_users_count + 1
+              }
+            }
+            return feed
+          })
+        },
         collectiveFeeds: {
           ...state.collectiveFeeds,
           data: state.collectiveFeeds.data.map(feed => {
