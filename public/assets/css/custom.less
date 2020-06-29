@@ -4261,6 +4261,9 @@ img {
 //chat box
 
 .chat-box {
+  // width: 100%;
+  // height: 100vh;
+  // overflow-y: scroll;
   .chat-header{
     display: flex;
     align-items: center;
@@ -4375,7 +4378,7 @@ img {
 
           .msgImg {
             max-width: 400px;
-	    max-height:400px;
+	          max-height:400px;
           }
           .msgImg img {
             width: 225px !important;
@@ -4385,7 +4388,7 @@ img {
           
           .msgVideo {
             max-width: 400px;
-	    max-height: 400px;
+	          max-height: 400px;
             video {
               width: 225px !important;
               height:auto !important;
@@ -4394,7 +4397,6 @@ img {
             }
           }
         }
-
         .time {
           font-size: 12px;
           padding: 5px;
@@ -4403,11 +4405,10 @@ img {
         }
 
         .artcubecase{
-		//float: left;
-	width: 50px;
-	height: 50px;
-	 margin: 0px 14px 0 0;
-
+		      //float: left;
+          width: 50px;
+          height: 50px;
+	        margin: 0px 14px 0 0;
         }
 
         &.orange {
@@ -4474,15 +4475,14 @@ img {
           }
         }
         .user-message {
-
           .text {
             // background-color: rgba(128,0,128,.3);
             // border: 2px solid purple;
             // border: 1px solid white;    
             width: auto;
-	    max-width: 80vw;
+	          max-width: 80vw;
             padding:4px 6px ;
-	    box-sizing: border-box;
+	          box-sizing: border-box;
             text-align: left;
             word-wrap: break-word;
             clear: both;
@@ -4504,46 +4504,46 @@ img {
           align-items: center;
           flex-direction: row-reverse;
 
-	  .send-icon {
+        .send-icon {
           float: right;
-	  clear:both;
-	  margin-right: 0;
-	  }
+          clear:both;
+          margin-right: 0;
+        }
 
-          .msgDocument {
-            padding-top: 10px;
-            box-sizing: border-box;
-          }
+        .msgDocument {
+          padding-top: 10px;
+          box-sizing: border-box;
+        }
 
-          .msgImg {
-            max-width: 400px;
-	    max-height: 400px;
-          }
-          .msgImg img {
+        .msgImg {
+          max-width: 400px;
+          max-height: 400px;
+        }
+        .msgImg img {
+          width: 225px !important;
+          height: auto !important;
+          margin-left: 0;
+          border-radius: 5px;
+        }
+
+        .msgVideo {
+          max-width: 400px;
+          max-height:400px;
+          video {
             width: 225px !important;
             height: auto !important;
             margin-left: 0;
             border-radius: 5px;
           }
-
-          .msgVideo {
-            max-width: 400px;
-	    max-height:400px;
-            video {
-              width: 225px !important;
-              height: auto !important;
-              margin-left: 0;
-              border-radius: 5px;
-            }
-          }
         }
+      }
 
-        .time {
-          font-size: 12px;
-    padding: 5px;
-          margin-top: 0;
-          background-color: none;
-        }
+      .time {
+        font-size: 12px;
+        padding: 5px;
+        margin-top: 0;
+        background-color: none;
+      }
 
         &.orange {
           .user-message {
@@ -4611,13 +4611,13 @@ img {
         .user-message {
           .text{
             width: auto;
-	    max-width:80vw;
+	          max-width:80vw;
             padding: 4px 6px;
             box-sizing: border-box;
             text-align: left;
             word-wrap: break-word;
             clear: both;
-	    border: 1px solid;
+	          border: 1px solid;
             border-radius: 10px 10px 0 10px;
           }
           img{
@@ -4686,8 +4686,6 @@ img {
       @media @desktop {
         font-size:12px;
       }
-      
-
       &.gold {      
         background-color: @color_gold;
       }
@@ -4718,128 +4716,99 @@ img {
     }
   }
 
-  .image-preview {
-    box-sizing: border-box;
-    margin: 20px auto;
-    border: 1px solid #444;
-    max-width: 200px;
-    height: auto;
-    max-height: 200px;
-    display: inline-block;
-    position: relative;
-    left: calc(50% - 100px);
-    img {
-       max-width: 200px;
-       max-height: 200px;
-    }
-    .fa-trash {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      font-size: large;
-      cursor: pointer;
-      box-shadow: 0 0 5px #000;
-      background: #000;
-      padding: 5px;
-      border-radius: 4px;
-    }
-
-    input[type="checkbox"] {
-      // visibility: hidden;
-      // opacity: 0;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-  }
-
-  .document-preview {
-    box-sizing: border-box;
-    margin: 20px auto;
-    border: 1px solid #444;
-    max-width: 300px;
-    max-height: 200px;
-    display: inline-block;
-    position: relative;
-    left: calc(50% - 100px);
-    text-align: center;
-    border: 1px solid #444;
-    padding: 10px;
-    
-    .fa-file-alt {
+  .preview {
+    .image-preview {
+      box-sizing: border-box;
+      margin: 0 auto;
+      border: 1px solid #444;
       max-width: 200px;
-       max-height: 200px;
-      font-size: 100px;
+      max-height: 200px;
+      position: relative;
+      img {
+         max-width: 200px;
+         max-height: 200px;
+      }
+      .fa-trash {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: large;
+        cursor: pointer;
+        box-shadow: 0 0 5px #000;
+        background: #000;
+        padding: 5px;
+        border-radius: 4px;
+      }
     }
-
-    .fa-trash {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      font-size: large;
-      cursor: pointer;
-      box-shadow: 0 0 5px #000;
-      background: #000;
+  
+    .document-preview {
+      box-sizing: border-box;
+      margin: 0 auto;
+      border: 1px solid #444;
+      max-width: 300px;
+      max-height: 200px;
+      position: relative;
+      text-align: center;
+      border: 1px solid #444;
+      padding: 10px;
+      
+      .fa-file-alt {
+        max-width: 200px;
+         max-height: 200px;
+        font-size: 100px;
+      }
+  
+      .fa-trash {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: large;
+        cursor: pointer;
+        box-shadow: 0 0 5px #000;
+        background: #000;
+        padding: 5px;
+        border-radius: 4px;
+      }
+    }
+  
+    .video-preview {
+      box-sizing: border-box;
+      margin: 0 auto;
+      border: 1px solid #444;
+      max-width: 200px;
+      max-height: 300px;
+      position: relative;
       padding: 5px;
-      border-radius: 4px;
-    }
-
-    input[type="checkbox"] {
-      // visibility: hidden;
-      // opacity: 0;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
-  }
-
-  .video-preview {
-    box-sizing: border-box;
-    margin: 20px auto;
-    border: 1px solid #444;
-    max-width: 200px;
-    height: auto;
-    max-height: 300px;
-    display: inline-block;
-    position: relative;
-    padding: 5px;
-    box-sizing: border-box;
-    left: calc(50% - 100px);
-    video {
-       width: 100%;
-       height: 100%;
-    }
-    .fa-trash {
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      font-size: large;
-      cursor: pointer;
-      box-shadow: 0 0 5px #000;
-      background: #000;
-      padding: 5px;
-      border-radius: 4px;
-      z-index: 10;
-    }
-
-    input[type="checkbox"] {
-      // visibility: hidden;
-      // opacity: 0;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-    }
+      box-sizing: border-box;
+      video {
+         width: 100%;
+         height: 100%;
+      }
+      .fa-trash {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: large;
+        cursor: pointer;
+        box-shadow: 0 0 5px #000;
+        background: #000;
+        padding: 5px;
+        border-radius: 4px;
+        z-index: 10;
+      }
+    }  
   }
 
   .add-img-vid-box{
     display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    border: 1px solid;
+    top: 23%;
+    left: 23%;
     background: #000;
-    width: 100%;
-    height: 100%;
-    z-index: 9;
+    width: 50%;
+    height: 70%;
+    z-index: 10;
     justify-content: center;
     align-items: center;
     .close-add-box{
