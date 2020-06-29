@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import $ from 'jquery';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -29,6 +29,7 @@ class ChatBox extends Component {
     hidden: false,
     progress: 0
   };
+  preview = createRef();
 
   componentDidMount() {
     this.props.getConversation(this.props.match.params.slug);
@@ -36,6 +37,8 @@ class ChatBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    this.preview.current.scrollIntoView({ behavior: 'auto' });
+
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
     const currentUser = getCurrentUser();
@@ -161,10 +164,11 @@ class ChatBox extends Component {
           this.setState({ progress });
         },
         result => {
-          if (result.doc_type === 'document')
+          if (result.doc_type === 'document') {
             this.setState({ [result.doc_type]: result, progress: 0 });
-          else
+          } else {
             this.setState({ [result.doc_type]: result.path, progress: 0 });
+          }
         },
         err => {
           this.setState({ progress: 0 });
@@ -179,8 +183,7 @@ class ChatBox extends Component {
     const { user, messages } = this.props.conversation
 
     return (
-      <div className="chat-box">
-
+      <div className="chat-box" onScroll={() => console.log('scrolling')}>
         <>
           <div className={`chat-header ${user && user.feel_color}`}>
             <i
@@ -359,31 +362,35 @@ class ChatBox extends Component {
           </button>
         </div>
 
-        {image &&
-          <div className="image-preview">
-            <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
-            <img src={image} alt="" />
-          </div>
-        }
+        <div className="preview">
+          {image &&
+            <div className="image-preview">
+              <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
+              <img src={image} alt="" />
+            </div>
+          }
 
-        {video &&
-          <div className="video-preview">
-            <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
-            <video width="320" height="240" controls>
-              <source src={video} type="video/mp4" />
-              <source src={video} type="video/ogg" />
+          {video &&
+            <div className="video-preview">
+              <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
+              <video width="320" height="240" controls>
+                <source src={video} type="video/mp4" />
+                <source src={video} type="video/ogg" />
                   Your browser does not support the video tag.
             </video>
-          </div>
-        }
+            </div>
+          }
 
-        {document &&
-          <div className="document-preview">
-            <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
-            <i className="fas fa-file-alt"></i>
-            <div> {document.doc_name && document.doc_name}</div>
-          </div>
-        }
+          {document &&
+            <div className="document-preview">
+              <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
+              <i className="fas fa-file-alt"></i>
+              <div> {document.doc_name && document.doc_name}</div>
+            </div>
+          }
+          <div ref={ref => this.preview.current = ref}> </div>
+        </div>
+
 
         {hidden &&
           <div className="add-img-vid-box">
