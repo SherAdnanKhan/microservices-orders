@@ -15,7 +15,20 @@ import {
 
 const initialState = {
   myFeeds: null,
-  collectiveFeeds: null,
+  collectiveFeeds: {
+    current_page: 1,
+    data: [],
+    first_page_url: null,
+    from: 0,
+    last_page: 0,
+    last_page_url: null,
+    next_page_url: null,
+    path: null,
+    per_page: 0,
+    prev_page_url: null,
+    to: 0,
+    total: 0
+  },
   favesFeeds: null,
   sprfvsFeeds: null,
   favesAndSprfvsFeeds: null,
@@ -33,7 +46,23 @@ export default (state = initialState, action) => {
     case GET_COLLECTIVE_FEEDS:
       return {
         ...state,
-        collectiveFeeds: action.payload
+        collectiveFeeds: {
+          ...state.collectiveFeeds,
+          data: state.collectiveFeeds.data
+            ? [...state.collectiveFeeds.data, ...action.payload.data]
+            : action.payload.data,
+          current_page: action.payload.current_page,
+          first_page_url: action.payload.first_page_url,
+          from: action.payload.from,
+          last_page: action.payload.last_page,
+          last_page_url: action.payload.last_page_url,
+          next_page_url: action.payload.next_page_url,
+          path: action.payload.path,
+          per_page: action.payload.per_page,
+          prev_page_url: action.payload.prev_page_url,
+          to: action.payload.to,
+          total: action.payload.total
+        }
       };
     case GET_USER_FEEDS:
       return {

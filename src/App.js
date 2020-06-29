@@ -39,9 +39,7 @@ function App() {
     }
 
     if (socket) {
-      socket.emit('joinUser', currentUser, () => {
-        console.log("notification joined. ");
-      });
+      socket.emit('joinUser', currentUser);
 
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));

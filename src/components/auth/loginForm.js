@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Input from '../common/input';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,12 +14,6 @@ const LoginForm = () => {
   } = useSelector(state => state);
   // const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    if (error) {
-      // setErrors(error);
-      console.log(error);
-    }
-  }, [error]);
 
   const validate = () => {
     const errors = {};
