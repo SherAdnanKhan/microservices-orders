@@ -48,7 +48,11 @@ const Search = () => {
                   <Avatar avatars={user && user.avatars} feelColor={user.feel_color} />
                 </Link>
                 <div>
-                  <p>{user.username}</p>
+                  <p className="usernames">
+                    <Link to={`/dashboard/studio/${user.slug}`} >
+                      {user.username}
+                    </Link>
+                  </p>
                   <p>
                     {user.art &&
                       <>

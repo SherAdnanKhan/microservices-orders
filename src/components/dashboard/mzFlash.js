@@ -6,6 +6,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { getUserStudio } from "../../actions/studioActions";
 import { getUserFeeds } from "../../actions/mzFlashActions";
 import Avatar from "../common/avatar";
+import { Link } from 'react-router-dom';
 
 const MzFlash = () => {
   const dispatch = useDispatch();
@@ -78,7 +79,11 @@ const MzFlash = () => {
                   />
                 </div>
                 <div className="col-7">
-                  <span>Name: {feed.user.username}</span>
+                  <span className="usernames">Name:
+                    <Link to={`/dashboard/studio/${feed.user.slug}`} >
+                      {feed.user.username}
+                    </Link>
+                  </span>
                   <span className="name-btn BT-2">
                     {/* <Link to="#">Button</Link> */}
                   </span>
