@@ -42,7 +42,11 @@ const Post = ({
 
                     <div className="show-list">
                       <div className="s-l-header">
-                        <p>{user && user.username}</p>
+                        <p className="usernames">
+                          <Link to={`/dashboard/studio/${user.slug}`} >
+                            {user.username}
+                          </Link>
+                        </p>
                         <Avatar avatars={user && user.avatars} feelColor={user && user.feel_color} />
                         {user && user.art
                           && (

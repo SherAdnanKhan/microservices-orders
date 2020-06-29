@@ -151,7 +151,12 @@ const FeedSection = ({
               <div className="reposted-text">
                 {feed.user.id === currentUser.id
                   ? <> You have reposted this feed </>
-                  : <> {feed.user.username} has reposted this feed </>
+                  : <> <p className="usernames">
+                    <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                      {feed.user.username}
+                    </Link> has reposted this feed
+                  </p>
+                  </>
                 }
               </div>
             }
@@ -164,7 +169,11 @@ const FeedSection = ({
               </Link>
             </div>
             <div className="col-9">
-              <span>{feed.user.username}</span>
+              <span className="usernames">
+                <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                  {feed.user.username}
+                </Link>
+              </span>
             </div>
             <p className="submit-text">{feed.feed} </p>
             <div className="imgvideo-mzflash">
@@ -196,7 +205,11 @@ const FeedSection = ({
                   />
                 </div>
                 <div className="user-name-parent">
-                  <p className="user-name">{feed.parent.user.username}</p>
+                  <p className="user-name usernames">
+                    <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+                      {feed.parent.user.username}
+                    </Link>
+                  </p>
                 </div>
               </div>
             }

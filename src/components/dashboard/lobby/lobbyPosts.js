@@ -6,7 +6,11 @@ const LobbyPosts = ({ post }) => {
   return (
     <div className="post-page">
       <div className="post-head">
-        <p>{post.user.username}</p>
+        <p className="usernames">
+          <Link to={`/dashboard/studio/${post.user.slug}`} >
+            {post.user.username}
+          </Link>
+        </p>
         <Link to={`/dashboard/studio/${post.user.slug}`} >
           <Avatar avatars={post.user.avatars && post.user.avatars} feelColor={post.user.feel_color} />
         </Link>

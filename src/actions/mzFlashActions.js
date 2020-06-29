@@ -106,7 +106,7 @@ export const createFeedComment = data => dispatch => {
         type: CREATE_FEED_COMMENT,
         payload: res.data.data.feed_comment
       });
-      toast('Comment has been created.');
+      toast('Comment has been added to the feed');
     });
 };
 

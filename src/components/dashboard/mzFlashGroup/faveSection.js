@@ -106,8 +106,11 @@ const FaveSection = ({
                 >
                   <div className="row">
                     {feed.parent &&
-                      <div className="reposted-text">
-                        {feed.user.username} has reposted this feed
+                      <div className="reposted-text usernames">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                        has reposted this feed
                       </div>
                     }
                     <div className="col-2">
@@ -119,7 +122,11 @@ const FaveSection = ({
                       </Link>
                     </div>
                     <div className="col-7">
-                      <span> {feed.user.username}</span>
+                      <span className="usernames">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                      </span>
                       <p> {feed.feed}</p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -152,7 +159,11 @@ const FaveSection = ({
                         </Link>
                       </div>
                       <div className="user-name-parent">
-                        <p>{feed.parent.user.username}</p>
+                        <p className="usernames">
+                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+                            {feed.parent.user.username}
+                          </Link>
+                        </p>
                       </div>
                     </div>
                   }
@@ -224,8 +235,11 @@ const FaveSection = ({
                 >
                   <div className="row">
                     {feed.parent &&
-                      <div className="reposted-text">
-                        {feed.user.username} has reposted this feed
+                      <div className="reposted-text usernames">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                        has reposted this feed
                       </div>
                     }
                     <div className="col-2">
@@ -237,7 +251,11 @@ const FaveSection = ({
                       </Link>
                     </div>
                     <div className="col-7">
-                      <span> {feed.user.username}</span>
+                      <span className="usernames">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                      </span>
                       <p> {feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -270,7 +288,11 @@ const FaveSection = ({
                         </Link>
                       </div>
                       <div className="user-name-parent">
-                        <p>{feed.parent.user.username}</p>
+                        <p className="usernames">
+                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+                            {feed.parent.user.username}
+                          </Link>
+                        </p>
                       </div>
                     </div>
                   }
@@ -342,8 +364,11 @@ const FaveSection = ({
                 >
                   <div className="row">
                     {feed.parent &&
-                      <div className="reposted-text">
-                        {feed.user.username} has reposted this feed
+                      <div className="reposted-text usernames">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                        has reposted this feed
                       </div>
                     }
                     <div className="col-2">
@@ -355,7 +380,11 @@ const FaveSection = ({
                       </Link>
                     </div>
                     <div className="col-7">
-                      <span> {feed.user.username}</span>
+                      <span className="usernames">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                      </span>
                       <p>{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -388,7 +417,11 @@ const FaveSection = ({
                         </Link>
                       </div>
                       <div className="user-name-parent">
-                        <p>{feed.parent.user.username}</p>
+                        <p className="usernames">
+                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+                            {feed.parent.user.username}
+                          </Link>
+                        </p>
                       </div>
                     </div>
                   }
@@ -461,7 +494,10 @@ const FaveSection = ({
                   <div className="row">
                     {feed.parent &&
                       <div className="reposted-text">
-                        {feed.user.username} has reposted this feed
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                        has reposted this feed
                       </div>
                     }
                     <div className="col-2">
@@ -473,7 +509,11 @@ const FaveSection = ({
                       </Link>
                     </div>
                     <div className="col-7">
-                      <span> {feed.user.username}</span>
+                      <span className='usernames'>
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          {feed.user.username}
+                        </Link>
+                      </span>
                       <p>{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
@@ -506,7 +546,11 @@ const FaveSection = ({
                         </Link>
                       </div>
                       <div className="user-name-parent">
-                        <p>{feed.parent.user.username}</p>
+                        <p className='usernames'>
+                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+                            {feed.parent.user.username}
+                          </Link>
+                        </p>
                       </div>
                     </div>
                   }
