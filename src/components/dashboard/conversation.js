@@ -24,7 +24,6 @@ const Conversation = () => {
     const incoming = new Date(date);
 
     if (current.getDate() === incoming.getDate()) {
-      console.log('yes')
       return formatTime(date);
     }
     return formatDate(date);

@@ -7,6 +7,7 @@ import { formatTime, formatDate } from '../../utils/helperFunctions';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
 import io from 'socket.io-client';
+import { toast } from 'react-toastify';
 
 import {
   getConversation,
@@ -24,7 +25,7 @@ class ChatBox extends Component {
     image: '',
     video: '',
     document: '',
-    message: ' ',
+    message: '',
     hidden: false,
     progress: 0
   };
@@ -43,15 +44,12 @@ class ChatBox extends Component {
       localStorage.setItem('activeConversation', currentConversation.id);
 
       this.state.socket.emit('join', { room: currentConversation.id }, () => {
-        console.log(`Group with id ${currentConversation.id}  joined `);
       });
 
       this.state.socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => {
-        console.log("Read all");
       });
 
       this.state.socket.on('recieveMessage', (data) => {
-        console.log("recieve: ", data);
         this.props.updateConversation(data);
 
         if (data.user.id !== currentUser.id) {
@@ -98,17 +96,24 @@ class ChatBox extends Component {
     const { image, video, message, document } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
-
+    const new_message = message.replace(/\s/g, '');
     if (conversation) {
-      if (message || image || video) {
-        const data = {
+      if (new_message || image || video) {
+        let data = {
           message,
           url: image || video || (document && document.path) || '',
           type: image ? 1 : video ? 2 : document ? 3 : 0,
           user,
           room: conversation.id
         };
-
+        if (!message.replace(/\s/g, '').length || message.length === 0) {
+          data = {
+            url: image || video || (document && document.path) || '',
+            type: image ? 1 : video ? 2 : document ? 3 : 0,
+            user,
+            room: conversation.id
+          };
+        }
         this.setState({ message: '', image: '', video: '', document: '' });
 
         this.props.createMessage(data,
@@ -122,6 +127,9 @@ class ChatBox extends Component {
             this.state.socket.emit('sendMessage', newData, () => {
             });
           });
+      }
+      else {
+        toast('Please add message to send');
       }
     }
 
@@ -153,7 +161,6 @@ class ChatBox extends Component {
           this.setState({ progress });
         },
         result => {
-          console.log(result);
           if (result.doc_type === 'document')
             this.setState({ [result.doc_type]: result, progress: 0 });
           else

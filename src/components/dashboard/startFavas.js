@@ -39,7 +39,7 @@ const StartFaves = () => {
           onClick={() => history.push('/tutorial')}
           className="clickable"
         >
-          >>
+          {'>>'}
         </h1>
       </div>
       {recommendedGalleries &&
