@@ -8,6 +8,7 @@ import FaveSection from './faveSection';
 import FeedSection from './feedSection';
 import {
   getCollectiveFeeds,
+  getMyFeeds,
   getMyFavesFeeds,
   getMySprfvsFeeds,
   getMySprfvsAndFavesFeeds,
@@ -32,7 +33,7 @@ const MzFlashGroup = () => {
   const {
     user: { favouriteUsers, faveAndSprfvsUsers, sprfvsUsers },
     mzFlash: {
-      collectiveFeeds, loading, favesFeeds,
+      collectiveFeeds, loading, favesFeeds, myFeeds,
       sprfvsFeeds, favesAndSprfvsFeeds, userFeeds
     }
   } = useSelector(state => state);
@@ -42,6 +43,7 @@ const MzFlashGroup = () => {
     dispatch(getFaveAndSprfvsUsers());
     dispatch(getSprfvsUsers(3, 1));
     dispatch(getCollectiveFeeds());
+    dispatch(getMyFeeds());
     dispatch(getMySprfvsFeeds());
     dispatch(getMyFavesFeeds());
     dispatch(getMySprfvsAndFavesFeeds());
@@ -112,7 +114,6 @@ const MzFlashGroup = () => {
       {loading && <Spinner />}
       <div className="row">
         <UserSection
-          activeTab={activeTab}
           favouriteUsers={favouriteUsers}
           sprfvsUsers={sprfvsUsers}
           faveAndSprfvsUsers={faveAndSprfvsUsers}
@@ -120,6 +121,7 @@ const MzFlashGroup = () => {
           activeUserList={activeUserList}
         />
         <FaveSection
+          myFeeds={myFeeds}
           sprfvsFeeds={sprfvsFeeds}
           favesFeeds={favesFeeds}
           favesAndSprfvsFeeds={favesAndSprfvsFeeds}

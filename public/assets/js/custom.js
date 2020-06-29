@@ -236,6 +236,7 @@ $(window).scroll(function () {
 
 $(document).on('click', '.post-body', function () {
   $(this).next().find('.lobby-icon').toggleClass("lobby-icon-slide");
+  $(this).prev().toggleClass("lobby-icon-slide");
 });
 
 

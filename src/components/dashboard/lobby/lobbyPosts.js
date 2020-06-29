@@ -21,6 +21,9 @@ const LobbyPosts = ({ post }) => {
           </>
         }
       </div>
+      <div className="valut-icon">
+        <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+      </div>
       <div className="post-body">
         {post.post_type === 2
           ? (

@@ -183,7 +183,7 @@ class ChatBox extends Component {
     const { user, messages } = this.props.conversation
 
     return (
-      <div className="chat-box" onScroll={() => console.log('scrolling')}>
+      <div className="chat-box">
         <>
           <div className={`chat-header ${user && user.feel_color}`}>
             <i

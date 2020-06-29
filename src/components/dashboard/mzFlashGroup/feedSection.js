@@ -251,7 +251,7 @@ const FeedSection = ({
               }
               {activeFeedComment === feed.id &&
                 <>
-                  {feed.limited_comments.map((comment, index) => (
+                  {feed?.limited_comments?.map((comment, index) => (
                     <p key={index}> {comment.comment} </p>
                   ))}
                 </>
