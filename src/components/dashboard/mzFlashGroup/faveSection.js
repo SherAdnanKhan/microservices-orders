@@ -17,7 +17,7 @@ const FaveSection = ({
     <div className="col-6 box-2 tab">
       <div className="row">
         <div
-          className={`col-4 ${activeTab === 1 && 'active'}`}
+          className={`col-3 ${activeTab === 1 && 'active'}`}
           onClick={() => onTabChange(1)}
         >
           <button className="tablinks">
@@ -44,7 +44,7 @@ const FaveSection = ({
           </button>
         </div>
         <div
-          className={`col-4 ${activeTab === 2 && 'active'}`}
+          className={`col-3 ${activeTab === 2 && 'active'}`}
           onClick={() => onTabChange(2)}
         >
           <button className="tablinks">
@@ -71,7 +71,7 @@ const FaveSection = ({
           </button>
         </div>
         <div
-          className={`col-4 ${activeTab === 3 && 'active'}`}
+          className={`col-3 ${activeTab === 3 && 'active'}`}
           onClick={() => onTabChange(3)}
         >
           <button className="tablinks">
@@ -98,7 +98,7 @@ const FaveSection = ({
           </button>
         </div>
         <div
-          className={`col-4 ${activeTab === 4 && 'active'}`}
+          className={`col-3 ${activeTab === 4 && 'active'}`}
           onClick={() => onTabChange(4)}
         >
           <button className="tablinks">
