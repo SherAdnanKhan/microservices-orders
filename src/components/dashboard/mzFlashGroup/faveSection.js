@@ -164,8 +164,8 @@ const FaveSection = ({
                     </div>
                   </div>
                   {feed.parent &&
-                    <div className="flex-container">
-                      <div className="action">
+                    <div className="flex-container-nested">
+                      <div className="col-2 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
@@ -173,12 +173,9 @@ const FaveSection = ({
                           />
                         </Link>
                       </div>
-                      <div className="user-name-parent">
-                        <p className="usernames">
-                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
-                            {feed.parent.user.username}
-                          </Link>
-                        </p>
+                      <div className="col-7 user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -293,8 +290,8 @@ const FaveSection = ({
                     </div>
                   </div>
                   {feed.parent &&
-                    <div className="flex-container">
-                      <div className="action">
+                    <div className="flex-container-nested">
+                      <div className="col-2 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
@@ -302,12 +299,9 @@ const FaveSection = ({
                           />
                         </Link>
                       </div>
-                      <div className="user-name-parent">
-                        <p className="usernames">
-                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
-                            {feed.parent.user.username}
-                          </Link>
-                        </p>
+                      <div className="col-7 user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -422,8 +416,8 @@ const FaveSection = ({
                     </div>
                   </div>
                   {feed.parent &&
-                    <div className="flex-container">
-                      <div className="action">
+                    <div className="flex-container-nested">
+                      <div className="col-2 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
@@ -431,12 +425,9 @@ const FaveSection = ({
                           />
                         </Link>
                       </div>
-                      <div className="user-name-parent">
-                        <p className="usernames">
-                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
-                            {feed.parent.user.username}
-                          </Link>
-                        </p>
+                      <div className="col-7 user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -545,8 +536,8 @@ const FaveSection = ({
                     </div>
                   </div>
                   {feed.parent &&
-                    <div className="flex-container">
-                      <div className="action">
+                    <div className="flex-container-nested">
+                      <div className="col-2 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
@@ -554,8 +545,9 @@ const FaveSection = ({
                           />
                         </Link>
                       </div>
-                      <div className="user-name-parent">
+                      <div className="col-7 user-name-parent">
                         <p>{feed.parent.user.username}</p>
+                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -671,8 +663,8 @@ const FaveSection = ({
                     </div>
                   </div>
                   {feed.parent &&
-                    <div className="flex-container">
-                      <div className="action">
+                    <div className="flex-container-nested">
+                      <div className="col-2 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
@@ -680,12 +672,9 @@ const FaveSection = ({
                           />
                         </Link>
                       </div>
-                      <div className="user-name-parent">
-                        <p className='usernames'>
-                          <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
-                            {feed.parent.user.username}
-                          </Link>
-                        </p>
+                      <div className="col-7 user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
