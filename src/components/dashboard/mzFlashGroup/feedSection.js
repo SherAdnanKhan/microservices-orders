@@ -176,15 +176,16 @@ const FeedSection = ({
                 }
               </div>
             }
-            <div className="col-3">
+            <div className="col-12 cube-top">
               <Link to={`/dashboard/studio/${feed.user.slug}`}>
                 <Avatar
                   avatars={feed.user.avatars}
                   feelColor={feed.feel_color}
                 />
               </Link>
+              <span>Monday may 2014</span>
             </div>
-            <div className="col-9">
+            <div className="col-12">
               <span className="usernames">
                 <Link to={`/dashboard/studio/${feed.user.slug}`}>
                   {feed.user.username}

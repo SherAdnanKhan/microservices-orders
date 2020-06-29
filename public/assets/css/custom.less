@@ -5402,6 +5402,17 @@ img {
     float: left;
     padding: 0 0px;
     width: 100%;
+    .usernames{
+      margin-left:20px;
+    }
+  }
+  .submit-text{
+    text-align: center;
+  }
+  .cube-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .box-css {
     border: 2px solid #C3C3C3;
@@ -5511,7 +5522,7 @@ img {
       display:flex;
       border: 1px solid;
       margin: 5px;
-      justify-content: center;
+      justify-content: space-around;
       .user-name-parent{
         display:flex;
         align-items: center;
@@ -5536,7 +5547,6 @@ img {
         margin-left:15px;
       }
       .repost{
-        margin-left:15px;
         margin-top:7px;
       }
     }
@@ -5662,11 +5672,13 @@ img {
     }
   }
   .image-preview {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin-top: 5px;
     img {
-      width: 100%;
-      height: 100%;
+      width: 100px;
+      height: 100px;
     }
   }
   .video-preview {
@@ -5991,7 +6003,7 @@ img {
       display: block;
       border: 1px solid #444;
       width: 110%;
-      margin-left:20px;
+      margin-left:15px;
       // margin: 0 auto;
       padding: 10px;
       box-sizing: border-box;
@@ -6013,7 +6025,7 @@ img {
       color: white;
       font-size: 16px;
       padding: 10px;
-      margin-left:60px;
+      margin-left:53px;
       @media (min-width: 857px)and(max-width:1200px)  {
         font-size:12px;
       }
@@ -6100,6 +6112,12 @@ img {
   }
   .set-sources{
     display:none;
+  }
+  .hide-mobile{
+    display:none;
+  }
+  .mobile-view{
+    width: 32.33333333% !important;
   }
   .mz-flash-group{#demo {
     height: 300px !important;
