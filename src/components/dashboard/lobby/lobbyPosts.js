@@ -20,6 +20,10 @@ const LobbyPosts = ({ post }) => {
             {post.user.art.name && post.user.art.name}
           </>
         }
+        <div className="counts">
+          <p className="strokes-count">strokes: {post.stroke_users.length}</p>
+          <p>comments: {post.comments.length}</p>
+        </div>
       </div>
       <div className="valut-icon">
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
