@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Avatar from '../../common/avatar';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
+import UserContext from '../../../context/userContext';
 
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
   activeTab, onTabChange, onCommentChange,
   activeFeedComment, onActiveFeedComment, onPostComment,
-  comments, onRepost, onStroke, onUnstroke
+  comments, onRepost, onStroke, onUnstroke, myFeeds
 }) => {
+
+  const currentUser = useContext(UserContext);
+
   return (
     <div className="col-6 box-2 tab">
       <div className="row">
@@ -91,6 +95,17 @@ const FaveSection = ({
                 </div>
               </div>
             </div>
+          </button>
+        </div>
+        <div
+          className={`col-4 ${activeTab === 4 && 'active'}`}
+          onClick={() => onTabChange(4)}
+        >
+          <button className="tablinks">
+            <Avatar
+              avatars={currentUser.avatars}
+              feelColor={currentUser.feel_color}
+            />
           </button>
         </div>
       </div>
@@ -312,7 +327,7 @@ const FaveSection = ({
                     }
                     {activeFeedComment === feed.id &&
                       <>
-                        {feed.limited_comments.map((comment, index) => (
+                        {feed?.limited_comments?.map((comment, index) => (
                           <p key={index}> {comment.comment} </p>
                         ))}
                       </>
@@ -430,7 +445,7 @@ const FaveSection = ({
                     }
                     {activeFeedComment === feed.id &&
                       <>
-                        {feed.limited_comments.map((comment, index) => (
+                        {feed?.limited_comments?.map((comment, index) => (
                           <p key={index}> {comment.comment} </p>
                         ))}
                       </>
@@ -449,6 +464,126 @@ const FaveSection = ({
               ))}
           </>
         }
+
+        {activeTab === 4 &&
+          <>
+            {myFeeds &&
+              myFeeds.data.map((feed, index) => (
+                <div
+                  className="sub-box tabcontent"
+                  id="tab3"
+                  key={index}
+                >
+                  <div className="row">
+                    {feed.parent &&
+                      <div className="reposted-text">
+                        {feed.user.username} has reposted this feed
+                      </div>
+                    }
+                    <div className="col-2">
+                      <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                        <Avatar
+                          avatars={feed.user.avatars}
+                          feelColor={feed.feel_color}
+                        />
+                      </Link>
+                    </div>
+                    <div className="col-7">
+                      <span> {feed.user.username}</span>
+                      <p>{feed.feed} </p>
+                      {feed.feed_type === 1 &&
+                        feed.image &&
+                        <img
+                          src={feed.image.path}
+                          alt="Snow"
+                          className="img-css"
+                        />
+                      }
+                      {feed.feed_type === 2 &&
+                        feed.image &&
+                        <div className="video left-space">
+                          <video controls>
+                            <source src={feed.image.path} type="video/mp4" />
+                            <source src={feed.image.path} type="video/ogg" />
+                                Your browser does not support the video tag.
+                              </video>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  {feed.parent &&
+                    <div className="flex-container">
+                      <div className="action">
+                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+                          <Avatar
+                            avatars={feed.parent.user.avatars}
+                            feelColor={feed.parent.user.feel_color}
+                          />
+                        </Link>
+                      </div>
+                      <div className="user-name-parent">
+                        <p>{feed.parent.user.username}</p>
+                      </div>
+                    </div>
+                  }
+                  <div className="flex-container">
+                    <div className="action">
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                      <div className="coment-counter">
+                        {feed.comments_count}
+                      </div>
+                    </div>
+                    <div className="strk-btn">
+                      <Stroke
+                        hasStroke={feed.has_stroke_count}
+                        className="strk-img"
+                        onStroke={() => onStroke(feed.id)}
+                        onUnstroke={() => onUnstroke(feed.id)}
+                      />
+                      <div className="strk-counter">
+                        {feed.stroke_users_count}
+                      </div>
+                    </div>
+                    <div className="actions-repost">
+                      <button
+                        className="repost"
+                        onClick={e => onRepost(e, feed)}
+                      >
+                        Repost
+                        </button>
+                    </div>
+                  </div>
+                  <div className="view-comment">
+                    {feed.limited_comments.length > 0 &&
+                      <Link
+                        to="#"
+                        onClick={e => onActiveFeedComment(e, feed.id)}
+                      >
+                        View Comments
+                        </Link>
+                    }
+                    {activeFeedComment === feed.id &&
+                      <>
+                        {feed?.limited_comments?.map((comment, index) => (
+                          <p key={index}> {comment.comment} </p>
+                        ))}
+                      </>
+                    }
+                  </div>
+                  <input
+                    type="text"
+                    id={`fav${feed.id}`}
+                    name={`fav${feed.id}`}
+                    value={comments[`fav${feed.id}`] ? comments[`fav${feed.id}`] : ''}
+                    placeholder="Enter a Comment..."
+                    onChange={onCommentChange}
+                    onKeyUp={e => onPostComment(e, feed.id, `fav${feed.id}`)}
+                  />
+                </div>
+              ))}
+          </>
+        }
+
         {activeTab === 0 &&
           <>
             {userFeeds &&
@@ -548,7 +683,7 @@ const FaveSection = ({
                     }
                     {activeFeedComment === feed.id &&
                       <>
-                        {feed.limited_comments.map((comment, index) => (
+                        {feed?.limited_comments?.map((comment, index) => (
                           <p key={index}> {comment.comment} </p>
                         ))}
                       </>
