@@ -69,9 +69,9 @@ const MzFlash = () => {
 
         {userFeeds &&
           userFeeds.data.map((feed, index) => (
-            <div className="col-4 box-3" key={index}>
+            <div className="box-3" key={index}>
               <div className="sub-box row">
-                <div className="col-3">
+                <div className="col-1">
                   <Avatar
                     avatars={feed.user.avatars}
                     feelColor={feed.user.feel_color}
@@ -102,6 +102,44 @@ const MzFlash = () => {
                     </video>
                   }
                 </div>
+                {feed.parent &&
+                  <div className="flex-container-nested">
+                    <div className="action-cube">
+                      <Avatar
+                        avatars={feed.parent.user.avatars}
+                        feelColor={feed.parent.user.feel_color}
+                      />
+                    </div>
+                    <div className="user-name-parent">
+                      <p className="user-name">{feed.parent.user.username}</p>
+                    </div>
+                  </div>
+                }
+                <div className="flex-container">
+                  <div className="action">
+                    <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                    <div className="coment-counter">
+                      123
+                    </div>
+                  </div>
+                  <div className="strk-btn">
+                    <img className="strk-img" alt="" src="/assets/images/crit1.png" />
+                    <div className="strk-counter">
+                      {feed.stroke_users_count}
+                    </div>
+                  </div>
+                  <div className="actions-repost">
+                    <button
+                      className="repost"
+                    >
+                      Repost
+                    </button>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Enter a Comment..."
+                />
               </div>
             </div>
           ))}
