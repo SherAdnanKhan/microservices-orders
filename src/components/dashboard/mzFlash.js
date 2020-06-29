@@ -119,11 +119,11 @@ const MzFlash = () => {
                   <div className="action">
                     <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     <div className="coment-counter">
-                      123
+                      {feed.stroke_users_count}
                     </div>
                   </div>
                   <div className="strk-btn">
-                    <img className="strk-img" alt="" src="/assets/images/crit1.png" />
+                    <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
                     <div className="strk-counter">
                       {feed.stroke_users_count}
                     </div>
