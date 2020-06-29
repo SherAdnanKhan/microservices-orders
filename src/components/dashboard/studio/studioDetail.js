@@ -100,7 +100,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                   id="addbio"
                   value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
                   disabled
-                >  {userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
+                >  {userStudio && userStudio.user.bio ? userStudio.user.bio.replace(/<br\s*\/?>/g,'\n') : ''}
                   </div>
               </label>
             }
