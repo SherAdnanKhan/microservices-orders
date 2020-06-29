@@ -138,9 +138,6 @@ const RegisterForm = () => {
     if (!isEmpty(croppedImage)) {
       data.avatar = croppedImage;
     }
-
-    console.log(data);
-
     for (let key in data) {
       formData.append(key, data[key]);
     }

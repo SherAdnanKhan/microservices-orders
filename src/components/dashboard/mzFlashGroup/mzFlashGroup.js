@@ -22,6 +22,7 @@ import {
 const MzFlashGroup = () => {
   const [activeTab, setActiveTab] = useState(2);
   const [activeUserList, setActiveUserList] = useState(2);
+  const [activeUser, setActiveUser] = useState('');
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
 
@@ -100,12 +101,13 @@ const MzFlashGroup = () => {
 
   const handleActiveUser = user => {
     setActiveTab(0);
-    console.log(user)
+    setActiveUser(user);
     dispatch(getUserFeeds(user.slug));
   };
 
   const handleTabChange = tab => {
     setActiveTab(tab);
+    setActiveUser('');
     setActiveUserList(tab);
   };
 
@@ -127,6 +129,8 @@ const MzFlashGroup = () => {
           favesAndSprfvsFeeds={favesAndSprfvsFeeds}
           userFeeds={userFeeds}
           activeTab={activeTab}
+          activeUser={activeUser}
+          activeUserList={activeUserList}
           onTabChange={handleTabChange}
           activeFeedComment={activeFeedComment}
           onActiveFeedComment={handleActiveFeedComment}

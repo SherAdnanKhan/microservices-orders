@@ -7,7 +7,7 @@ const UserSection = ({
 }) => {
   return (
     <div className="col-2 box-1">
-      {activeUserList !== 4 && <i className="fa fa-caret-up fa-3x"></i>}
+      <i className="fa fa-caret-up fa-3x"></i>
       {activeUserList === 1 &&
         <div className="box-css">
           <div id="demo">
@@ -23,7 +23,7 @@ const UserSection = ({
           </div>
         </div>
       }
-      {activeUserList === 2 &&
+      {(activeUserList === 2 || activeUserList === 4) &&
         <div className="box-css">
           <div id="demo">
             <div className="cv-carousel">
@@ -53,7 +53,7 @@ const UserSection = ({
           </div>
         </div>
       }
-      {activeUserList !== 4 && <i className="fa fa-caret-down fa-3x"></i>}
+      <i className="fa fa-caret-down fa-3x"></i>
     </div>
   );
 };

@@ -45,8 +45,6 @@ export const createGallery = (data, callback) => dispatch => {
   http
     .post('/galleries/my-gallery/create', data, {})
     .then(res => {
-      console.log(res.data.data);
-
       toast('Gallery created successfully.');
       dispatch({
         type: CREATE_GALLERY,

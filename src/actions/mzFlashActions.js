@@ -43,9 +43,9 @@ export const getMyFeeds = () => dispatch => {
     });
 };
 
-export const getCollectiveFeeds = () => dispatch => {
+export const getCollectiveFeeds = (page = 1) => dispatch => {
   http
-    .get('/mzflash/user/collective-feed')
+    .get(`/mzflash/user/collective-feed?page=${page}`)
     .then(res => {
       dispatch({
         type: GET_COLLECTIVE_FEEDS,

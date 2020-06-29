@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Avatar from '../../common/avatar';
 import Input from '../../common/input';
 import { useDispatch } from 'react-redux';
-import { createFeed } from '../../../actions/mzFlashActions';
+import { createFeed, getCollectiveFeeds } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 
@@ -14,7 +14,7 @@ const FeedSection = ({
 }) => {
 
   const dispatch = useDispatch();
-
+  const [currentPage, setCurrentPage] = useState(1);
   const [imageUrl, setImageUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [charCount, setCharCount] = useState(0);
@@ -24,6 +24,8 @@ const FeedSection = ({
     video: null,
     image: null
   });
+
+  const feedRef = useRef();
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file') {
@@ -44,9 +46,6 @@ const FeedSection = ({
       setCharCount(input.value.length);
     }
   };
-
-
-
 
   const validate = () => {
     let error = '';
@@ -78,8 +77,25 @@ const FeedSection = ({
     setError(error);
   };
 
+  const handleScroll = async () => {
+    const scrollTop = feedRef.current.scrollTop;
+    const scrollHeight = feedRef.current.scrollHeight;
+    const clientHeight = feedRef.current.clientHeight;
+
+    if (scrollHeight - clientHeight === scrollTop) {
+      if (collectiveFeeds.next_page_url) {
+        setCurrentPage(currentPage => currentPage + 1);
+        dispatch(getCollectiveFeeds(currentPage + 1));
+      }
+    }
+  };
+
   return (
-    <div className="col-4 box-3">
+    <div
+      className="col-4 box-3"
+      ref={ref => feedRef.current = ref}
+      onScroll={handleScroll}
+    >
       <div className="message-input">
         <form className="form-inline" onSubmit={handleSubmit}>
           <i
