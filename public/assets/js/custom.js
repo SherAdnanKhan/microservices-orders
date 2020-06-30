@@ -241,5 +241,6 @@ $(document).on('click', '.post-body', function () {
 
 
 $(document).on('click', '.list-body', function () {
-  $(this).next().find('.lobby-icon').toggleClass("lobby-icon-slide");
+  $(this).find('.lobby-icon').toggleClass("lobby-icon-slide");
+  $(this).prev().toggleClass("lobby-icon-slide");
 });
