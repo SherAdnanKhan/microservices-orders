@@ -3,6 +3,7 @@ import Avatar from '../../common/avatar';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 import UserContext from '../../../context/userContext';
+import { formatDate } from '../../../utils/helperFunctions';
 
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
@@ -146,10 +147,7 @@ const FaveSection = ({
                   <div className="row">
                     {feed.parent &&
                       <div className="reposted-text usernames">
-                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
-                          {feed.user.username}
-                        </Link>
-                        has reposted this feed
+                        {feed.user.username} has reposted this feed
                       </div>
                     }
                     <div className="col-12 cube-fave">
@@ -159,7 +157,8 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
-                      <span className="date-time">Monday may 2014
+                      <span className="date-time">
+                        {formatDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="col-12">
@@ -168,6 +167,7 @@ const FaveSection = ({
                           {feed.user.username}
                         </Link>
                       </span>
+                      <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -197,13 +197,31 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span className="date-time">Monday may 2014
+                        <span className="date-time">
+                          {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
-                        <p className="submit-text"> {feed.feed}</p>
-                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
+                        <p className="submit-text"> {feed.parent.feed}</p>
+                        {feed.parent.feed_type === 1 &&
+                          feed.parent.image &&
+                          <img
+                            src={feed.parent.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        }
+                        {feed.parent.feed_type === 2 &&
+                          feed.parent.image &&
+                          <div className="video left-space">
+                            <video controls>
+                              <source src={feed.parent.image.path} type="video/mp4" />
+                              <source src={feed.parent.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        }
                       </div>
                     </div>
                   }
@@ -276,10 +294,7 @@ const FaveSection = ({
                   <div className="row">
                     {feed.parent &&
                       <div className="reposted-text usernames">
-                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
-                          {feed.user.username}
-                        </Link>
-                        has reposted this feed
+                        {feed.user.username} has reposted this feed
                       </div>
                     }
                     <div className="col-12 cube-fave">
@@ -289,7 +304,8 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
-                      <span className="date-time">Monday may 2014
+                      <span className="date-time">
+                        {formatDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="col-12">
@@ -298,6 +314,7 @@ const FaveSection = ({
                           {feed.user.username}
                         </Link>
                       </span>
+                      <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -312,8 +329,8 @@ const FaveSection = ({
                           <video controls>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
-                                Your browser does not support the video tag.
-                              </video>
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                       }
                     </div>
@@ -327,13 +344,31 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span className="date-time">Monday may 2014
+                        <span className="date-time">
+                          {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
-                        <p className="submit-text">{feed.feed} </p>
-                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
+                        <p className="submit-text">{feed.parent.feed} </p>
+                        {feed.parent.feed_type === 1 &&
+                          feed.parent.image &&
+                          <img
+                            src={feed.parent.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        }
+                        {feed.parent.feed_type === 2 &&
+                          feed.parent.image &&
+                          <div className="video left-space">
+                            <video controls>
+                              <source src={feed.parent.image.path} type="video/mp4" />
+                              <source src={feed.parent.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        }
                       </div>
                     </div>
                   }
@@ -406,10 +441,7 @@ const FaveSection = ({
                   <div className="row">
                     {feed.parent &&
                       <div className="reposted-text usernames">
-                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
-                          {feed.user.username}
-                        </Link>
-                        has reposted this feed
+                        {feed.user.username} has reposted this feed
                       </div>
                     }
                     <div className="col-12 cube-fave">
@@ -419,7 +451,8 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
-                      <span className="date-time">Monday may 2014
+                      <span className="date-time">
+                        {formatDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="col-12">
@@ -428,6 +461,7 @@ const FaveSection = ({
                           {feed.user.username}
                         </Link>
                       </span>
+                      <p className="submit-text"> {feed.feed}</p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -442,8 +476,8 @@ const FaveSection = ({
                           <video controls>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
-                                Your browser does not support the video tag.
-                              </video>
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                       }
                     </div>
@@ -457,13 +491,31 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span className="date-time">Monday may 2014
+                        <span className="date-time">
+                          {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
-                        <p className="submit-text">{feed.feed} </p>
-                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
+                        <p className="submit-text">{feed.parent.feed} </p>
+                        {feed.parent.feed_type === 1 &&
+                          feed.parent.image &&
+                          <img
+                            src={feed.parent.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        }
+                        {feed.parent.feed_type === 2 &&
+                          feed.parent.image &&
+                          <div className="video left-space">
+                            <video controls>
+                              <source src={feed.parent.image.path} type="video/mp4" />
+                              <source src={feed.parent.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        }
                       </div>
                     </div>
                   }
@@ -548,6 +600,9 @@ const FaveSection = ({
                         />
                       </Link>
                     </div>
+                    <span className="date-time">
+                      {formatDate(feed.created_at)}
+                    </span>
                     <div className="col-7">
                       <span> {feed.user.username}</span>
                       <p>{feed.feed} </p>
@@ -565,8 +620,8 @@ const FaveSection = ({
                           <video controls>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
-                                Your browser does not support the video tag.
-                              </video>
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                       }
                     </div>
@@ -580,13 +635,31 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span className="date-time">Monday may 2014
+                        <span className="date-time">
+                          {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="col-7 user-name-parent">
                         <p classNmae="usernames">{feed.parent.user.username}</p>
-                        <p className="submit-text"> {feed.feed}</p>
-                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
+                        <p className="submit-text"> {feed.parent.feed}</p>
+                        {feed.parent.feed_type === 1 &&
+                          feed.parent.image &&
+                          <img
+                            src={feed.parent.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        }
+                        {feed.parent.feed_type === 2 &&
+                          feed.parent.image &&
+                          <div className="video left-space">
+                            <video controls>
+                              <source src={feed.parent.image.path} type="video/mp4" />
+                              <source src={feed.parent.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        }
                       </div>
                     </div>
                   }
@@ -614,7 +687,7 @@ const FaveSection = ({
                         onClick={e => onRepost(e, feed)}
                       >
                         Repost
-                        </button>
+                      </button>
                     </div>
                   </div>
                   <div className="view-comment">
@@ -660,10 +733,7 @@ const FaveSection = ({
                   <div className="row">
                     {feed.parent &&
                       <div className="reposted-text">
-                        <Link to={`/dashboard/studio/${feed.user.slug}`}>
-                          {feed.user.username}
-                        </Link>
-                        has reposted this feed
+                        {feed.user.username} has reposted this feed
                       </div>
                     }
                     <div className="col-2">
@@ -674,6 +744,9 @@ const FaveSection = ({
                         />
                       </Link>
                     </div>
+                    <span className="date-time">
+                      {formatDate(feed.parent.created_at)}
+                    </span>
                     <div className="col-7">
                       <span className='usernames'>
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
@@ -695,8 +768,8 @@ const FaveSection = ({
                           <video controls>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
-                                Your browser does not support the video tag.
-                              </video>
+                            Your browser does not support the video tag.
+                          </video>
                         </div>
                       }
                     </div>
@@ -710,13 +783,31 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span className="date-time">Monday may 2014
+                        <span className="date-time">
+                          {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
-                        <p className="submit-text"> {feed.feed}</p>
-                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
+                        <p className="submit-text"> {feed.parent.feed}</p>
+                        {feed.parent.feed_type === 1 &&
+                          feed.parent.image &&
+                          <img
+                            src={feed.parent.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        }
+                        {feed.parent.feed_type === 2 &&
+                          feed.parent.image &&
+                          <div className="video left-space">
+                            <video controls>
+                              <source src={feed.parent.image.path} type="video/mp4" />
+                              <source src={feed.parent.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        }
                       </div>
                     </div>
                   }
