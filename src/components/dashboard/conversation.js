@@ -72,10 +72,10 @@ const Conversation = () => {
                 {conversation.participants.length > 0 &&
                   <>
                     {conversation.participants[0].id !== currentUser.id &&
-                      <div className="name">Name: {conversation.participants[0].username} </div>
+                      <div className="name"> {conversation.participants[0].username} </div>
                     }
                     {conversation.participants[1].id !== currentUser.id &&
-                      <div className="name">Name: {conversation.participants[1].username} </div>
+                      <div className="name"> {conversation.participants[1].username} </div>
                     }
                   </>
                 }

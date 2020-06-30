@@ -4534,11 +4534,16 @@ img {
           align-items: center;
           flex-direction: row-reverse;
 
-        .send-icon {
-          float: right;
+     //   .send-icon {
+	//	width:15px;
+	//	height:15px;
+       //   float: right;
           clear:both;
           margin-right: 0;
-        }
+//	  img {
+//		  width:100%;
+	//  }
+     //   }
 
         .msgDocument {
           padding-top: 10px;
@@ -4651,8 +4656,8 @@ img {
             border-radius: 10px 10px 0 10px;
           }
           img{
-            width: 25px;
-            border: 1px solid #ccc;
+            width: 15px;
+            border: 1px solid rgba(255,255,255, .5);
             margin-left: 10px;
           }
         }
@@ -5002,8 +5007,12 @@ img {
       }
       .msg {
         width: 100%;
-        max-width: calc(100% - 60px - 150px);
+	height:40px;
+	white-space: nowrap;
+	overflow:hidden;
+        max-width: calc(100% - 30px - 120px);
         padding-left: 15px;
+	text-overflow: ellipsis;
         font-size: 13px;
         display: inline-block;
         vertical-align: top;
@@ -5013,7 +5022,9 @@ img {
       }
       .dateTime {
         width: 100%;
-        max-width: 123px;
+        max-width: 70px;
+	color: rgba(255,255,255, .7);
+	font-size:13px;
         text-align: right;
         vertical-align: top;
         display: inline-block;
