@@ -13,7 +13,6 @@ import {
   STROKE_FEED,
   UNSTROKE_FEED
 } from '../constants/actionTypes';
-import { toast } from 'react-toastify';
 
 export const createFeed = data => dispatch => {
   dispatch({ type: START_FEEDS_LOADER });
@@ -106,7 +105,6 @@ export const createFeedComment = data => dispatch => {
         type: CREATE_FEED_COMMENT,
         payload: res.data.data.feed_comment
       });
-      toast('Comment has been added to the feed');
     });
 };
 

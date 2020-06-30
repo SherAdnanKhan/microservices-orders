@@ -1,18 +1,23 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { Link } from 'react-router-dom';
 import ProfileCube from '../common/profileCube';
+import Stroke from '../common/stroke';
+import Avatar from "../common/avatar";
 import { favUser, unfavUser } from "../../actions/userActions";
 import { useRouteMatch } from 'react-router-dom';
 import { getUserStudio } from "../../actions/studioActions";
-import { getUserFeeds } from "../../actions/mzFlashActions";
-import Avatar from "../common/avatar";
-import { Link } from 'react-router-dom';
+import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed } from "../../actions/mzFlashActions";
+import Spinner from "../common/spinner";
 
 const MzFlash = () => {
+  const [comments, setComments] = useState({});
+  const [activeComments, setActiveComments] = useState('');
+
   const dispatch = useDispatch();
   const {
     studio: { userStudio },
-    mzFlash: { userFeeds }
+    mzFlash: { userFeeds, loading }
   } = useSelector(state => state);
 
   const { params: { slug } } = useRouteMatch();
@@ -27,17 +32,62 @@ const MzFlash = () => {
     dispatch(unfavUser(id))
   }
 
+  const handleStroke = id => {
+    const data = {
+      feed_id: id
+    };
+    dispatch(strokeFeed(data));
+  };
+
+  const handleUnstroke = id => {
+    const data = {
+      feed_id: id
+    };
+    dispatch(unstrokeFeed(data));
+  };
+
+  const handleCommentChange = ({ target: input }) => {
+    setComments({ ...comments, [input.name]: input.value });
+  };
+
+  const handleActiveComments = (e, feedId) => {
+    e.preventDefault();
+
+    if (feedId === activeComments) {
+      setActiveComments('');
+    } else {
+      setActiveComments(feedId);
+    }
+  };
+
+  const handlePostComment = (e, feedId) => {
+    if (e.keyCode === 13 && comments[feedId]) {
+      const commentData = {
+        feed_id: feedId,
+        comment: comments[feedId]
+      };
+
+      dispatch(createFeedComment(commentData));
+      setComments({ ...comments, [feedId]: '' });
+    }
+  };
+
+  const handleRepost = (e, feed) => {
+    e.preventDefault();
+
+    const formData = {};
+    formData.feed_id = feed.id;
+    dispatch(createFeed(formData));
+  };
+
   useEffect(() => {
     dispatch(getUserStudio(slug));
     dispatch(getUserFeeds(slug))
   }, [dispatch, slug]);
 
-  useEffect(() => {
-    console.log(userFeeds)
-  }, [userFeeds]);
-
   return (
     <div className={`mz-flash-page ${userStudio && userStudio.user.feel_color}`}>
+      {loading && <Spinner />}
       <>
         <div className="mz-flash-head">
           {userStudio &&
@@ -56,7 +106,6 @@ const MzFlash = () => {
           <div className="fav-btn-div">
             {userStudio && userStudio.has_faved &&
               <button className="fav-btn clickable" onClick={(e) => handleUnFave(e, userStudio.user.id)}>FAVING</button>
-
             }
             {userStudio && !userStudio.has_faved &&
               <button className="fav-btn clickable" onClick={(e) => handleFave(e, userStudio.user.id)}>FAVE</button>
@@ -72,6 +121,11 @@ const MzFlash = () => {
           userFeeds.data.map((feed, index) => (
             <div className="box-3" key={index}>
               <div className="sub-box row">
+                {feed.parent &&
+                  <div className="reposted-text">
+                    {feed.parent.user.username} has reposted this feed
+                  </div>
+                }
                 <div className="col-1">
                   <Avatar
                     avatars={feed.user.avatars}
@@ -84,12 +138,9 @@ const MzFlash = () => {
                       {feed.user.username}
                     </Link>
                   </span>
-                  <span className="name-btn BT-2">
-                    {/* <Link to="#">Button</Link> */}
-                  </span>
                   <p> {feed.feed} </p>
                 </div>
-                <div class="imgvideo-mzflash">
+                <div className="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
                     feed.image &&
                     <img
@@ -124,11 +175,17 @@ const MzFlash = () => {
                   <div className="action">
                     <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     <div className="coment-counter">
-                      {feed.stroke_users_count}
+                      {feed.comments_count}
                     </div>
                   </div>
                   <div className="strk-btn">
-                    <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" />
+                    <Stroke
+                      hasStroke={feed.has_stroke_count}
+                      className="strk-img"
+                      onStroke={() => handleStroke(feed.id)}
+                      onUnstroke={() => handleUnstroke(feed.id)}
+                    />
+                    {/* <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" /> */}
                     <div className="strk-counter">
                       {feed.stroke_users_count}
                     </div>
@@ -136,13 +193,35 @@ const MzFlash = () => {
                   <div className="actions-repost">
                     <button
                       className="repost"
+                      onClick={e => handleRepost(e, feed)}
                     >
                       Repost
                     </button>
                   </div>
                 </div>
+                <div className="view-comment">
+                  {feed.limited_comments.length > 0 &&
+                    <Link
+                      to="#"
+                      onClick={(e) => handleActiveComments(e, feed.id)}
+                    >
+                      View Comments
+                    </Link>
+                  }
+                  {activeComments === feed.id &&
+                    <>
+                      {feed?.limited_comments?.map((comment, index) => (
+                        <p key={index}> {comment.comment} </p>
+                      ))}
+                    </>
+                  }
+                </div>
                 <input
                   type="text"
+                  name={feed.id}
+                  value={comments[feed.id] ? comments[feed.id] : ''}
+                  onChange={handleCommentChange}
+                  onKeyUp={e => handlePostComment(e, feed.id)}
                   placeholder="Enter a Comment..."
                 />
               </div>
