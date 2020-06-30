@@ -244,3 +244,18 @@ $(document).on('click', '.list-body', function () {
   $(this).find('.lobby-icon').toggleClass("lobby-icon-slide");
   $(this).prev().toggleClass("lobby-icon-slide");
 });
+
+
+$(document).on('click', '.action-w', function () {
+  if ($(this).parents('.post-footer').find('.duplicate-img').length <= 0) {
+    let src = $(this).parents('.post-footer').prev().find('img').attr('src');
+    $(this).parents('.post-footer').find('.post-title').after(`
+    <div class="duplicate-img">
+    <img src="${src}"/>
+    </div>
+    `);
+  } else {
+    $(this).parents('.post-footer').find('.duplicate-img').remove();
+  }
+
+})

@@ -7,7 +7,7 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
 
   return (
     <div className="post-footer">
-      {post && post.post && post.post.title && <h3>{post.post.title}</h3>}
+      {post && post.post && post.post.title && <h3 className="post-title">{post.post.title}</h3>}
       <div className="post-footer-bar">
         <div className="poster-footer-stokes-btn" >
           {post && post.has_stroke
@@ -33,7 +33,7 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
           <img className="post-non-color-icon open-commet" src="/assets/images/crit1.png" alt="" />
         </div>
         {hasAllowedCritiques() &&
-          <div className="post-footer-icons">
+          <div className="post-footer-icons action-w">
             <img className="post-non-color-icon" src="/assets/images/ncommnicon.png" alt="" />
           </div>
         }
