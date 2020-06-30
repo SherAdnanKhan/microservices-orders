@@ -82,7 +82,7 @@ export default (state = initialState, action) => {
         ...state,
         myFeeds: {
           ...state.myFeeds,
-          data: state.myFeeds.data.map(feed => {
+          data: state?.myFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -96,7 +96,7 @@ export default (state = initialState, action) => {
         },
         collectiveFeeds: {
           ...state.collectiveFeeds,
-          data: state.collectiveFeeds.data.map(feed => {
+          data: state?.collectiveFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -110,7 +110,7 @@ export default (state = initialState, action) => {
         },
         sprfvsFeeds: {
           ...state.sprfvsFeeds,
-          data: state.sprfvsFeeds.data.map(feed => {
+          data: state?.sprfvsFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -124,7 +124,7 @@ export default (state = initialState, action) => {
         },
         favesFeeds: {
           ...state.favesFeeds,
-          data: state.favesFeeds.data.map(feed => {
+          data: state?.favesFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -138,7 +138,7 @@ export default (state = initialState, action) => {
         },
         favesAndSprfvsFeeds: {
           ...state.favesAndSprfvsFeeds,
-          data: state.favesAndSprfvsFeeds.data.map(feed => {
+          data: state?.favesAndSprfvsFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -185,7 +185,7 @@ export default (state = initialState, action) => {
         ...state,
         myFeeds: {
           ...state.myFeeds,
-          data: state.myFeeds.data.map(feed => {
+          data: state?.myFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -198,7 +198,7 @@ export default (state = initialState, action) => {
         },
         collectiveFeeds: {
           ...state.collectiveFeeds,
-          data: state.collectiveFeeds.data.map(feed => {
+          data: state?.collectiveFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -211,7 +211,7 @@ export default (state = initialState, action) => {
         },
         favesFeeds: {
           ...state.favesFeeds,
-          data: state.favesFeeds.data.map(feed => {
+          data: state?.favesFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -224,7 +224,7 @@ export default (state = initialState, action) => {
         },
         sprfvsFeeds: {
           ...state.sprfvsFeeds,
-          data: state.sprfvsFeeds.data.map(feed => {
+          data: state?.sprfvsFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -237,7 +237,7 @@ export default (state = initialState, action) => {
         },
         favesAndSprfvsFeeds: {
           ...state.favesAndSprfvsFeeds,
-          data: state.favesAndSprfvsFeeds.data.map(feed => {
+          data: state?.favesAndSprfvsFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -267,7 +267,7 @@ export default (state = initialState, action) => {
         ...state,
         collectiveFeeds: {
           ...state.collectiveFeeds,
-          data: state.collectiveFeeds.data.map(feed => {
+          data: state?.collectiveFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -280,7 +280,7 @@ export default (state = initialState, action) => {
         },
         favesFeeds: {
           ...state.favesFeeds,
-          data: state.favesFeeds.data.map(feed => {
+          data: state?.favesFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -293,7 +293,7 @@ export default (state = initialState, action) => {
         },
         sprfvsFeeds: {
           ...state.sprfvsFeeds,
-          data: state.sprfvsFeeds.data.map(feed => {
+          data: state?.sprfvsFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
@@ -306,7 +306,7 @@ export default (state = initialState, action) => {
         },
         favesAndSprfvsFeeds: {
           ...state.favesAndSprfvsFeeds,
-          data: state.favesAndSprfvsFeeds.data.map(feed => {
+          data: state?.favesAndSprfvsFeeds?.data?.map(feed => {
             if (feed.id === action.payload.feed_id) {
               return {
                 ...feed,
