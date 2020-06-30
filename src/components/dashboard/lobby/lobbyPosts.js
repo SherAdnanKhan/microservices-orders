@@ -1,8 +1,23 @@
 import React from 'react';
 import Avatar from "../../common/avatar";
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
+import Stroke from '../../common/stroke';
+import { makeStoke, unStoke } from "../../../actions/postAction";
+import { useDispatch } from "react-redux";
+
 
 const LobbyPosts = ({ post }) => {
+  const { params: { id } } = useRouteMatch();
+  const dispatch = useDispatch();
+  const handleUnStoke = (e, ID) => {
+    //e.preventDefault();
+    dispatch(unStoke(ID, id))
+  }
+
+  const handleStoke = (e, ID) => {
+    //e.preventDefault();
+    dispatch(makeStoke(ID, id));
+  }
   return (
     <div className="post-page">
       <div className="post-head">
@@ -20,10 +35,6 @@ const LobbyPosts = ({ post }) => {
             {post.user.art.name && post.user.art.name}
           </>
         }
-        <div className="counts">
-          <p className="strokes-count">strokes: {post.stroke_users.length}</p>
-          <p>comments: {post.comments.length}</p>
-        </div>
       </div>
       <div className="valut-icon">
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
@@ -46,10 +57,17 @@ const LobbyPosts = ({ post }) => {
         <p>{post && post.title}</p>
         <div class="lobby-icon">
           <div className="strk-btn">
-            <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" />
+            <Stroke
+              hasStroke={post.has_stroke}
+              className="strk-img"
+              onStroke={() => handleStoke(post.id)}
+              onUnstroke={() => handleUnStoke(post.id)}
+            />
+            {post.stroke_users.length}
           </div>
           <div className="action">
             <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+            {post.comments.length}
           </div>
           <div className="action">
             <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
