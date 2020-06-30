@@ -251,13 +251,19 @@ const FeedSection = ({
             <div className="flex-container">
               <div className="action">
                 <span className="coment-counter">
-                  {feed.comments_count}
+                  {feed.comments_count > 1
+                    ? <>{feed.comments_count} comments </>
+                    : <>{feed.comments_count} comment </>
+                  }
                 </span>
                 <img className="comment-img" alt="" src="/assets/images/crit1.png" />
               </div>
               <div className="strk-btn">
                 <span className="strk-counter">
-                  {feed.stroke_users_count}
+                  {feed.stroke_users_count > 1
+                    ? <> {feed.stroke_users_count} strokes </>
+                    : <> {feed.stroke_users_count} stroke </>
+                  }
                 </span>
                 <Stroke
                   hasStroke={feed.has_stroke_count}
