@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { createFeed, getCollectiveFeeds } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
+import { formatDate } from '../../../utils/helperFunctions';
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
@@ -167,12 +168,7 @@ const FeedSection = ({
               <div className="reposted-text">
                 {feed.user.id === currentUser.id
                   ? <> You have reposted this feed </>
-                  : <> <p className="usernames">
-                    <Link to={`/dashboard/studio/${feed.user.slug}`}>
-                      {feed.user.username}
-                    </Link> has reposted this feed
-                  </p>
-                  </>
+                  : <> {feed.user.username} has reposted this feed  </>
                 }
               </div>
             }
@@ -183,7 +179,9 @@ const FeedSection = ({
                   feelColor={feed.feel_color}
                 />
               </Link>
-              <span>Monday may 2014</span>
+              <span>
+                {formatDate(feed.created_at)}
+              </span>
             </div>
             <div className="col-12">
               <span className="usernames">
@@ -192,6 +190,7 @@ const FeedSection = ({
                 </Link>
               </span>
             </div>
+            <p className="submit-text">{feed.feed} </p>
             <div className="imgvideo-mzflash">
               {feed.feed_type === 1 &&
                 feed.image &&
@@ -227,7 +226,25 @@ const FeedSection = ({
                     </Link>
                   </p>
                 </div>
-                <p className="submit-text">{feed.feed} </p>
+                <p className="submit-text">{feed.parent.feed} </p>
+                {feed.parent.feed_type === 1 &&
+                  feed.parent.image &&
+                  <img
+                    src={feed.parent.image.path}
+                    alt="Snow"
+                    className="img-css-fave"
+                  />
+                }
+                {feed.parent.feed_type === 2 &&
+                  feed.parent.image &&
+                  <div className="video left-space">
+                    <video controls>
+                      <source src={feed.parent.image.path} type="video/mp4" />
+                      <source src={feed.parent.image.path} type="video/ogg" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                }
               </div>
             }
             <div className="flex-container">
