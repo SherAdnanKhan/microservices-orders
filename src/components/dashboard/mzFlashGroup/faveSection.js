@@ -159,7 +159,8 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
-                      <span>Monday may 2014</span>
+                      <span className="date-time">Monday may 2014
+                      </span>
                     </div>
                     <div className="col-12">
                       <span className="usernames">
@@ -167,7 +168,6 @@ const FaveSection = ({
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p className="submit-text"> {feed.feed}</p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -197,10 +197,12 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span>Monday may 2014</span>
+                        <span className="date-time">Monday may 2014
+                        </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
+                        <p className="submit-text"> {feed.feed}</p>
                         <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
@@ -287,7 +289,8 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
-                      <span>Monday may 2014</span>
+                      <span className="date-time">Monday may 2014
+                      </span>
                     </div>
                     <div className="col-12">
                       <span className="usernames">
@@ -295,7 +298,6 @@ const FaveSection = ({
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p className="submit-text"> {feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -325,10 +327,12 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span>Monday may 2014</span>
+                        <span className="date-time">Monday may 2014
+                        </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
+                        <p className="submit-text">{feed.feed} </p>
                         <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
@@ -415,7 +419,8 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
-                      <span>Monday may 2014</span>
+                      <span className="date-time">Monday may 2014
+                      </span>
                     </div>
                     <div className="col-12">
                       <span className="usernames">
@@ -423,7 +428,6 @@ const FaveSection = ({
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -453,10 +457,12 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span>Monday may 2014</span>
+                        <span className="date-time">Monday may 2014
+                        </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
+                        <p className="submit-text">{feed.feed} </p>
                         <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
@@ -574,10 +580,12 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span>Monday may 2014</span>
+                        <span className="date-time">Monday may 2014
+                        </span>
                       </div>
                       <div className="col-7 user-name-parent">
                         <p classNmae="usernames">{feed.parent.user.username}</p>
+                        <p className="submit-text"> {feed.feed}</p>
                         <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
@@ -702,10 +710,12 @@ const FaveSection = ({
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
-                        <span>Monday may 2014</span>
+                        <span className="date-time">Monday may 2014
+                        </span>
                       </div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
+                        <p className="submit-text"> {feed.feed}</p>
                         <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>

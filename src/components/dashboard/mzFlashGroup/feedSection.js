@@ -192,7 +192,6 @@ const FeedSection = ({
                 </Link>
               </span>
             </div>
-            <p className="submit-text">{feed.feed} </p>
             <div className="imgvideo-mzflash">
               {feed.feed_type === 1 &&
                 feed.image &&
@@ -228,6 +227,7 @@ const FeedSection = ({
                     </Link>
                   </p>
                 </div>
+                <p className="submit-text">{feed.feed} </p>
               </div>
             }
             <div className="flex-container">
