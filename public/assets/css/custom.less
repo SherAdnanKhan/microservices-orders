@@ -3776,11 +3776,9 @@ img {
       width: 8.33333333%;
     }
     .flex-container-nested{
-      display:flex;
       border: 1px solid;
       margin: 5px;
       .action-cube{
-        width:80px;
         text-align: center;
       }
     }
@@ -3838,6 +3836,7 @@ img {
       font-style: italic;
       opacity: 0.4;
     }
+   
     .imgvideo-mzflash{
       text-align:center;
       video{
@@ -3850,6 +3849,11 @@ img {
   .img-css {
     height: 100px;
     width: 100px;
+  }
+  .img-css-fave {
+    height: 100px;
+    width: 100px;
+    margin-left:20%;
   }
 
   .mz-flash-head{
@@ -5416,11 +5420,16 @@ img {
     padding: 0 0px;
     width: 100%;
     .usernames{
-      margin-left:20px;
+      margin-left:15px;
     }
   }
   .submit-text{
     text-align: center;
+  }
+  .cube-fave{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .cube-top{
     display: flex;
@@ -5523,18 +5532,26 @@ img {
       }
     }
     .flex-container-nested{
-      display:flex;
       border: 2px solid #606060;
       margin: 5px;
+      display: flow-root;
       .action-cube{
-        width:80px;
         text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .user-name-parent{
+        .usernames{
+          margin-left:15px;
+        }
       }
     }
     .flex-container{
       display:flex;
       border: 1px solid;
       margin: 5px;
+      clear: both;
       justify-content: space-around;
       .user-name-parent{
         display:flex;
@@ -5571,6 +5588,11 @@ img {
   .img-css {
     height: 100px;
     width: 100px;
+  }
+  .img-css-fave {
+    height: 100px;
+    width: 100px;
+    margin-left:20%;
   }
     video{
       width:160px;

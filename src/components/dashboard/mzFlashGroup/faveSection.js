@@ -152,27 +152,28 @@ const FaveSection = ({
                         has reposted this feed
                       </div>
                     }
-                    <div className="col-2">
+                    <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
                           feelColor={feed.feel_color}
                         />
                       </Link>
+                      <span>Monday may 2014</span>
                     </div>
-                    <div className="col-7">
+                    <div className="col-12">
                       <span className="usernames">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p> {feed.feed}</p>
+                      <p className="submit-text"> {feed.feed}</p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
                           src={feed.image.path}
                           alt="Snow"
-                          className="img-css"
+                          className="img-css-fave"
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -189,17 +190,18 @@ const FaveSection = ({
                   </div>
                   {feed.parent &&
                     <div className="flex-container-nested">
-                      <div className="col-2 action-cube">
+                      <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
+                        <span>Monday may 2014</span>
                       </div>
-                      <div className="col-7 user-name-parent">
-                        <p>{feed.parent.user.username}</p>
-                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
+                      <div className="col-12 user-name-parent">
+                        <p className="usernames">{feed.parent.user.username}</p>
+                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -278,27 +280,28 @@ const FaveSection = ({
                         has reposted this feed
                       </div>
                     }
-                    <div className="col-2">
+                    <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
                           feelColor={feed.feel_color}
                         />
                       </Link>
+                      <span>Monday may 2014</span>
                     </div>
-                    <div className="col-7">
+                    <div className="col-12">
                       <span className="usernames">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p> {feed.feed} </p>
+                      <p className="submit-text"> {feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
                           src={feed.image.path}
                           alt="Snow"
-                          className="img-css"
+                          className="img-css-fave"
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -315,17 +318,18 @@ const FaveSection = ({
                   </div>
                   {feed.parent &&
                     <div className="flex-container-nested">
-                      <div className="col-2 action-cube">
+                      <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
+                        <span>Monday may 2014</span>
                       </div>
-                      <div className="col-7 user-name-parent">
-                        <p>{feed.parent.user.username}</p>
-                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
+                      <div className="col-12 user-name-parent">
+                        <p className="usernames">{feed.parent.user.username}</p>
+                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -404,27 +408,28 @@ const FaveSection = ({
                         has reposted this feed
                       </div>
                     }
-                    <div className="col-2">
+                    <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
                           feelColor={feed.feel_color}
                         />
                       </Link>
+                      <span>Monday may 2014</span>
                     </div>
-                    <div className="col-7">
+                    <div className="col-12">
                       <span className="usernames">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p>{feed.feed} </p>
+                      <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
                           src={feed.image.path}
                           alt="Snow"
-                          className="img-css"
+                          className="img-css-fave"
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -441,17 +446,18 @@ const FaveSection = ({
                   </div>
                   {feed.parent &&
                     <div className="flex-container-nested">
-                      <div className="col-2 action-cube">
+                      <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
+                        <span>Monday may 2014</span>
                       </div>
-                      <div className="col-7 user-name-parent">
-                        <p>{feed.parent.user.username}</p>
-                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
+                      <div className="col-12 user-name-parent">
+                        <p className="usernames">{feed.parent.user.username}</p>
+                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -544,7 +550,7 @@ const FaveSection = ({
                         <img
                           src={feed.image.path}
                           alt="Snow"
-                          className="img-css"
+                          className="img-css-fave"
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -561,17 +567,18 @@ const FaveSection = ({
                   </div>
                   {feed.parent &&
                     <div className="flex-container-nested">
-                      <div className="col-2 action-cube">
+                      <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
+                        <span>Monday may 2014</span>
                       </div>
                       <div className="col-7 user-name-parent">
-                        <p>{feed.parent.user.username}</p>
-                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
+                        <p classNmae="usernames">{feed.parent.user.username}</p>
+                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
@@ -671,7 +678,7 @@ const FaveSection = ({
                         <img
                           src={feed.image.path}
                           alt="Snow"
-                          className="img-css"
+                          className="img-css-fave"
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -688,17 +695,18 @@ const FaveSection = ({
                   </div>
                   {feed.parent &&
                     <div className="flex-container-nested">
-                      <div className="col-2 action-cube">
+                      <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
                             feelColor={feed.parent.user.feel_color}
                           />
                         </Link>
+                        <span>Monday may 2014</span>
                       </div>
-                      <div className="col-7 user-name-parent">
-                        <p>{feed.parent.user.username}</p>
-                        <img className="img-css" alt="" src="/assets/images/crit1.png" />
+                      <div className="col-12 user-name-parent">
+                        <p className="usernames">{feed.parent.user.username}</p>
+                        <img className="img-css-fave" alt="" src="/assets/images/crit1.png" />
                       </div>
                     </div>
                   }
