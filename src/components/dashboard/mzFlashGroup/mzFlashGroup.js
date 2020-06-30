@@ -89,7 +89,6 @@ const MzFlashGroup = () => {
       feed_id: id
     };
     dispatch(strokeFeed(data));
-    console.log(id);
   };
 
   const handleFeedUnstroke = id => {
