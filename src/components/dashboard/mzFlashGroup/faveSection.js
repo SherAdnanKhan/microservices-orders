@@ -161,6 +161,7 @@ const FaveSection = ({
                         {formatDate(feed.created_at)}
                       </span>
                     </div>
+                    <div className="time">03:47 pm</div>
                     <div className="col-12">
                       <span className="usernames">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
@@ -201,6 +202,7 @@ const FaveSection = ({
                           {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
+                      <div className="time">03:47 pm</div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
                         <p className="submit-text"> {feed.parent.feed}</p>
@@ -233,15 +235,15 @@ const FaveSection = ({
                       </div>
                     </div>
                     <div className="strk-btn">
+                      <span className="strk-counter">
+                        {feed.stroke_users_count}
+                      </span>
                       <Stroke
                         hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
                       />
-                      <div className="strk-counter">
-                        {feed.stroke_users_count}
-                      </div>
                     </div>
                     <div className="actions-repost">
                       <button
@@ -308,6 +310,7 @@ const FaveSection = ({
                         {formatDate(feed.created_at)}
                       </span>
                     </div>
+                    <div className="time">03:47 pm</div>
                     <div className="col-12">
                       <span className="usernames">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
@@ -348,6 +351,7 @@ const FaveSection = ({
                           {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
+                      <div className="time">03:47 pm</div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
                         <p className="submit-text">{feed.parent.feed} </p>
@@ -374,21 +378,21 @@ const FaveSection = ({
                   }
                   <div className="flex-container">
                     <div className="action">
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div className="coment-counter">
+                      <span className="coment-counter">
                         {feed.comments_count}
-                      </div>
+                      </span>
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     </div>
                     <div className="strk-btn">
+                      <span className="strk-counter">
+                        {feed.stroke_users_count}
+                      </span>
                       <Stroke
                         hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
                       />
-                      <div className="strk-counter">
-                        {feed.stroke_users_count}
-                      </div>
                     </div>
                     <div className="actions-repost">
                       <button
@@ -455,6 +459,7 @@ const FaveSection = ({
                         {formatDate(feed.created_at)}
                       </span>
                     </div>
+                    <div className="time">03:47 pm</div>
                     <div className="col-12">
                       <span className="usernames">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
@@ -495,6 +500,7 @@ const FaveSection = ({
                           {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
+                      <div className="time">03:47 pm</div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
                         <p className="submit-text">{feed.parent.feed} </p>
@@ -521,21 +527,21 @@ const FaveSection = ({
                   }
                   <div className="flex-container">
                     <div className="action">
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div className="coment-counter">
+                      <span className="coment-counter">
                         {feed.comments_count}
-                      </div>
+                      </span>
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     </div>
                     <div className="strk-btn">
+                      <span className="strk-counter">
+                        {feed.stroke_users_count}
+                      </span>
                       <Stroke
                         hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
                       />
-                      <div className="strk-counter">
-                        {feed.stroke_users_count}
-                      </div>
                     </div>
                     <div className="actions-repost">
                       <button
@@ -592,20 +598,22 @@ const FaveSection = ({
                         {feed.user.username} has reposted this feed
                       </div>
                     }
-                    <div className="col-2">
+                    <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
                           feelColor={feed.feel_color}
                         />
                       </Link>
+                      <span className="date-time">
+                        {formatDate(feed.created_at)}
+                      </span>
                     </div>
-                    <span className="date-time">
-                      {formatDate(feed.created_at)}
-                    </span>
-                    <div className="col-7">
-                      <span> {feed.user.username}</span>
-                      <p>{feed.feed} </p>
+
+                    <div className="time">03:47 pm</div>
+                    <div className="col-12">
+                      <span className="usernames"> {feed.user.username}</span>
+                      <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -639,7 +647,8 @@ const FaveSection = ({
                           {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
-                      <div className="col-7 user-name-parent">
+                      <div className="time">03:47 pm</div>
+                      <div className="col-12 user-name-parent">
                         <p classNmae="usernames">{feed.parent.user.username}</p>
                         <p className="submit-text"> {feed.parent.feed}</p>
                         {feed.parent.feed_type === 1 &&
@@ -665,21 +674,21 @@ const FaveSection = ({
                   }
                   <div className="flex-container">
                     <div className="action">
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div className="coment-counter">
+                      <span className="coment-counter">
                         {feed.comments_count}
-                      </div>
+                      </span>
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     </div>
                     <div className="strk-btn">
+                      <span className="strk-counter">
+                        {feed.stroke_users_count}
+                      </span>
                       <Stroke
                         hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
                       />
-                      <div className="strk-counter">
-                        {feed.stroke_users_count}
-                      </div>
                     </div>
                     <div className="actions-repost">
                       <button
@@ -736,7 +745,7 @@ const FaveSection = ({
                         {feed.user.username} has reposted this feed
                       </div>
                     }
-                    <div className="col-2">
+                    <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
@@ -747,13 +756,14 @@ const FaveSection = ({
                     <span className="date-time">
                       {formatDate(feed.parent.created_at)}
                     </span>
-                    <div className="col-7">
+                    <div className="time">03:47 pm</div>
+                    <div className="col-12">
                       <span className='usernames'>
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           {feed.user.username}
                         </Link>
                       </span>
-                      <p>{feed.feed} </p>
+                      <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
                         <img
@@ -787,6 +797,7 @@ const FaveSection = ({
                           {formatDate(feed.parent.created_at)}
                         </span>
                       </div>
+                      <div className="time">03:47 pm</div>
                       <div className="col-12 user-name-parent">
                         <p className="usernames">{feed.parent.user.username}</p>
                         <p className="submit-text"> {feed.parent.feed}</p>
@@ -813,21 +824,21 @@ const FaveSection = ({
                   }
                   <div className="flex-container">
                     <div className="action">
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                      <div className="coment-counter">
+                      <span className="coment-counter">
                         {feed.comments_count}
-                      </div>
+                      </span>
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     </div>
                     <div className="strk-btn">
+                      <span className="strk-counter">
+                        {feed.stroke_users_count}
+                      </span>
                       <Stroke
                         hasStroke={feed.has_stroke_count}
                         className="strk-img"
                         onStroke={() => onStroke(feed.id)}
                         onUnstroke={() => onUnstroke(feed.id)}
                       />
-                      <div className="strk-counter">
-                        {feed.stroke_users_count}
-                      </div>
                     </div>
                     <div className="actions-repost">
                       <button

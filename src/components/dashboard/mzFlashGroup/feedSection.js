@@ -183,6 +183,7 @@ const FeedSection = ({
                 {formatDate(feed.created_at)}
               </span>
             </div>
+            <div className="time">03:47 pm</div>
             <div className="col-12">
               <span className="usernames">
                 <Link to={`/dashboard/studio/${feed.user.slug}`}>
@@ -249,21 +250,21 @@ const FeedSection = ({
             }
             <div className="flex-container">
               <div className="action">
-                <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                <div className="coment-counter">
+                <span className="coment-counter">
                   {feed.comments_count}
-                </div>
+                </span>
+                <img className="comment-img" alt="" src="/assets/images/crit1.png" />
               </div>
               <div className="strk-btn">
+                <span className="strk-counter">
+                  {feed.stroke_users_count}
+                </span>
                 <Stroke
                   hasStroke={feed.has_stroke_count}
                   className="strk-img"
                   onStroke={() => onStroke(feed.id)}
                   onUnstroke={() => onUnstroke(feed.id)}
                 />
-                <div className="strk-counter">
-                  {feed.stroke_users_count}
-                </div>
               </div>
               <div className="actions-repost">
                 <button
