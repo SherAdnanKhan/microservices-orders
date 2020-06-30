@@ -126,19 +126,20 @@ const MzFlash = () => {
                     {feed.parent.user.username} has reposted this feed
                   </div>
                 }
-                <div className="col-12">
+                <div className="col-12 mz-flash-flex">
                   <Avatar
                     avatars={feed.user.avatars}
                     feelColor={feed.user.feel_color}
                   />
+                  <span>Monday may 2014</span>
                 </div>
+                <div className="time">03:47 pm</div>
                 <div className="col-12">
                   <span className="usernames">Name:
                     <Link to={`/dashboard/studio/${feed.user.slug}`} >
                       {feed.user.username}
                     </Link>
                   </span>
-                  <p> {feed.feed} </p>
                   <span className="name-btn BT-2">
                     {/* <Link to="#">Button</Link> */}
                   </span>
@@ -177,12 +178,15 @@ const MzFlash = () => {
                 }
                 <div className="flex-container">
                   <div className="action">
-                    <img className="comment-img" alt="" src="/assets/images/crit1.png" />
-                    <div className="coment-counter">
+                    <span className="coment-counter">
                       {feed.comments_count}
-                    </div>
+                    </span>
+                    <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                   </div>
                   <div className="strk-btn">
+                    <span className="strk-counter">
+                      {feed.stroke_users_count}
+                    </span>
                     <Stroke
                       hasStroke={feed.has_stroke_count}
                       className="strk-img"
@@ -190,9 +194,6 @@ const MzFlash = () => {
                       onUnstroke={() => handleUnstroke(feed.id)}
                     />
                     {/* <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" /> */}
-                    <div className="strk-counter">
-                      {feed.stroke_users_count}
-                    </div>
                   </div>
                   <div className="actions-repost">
                     <button

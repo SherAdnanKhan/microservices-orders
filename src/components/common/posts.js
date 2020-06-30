@@ -56,6 +56,9 @@ const Post = ({
                             </>
                           )}
                       </div>
+                      <div className="valut-icon">
+                        <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+                      </div>
                       {gallery &&
                         gallery.posts.map((post, index) => (
                           <div className="list-body" key={index}>
@@ -70,7 +73,7 @@ const Post = ({
                                 <img src={`${post.image.path}`} alt="" />
                               )}
                             <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
-                            <div class="lobby-icon">
+                            <div className="lobby-icon">
                               <div className="strk-btn">
                                 <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" />
                               </div>
