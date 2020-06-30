@@ -126,19 +126,22 @@ const MzFlash = () => {
                     {feed.parent.user.username} has reposted this feed
                   </div>
                 }
-                <div className="col-1">
+                <div className="col-12">
                   <Avatar
                     avatars={feed.user.avatars}
                     feelColor={feed.user.feel_color}
                   />
                 </div>
-                <div className="col-7">
+                <div className="col-12">
                   <span className="usernames">Name:
                     <Link to={`/dashboard/studio/${feed.user.slug}`} >
                       {feed.user.username}
                     </Link>
                   </span>
                   <p> {feed.feed} </p>
+                  <span className="name-btn BT-2">
+                    {/* <Link to="#">Button</Link> */}
+                  </span>
                 </div>
                 <div className="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
@@ -168,6 +171,7 @@ const MzFlash = () => {
                     </div>
                     <div className="user-name-parent">
                       <p className="user-name">{feed.parent.user.username}</p>
+                      <p className="submit-text">{feed.feed} </p>
                     </div>
                   </div>
                 }
