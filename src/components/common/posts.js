@@ -80,7 +80,7 @@ const Post = ({
                               <div className="action">
                                 <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                               </div>
-                              <div className="action">
+                              <div className="action ">
                                 <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
                               </div>
                             </div>
