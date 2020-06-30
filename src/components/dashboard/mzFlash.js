@@ -140,6 +140,7 @@ const MzFlash = () => {
                       {feed.user.username}
                     </Link>
                   </span>
+                  <p className="submit-text">{feed.feed} </p>
                   <span className="name-btn BT-2">
                     {/* <Link to="#">Button</Link> */}
                   </span>
