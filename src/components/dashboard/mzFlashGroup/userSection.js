@@ -46,19 +46,6 @@ const UserSection = ({
                   </div>
                 ))
               }
-              {favouriteUsers &&
-                favouriteUsers.map((user, index) => (
-                  <div
-                    className={index === 0 ? 'item active' : 'item'}
-                    key={index}
-                    onClick={() => onActiveUser(user)}
-                  >
-                    <div className="cube">
-                      <UserCube user={user} />
-                    </div>
-                  </div>
-                ))
-              }
             </>
           }
           {activeUserList === 3 &&

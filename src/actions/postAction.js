@@ -1,5 +1,5 @@
 import {
-  GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS
+  GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS, GET_NCOMM
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 
@@ -56,6 +56,17 @@ export const getComments = postId => dispatch => {
       dispatch({
         type: GET_COMMENTS,
         payload: res.data.data.comments
+      });
+    });
+};
+
+export const getNcomm = slug => dispatch => {
+  http
+    .get(`/post/ncomm/${slug}`)
+    .then(res => {
+      dispatch({
+        type: GET_NCOMM,
+        payload: res.data.data.ncom_posts
       });
     });
 };
