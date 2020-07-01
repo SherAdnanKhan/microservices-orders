@@ -79,7 +79,6 @@ const MzFlashGroup = () => {
 
     const formData = {};
     formData.feed_id = feed.id;
-    formData.feed = feed.feed;
 
     dispatch(createFeed(formData));
   };
