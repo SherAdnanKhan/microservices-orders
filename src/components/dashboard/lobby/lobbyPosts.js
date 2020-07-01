@@ -10,7 +10,6 @@ import Comment from '../viewPost/comments';
 const LobbyPosts = ({ post }) => {
   const dispatch = useDispatch();
   const handleUnStoke = (id) => {
-    console.log(id);
     dispatch(unStoke(id))
   }
 
