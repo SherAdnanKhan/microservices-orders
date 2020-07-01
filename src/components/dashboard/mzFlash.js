@@ -9,6 +9,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { getUserStudio } from "../../actions/studioActions";
 import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed } from "../../actions/mzFlashActions";
 import Spinner from "../common/spinner";
+import { completeFormattedDate, formatTime } from "../../utils/helperFunctions";
 
 const MzFlash = () => {
   const [comments, setComments] = useState({});
@@ -131,9 +132,13 @@ const MzFlash = () => {
                     avatars={feed.user.avatars}
                     feelColor={feed.user.feel_color}
                   />
-                  <span className="date-time">Monday may 2014</span>
+                  <span className="date-time">
+                    {completeFormattedDate(feed.created_at)}
+                  </span>
                 </div>
-                <div className="time">03:47 pm</div>
+                <div className="time">
+                  {formatTime(feed.created_at)}
+                </div>
                 <div className="col-12">
                   <span className="usernames">Name:
                     <Link to={`/dashboard/studio/${feed.user.slug}`} >
@@ -141,9 +146,6 @@ const MzFlash = () => {
                     </Link>
                   </span>
                   <p className="submit-text">{feed.feed} </p>
-                  <span className="name-btn BT-2">
-                    {/* <Link to="#">Button</Link> */}
-                  </span>
                 </div>
                 <div className="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
@@ -170,10 +172,34 @@ const MzFlash = () => {
                         avatars={feed.parent.user.avatars}
                         feelColor={feed.parent.user.feel_color}
                       />
+                      <span className="date-time">
+                        {completeFormattedDate(feed.parent.created_at)}
+                      </span>
+                    </div>
+                    <div className="time">
+                      {formatTime(feed.parent.created_at)}
                     </div>
                     <div className="user-name-parent">
                       <p className="user-name">{feed.parent.user.username}</p>
                       <p className="submit-text">{feed.feed} </p>
+                      {feed.parent.feed_type === 1 &&
+                        feed.parent.image &&
+                        <img
+                          src={feed.parent.image.path}
+                          alt="Snow"
+                          className="img-css-fave"
+                        />
+                      }
+                      {feed.parent.feed_type === 2 &&
+                        feed.parent.image &&
+                        <div className="video left-space">
+                          <video controls>
+                            <source src={feed.parent.image.path} type="video/mp4" />
+                            <source src={feed.parent.image.path} type="video/ogg" />
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      }
                     </div>
                   </div>
                 }
@@ -194,7 +220,6 @@ const MzFlash = () => {
                       onStroke={() => handleStroke(feed.id)}
                       onUnstroke={() => handleUnstroke(feed.id)}
                     />
-                    {/* <img className="strk-img" alt="" src="/assets/images/strokeiconem.png" /> */}
                   </div>
                   <div className="actions-repost">
                     <button

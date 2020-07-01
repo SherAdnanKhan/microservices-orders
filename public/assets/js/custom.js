@@ -257,5 +257,50 @@ $(document).on('click', '.action-w', function () {
   } else {
     $(this).parents('.post-footer').find('.duplicate-img').remove();
   }
+});
 
-})
+$(document)
+  .on('click', '.controls .up', function () {
+    const getActiveSlide = $('.vSlider .slides .item.active').prev('.item').length;
+    if (getActiveSlide > 0) {
+      $('.vSlider .slides .item.active')
+        .removeClass('active')
+        .prev()
+        .addClass('active');
+      let top = 0;
+      var stop = false;
+      $('.vSlider .slides .item')
+        .each(function (i) {
+          const checkClass = $(this).hasClass('active');
+          if (checkClass == false && stop == false) {
+            top += $(this).outerHeight(true);
+          } else if (checkClass == true && stop == false) {
+            stop = true;
+          }
+        });
+      $('.vSlider .slides').scrollTop(top);
+    }
+  });
+
+$(document)
+  .on('click', '.controls .down', function () {
+    const getActiveSlide = $('.vSlider .slides .item.active').next('.item').length;
+    if (getActiveSlide > 0) {
+      $('.vSlider .slides .item.active')
+        .removeClass('active')
+        .next()
+        .addClass('active');
+      let top = 0;
+      var stop = false;
+      $('.vSlider .slides .item')
+        .each(function (i) {
+          const checkClass = $(this).hasClass('active');
+          if (checkClass == false && stop == false) {
+            top += $(this).outerHeight(true);
+          } else if (checkClass == true && stop == false) {
+            stop = true;
+          }
+        });
+      $('.vSlider .slides').scrollTop(top);
+    }
+  });
