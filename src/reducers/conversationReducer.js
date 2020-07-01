@@ -57,7 +57,6 @@ export default (state = initialState, action) => {
         ...state,
         messages: state.messages?.map(message => {
           if (message.id === action.payload.id) {
-            console.log('matched')
             return {
               ...message,
               messages_logs: message.messages_logs?.map(log => {
