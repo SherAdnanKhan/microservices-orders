@@ -791,10 +791,10 @@ const FaveSection = ({
                           feelColor={feed.feel_color}
                         />
                       </Link>
+                      <span className="date-time">
+                        {formatDate(feed.created_at)}
+                      </span>
                     </div>
-                    <span className="date-time">
-                      {formatDate(feed.created_at)}
-                    </span>
                     <div className="time">
                       {formatTime(feed.created_at)}
                     </div>
