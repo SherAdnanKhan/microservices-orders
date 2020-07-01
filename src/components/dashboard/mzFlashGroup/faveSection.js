@@ -13,7 +13,7 @@ const FaveSection = ({
 }) => {
 
   const currentUser = useContext(UserContext);
-  console.log(activeUser)
+
   return (
     <div className="col-6 box-2 tab">
       <div className="row">
