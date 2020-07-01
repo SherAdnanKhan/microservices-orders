@@ -54,7 +54,11 @@ class ChatBox extends Component {
 
       this.state.socket.on('recieveMessage', (data) => {
         this.props.updateConversation(data);
-
+        if (data.created_by === this.props.conversation.user.id) {
+          if (data.feel_color !== this.props.conversation.user.feel_color) {
+            this.componentRefreshUser();
+          }
+        }
         if (data.user.id !== currentUser.id) {
           this.state.socket.emit("onRead", data, () => {
           });
@@ -89,6 +93,10 @@ class ChatBox extends Component {
     this.state.socket.emit('disconnect');
     this.setState({ message: '', socket: '' });
     this.props.clearConversation();
+  }
+
+  componentRefreshUser = () => {
+    this.props.getConversation(this.props.match.params.slug);
   }
 
   componentWillUnmount() {
