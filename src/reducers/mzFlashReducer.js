@@ -265,6 +265,19 @@ export default (state = initialState, action) => {
     case UNSTROKE_FEED:
       return {
         ...state,
+        myFeeds: {
+          ...state.myFeeds,
+          data: state?.myFeeds?.data?.map(feed => {
+            if (feed.id === action.payload.feed_id) {
+              return {
+                ...feed,
+                has_stroke_count: action.payload.has_stroke_count,
+                stroke_users_count: feed.stroke_users_count - 1
+              }
+            }
+            return feed
+          })
+        },
         collectiveFeeds: {
           ...state.collectiveFeeds,
           data: state?.collectiveFeeds?.data?.map(feed => {

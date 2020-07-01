@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
@@ -8,6 +8,8 @@ import Comment from '../viewPost/comments';
 
 
 const LobbyPosts = ({ post }) => {
+  const [activePost, setActivePost] = useState({});
+
   const dispatch = useDispatch();
   const handleUnStoke = (id) => {
     dispatch(unStoke(id))
@@ -16,6 +18,15 @@ const LobbyPosts = ({ post }) => {
   const handleStoke = (id) => {
     dispatch(makeStoke(id));
   }
+
+  const handleActivePost = post => {
+    if (post === activePost) {
+      setActivePost({});
+    } else {
+      setActivePost(post);
+    }
+  };
+
   return (
     <div className="post-page">
       <div className="post-head">
@@ -37,7 +48,7 @@ const LobbyPosts = ({ post }) => {
       <div className="valut-icon">
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
-      <div className="post-body">
+      <div className="post-body" onClick={() => handleActivePost(post)}>
         {post.post_type === 2
           ? (
             <video width="320" height="240" controls>
@@ -49,11 +60,14 @@ const LobbyPosts = ({ post }) => {
             <img src={post.image.path} alt="" stye={{ width: "100%", heigth: "100%" }} />
           )
         }
-
       </div>
       <div className="onearttitle">
         <p>{post && post.title}</p>
-        <div className="lobby-icon">
+        <div className={
+          activePost === post
+            ? 'lobby-icon lobby-icon-slide'
+            : 'lobby-icon'
+        }>
           <div className="strk-btn">
             <Stroke
               hasStroke={post.has_stroke}
