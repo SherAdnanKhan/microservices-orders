@@ -234,16 +234,16 @@ $(window).scroll(function () {
 //   modal.style.display = "none";
 // }
 
-$(document).on('click', '.post-body', function () {
-  $(this).next().find('.lobby-icon').toggleClass("lobby-icon-slide");
-  $(this).prev().toggleClass("lobby-icon-slide");
-});
+// $(document).on('click', '.post-body', function () {
+//   $(this).next().find('.lobby-icon').toggleClass("lobby-icon-slide");
+//   $(this).prev().toggleClass("lobby-icon-slide");
+// });
 
 
-$(document).on('click', '.list-body', function () {
-  $(this).find('.lobby-icon').toggleClass("lobby-icon-slide");
-  $(this).prev().toggleClass("lobby-icon-slide");
-});
+// $(document).on('click', '.list-body', function () {
+//   $(this).find('.lobby-icon').toggleClass("lobby-icon-slide");
+//   $(this).prev().toggleClass("lobby-icon-slide");
+// });
 
 
 $(document).on('click', '.action-w', function () {

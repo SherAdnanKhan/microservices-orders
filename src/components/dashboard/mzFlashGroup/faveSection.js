@@ -615,8 +615,8 @@ const FaveSection = ({
 
         {activeTab === 4 &&
           <>
-            {myFeeds &&
-              myFeeds?.data?.map((feed, index) => (
+            {myFeeds && myFeeds.data &&
+              myFeeds.data.map((feed, index) => (
                 <div
                   className="sub-box tabcontent"
                   id="tab3"

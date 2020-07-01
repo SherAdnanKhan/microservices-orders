@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from './avatar';
 import { FAVES, SPRFVS, INVITE_ONLY } from '../../constants/privacyTypes';
@@ -6,6 +6,16 @@ import { FAVES, SPRFVS, INVITE_ONLY } from '../../constants/privacyTypes';
 const Post = ({
   gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprFvs
 }) => {
+  const [activePost, setActivePost] = useState({});
+
+  const handleActivePost = post => {
+    if (post === activePost) {
+      setActivePost({});
+    } else {
+      setActivePost(post);
+    }
+  }
+
   const isAllowed = () => {
     const found = galleryPrivacy.find(g => g.gallery_id === activeGallery.id);
     return !!found.is_allowed;
@@ -62,18 +72,24 @@ const Post = ({
                       {gallery &&
                         gallery.posts.map((post, index) => (
                           <div className="list-body" key={index}>
-                            {post.post_type === 2
-                              ? (
-                                <video width="320" height="240" controls>
-                                  <source src={post.image.path} type="video/mp4" />
-                                  <source src={post.image.path} type="video/ogg" />
-                              Your browser does not support the video tag.
-                                </video>
-                              ) : (
-                                <img src={`${post.image.path}`} alt="" />
-                              )}
-                            <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
-                            <div className="lobby-icon">
+                            <div onClick={() => handleActivePost(post)}>
+                              {post.post_type === 2
+                                ? (
+                                  <video width="320" height="240" controls>
+                                    <source src={post.image.path} type="video/mp4" />
+                                    <source src={post.image.path} type="video/ogg" />
+                                    Your browser does not support the video tag.
+                                  </video>
+                                ) : (
+                                  <img src={`${post.image.path}`} alt="" />
+                                )}
+                              <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
+                            </div>
+                            <div className={
+                              activePost === post
+                                ? 'lobby-icon lobby-icon-slide'
+                                : 'lobby-icon'
+                            }>
                               <div className="strk-btn">
                                 <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" />
                               </div>
