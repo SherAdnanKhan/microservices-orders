@@ -179,7 +179,7 @@ const FeedSection = ({
                   feelColor={feed.feel_color}
                 />
               </Link>
-              <span>
+              <span className="date-time">
                 {completeFormattedDate(feed.created_at)}
               </span>
             </div>
@@ -223,7 +223,7 @@ const FeedSection = ({
                       feelColor={feed.parent.user.feel_color}
                     />
                   </Link>
-                  <span>
+                  <span className="date-time">
                     {completeFormattedDate(feed.parent.created_at)}
                   </span>
                 </div>

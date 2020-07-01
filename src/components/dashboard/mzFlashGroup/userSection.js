@@ -9,8 +9,8 @@ const UserSection = ({
     <div className="col-2 box-1">
       <div className="vSlider">
         <div className="controls">
-          <i className="up fa fa-caret-up fa-3x"></i>
-          <i className="down fa fa-caret-down fa-3x"></i>
+          <i className="arrow-up fa fa-caret-up fa-3x"></i>
+          <i className="arrow-down fa fa-caret-down fa-3x"></i>
         </div>
 
         <div className="slides">
