@@ -5,7 +5,7 @@ const RightBorder = () => {
   const history = useHistory();
 
   return (
-    <div className="right">
+    <div className="right right-border">
       <img
         alt=""
         src="/assets/images/strqicon.png"
