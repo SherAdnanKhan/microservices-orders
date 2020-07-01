@@ -1,22 +1,21 @@
 import React from 'react';
 import Avatar from "../../common/avatar";
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 import { makeStoke, unStoke } from "../../../actions/postAction";
 import { useDispatch } from "react-redux";
+import Comment from '../viewPost/comments';
 
 
 const LobbyPosts = ({ post }) => {
-  const { params: { id } } = useRouteMatch();
   const dispatch = useDispatch();
-  const handleUnStoke = (e, ID) => {
-    //e.preventDefault();
-    dispatch(unStoke(ID, id))
+  const handleUnStoke = (id) => {
+    console.log(id);
+    dispatch(unStoke(id))
   }
 
-  const handleStoke = (e, ID) => {
-    //e.preventDefault();
-    dispatch(makeStoke(ID, id));
+  const handleStoke = (id) => {
+    dispatch(makeStoke(id));
   }
   return (
     <div className="post-page">
@@ -55,7 +54,7 @@ const LobbyPosts = ({ post }) => {
       </div>
       <div className="onearttitle">
         <p>{post && post.title}</p>
-        <div class="lobby-icon">
+        <div className="lobby-icon">
           <div className="strk-btn">
             <Stroke
               hasStroke={post.has_stroke}
@@ -70,10 +69,11 @@ const LobbyPosts = ({ post }) => {
             {post.comments.length}
           </div>
           <div className="action">
-            <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
+            <img className="comment-img open-commet" alt="" src="/assets/images/ncommnicon.png" />
           </div>
         </div>
       </div>
+      <Comment post={post} />
     </div>
   );
 }
