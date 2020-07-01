@@ -246,18 +246,18 @@ $(window).scroll(function () {
 // });
 
 
-$(document).on('click', '.action-w', function () {
-  if ($(this).parents('.post-footer').find('.duplicate-img').length <= 0) {
-    let src = $(this).parents('.post-footer').prev().find('img').attr('src');
-    $(this).parents('.post-footer').find('.post-title').after(`
-    <div class="duplicate-img">
-    <img src="${src}"/>
-    </div>
-    `);
-  } else {
-    $(this).parents('.post-footer').find('.duplicate-img').remove();
-  }
-});
+// $(document).on('click', '.action-w', function () {
+//   if ($(this).parents('.post-footer').find('.duplicate-img').length <= 0) {
+//     let src = $(this).parents('.post-footer').prev().find('img').attr('src');
+//     $(this).parents('.post-footer').find('.post-title').after(`
+//     <div class="duplicate-img">
+//     <img src="${src}"/>
+//     </div>
+//     `);
+//   } else {
+//     $(this).parents('.post-footer').find('.duplicate-img').remove();
+//   }
+// });
 
 $(document)
   .on('click', '.controls .arrow-up', function () {
