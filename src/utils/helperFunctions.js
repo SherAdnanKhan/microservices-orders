@@ -29,5 +29,9 @@ export const formatDate = date => {
 
 export const formatDateTime = date => {
   return moment(date).format("LLL");
-}
+};
+
+export const completeFormattedDate = date => {
+  return moment(date).format('MMMM Do YYYY');
+};
 

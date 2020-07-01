@@ -3,7 +3,7 @@ import Avatar from '../../common/avatar';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 import UserContext from '../../../context/userContext';
-import { formatDate, formatTime } from '../../../utils/helperFunctions';
+import { completeFormattedDate, formatTime } from '../../../utils/helperFunctions';
 
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
@@ -158,7 +158,7 @@ const FaveSection = ({
                         />
                       </Link>
                       <span className="date-time">
-                        {formatDate(feed.created_at)}
+                        {completeFormattedDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="time">
@@ -201,7 +201,7 @@ const FaveSection = ({
                           />
                         </Link>
                         <span className="date-time">
-                          {formatDate(feed.parent.created_at)}
+                          {completeFormattedDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="time">
@@ -317,7 +317,7 @@ const FaveSection = ({
                         />
                       </Link>
                       <span className="date-time">
-                        {formatDate(feed.created_at)}
+                        {completeFormattedDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="time">
@@ -360,7 +360,7 @@ const FaveSection = ({
                           />
                         </Link>
                         <span className="date-time">
-                          {formatDate(feed.parent.created_at)}
+                          {completeFormattedDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="time">
@@ -476,7 +476,7 @@ const FaveSection = ({
                         />
                       </Link>
                       <span className="date-time">
-                        {formatDate(feed.created_at)}
+                        {completeFormattedDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="time">
@@ -519,7 +519,7 @@ const FaveSection = ({
                           />
                         </Link>
                         <span className="date-time">
-                          {formatDate(feed.parent.created_at)}
+                          {completeFormattedDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="time">
@@ -636,7 +636,7 @@ const FaveSection = ({
                         />
                       </Link>
                       <span className="date-time">
-                        {formatDate(feed.created_at)}
+                        {completeFormattedDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="time">
@@ -675,7 +675,7 @@ const FaveSection = ({
                           />
                         </Link>
                         <span className="date-time">
-                          {formatDate(feed.parent.created_at)}
+                          {completeFormattedDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="time">
@@ -792,7 +792,7 @@ const FaveSection = ({
                         />
                       </Link>
                       <span className="date-time">
-                        {formatDate(feed.created_at)}
+                        {completeFormattedDate(feed.created_at)}
                       </span>
                     </div>
                     <div className="time">
@@ -835,7 +835,7 @@ const FaveSection = ({
                           />
                         </Link>
                         <span className="date-time">
-                          {formatDate(feed.parent.created_at)}
+                          {completeFormattedDate(feed.parent.created_at)}
                         </span>
                       </div>
                       <div className="time">
