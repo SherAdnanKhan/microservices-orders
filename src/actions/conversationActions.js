@@ -108,6 +108,19 @@ export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
     });
 };
 
-export const readMessage = data => ({ type: READ_MESSAGE, payload: data });
+export const readMessage = data => dispatch => {
+  const payload = {
+    user_id: data.user.id
+  };
+  http
+    .post(`/chats/message/read/${data.id}`, payload)
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: READ_MESSAGE,
+        payload: data
+      });
+    });
+};
 
 export const readAll = data => ({ type: READ_ALL, payload: data });
