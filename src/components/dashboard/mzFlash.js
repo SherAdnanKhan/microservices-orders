@@ -131,7 +131,7 @@ const MzFlash = () => {
                     avatars={feed.user.avatars}
                     feelColor={feed.user.feel_color}
                   />
-                  <span>Monday may 2014</span>
+                  <span className="date-time">Monday may 2014</span>
                 </div>
                 <div className="time">03:47 pm</div>
                 <div className="col-12">

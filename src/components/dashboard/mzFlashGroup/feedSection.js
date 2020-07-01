@@ -179,7 +179,7 @@ const FeedSection = ({
                   feelColor={feed.feel_color}
                 />
               </Link>
-              <span>
+              <span className="date-time">
                 {formatDate(feed.created_at)}
               </span>
             </div>
