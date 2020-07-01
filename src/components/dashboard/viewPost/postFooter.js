@@ -1,10 +1,15 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNcomm } from "../../../actions/postAction";
 import SimpleImageSlider from "react-simple-image-slider";
+import { useHistory } from "react-router-dom";
+
 
 const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
   const sliderRef = useRef();
+  const history = useHistory();
+
+  const [urls, setUrls] = useState([]);
 
   const dispatch = useDispatch();
   const {
@@ -18,9 +23,15 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
 
   useEffect(() => {
     if (ncomm) {
+      setUrls(urls => urls = ncomm.data.map(item => {
+        return {
+          url: item.image.path,
+          user: item.user
+        }
+      }))
       sliderRef.current.scrollIntoView({ behavior: 'auto' });;
     }
-  })
+  }, [ncomm])
 
   const hasAllowedCritiques = () => {
     return post && post.other_privacy.is_allowed ? true : false;
@@ -31,8 +42,23 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
       {post && post.post && post.post.title &&
         <h3 className="post-title">{post.post.title}</h3>
       }
+      <div ref={ref => sliderRef.current = ref}>
+        {ncomm && ncomm.data &&
+          <SimpleImageSlider
+            onClick={(index) => history.push(`/dashboard/studio/${urls[index].user.slug}`)}
+            width={896}
+            height={304}
+            style={{ cursor: 'pointer' }}
+            images={ncomm?.data?.map(item => {
+              return {
+                url: item.image.path
+              }
+            })}
+          />
+        }
+      </div>
       <div className="post-footer-bar">
-        <div className="poster-footer-stokes-btn" >
+        <div className="poster-footer-stokes-btn">
           {post && post.has_stroke
             ? (
               <img
@@ -67,20 +93,6 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
         </div>
       </div>
       {post && post.post && post.post.title && <div> <h3>{post.post.title}</h3> </div>}
-      <div ref={ref => sliderRef.current = ref}>
-        {ncomm && ncomm.data &&
-          <SimpleImageSlider
-
-            width={896}
-            height={504}
-            images={ncomm.data.map(item => {
-              return {
-                url: item.image.path
-              }
-            })}
-          />
-        }
-      </div>
     </div>
   )
 }
