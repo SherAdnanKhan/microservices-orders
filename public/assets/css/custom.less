@@ -4384,9 +4384,16 @@ img {
     box-sizing: border-box;  
     overflow-y: auto;
     .chat-uesr{
+      margin-top: 50px;
       text-align: center;
       border-bottom: 1px solid #444;
+
       padding-bottom: 20px;
+     .artcubecase{
+       margin: 0 auto 10px auto;
+       display: flex; 
+       justify-content:center;
+      }
       p{
         margin: 0;
       }
@@ -4395,8 +4402,9 @@ img {
       }
     }
     .message-row {
-      padding:5px;
+      padding:20px 5px 5px 5px;
      // background: rgba(@grayRGB , .2);
+     
      
       box-sizing: border-box;
       margin-bottom: 5px;
@@ -4418,20 +4426,26 @@ img {
           }
 
           .msgImg {
-            max-width: 400px;
+            max-width: 100%;
 	          max-height:400px;
+		  justify-content:center;
+		  margin-top: 10px;
+
           }
           .msgImg img {
-            width: 225px !important;
+            width: 215px !important;
             height: auto !important;
             border-radius: 5px;
           }
           
           .msgVideo {
-            max-width: 400px;
+            max-width: 100%;
 	          max-height: 400px;
+		  display: flex;
+		  justify-content:center;
+		  margin-top: 10px;
             video {
-              width: 225px !important;
+              width: 215px !important;
               height:auto !important;
               margin-left: 0;
               border-radius: 5px;
@@ -4442,7 +4456,10 @@ img {
           font-size: 12px;
           padding: 5px;
           margin-top: 0;
-          background-color: none;
+	  margin-left: 60px;
+	  color: rgba(255,255,255,.7);
+	 float: left; 
+          background-color: ;
         }
 
         .artcubecase{
@@ -4521,7 +4538,7 @@ img {
             // border: 2px solid purple;
             // border: 1px solid white;    
             width: auto;
-	          max-width: 80vw;
+	          max-width: 65vw;
             padding:4px 6px ;
 	          box-sizing: border-box;
             text-align: left;
@@ -4545,16 +4562,15 @@ img {
           align-items: center;
           flex-direction: row-reverse;
 
-     //   .send-icon {
+   //     .send-icon {
 	//	width:15px;
 	//	height:15px;
-       //   float: right;
-          clear:both;
-          margin-right: 0;
-//	  img {
-//		  width:100%;
-	//  }
-     //   }
+ // float: right;
+        //  clear:both;
+        
+//	  border: 1px solid red;
+//	 }
+        
 
         .msgDocument {
           padding-top: 10px;
@@ -4562,23 +4578,29 @@ img {
         }
 
         .msgImg {
-          max-width: 400px;
+          max-width: 100%;
           max-height: 400px;
+	  justify-content:center;
+		  margin-top: 10px;
+
         }
         .msgImg img {
-          width: 225px !important;
+          width: 215px !important;
           height: auto !important;
           margin-left: 0;
           border-radius: 5px;
         }
 
         .msgVideo {
-          max-width: 400px;
+          max-width: 100%;
           max-height:400px;
+	  display: flex;
+	  justify-content: center;
+	  margin-top: 10px;
           video {
-            width: 225px !important;
+            width: 215px !important;
             height: auto !important;
-            margin-left: 0;
+            margin-left:0px;
             border-radius: 5px;
           }
         }
@@ -4588,6 +4610,10 @@ img {
         font-size: 12px;
         padding: 5px;
         margin-top: 0;
+	margin-right: 30px;
+	  color: rgba(255,255,255,.7);
+	 float:right; 
+
         background-color: none;
       }
 
@@ -4657,7 +4683,7 @@ img {
         .user-message {
           .text{
             width: auto;
-	          max-width:80vw;
+            max-width:65vw;
             padding: 4px 6px;
             box-sizing: border-box;
             text-align: left;
@@ -4669,6 +4695,7 @@ img {
           img{
             width: 15px;
             border: 1px solid rgba(255,255,255, .5);
+	    opacity: .7;
             margin-left: 10px;
           }
         }

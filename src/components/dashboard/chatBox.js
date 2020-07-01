@@ -225,7 +225,7 @@ class ChatBox extends Component {
                               {data.messages_logs.length > 0
                                 ? data.messages_logs[0].status === 1
                                   ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
-                                  : <img alt="" src="/assets/images/avataricon.png" />
+                                  : <img alt="" src="/assets/images/avatarblack.png" />
                                 : <img alt="/assets/images/avataricon.png" />
                               }
                             </div>
