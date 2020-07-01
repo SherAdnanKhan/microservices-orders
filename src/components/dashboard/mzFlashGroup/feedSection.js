@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { createFeed, getCollectiveFeeds } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
-import { formatDate } from '../../../utils/helperFunctions';
+import { completeFormattedDate, formatTime } from '../../../utils/helperFunctions';
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
@@ -179,11 +179,13 @@ const FeedSection = ({
                   feelColor={feed.feel_color}
                 />
               </Link>
-              <span className="date-time">
-                {formatDate(feed.created_at)}
+              <span>
+                {completeFormattedDate(feed.created_at)}
               </span>
             </div>
-            <div className="time">03:47 pm</div>
+            <div className="time">
+              {formatTime(feed.created_at)}
+            </div>
             <div className="col-12">
               <span className="usernames">
                 <Link to={`/dashboard/studio/${feed.user.slug}`}>
@@ -215,10 +217,18 @@ const FeedSection = ({
             {feed.parent &&
               <div className="flex-container-nested">
                 <div className="action-cube">
-                  <Avatar
-                    avatars={feed.parent.user.avatars}
-                    feelColor={feed.parent.user.feel_color}
-                  />
+                  <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+                    <Avatar
+                      avatars={feed.parent.user.avatars}
+                      feelColor={feed.parent.user.feel_color}
+                    />
+                  </Link>
+                  <span>
+                    {completeFormattedDate(feed.parent.created_at)}
+                  </span>
+                </div>
+                <div className="time">
+                  {formatTime(feed.parent.created_at)}
                 </div>
                 <div className="user-name-parent">
                   <p className="user-name usernames">

@@ -20,7 +20,7 @@ import {
 } from '../../../actions/mzFlashActions';
 
 const MzFlashGroup = () => {
-  const [activeTab, setActiveTab] = useState(2);
+  const [activeTab, setActiveTab] = useState(4);
   const [activeUserList, setActiveUserList] = useState(2);
   const [activeUser, setActiveUser] = useState('');
   const [activeFeedComment, setActiveFeedComment] = useState(0);
