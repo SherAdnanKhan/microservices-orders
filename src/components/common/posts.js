@@ -66,12 +66,18 @@ const Post = ({
                             </>
                           )}
                       </div>
-                      <div className="valut-icon">
-                        <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
-                      </div>
                       {gallery &&
                         gallery.posts.map((post, index) => (
                           <div className="list-body" key={index}>
+                            <div
+                              className={
+                                activePost === post
+                                  ? 'valut-icon show-valut'
+                                  : 'valut-icon'
+                              }
+                            >
+                              <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+                            </div>
                             <div onClick={() => handleActivePost(post)}>
                               {post.post_type === 2
                                 ? (
