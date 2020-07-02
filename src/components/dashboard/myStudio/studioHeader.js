@@ -10,6 +10,14 @@ const StudioHeader = ({ myStudio }) => {
         <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} />
       </div>
       {myStudio && <p>{myStudio.user.username}</p>}
+      <div className="actions">
+        <img
+          src='/assets/images/sprfvs_full.png'
+          alt=""
+          className="clickable"
+          onClick={() => history.push('/dashboard/my-studio/sprfvs')}
+        />
+      </div>
     </div>
   );
 };
