@@ -233,13 +233,13 @@ const FaveSection = ({
                   }
                   <div className="flex-container">
                     <div className="action">
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                       <div className="coment-counter">
                         {feed.comments_count > 1
                           ? <> {feed.comments_count} comments </>
                           : <> {feed.comments_count} comment </>
                         }
                       </div>
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
                     </div>
                     <div className="strk-btn">
                       <span className="strk-counter">
