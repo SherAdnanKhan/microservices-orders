@@ -29,7 +29,9 @@ const Main = () => {
             ? import('./faves/faving')
             : split[3] === 'fave-by'
               ? import('./faves/faveBy')
-              : import('./myStudio/myStudio');
+              : split[3] === 'sprfvs'
+                ? import('./myStudio/sprfvsUsers')
+                : import('./myStudio/myStudio')
       case 'change-password':
         return import('./settings/changePassword');
       case 'fave':

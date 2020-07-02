@@ -1,0 +1,81 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../../common/spinner';
+import FavTabs from '../faves/favTabs';
+import SPRFVS from '../faves/sprfvs';
+import Request from '../faves/requests';
+import {
+  approveRequest,
+  rejectRequest,
+  getSprfvsUsers,
+  getUserRequests,
+} from '../../../actions/userActions';
+
+const SprfvsUser = () => {
+  const dispatch = useDispatch();
+  const {
+    user: {
+      sprfvsUsers, userRequests,
+    },
+    loading: { loading },
+  } = useSelector(state => state);
+
+  const [activeTab, setActiveTab] = useState(1);
+
+  const [tabs] = useState([
+    { id: 1, value: 'SPRFVS' },
+    { id: 2, value: 'Requests' }
+  ]);
+
+  useEffect(() => {
+    dispatch(getSprfvsUsers(3, 1));
+  }, [dispatch]);
+
+  const handleApprovedRequest = (request) => {
+    dispatch(approveRequest(request));
+  };
+
+  const handleRejectedRequest = (request) => {
+    dispatch(rejectRequest(request));
+  };
+
+  const handleTabChange = id => {
+    switch (id) {
+      case 1:
+        dispatch(getSprfvsUsers(3, 1));
+        break;
+      case 2:
+        dispatch(getUserRequests(3, 0));
+        break;;
+      default:
+        break;
+    }
+    setActiveTab(id);
+  };
+
+  return (
+    <div className="favas">
+      {loading && <Spinner />}
+      <FavTabs
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
+      />
+      {activeTab === 1
+        && (
+          <SPRFVS
+            sprfvsUsers={sprfvsUsers}
+          />
+        )}
+      {activeTab === 2
+        && (
+          <Request
+            userRequests={userRequests}
+            onApprovedRequest={handleApprovedRequest}
+            onRejectedRequest={handleRejectedRequest}
+          />
+        )}
+    </div>
+  );
+};
+export default SprfvsUser;
