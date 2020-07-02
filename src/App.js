@@ -17,6 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateCounter } from './actions/userActions';
 import { useDispatch } from 'react-redux';
+import { updateConversationUnreadCount } from './actions/conversationActions';
 
 function App() {
   const [socket, setSocket] = useState('');
@@ -45,16 +46,21 @@ function App() {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
 
         if (activeConversation !== data.room) {
-          toast(() => {
-            return (
-              <Link
-                to={`/dashboard/chat/${data.user.slug}`}
-                style={{ textDecoration: 'none', color: currentUser.feel_color }}>
-                You have new message from {data.user.username}
-              </Link>
-            )
-          });
+          new Audio('/assets/sounds/notification.mp3')
+            .play()
+            .then(() => {
+              toast(() => {
+                return (
+                  <Link
+                    to={`/dashboard/chat/${data.user.slug}`}
+                    style={{ textDecoration: 'none', color: currentUser.feel_color }}>
+                    You have new message from {data.user.username}
+                  </Link>
+                )
+              });
+            })
           dispatch(updateCounter());
+          dispatch(updateConversationUnreadCount(data));
         }
       });
     }

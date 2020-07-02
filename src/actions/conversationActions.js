@@ -8,7 +8,8 @@ import {
   START_FILE_LOADER,
   STOP_FILE_LOADER,
   READ_MESSAGE,
-  READ_ALL
+  READ_ALL,
+  UPDATE_CONVERSATION_UNREAD_COUNT
 } from '../constants/actionTypes';
 
 export const getAllConversations = () => dispatch => {
@@ -121,6 +122,13 @@ export const readMessage = data => dispatch => {
         payload: data
       });
     });
+};
+
+export const updateConversationUnreadCount = data => {
+  return {
+    type: UPDATE_CONVERSATION_UNREAD_COUNT,
+    payload: data
+  }
 };
 
 export const readAll = data => ({ type: READ_ALL, payload: data });
