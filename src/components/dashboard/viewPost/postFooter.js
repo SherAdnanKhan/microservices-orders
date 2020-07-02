@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getNcomm } from "../../../actions/postAction";
+import { getNcomm, clearNcomm } from "../../../actions/postAction";
 import SimpleImageSlider from "react-simple-image-slider";
 import { useHistory } from "react-router-dom";
 
@@ -33,6 +33,12 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
     }
   }, [ncomm])
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearNcomm());
+    }
+  }, [dispatch]);
+
   const hasAllowedCritiques = () => {
     return post && post.other_privacy.is_allowed ? true : false;
   }
@@ -43,7 +49,7 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
         <h3 className="post-title">{post.post.title}</h3>
       }
       <div ref={ref => sliderRef.current = ref}>
-        {ncomm && ncomm.data &&
+        {ncomm && ncomm.data && ncomm.data.length > 0 &&
           <SimpleImageSlider
             onClick={(index) => history.push(`/dashboard/studio/${urls[index].user.slug}`)}
             width={896}
@@ -55,6 +61,9 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
               }
             })}
           />
+        }
+        {ncomm && ncomm.data.length === 0 &&
+          <h3> No images to show </h3>
         }
       </div>
       <div className="post-footer-bar">
@@ -92,7 +101,6 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
           />
         </div>
       </div>
-      {post && post.post && post.post.title && <div> <h3>{post.post.title}</h3> </div>}
     </div>
   )
 }

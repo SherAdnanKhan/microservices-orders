@@ -68,7 +68,7 @@ export const UNSTROKE_POST = 'UNSTROKE_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_NCOMM = 'GET_NCOMM';
-
+export const CLEAR_NCOMM = 'CLEAR_NCOMM';
 
 //Conversations
 export const GET_CONVERSATION = 'GET_CONVERSATION';
