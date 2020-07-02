@@ -44,7 +44,13 @@ const Conversation = () => {
           conversations.map((conversation, index) => (
             <div className="singleMsg" key={index}>
               {conversation.unread_messages_logs_count > 0 &&
-                <span className="notify">
+                <span className={
+                  conversation.participants[0].id !== currentUser.id
+                    ? `notify ${conversation.participants[0].feel_color}`
+                    : conversation.participants[1].id !== currentUser.id
+                      ? `notify ${conversation.participants[1].feel_color}`
+                      : 'notify'
+                }>
                   {conversation.unread_messages_logs_count}
                 </span>
               }

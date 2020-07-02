@@ -6,7 +6,8 @@ import {
   START_FILE_LOADER,
   STOP_FILE_LOADER,
   READ_MESSAGE,
-  READ_ALL
+  READ_ALL,
+  UPDATE_CONVERSATION_UNREAD_COUNT
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -34,6 +35,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         messages: [...state.messages, action.payload]
+      };
+    case UPDATE_CONVERSATION_UNREAD_COUNT:
+      return {
+        ...state,
+        conversations: state?.conversations?.map(conversation => {
+          if (conversation.id === action.payload.room) {
+            return {
+              ...conversation,
+              unread_messages_logs_count: conversation.unread_messages_logs_count + 1,
+              messages: [...conversation.messages, action.payload]
+            }
+          }
+          return conversation
+        })
       };
     case CLEAR_CONVERSATION:
       return {
