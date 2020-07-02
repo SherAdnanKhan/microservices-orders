@@ -45,7 +45,11 @@ const LobbyPosts = ({ post }) => {
           </>
         }
       </div>
-      <div className="valut-icon">
+      <div className={
+        activePost === post
+          ? 'valut-icon show-valut'
+          : 'valut-icon'
+      }>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
       <div className="post-body" onClick={() => handleActivePost(post)}>
@@ -87,7 +91,7 @@ const LobbyPosts = ({ post }) => {
         </div>
       </div>
       <Comment post={post} />
-    </div>
+    </div >
   );
 }
 
