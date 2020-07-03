@@ -27,12 +27,14 @@ const Header = () => {
             <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
             <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
           </div>
-          <Link to="" className="feelIcon">
-            <img alt="" src="/assets/images/icons/feelicon.png" />
-          </Link>
+
         </div>
       </div>
-
+      <div class="color-icon">
+        <Link to="" className="feelIcon">
+          <img alt="" src="/assets/images/icons/feelicon.png" />
+        </Link>
+      </div>
       <Search />
 
       <hr className="do-not-delete" />
