@@ -1100,12 +1100,12 @@ input {
         border: 2px solid #1E90FF;
       }
     }
-    .feelIcon {
-      border-left: 1px solid darken(#1E90FF, 10%);
-      border-bottom: 1px solid darken(#1E90FF, 10%);
-    }
+   
     .top {
-      
+      .feelIcon {
+        border-left: 1px solid darken(#1E90FF, 10%);
+        border-bottom: 1px solid darken(#1E90FF, 10%);
+      }
     }
     nav,
     .tutorfeel {
@@ -1118,23 +1118,7 @@ input {
       }
     }
   }
-  .feelIcon {
-    float:right;
-    margin-right:10%;
-    right: 0;
-    margin-top:2%;
-    background: darkgrey;
-    width: 70px;
-    display: block;
-    text-align: center;
-    padding: 5px;
-    border-radius:50%;
-    top: 0;
-    img {
-      width: 100%;
-      border-radius:50%;
-    }
-  }
+ 
   .top {
     position: fixed;
     z-index: 70;
@@ -1144,13 +1128,33 @@ input {
     height: 50px;
     transition: all;
     transition-duration: 0.5s;
-   
+    .feelIcon {
+      position: absolute;
+      right: 0;
+      width: 36px;
+      border-radius: 0 0 0 20px;
+      display: block;
+      text-align: center;
+      padding: 5px;
+      margin-top: -1px;
+      top: 0;
+      img {
+        width: 100%;
+      }
+    }
     .contentFit {
       max-width: @desktopWidth;
       margin: 0 auto;
       width: 100%;
       .left-icon{
         width:25%;
+        text-align: center;
+        .valut-img{
+          width:30px;
+          margin-left:15px;
+        }
+      }
+      .logo-icon{
         text-align: center;
         .valut-img{
           width:30px;
@@ -1161,6 +1165,7 @@ input {
         text-align: center;
         .valut-img{
           width:30px;
+          margin-left:15px;
         }
       }
     }
