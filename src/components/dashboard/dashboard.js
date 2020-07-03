@@ -7,7 +7,6 @@ import StartFaves from "./startFavas";
 import Profile from './profile';
 import NavBar from './layout/navBar';
 import AddExibit from './exhibition/addExibition';
-import ExhibitionModel from './exhibition/exhibitionModel';
 
 const Dashboard = ({ user }) => {
   return (
