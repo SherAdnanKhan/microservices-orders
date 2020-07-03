@@ -30,10 +30,8 @@ const Lobby = () => {
           </div>
         </div>
       }
-      <div className="section-1">
-        section 1
-      </div>
-      {/* <div className="section-1 base" id="sec">
+
+      <div className="section-1 base" id="sec">
         <div className="vSlider">
           <div className="controls">
             <i className="arrow-up fa fa-caret-up fa-3x"></i>
@@ -56,7 +54,9 @@ const Lobby = () => {
             }
           </div>
         </div>
-      </div> */}
+      </div>
+
+
       <div className="section-2">
         {favouriteGalleries &&
           favouriteGalleries.fav_galleries.map((gallery, index) => (
