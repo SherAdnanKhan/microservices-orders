@@ -6499,4 +6499,109 @@ img {
   z-index:12 !important;
 }
 
+.exhibition-model {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  background-color: black;
+  border: 2px solid black;
+
+  .btn-disable {
+    color: gray !important;
+  }
+
+  .update-image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 2px solid #444;
+    background: black;
+
+    .actions {
+      button {
+        display: block;
+        width: 50%;
+        margin: 10px auto 0 auto;
+        padding: 15px;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+        border-radius: 30px;
+        color: white;
+        background-color: black;
+        font-size: 100%;
+      }
+      width: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      margin-bottom: 5%;
+    }
+
+    .up-img-box{
+      width: 50%;
+      height: 70%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 25px auto;
+      position: relative;
+      overflow: hidden;
+      .update-pic{
+        width: 80%;
+        border: 2px solid;
+      }
+      
+      .add-nag-icon{
+        position: absolute;
+        display: flex;
+        .nag{
+          text-align: center;
+          margin: 0 15px;
+          position: relative;
+        }
+        .nag-icon{
+          width: 50px;
+          height: 50px;
+          padding: 5px;
+          display: block;
+          border: 1px solid white;
+          border-radius: 50%;
+          background: gray;
+          margin: 0 auto;
+          img{
+            width: 100%;
+          }
+        }
+        .nag-btn{
+          width: 120px;
+          padding: 5px;
+          display: block;
+          background: gray;
+          border-radius: 25px;
+          font-size: 14px;
+          margin: 10px auto;
+        }
+        input{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
 
