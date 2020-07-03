@@ -1144,10 +1144,25 @@ input {
       max-width: @desktopWidth;
       margin: 0 auto;
       width: 100%;
+      .left-icon{
+        width:25%;
+        text-align: center;
+        .valut-img{
+          width:30px;
+        }
+      }
+      .right-icon{
+        width:25%;
+        text-align: center;
+        .valut-img{
+          width:30px;
+        }
+      }
     }
     .d-flex {
       display: flex;
       height: 49px;
+      align-items: center;
     }
     .burgerMenu {
       width: 100%;
@@ -1161,7 +1176,7 @@ input {
     }
     .search {
       max-width: calc(100% - 115px);
-      width: 100%;
+      width: 50%;
       align-self: center;
       text-align: center;
       img {
@@ -6259,6 +6274,30 @@ img {
   margin-right:47px;
 }
 @media screen and (max-width: 856px) {
+  .frameReady {
+    .top{
+      .contentFit {
+        max-width: @desktopWidth;
+        margin: 0 auto;
+        width: 100%;
+        .left-icon{
+          width:34%;
+          text-align: center;
+          .valut-img{
+            width:30px;
+          }
+        }
+        .right-icon{
+          width:34%;
+          text-align: center;
+          .valut-img{
+            width:30px;
+          }
+        }
+      }
+    }
+  }
+
   .box-1,.box-2,.box-3 {
     width:100% !important;
   }
