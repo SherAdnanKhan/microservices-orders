@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   getFaveUsers,
-  approveRequest,
-  getSprfvsUsers,
-  getUserRequests,
   getInvitedUsers,
-  rejectRequest
 } from '../../../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../../common/spinner';
@@ -13,8 +9,6 @@ import { useLocation } from 'react-router-dom';
 import FavTabs from './favTabs';
 
 import Faves from './faves';
-import SPRFVS from './sprfvs';
-import Request from './requests';
 import Invited from './invited';
 
 const Faving = () => {
@@ -23,9 +17,7 @@ const Faving = () => {
 
   const dispatch = useDispatch();
   const {
-    user: {
-      faveUsers, sprfvsUsers, userRequests, invitedUsers
-    },
+    user: { faveUsers, invitedUsers },
     loading: { loading },
   } = useSelector(state => state);
 
@@ -34,9 +26,7 @@ const Faving = () => {
 
   const [tabs] = useState([
     { id: 1, value: 'Faves' },
-    { id: 2, value: 'SPRFVS' },
-    { id: 3, value: 'Requests' },
-    { id: 4, value: 'Invited' },
+    { id: 2, value: 'Invited' },
   ]);
 
   useEffect(() => {
@@ -48,26 +38,12 @@ const Faving = () => {
     dispatch(getFaveUsers(input.value));
   };
 
-  const handleApprovedRequest = (request) => {
-    dispatch(approveRequest(request));
-  };
-
-  const handleRejectedRequest = (request) => {
-    dispatch(rejectRequest(request));
-  };
-
   const handleTabChange = id => {
     switch (id) {
       case 1:
         dispatch(getFaveUsers(''));
         break;
       case 2:
-        dispatch(getSprfvsUsers(3, 1));
-        break;
-      case 3:
-        dispatch(getUserRequests(3, 0));
-        break;
-      case 4:
         dispatch(getInvitedUsers(4, 1));
         break;
       default:
@@ -96,20 +72,6 @@ const Faving = () => {
           />
         )}
       {activeTab === 2
-        && (
-          <SPRFVS
-            sprfvsUsers={sprfvsUsers}
-          />
-        )}
-      {activeTab === 3
-        && (
-          <Request
-            userRequests={userRequests}
-            onApprovedRequest={handleApprovedRequest}
-            onRejectedRequest={handleRejectedRequest}
-          />
-        )}
-      {activeTab === 4
         && (
           <Invited
             invitedUsers={invitedUsers}

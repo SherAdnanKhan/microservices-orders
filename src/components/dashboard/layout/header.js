@@ -14,15 +14,27 @@ const Header = () => {
               <i className="fas fa-ellipsis-v" />
             </span>
           </div>
+          <div className="left-icon">
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+          </div>
           <div className="search" id="search">
             <img src="/assets/images/icons/searchicon.png" alt="search Icon" />
           </div>
+          <div className="right-icon">
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+          </div>
+
         </div>
+      </div>
+      <div class="color-icon">
         <Link to="" className="feelIcon">
           <img alt="" src="/assets/images/icons/feelicon.png" />
         </Link>
       </div>
-
       <Search />
 
       <hr className="do-not-delete" />
