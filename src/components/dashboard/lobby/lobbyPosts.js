@@ -3,6 +3,7 @@ import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 import { makeStoke, unStoke } from "../../../actions/postAction";
+import { completeFormattedDate } from '../../../utils/helperFunctions';
 import { useDispatch } from "react-redux";
 import Comment from '../viewPost/comments';
 
@@ -89,7 +90,18 @@ const LobbyPosts = ({ post }) => {
             <img className="comment-img open-commet" alt="" src="/assets/images/ncommnicon.png" />
           </div>
         </div>
+        <div className={
+          activePost === post
+            ? 'lobby-icon time-div lobby-icon-slide'
+            : 'lobby-icon time-div'
+        }>
+          <div className=" time-row">
+            <p className={`lobby-post-time ${post.user.feel_color}`}>{completeFormattedDate(post.created_at)}</p>
+          </div>
+        </div>
+
       </div>
+
       <Comment post={post} />
     </div >
   );
