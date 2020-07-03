@@ -11,7 +11,9 @@ import {
   STOP_GALLERY_LOADER,
   CREATE_GALLERY,
   UPDATE_GALLERY,
-  REMOVE_GALLERY_IMAGE
+  REMOVE_GALLERY_IMAGE,
+  STROKE_POST,
+  UNSTROKE_POST
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -27,6 +29,39 @@ export default (state = initialState, action) => {
       return {
         ...state,
         gallery: action.payload
+      };
+
+    case STROKE_POST:
+      return {
+        ...state,
+        gallery: {
+          ...state.gallery,
+          posts: state?.gallery?.posts?.map(post => {
+            if (post.id === action.payload.postId) {
+              return {
+                ...post,
+                has_stroke: action.payload.value
+              }
+            }
+            return post
+          })
+        }
+      };
+    case UNSTROKE_POST:
+      return {
+        ...state,
+        gallery: {
+          ...state.gallery,
+          posts: state?.gallery?.posts?.map(post => {
+            if (post.id === action.payload.postId) {
+              return {
+                ...post,
+                has_stroke: action.payload.value
+              }
+            }
+            return post
+          })
+        }
       };
     case GET_MY_GALLERIES:
       return {

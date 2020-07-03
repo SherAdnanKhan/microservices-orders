@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
-import { makeStoke, unStoke } from "../../../actions/postAction";
-import { completeFormattedDate } from '../../../utils/helperFunctions';
+import { strokePost, unstrokePost } from "../../../actions/postAction";
 import { useDispatch } from "react-redux";
 import Comment from '../viewPost/comments';
-
+import { completeFormattedDate } from '../../../utils/helperFunctions';
 
 const LobbyPosts = ({ post }) => {
   const [activePost, setActivePost] = useState({});
-
   const dispatch = useDispatch();
-  const handleUnStoke = (id) => {
-    dispatch(unStoke(id))
+
+  const handleUnstroke = () => {
+    console.log('active: ', activePost);
+    dispatch(unstrokePost(post.id, post.gallery_id))
   }
 
-  const handleStoke = (id) => {
-    dispatch(makeStoke(id));
+  const handleStroke = () => {
+    dispatch(strokePost(post.id, post.gallery_id));
   }
 
   const handleActivePost = post => {
@@ -75,19 +75,19 @@ const LobbyPosts = ({ post }) => {
         }>
           <div className="strk-btn">
             <Stroke
-              hasStroke={post.has_stroke}
+              hasStroke={post.has_stroke.length}
               className="strk-img"
-              onStroke={() => handleStoke(post.id)}
-              onUnstroke={() => handleUnStoke(post.id)}
+              onStroke={() => handleStroke()}
+              onUnstroke={() => handleUnstroke()}
             />
             {post.stroke_users.length}
           </div>
           <div className="action">
-            <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+            <img className="comment-img open-commet" alt="" src="/assets/images/crit1.png" />
             {post.comments.length}
           </div>
           <div className="action">
-            <img className="comment-img open-commet" alt="" src="/assets/images/ncommnicon.png" />
+            <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
           </div>
         </div>
         <div className={
@@ -96,13 +96,14 @@ const LobbyPosts = ({ post }) => {
             : 'lobby-icon time-div'
         }>
           <div className=" time-row">
-            <p className={`lobby-post-time ${post.user.feel_color}`}>{completeFormattedDate(post.created_at)}</p>
+            <p className={`lobby-post-time ${post.user.feel_color}`}>
+              {completeFormattedDate(post.created_at)}
+            </p>
           </div>
         </div>
 
       </div>
-
-      <Comment post={post} />
+      {activePost === post && <Comment post={activePost} />}
     </div >
   );
 }

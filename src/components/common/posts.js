@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from './avatar';
 import { FAVES, SPRFVS, INVITE_ONLY } from '../../constants/privacyTypes';
+import Comment from '../dashboard/viewPost/comments';
+import Stroke from './stroke';
 
 const Post = ({
   gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprFvs
@@ -12,6 +14,7 @@ const Post = ({
     if (post === activePost) {
       setActivePost({});
     } else {
+      console.log('active post: ', post)
       setActivePost(post);
     }
   }
@@ -40,7 +43,7 @@ const Post = ({
                                   <video width="320" height="240" controls>
                                     <source src={post.image.path} type="video/mp4" />
                                     <source src={post.image.path} type="video/ogg" />
-                                Your browser does not support the video tag.
+                                    Your browser does not support the video tag.
                                   </video>
                                 ) : (
                                   <img src={`${post.image.path}`} alt="" />
@@ -97,10 +100,16 @@ const Post = ({
                                 : 'lobby-icon'
                             }>
                               <div className="strk-btn">
-                                <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" />
+                                {/* <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" /> */}
+                                <Stroke
+                                  className="strk-img"
+                                  hasStroke={post.has_stroke}
+                                  onStroke={() => console.log('stroke: ', post)}
+                                  onUnstroke={() => console.log('unstroke: ', post)}
+                                />
                               </div>
                               <div className="action">
-                                <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                                <img className="comment-img open-commet" alt="" src="/assets/images/crit1.png" />
                               </div>
                               <div className="action ">
                                 <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
@@ -108,6 +117,7 @@ const Post = ({
                             </div>
                           </div>
                         ))}
+                      <Comment post={activePost} />
                     </div>
                   </div>
                 )}

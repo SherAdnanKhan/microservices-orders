@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouteMatch } from "react-router-dom";
-import { getPost, makeStoke, unStoke } from "../../../actions/postAction";
+import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { useSelector, useDispatch } from "react-redux";
 import PostFooter from "./postFooter";
 import ViewPostHead from "./postHead";
@@ -21,14 +21,16 @@ const ViewPost = () => {
     dispatch(getPost(id))
   }, [dispatch, id]);
 
-  const handleUnStoke = (e, ID) => {
-    e.preventDefault();
-    dispatch(unStoke(ID, id))
+  useEffect(() => {
+    console.log(post)
+  }, [post]);
+
+  const handleUnStoke = () => {
+    dispatch(unstrokePost(post.post.id, post.post.gallery_id))
   }
 
-  const handleStoke = (e, ID) => {
-    e.preventDefault();
-    dispatch(makeStoke(ID, id));
+  const handleStoke = () => {
+    dispatch(strokePost(post.post.id, post.post.gallery_id));
   }
 
   return (
