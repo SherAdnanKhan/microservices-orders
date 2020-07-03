@@ -16,25 +16,53 @@ export const getPost = (post) => dispatch => {
     });
 };
 
-export const makeStoke = postId => dispatch => {
-  dispatch({ type: STROKE_POST, payload: true });
+export const strokePost = (postId, galleryId) => dispatch => {
+  dispatch({
+    type: STROKE_POST,
+    payload: {
+      postId: postId,
+      galleryId: galleryId,
+      value: true
+    }
+  });
 
   http
     .post('/post/stroke', { post_id: postId })
     .then()
     .catch(() => {
-      dispatch({ type: UNSTROKE_POST, payload: false });
+      dispatch({
+        type: UNSTROKE_POST,
+        payload: {
+          postId: postId,
+          galleryId: galleryId,
+          value: false
+        }
+      });
     });
 };
 
-export const unStoke = (postId) => dispatch => {
-  dispatch({ type: UNSTROKE_POST, payload: false });
+export const unstrokePost = (postId, galleryId) => dispatch => {
+  dispatch({
+    type: UNSTROKE_POST,
+    payload: {
+      postId: postId,
+      galleryId: galleryId,
+      value: false
+    }
+  });
 
   http
     .post('/post/unstroke', { post_id: postId })
     .then()
     .catch(() => {
-      dispatch({ type: STROKE_POST, payload: true });
+      dispatch({
+        type: STROKE_POST,
+        payload: {
+          postId: postId,
+          galleryId: galleryId,
+          value: true
+        }
+      });
     });
 };
 
@@ -74,6 +102,6 @@ export const getNcomm = slug => dispatch => {
 export const clearNcomm = () => {
   return {
     type: CLEAR_NCOMM,
-  }
+  };
 };
 

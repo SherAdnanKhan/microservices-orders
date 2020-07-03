@@ -74,14 +74,14 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
                 className="post-color-icon"
                 src="/assets/images/strokeiconfull.png"
                 alt=""
-                onClick={(e) => handleUnStoke(e, post && post.post && post.post.id)}
+                onClick={handleUnStoke}
               />
             ) : (
               <img
                 className="post-non-color-icon"
                 src="/assets/images/strokeiconem.png"
                 alt=""
-                onClick={(e) => handleStoke(e, post && post.post && post.post.id)}
+                onClick={handleStoke}
               />
             )
           }

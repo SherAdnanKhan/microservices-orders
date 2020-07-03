@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getComments, createComment } from '../../../actions/postAction';
 import Avatar from '../../common/avatar';
@@ -8,10 +8,17 @@ const Comment = ({ post }) => {
   const dispatch = useDispatch();
   const { comments } = useSelector(state => state.postView);
 
+  const bottomRef = useRef();
+
   useEffect(() => {
-    if (post)
+    if (post) {
       dispatch(getComments(post.id))
+    }
   }, [post, dispatch]);
+
+  useEffect(() => {
+    bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [comments]);
 
   const handleSubmit = () => {
     const data = {
@@ -45,7 +52,6 @@ const Comment = ({ post }) => {
                 </div>
               </div>
             </div>
-
           </div>
           <div className="user-link">
             <p>WebDesign/ <br /> Programmer </p>
@@ -97,6 +103,7 @@ const Comment = ({ post }) => {
                 </div>
               ))
             }
+            <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
           <div className="text-area">
             <div className="msg-input">
