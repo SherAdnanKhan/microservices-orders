@@ -1,23 +1,80 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites } from '../../../actions/userActions';
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';
 import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions";
+import FeedSection from '../mzFlashGroup/feedSection';
+import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
+import UserContext from '../../../context/userContext';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const {
-    user: { favouriteUsers, favouriteGalleries, unreadCount }
+    user: { favouriteUsers, favouriteGalleries, unreadCount },
+    mzFlash: { collectiveFeeds }
   } = useSelector(state => state);
+
+  const [activeFeedComment, setActiveFeedComment] = useState(0);
+  const [comments, setComments] = useState({})
+
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getUserArtById(user_art_id))
+    dispatch(getUserArtById(user_art_id));
+    dispatch(getCollectiveFeeds());
   }, [dispatch, user_art_id]);
 
+  const handleEnter = (e, feedId, comment) => {
+    if (e.keyCode === 13 && comments[comment]) {
+      const commentData = {
+        feed_id: feedId,
+        comment: comments[comment]
+      };
+
+      dispatch(createFeedComment(commentData));
+      setComments({ ...comments, [comment]: '' });
+    }
+  };
+
+  const handleCommentChange = ({ target: input }) => {
+    setComments({ ...comments, [input.name]: input.value });
+    console.log(comments)
+  };
+
+  const handleActiveFeedComment = (e, feedId) => {
+    e.preventDefault();
+    if (feedId === activeFeedComment)
+      setActiveFeedComment(0);
+    else
+      setActiveFeedComment(feedId);
+  };
+
+  const handleRepost = (e, feed) => {
+    e.preventDefault();
+
+    const formData = {};
+    formData.feed_id = feed.id;
+
+    dispatch(createFeed(formData));
+  };
+
+  const handleFeedStroke = id => {
+    const data = {
+      feed_id: id
+    };
+    dispatch(strokeFeed(data));
+  };
+
+  const handleFeedUnstroke = id => {
+    const data = {
+      feed_id: id
+    };
+    dispatch(unstrokeFeed(data));
+  };
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
@@ -73,7 +130,18 @@ const Lobby = () => {
       </div>
 
       <div className="section-3">
-        <div className=" sub-box row set-sources"><div className="reposted-text"> You have reposted this feed </div><div className="col-12 cube-top"><a href="/dashboard/studio/qa-test"><div className="artcubecase limegreen"><div className="procusmallmove"><div className="scenesmall limegreen"><div className="cubesmallmove"><div className="cube-facesmall  cube-face-frontsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/Dyb0Qk0jCY-1592560648.jpg" height="100%" /></div><div className="cube-facesmall  cube-face-backsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/PWRGH76QcB-1592996695.jpg" height="100%" /></div><div className="cube-facesmall  cube-face-leftsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/nQAMyoeWPV-1592996728.jpg" height="100%" /></div><div className="cube-facesmall  cube-face-rightsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/Dyb0Qk0jCY-1592560648.jpg" height="100%" /></div></div></div></div></div></a><span className="date-time">June 30th 2020</span></div><div className="time">11:16 AM</div><div className="col-12"><span className="usernames"><a href="/dashboard/studio/qa-test">qa</a></span></div><p className="submit-text">test </p><div className="imgvideo-mzflash" /><div className="flex-container-nested"><div className="action-cube"><a href="/dashboard/studio/qa-test"><div className="artcubecase gray"><div className="procusmallmove"><div className="scenesmall gray"><div className="cubesmallmove"><div className="cube-facesmall  cube-face-frontsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/Dyb0Qk0jCY-1592560648.jpg" height="100%" /></div><div className="cube-facesmall  cube-face-backsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/PWRGH76QcB-1592996695.jpg" height="100%" /></div><div className="cube-facesmall  cube-face-leftsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/nQAMyoeWPV-1592996728.jpg" height="100%" /></div><div className="cube-facesmall  cube-face-rightsmall"><img alt="" src="https://meuzm-stage.s3.us-west-1.amazonaws.com/artists/Dyb0Qk0jCY-1592560648.jpg" height="100%" /></div></div></div></div></div></a><span className="date-time">June 19th 2020</span></div><div className="time">07:10 PM</div><div className="user-name-parent"><p className="user-name usernames"><a href="/dashboard/studio/qa-test">qa</a></p></div><p className="submit-text">test </p></div><div className="flex-container"><div className="action"><span className="coment-counter">0 comment </span><img className="comment-img" alt="" src="/assets/images/crit1.png" /></div><div className="strk-btn"><span className="strk-counter"> 1 stroke </span><img className="strk-img clickable" src="/assets/images/strokeiconfull.png" alt="" /></div><div className="actions-repost"><button className="repost">Repost</button></div></div><div className="view-comment" /><input type="text" id="feed118" name="feed118" placeholder="Enter a Comment..." defaultValue /></div>
+        <FeedSection
+          collectiveFeeds={collectiveFeeds}
+          currentUser={currentUser}
+          activeFeedComment={activeFeedComment}
+          onActiveFeedComment={handleActiveFeedComment}
+          onCommentChange={handleCommentChange}
+          comments={comments}
+          onPostComment={handleEnter}
+          onRepost={handleRepost}
+          onStroke={handleFeedStroke}
+          onUnstroke={handleFeedUnstroke}
+        />
       </div>
 
       <div className="assist">
