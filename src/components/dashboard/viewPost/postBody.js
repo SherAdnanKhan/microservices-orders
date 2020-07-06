@@ -26,19 +26,19 @@ const PostBody = ({ post }) => {
         </>
       }
       <div className="right-clicked">
-        <div className="boxes">
+        <div className="boxes first ">
           <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
         </div>
-        <div className="boxes">
+        <div className="boxes img-align">
           <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
         </div>
-        <div className="boxes">
+        <div className="boxes img-align">
           <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
         </div>
-        <div className="boxes">
+        <div className="boxes img-align">
           <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
         </div>
-        <div className="boxes">
+        <div className="boxes img-align">
           <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
         </div>
 
