@@ -1,32 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
-import { strokePost, unstrokePost } from "../../../actions/postAction";
-import { useDispatch } from "react-redux";
 import Comment from '../viewPost/comments';
 import { completeFormattedDate } from '../../../utils/helperFunctions';
+import ImageVideoSlider from '../../common/imageVideoSlider';
 
-const LobbyPosts = ({ post }) => {
-  const [activePost, setActivePost] = useState({});
-  const dispatch = useDispatch();
-
-  const handleUnstroke = () => {
-    console.log('active: ', activePost);
-    dispatch(unstrokePost(post.id, post.gallery_id))
-  }
-
-  const handleStroke = () => {
-    dispatch(strokePost(post.id, post.gallery_id));
-  }
-
-  const handleActivePost = post => {
-    if (post === activePost) {
-      setActivePost({});
-    } else {
-      setActivePost(post);
-    }
-  };
+const LobbyPosts = ({
+  post, ncomm, onClickNcomm,
+  activeNcomm, onActivePost, activePost,
+  onStrokePost, onUnstrokePost
+}) => {
 
   return (
     <div className="post-page">
@@ -53,7 +37,7 @@ const LobbyPosts = ({ post }) => {
       }>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
-      <div className="post-body" onClick={() => handleActivePost(post)}>
+      <div className="post-body" onClick={() => onActivePost(post)}>
         {post.post_type === 2
           ? (
             <video width="320" height="240" controls>
@@ -66,6 +50,9 @@ const LobbyPosts = ({ post }) => {
           )
         }
       </div>
+      {activeNcomm === post &&
+        <ImageVideoSlider ncomm={ncomm} />
+      }
       <div className="onearttitle">
         <p>{post && post.title}</p>
         <div className={
@@ -73,21 +60,28 @@ const LobbyPosts = ({ post }) => {
             ? 'lobby-icon lobby-icon-slide'
             : 'lobby-icon'
         }>
-          <div className="strk-btn">
-            <Stroke
-              hasStroke={post.has_stroke.length}
-              className="strk-img"
-              onStroke={() => handleStroke()}
-              onUnstroke={() => handleUnstroke()}
-            />
-            {post.stroke_users.length}
+          <div className="action">
+            <div className="strk-btn">
+              <Stroke
+                hasStroke={post.has_stroke.length}
+                className="strk-img"
+                onStroke={() => onStrokePost(post)}
+                onUnstroke={() => onUnstrokePost(post)}
+              />
+              {post.stroke_users.length}
+            </div>
           </div>
           <div className="action">
             <img className="comment-img open-commet" alt="" src="/assets/images/crit1.png" />
             {post.comments.length}
           </div>
           <div className="action">
-            <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
+            <img
+              className="comment-img"
+              alt=""
+              src="/assets/images/ncommnicon.png"
+              onClick={() => onClickNcomm(post)}
+            />
           </div>
         </div>
         <div className={

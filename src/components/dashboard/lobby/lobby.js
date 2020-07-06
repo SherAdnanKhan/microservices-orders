@@ -8,17 +8,21 @@ import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import UserContext from '../../../context/userContext';
+import { getNcomm, clearNcomm, strokePost, unstrokePost } from '../../../actions/postAction';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const {
     user: { favouriteUsers, favouriteGalleries, unreadCount },
-    mzFlash: { collectiveFeeds }
+    mzFlash: { collectiveFeeds },
+    postView: { ncomm }
   } = useSelector(state => state);
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
+  const [activePost, setActivePost] = useState('');
+  const [activeNcomm, setActiveNcomm] = useState('');
 
   const currentUser = useContext(UserContext);
 
@@ -27,6 +31,11 @@ const Lobby = () => {
     dispatch(getUserArtById(user_art_id));
     dispatch(getCollectiveFeeds());
   }, [dispatch, user_art_id]);
+
+  useEffect(() => {
+    dispatch(clearNcomm);
+    setActiveNcomm('');
+  }, [dispatch])
 
   const handleEnter = (e, feedId, comment) => {
     if (e.keyCode === 13 && comments[comment]) {
@@ -75,6 +84,20 @@ const Lobby = () => {
     };
     dispatch(unstrokeFeed(data));
   };
+
+  const handleUnstrokePost = (post) => {
+    dispatch(unstrokePost(post.id, post.gallery_id))
+  }
+
+  const handleStrokePost = (post) => {
+    dispatch(strokePost(post.id, post.gallery_id));
+  }
+
+  const handleNcomm = post => {
+    dispatch(getNcomm(post.slug));
+    setActiveNcomm(post);
+  };
+
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
@@ -112,15 +135,22 @@ const Lobby = () => {
             </div>
           </div>
         </div>
-
-
         <div className="col-6 section-2 box-2">
           {favouriteGalleries &&
             favouriteGalleries.fav_galleries.map((gallery, index) => (
               <div key={index}>
                 {gallery.posts.map((post, post_index) => (
                   <div key={post_index}>
-                    <LobbyPosts post={post} />
+                    <LobbyPosts
+                      onClickNcomm={handleNcomm}
+                      onActivePost={post => setActivePost(post)}
+                      onStrokePost={handleStrokePost}
+                      onUnstrokePost={handleUnstrokePost}
+                      post={post}
+                      ncomm={ncomm}
+                      activeNcomm={activeNcomm}
+                      activePost={activePost}
+                    />
                   </div>
                 ))
                 }
@@ -128,7 +158,6 @@ const Lobby = () => {
             ))
           }
         </div>
-
         <div className="section-3 box-3 col4">
           <FeedSection
             collectiveFeeds={collectiveFeeds}
@@ -142,7 +171,6 @@ const Lobby = () => {
             onStroke={handleFeedStroke}
             onUnstroke={handleFeedUnstroke}
           />
-
         </div>
         <div className="assist">
           <a href="#__">
