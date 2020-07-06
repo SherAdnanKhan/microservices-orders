@@ -313,18 +313,18 @@ $(document)
   // holds the start time
   var start;
 
-  $(document).on('mousedown', ".post-body > img", function (e) {
-    start = new Date().getTime();
-  });
+  // $(document).on('mousedown', ".post-body > img", function (e) {
+  //   start = new Date().getTime();
+  // });
 
-  $(document).on('mouseleave', ".post-body > img", function (e) {
-    start = 0;
-  });
+  // $(document).on('mouseleave', ".post-body > img", function (e) {
+  //   start = 0;
+  // });
 
-  $(document).on('mouseup', ".post-body > img", function (e) {
-    if (new Date().getTime() >= (start + longpress)) {
-      $(this).parent().find('.right-clicked').show();
-    }
-  });
+  // $(document).on('mouseup', ".post-body > img", function (e) {
+  //   if (new Date().getTime() >= (start + longpress)) {
+  //     $(this).parent().find('.right-clicked').show();
+  //   }
+  // });
 
 }());

@@ -21,10 +21,6 @@ const ViewPost = () => {
     dispatch(getPost(id))
   }, [dispatch, id]);
 
-  useEffect(() => {
-    console.log(post)
-  }, [post]);
-
   const handleUnStoke = () => {
     dispatch(unstrokePost(post.post.id, post.post.gallery_id))
   }
@@ -42,7 +38,7 @@ const ViewPost = () => {
         post={post && post.post}
       />
       <ViewPostBody
-        post={post && post.post}
+        post={post}
       />
       <PostFooter
         post={post}
