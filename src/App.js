@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { updateCounter } from './actions/userActions';
 import { useDispatch } from 'react-redux';
 import { updateConversationUnreadCount } from './actions/conversationActions';
+import { userKey } from './constants/keys';
 
 function App() {
   const [socket, setSocket] = useState('');
@@ -41,6 +42,11 @@ function App() {
 
     if (socket) {
       socket.emit('joinUser', currentUser);
+
+      socket.on('notifyColrChange', (user) => {
+        localStorage.setItem(userKey, JSON.stringify(user));
+        window.location.reload();
+      })
 
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
