@@ -4,11 +4,26 @@ import Avatar from './avatar';
 import { FAVES, SPRFVS, INVITE_ONLY } from '../../constants/privacyTypes';
 import Comment from '../dashboard/viewPost/comments';
 import Stroke from './stroke';
+import { strokePost, unstrokePost, getNcomm } from '../../actions/postAction';
+import { useDispatch, useSelector } from 'react-redux';
+import ImageVideoSlider from './imageVideoSlider';
 
 const Post = ({
   gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprFvs
 }) => {
+
+  const dispatch = useDispatch();
+  const {
+    postView: { ncomm },
+  } = useSelector(state => state);
+
   const [activePost, setActivePost] = useState({});
+  const [activeNcomm, setActiveNcomm] = useState('');
+
+  const handleNcomm = post => {
+    setActiveNcomm(post);
+    dispatch(getNcomm(post.slug));
+  };
 
   const handleActivePost = post => {
     if (post === activePost) {
@@ -22,6 +37,14 @@ const Post = ({
   const isAllowed = () => {
     const found = galleryPrivacy.find(g => g.gallery_id === activeGallery.id);
     return !!found.is_allowed;
+  };
+
+  const handleStroke = post => {
+    dispatch(strokePost(post.id, post.gallery_id));
+  };
+
+  const handleUnstroke = post => {
+    dispatch(unstrokePost(post.id, post.gallery_id));
   };
 
   return (
@@ -94,25 +117,37 @@ const Post = ({
                                 )}
                               <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
                             </div>
+                            {activeNcomm === post &&
+                              <ImageVideoSlider ncomm={ncomm} />
+                            }
                             <div className={
                               activePost === post
                                 ? 'lobby-icon lobby-icon-slide'
                                 : 'lobby-icon'
                             }>
                               <div className="strk-btn">
-                                {/* <img className="strk-img" alt="" src="/assets/images/strokeiconfull.png" /> */}
                                 <Stroke
                                   className="strk-img"
-                                  hasStroke={post.has_stroke}
-                                  onStroke={() => console.log('stroke: ', post)}
-                                  onUnstroke={() => console.log('unstroke: ', post)}
+                                  hasStroke={post.has_stroke.length}
+                                  onStroke={() => handleStroke(post)}
+                                  onUnstroke={() => handleUnstroke(post)}
+                                />
+                                {post.stroke_users_count}
+                              </div>
+                              <div className="action">
+                                <img
+                                  className="comment-img open-commet"
+                                  alt=""
+                                  src="/assets/images/crit1.png"
                                 />
                               </div>
                               <div className="action">
-                                <img className="comment-img open-commet" alt="" src="/assets/images/crit1.png" />
-                              </div>
-                              <div className="action ">
-                                <img className="comment-img" alt="" src="/assets/images/ncommnicon.png" />
+                                <img
+                                  className="comment-img clickable"
+                                  alt=""
+                                  src="/assets/images/ncommnicon.png"
+                                  onClick={() => handleNcomm(post)}
+                                />
                               </div>
                             </div>
                           </div>

@@ -61,7 +61,7 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
         }
         <div className="post-footer-icons action-w">
           <img
-            className="post-non-color-icon"
+            className="post-non-color-icon clickable"
             src="/assets/images/ncommnicon.png"
             onClick={() => handleNcomm(post)}
             alt=""

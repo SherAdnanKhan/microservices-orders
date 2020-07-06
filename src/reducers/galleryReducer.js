@@ -40,7 +40,8 @@ export default (state = initialState, action) => {
             if (post.id === action.payload.postId) {
               return {
                 ...post,
-                has_stroke: action.payload.value
+                has_stroke: [1],
+                stroke_users_count: post.stroke_users_count + 1
               }
             }
             return post
@@ -56,7 +57,8 @@ export default (state = initialState, action) => {
             if (post.id === action.payload.postId) {
               return {
                 ...post,
-                has_stroke: action.payload.value
+                has_stroke: [],
+                stroke_users_count: post.stroke_users_count - 1
               }
             }
             return post
