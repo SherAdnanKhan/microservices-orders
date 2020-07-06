@@ -62,7 +62,15 @@ const ExhibitionModel = ({ onSave }) => {
           onCompleteCrop={handleCompleteCrop}
           croppedImage={croppedImage}
         />
+        <div className="Exhibit-head">
+          <div class="left-caret">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </div>
+
+          <h2>Add an Exhibit</h2>
+        </div>
         <div className="up-img-box">
+
           {isEmpty(croppedImage) && !isEmpty(imageUrl) && <img className="update-pic" src={imageUrl} alt="gallery" />}
           {!isEmpty(croppedImage) && <img className="update-pic" src={URL.createObjectURL(croppedImage)} alt="gallery" />}
           {video &&
