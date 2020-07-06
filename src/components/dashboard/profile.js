@@ -21,8 +21,9 @@ const Profile = () => {
   const [images, setImages] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
   const [selectedImage, setSelectedImage] = useState({});
-  const [color, setColor] = useState('red');
+
   const { loading } = useSelector(state => state.loading);
+  const { feelColor } = useSelector(state => state.feelColor);
 
   useEffect(() => {
     if (avatars)
@@ -74,17 +75,13 @@ const Profile = () => {
     history.push('/dashboard/my-studio');
   }
 
-  useEffect(() => {
-    setColor(user.feel_color);
-  }, [user]);
-
   const handleSkip = value => {
     setToggle(value);
     setCroppedImage('');
   };
 
   return (
-    <div className={`frameReady ${color}`}>
+    <div className={`frameReady ${feelColor}`}>
       <LeftBorder />
       <RightBorder />
       <div className="edit-profile-page">

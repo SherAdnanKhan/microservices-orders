@@ -9,13 +9,14 @@ import { getMyGalleries } from "../../../actions/galleryActions";
 import ExhibitionModel from "./exhibitionModel";
 
 const AddExibit = () => {
-  const [color, setColor] = useState('red');
   const [showModel, setShowModel] = useState(true);
 
   const { params: { id } } = useRouteMatch();
 
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const { feelColor } = useSelector(state => state.feelColor);
 
   const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
   const { loading } = useSelector(state => state.loading);
@@ -68,7 +69,6 @@ const AddExibit = () => {
     // setArts(option.name)
   }
 
-
   useEffect(() => {
     dispatch(getMyGalleries())
 
@@ -120,8 +120,6 @@ const AddExibit = () => {
   }
 
   useEffect(() => {
-    setColor(user.feel_color);
-
     if (id !== 'new') {
       setData(data => {
         return {
@@ -149,7 +147,7 @@ const AddExibit = () => {
         <ExhibitionModel onSave={handleSave} />
       }
       {!showModel &&
-        <div className={`frameReady ${color}`}>
+        <div className={`frameReady ${feelColor}`}>
           {loading && <Spinner />}
           <>
             <div className="exibition-page-header">

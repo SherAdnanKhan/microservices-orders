@@ -10,6 +10,7 @@ import postReducer from '../reducers/postReducer';
 import conversationReducer from '../reducers/conversationReducer';
 import privacyReducer from '../reducers/privacyReducer';
 import mzFlashReducer from '../reducers/mzFlashReducer';
+import colorReducer from '../reducers/colorReducer';
 
 export default combineReducers({
   error: errorReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
   postView: postReducer,
   conversation: conversationReducer,
   privacies: privacyReducer,
-  mzFlash: mzFlashReducer
+  mzFlash: mzFlashReducer,
+  feelColor: colorReducer
 });

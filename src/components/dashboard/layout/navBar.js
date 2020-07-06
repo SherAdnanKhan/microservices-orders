@@ -1,31 +1,22 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { logout } from '../../../actions/authActions';
 import Search from './search';
-import UserContext from '../../../context/userContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeFeelColor } from '../../../actions/colorActions';
 import ChangeColor from './changeColor';
 
 const NavBar = () => {
-  const [color, setColor] = useState();
-
   const history = useHistory();
-  const user = useContext(UserContext);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setColor(user.feel_color);
-  }, [user]);
+  const { feelColor } = useSelector(state => state.feelColor);
 
   const handleColorChange = color => {
-    dispatch(changeFeelColor(color, () => {
-      setColor(color);
-    }));
+    dispatch(changeFeelColor(color));
   };
 
   return (
-    <div className={`frameReady ${color}`}>
+    <div className={`frameReady ${feelColor}`}>
       <div className="top" id="main-menu">
         <div className="contentFit d-flex">
           <div className="burgerMenu">

@@ -19,6 +19,12 @@ import { updateCounter } from './actions/userActions';
 import { useDispatch } from 'react-redux';
 import { updateConversationUnreadCount } from './actions/conversationActions';
 import { userKey } from './constants/keys';
+import store from './store';
+import { updateFeelColor } from './actions/colorActions';
+
+if (getCurrentUser()) {
+  store.dispatch(updateFeelColor(getCurrentUser().feel_color));
+}
 
 function App() {
   const [socket, setSocket] = useState('');
@@ -45,7 +51,7 @@ function App() {
 
       socket.on('notifyColrChange', (user) => {
         localStorage.setItem(userKey, JSON.stringify(user));
-        window.location.reload();
+        dispatch(updateFeelColor(user.feel_color))
       })
 
       socket.on('notify', data => {
