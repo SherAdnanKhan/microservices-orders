@@ -77,7 +77,7 @@ const LobbyPosts = ({
           </div>
           <div className="action">
             <img
-              className="comment-img"
+              className="comment-img clickable"
               alt=""
               src="/assets/images/ncommnicon.png"
               onClick={() => onClickNcomm(post)}
