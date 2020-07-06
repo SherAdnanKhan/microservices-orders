@@ -4310,6 +4310,19 @@ img {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+  .right-clicked{
+    display:none;
+    transition: 0.3s all ease-in-out;
+    .boxes{
+      border:1px solid;
+      img{
+        height:250px;
+        width:250px;
+      }
+    }
+  }
+ 
   .strk-btn{
     width:50px;
     .strk-img{

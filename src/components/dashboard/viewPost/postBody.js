@@ -3,6 +3,7 @@ import React from 'react';
 const PostBody = ({ post }) => {
   return (
     <div className="post-body">
+
       {post &&
         <>
           {post.post_type === 2
@@ -24,7 +25,27 @@ const PostBody = ({ post }) => {
 
         </>
       }
+      <div className="right-clicked">
+        <div className="boxes">
+          <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
+        </div>
+        <div className="boxes">
+          <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
+        </div>
+        <div className="boxes">
+          <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
+        </div>
+        <div className="boxes">
+          <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
+        </div>
+        <div className="boxes">
+          <img className="valut-img" alt="" src="/assets/images/dodgerblue.png" />
+        </div>
+
+      </div>
     </div>
+
   )
 }
+
 export default PostBody;

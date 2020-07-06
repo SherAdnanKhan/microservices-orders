@@ -305,3 +305,26 @@ $(document)
       $('.vSlider .slides').scrollTop(top);
     }
   });
+
+(function () {
+
+  // how many milliseconds is a long press?
+  var longpress = 2000;
+  // holds the start time
+  var start;
+
+  $(document).on('mousedown', ".post-body > img", function (e) {
+    start = new Date().getTime();
+  });
+
+  $(document).on('mouseleave', ".post-body > img", function (e) {
+    start = 0;
+  });
+
+  $(document).on('mouseup', ".post-body > img", function (e) {
+    if (new Date().getTime() >= (start + longpress)) {
+      $(this).parent().find('.right-clicked').show();
+    }
+  });
+
+}());
