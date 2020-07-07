@@ -22,9 +22,7 @@ const MyStudio = () => {
 
   const {
     studio: { myStudio },
-    // exibition: { ListOfGalleries: { data: galleries } },
     gallery: { gallery, myGalleries }
-
   } = useSelector(state => state);
 
   useEffect(() => {
@@ -89,6 +87,7 @@ const MyStudio = () => {
       <PostBar
         myStudio={myStudio}
         activeGallery={activeGallery}
+        gallery={gallery}
         totalPosts={myStudio && myStudio.user.posts_count}
       />
       <StudioFooter gallery={gallery} user={myStudio && myStudio.user} />
