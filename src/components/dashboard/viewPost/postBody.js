@@ -21,7 +21,7 @@ const PostBody = ({ post }) => {
       </div>
       <div className="post-body">
         {post &&
-          <div
+          <div className="image-div"
             onMouseDown={handleButtonPress}
             onMouseUp={handleButtonRelease}
           >

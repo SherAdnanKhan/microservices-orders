@@ -4410,9 +4410,15 @@ img {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  .image-div {
+    width: 100%;
+}
   .right-clicked{
-    display:none;
+    display: none;
     transition: 0.3s all ease-in-out;
+    width: 27.3%;
+    height: 100vh;
+    overflow-y: scroll;
     &.show {
       display: block;
     }
