@@ -56,7 +56,11 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
         </div>
         {hasAllowedCritiques() &&
           <div className="post-footer-icons">
-            <img className="post-non-color-icon open-commet" src="/assets/images/crit1.png" alt="" />
+            <img
+              className="post-non-color-icon open-commet clickable"
+              src="/assets/images/crit1.png"
+              alt=""
+            />
           </div>
         }
         <div className="post-footer-icons action-w">

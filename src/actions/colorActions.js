@@ -3,7 +3,7 @@ import { userKey } from '../constants/keys';
 import io from 'socket.io-client';
 import { CHANGE_COLOR } from '../constants/actionTypes';
 
-const socket = io.connect(process.env.REACT_APP_SOCKET_URL);
+const socket = io.connect(process.env.REACT_APP_SOCKET_URL, { transport: ['websocket'] });
 
 export const changeFeelColor = (color, callback) => () => {
   http

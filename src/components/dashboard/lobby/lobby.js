@@ -94,9 +94,21 @@ const Lobby = () => {
   }
 
   const handleNcomm = post => {
-    dispatch(getNcomm(post.slug));
-    setActiveNcomm(post);
+    if (post.id === activeNcomm.id) {
+      setActiveNcomm('');
+    } else {
+      dispatch(getNcomm(post.slug));
+      setActiveNcomm(post);
+    }
   };
+
+  const handleActivePost = post => {
+    if (post.id === activePost.id) {
+      setActivePost('');
+    } else {
+      setActivePost(post);
+    }
+  }
 
   return (
     <div className="lobby-page">
@@ -143,7 +155,7 @@ const Lobby = () => {
                   <div key={post_index}>
                     <LobbyPosts
                       onClickNcomm={handleNcomm}
-                      onActivePost={post => setActivePost(post)}
+                      onActivePost={handleActivePost}
                       onStrokePost={handleStrokePost}
                       onUnstrokePost={handleUnstrokePost}
                       post={post}
