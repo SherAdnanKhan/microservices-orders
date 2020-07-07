@@ -69,6 +69,12 @@ const ViewProfile = ({ myStudio }) => {
               </div>
               {myStudio && <span>{myStudio.fav_by_count}</span>}
             </Link>
+            <Link to='#'>
+              <div className="faved-by-btn">
+                <img src="/assets/images/FaveGalleryFull.png" alt="" />
+                  Fave galleries
+              </div>
+            </Link>
             <Link to="#">
               <div className="faved-by-btn">
                 <img src="/assets/images/faving.png" alt="" />

@@ -19,6 +19,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/my-studio/profile" component={Profile} />
         <Route exact path="/dashboard/my-studio/fave" component={Main} />
         <Route exact path="/dashboard/my-studio/fave-by" component={Main} />
+        <Route exact path="/dashboard/my-studio/fave-galleries" component={Main} />
         <Route exact path="/dashboard/my-studio/sprfvs" component={Main} />
         <Route exact path="/dashboard/my-studio" component={Main} />
         <Route exact path="/dashboard/studio/:slug" component={Main} />

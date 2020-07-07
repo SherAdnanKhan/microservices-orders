@@ -45,6 +45,7 @@ export const STOP_STUDIO_LOADER = 'STOP_STUDIO_LOADER'
 
 // Gallery
 export const GET_GALLERY = "GET_GALLERY";
+export const GET_USER_FAV_GALLERIES = 'GET_USER_FAV_GALLERIES';
 export const MAKE_FAV = "MAKE_FAV";
 export const FAV_GALLERY = "FAV_GALLERY";
 export const UNFAV_GALLERY = "UNFAV_GALLERY";

@@ -38,6 +38,12 @@ const EditProfile = ({ myStudio }) => {
               </div>
               {myStudio && <span>{myStudio.fav_by_count}</span>}
             </Link>
+            <Link to='/dashboard/my-studio/fave-galleries'>
+              <div className="faved-by-btn">
+                <img src="/assets/images/FaveGalleryFull.png" alt="" />
+                  Fave galleries
+              </div>
+            </Link>
             <Link to="/dashboard/my-studio/fave">
               <div className="faved-by-btn">
                 <img src="/assets/images/faving.png" alt="" />
