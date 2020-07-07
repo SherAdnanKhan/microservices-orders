@@ -30,6 +30,16 @@ const Comment = ({ post }) => {
     setComment('');
   };
 
+  const getCommentTime = comment => {
+    const splitted = comment.created_at.split(',');
+    const time =
+      (splitted[0] === 'just now' || splitted[0].includes('seconds'))
+        ? splitted[0]
+        : `${splitted[0]} ago`;
+
+    return time;
+  };
+
   return (
     <>
       <div className="user-list-view">
@@ -98,7 +108,7 @@ const Comment = ({ post }) => {
                   </div>
                   <div className="comment-info">
                     <p>{comment.user.username} : <span>{comment.description}</span> </p>
-                    <p> 20 h </p>
+                    <p> {getCommentTime(comment)} </p>
                   </div>
                 </div>
               ))

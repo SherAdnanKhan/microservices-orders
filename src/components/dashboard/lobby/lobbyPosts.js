@@ -72,7 +72,11 @@ const LobbyPosts = ({
             </div>
           </div>
           <div className="action">
-            <img className="comment-img open-commet" alt="" src="/assets/images/crit1.png" />
+            <img
+              className="comment-img open-commet clickable"
+              alt=""
+              src="/assets/images/crit1.png"
+            />
             {post.comments.length}
           </div>
           <div className="action">
