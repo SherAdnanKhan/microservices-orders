@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const PostBar = ({ myStudio, activeGallery, totalPosts }) => {
+const PostBar = ({ myStudio, activeGallery, totalPosts, gallery }) => {
   const history = useHistory();
+  console.log(gallery)
 
   return (
     <div className="total-post">
@@ -20,13 +21,22 @@ const PostBar = ({ myStudio, activeGallery, totalPosts }) => {
         {activeGallery && <p>{activeGallery.title}</p>}
       </div>
       <div className="heart-icon">
+
         {activeGallery &&
-          <img
-            src="/assets/images/add.png"
-            className="clickable"
-            onClick={() => history.push(`/dashboard/exhibition/${activeGallery.id}`)}
-            alt=""
-          />
+          <>
+            <img
+              src="/assets/images/favers.png"
+              className="clickable"
+              onClick={() => history.push(`/dashboard/my-studio/gallery-followers/${activeGallery.slug}`)}
+              alt=""
+            />
+            <img
+              src="/assets/images/add.png"
+              className="clickable"
+              onClick={() => history.push(`/dashboard/exhibition/${activeGallery.id}`)}
+              alt=""
+            />
+          </>
         }
       </div>
     </div>

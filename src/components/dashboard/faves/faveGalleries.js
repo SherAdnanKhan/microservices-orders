@@ -59,6 +59,7 @@ const FaveGalleries = () => {
                       </>
                     }
                   </p>
+                  <p>{gallery?.title}</p>
                   <div className="gallery-cover">
                     <img src={gallery?.image?.path} alt="" />
                   </div>
