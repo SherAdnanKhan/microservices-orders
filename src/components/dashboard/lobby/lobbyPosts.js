@@ -31,7 +31,7 @@ const LobbyPosts = ({
         }
       </div>
       <div className={
-        activePost === post
+        activePost.id === post.id
           ? 'valut-icon show-valut'
           : 'valut-icon'
       }>
@@ -56,7 +56,7 @@ const LobbyPosts = ({
       <div className="onearttitle">
         <p>{post && post.title}</p>
         <div className={
-          activePost === post
+          activePost.id === post.id
             ? 'lobby-icon lobby-icon-slide'
             : 'lobby-icon'
         }>
@@ -85,7 +85,7 @@ const LobbyPosts = ({
           </div>
         </div>
         <div className={
-          activePost === post
+          activePost.id === post.id
             ? 'lobby-icon time-div lobby-icon-slide'
             : 'lobby-icon time-div'
         }>

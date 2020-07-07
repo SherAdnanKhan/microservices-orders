@@ -21,15 +21,18 @@ const Post = ({
   const [activeNcomm, setActiveNcomm] = useState('');
 
   const handleNcomm = post => {
-    setActiveNcomm(post);
-    dispatch(getNcomm(post.slug));
+    if (post.id === activeNcomm.id) {
+      setActiveNcomm('');
+    } else {
+      setActiveNcomm(post);
+      dispatch(getNcomm(post.slug));
+    }
   };
 
   const handleActivePost = post => {
-    if (post === activePost) {
-      setActivePost({});
+    if (post.id === activePost.id) {
+      setActivePost('');
     } else {
-      console.log('active post: ', post)
       setActivePost(post);
     }
   }
@@ -97,7 +100,7 @@ const Post = ({
                           <div className="list-body" key={index}>
                             <div
                               className={
-                                activePost === post
+                                activePost.id === post.id
                                   ? 'valut-icon show-valut'
                                   : 'valut-icon'
                               }
@@ -121,7 +124,7 @@ const Post = ({
                               <ImageVideoSlider ncomm={ncomm} />
                             }
                             <div className={
-                              activePost === post
+                              activePost.id === post.id
                                 ? 'lobby-icon lobby-icon-slide'
                                 : 'lobby-icon'
                             }>
@@ -136,7 +139,7 @@ const Post = ({
                               </div>
                               <div className="action">
                                 <img
-                                  className="comment-img open-commet"
+                                  className="comment-img open-commet clickable"
                                   alt=""
                                   src="/assets/images/crit1.png"
                                 />
