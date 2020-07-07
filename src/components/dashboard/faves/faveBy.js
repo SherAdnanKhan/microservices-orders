@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Avatar from '../../common/avatar';
 import Spinner from '../../common/spinner';
 import { Link } from "react-router-dom";
-import FavTabs from "./favTabs";
 
-const FaveBy = (props) => {
+const FaveBy = () => {
   const dispatch = useDispatch();
   const { faveByUsers } = useSelector(state => state.user);
   const { loading } = useSelector(state => state.loading);
@@ -17,6 +16,10 @@ const FaveBy = (props) => {
     dispatch(getFaveByUsers(""))
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log(faveByUsers)
+  }, [faveByUsers]);
+
   const handleChange = ({ target: input }) => {
     console.log(input.value);
     setQuery(input.value);
@@ -26,7 +29,6 @@ const FaveBy = (props) => {
   return (
     <div className="favas">
       {loading && <Spinner />}
-      <FavTabs />
       <div className="search-input">
         <input
           autoFocus
@@ -58,7 +60,7 @@ const FaveBy = (props) => {
                     }
                   </p>
                   <p>Faving Gallery</p>
-                  <p>2</p>
+                  <p>{user.galleries.length}</p>
                 </div>
               </div>
             ))}

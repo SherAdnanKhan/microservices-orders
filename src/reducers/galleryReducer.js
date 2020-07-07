@@ -13,11 +13,13 @@ import {
   UPDATE_GALLERY,
   REMOVE_GALLERY_IMAGE,
   STROKE_POST,
-  UNSTROKE_POST
+  UNSTROKE_POST,
+  GET_USER_FAV_GALLERIES
 } from "../constants/actionTypes";
 
 const initialState = {
   gallery: null,
+  userFavGalleries: null,
   myGalleries: null,
   recommendedGalleries: null,
   loading: false
@@ -29,6 +31,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         gallery: action.payload
+      };
+    case GET_USER_FAV_GALLERIES:
+      return {
+        ...state,
+        userFavGalleries: action.payload
       };
 
     case STROKE_POST:

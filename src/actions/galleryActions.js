@@ -1,5 +1,6 @@
 import {
   GET_GALLERY,
+  GET_USER_FAV_GALLERIES,
   UNFAV_GALLERY,
   FAV_GALLERY,
   CLEAR_GALLERY,
@@ -16,13 +17,24 @@ import {
 import http from '../services/httpService';
 import { toast } from 'react-toastify';
 
-export const getGallery = utilite => dispatch => {
+export const getGallery = slug => dispatch => {
   http
-    .get(`/galleries/${utilite}`)
+    .get(`/galleries/${slug}`)
     .then(res => {
       dispatch({
         type: GET_GALLERY,
         payload: res.data.data
+      });
+    });
+};
+
+export const getUserFavGelleries = userId => dispatch => {
+  http
+    .get(`/galleries/faved/gallery?user_id=${userId}`)
+    .then(res => {
+      dispatch({
+        type: GET_USER_FAV_GALLERIES,
+        payload: res.data.data.user_faved_galleries
       });
     });
 };
