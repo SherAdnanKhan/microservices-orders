@@ -75,6 +75,10 @@ export default (state = initialState, action) => {
         collectiveFeeds: {
           ...state.collectiveFeeds,
           data: [action.payload, ...state.collectiveFeeds.data]
+        },
+        myFeeds: {
+          ...state.myFeeds,
+          data: state?.myFeeds?.data ? [action.payload, ...state.myFeeds.data] : [action.payload]
         }
       };
     case CREATE_FEED_COMMENT:
