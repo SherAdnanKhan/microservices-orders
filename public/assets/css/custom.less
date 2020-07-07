@@ -5860,6 +5860,24 @@ img {
     .box-2 {
       margin: 50px 10px 0 10px;
       padding-top: 5px;
+      .sub-box{
+        .flex-container-nested{
+          border: 2px solid #606060;
+          margin: 5px;
+          display: flow-root;
+          .action-cube{
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .user-name-parent{
+            .usernames{
+              margin-left:15px;
+            }
+          }
+        }
+      }
     }
     .box-3 {
       border: 2px solid #C3C3C3;
@@ -6108,8 +6126,9 @@ img {
     margin-left:20%;
   }
     video{
-      width:160px;
+      width:150px;
       height:120px;
+      margin-left:20%;
     }
   }
   .name-btn {
