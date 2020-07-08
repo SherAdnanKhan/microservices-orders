@@ -7,7 +7,6 @@ import { formatTime, formatDate } from '../../utils/helperFunctions';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
 import io from 'socket.io-client';
-import { toast } from 'react-toastify';
 
 import {
   getConversation,
