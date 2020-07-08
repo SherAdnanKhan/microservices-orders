@@ -328,10 +328,10 @@ $(document)
   // });
 
 }());
-$(document).on('click', '.action-w', function () {
-  $('.my-slider').css({
-    'height': '150px',
-    'color': 'white',
-    'font-size': '44px'
-  });
-})
+// $(document).on('click', '.action-w', function () {
+//   $('.my-slider').css({
+//     'height': '150px',
+//     'color': 'white',
+//     'font-size': '44px'
+//   });
+// })
