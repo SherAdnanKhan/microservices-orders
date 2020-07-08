@@ -33,7 +33,8 @@ class ChatBox extends Component {
 
   componentDidMount() {
     this.props.getConversation(this.props.match.params.slug);
-    this.setState({ socket: io.connect(process.env.REACT_APP_SOCKET_URL) });
+    const config = { secure: true, resource: process.env.REACT_APP_SOCKET_BASE_PATH, path: process.env.REACT_APP_SOCKET_BASE_PATH, transports: ['polling'] };
+    this.setState({ socket: io.connect(process.env.REACT_APP_SOCKET_URL, config) });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

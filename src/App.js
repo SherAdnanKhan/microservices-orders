@@ -43,7 +43,7 @@ function App() {
 
   useEffect(() => {
     if (!socket && currentUser) {
-      const config = { secure: true, resource: process.env.REACT_APP_SOCKET_BASE_PATH, path: process.env.REACT_APP_SOCKET_BASE_PATH };
+      const config = { secure: true, resource: process.env.REACT_APP_SOCKET_BASE_PATH, path: process.env.REACT_APP_SOCKET_BASE_PATH, transports: ['polling'] };
       setSocket(io.connect(process.env.REACT_APP_SOCKET_URL, config));
     }
 
