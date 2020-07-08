@@ -14,7 +14,8 @@ import {
   REMOVE_GALLERY_IMAGE,
   STROKE_POST,
   UNSTROKE_POST,
-  GET_USER_FAV_GALLERIES
+  GET_USER_FAV_GALLERIES,
+  ADD_POST_COMMENT
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -31,6 +32,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         gallery: action.payload
+      };
+    case ADD_POST_COMMENT:
+      return {
+        ...state,
+        gallery: {
+          ...state.gallery,
+          posts: state?.gallery?.posts.map(post => {
+            if (action.payload.postId === post.id) {
+              return {
+                ...post,
+                comments: [...post.comments, action.payload.comment]
+              }
+            }
+            return post
+          })
+        }
       };
     case GET_USER_FAV_GALLERIES:
       return {

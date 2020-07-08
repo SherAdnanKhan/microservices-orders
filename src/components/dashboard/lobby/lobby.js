@@ -149,7 +149,7 @@ const Lobby = () => {
         </div>
         <div className="col-6 section-2 box-2">
           {favouriteGalleries &&
-            favouriteGalleries.fav_galleries.map((gallery, index) => (
+            favouriteGalleries?.fav_galleries?.map((gallery, index) => (
               <div key={index}>
                 {gallery.posts.map((post, post_index) => (
                   <div key={post_index}>
