@@ -68,7 +68,7 @@ const LobbyPosts = ({
                 onStroke={() => onStrokePost(post)}
                 onUnstroke={() => onUnstrokePost(post)}
               />
-              {post.stroke_users.length}
+              <p> strokes {post.stroke_users.length} </p>
             </div>
           </div>
           <div className="action">
@@ -77,7 +77,7 @@ const LobbyPosts = ({
               alt=""
               src="/assets/images/crit1.png"
             />
-            {post.comments.length}
+            <p> comments {post.comments.length} </p>
           </div>
           <div className="action">
             <img

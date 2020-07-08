@@ -9,7 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import ImageVideoSlider from './imageVideoSlider';
 
 const Post = ({
-  gallery, user, activeGallery, galleryPrivacy, onSuperFav, isSprFvs
+  gallery, user, activeGallery,
+  galleryPrivacy, onSuperFav, isSprFvs
 }) => {
 
   const dispatch = useDispatch();
@@ -135,7 +136,7 @@ const Post = ({
                                   onStroke={() => handleStroke(post)}
                                   onUnstroke={() => handleUnstroke(post)}
                                 />
-                                {post.stroke_users_count}
+                                <p> strokes {post.stroke_users_count} </p>
                               </div>
                               <div className="action">
                                 <img
@@ -143,6 +144,7 @@ const Post = ({
                                   alt=""
                                   src="/assets/images/crit1.png"
                                 />
+                                <p> comments {post.comments.length}</p>
                               </div>
                               <div className="action">
                                 <img
