@@ -21,8 +21,6 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
     }
   }, [dispatch]);
 
-  console.log(post)
-
   const hasAllowedCritiques = () => {
     return post && post.other_privacy.is_allowed ? true : false;
   };
