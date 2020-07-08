@@ -58,10 +58,8 @@ function App() {
 
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
-
-        playNotificationSound();
         if (activeConversation !== data.room) {
-
+          playNotificationSound();
           toast(() => {
             return (
               <Link

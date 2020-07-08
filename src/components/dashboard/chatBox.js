@@ -7,7 +7,6 @@ import { formatTime, formatDate } from '../../utils/helperFunctions';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
 import io from 'socket.io-client';
-
 import {
   getConversation,
   updateConversation,
@@ -16,7 +15,8 @@ import {
   uploadImage,
   uploadFile,
   readMessage,
-  readAll
+  readAll,
+  changeReadMessageStatus
 } from '../../actions/conversationActions';
 
 class ChatBox extends Component {
@@ -61,12 +61,17 @@ class ChatBox extends Component {
         }
         if (data.user.id !== currentUser.id) {
           this.state.socket.emit("onRead", data, () => {
+            this.props.readMessage(data);
           });
         }
       });
 
       this.state.socket.on('read', (data) => {
-        this.props.readMessage(data);
+        if (data.user.id !== currentUser.id) {
+          console.log('i am reading');
+          console.log(data.user);
+        }
+        this.props.changeReadMessageStatus(data);
       });
 
       this.state.socket.on('readAll', (data) => {
@@ -443,5 +448,6 @@ export default connect(
   uploadImage,
   uploadFile,
   readMessage,
-  readAll
+  readAll,
+  changeReadMessageStatus
 })(withRouter(ChatBox));

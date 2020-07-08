@@ -113,16 +113,24 @@ export const readMessage = data => dispatch => {
   const payload = {
     user_id: data.user.id
   };
+
   http
     .post(`/chats/message/read/${data.id}`, payload)
-    .then(res => {
-      console.log(res);
-      dispatch({
-        type: READ_MESSAGE,
-        payload: data
-      });
+    .then()
+    .catch(err => {
+      if (err.response && err.response.data) {
+        toast(err.response.data.errors.error)
+      }
     });
 };
+
+export const changeReadMessageStatus = data => {
+  console.log('read message is read')
+  return {
+    type: READ_MESSAGE,
+    payload: data
+  };
+}
 
 export const updateConversationUnreadCount = data => {
   return {
