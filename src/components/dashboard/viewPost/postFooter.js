@@ -4,7 +4,7 @@ import { getNcomm, clearNcomm } from "../../../actions/postAction";
 
 import ImageVideoSlider from "../../common/imageVideoSlider";
 
-const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
+const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const dispatch = useDispatch();
   const {
     postView: { ncomm },
@@ -13,6 +13,8 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
   const handleNcomm = post => {
     dispatch(getNcomm(post.post.slug));
   };
+
+  console.log(post);
 
   useEffect(() => {
     return () => {
@@ -61,6 +63,7 @@ const PostFooter = ({ post, handleStoke, handleUnStoke }) => {
               src="/assets/images/crit1.png"
               alt=""
             />
+            {comments.length}
           </div>
         }
         <div className="post-footer-icons action-w">

@@ -1,5 +1,11 @@
 import {
-  GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS, GET_NCOMM, CLEAR_NCOMM
+  GET_POST,
+  STROKE_POST,
+  UNSTROKE_POST,
+  ADD_POST_COMMENT,
+  GET_COMMENTS,
+  GET_NCOMM,
+  CLEAR_NCOMM
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 
@@ -66,13 +72,13 @@ export const unstrokePost = (postId, galleryId) => dispatch => {
     });
 };
 
-export const createComment = data => dispatch => {
+export const createComment = (data, postId, galleryId) => dispatch => {
   http
     .post('/comments', data)
     .then(res => {
       dispatch({
-        type: ADD_COMMENT,
-        payload: res.data.data.comment
+        type: ADD_POST_COMMENT,
+        payload: { comment: res.data.data.comment, postId, galleryId }
       });
     });
 };

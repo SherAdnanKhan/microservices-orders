@@ -26,7 +26,7 @@ const Comment = ({ post }) => {
       post_id: post.id
     };
 
-    dispatch(createComment(data));
+    dispatch(createComment(data, post.id, post.gallery_id));
     setComment('');
   };
 

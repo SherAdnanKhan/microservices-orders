@@ -14,7 +14,7 @@ const ViewPost = () => {
   const { params: { id } } = useRouteMatch();
 
   const {
-    postView: { post },
+    postView: { post, comments },
   } = useSelector(state => state);
 
   useEffect(() => {
@@ -42,6 +42,7 @@ const ViewPost = () => {
       />
       <PostFooter
         post={post}
+        comments={comments}
         handleStoke={handleStoke}
         handleUnStoke={handleUnStoke}
       />

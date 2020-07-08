@@ -1,4 +1,12 @@
-import { GET_POST, STROKE_POST, UNSTROKE_POST, ADD_COMMENT, GET_COMMENTS, GET_NCOMM, CLEAR_NCOMM } from "../constants/actionTypes";
+import {
+  GET_POST,
+  STROKE_POST,
+  UNSTROKE_POST,
+  ADD_POST_COMMENT,
+  GET_COMMENTS,
+  GET_NCOMM,
+  CLEAR_NCOMM
+} from "../constants/actionTypes";
 
 const initialState = {
   post: null,
@@ -43,10 +51,10 @@ export default (state = initialState, action) => {
           }
         }
       };
-    case ADD_COMMENT:
+    case ADD_POST_COMMENT:
       return {
         ...state,
-        comments: [...state.comments, action.payload]
+        comments: [...state.comments, action.payload.comment]
       };
     case GET_COMMENTS:
       return {
