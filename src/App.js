@@ -43,8 +43,8 @@ function App() {
 
   useEffect(() => {
     if (!socket && currentUser) {
-      console.log(process.env.REACT_APP_SOCKET_URL);
-      setSocket(io.connect(process.env.REACT_APP_SOCKET_URL, { secure: true }));
+      const config = { secure: true, resource: process.env.REACT_APP_SOCKET_BASE_PATH };
+      setSocket(io.connect(process.env.REACT_APP_SOCKET_URL, config));
     }
 
     if (socket) {
