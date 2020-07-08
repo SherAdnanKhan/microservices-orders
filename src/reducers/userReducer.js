@@ -14,7 +14,8 @@ import {
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
   STROKE_POST,
-  UNSTROKE_POST
+  UNSTROKE_POST,
+  ADD_POST_COMMENT
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -79,6 +80,30 @@ export default (state = initialState, action) => {
                       ...post,
                       has_stroke: [],
                       stroke_users: post.stroke_users.filter(user => user.id !== 0)
+                    }
+                  }
+                  return post
+                })
+              }
+            }
+            return gallery
+          })
+        }
+      };
+    case ADD_POST_COMMENT:
+      return {
+        ...state,
+        favouriteGalleries: {
+          ...state.favouriteGalleries,
+          fav_galleries: state?.favouriteGalleries?.fav_galleries?.map(gallery => {
+            if (gallery.id === action.payload.galleryId) {
+              return {
+                ...gallery,
+                posts: gallery.posts.map(post => {
+                  if (post.id === action.payload.postId) {
+                    return {
+                      ...post,
+                      comments: [...post.comments, action.payload.comment]
                     }
                   }
                   return post

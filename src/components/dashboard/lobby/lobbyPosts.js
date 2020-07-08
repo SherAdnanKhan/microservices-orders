@@ -101,7 +101,7 @@ const LobbyPosts = ({
         </div>
 
       </div>
-      {activePost === post && <Comment post={activePost} />}
+      {activePost.id === post.id && <Comment post={activePost} />}
     </div >
   );
 }
