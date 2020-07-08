@@ -21,6 +21,8 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
     }
   }, [dispatch]);
 
+  console.log(post)
+
   const hasAllowedCritiques = () => {
     return post && post.other_privacy.is_allowed ? true : false;
   };
@@ -79,18 +81,23 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
         {post &&
           <ShowMoreText
             lines={2}
-            more={<button> Show more </button>}
-            less={<button> Show less </button>}
+            more="View more"
+            less="View less"
             expanded={false}
-            width={280}
+            width={600}
           >
             {post.post.description}
           </ShowMoreText>
         }
       </div>
-      <div className='post-date' style={{ width: '80%', marginTop: '20px', textAlign: 'left' }}>
-        {post && completeFormattedDate(post.post.created_at)}
-      </div>
+      {post &&
+        <div
+          className={`post-date ${post.post.user.feel_color} `}
+          style={{ width: '80%', marginTop: '20px', textAlign: 'left' }}
+        >
+          {completeFormattedDate(post.post.created_at)}
+        </div>
+      }
     </div>
   )
 }
