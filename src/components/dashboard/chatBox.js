@@ -7,7 +7,6 @@ import { formatTime, formatDate } from '../../utils/helperFunctions';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
 import io from 'socket.io-client';
-import { toast } from 'react-toastify';
 
 import {
   getConversation,
@@ -112,26 +111,22 @@ class ChatBox extends Component {
     if (conversation) {
       if (new_message || image || video) {
         let data = {
-          message,
           url: image || video || (document && document.path) || '',
           type: image ? 1 : video ? 2 : document ? 3 : 0,
           user,
           room: conversation.id
         };
-        if (!message.replace(/\s/g, '').length || message.length === 0) {
-          data = {
-            url: image || video || (document && document.path) || '',
-            type: image ? 1 : video ? 2 : document ? 3 : 0,
-            user,
-            room: conversation.id
-          };
+
+        if (message.trim() !== '') {
+          data.message = message;
+          console.log('message: ', message);
         }
+
         this.setState({ message: '', image: '', video: '', document: '' });
 
         this.props.createMessage(data,
           (result) => {
             const newData = result.message;
-
             newData.user = result.user;
             newData.room = result.message.conversation_id;
             newData.reciver = this.props.match.params.slug;
@@ -139,9 +134,6 @@ class ChatBox extends Component {
             this.state.socket.emit('sendMessage', newData, () => {
             });
           });
-      }
-      else {
-        toast('Please add message to send');
       }
     }
 

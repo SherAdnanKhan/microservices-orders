@@ -35,3 +35,10 @@ export const completeFormattedDate = date => {
   return moment(date).format('MMMM Do YYYY');
 };
 
+export const playNotificationSound = async () => {
+  try {
+    await new Audio('/assets/sounds/notification.mp3').play()
+  } catch (err) {
+
+  }
+}

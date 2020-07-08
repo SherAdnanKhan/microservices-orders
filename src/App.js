@@ -21,6 +21,7 @@ import { updateConversationUnreadCount } from './actions/conversationActions';
 import { userKey } from './constants/keys';
 import store from './store';
 import { updateFeelColor } from './actions/colorActions';
+import { playNotificationSound } from './utils/helperFunctions';
 
 if (getCurrentUser()) {
   store.dispatch(updateFeelColor(getCurrentUser().feel_color));
@@ -58,20 +59,19 @@ function App() {
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
 
+        playNotificationSound();
         if (activeConversation !== data.room) {
-          new Audio('/assets/sounds/notification.mp3')
-            .play()
-            .then(() => {
-              toast(() => {
-                return (
-                  <Link
-                    to={`/dashboard/chat/${data.user.slug}`}
-                    style={{ textDecoration: 'none', color: currentUser.feel_color }}>
-                    You have new message from {data.user.username}
-                  </Link>
-                )
-              });
-            })
+
+          toast(() => {
+            return (
+              <Link
+                to={`/dashboard/chat/${data.user.slug}`}
+                style={{ textDecoration: 'none', color: currentUser.feel_color }}>
+                You have new message from {data.user.username}
+              </Link>
+            )
+          });
+
           dispatch(updateCounter());
           dispatch(updateConversationUnreadCount(data));
         }
