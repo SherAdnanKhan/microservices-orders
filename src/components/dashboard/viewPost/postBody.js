@@ -46,13 +46,22 @@ const PostBody = ({ post }) => {
 
         <div className={show ? 'right-clicked show' : 'right-clicked'}>
           {post && post.other_posts &&
-            post.other_posts.map(other => (
-              <div className="boxes img-align">
-                <img
-                  className="valut-img"
-                  alt=""
-                  src={other.image.path}
-                />
+            post.other_posts.map((other, index) => (
+              <div className="boxes img-align" key={index}>
+                {other.post_type <= 1 &&
+                  <img
+                    className="valut-img"
+                    alt=""
+                    src={other.image.path}
+                  />
+                }
+                {other.post_type === 2 &&
+                  <video controls>
+                    <source src={other.image.path} type="video/mp4" />
+                    <source src={other.image.path} type="video/ogg" />
+                    Your browser does not support the video tag.
+                  </video>
+                }
               </div>
             ))
           }
