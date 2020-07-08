@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNcomm, clearNcomm } from "../../../actions/postAction";
-
+import ShowMoreText from 'react-show-more-text';
 import ImageVideoSlider from "../../common/imageVideoSlider";
+import { completeFormattedDate } from "../../../utils/helperFunctions";
 
 const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const dispatch = useDispatch();
@@ -13,8 +14,6 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const handleNcomm = post => {
     dispatch(getNcomm(post.post.slug));
   };
-
-  console.log(post);
 
   useEffect(() => {
     return () => {
@@ -63,7 +62,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
               src="/assets/images/crit1.png"
               alt=""
             />
-            {comments.length}
+            <p> comments {comments.length} </p>
           </div>
         }
         <div className="post-footer-icons action-w">
@@ -76,7 +75,23 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
         </div>
       </div>
 
-    </div >
+      <div className='post-description' style={{ width: '80%', textAlign: 'center' }}>
+        {post &&
+          <ShowMoreText
+            lines={2}
+            more={<button> Show more </button>}
+            less={<button> Show less </button>}
+            expanded={false}
+            width={280}
+          >
+            {post.post.description}
+          </ShowMoreText>
+        }
+      </div>
+      <div className='post-date' style={{ width: '80%', marginTop: '20px', textAlign: 'left' }}>
+        {post && completeFormattedDate(post.post.created_at)}
+      </div>
+    </div>
   )
 }
 export default PostFooter;
