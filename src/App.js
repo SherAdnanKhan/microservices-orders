@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import LoginForm from './components/auth/loginForm';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import RegisterForm from './components/auth/registerForm';
@@ -10,7 +10,6 @@ import Welcome from './components/welcome';
 import Dashboard from './components/dashboard/dashboard';
 import history from "./components/common/history";
 import Tutorial from './components/tutorial';
-import io from 'socket.io-client';
 import { getCurrentUser } from './actions/authActions';
 import SocketContext from './context/socketContext';
 import { ToastContainer, toast } from "react-toastify";
@@ -22,13 +21,14 @@ import { userKey } from './constants/keys';
 import store from './store';
 import { updateFeelColor } from './actions/colorActions';
 import { playNotificationSound } from './utils/helperFunctions';
+import socket from './services/socketService';
 
 if (getCurrentUser()) {
   store.dispatch(updateFeelColor(getCurrentUser().feel_color));
 }
 
 function App() {
-  const [socket, setSocket] = useState('');
+  // const [socket, setSocket] = useState('');
   const dispatch = useDispatch();
   const currentUser = getCurrentUser();
 
@@ -43,15 +43,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!socket && currentUser) {
-      const config = { secure: true, resource: process.env.REACT_APP_SOCKET_BASE_PATH, path: process.env.REACT_APP_SOCKET_BASE_PATH, transports: ['polling'] };
-      setSocket(io.connect(process.env.REACT_APP_SOCKET_URL, config));
-    }
-
-    if (socket) {
+    if (currentUser) {
       socket.emit('joinUser', currentUser);
 
       socket.on('notifyColrChange', (user) => {
+        console.log(user.feel_color)
         localStorage.setItem(userKey, JSON.stringify(user));
         dispatch(updateFeelColor(user.feel_color))
       })
@@ -69,7 +65,6 @@ function App() {
               </Link>
             )
           });
-
           dispatch(updateCounter());
           dispatch(updateConversationUnreadCount(data));
         }
@@ -80,10 +75,9 @@ function App() {
       if (socket) {
         socket.emit('disconnect');
         socket.emit('userLeft', currentUser);
-        setSocket('');
       }
     }
-  }, [socket, dispatch, currentUser])
+  }, [dispatch, currentUser])
 
   return (
 

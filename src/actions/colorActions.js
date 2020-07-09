@@ -1,12 +1,10 @@
 import http from '../services/httpService';
 import { userKey } from '../constants/keys';
-import io from 'socket.io-client';
 import { CHANGE_COLOR } from '../constants/actionTypes';
+import socket from '../services/socketService';
 
-const config = { secure: true, path: process.env.REACT_APP_SOCKET_BASE_PATH };
-const socket = io.connect(process.env.REACT_APP_SOCKET_URL, config);
 
-export const changeFeelColor = (color, callback) => () => {
+export const changeFeelColor = color => () => {
   http
     .put(`/users/feel-color?feel_color=${color}`)
     .then(res => {

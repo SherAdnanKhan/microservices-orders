@@ -6,7 +6,8 @@ import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
 import SocketContext from '../../context/socketContext';
 import { getCurrentUser } from '../../actions/authActions';
-import io from 'socket.io-client';
+import socket from '../../services/socketService';
+
 import {
   getConversation,
   updateConversation,
@@ -32,8 +33,6 @@ class ChatBox extends Component {
 
   componentDidMount() {
     this.props.getConversation(this.props.match.params.slug);
-    const config = { secure: true, resource: process.env.REACT_APP_SOCKET_BASE_PATH, path: process.env.REACT_APP_SOCKET_BASE_PATH, transports: ['polling'] };
-    this.setState({ socket: io.connect(process.env.REACT_APP_SOCKET_URL, config) });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -46,13 +45,10 @@ class ChatBox extends Component {
     if (currentConversation && currentConversation !== previos) {
       localStorage.setItem('activeConversation', currentConversation.id);
 
-      this.state.socket.emit('join', { room: currentConversation.id }, () => {
-      });
+      socket.emit('join', { room: currentConversation.id }, () => { });
+      socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => { });
 
-      this.state.socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => {
-      });
-
-      this.state.socket.on('recieveMessage', (data) => {
+      socket.on('recieveMessage', (data) => {
         this.props.updateConversation(data);
         if (data.created_by === this.props.conversation.user.id) {
           if (data.feel_color !== this.props.conversation.user.feel_color) {
@@ -60,13 +56,13 @@ class ChatBox extends Component {
           }
         }
         if (data.user.id !== currentUser.id) {
-          this.state.socket.emit("onRead", data, () => {
+          socket.emit("onRead", data, () => {
             this.props.readMessage(data);
           });
         }
       });
 
-      this.state.socket.on('read', (data) => {
+      socket.on('read', (data) => {
         if (data.user.id !== currentUser.id) {
           console.log('i am reading');
           console.log(data.user);
@@ -74,7 +70,7 @@ class ChatBox extends Component {
         this.props.changeReadMessageStatus(data);
       });
 
-      this.state.socket.on('readAll', (data) => {
+      socket.on('readAll', (data) => {
         if (data.user.id !== currentUser.id) {
           this.props.readAll(data);
         }
@@ -92,11 +88,12 @@ class ChatBox extends Component {
 
   componentCleanup = () => {
     const { conversation } = this.props.conversation;
-
     localStorage.removeItem('activeConversation');
-    conversation && this.state.socket.emit('leave', { room: conversation.id });
-    this.state.socket.emit('disconnect');
-    this.setState({ message: '', socket: '' });
+
+    conversation && socket.emit('leave', { room: conversation.id });
+    socket.emit('disconnect');
+
+    this.setState({ message: '' });
     this.props.clearConversation();
   }
 
@@ -136,7 +133,7 @@ class ChatBox extends Component {
             newData.room = result.message.conversation_id;
             newData.reciver = this.props.match.params.slug;
 
-            this.state.socket.emit('sendMessage', newData, () => {
+            socket.emit('sendMessage', newData, () => {
             });
           });
       }
