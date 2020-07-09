@@ -2756,7 +2756,7 @@ img {
   }
   
   .studioScreen {
-    margin-top: 65px;
+    margin-top: 30px;
     text-align: center;
     width: 100%;
     display: flex;
@@ -3326,9 +3326,15 @@ img {
 //Edit Studio Start
 
 .edit-studioScreen {
-  margin-top: 65px;
+  margin-top: 30px;
   text-align: center;
   width: 100%;
+  display: flex;
+  .studioHead{
+    display: flex;
+    align-items: center;
+    width:50%;
+  }
   h2 {
     margin-top: 20px;
     position: relative;
@@ -3339,7 +3345,7 @@ img {
     margin-top: 10px;
     width: 100%;
     label {
-      width: 70%;
+      width: 84%;
       text-align: center;
       display: block;
       margin: 0 auto 15px;
@@ -3454,7 +3460,7 @@ img {
     cursor: pointer;
     height: 290px;
     overflow: hidden;
-    width: 290px;
+    width: 325px;
       // flex-basis: 24%;
       // border: 1px solid rgba(61, 61, 61, 0.7);
       // opacity: 0.6;
@@ -3505,6 +3511,7 @@ img {
     img{
       width: 35px;
       cursor: pointer;
+      margin-left:20px;
     }
     .fa-th{
       display: none;
@@ -4421,11 +4428,11 @@ img {
     opacity: 0;
     width: 0;
     transition: 0.3s all ease-in-out;
-    height: 100vh;
+    height: 140vh;
     overflow-y: scroll;
     overflow-x: hidden;
     &.show {
-      width: 50%;
+      width: 25%;
       opacity: 1;
       border: 1px solid white;
       .post-body {
@@ -4444,11 +4451,11 @@ img {
         margin-left:15px;
       }
       img{
-        height:250px;
+        height:200px;
         width:100%;
       }
       video {
-        height:250px;
+        height:200px;
         width:100%;
       }
     }
@@ -6739,6 +6746,24 @@ img {
   width:25% !important;   
 }
 @media screen and (max-width: 856px) {
+  .post-page{
+    .post-body{
+      .right-clicked{
+       height:60vh;
+      &.show{
+        width:37%;
+        .boxes{
+          img{
+            height:100px;
+          }
+          video{
+              height :100px;
+          }
+        }
+      }
+      }
+    }
+  }
   .my-studio {
     .studioScreen{
       display: flow-root !important;
@@ -6751,6 +6776,14 @@ img {
     .studioHead{
       width:100% !important;
       
+    }
+  }
+  .edit-studioScreen{
+    display: flow-root !important;
+    .studioHead{
+      width:100% !important;
+     
+
     }
   }
   .editstudio-btn button{
