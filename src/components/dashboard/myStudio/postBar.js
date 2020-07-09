@@ -25,7 +25,7 @@ const PostBar = ({ myStudio, activeGallery, totalPosts, gallery }) => {
         {activeGallery &&
           <>
             <img
-              src="/assets/images/favers.png"
+              src="/assets/images/fave_gallery_empty.png"
               className="clickable"
               onClick={() => history.push(`/dashboard/my-studio/gallery-followers/${activeGallery.slug}`)}
               alt=""

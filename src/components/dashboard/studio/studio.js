@@ -40,8 +40,8 @@ const Studio = () => {
 
   const handleLike = () => {
     return gallery.has_faved
-      ? dispatch(unfavGallery({ gallery_id: activeGallery.id }))
-      : dispatch(favGallery({ gallery_id: activeGallery.id }));
+      ? dispatch(unfavGallery(activeGallery))
+      : dispatch(favGallery(activeGallery));
   };
 
   const handleSuperFav = () => {

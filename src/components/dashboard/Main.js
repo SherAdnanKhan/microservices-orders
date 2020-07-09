@@ -28,7 +28,7 @@ const Main = () => {
             : split[3] === 'fave-by'
               ? import('./faves/faveBy')
               : split[3] === 'sprfvs'
-                ? import('./myStudio/sprfvsUsers')
+                ? import('./faves/sprfvsUsers')
                 : split[3] === 'fave-galleries'
                   ? import('./faves/faveGalleries')
                   : split[3] === 'gallery-followers'
@@ -45,7 +45,13 @@ const Main = () => {
           ? import('./faves/faving')
           : split[3] === 'fave-by'
             ? import('./faves/faveBy')
-            : import('./studio/studio');
+            : split[3] === 'sprfvs'
+              ? import('./faves/sprfvsUsers')
+              : split[3] === 'fave-galleries'
+                ? import('./faves/faveGalleries')
+                : split[3] === 'gallery-followers'
+                  ? import('./faves/galleryFollowers')
+                  : import('./studio/studio')
       case 'mz-flash':
         return import('./mzFlash');
       case 'mz-flash-group':

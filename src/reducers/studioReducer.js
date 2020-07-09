@@ -12,6 +12,7 @@ import {
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
 } from "../constants/actionTypes";
+import { SPRFVS } from "../constants/privacyTypes";
 
 const initialState = {
   myStudio: null,
@@ -67,7 +68,7 @@ export default (state = initialState, action) => {
         userStudio: {
           ...state.userStudio,
           gallery_privacy: state.userStudio.gallery_privacy.map(gallery => {
-            if (gallery.gallery_id === action.payload.galleryId) {
+            if (gallery.gallery_id === action.payload.gallery.id) {
               return {
                 ...gallery,
                 is_allowed: 1
@@ -78,12 +79,14 @@ export default (state = initialState, action) => {
         }
       };
     case UNFAV_GALLERY:
+      console.log(state.userStudio)
       return {
         ...state,
         userStudio: {
           ...state.userStudio,
           gallery_privacy: state.userStudio.gallery_privacy.map(gallery => {
-            if (gallery.gallery_id === action.payload.galleryId) {
+            if (gallery.gallery_id === action.payload.gallery.id
+              && action.payload.gallery.privacy.privacy_type_id !== SPRFVS) {
               return {
                 ...gallery,
                 is_allowed: 0

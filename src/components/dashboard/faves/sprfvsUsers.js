@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../../common/spinner';
-import FavTabs from '../faves/favTabs';
-import SPRFVS from '../faves/sprfvs';
-import Request from '../faves/requests';
+import FavTabs from './favTabs';
+import SPRFVS from './sprfvs';
+import Request from './requests';
 import {
   approveRequest,
   rejectRequest,
   getSprfvsUsers,
   getUserRequests,
 } from '../../../actions/userActions';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 
 const SprfvsUser = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
+
+  const split = location.pathname.split('/');
+  const { params: { slug } } = useRouteMatch();
+
   const {
     user: {
       sprfvsUsers, userRequests,
@@ -28,8 +34,8 @@ const SprfvsUser = () => {
   ]);
 
   useEffect(() => {
-    dispatch(getSprfvsUsers(3, 1));
-  }, [dispatch]);
+    dispatch(getSprfvsUsers(3, 1, slug));
+  }, [dispatch, slug]);
 
   const handleApprovedRequest = (request) => {
     dispatch(approveRequest(request));
@@ -56,11 +62,13 @@ const SprfvsUser = () => {
   return (
     <div className="favas">
       {loading && <Spinner />}
-      <FavTabs
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-      />
+      {split[2] === 'my-studio' &&
+        <FavTabs
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
+      }
       {activeTab === 1
         && (
           <SPRFVS

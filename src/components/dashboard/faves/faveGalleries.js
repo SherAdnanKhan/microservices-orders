@@ -1,14 +1,13 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from '../../common/avatar';
 import Spinner from '../../common/spinner';
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { getUserFavGelleries } from "../../../actions/galleryActions";
-import UserContext from "../../../context/userContext";
 
 const FaveGalleries = () => {
   const dispatch = useDispatch();
-  const currentUser = useContext(UserContext);
+  const { params: { id } } = useRouteMatch();
 
   const {
     loading: { loading },
@@ -18,13 +17,13 @@ const FaveGalleries = () => {
   // const [query, setQuery] = useState('');
 
   useEffect(() => {
-    dispatch(getUserFavGelleries(currentUser.id));
-  }, [dispatch, currentUser.id]);
+    dispatch(getUserFavGelleries(id));
+  }, [dispatch, id]);
 
   // const handleChange = ({ target: input }) => {
   //   setQuery(input.value);
   //   dispatch(getFavourites(input.value))
-  // };
+  // };\
 
   return (
     <div className="favas">
