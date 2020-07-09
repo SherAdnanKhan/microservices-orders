@@ -6,7 +6,7 @@ const PostBody = ({ post }) => {
 
   const handleButtonPress = () => {
     eventRef.current = setTimeout(() => {
-      setShow(true);
+      setShow(!show);
     }, 2000)
   };
 
@@ -22,6 +22,8 @@ const PostBody = ({ post }) => {
       <div className="post-body">
         {post &&
           <div className="image-div"
+            onTouchStart={handleButtonPress}
+            onTouchEnd={handleButtonRelease}
             onMouseDown={handleButtonPress}
             onMouseUp={handleButtonRelease}
           >
