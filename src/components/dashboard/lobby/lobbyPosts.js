@@ -5,6 +5,7 @@ import Stroke from '../../common/stroke';
 import Comment from '../viewPost/comments';
 import { completeFormattedDate } from '../../../utils/helperFunctions';
 import ImageVideoSlider from '../../common/imageVideoSlider';
+import VideoPlayer from '../../common/videoPlayer';
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
@@ -40,11 +41,9 @@ const LobbyPosts = ({
       <div className="post-body" onClick={() => onActivePost(post)}>
         {post.post_type === 2
           ? (
-            <video width="320" height="240" controls>
-              <source src={post.image.path} type="video/mp4" />
-              <source src={post.image.path} type="video/ogg" />
-           Your browser does not support the video tag.
-            </video>
+            <VideoPlayer
+              path={post.image.path}
+            />
           ) : (
             <img src={post.image.path} alt="" stye={{ width: "100%", heigth: "100%" }} />
           )
