@@ -113,9 +113,9 @@ $(document).click(function () {
   $(".right").css("opacity", opacity);
   $(".bottom").css("opacity", opacity);
 
-  $(".left").css("left", "-42px");
-  $(".right").css("right", "-42px");
-  $(".bottom").css("bottom", "-42px");
+  $(".left").css("left", "-38px");
+  $(".right").css("right", "-37px");
+  $(".bottom").css("bottom", "-37px");
 });
 
 $(document).on('click', '.item-box', function () {
@@ -130,8 +130,8 @@ $(document).on('click', '.go-to-profile', function () {
 $(document).on('click', '.left', function (e) {
   $(".left").css("left", "0px");
   $(".left").css("opacity", "1");
-  $(".right").css("right", "-42px");
-  $(".bottom").css("bottom", "-42px");
+  $(".right").css("right", "-37px");
+  $(".bottom").css("bottom", "-37px");
 
   e.stopPropagation();
 });
@@ -139,16 +139,16 @@ $(document).on('click', '.left', function (e) {
 $(document).on('click', '.right', function (e) {
   $(".right").css("right", "0px");
   $(".right").css("opacity", "1");
-  $(".bottom").css("bottom", "-42px");
-  $(".left").css("left", "-42px");
+  $(".bottom").css("bottom", "-37px");
+  $(".left").css("left", "-38px");
   e.stopPropagation();
 });
 
 $(document).on('click', '.bottom', function (e) {
   $(".bottom").css("bottom", "0px");
   $(".bottom").css("opacity", "1");
-  $(".left").css("left", "-42px");
-  $(".right").css("right", "-42px");
+  $(".left").css("left", "-38px");
+  $(".right").css("right", "-37px");
   e.stopPropagation();
 });
 
@@ -195,9 +195,9 @@ $(window).scroll(function () {
     $(".frameReady .left").css({ 'opacity': '0.5' });
     $(".frameReady .right").css({ 'opacity': '0.5' });
 
-    $(".left").css("left", "-42px");
-    $(".right").css("right", "-42px");
-    $(".bottom").css("bottom", "-42px");
+    $(".left").css("left", "-38px");
+    $(".right").css("right", "-37px");
+    $(".bottom").css("bottom", "-37px");
   } else {
     if (scroll === 0) {
       $(".frameReady .top").css({ 'opacity': '1' });
@@ -205,9 +205,9 @@ $(window).scroll(function () {
       $(".frameReady .left").css({ 'opacity': '1' });
       $(".frameReady .right").css({ 'opacity': '1' });
 
-      $(".left").css("left", "-42px");
-      $(".right").css("right", "-42px");
-      $(".bottom").css("bottom", "-42px");
+      $(".left").css("left", "-38px");
+      $(".right").css("right", "-37px");
+      $(".bottom").css("bottom", "-37px");
     }
   }
   position = scroll;

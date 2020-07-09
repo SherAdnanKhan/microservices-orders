@@ -7,6 +7,7 @@ const LeftBorder = () => {
     <div className="left">
       <img alt="" src="/assets/images/lobbyicon.png" onClick={() => history.push('/dashboard/lobby')} />
       <img alt="" src="/assets/images/newstudioicon.png" onClick={() => history.push('/dashboard/my-studio')} />
+      <img alt="" src="/assets/images/add.png" onClick={() => history.push('/dashboard/my-studio')} />
     </div>
   );
 };
