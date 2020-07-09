@@ -12,10 +12,10 @@ const StudioHeader = ({ myStudio }) => {
       {myStudio && <p>{myStudio.user.username}</p>}
       <div className="actions">
         <img
-          src='/assets/images/sprfvs_full.png'
+          src='/assets/images/sprfvs_empty.png'
           alt=""
           className="clickable"
-          onClick={() => history.push('/dashboard/my-studio/sprfvs')}
+          onClick={() => history.push(`/dashboard/my-studio/sprfvs/${myStudio.user.slug}`)}
         />
       </div>
     </div>

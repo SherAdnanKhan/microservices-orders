@@ -19,13 +19,18 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/my-studio/profile" component={Profile} />
         <Route exact path="/dashboard/my-studio/fave" component={Main} />
         <Route exact path="/dashboard/my-studio/fave-by" component={Main} />
-        <Route exact path="/dashboard/my-studio/fave-galleries" component={Main} />
+        <Route exact path="/dashboard/my-studio/fave-galleries/:id" component={Main} />
         <Route exact path="/dashboard/my-studio/gallery-followers/:slug" component={Main} />
-        <Route exact path="/dashboard/my-studio/sprfvs" component={Main} />
+        <Route exact path="/dashboard/my-studio/sprfvs/:slug" component={Main} />
         <Route exact path="/dashboard/my-studio" component={Main} />
+
+        <Route exact path="/dashboard/studio/gallery-followers/:slug" component={Main} />
+        <Route exact path="/dashboard/studio/fave-galleries/:id" component={Main} />
+        <Route exact path="/dashboard/studio/sprfvs/:slug" component={Main} />
         <Route exact path="/dashboard/studio/:slug" component={Main} />
         <Route exact path="/dashboard/studio/fave" component={Main} />
         <Route exact path="/dashboard/studio/fave-by" component={Main} />
+
         <Route exact path="/dashboard/mz-flash/:slug" component={Main} />
         <Route exact path="/dashboard/mz-flash-group" component={Main} />
         <Route exact path="/dashboard/viewpost/:id" component={Main} />

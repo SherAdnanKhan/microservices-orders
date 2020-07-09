@@ -100,8 +100,8 @@ const StudioDetail = ({ userStudio, slug }) => {
                   id="addbio"
                   value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
                   disabled
-                >  {userStudio && userStudio.user.bio ? userStudio.user.bio.replace(/<br\s*\/?>/g,'\n') : ''}
-                  </div>
+                >  {userStudio && userStudio.user.bio ? userStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''}
+                </div>
               </label>
             }
             <div className="stuion-faved-btn">
@@ -114,6 +114,12 @@ const StudioDetail = ({ userStudio, slug }) => {
                   Faved by
                 </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
+              </Link>
+              <Link to={`/dashboard/studio/fave-galleries/${userStudio?.user?.id}`}>
+                <div className="faved-by-btn">
+                  <img src="/assets/images/fave_icon.png" alt="" />
+                  Fave galleries
+                </div>
               </Link>
               <Link to="#" onClick={e => {
                 e.preventDefault();

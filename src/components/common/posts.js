@@ -40,7 +40,7 @@ const Post = ({
 
   const isAllowed = () => {
     const found = galleryPrivacy.find(g => g.gallery_id === activeGallery.id);
-    return !!found.is_allowed;
+    return found && found.is_allowed ? true : false;
   };
 
   const handleStroke = post => {
@@ -179,7 +179,7 @@ const Post = ({
                       disabled={isSprFvs > 0}
                       onClick={onSuperFav}
                     >
-                      {isSprFvs === 2 && 'Requested'}
+                      {isSprFvs > 0 && 'Requested'}
                       {isSprFvs === 0 && 'Request'}
                     </button>
                     <div> Only for SprFvs </div>

@@ -117,9 +117,15 @@ export const getFeelHistory = (page) => dispatch => {
     });
 };
 
-export const getSprfvsUsers = (privacyTypeId, status) => dispatch => {
+export const getSprfvsUsers = (privacyTypeId, status, userSlug = '') => dispatch => {
+  let url = `/user/privacy/lists/${privacyTypeId}/${status}`;
+
+  if (userSlug) {
+    url += `?slug=${userSlug}`;
+  }
+
   http
-    .get(`/user/privacy/lists/${privacyTypeId}/${status}`)
+    .get(url)
     .then(res => {
       dispatch({
         type: SPRFVS_USERS,

@@ -12,12 +12,19 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
       {userStudio && <p>{userStudio.user.username}</p>}
       <div className="actions">
         <img
+          src='/assets/images/sprfvs_empty.png'
+          alt=""
+          className="clickable sprvs-empty"
+          onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}
+        />
+        <img
           onClick={() => onModelOpen(true)}
           src="/assets/images/invite_gallery_icon.png"
-          className="clickable fav-icon"
+          className="clickable fav-icon invite-only"
           alt=""
         />
       </div>
+
       <div className="heart">
         <img src="/assets/images/favebackoff.png" alt="" />
       </div>

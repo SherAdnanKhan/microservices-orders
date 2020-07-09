@@ -108,36 +108,36 @@ export const removeGalleryImage = (id, callback) => dispatch => {
     });
 };
 
-export const favGallery = data => dispatch => {
+export const favGallery = gallery => dispatch => {
   dispatch({
     type: FAV_GALLERY,
-    payload: { galleryId: data.gallery_id, hasFaved: true }
+    payload: { gallery, hasFaved: true }
   });
 
   http
-    .post('/galleries/fav', data)
+    .post('/galleries/fav', { gallery_id: gallery.id })
     .then()
     .catch(() => {
       dispatch({
         type: UNFAV_GALLERY,
-        payload: false
+        payload: { gallery, hasFaved: false }
       });
     });
 };
 
-export const unfavGallery = data => dispatch => {
+export const unfavGallery = gallery => dispatch => {
   dispatch({
     type: UNFAV_GALLERY,
-    payload: { galleryId: data.gallery_id, hasFaved: false }
+    payload: { gallery, hasFaved: false }
   });
 
   http
-    .post('/galleries/unfav', data)
+    .post('/galleries/unfav', { gallery_id: gallery.id })
     .then()
     .catch(() => {
       dispatch({
         type: FAV_GALLERY,
-        payload: true
+        payload: { gallery, hasFaved: true }
       });
     });
 };

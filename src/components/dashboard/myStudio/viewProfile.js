@@ -71,7 +71,7 @@ const ViewProfile = ({ myStudio }) => {
             </Link>
             <Link to='#'>
               <div className="faved-by-btn">
-                <img src="/assets/images/FaveGalleryFull.png" alt="" />
+                <img src="/assets/images/fave_icon.png" alt="" />
                   Fave galleries
               </div>
             </Link>
