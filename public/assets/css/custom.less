@@ -2765,6 +2765,8 @@ img {
       display: flex;
       flex-direction: row;
       justify-content: space-around; 
+      align-items: center;
+      width: 50%;
       img {
           width: 10%;
           background-color: transparent;
@@ -2782,10 +2784,11 @@ img {
       margin-top: 10px;
       width: 100%;
       label {
-        width: 70%;
+        width: 92%;
         text-align: center;
         display: flex;
-        margin: 0 auto 25px;
+        margin-left:30px;
+        margin-bottom:25px;
         div {
           width:90%;
           max-height:auto;
@@ -3515,7 +3518,7 @@ img {
   }
 }
 .profilebioname{
-    width: 50vw;
+    width: 85%;
     margin: 35px auto 0;
     background: #2d2d2d;
     border-radius: 5px;
@@ -6728,7 +6731,24 @@ img {
   width: 45% !important;
   margin-right:47px;
 }
+.editstudio-btn button{
+  width:25% !important;   
+}
 @media screen and (max-width: 856px) {
+  .my-studio {
+    .studioScreen{
+      display: flow-root !important;
+      form{
+        label{
+          margin-left:15px;
+        }
+      }
+    }
+    .studioHead{
+      width:100% !important;
+      
+    }
+  }
   .editstudio-btn button{
     width:25% !important;
   }
