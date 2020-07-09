@@ -9,7 +9,7 @@ class Socket {
   };
 
   getSocketConection() {
-    return io.connect(process.env.REACT_APP_SOCKET_URL);
+    return io.connect(process.env.REACT_APP_SOCKET_URL, this.config);
   };
 };
 
