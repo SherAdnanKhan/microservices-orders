@@ -1420,7 +1420,7 @@ input {
     top: 0;
   }
   .left {
-      left: -42px;
+      left: -38px;
       width: 50px;
       display: flex;
       justify-content: center;
@@ -1440,7 +1440,7 @@ input {
     }
   }
   .right {
-    right: -42px;
+    right: -37px;
     width: 50px;
     display: flex;
     justify-content: center;
@@ -1465,7 +1465,7 @@ input {
   .bottom {
     position: fixed;
     left: 0;
-    bottom: -42px;
+    bottom: -37px;
     height: 50px;
     transition: 0.4s;
     -webkit-align-self: center;
@@ -2759,6 +2759,8 @@ img {
     margin-top: 65px;
     text-align: center;
     width: 100%;
+    display: flex;
+    justify-content: space-around;
     .studioHead{
       display: flex;
       flex-direction: row;
@@ -6727,6 +6729,15 @@ img {
   margin-right:47px;
 }
 @media screen and (max-width: 856px) {
+  .editstudio-btn button{
+    width:25% !important;
+  }
+  .faved-btn a div{
+    margin: 0 10px !important;
+  }
+  .frameReady .left{
+    // width:50% !important;
+  }
   .lobby-page{
     width:90%;
     .row{
