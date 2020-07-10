@@ -44,11 +44,11 @@ const Post = ({
   };
 
   const handleStroke = post => {
-    dispatch(strokePost(post.id, post.gallery_id));
+    dispatch(strokePost(post.id, post.gallery_id, post.user));
   };
 
   const handleUnstroke = post => {
-    dispatch(unstrokePost(post.id, post.gallery_id));
+    dispatch(unstrokePost(post.id, post.gallery_id, post.user));
   };
 
   return (

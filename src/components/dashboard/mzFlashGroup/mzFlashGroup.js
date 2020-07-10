@@ -50,20 +50,19 @@ const MzFlashGroup = () => {
     dispatch(getMySprfvsAndFavesFeeds());
   }, [dispatch]);
 
-  const handleEnter = (e, feedId, comment) => {
+  const handleEnter = (e, feedId, comment, user) => {
     if (e.keyCode === 13 && comments[comment]) {
       const commentData = {
         feed_id: feedId,
         comment: comments[comment]
       };
-      dispatch(createFeedComment(commentData));
+      dispatch(createFeedComment(commentData, user));
       setComments({ ...comments, [comment]: '' });
     }
   };
 
   const handleCommentChange = ({ target: input }) => {
     setComments({ ...comments, [input.name]: input.value });
-    console.log(comments)
   };
 
   const handleActiveFeedComment = (e, feedId) => {
@@ -83,18 +82,18 @@ const MzFlashGroup = () => {
     dispatch(createFeed(formData));
   };
 
-  const handleFeedStroke = id => {
+  const handleFeedStroke = (id, user) => {
     const data = {
       feed_id: id
     };
-    dispatch(strokeFeed(data));
+    dispatch(strokeFeed(data, user));
   };
 
-  const handleFeedUnstroke = id => {
+  const handleFeedUnstroke = (id, user) => {
     const data = {
       feed_id: id
     };
-    dispatch(unstrokeFeed(data));
+    dispatch(unstrokeFeed(data, user));
   };
 
   const handleActiveUser = user => {

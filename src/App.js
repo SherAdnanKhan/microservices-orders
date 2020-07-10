@@ -50,7 +50,31 @@ function App() {
         console.log(user.feel_color)
         localStorage.setItem(userKey, JSON.stringify(user));
         dispatch(updateFeelColor(user.feel_color))
-      })
+      });
+
+      socket.on('notifyPost', (data) => {
+        toast(`${data.sender.username} has commented on your post`);
+      });
+
+      socket.on('notifyFeed', (data) => {
+        toast(`${data.sender.username} has commented on your feed`);
+      });
+
+      socket.on('notifyFeedStroke', (data) => {
+        toast(`${data.sender.username} liked your feed`);
+      });
+
+      socket.on('notifyFeedUnstroke', (data) => {
+        toast(`${data.sender.username} disliked your feed`);
+      });
+
+      socket.on('notifyPostStroke', (data) => {
+        toast(`${data.sender.username} liked your post`);
+      });
+
+      socket.on('notifyPostUnstroke', (data) => {
+        toast(`${data.sender.username} disliked your post`);
+      });
 
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
