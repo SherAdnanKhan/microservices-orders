@@ -33,18 +33,18 @@ const MzFlash = () => {
     dispatch(unfavUser(id))
   }
 
-  const handleStroke = id => {
+  const handleStroke = (id, user) => {
     const data = {
       feed_id: id
     };
-    dispatch(strokeFeed(data));
+    dispatch(strokeFeed(data, user));
   };
 
-  const handleUnstroke = id => {
+  const handleUnstroke = (id, user) => {
     const data = {
       feed_id: id
     };
-    dispatch(unstrokeFeed(data));
+    dispatch(unstrokeFeed(data, user));
   };
 
   const handleCommentChange = ({ target: input }) => {
@@ -61,14 +61,14 @@ const MzFlash = () => {
     }
   };
 
-  const handlePostComment = (e, feedId) => {
+  const handlePostComment = (e, feedId, user) => {
     if (e.keyCode === 13 && comments[feedId]) {
       const commentData = {
         feed_id: feedId,
         comment: comments[feedId]
       };
 
-      dispatch(createFeedComment(commentData));
+      dispatch(createFeedComment(commentData, user));
       setComments({ ...comments, [feedId]: '' });
     }
   };
@@ -217,8 +217,8 @@ const MzFlash = () => {
                     <Stroke
                       hasStroke={feed.has_stroke_count}
                       className="strk-img"
-                      onStroke={() => handleStroke(feed.id)}
-                      onUnstroke={() => handleUnstroke(feed.id)}
+                      onStroke={() => handleStroke(feed.id, feed.user)}
+                      onUnstroke={() => handleUnstroke(feed.id, feed.user)}
                     />
                   </div>
                   <div className="actions-repost">
@@ -252,7 +252,7 @@ const MzFlash = () => {
                   name={feed.id}
                   value={comments[feed.id] ? comments[feed.id] : ''}
                   onChange={handleCommentChange}
-                  onKeyUp={e => handlePostComment(e, feed.id)}
+                  onKeyUp={e => handlePostComment(e, feed.id, feed.user)}
                   placeholder="Enter a Comment..."
                 />
               </div>

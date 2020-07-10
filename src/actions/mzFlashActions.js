@@ -13,6 +13,8 @@ import {
   STROKE_FEED,
   UNSTROKE_FEED
 } from '../constants/actionTypes';
+import { getCurrentUser } from './authActions';
+import socket from '../services/socketService';
 
 export const createFeed = data => dispatch => {
   dispatch({ type: START_FEEDS_LOADER });
@@ -97,7 +99,9 @@ export const getMySprfvsAndFavesFeeds = () => dispatch => {
     });
 };
 
-export const createFeedComment = data => dispatch => {
+export const createFeedComment = (data, user) => dispatch => {
+  const currentUser = getCurrentUser();
+
   http
     .post('/mzflash/feed/comment', data)
     .then(res => {
@@ -105,11 +109,14 @@ export const createFeedComment = data => dispatch => {
         type: CREATE_FEED_COMMENT,
         payload: res.data.data.feed_comment
       });
+      socket.emit('onFeed', { sender: currentUser, reciever: user });
     });
 };
 
 
-export const strokeFeed = data => dispatch => {
+export const strokeFeed = (data, user) => dispatch => {
+  const currentUser = getCurrentUser();
+
   dispatch({
     type: STROKE_FEED,
     payload: { feed_id: data.feed_id, has_stroke_count: 1 }
@@ -117,7 +124,9 @@ export const strokeFeed = data => dispatch => {
 
   http
     .post('/mzflash/feed-stroke', data)
-    .then()
+    .then(() => {
+      socket.emit('onFeedStroke', { sender: currentUser, reciever: user });
+    })
     .catch(() => {
       dispatch({
         type: UNSTROKE_FEED,
@@ -126,7 +135,9 @@ export const strokeFeed = data => dispatch => {
     });
 };
 
-export const unstrokeFeed = data => dispatch => {
+export const unstrokeFeed = (data, user) => dispatch => {
+  const currentUser = getCurrentUser();
+
   dispatch({
     type: UNSTROKE_FEED,
     payload: { feed_id: data.feed_id, has_stroke_count: 0 }
@@ -134,7 +145,9 @@ export const unstrokeFeed = data => dispatch => {
 
   http
     .post('/mzflash/feed-unstroke', data)
-    .then()
+    .then(() => {
+      socket.emit('onFeedUnstroke', { sender: currentUser, reciever: user });
+    })
     .catch(() => {
       dispatch({
         type: STROKE_FEED,

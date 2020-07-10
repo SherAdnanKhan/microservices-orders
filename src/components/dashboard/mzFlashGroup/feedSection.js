@@ -278,8 +278,8 @@ const FeedSection = ({
                 <Stroke
                   hasStroke={feed.has_stroke_count}
                   className="strk-img"
-                  onStroke={() => onStroke(feed.id)}
-                  onUnstroke={() => onUnstroke(feed.id)}
+                  onStroke={() => onStroke(feed.id, feed.user)}
+                  onUnstroke={() => onUnstroke(feed.id, feed.user)}
                 />
               </div>
               <div className="actions-repost">
@@ -315,7 +315,7 @@ const FeedSection = ({
               value={comments[`feed${feed.id}`] ? comments[`feed${feed.id}`] : ''}
               placeholder="Enter a Comment..."
               onChange={onCommentChange}
-              onKeyUp={e => onPostComment(e, feed.id, `feed${feed.id}`)}
+              onKeyUp={e => onPostComment(e, feed.id, `feed${feed.id}`, feed.user)}
             />
           </div>
         ))}

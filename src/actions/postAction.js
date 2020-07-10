@@ -8,6 +8,8 @@ import {
   CLEAR_NCOMM
 } from '../constants/actionTypes';
 import http from '../services/httpService';
+import socket from '../services/socketService';
+import { getCurrentUser } from './authActions';
 
 export const getPost = (post) => dispatch => {
   http
@@ -22,7 +24,9 @@ export const getPost = (post) => dispatch => {
     });
 };
 
-export const strokePost = (postId, galleryId) => dispatch => {
+export const strokePost = (postId, galleryId, user) => dispatch => {
+  const currentUser = getCurrentUser();
+
   dispatch({
     type: STROKE_POST,
     payload: {
@@ -34,7 +38,9 @@ export const strokePost = (postId, galleryId) => dispatch => {
 
   http
     .post('/post/stroke', { post_id: postId })
-    .then()
+    .then(() => {
+      socket.emit('onPostStroke', { sender: currentUser, reciever: user });
+    })
     .catch(() => {
       dispatch({
         type: UNSTROKE_POST,
@@ -47,7 +53,9 @@ export const strokePost = (postId, galleryId) => dispatch => {
     });
 };
 
-export const unstrokePost = (postId, galleryId) => dispatch => {
+export const unstrokePost = (postId, galleryId, user) => dispatch => {
+  const currentUser = getCurrentUser();
+
   dispatch({
     type: UNSTROKE_POST,
     payload: {
@@ -59,7 +67,9 @@ export const unstrokePost = (postId, galleryId) => dispatch => {
 
   http
     .post('/post/unstroke', { post_id: postId })
-    .then()
+    .then(() => {
+      socket.emit('onPostUnstroke', { sender: currentUser, reciever: user });
+    })
     .catch(() => {
       dispatch({
         type: STROKE_POST,
@@ -72,7 +82,9 @@ export const unstrokePost = (postId, galleryId) => dispatch => {
     });
 };
 
-export const createComment = (data, postId, galleryId) => dispatch => {
+export const createComment = (data, postId, galleryId, user) => dispatch => {
+  const currentUser = getCurrentUser();
+
   http
     .post('/comments', data)
     .then(res => {
@@ -80,6 +92,7 @@ export const createComment = (data, postId, galleryId) => dispatch => {
         type: ADD_POST_COMMENT,
         payload: { comment: res.data.data.comment, postId, galleryId }
       });
+      socket.emit('onPost', { sender: currentUser, reciever: user });
     });
 };
 

@@ -22,11 +22,11 @@ const ViewPost = () => {
   }, [dispatch, id]);
 
   const handleUnStoke = () => {
-    dispatch(unstrokePost(post.post.id, post.post.gallery_id))
+    dispatch(unstrokePost(post.post.id, post.post.gallery_id, post.post.user))
   }
 
   const handleStoke = () => {
-    dispatch(strokePost(post.post.id, post.post.gallery_id));
+    dispatch(strokePost(post.post.id, post.post.gallery_id, post.post.user));
   }
 
   return (
