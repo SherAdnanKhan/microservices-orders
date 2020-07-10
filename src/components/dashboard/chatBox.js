@@ -230,7 +230,7 @@ class ChatBox extends Component {
                       >
                         <div className={`outgoing ${data.feel_color}`}>
                           <div className="user-message">
-                            <div className="send-icon">
+                            <div className={index === messages.length - 1 ? 'send-icon high' : 'send-icon'}>
                               {data.messages_logs.length > 0
                                 ? data.messages_logs[0].status === 1
                                   ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
@@ -289,7 +289,7 @@ class ChatBox extends Component {
                         <div className={`incoming ${data.feel_color}`}>
                           <div className="user-message">
                             <Avatar avatars={data.user.avatars} feelColor={data.feel_color} />
-                            <div className="text">
+                            <div className='text'>
                               {data.message}
                               {data.type === 1 &&
                                 <div className="msgImg">
@@ -341,7 +341,8 @@ class ChatBox extends Component {
             }
           </div>
         </>
-        {progress > 0 &&
+        {
+          progress > 0 &&
           <div>
             <div className={`progressBar ${currentUser.feel_color}`}>
               <span className="text"> {progress}% </span>
@@ -401,7 +402,8 @@ class ChatBox extends Component {
         </div>
 
 
-        {hidden &&
+        {
+          hidden &&
           <div className="add-img-vid-box">
             <i
               className="fa fa-times close-add-box"
