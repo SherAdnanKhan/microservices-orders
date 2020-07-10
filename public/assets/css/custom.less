@@ -1418,6 +1418,11 @@ input {
     width: 200px;
     box-shadow: 1px 0px 3px rgba(61,61,61,1);
     top: 0;
+    @media screen and (max-width: 856px) {
+        height: 50vh !important;
+        top: 50% !important;
+        transform: translate(0px, -50%) !important;
+      }
   }
   .left {
       left: -38px;
@@ -1429,9 +1434,22 @@ input {
       flex-direction: column;
       cursor: pointer;
       @media screen and (max-width: 856px) {
+        justify-content: space-evenly !important;
       &.toggle{
-          width:50% !important;
+          width:81% !important;
+          left:-38% !important;
+          img{
+            margin-left:130px;
+          }
+          .mystudio-img{
+            margin-left:200px;
+          }
         }
+      .left{
+        height: 50vh !important;
+        top: 50% !important;
+        transform: translate(0px, -50%) !important;
+      }
       }
       &.toggle{
         left: 0px;
@@ -1452,17 +1470,28 @@ input {
     width: 50px;
     display: flex;
     justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
     border-radius: 50% 0 0 50%;
     z-index: 2;
     cursor: pointer;
     @media screen and (max-width: 856px) {
+      justify-content: space-around !important;
       &.toggle{
-          width:50% !important;
+          width:81% !important;
+          right:-38% !important;
+          img{
+            margin-right:130px;
+          }
+          .mystudio-img{
+            margin-right:200px;
+          }
         }
+      .right{
+        height: 50vh !important;
+        top: 50% !important;
+        transform: translate(0px, -50%) !important;
       }
-      &.toggle{
-        right: 0px;
       }
     img{
       width: 25px;
