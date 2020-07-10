@@ -39,8 +39,8 @@ export default (state = initialState, action) => {
         messages: {
           ...state.messages,
           current_page: action.payload.conversation.messages.current_page,
-          data: state.messages.data
-            ? [...action.payload.conversation.messages.data, ...state.messages.data]
+          data: state?.messages?.data
+            ? [...action.payload.conversation.messages.data.reverse(), ...state.messages.data]
             : [action.payload.conversation.messages.data],
           first_page_url: action.payload.conversation.messages.first_page_url,
           from: action.payload.conversation.messages.from,
@@ -86,7 +86,20 @@ export default (state = initialState, action) => {
       return {
         ...state,
         conversation: null,
-        messages: [],
+        messages: {
+          current_page: 1,
+          data: [],
+          first_page_url: "",
+          from: 0,
+          last_page: 0,
+          last_page_url: "",
+          next_page_url: "",
+          path: "",
+          per_page: "10",
+          prev_page_url: null,
+          to: 0,
+          total: 0
+        },
         user: null
       };
     case START_FILE_LOADER:

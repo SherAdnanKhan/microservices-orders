@@ -34,6 +34,9 @@ export default (state = initialState, action) => {
         gallery: action.payload
       };
     case ADD_POST_COMMENT:
+      if (!state.gallery) {
+        return state
+      }
       return {
         ...state,
         gallery: {
