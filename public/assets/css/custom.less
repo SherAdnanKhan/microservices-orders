@@ -1428,6 +1428,14 @@ input {
       z-index: 12;
       flex-direction: column;
       cursor: pointer;
+      @media screen and (max-width: 856px) {
+      &.toggle{
+          width:50% !important;
+        }
+      }
+      &.toggle{
+        left: 0px;
+      }
     img{
       width: 25px;
       margin: 10px 0;
@@ -1448,6 +1456,14 @@ input {
     border-radius: 50% 0 0 50%;
     z-index: 2;
     cursor: pointer;
+    @media screen and (max-width: 856px) {
+      &.toggle{
+          width:50% !important;
+        }
+      }
+      &.toggle{
+        right: 0px;
+      }
     img{
       width: 25px;
       margin: 10px 0;
@@ -1478,6 +1494,14 @@ input {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    @media screen and (max-width: 856px) {
+    &.toggle{
+      height:25% !important;
+      }
+    }
+    &.toggle{
+      bottom: 0px;
+    }
     a {
       display: inline-block;
       margin: 5px auto;
@@ -6750,6 +6774,9 @@ img {
   width:25% !important;   
 }
 @media screen and (max-width: 856px) {
+  .frameReady .left{
+    // width:50% !important;
+  }
   .post-page{
     .post-body{
       .right-clicked{
@@ -6796,9 +6823,7 @@ img {
   .faved-btn a div{
     margin: 0 10px !important;
   }
-  .frameReady .left{
-    // width:50% !important;
-  }
+  
   .lobby-page{
     width:90%;
     .row{
@@ -6846,9 +6871,7 @@ img {
       }
     }
   }
-  // .set-sources{
-  //   display: none !important;
-  // }
+  
   .box-1,.box-2,.box-3 {
     width:100% !important;
   }
@@ -6930,7 +6953,11 @@ img {
       margin-top:25px !important;
       margin-left:8px;
       overflow-y :hidden !important;
+      .set-sources{
+        display: none !important;
+        }
     }
+    
     #demo {
     height: 300px !important;
     }
