@@ -17,18 +17,27 @@ import "react-toastify/dist/ReactToastify.css";
 import { updateCounter } from './actions/userActions';
 import { useDispatch } from 'react-redux';
 import { updateConversationUnreadCount } from './actions/conversationActions';
-import { userKey } from './constants/keys';
+
 import store from './store';
 import { updateFeelColor } from './actions/colorActions';
 import { playNotificationSound } from './utils/helperFunctions';
 import socket from './services/socketService';
+
+import {
+  userKey,
+  POST_COMMENT,
+  FEED_COMMENT,
+  FEED_STROKE,
+  FEED_UNSTROKE,
+  POST_STROKE,
+  POST_UNSTROKE
+} from './constants/keys';
 
 if (getCurrentUser()) {
   store.dispatch(updateFeelColor(getCurrentUser().feel_color));
 }
 
 function App() {
-  // const [socket, setSocket] = useState('');
   const dispatch = useDispatch();
   const currentUser = getCurrentUser();
 
@@ -52,29 +61,47 @@ function App() {
         dispatch(updateFeelColor(user.feel_color))
       });
 
-      socket.on('notifyPost', (data) => {
-        toast(`${data.sender.username} has commented on your post`);
+      socket.on('reciveUserNotifications', (data, type) => {
+        switch (type) {
+          case POST_COMMENT:
+            toast(`${data.sender.username} has commented on your post`);
+            break;
+          case FEED_COMMENT:
+            toast(`${data.sender.username} has commented on your feed`);
+            break;
+          case FEED_STROKE:
+            toast(`${data.sender.username} liked your feed`);
+            break;
+          case FEED_UNSTROKE:
+            toast(`${data.sender.username} disliked your feed`);
+            break;
+          case POST_STROKE:
+            toast(`${data.sender.username} liked your post`);
+            break;
+          case POST_UNSTROKE:
+            toast(`${data.sender.username} disliked your post`);
+            break;
+          default:
+            break;
+        }
       });
 
-      socket.on('notifyFeed', (data) => {
-        toast(`${data.sender.username} has commented on your feed`);
-      });
 
-      socket.on('notifyFeedStroke', (data) => {
-        toast(`${data.sender.username} liked your feed`);
-      });
+      // socket.on('notifyFeedStroke', (data) => {
+      //   toast(`${data.sender.username} liked your feed`);
+      // });
 
-      socket.on('notifyFeedUnstroke', (data) => {
-        toast(`${data.sender.username} disliked your feed`);
-      });
+      // socket.on('notifyFeedUnstroke', (data) => {
+      //   toast(`${data.sender.username} disliked your feed`);
+      // });
 
-      socket.on('notifyPostStroke', (data) => {
-        toast(`${data.sender.username} liked your post`);
-      });
+      // socket.on('notifyPostStroke', (data) => {
+      //   toast(`${data.sender.username} liked your post`);
+      // });
 
-      socket.on('notifyPostUnstroke', (data) => {
-        toast(`${data.sender.username} disliked your post`);
-      });
+      // socket.on('notifyPostUnstroke', (data) => {
+      //   toast(`${data.sender.username} disliked your post`);
+      // });
 
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));

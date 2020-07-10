@@ -10,6 +10,7 @@ import {
 import http from '../services/httpService';
 import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
+import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
 
 export const getPost = (post) => dispatch => {
   http
@@ -39,7 +40,7 @@ export const strokePost = (postId, galleryId, user) => dispatch => {
   http
     .post('/post/stroke', { post_id: postId })
     .then(() => {
-      socket.emit('onPostStroke', { sender: currentUser, reciever: user });
+      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_STROKE);
     })
     .catch(() => {
       dispatch({
@@ -68,7 +69,7 @@ export const unstrokePost = (postId, galleryId, user) => dispatch => {
   http
     .post('/post/unstroke', { post_id: postId })
     .then(() => {
-      socket.emit('onPostUnstroke', { sender: currentUser, reciever: user });
+      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_UNSTROKE);
     })
     .catch(() => {
       dispatch({
@@ -92,7 +93,7 @@ export const createComment = (data, postId, galleryId, user) => dispatch => {
         type: ADD_POST_COMMENT,
         payload: { comment: res.data.data.comment, postId, galleryId }
       });
-      socket.emit('onPost', { sender: currentUser, reciever: user });
+      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_COMMENT);
     });
 };
 
