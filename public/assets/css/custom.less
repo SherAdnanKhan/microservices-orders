@@ -1418,11 +1418,12 @@ input {
     width: 200px;
     box-shadow: 1px 0px 3px rgba(61,61,61,1);
     top: 0;
-    @media screen and (max-width: 856px) {
-        height: 50vh !important;
-        top: 50% !important;
-        transform: translate(0px, -50%) !important;
-      }
+    @media @mobile {
+      height: 55vh ;
+      top: 50% !important;
+      transform: translate(0px, -50%) !important;
+    }
+  
   }
   .left {
       left: -38px;
@@ -1433,24 +1434,34 @@ input {
       z-index: 12;
       flex-direction: column;
       cursor: pointer;
-      @media screen and (max-width: 856px) {
+      @media @mobile {
         justify-content: space-evenly !important;
+        height:55vh;
       &.toggle{
           width:81% !important;
           left:-38% !important;
           img{
-            margin-left:130px;
+            margin-left:55%;
           }
           .mystudio-img{
-            margin-left:200px;
+            margin-left:75%;
           }
         }
-      .left{
-        height: 50vh !important;
-        top: 50% !important;
-        transform: translate(0px, -50%) !important;
       }
-      }
+      // @media @tablet {
+      //   justify-content: space-evenly !important;
+      //   height: 60vh !important;
+      // &.toggle{
+      //     width:81% !important;
+      //     left:-38% !important;
+      //     img{
+      //       margin-left:55%;
+      //     }
+      //     .mystudio-img{
+      //       margin-left:75%;
+      //     }
+      //   }
+      // }
       &.toggle{
         left: 0px;
       }
@@ -1475,24 +1486,22 @@ input {
     border-radius: 50% 0 0 50%;
     z-index: 2;
     cursor: pointer;
-    @media screen and (max-width: 856px) {
+    @media @mobile {
       justify-content: space-around !important;
+      height:55vh;
       &.toggle{
           width:81% !important;
           right:-38% !important;
           img{
-            margin-right:130px;
+            margin-right:55%;
           }
           .mystudio-img{
-            margin-right:200px;
+            margin-right:75%;
           }
-        }
-      .right{
-        height: 50vh !important;
-        top: 50% !important;
-        transform: translate(0px, -50%) !important;
       }
-      }
+    }
+    
+    
     img{
       width: 25px;
       margin: 10px 0;
