@@ -1429,12 +1429,12 @@ input {
       width: 50px;
       display: flex;
       justify-content: center;
-      justify-content: space-evenly;
       border-radius: 0 50% 50% 0;
       z-index: 12;
       flex-direction: column;
       cursor: pointer;
       @media screen and (max-width: 856px) {
+        justify-content: space-evenly !important;
       &.toggle{
           width:81% !important;
           left:-38% !important;
@@ -1449,7 +1449,6 @@ input {
         height: 50vh !important;
         top: 50% !important;
         transform: translate(0px, -50%) !important;
-        
       }
       }
       &.toggle{
@@ -1477,6 +1476,7 @@ input {
     z-index: 2;
     cursor: pointer;
     @media screen and (max-width: 856px) {
+      justify-content: space-around !important;
       &.toggle{
           width:81% !important;
           right:-38% !important;
