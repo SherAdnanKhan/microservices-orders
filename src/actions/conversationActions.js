@@ -25,14 +25,15 @@ export const getAllConversations = () => dispatch => {
     });
 };
 
-export const getConversation = slug => dispatch => {
+export const getConversation = (slug, page = 1, callback) => dispatch => {
   http
-    .get(`/chats/user/${slug}`)
+    .get(`/chats/user/${slug}?page=${page}`)
     .then(res => {
       dispatch({
         type: GET_CONVERSATION,
         payload: res.data.data
       });
+      callback && callback()
     });
 };
 

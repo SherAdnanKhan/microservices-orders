@@ -1,5 +1,4 @@
 import React, { Component, createRef } from 'react';
-import $ from 'jquery';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from '../common/avatar';
@@ -27,9 +26,14 @@ class ChatBox extends Component {
     document: '',
     message: '',
     hidden: false,
-    progress: 0
+    progress: 0,
+    page: 1,
+    scrollHeight: ''
   };
+
   preview = createRef();
+  containerRef = createRef();
+  bottomRef = createRef();
 
   componentDidMount() {
     this.props.getConversation(this.props.match.params.slug);
@@ -45,11 +49,17 @@ class ChatBox extends Component {
     if (currentConversation && currentConversation !== previos) {
       localStorage.setItem('activeConversation', currentConversation.id);
 
+      if (previos?.id !== currentConversation.id) {
+        this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+
       socket.emit('join', { room: currentConversation.id }, () => { });
       socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => { });
 
       socket.on('recieveMessage', (data) => {
         this.props.updateConversation(data);
+        this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+
         if (data.created_by === this.props.conversation.user.id) {
           if (data.feel_color !== this.props.conversation.user.feel_color) {
             this.componentRefreshUser();
@@ -75,14 +85,6 @@ class ChatBox extends Component {
           this.props.readAll(data);
         }
       });
-    }
-
-    if (this.props.conversation.messages) {
-      if ($('.chat-container').length) {
-        $('.chat-container').stop().animate({
-          scrollTop: $('.chat-container')[0].scrollHeight
-        }, 'fast');
-      }
     }
   }
 
@@ -136,10 +138,6 @@ class ChatBox extends Component {
           socket.emit('sendMessage', newData, () => { });
         });
     }
-
-    $('.chat-container').stop().animate({
-      scrollTop: $('.chat-container')[0].scrollHeight
-    }, 'slow');
   }
 
   handleEnter = e => {
@@ -173,6 +171,26 @@ class ChatBox extends Component {
         err => {
           this.setState({ progress: 0 });
         })
+    }
+  }
+
+  handleScroll = () => {
+    const scrollTop = this.containerRef.current.scrollTop;
+    const { scrollHeight } = this.state;
+    const { page } = this.state;
+
+    if (scrollTop === 0) {
+      if (!scrollHeight) {
+        this.setState({ scrollHeight: this.containerRef.current.scrollHeight })
+      }
+
+      this.setState({ page: page + 1, }, () => {
+        if (this.props.conversation.messages.next_page_url) {
+          this.props.getConversation(this.props.match.params.slug, page + 1, () => {
+            this.containerRef.current.scrollTo(0, this.state.scrollHeight);
+          });
+        }
+      });
     }
   }
 
@@ -211,7 +229,7 @@ class ChatBox extends Component {
             </div>
           </div>
 
-          <div className="chat-container">
+          <div className="chat-container" >
             <div className="chat-uesr">
               {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
               <div className="chat-uesr-name">
@@ -220,8 +238,12 @@ class ChatBox extends Component {
               </div>
             </div>
 
-            {messages &&
-              messages.map((data, index) => (
+            <div
+              className="message-box"
+              ref={ref => this.containerRef.current = ref}
+              onScroll={this.handleScroll}
+            >
+              {messages?.data?.map((data, index) => (
                 <div key={index}>
                   {data.user.id === currentUser.id
                     ? (
@@ -230,7 +252,7 @@ class ChatBox extends Component {
                       >
                         <div className={`outgoing ${data.feel_color}`}>
                           <div className="user-message">
-                            <div className={index === messages.length - 1 ? 'send-icon high' : 'send-icon'}>
+                            <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
                               {data.messages_logs.length > 0
                                 ? data.messages_logs[0].status === 1
                                   ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
@@ -336,9 +358,11 @@ class ChatBox extends Component {
                       </div>
                     )
                   }
+                  <div ref={ref => this.bottomRef.current = ref}></div>
                 </div>
               ))
-            }
+              }
+            </div>
           </div>
         </>
         {
