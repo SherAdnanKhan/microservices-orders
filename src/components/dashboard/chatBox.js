@@ -91,9 +91,11 @@ class ChatBox extends Component {
     localStorage.removeItem('activeConversation');
 
     conversation && socket.emit('leave', { room: conversation.id });
-    socket.emit('disconnect');
 
-    this.setState({ message: '' });
+    socket.off('recieveMessage');
+    socket.off('onRead');
+    socket.off('onReadAll');
+
     this.props.clearConversation();
   }
 
@@ -109,40 +111,35 @@ class ChatBox extends Component {
     const { image, video, message, document } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
-    const new_message = message.replace(/\s/g, '');
+
     if (conversation) {
-      if (new_message || image || video) {
-        let data = {
-          url: image || video || (document && document.path) || '',
-          type: image ? 1 : video ? 2 : document ? 3 : 0,
-          user,
-          room: conversation.id
-        };
+      let data = {
+        url: image || video || (document && document.path) || '',
+        type: image ? 1 : video ? 2 : document ? 3 : 0,
+        user,
+        room: conversation.id
+      };
 
-        if (message.trim() !== '') {
-          data.message = message;
-          console.log('message: ', message);
-        }
-
-        this.setState({ message: '', image: '', video: '', document: '' });
-
-        this.props.createMessage(data,
-          (result) => {
-            const newData = result.message;
-            newData.user = result.user;
-            newData.room = result.message.conversation_id;
-            newData.reciver = this.props.match.params.slug;
-
-            socket.emit('sendMessage', newData, () => {
-            });
-          });
+      if (message.trim() !== '') {
+        data.message = message;
       }
+
+      this.setState({ message: '', image: '', video: '', document: '' });
+
+      this.props.createMessage(data,
+        (result) => {
+          const newData = result.message;
+          newData.user = result.user;
+          newData.room = result.message.conversation_id;
+          newData.reciver = this.props.match.params.slug;
+
+          socket.emit('sendMessage', newData, () => { });
+        });
     }
 
     $('.chat-container').stop().animate({
       scrollTop: $('.chat-container')[0].scrollHeight
     }, 'slow');
-
   }
 
   handleEnter = e => {
@@ -200,11 +197,13 @@ class ChatBox extends Component {
               {user && <p>{user.username}</p>}
               <span>Time Ago Active</span>
             </div>
+
             <div className="call-btn">
               <button>video Call</button>
               <button>Draw</button>
             </div>
           </div>
+
           <div className="chat-container">
             <div className="chat-uesr">
               {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
