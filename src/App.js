@@ -75,6 +75,8 @@ function App() {
       if (socket) {
         socket.emit('disconnect');
         socket.emit('userLeft', currentUser);
+        socket.disconnect();
+        socket.close();
       }
     }
   }, [dispatch, currentUser])
