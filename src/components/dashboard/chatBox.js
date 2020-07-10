@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import $ from 'jquery';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
@@ -194,10 +194,17 @@ class ChatBox extends Component {
               onClick={() => history.goBack()}
             />
 
-            {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
+            {user &&
+              <Link to={`/dashboard/studio/${user.slug}`} >
+                <Avatar avatars={user.avatars} feelColor={user.feel_color} />
+              </Link>
+            }
 
             <div className="user-Status">
-              {user && <p>{user.username}</p>}
+              {user && <p>
+                <Link to={`/dashboard/studio/${user.slug}`} >{user.username}</Link>
+              </p>
+              }
               <span>Time Ago Active</span>
             </div>
             <div className="call-btn">
