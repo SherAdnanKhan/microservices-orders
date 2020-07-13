@@ -60,7 +60,7 @@ const ImageVideoSlider = ({ ncomm }) => {
           slidesToShow: slidesToShow
         }
       });
-      sliderRef.current.scrollIntoView({ behavior: 'auto' });;
+      // sliderRef.current.scrollIntoView({ behavior: 'smooth' });;
     }
   }, [ncomm]);
 
