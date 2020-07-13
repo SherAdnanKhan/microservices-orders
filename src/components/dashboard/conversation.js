@@ -85,16 +85,16 @@ const Conversation = () => {
                     }
                   </>
                 }
-                {conversation.messages.length > 0 &&
+                {conversation.last_message &&
                   <>
-                    {conversation.messages[conversation.messages.length - 1].message}
+                    {conversation.last_message.message}
                   </>
                 }
               </div>
               <div className="dateTime">
-                {conversation.messages.length > 0 &&
+                {conversation.last_message &&
                   <>
-                    {getDateOrTime(conversation.messages[conversation.messages.length - 1].created_at)}
+                    {getDateOrTime(conversation.last_message.created_at)}
                   </>
                 }
               </div>
