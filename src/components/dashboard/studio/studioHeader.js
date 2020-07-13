@@ -12,7 +12,10 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
       {userStudio && <p>{userStudio.user.username}</p>}
       <div className="actions">
         <img
-          src='/assets/images/sprfvs_empty.png'
+          src={userStudio?.is_sprfvs
+            ? '/assets/images/sprfvs_full.png'
+            : '/assets/images/sprfvs_empty.png'
+          }
           alt=""
           className="clickable sprvs-empty"
           onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}

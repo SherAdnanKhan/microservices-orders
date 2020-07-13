@@ -32,26 +32,26 @@ const EditProfile = ({ myStudio }) => {
               <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
             </label>
             <div className="faved-btn">
-              <Link to='/dashboard/my-studio/fave-by'>
+              {/* <Link to='/dashboard/my-studio/fave-by'>
                 <div className="faved-by-btn">
                   <img src="/assets/images/favers.png" alt="" />
                   Faved by
               </div>
                 {myStudio && <span>{myStudio.fav_by_count}</span>}
-              </Link>
+              </Link> */}
               <Link to={`/dashboard/my-studio/fave-galleries/${myStudio?.user?.id}`}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/fave_icon.png" alt="" />
                   Fave galleries
               </div>
               </Link>
-              <Link to="/dashboard/my-studio/fave">
+              {/* <Link to="/dashboard/my-studio/fave">
                 <div className="faved-by-btn">
                   <img src="/assets/images/faving.png" alt="" />
                   Faved
               </div>
                 {myStudio && <span>{myStudio.favs_count}</span>}
-              </Link>
+              </Link> */}
             </div>
           </form>
         </div>
