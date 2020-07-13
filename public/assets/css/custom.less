@@ -268,6 +268,9 @@ input {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  @media @mobile{
+    display: unset;
+  }
   .login-cube{
     width:40%;
     display: flex;
@@ -275,6 +278,9 @@ input {
     align-items: center;
     align-content: center;
     justify-content: center;
+    @media @mobile{
+      width:100%;
+    }
   }
   .login-border{
     border-left: 2px solid;;
@@ -288,6 +294,9 @@ input {
   form {
     margin-top: 30px;
     width: 40%;
+    @media @mobile{
+      width: 100%;
+    }
     label {
       width: 100%;
       text-align: left;
