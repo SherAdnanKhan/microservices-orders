@@ -36,7 +36,39 @@ class ChatBox extends Component {
   bottomRef = createRef();
 
   componentDidMount() {
+    const currentUser = getCurrentUser();
     this.props.getConversation(this.props.match.params.slug);
+
+    socket.on('recieveMessage', (data) => {
+      this.props.updateConversation(data);
+      this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+
+      if (data.created_by === this.props.conversation.user.id) {
+        if (data.feel_color !== this.props.conversation.user.feel_color) {
+          this.componentRefreshUser();
+        }
+      }
+
+      if (data.user.id !== currentUser.id) {
+        socket.emit("onRead", data, () => {
+          this.props.readMessage(data);
+        });
+      }
+    });
+
+    socket.on('read', (data) => {
+      if (data.user.id !== currentUser.id) {
+        console.log('i am reading');
+        console.log(data.user);
+      }
+      this.props.changeReadMessageStatus(data);
+    });
+
+    socket.on('readAll', (data) => {
+      if (data.user.id !== currentUser.id) {
+        this.props.readAll(data);
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -51,40 +83,9 @@ class ChatBox extends Component {
 
       if (previos?.id !== currentConversation.id) {
         this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        socket.emit('join', { room: currentConversation.id }, () => { });
+        socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => { });
       }
-
-      socket.emit('join', { room: currentConversation.id }, () => { });
-      socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => { });
-
-      socket.on('recieveMessage', (data) => {
-        this.props.updateConversation(data);
-        this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-
-        if (data.created_by === this.props.conversation.user.id) {
-          if (data.feel_color !== this.props.conversation.user.feel_color) {
-            this.componentRefreshUser();
-          }
-        }
-        if (data.user.id !== currentUser.id) {
-          socket.emit("onRead", data, () => {
-            this.props.readMessage(data);
-          });
-        }
-      });
-
-      socket.on('read', (data) => {
-        if (data.user.id !== currentUser.id) {
-          console.log('i am reading');
-          console.log(data.user);
-        }
-        this.props.changeReadMessageStatus(data);
-      });
-
-      socket.on('readAll', (data) => {
-        if (data.user.id !== currentUser.id) {
-          this.props.readAll(data);
-        }
-      });
     }
   }
 

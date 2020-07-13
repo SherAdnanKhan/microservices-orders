@@ -86,23 +86,6 @@ function App() {
         }
       });
 
-
-      // socket.on('notifyFeedStroke', (data) => {
-      //   toast(`${data.sender.username} liked your feed`);
-      // });
-
-      // socket.on('notifyFeedUnstroke', (data) => {
-      //   toast(`${data.sender.username} disliked your feed`);
-      // });
-
-      // socket.on('notifyPostStroke', (data) => {
-      //   toast(`${data.sender.username} liked your post`);
-      // });
-
-      // socket.on('notifyPostUnstroke', (data) => {
-      //   toast(`${data.sender.username} disliked your post`);
-      // });
-
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
         if (activeConversation !== data.room) {
@@ -133,7 +116,6 @@ function App() {
   }, [dispatch, currentUser])
 
   return (
-
     <SocketContext.Provider value={socket}>
       <ToastContainer autoClose={5000} />
       <Switch>
