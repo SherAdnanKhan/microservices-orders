@@ -1,9 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const PostBar = ({ myStudio, activeGallery, totalPosts, gallery }) => {
+const PostBar = ({ myStudio, activeGallery, totalPosts }) => {
   const history = useHistory();
-  console.log(gallery)
 
   return (
     <div className="total-post">
