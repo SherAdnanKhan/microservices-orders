@@ -9,7 +9,8 @@ import {
   STOP_FILE_LOADER,
   READ_MESSAGE,
   READ_ALL,
-  UPDATE_CONVERSATION_UNREAD_COUNT
+  UPDATE_CONVERSATION_UNREAD_COUNT,
+  ADD_MESSAGE
 } from '../constants/actionTypes';
 
 export const getAllConversations = () => dispatch => {
@@ -139,6 +140,13 @@ export const updateConversationUnreadCount = data => {
   return {
     type: UPDATE_CONVERSATION_UNREAD_COUNT,
     payload: data
+  }
+};
+
+export const addMessage = message => {
+  return {
+    type: ADD_MESSAGE,
+    payload: message
   }
 };
 
