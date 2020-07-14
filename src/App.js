@@ -88,19 +88,19 @@ function App() {
 
       socket.on('notify', data => {
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
-        if (activeConversation !== data.room) {
+        if (activeConversation !== data.message.conversation_id) {
           playNotificationSound();
           toast(() => {
             return (
               <Link
-                to={`/dashboard/chat/${data.user.slug}`}
+                to={`/dashboard/chat/${data.message.user.slug}`}
                 style={{ textDecoration: 'none', color: currentUser.feel_color }}>
-                You have new message from {data.user.username}
+                You have new message from {data.message.user.username}
               </Link>
             )
           });
           dispatch(updateCounter());
-          dispatch(updateConversationUnreadCount(data));
+          dispatch(updateConversationUnreadCount(data.message));
         }
       });
     }

@@ -110,14 +110,16 @@ export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
     });
 };
 
-export const readMessage = data => dispatch => {
-  const payload = {
-    user_id: data.user.id
+export const readMessage = (message_id, user_id) => dispatch => {
+  const data = {
+    user_id: user_id
   };
 
   http
-    .post(`/chats/message/read/${data.id}`, payload)
-    .then()
+    .post(`/chats/message/read/${message_id}`, data)
+    .then(() => {
+      console.log('succeed');
+    })
     .catch(err => {
       if (err.response && err.response.data) {
         toast(err.response.data.errors.error)

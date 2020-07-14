@@ -72,7 +72,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         conversations: state?.conversations?.map(conversation => {
-          if (conversation.id === action.payload.room) {
+          if (conversation.id === action.payload.conversation_id) {
             return {
               ...conversation,
               unread_messages_logs_count: conversation.unread_messages_logs_count + 1,

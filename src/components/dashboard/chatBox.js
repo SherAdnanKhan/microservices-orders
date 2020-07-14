@@ -49,15 +49,15 @@ class ChatBox extends Component {
         }
       }
 
-      // if (message.user.id !== currentUser.id) {
-      //   socket.emit("onRead", data, () => {
-      //     this.props.readMessage(data);
-      //   });
-      // }
+      if (data.message.user.id !== currentUser.id) {
+        socket.emit("onRead", data, () => {
+          this.props.readMessage(data.message.id, currentUser.id);
+        });
+      }
     });
 
     socket.on('read', (data) => {
-      if (data.user.id !== currentUser.id) {
+      if (data.message.user.id !== currentUser.id) {
         console.log('i am reading');
         console.log(data.user);
       }
