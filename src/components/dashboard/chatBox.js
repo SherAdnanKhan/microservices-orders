@@ -40,21 +40,20 @@ class ChatBox extends Component {
     this.props.getConversation(this.props.match.params.slug);
 
     socket.on('recieveMessage', (data) => {
-      this.props.updateConversation(data);
-      // this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      this.props.updateConversation(data.message);
+      this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
 
-      // if (data.created_by === this.props.conversation.user.id) {
-      //   if (data.feel_color !== this.props.conversation.user.feel_color) {
-      //     this.componentRefreshUser();
-      //   }
-      // }
+      if (data.message.created_by === this.props.conversation.user.id) {
+        if (data.message.feel_color !== this.props.conversation.user.feel_color) {
+          this.componentRefreshUser();
+        }
+      }
 
-      // if (data.user.id !== currentUser.id) {
+      // if (message.user.id !== currentUser.id) {
       //   socket.emit("onRead", data, () => {
       //     this.props.readMessage(data);
       //   });
       // }
-      console.log('recive message');
     });
 
     socket.on('read', (data) => {
