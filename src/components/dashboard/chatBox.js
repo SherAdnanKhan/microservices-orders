@@ -50,9 +50,10 @@ class ChatBox extends Component {
       }
 
       if (data.message.user.id !== currentUser.id) {
-        socket.emit("onRead", data, () => {
-          this.props.readMessage(data.message.id, currentUser.id);
-        });
+        const user = {
+          user_id: currentUser.id
+        };
+        socket.emit("onRead", data.message.id, user, data, getAuthToken(), () => { });
       }
     });
 
@@ -61,7 +62,7 @@ class ChatBox extends Component {
         console.log('i am reading');
         console.log(data.user);
       }
-      this.props.changeReadMessageStatus(data);
+      this.props.changeReadMessageStatus(data.message);
     });
 
     socket.on('readAll', (data) => {
