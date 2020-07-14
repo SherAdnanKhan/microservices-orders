@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
 import SocketContext from '../../context/socketContext';
-import { getCurrentUser } from '../../actions/authActions';
+import { getCurrentUser, getAuthToken } from '../../actions/authActions';
 import socket from '../../services/socketService';
 
 import {
@@ -41,19 +41,20 @@ class ChatBox extends Component {
 
     socket.on('recieveMessage', (data) => {
       this.props.updateConversation(data);
-      this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+      // this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
 
-      if (data.created_by === this.props.conversation.user.id) {
-        if (data.feel_color !== this.props.conversation.user.feel_color) {
-          this.componentRefreshUser();
-        }
-      }
+      // if (data.created_by === this.props.conversation.user.id) {
+      //   if (data.feel_color !== this.props.conversation.user.feel_color) {
+      //     this.componentRefreshUser();
+      //   }
+      // }
 
-      if (data.user.id !== currentUser.id) {
-        socket.emit("onRead", data, () => {
-          this.props.readMessage(data);
-        });
-      }
+      // if (data.user.id !== currentUser.id) {
+      //   socket.emit("onRead", data, () => {
+      //     this.props.readMessage(data);
+      //   });
+      // }
+      console.log('recive message');
     });
 
     socket.on('read', (data) => {
@@ -118,9 +119,10 @@ class ChatBox extends Component {
     if (conversation) {
       let data = {
         url: image || video || (document && document.path) || '',
-        type: image ? 1 : video ? 2 : document ? 3 : 0,
-        user,
-        room: conversation.id
+        message_type: image ? 1 : video ? 2 : document ? 3 : 0,
+        user_id: user.id,
+        conversation_id: conversation.id,
+        reciver: this.props.match.params.slug
       };
 
       if (message.trim() !== '') {
@@ -129,15 +131,7 @@ class ChatBox extends Component {
 
       this.setState({ message: '', image: '', video: '', document: '' });
 
-      this.props.createMessage(data,
-        (result) => {
-          const newData = result.message;
-          newData.user = result.user;
-          newData.room = result.message.conversation_id;
-          newData.reciver = this.props.match.params.slug;
-
-          socket.emit('sendMessage', newData, () => { });
-        });
+      socket.emit('sendMessage', data, getAuthToken(), () => { });
     }
   }
 
