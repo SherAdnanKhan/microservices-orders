@@ -92,8 +92,10 @@ class ChatBox extends Component {
 
       if (previos?.id !== currentConversation.id) {
         this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-        socket.emit('join', { room: currentConversation.id }, () => { });
-        socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, () => { });
+        socket.emit('join', { room: currentConversation.id }, () => {
+          socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, getAuthToken(), () => {
+          });
+        });
       }
     }
   }
