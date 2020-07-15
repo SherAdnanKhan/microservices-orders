@@ -206,7 +206,7 @@ class ChatBox extends Component {
 
     if (scrollTop === 0) {
       if (!scrollHeight) {
-        this.setState({ scrollHeight: this.containerRef.current.scrollHeight })
+        this.setState({ scrollHeight: this.containerRef.current.scrollHeight / 2 })
       }
 
       this.setState({ page: page + 1, }, () => {
@@ -254,7 +254,10 @@ class ChatBox extends Component {
             </div>
           </div>
 
-          <div className="chat-container" >
+          <div className="chat-container"
+            ref={ref => this.containerRef.current = ref}
+            onScroll={this.handleScroll}
+          >
             <div className="chat-uesr">
               {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
               <div className="chat-uesr-name">
@@ -263,11 +266,7 @@ class ChatBox extends Component {
               </div>
             </div>
 
-            <div
-              className="message-box"
-              ref={ref => this.containerRef.current = ref}
-              onScroll={this.handleScroll}
-            >
+            <div className="message-box">
               {messages?.data?.map((data, index) => (
                 <div key={index}>
                   {data.user.id === currentUser.id
