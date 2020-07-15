@@ -6,12 +6,26 @@ import Slider from "react-slick";
 const VerticalSlider = ({ children }) => {
   const sliderRef = useRef();
 
-  function PrevArrow({ onClick }) {
-    return <i className="arrow-up fa fa-caret-up fa-3x" onClick={onClick}></i>;
+  function PrevArrow({ onClick, style }) {
+    return (
+      <i
+        className="arrow-up fa fa-caret-up fa-3x"
+        onClick={onClick}
+        style={{ display: 'block' }}
+      >
+      </i>
+    );
   }
 
-  function NextArrow({ onClick }) {
-    return <i className="arrow-down fa fa-caret-down fa-3x" onClick={onClick}></i>
+  function NextArrow({ onClick, style }) {
+    return (
+      <i
+        className="arrow-down fa fa-caret-down fa-3x"
+        onClick={onClick}
+        style={{ display: 'block' }}
+      >
+      </i>
+    );
   }
 
   const [settings] = useState({
