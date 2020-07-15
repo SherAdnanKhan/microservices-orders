@@ -9,171 +9,111 @@ const UserSection = ({
 }) => {
   return (
     <div className="col-2 box-1">
-      <VerticalSlider>
-        {activeUserList === 1 &&
-          <>
-            {sprfvsUsers &&
-              sprfvsUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                  onClick={() => onActiveUser(user)}
-                >
-                  <div className="cube">
-                    <UserCube user={user} />
-                  </div>
-                </div>
-              ))
-            }
-          </>
-        }
-        {(activeUserList === 2 || activeUserList === 4) &&
-          <>
-            {favouriteUsers &&
-              favouriteUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                  onClick={() => onActiveUser(user)}
-                >
-                  <div className="cube">
-                    <UserCube user={user} />
-                  </div>
-                </div>
-              ))
-            }
-          </>
-        }
-        {activeUserList === 3 &&
-          <>
-            {faveAndSprfvsUsers &&
-              faveAndSprfvsUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                  onClick={() => onActiveUser(user)}
-                >
-                  <div className="cube">
-                    <UserCube user={user} />
-                  </div>
-                </div>
-              ))
-            }
-          </>
-        }
-      </VerticalSlider>
-
-      <HorizontalSlider>
-        {activeUserList === 1 &&
-          <>
-            {sprfvsUsers &&
-              sprfvsUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                  onClick={() => onActiveUser(user)}
-                >
-                  <div className="cube">
-                    <UserCube user={user} />
-                  </div>
-                </div>
-              ))
-            }
-          </>
-        }
-        {(activeUserList === 2 || activeUserList === 4) &&
-          <>
-            {favouriteUsers &&
-              favouriteUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                  onClick={() => onActiveUser(user)}
-                >
-                  <div className="cube">
-                    <UserCube user={user} />
-                  </div>
-                </div>
-              ))
-            }
-          </>
-        }
-        {activeUserList === 3 &&
-          <>
-            {faveAndSprfvsUsers &&
-              faveAndSprfvsUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                  onClick={() => onActiveUser(user)}
-                >
-                  <div className="cube">
-                    <UserCube user={user} />
-                  </div>
-                </div>
-              ))
-            }
-          </>
-        }
-      </HorizontalSlider>
-      {/* <div className="vSlider">
-        <div className="controls">
-          <i className="arrow-up fa fa-caret-up fa-3x"></i>
-          <i className="arrow-down fa fa-caret-down fa-3x"></i>
-        </div>
-
-        <div className="slides">
-
-        </div>
-      </div> */}
-      {/* <i className="fa fa-caret-up fa-3x"></i>
       {activeUserList === 1 &&
-        <div className="box-css">
-          <div id="demo">
-            <div className="cv-carousel">
-              {sprfvsUsers &&
-                sprfvsUsers.map((user, index) => (
-                  <div className="item" key={index} onClick={() => onActiveUser(user)}>
-                    <UserCube user={user} />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
+        <VerticalSlider>
+          {sprfvsUsers &&
+            sprfvsUsers.map((user, index) => (
+              <div
+                className={index === 0 ? 'item active' : 'item'}
+                key={index}
+                onClick={() => onActiveUser(user)}
+              >
+                <div className="cube">
+                  <UserCube user={user} />
+                </div>
+              </div>
+            ))
+          }
+        </VerticalSlider>
       }
       {(activeUserList === 2 || activeUserList === 4) &&
-        <div className="box-css">
-          <div id="demo">
-            <div className="cv-carousel">
-              {favouriteUsers &&
-                favouriteUsers.map((user, index) => (
-                  <div className="item" key={index} onClick={() => onActiveUser(user)}>
-                    <UserCube user={user} />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
+        <VerticalSlider>
+          {favouriteUsers &&
+            favouriteUsers.map((user, index) => (
+              <div
+                className={index === 0 ? 'item active' : 'item'}
+                key={index}
+                onClick={() => onActiveUser(user)}
+              >
+                <div className="cube">
+                  <UserCube user={user} />
+                </div>
+              </div>
+            ))
+          }
+        </VerticalSlider>
       }
+
       {activeUserList === 3 &&
-        <div className="box-css">
-          <div id="demo">
-            <div className="cv-carousel">
-              {faveAndSprfvsUsers &&
-                faveAndSprfvsUsers.map((user, index) => (
-                  <div className="item" key={index} onClick={() => onActiveUser(user)}>
-                    <UserCube user={user} />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
+        <VerticalSlider>
+          {faveAndSprfvsUsers &&
+            faveAndSprfvsUsers.map((user, index) => (
+              <div
+                className={index === 0 ? 'item active' : 'item'}
+                key={index}
+                onClick={() => onActiveUser(user)}
+              >
+                <div className="cube">
+                  <UserCube user={user} />
+                </div>
+              </div>
+            ))
+          }
+        </VerticalSlider>
       }
-      <i className="fa fa-caret-down fa-3x"></i> */}
-    </div >
+      {activeUserList === 1 &&
+        <HorizontalSlider>
+          {sprfvsUsers &&
+            sprfvsUsers.map((user, index) => (
+              <div
+                className={index === 0 ? 'item active' : 'item'}
+                key={index}
+                onClick={() => onActiveUser(user)}
+              >
+                <div className="cube">
+                  <UserCube user={user} />
+                </div>
+              </div>
+            ))
+          }
+        </HorizontalSlider>
+      }
+      {(activeUserList === 2 || activeUserList === 4) &&
+        <HorizontalSlider>
+          {favouriteUsers &&
+            favouriteUsers.map((user, index) => (
+              <div
+                className={index === 0 ? 'item active' : 'item'}
+                key={index}
+                onClick={() => onActiveUser(user)}
+              >
+                <div className="cube">
+                  <UserCube user={user} />
+                </div>
+              </div>
+            ))
+          }
+        </HorizontalSlider>
+      }
+
+      {activeUserList === 3 &&
+        <HorizontalSlider>
+          {faveAndSprfvsUsers &&
+            faveAndSprfvsUsers.map((user, index) => (
+              <div
+                className={index === 0 ? 'item active' : 'item'}
+                key={index}
+                onClick={() => onActiveUser(user)}
+              >
+                <div className="cube">
+                  <UserCube user={user} />
+                </div>
+              </div>
+            ))
+          }
+        </HorizontalSlider>
+      }
+    </div>
   );
 };
 
