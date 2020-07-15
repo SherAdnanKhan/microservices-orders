@@ -37,10 +37,10 @@ const Header = () => {
               onClick={() => history.push('/dashboard/mz-flash-group')}
             />
           </div>
-          <Link to="" className="feelIcon">
-            <img alt="" src="/assets/images/icons/feelicon.png" />
-          </Link>
         </div>
+        <Link to="" className="feelIcon">
+          <img alt="" src="/assets/images/icons/feelicon.png" />
+        </Link>
       </div>
       <Search />
 
