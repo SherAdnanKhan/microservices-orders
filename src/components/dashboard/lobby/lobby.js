@@ -9,6 +9,8 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import UserContext from '../../../context/userContext';
 import { getNcomm, clearNcomm, strokePost, unstrokePost } from '../../../actions/postAction';
+import VerticalSlider from '../../common/verticalSlider';
+import HorizontalSlider from '../../common/horizontalSlider';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -124,28 +126,39 @@ const Lobby = () => {
       }
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
-          <div className="vSlider">
-            <div className="controls">
-              <i className="arrow-up fa fa-caret-up fa-3x"></i>
-              <i className="arrow-down fa fa-caret-down fa-3x"></i>
-            </div>
-            <div className="slides">
-              {favouriteUsers &&
-                favouriteUsers.map((user, index) => (
-                  <div
-                    className={index === 0 ? 'item active' : 'item'}
-                    key={index}
-                  >
-                    <div className="cube">
-                      <Link to={`/dashboard/studio/${user.slug}`}>
-                        <UserCube user={user} />
-                      </Link>
-                    </div>
+          <VerticalSlider>
+            {favouriteUsers &&
+              favouriteUsers.map((user, index) => (
+                <div
+                  className={index === 0 ? 'item active' : 'item'}
+                  key={index}
+                >
+                  <div className="cube">
+                    <Link to={`/dashboard/studio/${user.slug}`}>
+                      <UserCube user={user} />
+                    </Link>
                   </div>
-                ))
-              }
-            </div>
-          </div>
+                </div>
+              ))
+            }
+          </VerticalSlider>
+
+          <HorizontalSlider>
+            {favouriteUsers &&
+              favouriteUsers.map((user, index) => (
+                <div
+                  className={index === 0 ? 'item active' : 'item'}
+                  key={index}
+                >
+                  <div className="cube">
+                    <Link to={`/dashboard/studio/${user.slug}`}>
+                      <UserCube user={user} />
+                    </Link>
+                  </div>
+                </div>
+              ))
+            }
+          </HorizontalSlider>
         </div>
         <div className="col-6 section-2 box-2">
           {favouriteGalleries &&
