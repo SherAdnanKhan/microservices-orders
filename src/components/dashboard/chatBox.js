@@ -16,8 +16,11 @@ import {
   uploadFile,
   readMessage,
   readAll,
-  changeReadMessageStatus
+  changeReadMessageStatus,
+  addMessage,
+  updateMessage
 } from '../../actions/conversationActions';
+import { toast } from 'react-toastify';
 
 class ChatBox extends Component {
   state = {
@@ -40,7 +43,12 @@ class ChatBox extends Component {
     this.props.getConversation(this.props.match.params.slug);
 
     socket.on('recieveMessage', (data) => {
-      this.props.updateConversation(data.message);
+      if (data.message.user.id === currentUser.id) {
+        this.props.updateMessage(data.message);
+      } else {
+        this.props.updateConversation(data.message);
+      }
+
       this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
 
       if (data.message.created_by === this.props.conversation.user.id) {
@@ -111,7 +119,7 @@ class ChatBox extends Component {
     this.componentCleanup();
   }
 
-  sendMessage = e => {
+  sendMessage = async (e) => {
     const { image, video, message, document } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
@@ -131,7 +139,27 @@ class ChatBox extends Component {
 
       this.setState({ message: '', image: '', video: '', document: '' });
 
-      socket.emit('sendMessage', data, getAuthToken(), () => { });
+      const newData = {
+        ...this.props?.conversation?.messages?.data[0]
+      };
+
+      newData.id = this.props?.conversation?.messages?.total + 1;
+      newData.messages_logs = [];
+      newData.type = data.message_type;
+      newData.user = user;
+      newData.url = data.url;
+      newData.message = message;
+      newData.created_at = 'now';
+      newData.feel_color = user.feel_color;
+
+      if (data.message || data.url) {
+        await this.props.addMessage(newData);
+        this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+
+        socket.emit('sendMessage', data, getAuthToken(), message => {
+          toast.error(message);
+        });
+      }
     }
   }
 
@@ -252,7 +280,7 @@ class ChatBox extends Component {
                                 ? data.messages_logs[0].status === 1
                                   ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
                                   : <img alt="" src="/assets/images/avatarblack.png" />
-                                : <img alt="/assets/images/avataricon.png" />
+                                : <img src="/assets/images/avatarblack.png" alt="" />
                               }
                             </div>
                             <div className="text">
@@ -295,7 +323,10 @@ class ChatBox extends Component {
                           </div>
                           {data.created_at &&
                             <p className='time'>
-                              {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
+                              {data.created_at === 'now'
+                                ? 'now'
+                                : `${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`
+                              }
                             </p>
                           }
 
@@ -473,5 +504,7 @@ export default connect(
   uploadFile,
   readMessage,
   readAll,
-  changeReadMessageStatus
+  changeReadMessageStatus,
+  addMessage,
+  updateMessage
 })(withRouter(ChatBox));
