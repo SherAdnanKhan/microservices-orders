@@ -10,7 +10,8 @@ import {
   READ_MESSAGE,
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
-  ADD_MESSAGE
+  ADD_MESSAGE,
+  UPDATE_MESSAGE
 } from '../constants/actionTypes';
 
 export const getAllConversations = () => dispatch => {
@@ -146,6 +147,13 @@ export const updateConversationUnreadCount = data => {
 export const addMessage = message => {
   return {
     type: ADD_MESSAGE,
+    payload: message
+  }
+};
+
+export const updateMessage = message => {
+  return {
+    type: UPDATE_MESSAGE,
     payload: message
   }
 };
