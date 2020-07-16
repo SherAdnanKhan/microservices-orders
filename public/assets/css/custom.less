@@ -4386,7 +4386,59 @@ img {
  display: flex;
  flex-direction: column;
  justify-content: flex-start;
+ .image-option-box{
+   text-align: center;
+   .fa-ellipsis-v{
+     cursor: pointer;
+   }
+  .add-img-vid-box{
+    display: flex;
+    display: none;
+    position: fixed;
+    border: 1px solid;
+    top: 23%;
+    left: 35%;
+    background: #000;
+    text-align: center;
+    border-radius:10px;
+    width: 16%;
+    // height: 70%;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    @media @mobile{
+      left: 25%;
+      width: 50%;
+    }
+    .close-add-box{
+      position: absolute;
+      top: 50px;
+      right: 27px;
+      border: 1px solid;
+      border-radius: 100%;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    label{
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      margin: 0 30px;
+      cursor: pointer;
+      
+      img{
+        width: 40px;
+        border: 1px solid;
+        border-radius: 100%;
+        padding: 5px;
+      }
 
+      input {
+        display: none;
+      }
+    }
+  }
+ }
  .my-slider {
   width: 100%;
   margin: 10px auto;

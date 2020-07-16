@@ -31,6 +31,25 @@ const LobbyPosts = ({
           </>
         }
       </div>
+
+      <div className="image-option-box">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <div className="add-img-vid-box">
+          <div className="img-option">
+            <p>Edit </p>
+            <p>Valut </p>
+            <p>Delete </p>
+            <p>Share </p>
+            <p>Share On STRQ chat </p>
+            <p>Turn off critiques </p>
+            <p>Report </p>
+            <p>Unfave Gallery</p>
+            <p>Repost </p>
+            <p>MzFlash </p>
+          </div>
+        </div>
+
+      </div>
       <div className={
         activePost.id === post.id
           ? 'valut-icon show-valut'
