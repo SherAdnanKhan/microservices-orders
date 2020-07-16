@@ -17,8 +17,6 @@ import {
   readMessage,
   readAll,
   changeReadMessageStatus,
-  addMessage,
-  updateMessage
 } from '../../actions/conversationActions';
 import { toast } from 'react-toastify';
 
@@ -43,12 +41,7 @@ class ChatBox extends Component {
     this.props.getConversation(this.props.match.params.slug);
 
     socket.on('recieveMessage', (data) => {
-      if (data.message.user.id === currentUser.id) {
-        this.props.updateMessage(data.message);
-      } else {
-        this.props.updateConversation(data.message);
-      }
-
+      this.props.updateConversation(data.message);
       this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
 
       if (data.message.created_by === this.props.conversation.user.id) {
@@ -141,23 +134,7 @@ class ChatBox extends Component {
 
       this.setState({ message: '', image: '', video: '', document: '' });
 
-      const newData = {
-        ...this.props?.conversation?.messages?.data[0]
-      };
-
-      newData.id = this.props?.conversation?.messages?.total + 1;
-      newData.messages_logs = [];
-      newData.type = data.message_type;
-      newData.user = user;
-      newData.url = data.url;
-      newData.message = message;
-      newData.created_at = 'now';
-      newData.feel_color = user.feel_color;
-
       if (data.message || data.url) {
-        await this.props.addMessage(newData);
-        this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-
         socket.emit('sendMessage', data, getAuthToken(), message => {
           toast.error(message);
         });
@@ -430,18 +407,16 @@ class ChatBox extends Component {
               <img src={image} alt="" />
             </div>
           }
-
           {video &&
             <div className="video-preview">
               <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
               <video width="320" height="240" controls>
                 <source src={video} type="video/mp4" />
                 <source src={video} type="video/ogg" />
-                  Your browser does not support the video tag.
-            </video>
+                Your browser does not support the video tag.
+              </video>
             </div>
           }
-
           {document &&
             <div className="document-preview">
               <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
@@ -451,10 +426,7 @@ class ChatBox extends Component {
           }
           <div ref={ref => this.preview.current = ref}> </div>
         </div>
-
-
-        {
-          hidden &&
+        {hidden &&
           <div className="add-img-vid-box">
             <i
               className="fa fa-times close-add-box"
@@ -506,6 +478,4 @@ export default connect(
   readMessage,
   readAll,
   changeReadMessageStatus,
-  addMessage,
-  updateMessage
 })(withRouter(ChatBox));

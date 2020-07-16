@@ -8,8 +8,6 @@ import {
   READ_MESSAGE,
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
-  ADD_MESSAGE,
-  UPDATE_MESSAGE
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -68,26 +66,6 @@ export default (state = initialState, action) => {
         messages: {
           ...state.messages,
           data: [...state.messages.data, action.payload]
-        }
-      };
-    case ADD_MESSAGE:
-      return {
-        ...state,
-        messages: {
-          ...state.messages,
-          data: [...state.messages.data, action.payload]
-        }
-      };
-    case UPDATE_MESSAGE:
-      return {
-        ...state,
-        messages: {
-          ...state.messages,
-          data: state.messages.data.map(message => {
-            return (message.id === (state.messages.total + 1))
-              ? action.payload
-              : message
-          })
         }
       };
     case UPDATE_CONVERSATION_UNREAD_COUNT:
