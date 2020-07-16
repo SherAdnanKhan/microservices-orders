@@ -117,7 +117,10 @@ function App() {
 
   return (
     <SocketContext.Provider value={socket}>
-      <ToastContainer autoClose={5000} />
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={true}
+      />
       <Switch>
         <Route exact path='/login' component={LoginForm} />
         <Route exact path='/forgot' component={ForgotPasswordForm} />
