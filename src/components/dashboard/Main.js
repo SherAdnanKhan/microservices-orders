@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import Header from './layout/header';
 import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
-import Footer from './layout/footer';
 import { useLocation } from 'react-router-dom';
 import ChangeColor from './layout/changeColor';
 import { useDispatch, useSelector } from 'react-redux';
@@ -88,7 +87,6 @@ const Main = () => {
       <Suspense fallback={<div></div>}>
         <Component />
       </Suspense>
-      <Footer />
     </div>
   )
 }
