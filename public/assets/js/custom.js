@@ -336,3 +336,7 @@ $(document)
 //     'font-size': '44px'
 //   });
 // })
+
+$(document).on('click', '.fa-ellipsis-v', function () {
+  $(".add-img-vid-box").toggle();
+})
