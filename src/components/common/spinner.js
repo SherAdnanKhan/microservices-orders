@@ -5,7 +5,7 @@ const user = getCurrentUser();
 
 const Spinner = () => (
   <div className="spinner customSpinner ">
-    <div className={!user ? 'smallCube defaultColorForLogin' : 'smallCube'}>
+    <div className={!user ? 'smallCube defaultColorForLogin' : `smallCube ${user.feel_color}`}>
       <div className="procusmaller">
         <div className="scenesmaller">
           <div className="cubesmallerload">
