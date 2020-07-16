@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
 import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly } from "../../../actions/studioActions";
@@ -11,18 +11,35 @@ import StudioHeader from './studioHeader';
 import StudioFooter from './studioFooter';
 import GalleryModel from './galleryModel';
 import Spinner from '../../common/spinner';
+import queryString from 'query-string';
 
 const Studio = () => {
+  const galleryRef = useRef();
+
   const [showModel, setShowModel] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
 
   const { params: { slug } } = useRouteMatch();
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const {
     studio: { userStudio, loading },
     gallery: { gallery, myGalleries },
   } = useSelector(state => state);
+
+  useEffect(() => {
+    const { gallery } = queryString.parse(location.search);
+
+    if (userStudio) {
+      const foundGallery = userStudio.user.galleries.find(g => g.id === parseInt(gallery));
+      if (foundGallery) {
+        setActiveGallery(foundGallery);
+        dispatch(getGallery(foundGallery.slug));
+        galleryRef.current.scrollIntoView({ behavior: 'auto' })
+      }
+    }
+  }, [userStudio, dispatch, location]);
 
   useEffect(() => {
     dispatch(getUserStudio(slug));
@@ -90,12 +107,14 @@ const Studio = () => {
         userStudio={userStudio}
         slug={slug}
       />
-      <Gallery
-        galleries={userStudio && userStudio.user.galleries}
-        activeGallery={activeGallery}
-        onGalleryChange={handleGalleryChange}
-        color={userStudio && userStudio.user.feel_color}
-      />
+      <div ref={ref => galleryRef.current = ref}>
+        <Gallery
+          galleries={userStudio && userStudio.user.galleries}
+          activeGallery={activeGallery}
+          onGalleryChange={handleGalleryChange}
+          color={userStudio && userStudio.user.feel_color}
+        />
+      </div>
       <PostBar
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}

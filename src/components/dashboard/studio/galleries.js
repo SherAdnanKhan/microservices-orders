@@ -8,6 +8,10 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
               <div
+                ref={ref => activeGallery.id === gallery.id
+                  ? ref?.scrollIntoView({ behavior: 'auto' })
+                  : ''
+                }
                 key={index}
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
