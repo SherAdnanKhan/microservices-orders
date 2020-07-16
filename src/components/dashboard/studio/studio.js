@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
@@ -14,6 +14,8 @@ import Spinner from '../../common/spinner';
 import queryString from 'query-string';
 
 const Studio = () => {
+  const galleryRef = useRef();
+
   const [showModel, setShowModel] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
 
@@ -34,6 +36,7 @@ const Studio = () => {
       if (foundGallery) {
         setActiveGallery(foundGallery);
         dispatch(getGallery(foundGallery.slug));
+        galleryRef.current.scrollIntoView({ behavior: 'auto' })
       }
     }
   }, [userStudio, dispatch, location]);
@@ -104,12 +107,14 @@ const Studio = () => {
         userStudio={userStudio}
         slug={slug}
       />
-      <Gallery
-        galleries={userStudio && userStudio.user.galleries}
-        activeGallery={activeGallery}
-        onGalleryChange={handleGalleryChange}
-        color={userStudio && userStudio.user.feel_color}
-      />
+      <div ref={ref => galleryRef.current = ref}>
+        <Gallery
+          galleries={userStudio && userStudio.user.galleries}
+          activeGallery={activeGallery}
+          onGalleryChange={handleGalleryChange}
+          color={userStudio && userStudio.user.feel_color}
+        />
+      </div>
       <PostBar
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}

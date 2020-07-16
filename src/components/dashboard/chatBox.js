@@ -41,9 +41,9 @@ class ChatBox extends Component {
     const currentUser = getCurrentUser();
     this.props.getConversation(this.props.match.params.slug);
 
-    socket.on('recieveMessage', (data) => {
-      this.props.updateConversation(data.message);
-      this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    socket.on('recieveMessage', async (data) => {
+      await this.props.updateConversation(data.message);
+      this.bottomRef.current.scrollIntoView({ behavior: 'auto' });
 
       if (data.message.created_by === this.props.conversation.user.id) {
         if (data.message.feel_color !== this.props.conversation.user.feel_color) {
@@ -271,130 +271,127 @@ class ChatBox extends Component {
               </div>
             </div>
 
-            <div className="message-box">
-              {messages?.data?.map((data, index) => (
-                <div key={index}>
-                  {data.user.id === currentUser.id
-                    ? (
-                      <div
-                        className="message-row group"
-                      >
-                        <div className={`outgoing ${data.feel_color}`}>
-                          <div className="user-message">
-                            <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
-                              {data.messages_logs.length > 0
-                                ? data.messages_logs[0].status === 1
-                                  ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
-                                  : <img alt="" src="/assets/images/avatarblack.png" />
-                                : <img src="/assets/images/avatarblack.png" alt="" />
-                              }
-                            </div>
-                            <div className="text">
-                              {data.message}
-                              {data.type === 1 &&
-                                <div className="msgImg">
-                                  <a href={data.url} target="_blank" rel="noopener noreferrer">
-                                    <img
-                                      src={data.url}
-                                      alt=""
-                                    />
-                                  </a>
-                                </div>
-                              }
-                              {data.type === 2 &&
-                                <div className="msgVideo">
-                                  <video width="320" height="240" controls>
-                                    <source src={data.url} type="video/mp4" />
-                                    <source src={data.url} type="video/ogg" />
-                                    <source src={data.url} type="video/mov" />
-                                    <source src={data.url} type="video/mpeg" />
+            {messages?.data?.map((data, index) => (
+              <div key={index}>
+                {data.user.id === currentUser.id
+                  ? (
+                    <div
+                      className="message-row group"
+                    >
+                      <div className={`outgoing ${data.feel_color}`}>
+                        <div className="user-message">
+                          <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
+                            {data.messages_logs.length > 0
+                              ? data.messages_logs[0].status === 1
+                                ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
+                                : <img alt="" src="/assets/images/avatarblack.png" />
+                              : <img src="/assets/images/avatarblack.png" alt="" />
+                            }
+                          </div>
+                          <div className="text">
+                            {data.message}
+                            {data.type === 1 &&
+                              <div className="msgImg">
+                                <a href={data.url} target="_blank" rel="noopener noreferrer">
+                                  <img
+                                    src={data.url}
+                                    alt=""
+                                  />
+                                </a>
+                              </div>
+                            }
+                            {data.type === 2 &&
+                              <div className="msgVideo">
+                                <video width="320" height="240" controls>
+                                  <source src={data.url} type="video/mp4" />
+                                  <source src={data.url} type="video/ogg" />
+                                  <source src={data.url} type="video/mov" />
+                                  <source src={data.url} type="video/mpeg" />
                                       Your browser does not support the video tag.
                                     </video>
-                                </div>
-                              }
-                              {data.type === 3 &&
-                                <div className="msgDocument">
-                                  <i className="fas fa-file-alt"></i>
-                                  <a
-                                    href={data.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{ textDecoration: 'none' }}
-                                  >
-                                    Document
+                              </div>
+                            }
+                            {data.type === 3 &&
+                              <div className="msgDocument">
+                                <i className="fas fa-file-alt"></i>
+                                <a
+                                  href={data.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{ textDecoration: 'none' }}
+                                >
+                                  Document
                                     </a>
-                                </div>
-                              }
-                            </div>
+                              </div>
+                            }
                           </div>
-                          {data.created_at &&
-                            <p className='time'>
-                              {data.created_at === 'now'
-                                ? 'now'
-                                : `${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`
-                              }
-                            </p>
-                          }
-
                         </div>
+                        {data.created_at &&
+                          <p className='time'>
+                            {data.created_at === 'now'
+                              ? 'now'
+                              : `${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`
+                            }
+                          </p>
+                        }
                       </div>
-                    ) : (
-                      <div className="message-row group">
-                        <div className={`incoming ${data.feel_color}`}>
-                          <div className="user-message">
-                            <Avatar avatars={data.user.avatars} feelColor={data.feel_color} />
-                            <div className='text'>
-                              {data.message}
-                              {data.type === 1 &&
-                                <div className="msgImg">
-                                  <a href={data.url} target="_blank" rel="noopener noreferrer">
-                                    <img
-                                      src={data.url}
-                                      alt=""
-                                    />
-                                  </a>
-                                </div>
-                              }
-                              {data.type === 2 &&
-                                <div className="msgVideo">
-                                  <video width="320" height="240" controls>
-                                    <source src={data.url} type="video/mp4" />
-                                    <source src={data.url} type="video/ogg" />
-                                    <source src={data.url} type="video/mov" />
-                                    <source src={data.url} type="video/mpeg" />
+                    </div>
+                  ) : (
+                    <div className="message-row group">
+                      <div className={`incoming ${data.feel_color}`}>
+                        <div className="user-message">
+                          <Avatar avatars={data.user.avatars} feelColor={data.feel_color} />
+                          <div className='text'>
+                            {data.message}
+                            {data.type === 1 &&
+                              <div className="msgImg">
+                                <a href={data.url} target="_blank" rel="noopener noreferrer">
+                                  <img
+                                    src={data.url}
+                                    alt=""
+                                  />
+                                </a>
+                              </div>
+                            }
+                            {data.type === 2 &&
+                              <div className="msgVideo">
+                                <video width="320" height="240" controls>
+                                  <source src={data.url} type="video/mp4" />
+                                  <source src={data.url} type="video/ogg" />
+                                  <source src={data.url} type="video/mov" />
+                                  <source src={data.url} type="video/mpeg" />
                                       Your browser does not support the video tag.
                                     </video>
-                                </div>
-                              }
-                              {data.type === 3 &&
-                                <div className="msgDocument">
-                                  <i className="fas fa-file-alt"></i>
-                                  <a
-                                    href={data.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{ textDecoration: 'none' }}
-                                  >
-                                    Document
+                              </div>
+                            }
+                            {data.type === 3 &&
+                              <div className="msgDocument">
+                                <i className="fas fa-file-alt"></i>
+                                <a
+                                  href={data.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{ textDecoration: 'none' }}
+                                >
+                                  Document
                                     </a>
-                                </div>
-                              }
-                            </div>
+                              </div>
+                            }
                           </div>
-                          {data.created_at &&
-                            <p className='time'>
-                              {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
-                            </p>
-                          }
                         </div>
+                        {data.created_at &&
+                          <p className='time'>
+                            {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
+                          </p>
+                        }
                       </div>
-                    )
-                  }
-                  <div ref={ref => this.bottomRef.current = ref}></div>
-                </div>
-              ))
-              }
-            </div>
+                      <div ref={ref => this.bottomRef.current = ref}></div>
+                    </div>
+                  )
+                }
+              </div>
+            ))
+            }
           </div>
         </>
         {
@@ -406,11 +403,7 @@ class ChatBox extends Component {
             </div>
           </div>
         }
-        {this.state.typingText &&
-          <div className='typing-text'>
-            {this.state.typingText}
-          </div>
-        }
+
         <div className="message-input">
           <i
             className="fa fa-plus add-items-btn"
@@ -432,7 +425,11 @@ class ChatBox extends Component {
             Post
           </button>
         </div>
-
+        {this.state.typingText &&
+          <div className='typing-text'>
+            {this.state.typingText}
+          </div>
+        }
         <div className="preview">
           {image &&
             <div className="image-preview">
