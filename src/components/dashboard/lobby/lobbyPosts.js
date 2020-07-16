@@ -17,11 +17,11 @@ const LobbyPosts = ({
     <div className="post-page">
       <div className="post-head">
         <p className="usernames">
-          <Link to={`/dashboard/studio/${post.user.slug}`} >
+          <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
             {post.user.username}
           </Link>
         </p>
-        <Link to={`/dashboard/studio/${post.user.slug}`} >
+        <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
           <Avatar avatars={post.user.avatars && post.user.avatars} feelColor={post.user.feel_color} />
         </Link>
         {post.user.art &&
