@@ -96,6 +96,8 @@ const Lobby = () => {
   }
 
   const handleNcomm = post => {
+    dispatch(clearNcomm());
+
     if (post.id === activeNcomm.id) {
       setActiveNcomm('');
     } else {

@@ -4,7 +4,7 @@ import Avatar from './avatar';
 import { FAVES, SPRFVS, INVITE_ONLY } from '../../constants/privacyTypes';
 import Comment from '../dashboard/viewPost/comments';
 import Stroke from './stroke';
-import { strokePost, unstrokePost, getNcomm } from '../../actions/postAction';
+import { strokePost, unstrokePost, getNcomm, clearNcomm } from '../../actions/postAction';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageVideoSlider from './imageVideoSlider';
 
@@ -22,6 +22,8 @@ const Post = ({
   const [activeNcomm, setActiveNcomm] = useState('');
 
   const handleNcomm = post => {
+    dispatch(clearNcomm());
+
     if (post.id === activeNcomm.id) {
       setActiveNcomm('');
     } else {
@@ -111,7 +113,7 @@ const Post = ({
                             <div onClick={() => handleActivePost(post)}>
                               {post.post_type === 2
                                 ? (
-                                  <video width="320" height="240" controls>
+                                  <video controls onClick={e => e.preventDefault()}>
                                     <source src={post.image.path} type="video/mp4" />
                                     <source src={post.image.path} type="video/ogg" />
                                     Your browser does not support the video tag.
@@ -121,9 +123,17 @@ const Post = ({
                                 )}
                               <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
                             </div>
-                            {activeNcomm === post &&
+
+                            <div
+                              className={
+                                activeNcomm === post
+                                  ? 'ncomm-slider show'
+                                  : 'ncomm-slider'
+                              }
+                            >
                               <ImageVideoSlider ncomm={ncomm} />
-                            }
+                            </div>
+
                             <div className={
                               activePost.id === post.id
                                 ? 'lobby-icon lobby-icon-slide'
