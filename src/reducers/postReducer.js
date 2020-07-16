@@ -67,7 +67,6 @@ export default (state = initialState, action) => {
         ncomm: action.payload
       };
     case CLEAR_NCOMM:
-      console.log(action)
       return {
         ...state,
         ncomm: null

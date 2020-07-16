@@ -49,9 +49,18 @@ const LobbyPosts = ({
           )
         }
       </div>
-      {activeNcomm === post &&
+
+      <div
+        className={
+          activeNcomm === post
+            ? 'ncomm-slider show'
+            : 'ncomm-slider'
+        }
+      >
         <ImageVideoSlider ncomm={ncomm} />
-      }
+      </div>
+
+
       <div className="onearttitle">
         <p>{post && post.title}</p>
         <div className={
