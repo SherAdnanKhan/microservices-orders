@@ -29,7 +29,8 @@ class ChatBox extends Component {
     hidden: false,
     progress: 0,
     page: 1,
-    scrollHeight: ''
+    scrollHeight: '',
+    typingText: ''
   };
 
   preview = createRef();
@@ -55,20 +56,32 @@ class ChatBox extends Component {
           user_id: currentUser.id
         };
         socket.emit("onRead", data.message.id, user, data, getAuthToken(), () => { });
+        this.setState({ typingText: '' });
       }
     });
 
     socket.on('read', (data) => {
       if (data.message.user.id !== currentUser.id) {
-        console.log('i am reading');
+        console.log('i will update my status');
         console.log(data.user);
       }
+
       this.props.changeReadMessageStatus(data.message);
     });
 
     socket.on('readAll', (data) => {
       if (data.user.id !== currentUser.id) {
         this.props.readAll(data);
+      }
+    });
+
+    socket.on('typing', (data) => {
+      if (data.user.id !== currentUser.id) {
+        if (data.message) {
+          this.setState({ typingText: `${data.user.username} is typing...` });
+        } else {
+          this.setState({ typingText: '' });
+        }
       }
     });
   }
@@ -174,6 +187,21 @@ class ChatBox extends Component {
           this.setState({ progress: 0 });
         })
     }
+  }
+
+  handleChange = ({ target: input }) => {
+    this.setState({ message: input.value });
+
+    const { conversation } = this.props.conversation;
+    const user = getCurrentUser();
+
+    const data = {
+      conversation_id: conversation?.id,
+      message: input.value,
+      user
+    };
+
+    socket.emit('onType', data);
   }
 
   handleScroll = () => {
@@ -378,6 +406,11 @@ class ChatBox extends Component {
             </div>
           </div>
         }
+        {this.state.typingText &&
+          <div className='typing-text'>
+            {this.state.typingText}
+          </div>
+        }
         <div className="message-input">
           <i
             className="fa fa-plus add-items-btn"
@@ -389,7 +422,7 @@ class ChatBox extends Component {
             type="text"
             name="message"
             value={message}
-            onChange={e => this.setState({ message: e.target.value })}
+            onChange={this.handleChange}
             onKeyUp={this.handleEnter}
           />
           <button
