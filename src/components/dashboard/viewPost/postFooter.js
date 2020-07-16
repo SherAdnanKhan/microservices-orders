@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNcomm, clearNcomm } from "../../../actions/postAction";
 import ShowMoreText from 'react-show-more-text';
@@ -7,12 +7,20 @@ import { completeFormattedDate } from "../../../utils/helperFunctions";
 
 const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const dispatch = useDispatch();
+  const [hasNcomm, setHasNcomm] = useState(false);
+
   const {
     postView: { ncomm },
   } = useSelector(state => state);
 
   const handleNcomm = post => {
-    dispatch(getNcomm(post.post.slug));
+    if (hasNcomm) {
+      setHasNcomm(false);
+      dispatch(clearNcomm());
+    } else {
+      setHasNcomm(true);
+      dispatch(getNcomm(post.post.slug));
+    }
   };
 
   useEffect(() => {
@@ -27,8 +35,15 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
 
   return (
     <div className="post-footer">
-
-      <ImageVideoSlider ncomm={ncomm} />
+      <div
+        className={
+          hasNcomm
+            ? 'ncomm-slider show'
+            : 'ncomm-slider'
+        }
+      >
+        <ImageVideoSlider ncomm={ncomm} />
+      </div>
 
       {post && post.post && post.post.title &&
         <h3 className="post-title">{post.post.title}</h3>
