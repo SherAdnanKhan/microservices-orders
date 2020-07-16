@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
+import { useHistory } from 'react-router-dom';
 
 const ExhibitionModel = ({ onSave }) => {
   const [croppedImage, setCroppedImage] = useState(null);
@@ -9,6 +10,8 @@ const ExhibitionModel = ({ onSave }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [toggle, setToggle] = useState(false);
   const [isValid, setIsValid] = useState(false);
+
+  const history = useHistory();
 
   const handleCompleteCrop = blob => {
     setCroppedImage(blob);
@@ -63,8 +66,13 @@ const ExhibitionModel = ({ onSave }) => {
           croppedImage={croppedImage}
         />
         <div className="Exhibit-head">
-          <div class="left-caret">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          <div className="left-caret">
+            <i
+              className="fa fa-angle-left clickable"
+              aria-hidden="true"
+              onClick={() => history.goBack()}
+            >
+            </i>
           </div>
 
           <h2>Add an Exhibit</h2>
