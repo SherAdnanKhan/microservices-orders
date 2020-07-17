@@ -12,7 +12,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
                 <img
-                  src={gallery.image ? gallery.image.path : '/assets/images/galleryicon.png'}
+                  src={gallery?.image ? gallery?.image?.path : '/assets/images/galleryicon.png'}
                   alt=""
                 />
               </div>
@@ -33,12 +33,12 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                   />
                 </div>
                 <img
-                  src={gallery.image ? gallery.image.path : '/assets/images/galleryicon.png'}
+                  src={gallery?.image ? gallery?.image?.path : '/assets/images/galleryicon.png'}
                   alt=""
                 />
               </div>
             ))}
-            <h1 onClick={() => onModelOpen('')} className="clickable"> <img src='/assets/images/add.png' alt=""/> </h1>
+            <h1 onClick={() => onModelOpen('')} className="clickable"> <img src='/assets/images/add.png' alt="" /> </h1>
           </div>
         </div>
       }

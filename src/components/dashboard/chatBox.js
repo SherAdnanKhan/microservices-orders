@@ -385,13 +385,14 @@ class ChatBox extends Component {
                           </p>
                         }
                       </div>
-                      <div ref={ref => this.bottomRef.current = ref}></div>
+
                     </div>
                   )
                 }
               </div>
             ))
             }
+            <div ref={ref => this.bottomRef.current = ref}></div>
           </div>
         </>
         {
