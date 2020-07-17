@@ -35,15 +35,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
 
   return (
     <div className="post-footer">
-      <div
-        className={
-          hasNcomm
-            ? 'ncomm-slider show'
-            : 'ncomm-slider'
-        }
-      >
-        <ImageVideoSlider ncomm={ncomm} />
-      </div>
+      <ImageVideoSlider ncomm={ncomm} />
 
       {post && post.post && post.post.title &&
         <h3 className="post-title">{post.post.title}</h3>
