@@ -3,7 +3,8 @@ import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRecommendedGalleries, unfavRecommendedGallery, favRecommendedGallery } from '../../actions/galleryActions';
 import { useHistory } from 'react-router-dom';
-
+import HorizontalSlider from '../common/horizontalSlider';
+import Avatar from '../common/avatar';
 
 const StartFaves = () => {
   const history = useHistory();
@@ -42,49 +43,54 @@ const StartFaves = () => {
           {'>>'}
         </h1>
       </div>
-      {recommendedGalleries &&
-        recommendedGalleries.map((user, index) => (
-          <div key={index} className="f-image-box">
-            <div className="f-header">
-              <h4>{user.username}</h4>
-              <h4>{user.art_id && user.art.name}</h4>
-            </div>
-            <div className="f-gallery-box">
-
-              <div className="f-img-box">
-                <div className="main-img">
-                  <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" />
+      <HorizontalSlider slidesToShow={1} slidesToScroll={1}>
+        {recommendedGalleries &&
+          recommendedGalleries.map((user, index) => (
+            <div key={index} className="f-image-box">
+              <div className="f-header">
+                <h4>{user.username}</h4>
+                <div className='avatar'>
+                  <Avatar avatars={user.avatars} feelColor={user.feel_color} />
                 </div>
-                <div className="other-img">
-                  {user.galleries[0].posts.map((post, in_key) => (
-                    <img key={in_key} src={post.image.path} alt="avatar" />
-                  ))}
-                </div>
+                <h4>{user.art_id && user.art.name}</h4>
               </div>
-              <h2>{user.galleries[0].title}</h2>
+              <div className="f-gallery-box">
+
+                <div className="f-img-box">
+                  <div className="main-img">
+                    <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" />
+                  </div>
+                  <div className="other-img">
+                    {user.galleries[0].posts.map((post, in_key) => (
+                      <img key={in_key} src={post.image.path} alt="avatar" />
+                    ))}
+                  </div>
+                </div>
+                <h2>{user.galleries[0].title}</h2>
+              </div>
+              <div className="f-footer">
+                {!user.galleries[0].has_faved
+                  ? (
+                    <img
+                      src="/assets/images/catfave.png"
+                      className="clickable"
+                      onClick={() => handleLike(user, user.galleries[0])}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      src="/assets/images/catfaveon.png"
+                      className="clickable"
+                      onClick={() => handleLike(user, user.galleries[0])}
+                      alt=""
+                    />
+                  )
+                }
+                <h3 className="f-footer-text">ADD TO FAV'S</h3>
+              </div>
             </div>
-            <div className="f-footer">
-              {!user.galleries[0].has_faved
-                ? (
-                  <img
-                    src="/assets/images/catfave.png"
-                    className="clickable"
-                    onClick={() => handleLike(user, user.galleries[0])}
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    src="/assets/images/catfaveon.png"
-                    className="clickable"
-                    onClick={() => handleLike(user, user.galleries[0])}
-                    alt=""
-                  />
-                )
-              }
-              <h3 className="f-footer-text">ADD TO FAV'S</h3>
-            </div>
-          </div>
-        ))}
+          ))}
+      </HorizontalSlider>
 
     </div>
   );
