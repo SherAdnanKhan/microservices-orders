@@ -28,7 +28,7 @@ const ViewProfile = ({ myStudio }) => {
           {myStudio &&
             <div className="procu">
               <div className="editTool Edit" onClick={() => history.push('/dashboard/my-studio/profile')}>
-                <img src="/assets/images/paintbrush.png" alt="" className="clickable" />
+                <img src="/assets/images/paintbrush.png" alt="" className="clickable profile-brush" />
               </div>
               <ProfileCube avatars={myStudio.user.avatars} />
             </div>

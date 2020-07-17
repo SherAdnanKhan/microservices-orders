@@ -18,7 +18,7 @@ const FaveSection = ({
     <div className="col-6 box-2 tab">
       <div className="row">
         <div
-          className={`col-3 hide-mobile ${activeTab === 1 && 'active'}`}
+          className={`col-3 hide-mobile fav-tab-1 ${activeTab === 1 && 'active'}`}
           onClick={() => onTabChange(1)}
         >
           <button className="tablinks">
@@ -53,7 +53,7 @@ const FaveSection = ({
           </button>
         </div>
         <div
-          className={`col-3 mobile-view ${activeTab === 2 && 'active'}`}
+          className={`col-3 mobile-view fav-tab-2 ${activeTab === 2 && 'active'}`}
           onClick={() => onTabChange(2)}
         >
           <button className="tablinks">
@@ -88,8 +88,11 @@ const FaveSection = ({
           </button>
         </div>
         <div
-          className={`col-3 mobile-view ${activeTab === 3 && 'active'}`}
-          onClick={() => onTabChange(3)}
+          className={`col-3 mobile-view fav-tab-3 ${activeTab === 3 && 'active'}`}
+          onClick={(e) => {
+            e.preventDefault();
+            onTabChange(3)
+          }}
         >
           <button className="tablinks">
             {((activeUser && activeUserList !== 3) || !activeUser) &&
@@ -123,7 +126,7 @@ const FaveSection = ({
           </button>
         </div>
         <div
-          className={`col-3 mobile-view ${activeTab === 4 && 'active'}`}
+          className={`col-3 mobile-view fav-tab-4 ${activeTab === 4 && 'active'}`}
           onClick={() => onTabChange(4)}
         >
           <button className="tablinks">

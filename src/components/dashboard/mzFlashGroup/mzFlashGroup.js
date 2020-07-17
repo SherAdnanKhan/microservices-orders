@@ -6,6 +6,8 @@ import Spinner from '../../common/spinner';
 import UserSection from './userSection';
 import FaveSection from './faveSection';
 import FeedSection from './feedSection';
+import $ from 'jquery';
+
 import {
   getCollectiveFeeds,
   getMyFeeds,
@@ -49,6 +51,22 @@ const MzFlashGroup = () => {
     dispatch(getMyFavesFeeds());
     dispatch(getMySprfvsAndFavesFeeds());
   }, [dispatch]);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 769px)').matches) {
+        $('.my-slider-horizontal').hide();
+      }
+
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        if (activeTab === 2) {
+          $('.my-slider-horizontal').show();
+        } else {
+          $('.my-slider-horizontal').hide();
+        }
+      }
+    })
+  });
 
   const handleEnter = (e, feedId, comment, user) => {
     if (e.keyCode === 13 && comments[comment]) {
@@ -102,10 +120,19 @@ const MzFlashGroup = () => {
     dispatch(getUserFeeds(user.slug));
   };
 
-  const handleTabChange = tab => {
-    setActiveTab(tab);
-    setActiveUser('');
-    setActiveUserList(tab);
+  const handleTabChange = async tab => {
+    await setActiveTab(tab);
+    await setActiveUser('');
+    await setActiveUserList(tab);
+
+
+    if (window.matchMedia('(max-width: 856px)').matches) {
+      if (tab === 2) {
+        $('.my-slider-horizontal').show();
+      } else {
+        $('.my-slider-horizontal').hide();
+      }
+    }
   };
 
   return (

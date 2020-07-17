@@ -75,7 +75,7 @@ const ImageVideoSlider = ({ ncomm }) => {
             <div
               className="tile clickable"
               key={index}
-              onClick={() => history.push(`/dashboard/studio/${post.user.slug}`)}
+              onClick={() => history.push(`/dashboard/viewpost/${post.slug}`)}
             >
               {post.post_type <= 1 &&
                 <img
