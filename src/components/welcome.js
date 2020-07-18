@@ -26,9 +26,9 @@ const Welcome = ({ user }) => {
       </div>
 
       <div className="welcomeText">
-        Hi Welcome
-        <br />
-        {user.username}
+        Welcome <strong>{user.username},</strong>
+	  <br/>
+	 How do you Feel?
       </div>
 
       <div className="happy">
