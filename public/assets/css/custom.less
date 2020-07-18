@@ -2456,6 +2456,9 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10;
   background: #00000098;
   color: #fff;
@@ -2467,48 +2470,74 @@ img {
   }
   .happy {
     position: absolute;
-    left: 25%;
-    top: 18vh;
+    transform: rotate(225deg) translate(@feelDist) rotate(-225deg);
     text-align: center;
+    @media @landscape {
+    transform: rotate(225deg) translate(@feelDistWide) rotate(-225deg);
+   }
+
   }
   .confused {
     position: absolute;
-    right: 25%;
-    top: 18vh;
+    transform: rotate(315deg) translate(@feelDist) rotate(-315deg);
+   
     text-align: center;
+   @media @landscape {
+    transform: rotate(315deg) translate(@feelDistWide) rotate(-315deg);
+   }
   }
   .excited {
     position: absolute;
-    left: 5%;
-    top: 50vh;
-    text-align: center;
+    transform: rotate(180deg) translate(@feelDist) rotate(-180deg);
+   
+    text-align: center; @media @landscape {
+    transform: rotate(180deg) translate(@feelDistWide) rotate(-180deg);
+   }
+
   }
   .serene {
     position: absolute;
-    right: 5%;
-    top: 50vh;
-    text-align: center;
+    transform: rotate(0deg) translate(@feelDist) rotate(-0deg);
+   
+    text-align: center; @media @landscape {
+    transform: rotate(0deg) translate(@feelDistWide) rotate(-0deg);
+   }
+
   }
   .angry {
     position: absolute;
-    left: 25%;
-    top: 70vh;
-    text-align: center;
+    transform: rotate(135deg) translate(@feelDist) rotate(-135deg);
+   
+    text-align: center; @media @landscape {
+    transform: rotate(135deg) translate(@feelDistWide) rotate(-135deg);
+   }
+
   }
   .sad {
     position: absolute;
-    right: 25%;
-    top: 70vh;
-    text-align: center;
+    transform: rotate(45deg) translate(@feelDist) rotate(-45deg);
+   
+    text-align: center; @media @landscape {
+    transform: rotate(45deg) translate(@feelDistWide) rotate(-45deg);
+   }
+
   }
   .inspired {
     position: absolute;
-    right: calc(50% - 25px);
-    top: 90vh;
+transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
+   
     text-align: center;
+    @media @landscape {
+    transform: rotate(90deg) translate(@feelDistWide) rotate(-90deg);
+   }
+
   }
   img {
-    max-width: 50px;
+	  
+    max-width: 22vw;
+    @media @landscape {
+    max-width:22vh;
+    }
     display: block;
     margin: 0 auto;
   }
