@@ -32,23 +32,23 @@ const StudioDetail = ({ userStudio, slug }) => {
     return false;
   };
 
-  const hasAllowedFaves = () => {
-    if (userStudio) {
-      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faves');
-      return (found && found.is_allowed === 1)
-        ? history.push('/dashboard/studio/fave')
-        : toast('You are not allowed to view this');
-    }
-  };
+  // const hasAllowedFaves = () => {
+  //   if (userStudio) {
+  //     const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faves');
+  //     return (found && found.is_allowed === 1)
+  //       ? history.push('/dashboard/studio/fave')
+  //       : toast('You are not allowed to view this');
+  //   }
+  // };
 
-  const hasAllowedFavedBy = () => {
-    if (userStudio) {
-      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faved By');
-      return (found && found.is_allowed === 1)
-        ? history.push('/dashboard/studio/fave-by')
-        : toast('You are not allowed to view this');
-    }
-  };
+  // const hasAllowedFavedBy = () => {
+  //   if (userStudio) {
+  //     const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faved By');
+  //     return (found && found.is_allowed === 1)
+  //       ? history.push('/dashboard/studio/fave-by')
+  //       : toast('You are not allowed to view this');
+  //   }
+  // };
 
   return (
     <>
@@ -105,7 +105,7 @@ const StudioDetail = ({ userStudio, slug }) => {
               </label>
             }
             <div className="stuion-faved-btn">
-              <Link to="#" onClick={e => {
+              {/* <Link to="#" onClick={e => {
                 e.preventDefault();
                 hasAllowedFavedBy();
               }}>
@@ -114,14 +114,14 @@ const StudioDetail = ({ userStudio, slug }) => {
                   Faved by
                 </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
-              </Link>
+              </Link> */}
               <Link to={`/dashboard/studio/fave-galleries/${userStudio?.user?.id}`}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/fave_icon.png" alt="" />
-                  Fave galleries
+                  Faves
                 </div>
               </Link>
-              <Link to="#" onClick={e => {
+              {/* <Link to="#" onClick={e => {
                 e.preventDefault();
                 hasAllowedFaves();
               }}>
@@ -130,7 +130,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                 Faved
                 </div>
                 {userStudio && <span>{userStudio.favs_count}</span>}
-              </Link>
+              </Link> */}
             </div>
           </form>
         </div>

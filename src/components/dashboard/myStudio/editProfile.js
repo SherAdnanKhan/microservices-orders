@@ -42,7 +42,7 @@ const EditProfile = ({ myStudio }) => {
               <Link to={`/dashboard/my-studio/fave-galleries/${myStudio?.user?.id}`}>
                 <div className="faved-by-btn">
                   <img src="/assets/images/fave_icon.png" alt="" />
-                  Fave galleries
+                  Faves
               </div>
               </Link>
               {/* <Link to="/dashboard/my-studio/fave">

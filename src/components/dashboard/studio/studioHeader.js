@@ -11,6 +11,7 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
       </div>
       {userStudio && <p>{userStudio.user.username}</p>}
       <div className="actions">
+        SPRFVS
         <img
           src={userStudio?.is_sprfvs
             ? '/assets/images/sprfvs_full.png'
