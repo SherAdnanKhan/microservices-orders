@@ -93,7 +93,10 @@ const Comment = ({ post }) => {
       <div className="comments-box">
         <div className="comment-bar">
           <div className="commnent-img">
-            <img src="/assets/images/gray.png" alt="" />
+            {post?.image
+              ? <img src={post.image.path} alt="" />
+              : <img src="/assets/images/gray.png" alt="" />
+            }
             <i className="fa fa-times close-comment"></i>
           </div>
           <div className="comment-sec">
