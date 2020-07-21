@@ -107,8 +107,11 @@ const RegisterForm = () => {
   const handleChange = ({ target: input }) => {
     if (input.type === 'file' && input.files[0]) {
       setData({ ...data, [input.name]: input.files[0] });
+      setErrors({ ...errors, avatar: '' });
+
       setImage(URL.createObjectURL(input.files[0]));
       setToggle(true);
+
     } else {
       setData({ ...data, [input.name]: input.value });
     }
