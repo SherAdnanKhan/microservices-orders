@@ -53,7 +53,8 @@ const MzFlashGroup = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+
+    const handleResize = () => {
       if (window.matchMedia('(min-width: 769px)').matches) {
         $('.my-slider-horizontal').hide();
       }
@@ -65,7 +66,13 @@ const MzFlashGroup = () => {
           $('.my-slider-horizontal').hide();
         }
       }
-    })
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
   });
 
   const handleEnter = (e, feedId, comment, user) => {

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
+  const [focused, setFocused] = useState(true);
+
   return (
     <div className="wrapper">
       {galleries &&
@@ -8,10 +10,15 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
               <div
-                ref={ref => activeGallery.id === gallery.id
-                  ? ref?.scrollIntoView({ behavior: 'auto' })
-                  : ''
-                }
+                ref={ref => {
+                  if ((activeGallery.id === gallery.id && focused)) {
+                    setFocused(false);
+                    return ref?.scrollIntoView({ behavior: 'auto' });
+                  } else {
+                    return ''
+                  }
+                }}
+
                 key={index}
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
@@ -24,7 +31,7 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
           </div>
         </div>
       }
-    </div>
+    </div >
   );
 };
 
