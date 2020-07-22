@@ -35,6 +35,13 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
 
   return (
     <div className="post-footer">
+      <div className="galleryPeek">
+        <img
+          className="galleryPeek_img"
+          src="/assets/images/gallerypeek.png"
+          alt=""
+        />
+      </div>
       <ImageVideoSlider ncomm={ncomm} />
 
       {post && post.post && post.post.title &&

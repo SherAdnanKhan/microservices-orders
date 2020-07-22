@@ -3295,6 +3295,7 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
       width: 23.8vw;
       @media @mobile{
         width: 22vw;
+        height: 94px;
       }
       // flex-basis: 25%;
       // border: 1px solid rgba(61,61,61,.7);
@@ -4824,6 +4825,17 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
   align-items: center;
   margin: 25px auto;
   background-color: black;
+  .galleryPeek {
+    width: 90%;
+    height: 50px;
+    cursor: pointer;
+    img{
+      width:50px;
+    }
+  @media @mobile {
+    display: none;
+  }
+  }
 
   .post-date {
     &.gold {      
@@ -5046,6 +5058,7 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
     width: 100%;
     margin: 0 auto;
     border: 2px solid rgba(128,128,128,.5);
+    opacity: 0.7;
   }
 
   .commnent-img{
