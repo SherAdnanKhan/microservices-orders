@@ -115,3 +115,4 @@ export const UNSTROKE_FEED = 'UNSTROKE_FEED';
 
 //color
 export const CHANGE_COLOR = 'CHANGE_COLOR';
+export const GET_ALL_FEEL_COLORS = 'GET_ALL_FEEL_COLORS';
