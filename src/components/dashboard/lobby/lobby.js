@@ -16,7 +16,7 @@ const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const {
-    user: { favouriteUsers, favouriteGalleries, unreadCount },
+    user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
     postView: { ncomm }
   } = useSelector(state => state);
@@ -163,26 +163,20 @@ const Lobby = () => {
           </HorizontalSlider>
         </div>
         <div className="col-6 section-2 box-2">
-          {favouriteGalleries &&
-            favouriteGalleries?.fav_galleries?.map((gallery, index) => (
-              <div key={index}>
-                {gallery.posts.map((post, post_index) => (
-                  <div key={post_index}>
-                    <LobbyPosts
-                      onClickNcomm={handleNcomm}
-                      onActivePost={handleActivePost}
-                      onStrokePost={handleStrokePost}
-                      onUnstrokePost={handleUnstrokePost}
-                      post={post}
-                      ncomm={ncomm}
-                      activeNcomm={activeNcomm}
-                      activePost={activePost}
-                    />
-                  </div>
-                ))
-                }
-              </div>
-            ))
+          {favouritePosts?.map((post, index) => (
+            <div key={index}>
+              <LobbyPosts
+                onClickNcomm={handleNcomm}
+                onActivePost={handleActivePost}
+                onStrokePost={handleStrokePost}
+                onUnstrokePost={handleUnstrokePost}
+                post={post}
+                ncomm={ncomm}
+                activeNcomm={activeNcomm}
+                activePost={activePost}
+              />
+            </div>
+          ))
           }
         </div>
         <div className="section-3 box-3 col4">

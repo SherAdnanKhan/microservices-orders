@@ -74,8 +74,8 @@ const Main = () => {
     }
   });
 
-  const handleColorChange = color => {
-    dispatch(changeFeelColor(color));
+  const handleColorChange = colorId => {
+    dispatch(changeFeelColor(colorId));
   };
 
   return (

@@ -34,7 +34,7 @@ import {
 } from './constants/keys';
 
 if (getCurrentUser()) {
-  store.dispatch(updateFeelColor(getCurrentUser().feel_color));
+  store.dispatch(updateFeelColor(getCurrentUser().feel.color));
 }
 
 function App() {
@@ -56,9 +56,9 @@ function App() {
       socket.emit('joinUser', currentUser);
 
       socket.on('notifyColrChange', (user) => {
-        console.log(user.feel_color)
+        console.log(user)
         localStorage.setItem(userKey, JSON.stringify(user));
-        dispatch(updateFeelColor(user.feel_color))
+        dispatch(updateFeelColor(user.feel.color))
       });
 
       socket.on('reciveUserNotifications', (data, type) => {
