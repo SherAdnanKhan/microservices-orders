@@ -20,7 +20,7 @@ import {
 
 const initialState = {
   favouriteUsers: null,
-  favouriteGalleries: null,
+  favouritePosts: null,
   unreadCount: 0,
   users: null,
   faveUsers: null,
@@ -37,82 +37,49 @@ export default (state = initialState, action) => {
       return {
         ...state,
         favouriteUsers: action.payload.all_faved_users,
-        favouriteGalleries: action.payload.user_with_faved_galleries,
+        favouritePosts: action.payload.faved_galleries_posts,
         unreadCount: action.payload.user_with_count_unread
       };
     case STROKE_POST:
       return {
         ...state,
-        favouriteGalleries: {
-          ...state.favouriteGalleries,
-          fav_galleries: state?.favouriteGalleries?.fav_galleries?.map(gallery => {
-            if (gallery.id === action.payload.galleryId) {
-              return {
-                ...gallery,
-                posts: gallery?.posts?.map(post => {
-                  if (post.id === action.payload.postId) {
-                    return {
-                      ...post,
-                      has_stroke: [1],
-                      stroke_users: [...post.stroke_users, { id: 0 }]
-                    }
-                  }
-                  return post
-                })
-              }
+        favouritePosts: state?.favouritePosts?.map(post => {
+          if (post.id === action.payload.postId) {
+            return {
+              ...post,
+              has_stroke: [1],
+              stroke_users: [...post.stroke_users, { id: 0 }]
             }
-            return gallery
-          })
-        }
+          }
+          return post
+        })
       };
     case UNSTROKE_POST:
       return {
         ...state,
-        favouriteGalleries: {
-          ...state.favouriteGalleries,
-          fav_galleries: state?.favouriteGalleries?.fav_galleries?.map(gallery => {
-            if (gallery.id === action.payload.galleryId) {
-              return {
-                ...gallery,
-                posts: gallery?.posts?.map(post => {
-                  if (post.id === action.payload.postId) {
-                    return {
-                      ...post,
-                      has_stroke: [],
-                      stroke_users: post.stroke_users.filter(user => user.id !== 0)
-                    }
-                  }
-                  return post
-                })
-              }
+        favouritePosts: state?.favouritePosts?.map(post => {
+          if (post.id === action.payload.postId) {
+            return {
+              ...post,
+              has_stroke: [],
+              stroke_users: post.stroke_users.filter((user, index) => index !== post.stroke_users.length - 1)
             }
-            return gallery
-          })
-        }
+          }
+          return post
+        })
       };
     case ADD_POST_COMMENT:
       return {
         ...state,
-        favouriteGalleries: {
-          ...state.favouriteGalleries,
-          fav_galleries: state?.favouriteGalleries?.fav_galleries?.map(gallery => {
-            if (gallery.id === action.payload.galleryId) {
-              return {
-                ...gallery,
-                posts: gallery.posts.map(post => {
-                  if (post.id === action.payload.postId) {
-                    return {
-                      ...post,
-                      comments: [...post.comments, action.payload.comment]
-                    }
-                  }
-                  return post
-                })
-              }
+        favouritePosts: state?.favouritePosts?.map(post => {
+          if (post.id === action.payload.postId) {
+            return {
+              ...post,
+              comments: [...post.comments, action.payload.comment]
             }
-            return gallery
-          })
-        }
+          }
+          return post
+        })
       };
     case GET_ALL_USERS:
       return {
