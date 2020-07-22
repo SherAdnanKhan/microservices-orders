@@ -96,44 +96,42 @@ const Profile = () => {
           <div className="wrapper">
             <div className="edit-profile">
               <div className="scr-inner">
-                <div className="item-box">
+                <div className="item-box" onClick={() => handleImageSelect(images[0])}>
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
                     src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
                     alt=""
-                    onClick={() => handleImageSelect(images[0])}
+                    
                   />
                 </div>
-                <div className="item-box">
+                <div className="item-box"  onClick={() => handleImageSelect(images[1])}>
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
                     src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
                     alt=""
-                    onClick={() => handleImageSelect(images[1])}
+                   
                   />
                 </div>
-                <div className="item-box">
+                <div className="item-box"  onClick={() => handleImageSelect(images[2])}>
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
                     src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
                     alt=""
-                    onClick={() => handleImageSelect(images[2])}
                   />
                 </div>
-                <div className="item-box">
+                <div className="item-box"  onClick={() => handleImageSelect(images[3])}>
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
                     src={images[3] ? images[3].path : "/assets/images/avataricon.png"}
                     alt=""
-                    onClick={() => handleImageSelect(images[3])}
                   />
                 </div>
               </div>
@@ -201,11 +199,12 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-
+            {!toggle &&  //if toggle is not opened
               <div className={selectedImage.avatar ? "actions" : "actions hide"}>
-                <button onClick={handleSubmit} className="clickable">Save</button>
-                <button className="clickable" onClick={() => window.location.reload()}>Try again</button>
-              </div>
+              <button onClick={handleSubmit} className="clickable">Save</button>
+              <button className="clickable" onClick={() => window.location.reload()}>Try again</button>
+            </div>
+            }         
             </>
           </div>
         </div>
