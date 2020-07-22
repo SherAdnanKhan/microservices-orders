@@ -685,7 +685,7 @@ const FaveSection = ({
                         {formatTime(feed.parent.created_at)}
                       </div>
                       <div className="col-12 user-name-parent">
-                        <p classNmae="usernames">{feed.parent.user.username}</p>
+                        <p className="usernames">{feed.parent.user.username}</p>
                         <p className="submit-text"> {feed.parent.feed}</p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
