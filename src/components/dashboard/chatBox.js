@@ -272,6 +272,7 @@ class ChatBox extends Component {
             </div>
 
             {messages?.data?.map((data, index) => (
+                
               <div key={index}>
                 {data.user.id === currentUser.id
                   ? (
