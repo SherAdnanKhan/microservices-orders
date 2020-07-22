@@ -2892,6 +2892,11 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
      top: 33%;
      left: 4%;
    }
+   p {
+    text-align: center !important;
+    position: unset !important;
+    margin-right: unset !important;
+   }
    .heart {
      position: absolute;
      width: 70px;
@@ -3115,6 +3120,7 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
      top: 33%;
      left: 4%;
    }
+  
    .heart {
      position: absolute;
      width: 70px;
@@ -3642,7 +3648,7 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
 }
 .edit-screen{
   width: 100%;
-    margin: 50px 0;
+  margin: 50px 0;
     // display: block;
     // overflow: auto;
   // width: 100%;
@@ -3656,14 +3662,18 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
     .item-box{
       border: 1px solid rgba(61, 61, 61, 0.7);
     // opacity: 0.6;
-    display: inline-block;
-    background: #2d2d2d;
-    position: relative;
-    transition: all ease-in-out 0.3s;
-    cursor: pointer;
-    height: 290px;
-    overflow: hidden;
-    width: 325px;
+      display: inline-block;
+      background: #2d2d2d;
+      position: relative;
+      transition: all ease-in-out 0.3s;
+      cursor: pointer;
+      height: 290px;
+      overflow: hidden;
+      width: 23.8vw;
+      @media @mobile{
+        width: 22vw;
+        height: 94px;
+      }
       // flex-basis: 24%;
       // border: 1px solid rgba(61, 61, 61, 0.7);
       // opacity: 0.6;
@@ -6108,7 +6118,14 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
     z-index: 10000;
     border: 2px solid #444;
     background: black;
-
+    @media @mobile {
+      height: 54%;
+    }
+    form{
+      @media @mobile {
+        margin-top:40px;
+      }
+    }
     .fa-window-close {
       position: absolute;
       top: 2%;
@@ -6117,8 +6134,8 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
       font-size: large;
       cursor: pointer;
     }
-
     .actions {
+      padding: 0px !important;
       button {
         display: block;
         width: 50%;
@@ -6147,9 +6164,12 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
       margin: 25px auto;
       position: relative;
       overflow: hidden;
+      @media @mobile {
+        width: 85%;
+      }
       .update-pic{
         width: 80%;
-        border: 2px solid;
+        // border: 2px solid;
       }
       
       .add-nag-icon{
@@ -6509,7 +6529,8 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
     }
   }
   .submit-text{
-    text-align: center;
+    // text-align: center;
+    margin-left: 15px;
   }
   .cube-fave{
     display: flex;
@@ -7434,7 +7455,7 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
   margin-left:15px;
 }
 .submit-text{
-  text-align: center;
+  margin-left: 15px;
 }
 .view-comment a{
   color:white;
@@ -7489,7 +7510,6 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
     margin: auto;
     border: 2px solid #444;
     background: black;
-
     .actions {
       button {
         display: block;
