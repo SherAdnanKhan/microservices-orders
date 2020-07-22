@@ -192,7 +192,7 @@ const Post = ({
                       {isSprFvs > 0 && 'Requested'}
                       {isSprFvs === 0 && 'Request'}
                     </button>
-                    <div> Only for SprFvs </div>
+                    <div> Only for SprFav </div>
                   </div>
                 )}
               {(activeGallery?.privacy?.privacy_type_id === INVITE_ONLY && !isAllowed())
