@@ -55,26 +55,13 @@ const StudioDetail = ({ userStudio, slug }) => {
       <div className="wrapper">
         <div className="studio-Screen">
           <div className="studio-Head">
-            <div>
-              <img
-                className="clickable"
-                src="/assets/images/strqicon.png" alt=""
-                onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
-              />
-            </div>
+
             {userStudio &&
               <div className="procu">
                 <ProfileCube avatars={userStudio.user.avatars} />
               </div>
             }
-            <div>
-              <Link to="#" onClick={e => {
-                e.preventDefault();
-                hasAllowedMzflash(slug)
-              }}>
-                <img src="/assets/images/mzflash.png" alt="" />
-              </Link>
-            </div>
+
           </div>
           {userStudio &&
             <div className="profilebioname">
@@ -105,6 +92,13 @@ const StudioDetail = ({ userStudio, slug }) => {
               </label>
             }
             <div className="stuion-faved-btn">
+              <div>
+                <img
+                  className="clickable"
+                  src="/assets/images/strqicon.png" alt=""
+                  onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
+                />
+              </div>
               {/* <Link to="#" onClick={e => {
                 e.preventDefault();
                 hasAllowedFavedBy();
@@ -121,6 +115,14 @@ const StudioDetail = ({ userStudio, slug }) => {
                   Faves
                 </div>
               </Link>
+              <div>
+                <Link to="#" onClick={e => {
+                  e.preventDefault();
+                  hasAllowedMzflash(slug)
+                }}>
+                  <img className="mzflash-studio" src="/assets/images/mzflash.png" alt="" />
+                </Link>
+              </div>
               {/* <Link to="#" onClick={e => {
                 e.preventDefault();
                 hasAllowedFaves();

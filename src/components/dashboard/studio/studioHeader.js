@@ -9,9 +9,11 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
       <div className="back-icon">
         <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} />
       </div>
+
       {userStudio && <p>{userStudio.user.username}</p>}
+
       <div className="actions">
-        SPRFVS
+        <span className="sprfav"> SPRFAV </span>
         <img
           src={userStudio?.is_sprfvs
             ? '/assets/images/sprfvs_full.png'
