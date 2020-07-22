@@ -197,7 +197,7 @@ const Profile = () => {
                     <div className="nag-btn">
                       {selectedImage.id ? "Update profile picture" : "Add profile picture"}
                     </div>
-                    <input type="file" size={60} onChange={handleChange} />
+                    <input type="file" size={60} onChange={handleChange} accept="image/*"  />
                   </div>
                 </div>
               </div>
