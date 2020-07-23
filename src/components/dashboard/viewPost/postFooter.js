@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNcomm, clearNcomm } from "../../../actions/postAction";
 import ShowMoreText from 'react-show-more-text';
@@ -8,7 +8,6 @@ import { completeFormattedDate } from "../../../utils/helperFunctions";
 const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
-
   const {
     postView: { ncomm },
   } = useSelector(state => state);
@@ -22,7 +21,6 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
       dispatch(getNcomm(post.post.slug));
     }
   };
-
   useEffect(() => {
     return () => {
       dispatch(clearNcomm());
@@ -35,13 +33,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
 
   return (
     <div className="post-footer">
-      <div className="galleryPeek">
-        <img
-          className="galleryPeek_img"
-          src="/assets/images/gallerypeek.png"
-          alt=""
-        />
-      </div>
+    
       <ImageVideoSlider ncomm={ncomm} />
 
       {post && post.post && post.post.title &&
@@ -53,7 +45,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           {post && post.has_stroke
             ? (
               <img
-                className="post-color-icon"
+                className="post-color-icon"        //stock icon full
                 src="/assets/images/strokeiconfull.png"
                 alt=""
                 onClick={handleUnStoke}
