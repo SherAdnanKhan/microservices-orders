@@ -31,6 +31,9 @@ const Tutorial = ({ user }) => {
         <div className="icons">
           <img src="/assets/images/newstudioicon.png" alt="" />
         </div>
+        <div className="icons">
+          <img src="/assets/images/add.png" alt="" />
+        </div>
       </div>
       <div
         className={
@@ -45,12 +48,11 @@ const Tutorial = ({ user }) => {
         <div className="icons">
           <img src="/assets/images/mzflash.png" alt="" />
         </div>
+
       </div>
-      <div className={activeTab === 6 ? 'botom-menu add-botom' : 'botom-menu'}>
-        <div className="icons">
-          <img src="/assets/images/add.png" alt="" />
-        </div>
-      </div>
+      {/* <div className={activeTab === 6 ? 'botom-menu add-botom' : 'botom-menu'}>
+
+      </div> */}
       <div className="content">
         <div className="tabs-bar">
           <ul>
@@ -81,7 +83,7 @@ const Tutorial = ({ user }) => {
           && (
             <div className="tabs1">
               <p>
-              One last thing, if you like something just give it a
+                One last thing, if you like something just give it a
                 {' '}
                 <strong>Stroke</strong>
               , as in Brush-stroke or Stroke of genius
@@ -146,8 +148,8 @@ const Tutorial = ({ user }) => {
           && (
             <div className="tabs7">
               <p>
-              Click the tabs to open them, otherwise they remain out of your
-              way so that you may fully enjoy the exhibits
+                Click the tabs to open them, otherwise they remain out of your
+                way so that you may fully enjoy the exhibits
               </p>
             </div>
           )}
@@ -155,7 +157,7 @@ const Tutorial = ({ user }) => {
           && (
             <div className="tabs8">
               <p>
-              One last thing, if you like something just give it a
+                One last thing, if you like something just give it a
                 {' '}
                 <strong>Stroke</strong>
               , as in Brush-stroke or Stroke of genius
@@ -170,7 +172,7 @@ const Tutorial = ({ user }) => {
                 className="clickable"
                 onClick={() => history.push('/dashboard')}
               >
-              Enjoy Meuzm
+                Enjoy Meuzm
               </button>
             </div>
           )}
