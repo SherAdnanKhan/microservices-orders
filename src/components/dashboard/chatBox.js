@@ -254,10 +254,13 @@ class ChatBox extends Component {
             </div>
 
             <div className="call-btn">
-              <button>video Call</button>
-              <button>Draw</button>
+              <Link to="/dashboard/video-call">
+                <img href="#" src="/assets/images/icons/VidStrq.png" style={{width:"40px"}} alt="Video Call"></img>
+              </Link>
+           
+              <img src="/assets/images/icons/DrawStrq.png" style={{width:"40px", marginLeft:"43px"}} alt="Draw"></img>
             </div>
-          </div>
+          </div>  
 
           <div className="chat-container"
             ref={ref => this.containerRef.current = ref}
