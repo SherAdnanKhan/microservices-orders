@@ -106,7 +106,7 @@ const Comment = ({ post }) => {
                   <div className="user-cude">
                     <Avatar
                       avatars={comment.user.avatars && comment.user.avatars}
-                      feelColor={comment.user.feel_color}
+                      feelColor={comment.user.feel.color_code}
                     />
                   </div>
                   <div className="comment-info">

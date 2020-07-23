@@ -1,8 +1,11 @@
 import React from 'react';
 
-const EditButton = ({ onEdit }) => {
+const EditButton = ({ onEdit, feelColor }) => {
   return (
-    <div className="editstudio-btn">
+    <div
+      className="editstudio-btn"
+      style={{ backgroundColor: feelColor }}
+    >
       <button onClick={onEdit}>
         Edit Studio
       </button>

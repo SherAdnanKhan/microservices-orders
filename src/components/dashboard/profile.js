@@ -82,12 +82,12 @@ const Profile = () => {
 
   return (
     <div className={`frameReady ${feelColor}`}>
-      <LeftBorder />
-      <RightBorder />
+      <LeftBorder feelColor={feelColor} />
+      <RightBorder feelColor={feelColor} />
       <div className="edit-profile-page">
         {loading && <Spinner />}
         <div className="edit-user-page">
-          <div className="header-bar">
+          <div className="header-bar" >
             <div className="back-icon">
               <i className="fa fa-arrow-left clickable" onClick={handleBackPress} />
             </div>
@@ -96,27 +96,39 @@ const Profile = () => {
           <div className="wrapper">
             <div className="edit-profile">
               <div className="scr-inner">
-                <div className="item-box" onClick={() => handleImageSelect(images[0])}>
+                <div
+                  className="item-box"
+                  onClick={() => handleImageSelect(images[0])}
+                  style={{ border: `2px solid ${feelColor}` }}
+                >
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
                     src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
                     alt=""
-                    
+
                   />
                 </div>
-                <div className="item-box"  onClick={() => handleImageSelect(images[1])}>
+                <div
+                  className="item-box"
+                  onClick={() => handleImageSelect(images[1])}
+                  style={{ border: `2px solid ${feelColor}` }}
+                >
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
                     src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
                     alt=""
-                   
+
                   />
                 </div>
-                <div className="item-box"  onClick={() => handleImageSelect(images[2])}>
+                <div
+                  className="item-box"
+                  onClick={() => handleImageSelect(images[2])}
+                  style={{ border: `2px solid ${feelColor}` }}
+                >
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
@@ -125,7 +137,11 @@ const Profile = () => {
                     alt=""
                   />
                 </div>
-                <div className="item-box"  onClick={() => handleImageSelect(images[3])}>
+                <div
+                  className="item-box"
+                  onClick={() => handleImageSelect(images[3])}
+                  style={{ border: `2px solid ${feelColor}` }}
+                >
                   <div className="editTool Edit">
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
@@ -136,7 +152,11 @@ const Profile = () => {
                 </div>
               </div>
               <p>Select a profile picture change</p>
-              <button onClick={() => history.push('/dashboard/my-studio')}>
+
+              <button
+                onClick={() => history.push('/dashboard/my-studio')}
+                style={{ backgroundColor: feelColor }}
+              >
                 <i className="fa fa-check" />
               Done
             </button>
@@ -195,16 +215,28 @@ const Profile = () => {
                     <div className="nag-btn">
                       {selectedImage.id ? "Update profile picture" : "Add profile picture"}
                     </div>
-                    <input type="file" size={60} onChange={handleChange} accept="image/*"  />
+                    <input type="file" size={60} onChange={handleChange} accept="image/*" />
                   </div>
                 </div>
               </div>
-            {!toggle &&  //if toggle is not opened
-              <div className={selectedImage.avatar ? "actions" : "actions hide"}>
-              <button onClick={handleSubmit} className="clickable">Save</button>
-              <button className="clickable" onClick={() => window.location.reload()}>Try again</button>
-            </div>
-            }         
+              {!toggle &&  //if toggle is not opened
+                <div className={selectedImage.avatar ? "actions" : "actions hide"}>
+                  <button
+                    onClick={handleSubmit}
+                    className="clickable"
+                    style={{ backgroundColor: feelColor }}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="clickable"
+                    onClick={() => window.location.reload()}
+                    style={{ backgroundColor: feelColor }}
+                  >
+                    Try again
+                  </button>
+                </div>
+              }
             </>
           </div>
         </div>

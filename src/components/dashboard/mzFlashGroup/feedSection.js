@@ -176,7 +176,7 @@ const FeedSection = ({
               <Link to={`/dashboard/studio/${feed.user.slug}`}>
                 <Avatar
                   avatars={feed.user.avatars}
-                  feelColor={feed.feel_color}
+                  feelColor={feed.feel.color_code}
                 />
               </Link>
               <span className="date-time">
@@ -220,7 +220,7 @@ const FeedSection = ({
                   <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
                     <Avatar
                       avatars={feed.parent.user.avatars}
-                      feelColor={feed.parent.user.feel_color}
+                      feelColor={feed.parent.user.feel.color_code}
                     />
                   </Link>
                   <span className="date-time">

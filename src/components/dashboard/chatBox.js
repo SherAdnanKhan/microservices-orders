@@ -41,12 +41,13 @@ class ChatBox extends Component {
     const currentUser = getCurrentUser();
     this.props.getConversation(this.props.match.params.slug);
 
+
     socket.on('recieveMessage', async (data) => {
       await this.props.updateConversation(data.message);
       this.bottomRef.current.scrollIntoView({ behavior: 'auto' });
 
       if (data.message.created_by === this.props.conversation.user.id) {
-        if (data.message.feel_color !== this.props.conversation.user.feel_color) {
+        if (data.message.feel.color !== this.props.conversation.user.feel.color) {
           this.componentRefreshUser();
         }
       }
@@ -148,9 +149,13 @@ class ChatBox extends Component {
       this.setState({ message: '', image: '', video: '', document: '' });
 
       if (data.message || data.url) {
-        socket.emit('sendMessage', data, getAuthToken(), message => {
-          toast.error(message);
-        });
+        if (socket.connected) {
+          socket.emit('sendMessage', data, getAuthToken(), message => {
+            toast.error(message);
+          });
+        } else {
+          toast('There is some issue check your connection.');
+        }
       }
     }
   }
@@ -233,7 +238,9 @@ class ChatBox extends Component {
     return (
       <div className="chat-box">
         <>
-          <div className={`chat-header ${user && user.feel_color}`}>
+          <div
+            className='chat-header'
+            style={{ backgroundColor: user?.feel.color_code }}>
             <i
               className="fa fa-arrow-left clickable"
               onClick={() => history.goBack()}
@@ -241,7 +248,7 @@ class ChatBox extends Component {
 
             {user &&
               <Link to={`/dashboard/studio/${user.slug}`} >
-                <Avatar avatars={user.avatars} feelColor={user.feel_color} />
+                <Avatar avatars={user.avatars} feelColor={user?.feel.color_code} />
               </Link>
             }
 
@@ -267,7 +274,7 @@ class ChatBox extends Component {
             onScroll={this.handleScroll}
           >
             <div className="chat-uesr">
-              {user && <Avatar avatars={user.avatars} feelColor={user.feel_color} />}
+              {user && <Avatar avatars={user.avatars} feelColor={user?.feel.color_code} />}
               <div className="chat-uesr-name">
                 <p>	You are now Strqing with </p>
                 {user && <span>{user.username}</span>}
@@ -275,24 +282,29 @@ class ChatBox extends Component {
             </div>
 
             {messages?.data?.map((data, index) => (
-                
               <div key={index}>
                 {data.user.id === currentUser.id
                   ? (
                     <div
                       className="message-row group"
                     >
-                      <div className={`outgoing ${data.feel_color}`}>
+                      <div className='outgoing'>
                         <div className="user-message">
                           <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
                             {data.messages_logs.length > 0
                               ? data.messages_logs[0].status === 1
-                                ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel_color}.png`} />
+                                ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
                                 : <img alt="" src="/assets/images/avatarblack.png" />
                               : <img src="/assets/images/avatarblack.png" alt="" />
                             }
                           </div>
-                          <div className="text">
+                          <div className="text"
+                            style={{
+                              backgroundColor: data.feel.color_code,
+                              borderColor: data.feel.color_code,
+                              boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
+                            }}
+                          >
                             {data.message}
                             {data.type === 1 &&
                               <div className="msgImg">
@@ -311,8 +323,8 @@ class ChatBox extends Component {
                                   <source src={data.url} type="video/ogg" />
                                   <source src={data.url} type="video/mov" />
                                   <source src={data.url} type="video/mpeg" />
-                                      Your browser does not support the video tag.
-                                    </video>
+                                    Your browser does not support the video tag.
+                                </video>
                               </div>
                             }
                             {data.type === 3 &&
@@ -342,10 +354,17 @@ class ChatBox extends Component {
                     </div>
                   ) : (
                     <div className="message-row group">
-                      <div className={`incoming ${data.feel_color}`}>
+                      <div className='incoming'>
                         <div className="user-message">
-                          <Avatar avatars={data.user.avatars} feelColor={data.feel_color} />
-                          <div className='text'>
+                          <Avatar avatars={data.user.avatars} feelColor={data.feel.color_code} />
+                          <div
+                            className='text'
+                            style={{
+                              backgroundColor: data.feel.color_code,
+                              borderColor: data.feel.color_code,
+                              boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
+                            }}
+                          >
                             {data.message}
                             {data.type === 1 &&
                               <div className="msgImg">
@@ -402,7 +421,10 @@ class ChatBox extends Component {
         {
           progress > 0 &&
           <div>
-            <div className={`progressBar ${currentUser.feel_color}`}>
+            <div
+              className='progressBar'
+              style={{ backgroundColor: currentUser.feel.color_code }}
+            >
               <span className="text"> {progress}% </span>
               <div className="percent" style={{ width: `${progress}%` }}></div>
             </div>
@@ -425,12 +447,14 @@ class ChatBox extends Component {
           />
           <button
             onClick={this.handlePost}
-            className={`clickable btn-send ${currentUser.feel_color}`}
+            className='clickable btn-send'
+            style={{ backgroundColor: currentUser.feel.color_code }}
           >
             Post
           </button>
         </div>
-        {this.state.typingText &&
+        {
+          this.state.typingText &&
           <div className='typing-text'>
             {this.state.typingText}
           </div>
@@ -461,7 +485,8 @@ class ChatBox extends Component {
           }
           <div ref={ref => this.preview.current = ref}> </div>
         </div>
-        {hidden &&
+        {
+          hidden &&
           <div className="add-img-vid-box">
             <i
               className="fa fa-times close-add-box"

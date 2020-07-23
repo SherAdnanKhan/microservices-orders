@@ -1,11 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const RightBorder = () => {
+const RightBorder = ({ feelColor }) => {
   const history = useHistory();
 
   return (
-    <div className="right right-border">
+    <div
+      className="right right-border"
+      style={{ backgroundColor: feelColor }}
+    >
       <img
         alt=""
         src="/assets/images/strqicon.png"

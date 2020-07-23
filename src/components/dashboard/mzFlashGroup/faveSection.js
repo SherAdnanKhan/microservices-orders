@@ -47,7 +47,7 @@ const FaveSection = ({
             {activeUser && activeUserList === 1 &&
               <Avatar
                 avatars={activeUser.avatars}
-                feelColor={activeUser.feel_color}
+                feelColor={activeUser.feel.color_code}
               />
             }
           </button>
@@ -82,7 +82,7 @@ const FaveSection = ({
             {activeUser && activeUserList === 2 &&
               <Avatar
                 avatars={activeUser.avatars}
-                feelColor={activeUser.feel_color}
+                feelColor={activeUser.feel.color_code}
               />
             }
           </button>
@@ -120,7 +120,7 @@ const FaveSection = ({
             {activeUser && activeUserList === 3 &&
               <Avatar
                 avatars={activeUser.avatars}
-                feelColor={activeUser.feel_color}
+                feelColor={activeUser.feel.color_code}
               />
             }
           </button>
@@ -132,7 +132,7 @@ const FaveSection = ({
           <button className="tablinks">
             <Avatar
               avatars={currentUser.avatars}
-              feelColor={currentUser.feel_color}
+              feelColor={currentUser.feel.color_code}
             />
           </button>
         </div>
@@ -157,7 +157,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.feel_color}
+                          feelColor={feed.feel.color_code}
                         />
                       </Link>
                       <span className="date-time">
@@ -200,7 +200,7 @@ const FaveSection = ({
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel_color}
+                            feelColor={feed.parent.user.feel.color_code}
                           />
                         </Link>
                         <span className="date-time">
@@ -316,7 +316,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.feel_color}
+                          feelColor={feed.feel.color_code}
                         />
                       </Link>
                       <span className="date-time">
@@ -359,7 +359,7 @@ const FaveSection = ({
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel_color}
+                            feelColor={feed.parent.user.feel.color_code}
                           />
                         </Link>
                         <span className="date-time">
@@ -475,7 +475,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.feel_color}
+                          feelColor={feed.feel.color_code}
                         />
                       </Link>
                       <span className="date-time">
@@ -518,7 +518,7 @@ const FaveSection = ({
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel_color}
+                            feelColor={feed.parent.user.feel.color_code}
                           />
                         </Link>
                         <span className="date-time">
@@ -635,7 +635,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.feel_color}
+                          feelColor={feed.feel.color_code}
                         />
                       </Link>
                       <span className="date-time">
@@ -674,7 +674,7 @@ const FaveSection = ({
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel_color}
+                            feelColor={feed.parent.user.feel.color_code}
                           />
                         </Link>
                         <span className="date-time">
@@ -791,7 +791,7 @@ const FaveSection = ({
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
                           avatars={feed.user.avatars}
-                          feelColor={feed.feel_color}
+                          feelColor={feed.feel.color_code}
                         />
                       </Link>
                       <span className="date-time">
@@ -834,7 +834,7 @@ const FaveSection = ({
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
                             avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel_color}
+                            feelColor={feed.parent.user.feel.color_code}
                           />
                         </Link>
                         <span className="date-time">

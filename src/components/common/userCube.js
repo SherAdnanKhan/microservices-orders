@@ -1,82 +1,194 @@
 import React from 'react';
 
 const UserCube = ({ user }) => (
-  <div className={`cubescroll ${user.feel_color}`}>
+  <div className='cubescroll'>
     <div className="procu_">
       <div className="scene">
         {user.avatars && user.avatars.length > 0
-            && (
-              <div className="cube">
-                {user.avatars.length === 1
+          && (
+            <div className="cube">
+              {user.avatars.length === 1
                 && (
                   <>
-                    <div className="cube-face  cube-face-front">
+                    <div
+                      className="cube-face  cube-face-front"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-back">
+                    <div
+                      className="cube-face  cube-face-back"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-left">
+                    <div
+                      className="cube-face  cube-face-left"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-right">
+                    <div
+                      className="cube-face  cube-face-right"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
                   </>
                 )}
-                {user.avatars.length === 2
+              {user.avatars.length === 2
                 && (
                   <>
-                    <div className="cube-face  cube-face-front">
+                    <div
+                      className="cube-face  cube-face-front"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-back">
+                    <div
+                      className="cube-face  cube-face-back"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[1].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-left">
+                    <div
+                      className="cube-face  cube-face-left"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-right">
+                    <div
+                      className="cube-face  cube-face-right"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[1].path} height="100%" />
                     </div>
                   </>
                 )}
-                {user.avatars.length === 3
+              {user.avatars.length === 3
                 && (
                   <>
-                    <div className="cube-face  cube-face-front">
+                    <div
+                      className="cube-face  cube-face-front"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-back">
+                    <div
+                      className="cube-face  cube-face-back"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[1].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-left">
+                    <div
+                      className="cube-face  cube-face-left"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[2].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-right">
+                    <div
+                      className="cube-face  cube-face-right"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
                   </>
                 )}
-                {user.avatars.length >= 4
+              {user.avatars.length >= 4
                 && (
                   <>
-                    <div className="cube-face  cube-face-front">
+                    <div
+                      className="cube-face  cube-face-front"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-back">
+                    <div
+                      className="cube-face  cube-face-back"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[1].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-left">
+                    <div
+                      className="cube-face  cube-face-left"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[2].path} height="100%" />
                     </div>
-                    <div className="cube-face  cube-face-right">
+                    <div
+                      className="cube-face  cube-face-right"
+                      style={{
+                        backgroundColor: user.feel.color_code,
+                        borderColor: user.feel.color_code,
+                        boxShadow: `0 0 20px ${user.feel.color_code}`
+                      }}
+                    >
                       <img alt="" src={user.avatars[3].path} height="100%" />
                     </div>
                   </>
                 )}
-              </div>
-            )}
+            </div>
+          )}
       </div>
     </div>
     <div className="cuna">
@@ -92,20 +204,20 @@ const UserCube = ({ user }) => (
       </div>
       <div className="user-art">
         {user.art
-            && (
-              <>
-                {user.art.parent && (
-                  <>
-                    {`${user.art.parent.name}/`}
-                  </>
-                )}
-                {user.art.name && (
-                  <>
-                    {user.art.name}
-                  </>
-                )}
-              </>
-            )}
+          && (
+            <>
+              {user.art.parent && (
+                <>
+                  {`${user.art.parent.name}/`}
+                </>
+              )}
+              {user.art.name && (
+                <>
+                  {user.art.name}
+                </>
+              )}
+            </>
+          )}
       </div>
     </div>
   </div>

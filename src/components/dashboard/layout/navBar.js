@@ -17,7 +17,10 @@ const NavBar = () => {
 
   return (
     <div className={`frameReady ${feelColor}`}>
-      <div className="top" id="main-menu">
+      <div className="top"
+        id="main-menu"
+        style={{ backgroundColor: feelColor }}
+      >
         <div className="contentFit d-flex">
           <div className="burgerMenu">
             <span className="menuBlock" onClick={() => history.goBack()}>
@@ -37,7 +40,7 @@ const NavBar = () => {
       <ChangeColor onColorChange={handleColorChange} />
       <hr className="do-not-delete" />
 
-      <nav>
+      <nav style={{ backgroundColor: feelColor }}>
         <ul className="dropdownM">
           <li>
             <Link to="/dashboard/my-studio">My Studio</Link>

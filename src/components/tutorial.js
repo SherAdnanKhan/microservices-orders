@@ -17,13 +17,14 @@ const Tutorial = ({ user }) => {
   ]);
 
   return (
-    <div className={`wrapper tutorialScreen ${user.feel_color}`}>
+    <div className='wrapper tutorialScreen'>
       <div
         className={
           activeTab === 2 || activeTab === 3
             ? 'left-menu add-left'
             : 'left-menu'
         }
+        style={{ backgroundColor: user.feel.color_code }}
       >
         <div className="icons">
           <img src="/assets/images/lobbyicon.png" alt="" />
@@ -41,6 +42,7 @@ const Tutorial = ({ user }) => {
             ? 'right-menu add-right'
             : 'right-menu'
         }
+        style={{ backgroundColor: user.feel.color_code }}
       >
         <div className="icons">
           <img src="/assets/images/strqicon.png" alt="" />
@@ -48,7 +50,6 @@ const Tutorial = ({ user }) => {
         <div className="icons">
           <img src="/assets/images/mzflash.png" alt="" />
         </div>
-
       </div>
       {/* <div className={activeTab === 6 ? 'botom-menu add-botom' : 'botom-menu'}>
 
@@ -82,7 +83,7 @@ const Tutorial = ({ user }) => {
         {activeTab === 1
           && (
             <div className="tabs1">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 One last thing, if you like something just give it a
                 {' '}
                 <strong>Stroke</strong>
@@ -93,17 +94,17 @@ const Tutorial = ({ user }) => {
         {activeTab === 2
           && (
             <div className="tabs2">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 <strong>StrqChat:</strong>
                 {' '}
-              direct artist to artist communication
+                direct artist to artist communication
               </p>
             </div>
           )}
         {activeTab === 3
           && (
             <div className="tabs3">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 {' '}
                 <strong>MzFlash:</strong>
                 {' '}
@@ -115,7 +116,7 @@ const Tutorial = ({ user }) => {
         {activeTab === 4
           && (
             <div className="tabs4">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 <strong>StrqChat:</strong>
                 {' '}
               direct artist to artist communication
@@ -125,7 +126,7 @@ const Tutorial = ({ user }) => {
         {activeTab === 5
           && (
             <div className="tabs5">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 {' '}
                 <strong>MzFlash:</strong>
                 {' '}
@@ -137,7 +138,7 @@ const Tutorial = ({ user }) => {
         {activeTab === 6
           && (
             <div className="tabs6">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 <strong>Exhibit:</strong>
                 {' '}
               add a post to any of your galleries
@@ -147,7 +148,7 @@ const Tutorial = ({ user }) => {
         {activeTab === 7
           && (
             <div className="tabs7">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 Click the tabs to open them, otherwise they remain out of your
                 way so that you may fully enjoy the exhibits
               </p>
@@ -156,7 +157,7 @@ const Tutorial = ({ user }) => {
         {activeTab === 8
           && (
             <div className="tabs8">
-              <p>
+              <p style={{ backgroundColor: user.feel.color_code }}>
                 One last thing, if you like something just give it a
                 {' '}
                 <strong>Stroke</strong>
@@ -171,6 +172,7 @@ const Tutorial = ({ user }) => {
               <button
                 className="clickable"
                 onClick={() => history.push('/dashboard')}
+                style={{ backgroundColor: user.feel.color_code }}
               >
                 Enjoy Meuzm
               </button>

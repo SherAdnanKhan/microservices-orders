@@ -58,7 +58,7 @@ const StudioDetail = ({ userStudio, slug }) => {
 
             {userStudio &&
               <div className="procu">
-                <ProfileCube avatars={userStudio.user.avatars} />
+                <ProfileCube avatars={userStudio.user.avatars} feelColor={userStudio?.user.feel.color_code} />
               </div>
             }
 
@@ -97,6 +97,8 @@ const StudioDetail = ({ userStudio, slug }) => {
                   className="clickable"
                   src="/assets/images/strqicon.png" alt=""
                   onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
+                  style={{ backgroundColor: userStudio?.user.feel.color_code }}
+
                 />
               </div>
               {/* <Link to="#" onClick={e => {
@@ -110,7 +112,10 @@ const StudioDetail = ({ userStudio, slug }) => {
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link> */}
               <Link to={`/dashboard/studio/fave-galleries/${userStudio?.user?.id}`}>
-                <div className="faved-by-btn">
+                <div
+                  className="faved-by-btn"
+                  style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                >
                   <img src="/assets/images/fave_icon.png" alt="" />
                   Faves
                 </div>
@@ -120,7 +125,12 @@ const StudioDetail = ({ userStudio, slug }) => {
                   e.preventDefault();
                   hasAllowedMzflash(slug)
                 }}>
-                  <img className="mzflash-studio" src="/assets/images/mzflash.png" alt="" />
+                  <img
+                    className="mzflash-studio"
+                    src="/assets/images/mzflash.png"
+                    alt=""
+                    style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                  />
                 </Link>
               </div>
               {/* <Link to="#" onClick={e => {
@@ -137,7 +147,10 @@ const StudioDetail = ({ userStudio, slug }) => {
           </form>
         </div>
       </div>
-      <div className="studio-editstudio-btn">
+      <div
+        className="studio-editstudio-btn"
+        style={{ backgroundColor: userStudio?.user.feel.color_code }}
+      >
         <div style={{ height: '40px' }}></div>
       </div>
     </>

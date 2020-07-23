@@ -44,13 +44,14 @@ const Conversation = () => {
           conversations.map((conversation, index) => (
             <div className="singleMsg" key={index}>
               {conversation.unread_messages_logs_count > 0 &&
-                <span className={
-                  conversation.participants[0].id !== currentUser.id
-                    ? `notify ${conversation.participants[0].feel_color}`
-                    : conversation.participants[1].id !== currentUser.id
-                      ? `notify ${conversation.participants[1].feel_color}`
-                      : 'notify'
-                }>
+                <span className='notify'
+                  style={{
+                    borderColor:
+                      conversation.participants[0].id !== currentUser.id
+                        ? conversation.participants[0].feel.color_code
+                        : conversation.participants[1].feel.color_code
+                  }}
+                >
                   {conversation.unread_messages_logs_count}
                 </span>
               }
@@ -60,7 +61,7 @@ const Conversation = () => {
                     <Link to={`/dashboard/chat/${conversation.participants[0].slug}`}>
                       <Avatar
                         avatars={conversation.participants[0].avatars}
-                        feelColor={conversation.participants[0].feel_color}
+                        feelColor={conversation.participants[0].feel.color_code}
                       />
                     </Link>
                   }
@@ -68,7 +69,7 @@ const Conversation = () => {
                     <Link to={`/dashboard/chat/${conversation.participants[1].slug}`}>
                       <Avatar
                         avatars={conversation.participants[1].avatars}
-                        feelColor={conversation.participants[1].feel_color}
+                        feelColor={conversation.participants[1].feel.color_code}
                       />
                     </Link>
                   }

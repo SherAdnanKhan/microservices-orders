@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 
-const EditProfile = ({ myStudio }) => {
+const EditProfile = ({ myStudio, feelColor }) => {
   return (
     <div className="wrapper">
       <div className="studioScreen">
@@ -40,7 +40,10 @@ const EditProfile = ({ myStudio }) => {
                 {myStudio && <span>{myStudio.fav_by_count}</span>}
               </Link> */}
               <Link to={`/dashboard/my-studio/fave-galleries/${myStudio?.user?.id}`}>
-                <div className="faved-by-btn">
+                <div
+                  className="faved-by-btn"
+                  style={{ backgroundColor: feelColor }}
+                >
                   <img src="/assets/images/fave_icon.png" alt="" />
                   Faves
               </div>

@@ -22,7 +22,7 @@ const LobbyPosts = ({
           </Link>
         </p>
         <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
-          <Avatar avatars={post.user.avatars && post.user.avatars} feelColor={post.user.feel_color} />
+          <Avatar avatars={post.user.avatars && post.user.avatars} feelColor={post.user.feel.color_code} />
         </Link>
         {post.user.art &&
           <>
@@ -122,7 +122,10 @@ const LobbyPosts = ({
             : 'lobby-icon time-div'
         }>
           <div className=" time-row">
-            <p className={`lobby-post-time ${post.user.feel_color}`}>
+            <p
+              className='lobby-post-time'
+              style={{ color: post.user.feel.color_code }}
+            >
               {completeFormattedDate(post.created_at)}
             </p>
           </div>

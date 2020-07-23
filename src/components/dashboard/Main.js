@@ -7,7 +7,6 @@ import ChangeColor from './layout/changeColor';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFeelColor } from '../../actions/colorActions';
 
-
 const Main = () => {
   const location = useLocation();
   const split = location.pathname.split('/');
@@ -80,10 +79,10 @@ const Main = () => {
 
   return (
     <div className={`frameReady ${feelColor}`}>
-      <Header />
+      <Header feelColor={feelColor} />
       <ChangeColor onColorChange={handleColorChange} />
-      <LeftBorder />
-      <RightBorder />
+      <LeftBorder feelColor={feelColor} />
+      <RightBorder feelColor={feelColor} />
       <Suspense fallback={<div></div>}>
         <Component />
       </Suspense>

@@ -87,7 +87,7 @@ const MzFlash = () => {
   }, [dispatch, slug]);
 
   return (
-    <div className={`mz-flash-page ${userStudio && userStudio.user.feel_color}`}>
+    <div className='mz-flash-page'>
       {loading && <Spinner />}
       <>
         <div className="mz-flash-head">
@@ -100,13 +100,19 @@ const MzFlash = () => {
           <div className="fav-cub">
             {userStudio &&
               <div className="procu">
-                <ProfileCube avatars={userStudio?.user?.avatars} />
+                <ProfileCube avatars={userStudio?.user?.avatars} feelColor={userStudio?.user.feel.color_code} />
               </div>
             }
           </div>
           <div className="fav-btn-div">
             {userStudio && userStudio.has_faved &&
-              <button className="fav-btn clickable" onClick={(e) => handleUnFave(e, userStudio.user.id)}>FAVING</button>
+              <button
+                className="fav-btn clickable"
+                onClick={(e) => handleUnFave(e, userStudio.user.id)}
+                style={{ backgroundColor: userStudio?.user.feel.color_code }}
+              >
+                FAVING
+              </button>
             }
             {userStudio && !userStudio.has_faved &&
               <button className="fav-btn clickable" onClick={(e) => handleFave(e, userStudio.user.id)}>FAVE</button>
@@ -114,7 +120,7 @@ const MzFlash = () => {
           </div>
         </div>
 
-        <div className="fav-bar">
+        <div className="fav-bar" style={{ backgroundColor: userStudio?.user.feel.color_code }}>
           <h3>MZ FLASH</h3>
         </div>
 
@@ -130,7 +136,7 @@ const MzFlash = () => {
                 <div className="col-12 mz-flash-flex">
                   <Avatar
                     avatars={feed.user.avatars}
-                    feelColor={feed.user.feel_color}
+                    feelColor={feed.user.feel.color_code}
                   />
                   <span className="date-time">
                     {completeFormattedDate(feed.created_at)}
@@ -170,7 +176,7 @@ const MzFlash = () => {
                     <div className="action-cube">
                       <Avatar
                         avatars={feed.parent.user.avatars}
-                        feelColor={feed.parent.user.feel_color}
+                        feelColor={feed.parent.user.feel.color_code}
                       />
                       <span className="date-time">
                         {completeFormattedDate(feed.parent.created_at)}
