@@ -7,6 +7,7 @@ const PostBody = ({ post }) => {
   const handleButtonPress = () => {
     eventRef.current = setTimeout(() => {
       setShow(!show);
+
     }, 2000)
   };
 
@@ -19,13 +20,12 @@ const PostBody = ({ post }) => {
       <div className="valut-icon show-valut">
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
+
       <div className="post-body">
         {post &&
           <div className="image-div"
             onTouchStart={handleButtonPress}
             onTouchEnd={handleButtonRelease}
-            onMouseDown={handleButtonPress}
-            onMouseUp={handleButtonRelease}
           >
             {post.post.post_type === 2
               ? (
@@ -68,6 +68,17 @@ const PostBody = ({ post }) => {
             ))
           }
         </div>
+
+      </div>
+      <div className="galleryPeek"
+      >
+        <img           //Gallery peak icon
+          className="galleryPeek_img"
+          src="/assets/images/gallerypeek.png"
+          alt=""
+          onClick={() => setShow(!show)}
+
+        />
       </div>
     </>
   )

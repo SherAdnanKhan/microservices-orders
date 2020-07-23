@@ -4578,6 +4578,17 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
  display: flex;
  flex-direction: column;
  justify-content: flex-start;
+ .galleryPeek {
+  width: 90%;
+  height: 50px;
+  cursor: pointer;
+  img{
+    width:50px;
+  }
+@media @mobile {
+  display: none;
+}
+}
  
 .image-option-box{
   text-align: center;
@@ -4856,17 +4867,7 @@ transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
   align-items: center;
   margin: 25px auto;
   background-color: black;
-  .galleryPeek {
-    width: 90%;
-    height: 50px;
-    cursor: pointer;
-    img{
-      width:50px;
-    }
-  @media @mobile {
-    display: none;
-  }
-  }
+
 
   .post-date {
     &.gold {      
