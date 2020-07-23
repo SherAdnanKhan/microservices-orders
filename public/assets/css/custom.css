@@ -2274,6 +2274,20 @@ img {
 .art-selection .art-selection-table .art-selection-table-sub-element {
   padding: 12px 25px;
   background: #444;
+  border: 1px solid darkgray;
+}
+.art-selection .art-selection-table .art-selection-table-sub-element input[type="text"]:nth-last-child(1) {
+  padding: 15px 5px;
+}
+.art-selection .art-selection-table .art-selection-table-sub-element input[type="radio"]:nth-last-child(1) {
+  margin: 0px 5px 0px 30px !important;
+  display: inline-block;
+}
+.art-selection .art-selection-table .art-selection-table-sub-element:nth-last-child(1) {
+  padding: 0px;
+}
+.art-selection .art-selection-table .art-selection-table-sub-element:nth-last-child(1) input[type="radio"] {
+  margin: 0px 5px 0px 30px !important;
 }
 .art-selection .art-selection-table .art-selection-table-sub-element:hover {
   background: gray;
