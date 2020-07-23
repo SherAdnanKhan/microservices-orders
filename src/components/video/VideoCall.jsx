@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const VideoCall=()=> {
 
@@ -22,6 +23,12 @@ const VideoCall=()=> {
     </div>
     <div className="artist-name">
       salwa
+    </div>
+    <div >
+        <Link to="/dashboard/video-call/add">
+        <button className="btn-style" >Add Artist</button>
+        </Link>
+     
     </div>
   </div>
   <div className="head-main-user">

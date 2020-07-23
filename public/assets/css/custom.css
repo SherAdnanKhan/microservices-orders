@@ -776,6 +776,12 @@ input {
   border: 1px solid gray;
   margin-top: 3px;
 }
+.btn-style
+{
+  background-color: white;
+  color: black;
+}
+
 .forgotPasswordScreen form a {
   color: white;
   text-decoration: none;
