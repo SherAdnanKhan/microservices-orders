@@ -49,7 +49,7 @@ const ArtSelection = ({ user }) => {
   }
 
   return (
-    <div className={`art-selection ${user.feel_color}`}>
+    <div className='art-selection'>
       {loading && <Spinner />}
       <div className="art-selection-header">
         <p>What is your art?</p>
@@ -94,28 +94,28 @@ const ArtSelection = ({ user }) => {
             </div>
             <div>
               {art.children
-              && art.children.map((subart, j) => (
-                <div
-                  key={j}
-                  style={{ display: clickMainArt === subart.parent_id ? 'block' : 'none' }}
-                  className="art-selection-table-sub-element"
-                >
-                  <input
-                    type="radio"
-                    name="sub artName"
-                    checked={subart.id === selectedSubArt}
-                    onChange={() => {
-                      setSelectedSubArt(subart.id);
-                      setSubArtName(subart.name);
-                      setSelectedArt('');
-                      setSelectedArtName('');
-                      setSubArtRadio(false);
-                      setMainArtRadio(false);
-                    }}
-                  />
-                  <label>{subart.name}</label>
-                </div>
-              ))}
+                && art.children.map((subart, j) => (
+                  <div
+                    key={j}
+                    style={{ display: clickMainArt === subart.parent_id ? 'block' : 'none' }}
+                    className="art-selection-table-sub-element"
+                  >
+                    <input
+                      type="radio"
+                      name="sub artName"
+                      checked={subart.id === selectedSubArt}
+                      onChange={() => {
+                        setSelectedSubArt(subart.id);
+                        setSubArtName(subart.name);
+                        setSelectedArt('');
+                        setSelectedArtName('');
+                        setSubArtRadio(false);
+                        setMainArtRadio(false);
+                      }}
+                    />
+                    <label>{subart.name}</label>
+                  </div>
+                ))}
               <div className="art-selection-table-sub-element" style={{ display: art.id === clickMainArt ? 'block' : 'none' }}>
                 <input
                   type="radio"
@@ -191,6 +191,7 @@ const ArtSelection = ({ user }) => {
             && !subArtRadio && !mainArtRadio
           }
           onClick={(e) => HandleNext(e)}
+          style={{ backgroundColor: user.feel.color_code }}
         >
           Next
 

@@ -2,12 +2,16 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Search from './search';
 
-const Header = () => {
+const Header = ({ feelColor }) => {
   const history = useHistory();
 
   return (
     <>
-      <div className="top" id="main-menu">
+      <div
+        className="top"
+        id="main-menu"
+        style={{ backgroundColor: feelColor }}
+      >
         <div className="contentFit d-flex">
           <div className="logo-icon">
             <img className="valut-img" alt="" src="/assets/images/logowhite.png" />
@@ -42,7 +46,7 @@ const Header = () => {
           <img alt="" src="/assets/images/icons/feelicon.png" />
         </Link>
       </div>
-      <Search />
+      <Search feelColor={feelColor} />
 
       <hr className="do-not-delete" />
     </>

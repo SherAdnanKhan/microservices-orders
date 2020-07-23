@@ -150,7 +150,10 @@ const AddExibit = () => {
         <div className={`frameReady ${feelColor}`}>
           {loading && <Spinner />}
           <>
-            <div className="exibition-page-header">
+            <div
+              className="exibition-page-header"
+              style={{ backgroundColor: feelColor }}
+            >
               <span className="exibition-exit-icon">
                 <i className="fas fa-arrow-left clickable" onClick={() => history.goBack()}></i>
               </span>
@@ -204,7 +207,11 @@ const AddExibit = () => {
               <div className="exibition-gallery-utilties">
                 {myGalleries &&
                   myGalleries.map((val, index) => (
-                    <label key={index} className="exibition-gallery-item clickable" >
+                    <label
+                      key={index}
+                      className="exibition-gallery-item clickable"
+                      style={{ backgroundColor: feelColor }}
+                    >
                       <input
                         type="radio"
                         name="gallery_id"
@@ -219,13 +226,20 @@ const AddExibit = () => {
                 }
               </div>
               {error &&
-                <div className={`error ${user.feel_color}`}>
+                <div className='error' style={{ color: feelColor }}>
                   <div className="message"> {error} </div>
                 </div>
               }
               {/* <p style={{ color: "red", fontSize: "18px" }} >{error}</p> */}
-              <div className="exibition-button-div" id="submit" >
-                <button className="exibition-button" type="submit" id="addex">Exhibit 》</button>
+              <div className="exibition-button-div" id="submit">
+                <button
+                  className="exibition-button"
+                  type="submit"
+                  id="addex"
+                  style={{ backgroundColor: feelColor }}
+                >
+                  Exhibit 》
+                </button>
               </div>
             </form>
             <footer className="exibtion-footer">

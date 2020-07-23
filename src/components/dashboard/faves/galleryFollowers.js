@@ -44,7 +44,7 @@ const GalleryFollowers = () => {
               <div className="favas-box" key={index}>
                 <div className="favas-avatar">
                   <Link to={`/dashboard/studio/${user.slug}`}  >
-                    <Avatar avatars={user?.avatars} feelColor={user?.feel_color} />
+                    <Avatar avatars={user?.avatars} feelColor={user?.feel.color_code} />
                   </Link>
                 </div>
                 <div className="details">

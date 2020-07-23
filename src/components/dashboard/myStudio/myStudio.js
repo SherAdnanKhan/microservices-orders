@@ -22,7 +22,8 @@ const MyStudio = () => {
 
   const {
     studio: { myStudio },
-    gallery: { gallery, myGalleries }
+    gallery: { gallery, myGalleries },
+    feelColor: { feelColor }
   } = useSelector(state => state);
 
   useEffect(() => {
@@ -68,14 +69,14 @@ const MyStudio = () => {
           gallery={selectedGallery}
         />
       }
-      <StudioHeader myStudio={myStudio && myStudio} />
+      <StudioHeader myStudio={myStudio && myStudio} feelColor={feelColor} />
       {edit
-        ? <EditProfile myStudio={myStudio} />
-        : <ViewProfile myStudio={myStudio} />
+        ? <EditProfile myStudio={myStudio} feelColor={feelColor} />
+        : <ViewProfile myStudio={myStudio} feelColor={feelColor} />
       }
       {edit
-        ? <EditButton onEdit={handleEdit} />
-        : <ViewButton onEdit={handleEdit} />
+        ? <EditButton onEdit={handleEdit} feelColor={feelColor} />
+        : <ViewButton onEdit={handleEdit} feelColor={feelColor} />
       }
       <Gallery
         galleries={myGalleries}
@@ -89,6 +90,7 @@ const MyStudio = () => {
         activeGallery={activeGallery}
         gallery={gallery}
         totalPosts={myStudio && myStudio.user.posts_count}
+        feelColor={feelColor}
       />
       <StudioFooter gallery={gallery} user={myStudio && myStudio.user} />
     </div>

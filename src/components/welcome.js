@@ -20,14 +20,14 @@ const Welcome = ({ user }) => {
       <div className="cubecenter">
         <div className="procufull">
           <div className="scenefull">
-            <Avatar avatars={user.avatars} />
+            <Avatar avatars={user.avatars} feelColor={user.feel.color_code} />
           </div>
         </div>
       </div>
 
       <div className="welcomeText">
         Welcome <strong>{user.username},</strong>
-	  <br/>
+        <br />
 	 How do you Feel?
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNcomm, clearNcomm } from "../../../actions/postAction";
 import ShowMoreText from 'react-show-more-text';
@@ -33,7 +33,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
 
   return (
     <div className="post-footer">
-    
+
       <ImageVideoSlider ncomm={ncomm} />
 
       {post && post.post && post.post.title &&
@@ -96,8 +96,13 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
       </div>
       {post &&
         <div
-          className={`post-date ${post.post.user.feel_color} `}
-          style={{ width: '80%', marginTop: '20px', textAlign: 'left' }}
+          className='post-date'
+          style={{
+            width: '80%',
+            marginTop: '20px',
+            textAlign: 'left',
+            color: post.post.user.feel.color_code
+          }}
         >
           {completeFormattedDate(post.post.created_at)}
         </div>

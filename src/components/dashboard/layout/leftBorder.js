@@ -1,10 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const LeftBorder = () => {
+const LeftBorder = ({ feelColor }) => {
   const history = useHistory();
   return (
-    <div className="left">
+    <div
+      className="left"
+      style={{ backgroundColor: feelColor }}
+    >
       <img
         className="lobby-img"
         alt=""

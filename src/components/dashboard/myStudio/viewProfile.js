@@ -4,7 +4,7 @@ import ProfileCube from '../../common/profileCube';
 import { updateBio } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
 
-const ViewProfile = ({ myStudio }) => {
+const ViewProfile = ({ myStudio, feelColor }) => {
   const [bio, setBio] = useState('');
 
   const history = useHistory();
@@ -73,7 +73,10 @@ const ViewProfile = ({ myStudio }) => {
                 {myStudio && <span>{myStudio.fav_by_count}</span>}
               </Link> */}
               <Link to='#'>
-                <div className="faved-by-btn">
+                <div
+                  className="faved-by-btn"
+                  style={{ backgroundColor: feelColor }}
+                >
                   <img src="/assets/images/fave_icon.png" alt="" />
                   Faves
               </div>

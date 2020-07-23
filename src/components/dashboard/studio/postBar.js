@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 const PostBar = ({
   gallery, activeGallery,
-  onPostLike, totalPosts, galleryPrivacy
+  onPostLike, totalPosts, galleryPrivacy, user
 }) => {
 
   const history = useHistory();
@@ -17,7 +17,10 @@ const PostBar = ({
   };
 
   return (
-    <div className="total-post">
+    <div
+      className="total-post"
+      style={{ backgroundColor: user?.feel.color_code }}
+    >
       <div className="icon-side">
         {activeGallery && isAllowed() &&
           <>

@@ -10,7 +10,7 @@ const PostHead = ({ post }) => {
           {
             <Avatar
               avatars={post.user.avatars}
-              feelColor={post.user.feel_color}
+              feelColor={post.user.feel.color_code}
             />
           }
           <>

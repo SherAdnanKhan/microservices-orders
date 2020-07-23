@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
 
-const Search = () => {
+const Search = ({ feelColor }) => {
   const [query, setQuery] = useState('');
 
   const dispatch = useDispatch();
@@ -22,7 +22,11 @@ const Search = () => {
 
   return (
     <>
-      <div className="search-bar" id="search-bar">
+      <div
+        className="search-bar"
+        id="search-bar"
+        style={{ backgroundColor: feelColor }}
+      >
         <div className="back-btn" id="go-back">
           <i className="fa fa-arrow-left"></i>
         </div>
@@ -45,7 +49,7 @@ const Search = () => {
                   to={`/dashboard/studio/${user.slug}`}
                   onClick={handleClear}
                 >
-                  <Avatar avatars={user && user.avatars} feelColor={user.feel_color} />
+                  <Avatar avatars={user && user.avatars} feelColor={user.feel.color_code} />
                 </Link>
                 <div>
                   <p className="usernames">

@@ -12,7 +12,6 @@ const Post = ({
   gallery, user, activeGallery,
   galleryPrivacy, onSuperFav, isSprFvs
 }) => {
-
   const dispatch = useDispatch();
   const {
     postView: { ncomm },
@@ -89,7 +88,7 @@ const Post = ({
                             {user.username}
                           </Link>
                         </p>
-                        <Avatar avatars={user && user.avatars} feelColor={user && user.feel_color} />
+                        <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
                         {user && user.art
                           && (
                             <>

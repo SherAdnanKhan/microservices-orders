@@ -85,7 +85,7 @@ const Studio = () => {
   };
 
   return (
-    <div className={`studio ${userStudio && userStudio.user.feel_color}`}>
+    <div className='studio'>
       {loading && <Spinner />}
       {showModel &&
         <GalleryModel
@@ -108,7 +108,7 @@ const Studio = () => {
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         onGalleryChange={handleGalleryChange}
-        color={userStudio && userStudio.user.feel_color}
+        color={userStudio && userStudio.user.feel.color}
       />
       <PostBar
         galleries={userStudio && userStudio.user.galleries}
@@ -117,6 +117,7 @@ const Studio = () => {
         onPostLike={handleLike}
         totalPosts={userStudio && userStudio.user.posts_count}
         galleryPrivacy={userStudio && userStudio.gallery_privacy}
+        user={userStudio?.user}
       />
       <Post
         activeGallery={activeGallery}

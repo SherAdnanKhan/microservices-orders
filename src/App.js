@@ -35,7 +35,7 @@ import {
 
 if (getCurrentUser()) {
   const user = getCurrentUser();
-  store.dispatch(updateFeelColor(user.feel ? user.feel.color : user.feel_color));
+  store.dispatch(updateFeelColor(user.feel.color_code));
 }
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
       socket.on('notifyColrChange', (user) => {
         console.log(user)
         localStorage.setItem(userKey, JSON.stringify(user));
-        dispatch(updateFeelColor(user.feel ? user.feel.color : user.feel_color))
+        dispatch(updateFeelColor(user.feel.color_code))
       });
 
       socket.on('reciveUserNotifications', (data, type) => {
@@ -95,7 +95,7 @@ function App() {
             return (
               <Link
                 to={`/dashboard/chat/${data.message.user.slug}`}
-                style={{ textDecoration: 'none', color: currentUser.feel_color }}>
+                style={{ textDecoration: 'none', color: currentUser.feel.color_code }}>
                 You have new message from {data.message.user.username}
               </Link>
             )

@@ -1,11 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const PostBar = ({ myStudio, activeGallery, totalPosts }) => {
+const PostBar = ({ myStudio, activeGallery, totalPosts, feelColor }) => {
   const history = useHistory();
 
   return (
-    <div className="total-post">
+    <div
+      className="total-post"
+      style={{ backgroundColor: feelColor }}
+    >
       <div className="icon-side">
         <i className="fas fa-square " />
         <i className="fas fa-th" />
