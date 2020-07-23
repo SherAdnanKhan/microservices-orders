@@ -24,9 +24,12 @@ const VideoCall=()=> {
     <div className="artist-name">
       salwa
     </div>
-    <div >
+    <div style={{marginLeft:"auto"}} >
         <Link to="/dashboard/video-call/add">
         <button className="btn-style" >Add Artist</button>
+        </Link>
+        <Link to="/dashboard/video-call/group">
+        <button className="btn-style" style={{marginLeft:"12px",marginRight:"12px"}} >Group Video</button>
         </Link>
      
     </div>
