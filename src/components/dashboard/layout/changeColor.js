@@ -7,12 +7,9 @@ const ChangeColor = ({ onColorChange }) => {
   const { feelColors } = useSelector(state => state.feelColor);
 
   useEffect(() => {
-    dispatch(getAllFeelColors());
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log('colors: ', feelColors);
-  }, [feelColors]);
+    if (!feelColors)
+      dispatch(getAllFeelColors());
+  }, [dispatch, feelColors]);
 
   return (
     <div className="colorChangerScreen">
