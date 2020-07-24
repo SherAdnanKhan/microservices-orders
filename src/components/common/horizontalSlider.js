@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const HorizontalSlider = ({ children }) => {
+const HorizontalSlider = ({ children, slidesToShow = '' }) => {
   const sliderRef = useRef();
 
   function PrevArrow({ onClick, style }) {
@@ -33,7 +33,7 @@ const HorizontalSlider = ({ children }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: children?.length === 2 ? 2 : 3,
+    slidesToShow: slidesToShow ? slidesToShow : children?.length === 2 ? 2 : 3,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />

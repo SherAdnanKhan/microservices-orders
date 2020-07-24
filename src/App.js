@@ -35,7 +35,7 @@ import {
 
 if (getCurrentUser()) {
   const user = getCurrentUser();
-  store.dispatch(updateFeelColor(user.feel.color_code));
+  store.dispatch(updateFeelColor(user?.feel?.color_code));
 }
 
 function App() {

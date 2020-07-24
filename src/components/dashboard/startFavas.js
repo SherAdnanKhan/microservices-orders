@@ -43,7 +43,7 @@ const StartFaves = () => {
           {'>>'}
         </h1>
       </div>
-      <HorizontalSlider slidesToShow={1} slidesToScroll={1}>
+      <HorizontalSlider slidesToShow={1}>
         {recommendedGalleries &&
           recommendedGalleries.map((user, index) => (
             <div key={index} className="f-image-box">
