@@ -262,12 +262,12 @@ class ChatBox extends Component {
 
             <div className="call-btn">
               <Link to="/dashboard/video-call">
-                <img href="#" src="/assets/images/icons/VidStrq.png" style={{width:"40px"}} alt="Video Call"></img>
+                <img href="#" src="/assets/images/icons/VidStrq.png" style={{ width: "40px" }} alt="Video Call"></img>
               </Link>
-           
-              <img src="/assets/images/icons/DrawStrq.png" style={{width:"40px", marginLeft:"43px"}} alt="Draw"></img>
+
+              <img src="/assets/images/icons/DrawStrq.png" style={{ width: "40px", marginLeft: "43px" }} alt="Draw"></img>
             </div>
-          </div>  
+          </div>
 
           <div className="chat-container"
             ref={ref => this.containerRef.current = ref}
@@ -493,17 +493,17 @@ class ChatBox extends Component {
               onClick={() => this.setState({ hidden: false })}
             />
             <label>
-              <img alt="" src="/assets/images/plus.png" />
+              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
               Add Image
               <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
             </label>
             <label>
-              <img alt="" src="/assets/images/plus.png" />
+              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
               Add Video
               <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
             </label>
             <label>
-              <img alt="" src="/assets/images/plus.png" />
+              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
               Add Document
               <input
                 type="file"

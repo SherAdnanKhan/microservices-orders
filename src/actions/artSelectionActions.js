@@ -15,13 +15,29 @@ export const getArt = () => dispatch => {
     });
 };
 
-export const newArt = (value, history) => () => {
+export const newArt = (value, history) => dispatch => {
   if (value) {
     http
       .post('/arts', value)
       .then(res => {
-        localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
-        history.push('/dashboard/start-favas');
+        console.log(res.data.data.art);
+        console.log(value);
+        const data = {
+          art_id: res.data.data.art.id
+        };
+        http
+          .post('/arts/user-art-selection', data)
+          .then(res => {
+            localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
+            let id = res.data.data.user.art.id;
+            let name = res.data.data.user.art.name;
+            localStorage.setItem('art_id', id);
+            dispatch({
+              type: SELECT_USER,
+              payload: [id, name]
+            });
+            history.push('/dashboard/start-favas');
+          });
       });
   }
 };

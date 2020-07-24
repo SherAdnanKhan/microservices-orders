@@ -95,7 +95,7 @@ export const unfavUser = faved_to => dispatch => {
   dispatch({ type: UNFAV_USER, payload: false });
 
   http
-    .delete(`/favs/${faved_to}`)
+    .delete(`/favs/fave/${faved_to}`)
     .then()
     .catch(() => {
       dispatch({ type: FAV_USER, payload: true });
