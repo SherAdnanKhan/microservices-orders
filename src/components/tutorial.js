@@ -20,7 +20,7 @@ const Tutorial = ({ user }) => {
     <div className='wrapper tutorialScreen'>
       <div
         className={
-          activeTab === 2 || activeTab === 3
+         activeTab === 2 ||   activeTab === 3 || activeTab === 4
             ? 'left-menu add-left'
             : 'left-menu'
         }
@@ -38,7 +38,7 @@ const Tutorial = ({ user }) => {
       </div>
       <div
         className={
-          activeTab === 4 || activeTab === 5
+           activeTab === 5 || activeTab === 6 || activeTab === 7
             ? 'right-menu add-right'
             : 'right-menu'
         }
@@ -49,6 +49,9 @@ const Tutorial = ({ user }) => {
         </div>
         <div className="icons">
           <img src="/assets/images/mzflash.png" alt="" />
+        </div>
+        <div className="icons">
+          <img src="/assets/images/strokeiconem.png" alt="" />
         </div>
       </div>
       {/* <div className={activeTab === 6 ? 'botom-menu add-botom' : 'botom-menu'}>
@@ -83,11 +86,9 @@ const Tutorial = ({ user }) => {
         {activeTab === 1
           && (
             <div className="tabs1">
-              <p style={{ backgroundColor: user.feel.color_code }}>
-                One last thing, if you like something just give it a
-                {' '}
-                <strong>Stroke</strong>
-              , as in Brush-stroke or Stroke of genius
+              <p style={{ backgroundColor: user.feel.color_code }}> 
+                Welcome Akif Here is a Qucik Introduction to your Menus
+            
               </p>
             </div>
           )}
@@ -95,25 +96,35 @@ const Tutorial = ({ user }) => {
           && (
             <div className="tabs2">
               <p style={{ backgroundColor: user.feel.color_code }}>
-                <strong>StrqChat:</strong>
+                <strong>Lobby:</strong>
                 {' '}
-                direct artist to artist communication
+                The Feed of those you are faving
               </p>
             </div>
           )}
+
         {activeTab === 3
           && (
             <div className="tabs3">
               <p style={{ backgroundColor: user.feel.color_code }}>
                 {' '}
-                <strong>MzFlash:</strong>
+                <strong>Studio:</strong>
                 {' '}
-              public messaging board,
-              with access to the MzFlashes of artists you are faving as well.
+                  your personal page whcih includes your profile,posts etc
               </p>
             </div>
           )}
-        {activeTab === 4
+          {activeTab === 4  
+          && (
+            <div className="tabs4">
+              <p style={{ backgroundColor: user.feel.color_code }}>
+                <strong>Exhibit:</strong>
+                {' '}
+              add a post to any of your galleries
+              </p>
+            </div>
+          )}
+        {activeTab === 5
           && (
             <div className="tabs4">
               <p style={{ backgroundColor: user.feel.color_code }}>
@@ -123,7 +134,7 @@ const Tutorial = ({ user }) => {
               </p>
             </div>
           )}
-        {activeTab === 5
+        {activeTab === 6
           && (
             <div className="tabs5">
               <p style={{ backgroundColor: user.feel.color_code }}>
@@ -135,35 +146,24 @@ const Tutorial = ({ user }) => {
               </p>
             </div>
           )}
-        {activeTab === 6
+           {activeTab === 7
           && (
-            <div className="tabs6">
+            <div className="tabs5">
               <p style={{ backgroundColor: user.feel.color_code }}>
-                <strong>Exhibit:</strong>
                 {' '}
-              add a post to any of your galleries
+                <strong>Stroke:</strong>
+                {' '}
+                  one last thing, if you like something just give it a stoke,as in brush-stroke or stroke of genious
               </p>
             </div>
           )}
-        {activeTab === 7
+        {activeTab === 8
           && (
             <div className="tabs7">
               <p style={{ backgroundColor: user.feel.color_code }}>
                 Click the tabs to open them, otherwise they remain out of your
                 way so that you may fully enjoy the exhibits
               </p>
-            </div>
-          )}
-        {activeTab === 8
-          && (
-            <div className="tabs8">
-              <p style={{ backgroundColor: user.feel.color_code }}>
-                One last thing, if you like something just give it a
-                {' '}
-                <strong>Stroke</strong>
-              , as in Brush-stroke or Stroke of genius
-              </p>
-              <img src="/assets/images/strokeiconem.png" alt="" />
             </div>
           )}
         {activeTab === 9
