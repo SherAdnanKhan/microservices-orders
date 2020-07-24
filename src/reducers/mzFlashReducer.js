@@ -16,7 +16,7 @@ import {
 const initialState = {
   myFeeds: null,
   collectiveFeeds: {
-    current_page: 1,
+    current_page: 0,
     data: [],
     first_page_url: null,
     from: 0,
@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
         ...state,
         collectiveFeeds: {
           ...state.collectiveFeeds,
-          data: state.collectiveFeeds.data
+          data: state.collectiveFeeds.current_page !== action.payload.current_page && state.collectiveFeeds.data
             ? [...state.collectiveFeeds.data, ...action.payload.data]
             : action.payload.data,
           current_page: action.payload.current_page,

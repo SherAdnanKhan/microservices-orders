@@ -42,7 +42,14 @@ const Header = ({ feelColor }) => {
             />
           </div>
         </div>
-        <Link to="" className="feelIcon">
+        <Link
+          to=""
+          className="feelIcon"
+          style={{
+            borderLeft: '1px solid black',
+            borderBottom: '1px solid black'
+          }}
+        >
           <img alt="" src="/assets/images/icons/feelicon.png" />
         </Link>
       </div>

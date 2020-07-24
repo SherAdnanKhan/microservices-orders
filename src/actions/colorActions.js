@@ -9,7 +9,12 @@ export const changeFeelColor = (colorId, callback) => () => {
     .put(`/users/feel-color?feel_id=${colorId}`)
     .then(res => {
       localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
-      socket.emit('userColorChange', res.data.data.user);
+
+      if (!socket.connected) {
+        updateFeelColor(res.data.data.user?.feel?.color_code);
+      } else {
+        socket.emit('userColorChange', res.data.data.user);
+      }
       callback && callback();
     });
 };
@@ -22,7 +27,6 @@ export const getAllFeelColors = () => dispatch => {
         type: GET_ALL_FEEL_COLORS,
         payload: res.data.data.feels
       })
-      console.log(res.data.data.feels);
     });
 };
 

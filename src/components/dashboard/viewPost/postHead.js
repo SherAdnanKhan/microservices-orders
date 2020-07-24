@@ -14,8 +14,8 @@ const PostHead = ({ post }) => {
             />
           }
           <>
-            {post.user.art.parent && post.user.art.parent.name + '/'}
-            {post.user.art.name && post.user.art.name}
+            {post?.user?.art?.parent && post.user.art.parent.name + '/'}
+            {post?.user?.art?.name && post.user.art.name}
           </>
         </div>
       }

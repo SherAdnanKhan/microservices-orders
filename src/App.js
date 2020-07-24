@@ -57,7 +57,6 @@ function App() {
       socket.emit('joinUser', currentUser);
 
       socket.on('notifyColrChange', (user) => {
-        console.log(user)
         localStorage.setItem(userKey, JSON.stringify(user));
         dispatch(updateFeelColor(user.feel.color_code))
       });
