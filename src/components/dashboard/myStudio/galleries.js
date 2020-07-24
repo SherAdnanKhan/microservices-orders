@@ -12,7 +12,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
                 <img
-                  src={gallery?.image ? gallery?.image?.path : '/assets/images/galleryicon.png'}
+                  src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
                   alt=""
                 />
               </div>

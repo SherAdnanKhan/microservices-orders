@@ -258,14 +258,13 @@ const FaveSection = ({
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
                     </div>
-                    <div className="actions-repost">
-                      <button
-                        className="repost"
-                        onClick={e => onRepost(e, feed)}
-                      >
-                        Repost
-                        </button>
-                    </div>
+                    
+                     <div className="actions-repost">
+                    <img src="/assets/images/icons/repost_icon.png" 
+                     onClick={e => onRepost(e, feed)} alt=""
+                    >
+                    </img>
+                  </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -417,14 +416,12 @@ const FaveSection = ({
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
                     </div>
-                    <div className="actions-repost">
-                      <button
-                        className="repost"
-                        onClick={e => onRepost(e, feed)}
-                      >
-                        Repost
-                        </button>
-                    </div>
+                    <div className="actions-repost"  >
+                <img  src="/assets/images/icons/repost_icon.png" 
+                 onClick={e=> onRepost(e,feed) }alt=""
+               >
+                </img>
+              </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -577,13 +574,11 @@ const FaveSection = ({
                       />
                     </div>
                     <div className="actions-repost">
-                      <button
-                        className="repost"
-                        onClick={e => onRepost(e, feed)}
-                      >
-                        Repost
-                        </button>
-                    </div>
+                    <img src="/assets/images/icons/repost_icon.png" 
+                     onClick={e => onRepost(e, feed)} alt=""
+                    >
+                    </img>
+                  </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -733,13 +728,11 @@ const FaveSection = ({
                       />
                     </div>
                     <div className="actions-repost">
-                      <button
-                        className="repost"
-                        onClick={e => onRepost(e, feed)}
-                      >
-                        Repost
-                      </button>
-                    </div>
+                    <img src="/assets/images/icons/repost_icon.png" 
+                     onClick={e => onRepost(e, feed)} alt=""
+                    >
+                    </img>
+                  </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&

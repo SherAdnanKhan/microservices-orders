@@ -227,13 +227,12 @@ const MzFlash = () => {
                       onUnstroke={() => handleUnstroke(feed.id, feed.user)}
                     />
                   </div>
+
                   <div className="actions-repost">
-                    <button
-                      className="repost"
-                      onClick={e => handleRepost(e, feed)}
+                    <img src="/assets/images/icons/repost_icon.png" style={{width:"30px"}}
+                      onClick={e => handleRepost(e, feed)} alt=""
                     >
-                      Repost
-                    </button>
+                    </img>
                   </div>
                 </div>
                 <div className="view-comment">
