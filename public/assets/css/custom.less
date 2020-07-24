@@ -3960,6 +3960,10 @@ img {
           padding: 0px;
           width: 30%;
           margin: 5px auto;
+          box-sizing: border-box;
+          @media @mobile {
+            width: 55% !important;
+          }
         
           .f-header{
             background-color: black;
@@ -3981,24 +3985,34 @@ img {
               flex-direction: row;
               .main-img{
                 width: 70%;
-                height: 250px;
+                height: auto;
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding:5px;
                 img{
                   width: 100%;
+                  height: 100%;
                 }      
               }
               .other-img{
                 width: 30%;
-                height: 250px;
+                height: 450px;
                 overflow-y:scroll;
                 display: flex;
                 flex-direction: column;
+                padding:3px;
+                @media @mobile {
+                  height: 298px;
+                }
                 
                 img{
                   width: 100%;
+                  height: 24vh;
+                  @media @mobile {
+                    height: 15vh;
+                  }
                 }
               }
             }
@@ -4160,6 +4174,9 @@ img {
             width: 100%;
             height: 100%;
           }
+        }
+        a:hover {
+          color: #fff;
         }
       }
       .favas-avatar{
