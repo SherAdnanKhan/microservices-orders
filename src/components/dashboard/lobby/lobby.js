@@ -18,7 +18,8 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm }
+    postView: { ncomm },
+    feelColor: { feelColor }
   } = useSelector(state => state);
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
@@ -117,12 +118,20 @@ const Lobby = () => {
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
-        <div className="popUpChatMsg">
+        <div
+          className="popUpChatMsg"
+          style={{ backgroundColor: feelColor }}
+        >
           <Link to="/dashboard/conversations">
             <img src="/assets/images/strqicon.png" alt="" />
           </Link>
-          <div className="noticeicons">
-            <div className="noticecountright">{unreadCount}</div>
+          <div className="noticeicons" >
+            <div
+              className="noticecountright"
+              style={{ border: `2px solid ${feelColor}` }}
+            >
+              {unreadCount}
+            </div>
           </div>
         </div>
       }
