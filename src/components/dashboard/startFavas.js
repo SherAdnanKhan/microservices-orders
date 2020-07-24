@@ -61,9 +61,15 @@ const StartFaves = () => {
                     <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" />
                   </div>
                   <div className="other-img">
-                    {user.galleries[0].posts.map((post, in_key) => (
+                    {/* {user.galleries[0].posts.map((post, in_key) => (
                       <img key={in_key} src={post.image.path} alt="avatar" />
-                    ))}
+                    ))} */}
+                    <img src="/assets/images/pic1.png" alt="avatar" />
+                    <img src="/assets/images/pic1.png" alt="avatar" />
+                    <img src="/assets/images/pic1.png" alt="avatar" />
+                    <img src="/assets/images/pic1.png" alt="avatar" />
+                    <img src="/assets/images/pic1.png" alt="avatar" />
+
                   </div>
                 </div>
                 <h2>{user.galleries[0].title}</h2>
