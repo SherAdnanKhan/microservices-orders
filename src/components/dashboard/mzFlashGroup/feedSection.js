@@ -282,13 +282,11 @@ const FeedSection = ({
                   onUnstroke={() => onUnstroke(feed.id, feed.user)}
                 />
               </div>
-              <div className="actions-repost">
-                <button
-                  className="repost"
-                  onClick={e => onRepost(e, feed)}
-                >
-                  Repost
-                </button>
+              <div className="actions-repost"  >
+                <img  src="/assets/images/icons/repost_icon.png" 
+                 onClick={e=> onRepost(e,feed) }alt=""
+               >
+                </img>
               </div>
             </div>
             <div className="view-comment">
