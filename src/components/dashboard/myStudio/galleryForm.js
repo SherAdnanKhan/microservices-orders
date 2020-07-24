@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Input from '../../common/input';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGallery, createGallery, removeGalleryImage } from '../../../actions/galleryActions';
 import Spinner from '../../common/spinner';
 import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
+import UserContext from '../../../context/userContext';
 
 const GalleryForm = ({ onModelClose, gallery }) => {
+  const currentUser = useContext(UserContext);
   const [imageUrl, setImageUrl] = useState('/assets/images/gray.png');
 
   const [error, setError] = useState('');
@@ -126,7 +128,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             <div className="add-nag-icon">
               {gallery && gallery.image &&
                 <div className="nag">
-                  <div className="nag-icon" onClick={handleRemove}>
+                  <div className="nag-icon" style={{ backgroundColor: currentUser.feel.color_code }} onClick={handleRemove}  >
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
                   <div className="nag-btn">
@@ -135,7 +137,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                 </div>
               }
               <div className="nag">
-                <div className="nag-icon">
+                <div className="nag-icon" style={{ backgroundColor: currentUser.feel.color_code }}>
                   <img
                     alt=""
                     src="/assets/images/plus.png"
@@ -162,7 +164,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             error={error}
           />
           <div className="actions">
-            <button> Save </button>
+            <button style={{ backgroundColor: currentUser.feel.color_code }}> Save </button>
           </div>
         </form>
       </div>
