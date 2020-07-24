@@ -2156,7 +2156,7 @@ img {
     padding: 5px 0 5px 0;
     z-index: 9;
     position: relative;
-    margin-top:10px;
+    // margin-top:10px;
     margin-left:13px;
     .scenesmall {
       display: inline-block;
@@ -5139,7 +5139,7 @@ img {
     height: 50px;
     position: fixed;
     width: 100%;
-    top: 50px;
+    top: 48px;
     z-index: 10;
 
     &.gold {      
@@ -5172,6 +5172,9 @@ img {
 
     i{
       margin: 0 53px;
+      @media @mobile{
+        margin: 0 20px;
+      }
     }
     .artcubecase{
       width: auto;
@@ -5190,6 +5193,9 @@ img {
     .call-btn{
       margin-left: auto;
       margin-right: 53px;
+      @media @mobile{
+        margin-right:12px;
+      }
       button{
         margin-left: 10px;
         background: #000;
@@ -5402,10 +5408,14 @@ img {
           }
           .msgImg img {
             width: 215px !important;
-            height: 250px !important;
+            height: 230px !important;
             margin-left: 0;
             border-radius: 5px;
             opacity:1;
+            @media @mobile {
+              width: 175px !important;
+              height: 175px !important;
+            }
           }
 
           .msgVideo {
@@ -5556,6 +5566,9 @@ img {
     justify-content: center;
     .add-items-btn{
       margin-right:15px;
+      @media @mobile {
+        margin-righta: 0px;
+      }
     }
     i{
       cursor: pointer;
@@ -5574,9 +5587,11 @@ img {
       font-variant: small-caps;
       color: white;
       border-radius: 10px;
-      
       &::placeholder {
         color: white;
+      }
+      @media @mobile {
+        width: 65%;
       }
     }
     .btn-send{
