@@ -97,7 +97,13 @@ const ArtSelection = ({ user }) => {
                 && art.children.map((subart, j) => (
                   <div
                     key={j}
-                    style={{ display: clickMainArt === subart.parent_id ? 'block' : 'none' }}
+                    style={{
+                      display:
+                        clickMainArt === subart.parent_id
+                          ? 'block'
+                          : 'none',
+                      backgroundColor: user.feel.color_code
+                    }}
                     className="art-selection-table-sub-element"
                   >
                     <input
@@ -116,7 +122,15 @@ const ArtSelection = ({ user }) => {
                     <label>{subart.name}</label>
                   </div>
                 ))}
-              <div className="art-selection-table-sub-element" style={{ display: art.id === clickMainArt ? 'block' : 'none' }}>
+              <div
+                className="art-selection-table-sub-element"
+                style={{
+                  display:
+                    art.id === clickMainArt
+                      ? 'block'
+                      : 'none',
+                  backgroundColor: user.feel.color_code
+                }}>
                 <input
                   type="radio"
                   name="artsubRadio"

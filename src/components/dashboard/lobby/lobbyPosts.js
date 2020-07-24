@@ -55,7 +55,7 @@ const LobbyPosts = ({
           ? 'valut-icon show-valut'
           : 'valut-icon'
       }>
-        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
       <div className="post-body" onClick={() => onActivePost(post)}>

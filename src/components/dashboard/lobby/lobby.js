@@ -32,12 +32,15 @@ const Lobby = () => {
   useEffect(() => {
     dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id));
-    dispatch(getCollectiveFeeds());
   }, [dispatch, user_art_id]);
 
   useEffect(() => {
     dispatch(clearNcomm);
     setActiveNcomm('');
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCollectiveFeeds());
   }, [dispatch])
 
   const handleEnter = (e, feedId, comment) => {

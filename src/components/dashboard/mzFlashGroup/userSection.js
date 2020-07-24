@@ -7,7 +7,6 @@ const UserSection = ({
   activeUserList, favouriteUsers, sprfvsUsers,
   faveAndSprfvsUsers, onActiveUser
 }) => {
-  console.log(favouriteUsers)
 
   return (
     <div className="col-2 box-1">

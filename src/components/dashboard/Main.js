@@ -78,7 +78,7 @@ const Main = () => {
   };
 
   return (
-    <div className={`frameReady ${feelColor}`}>
+    <div className='frameReady'>
       <Header feelColor={feelColor} />
       <ChangeColor onColorChange={handleColorChange} />
       <LeftBorder feelColor={feelColor} />
