@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../../common/input';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGallery, createGallery, removeGalleryImage } from '../../../actions/galleryActions';
@@ -7,7 +7,6 @@ import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
 import {userKey} from "../../../constants/keys";
 const GalleryForm = ({ onModelClose, gallery }) => {
-  const currentUser = useContext(UserContext);
   const [imageUrl, setImageUrl] = useState('/assets/images/gray.png');
 
   const [error, setError] = useState('');
