@@ -4,14 +4,14 @@ import { CHANGE_COLOR, GET_ALL_FEEL_COLORS } from '../constants/actionTypes';
 import socket from '../services/socketService';
 
 
-export const changeFeelColor = (colorId, callback) => () => {
+export const changeFeelColor = (colorId, callback) => (dispatch) => {
   http
     .put(`/users/feel-color?feel_id=${colorId}`)
     .then(res => {
       localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
 
       if (!socket.connected) {
-        updateFeelColor(res.data.data.user?.feel?.color_code);
+        dispatch(updateFeelColor(res.data.data.user?.feel?.color_code));
       } else {
         socket.emit('userColorChange', res.data.data.user);
       }

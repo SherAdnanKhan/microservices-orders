@@ -1,13 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import {userKey} from "../../../constants/keys";
 
-const RightBorder = ({ feelColor }) => {
+const RightBorder = () => {
   const history = useHistory();
-
+  const feelColor=JSON.parse(localStorage.getItem(userKey))
   return (
     <div
       className="right right-border"
-      style={{ backgroundColor: feelColor }}
+      style={{ backgroundColor: feelColor.feel.color_code }}
     >
       <img
         alt=""
