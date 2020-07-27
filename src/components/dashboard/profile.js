@@ -91,7 +91,7 @@ const Profile = () => {
             <div className="back-icon">
               <i className="fa fa-arrow-left clickable" onClick={handleBackPress} />
             </div>
-            <p  >Edit Your Profile Cube {user.username}</p>
+            <p>Edit Your Profile Cube {user.username}</p>
           </div>
           <div className="wrapper">
             <div className="edit-profile">
