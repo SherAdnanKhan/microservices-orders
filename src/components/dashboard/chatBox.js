@@ -421,12 +421,16 @@ class ChatBox extends Component {
         {
           progress > 0 &&
           <div>
-            <div
-              className='progressBar'
-              style={{ backgroundColor: currentUser.feel.color_code }}
-            >
+            <div className='progressBar'>
               <span className="text"> {progress}% </span>
-              <div className="percent" style={{ width: `${progress}%` }}></div>
+              <div
+                className="percent"
+                style={{
+                  width: `${progress}%`,
+                  backgroundColor: currentUser.feel.color_code
+                }}
+              >
+              </div>
             </div>
           </div>
         }
