@@ -11,6 +11,8 @@ import Dashboard from './components/dashboard/dashboard';
 import history from "./components/common/history";
 import Tutorial from './components/tutorial';
 import { getCurrentUser, getAuthToken } from './actions/authActions';
+import StartFaves from './components/dashboard/startFavas';
+
 import SocketContext from './context/socketContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,6 +34,7 @@ import {
   POST_STROKE,
   POST_UNSTROKE
 } from './constants/keys';
+
 
 if (getCurrentUser()) {
   const user = getCurrentUser();
@@ -128,8 +131,9 @@ function App() {
         <Route exact path='/register' component={RegisterForm} />
         <ProtectedRoute exact path="/welcome" component={Welcome} />
         <ProtectedRoute exact path="/artselection" component={ArtSelection} />
-        <ProtectedRoute path='/dashboard/:page?' component={Dashboard} />
+        <ProtectedRoute exact path="/start-favas" component={StartFaves} />
         <ProtectedRoute path="/tutorial" component={Tutorial} />
+        <ProtectedRoute path='/dashboard/:page?' component={Dashboard} />
         <Route exact path='/home' component={Home} />
         <Redirect exact from='/' to='/home' />
       </Switch>

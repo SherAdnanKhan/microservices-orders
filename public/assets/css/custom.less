@@ -1,6 +1,8 @@
 @import 'feelHistory';
 @import 'video';
 @import 'startFave';
+@import 'artSelection';
+
 @font-face {
   font-family: "Font Awesome 5 Free";
   font-style: normal;
@@ -19,6 +21,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
+
 
 
 @bodyBG: #000000;
@@ -2352,111 +2355,6 @@ img {
 }
 /* small cube center in header end */
 
-// Styling for the artSelection Page
-
-.art-selection {
-  width: 90%;
-  height: 100vh;
-  margin: 0px auto;
-
-
-  &.gold {
-    .art-selection-nextBtn button{
-      background: @color_gold;
-    }
-  }
-  &.orange {
-    .art-selection-nextBtn button{
-      background: #ffa500;
-    }
-    
-  }
-  &.gray {
-    .art-selection-nextBtn button{
-      background: #808080;
-    }
-    
-  }
-  &.limegreen {
-    .art-selection-nextBtn button{
-      background: #32cd32;
-    }
-    
-  }
-  &.red {
-    .art-selection-nextBtn button{
-      background: #ff0000;
-    }
-    
-  }
-  &.purple {
-    .art-selection-nextBtn button{
-      background: #800080;
-    }
-    
-  }
-  &.dodgerblue {
-    .art-selection-nextBtn button{
-      background: #1e90ff; 
-    }
-  }
-
-  .art-selection-header{
-    p {
-      text-align: center;
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-  }
-  .art-selection-table{
-    max-height: 100vh;
-    overflow-y: scroll;
-    border: 1px solid white;
-    text-align: left;
-    margin-top: 0.2px;
-    .art-selection-table-element{
-      margin: 2px 10px;
-      padding: 1px
-    }
-    .art-selection-table-sub-element{
-      padding: 12px 25px;
-      background: #444;
-      border: 1px solid darkgray;
-      input[type="text"]:nth-last-child(1) {
-        padding: 15px 5px;
-      }
-      input[type="radio"]:nth-last-child(1) {
-        margin: 0px 5px 0px 30px !important;
-        display: inline-block;
-      }
-    }
-    .art-selection-table-sub-element:nth-last-child(1) {
-       padding: 0px;
-       input[type="radio"] {
-        margin: 0px 5px 0px 30px !important;
-       
-      }
-    }
- 
-    .art-selection-table-sub-element:hover{
-      background: gray;
-    }
-  }
-  .art-selection-nextBtn{
-    width: 90%;
-    text-align: center;
-    margin: 35px auto;
-    button {
-      padding: 12px 5px;
-      width: 100%;
-      background-color: limegreen;
-      border-radius:20px;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-    }
-  }
-}
 // Ind start
 
 .selectMood {
@@ -3920,6 +3818,7 @@ img {
     background: #fff;
   }
 }
+
 
 // Faving page start
 .favas{
