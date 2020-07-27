@@ -87,11 +87,11 @@ const Profile = () => {
       <div className="edit-profile-page">
         {loading && <Spinner />}
         <div className="edit-user-page">
-          <div className="header-bar" >
+          <div className="header-bar" style={{ backgroundColor: feelColor }} >
             <div className="back-icon">
               <i className="fa fa-arrow-left clickable" onClick={handleBackPress} />
             </div>
-            <p>Edit Your Profile Cube {user.username}</p>
+            <p  >Edit Your Profile Cube {user.username}</p>
           </div>
           <div className="wrapper">
             <div className="edit-profile">
