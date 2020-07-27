@@ -1,16 +1,18 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Search from './search';
+import {userKey} from "../../../constants/keys";
 
-const Header = ({ feelColor }) => {
+const Header = () => {
   const history = useHistory();
+  const feelColor=JSON.parse(localStorage.getItem(userKey))
 
   return (
     <>
       <div
         className="top"
         id="main-menu"
-        style={{ backgroundColor: feelColor }}
+        style={{ backgroundColor: feelColor.feel.color_code }}
       >
         <div className="contentFit d-flex">
           <div className="logo-icon">

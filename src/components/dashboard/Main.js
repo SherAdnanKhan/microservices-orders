@@ -79,10 +79,10 @@ const Main = () => {
 
   return (
     <div className='frameReady'>
-      <Header feelColor={feelColor} />
+      <Header />
       <ChangeColor onColorChange={handleColorChange} />
-      <LeftBorder feelColor={feelColor} />
-      <RightBorder feelColor={feelColor} />
+      <LeftBorder />
+      <RightBorder />
       <Suspense fallback={<div></div>}>
         <Component />
       </Suspense>
