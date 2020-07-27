@@ -16,7 +16,6 @@ const HorizontalSlider = ({ children, slidesToShow = '' }) => {
       </i>
     );
   }
-
   function NextArrow({ onClick, style }) {
     return (
       <i
@@ -27,18 +26,16 @@ const HorizontalSlider = ({ children, slidesToShow = '' }) => {
       </i>
     );
   }
-
   const [settings] = useState({
     arrows: true,
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: slidesToShow ? slidesToShow : children?.length === 2 ? 2 : 3,
+    slidesToShow: slidesToShow ? slidesToShow : children?.length === 2 ? 2 :children?.length === 1 ? 1 : 3,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />
   });
-
   return (
     <div
       className="my-slider-horizontal"
