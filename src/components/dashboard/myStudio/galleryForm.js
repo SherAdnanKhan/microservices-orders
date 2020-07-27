@@ -5,12 +5,7 @@ import { updateGallery, createGallery, removeGalleryImage } from '../../../actio
 import Spinner from '../../common/spinner';
 import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
-<<<<<<< HEAD
 import {userKey} from "../../../constants/keys";
-=======
-import UserContext from '../../../context/userContext';
-
->>>>>>> 64f1d6026d49e8838197a14df3ec0f14625ce176
 const GalleryForm = ({ onModelClose, gallery }) => {
   const currentUser = useContext(UserContext);
   const [imageUrl, setImageUrl] = useState('/assets/images/gray.png');
@@ -135,11 +130,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             <div className="add-nag-icon">
               {gallery && gallery.image &&
                 <div className="nag">
-<<<<<<< HEAD
                   <div className="nag-icon" style={{backgroundColor:feelColor.feel.color_code}} onClick={handleRemove}>
-=======
-                  <div className="nag-icon" style={{ backgroundColor: currentUser.feel.color_code }} onClick={handleRemove}  >
->>>>>>> 64f1d6026d49e8838197a14df3ec0f14625ce176
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
                   <div className="nag-btn" style={{backgroundColor:feelColor.feel.color_code}}> 
@@ -148,11 +139,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                 </div>
               }
               <div className="nag">
-<<<<<<< HEAD
                 <div className="nag-icon" style={{backgroundColor:feelColor.feel.color_code}}>
-=======
-                <div className="nag-icon" style={{ backgroundColor: currentUser.feel.color_code }}>
->>>>>>> 64f1d6026d49e8838197a14df3ec0f14625ce176
                   <img
                     alt=""
                     src="/assets/images/plus.png"
@@ -183,11 +170,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
           {/* </div> */}
        
           <div className="actions">
-<<<<<<< HEAD
             <button style={{backgroundColor:feelColor.feel.color_code}}> Save </button>
-=======
-            <button style={{ backgroundColor: currentUser.feel.color_code }}> Save </button>
->>>>>>> 64f1d6026d49e8838197a14df3ec0f14625ce176
           </div>
         </form>
       </div>
