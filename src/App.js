@@ -10,7 +10,7 @@ import Welcome from './components/welcome';
 import Dashboard from './components/dashboard/dashboard';
 import history from "./components/common/history";
 import Tutorial from './components/tutorial';
-import { getCurrentUser } from './actions/authActions';
+import { getCurrentUser, getAuthToken } from './actions/authActions';
 import SocketContext from './context/socketContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -54,7 +54,8 @@ function App() {
 
   useEffect(() => {
     if (currentUser) {
-      socket.emit('joinUser', currentUser);
+
+      socket.emit('joinUser', currentUser, getAuthToken());
 
       socket.on('notifyColrChange', (user) => {
         localStorage.setItem(userKey, JSON.stringify(user));
@@ -107,7 +108,7 @@ function App() {
 
     return () => {
       if (socket) {
-        socket.emit('disconnect');
+        socket.emit('disconnect', getAuthToken());
         socket.emit('userLeft', currentUser);
         socket.disconnect();
         socket.close();
