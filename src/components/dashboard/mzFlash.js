@@ -10,6 +10,7 @@ import { getUserStudio } from "../../actions/studioActions";
 import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed } from "../../actions/mzFlashActions";
 import Spinner from "../common/spinner";
 import { completeFormattedDate, formatTime } from "../../utils/helperFunctions";
+import {userKey} from "../../constants/keys";
 
 const MzFlash = () => {
   const [comments, setComments] = useState({});
@@ -85,7 +86,7 @@ const MzFlash = () => {
     dispatch(getUserStudio(slug));
     dispatch(getUserFeeds(slug))
   }, [dispatch, slug]);
-
+  const feelColor=JSON.parse(localStorage.getItem(userKey));
   return (
     <div className='mz-flash-page'>
       {loading && <Spinner />}
@@ -109,18 +110,18 @@ const MzFlash = () => {
               <button
                 className="fav-btn clickable"
                 onClick={(e) => handleUnFave(e, userStudio.user.id)}
-                style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                style={{ backgroundColor: feelColor.feel.color_code }}
               >
                 FAVING
               </button>
             }
             {userStudio && !userStudio.has_faved &&
-              <button className="fav-btn clickable" onClick={(e) => handleFave(e, userStudio.user.id)}>FAVE</button>
+              <button className="fav-btn clickable" style={{ backgroundColor: feelColor.feel.color_code }} onClick={(e) => handleFave(e, userStudio.user.id)}>FAVE</button>
             }
           </div>
         </div>
 
-        <div className="fav-bar" style={{ backgroundColor: userStudio?.user.feel.color_code }}>
+        <div className="fav-bar" style={{ backgroundColor: feelColor.feel.color_code }}>
           <h3>MZ FLASH</h3>
         </div>
 
