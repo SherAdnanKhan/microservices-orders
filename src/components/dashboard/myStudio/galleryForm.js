@@ -5,8 +5,7 @@ import { updateGallery, createGallery, removeGalleryImage } from '../../../actio
 import Spinner from '../../common/spinner';
 import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
-import UserContext from '../../../context/userContext';
-
+import {userKey} from "../../../constants/keys";
 const GalleryForm = ({ onModelClose, gallery }) => {
   const currentUser = useContext(UserContext);
   const [imageUrl, setImageUrl] = useState('/assets/images/gray.png');
@@ -104,12 +103,15 @@ const GalleryForm = ({ onModelClose, gallery }) => {
       setError(error);
     }
   };
+  const feelColor=JSON.parse(localStorage.getItem(userKey));
 
   return (
     <div className="gallery-form">
       {loading && <Spinner />}
       <div className="update-image">
-        <i className="fas fa-window-close" onClick={() => onModelClose(false)}></i>
+        <div className="nag-btn"  >
+        <i className="fas fa-window-close" style={{backgroundColor:feelColor.feel.color_code}} onClick={() => onModelClose(false)}></i>
+        </div>
         <ImageCropper
           imageUrl={imageUrl}
           toggle={toggle}
@@ -128,23 +130,23 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             <div className="add-nag-icon">
               {gallery && gallery.image &&
                 <div className="nag">
-                  <div className="nag-icon" style={{ backgroundColor: currentUser.feel.color_code }} onClick={handleRemove}  >
+                  <div className="nag-icon" style={{backgroundColor:feelColor.feel.color_code}} onClick={handleRemove}>
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
-                  <div className="nag-btn">
+                  <div className="nag-btn" style={{backgroundColor:feelColor.feel.color_code}}> 
                     Remove gallery cover
                   </div>
                 </div>
               }
               <div className="nag">
-                <div className="nag-icon" style={{ backgroundColor: currentUser.feel.color_code }}>
+                <div className="nag-icon" style={{backgroundColor:feelColor.feel.color_code}}>
                   <img
                     alt=""
                     src="/assets/images/plus.png"
                     onClick={handleRemove}
                   />
                 </div>
-                <div className="nag-btn">
+                <div className="nag-btn" style={{backgroundColor:feelColor.feel.color_code}}>
                   Add gallery cover
                 </div>
                 <input
@@ -156,15 +158,19 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             </div>
           </div>
           <div className="gallery-title"> {gallery && gallery.title}</div>
+          {/* <div className="nag-btn" style={{backgroundColor:feelColor.feel.color_code}}> */}
           <Input
             name="title"
             placeholder="Enter gallery title"
             value={data.title}
             onChange={handleChange}
             error={error}
+            style={{backgroundColor:feelColor.feel.color_code}}
           />
+          {/* </div> */}
+       
           <div className="actions">
-            <button style={{ backgroundColor: currentUser.feel.color_code }}> Save </button>
+            <button style={{backgroundColor:feelColor.feel.color_code}}> Save </button>
           </div>
         </form>
       </div>

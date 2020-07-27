@@ -494,17 +494,23 @@ class ChatBox extends Component {
             />
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+              <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
               Add Image
+              </div>  
               <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
             </label>
             <label>
-              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              Add Video
+            <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+            <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
+            Add Video
+              </div>  
               <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
             </label>
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              Add Document
+              <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
+            Add Document
+              </div>
               <input
                 type="file"
                 name="video"
