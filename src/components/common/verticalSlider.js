@@ -5,7 +5,6 @@ import Slider from "react-slick";
 
 const VerticalSlider = ({ children }) => {
   const sliderRef = useRef();
-
   function PrevArrow({ onClick, style }) {
     return (
       <i
@@ -34,7 +33,7 @@ const VerticalSlider = ({ children }) => {
     infinite: true,
     speed: 500,
     vertical: true,
-    slidesToShow: children?.length === 2 ? 2 : 3,
+    slidesToShow: children?.length === 2 ? 2 : children?.length === 1 ? 1 : 3,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
