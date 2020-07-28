@@ -1,14 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {userKey} from "../../../constants/keys";
+import {useSelector} from "react-redux";
 
 const LeftBorder = () => {
   const history = useHistory();
-  const feelColor=JSON.parse(localStorage.getItem(userKey));
+  const { feelColor } = useSelector(state => state.feelColor);
   return (
     <div
       className="left"
-      style={{ backgroundColor: feelColor.feel.color_code }}
+      style={{ backgroundColor:feelColor }}
     >
       <img
         className="lobby-img"

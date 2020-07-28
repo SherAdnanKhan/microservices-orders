@@ -8,7 +8,7 @@ const EditProfile = ({ myStudio, feelColor }) => {
       <div className="studioScreen">
         <div className="studioHead">
           <div className="procu">
-            {myStudio && <ProfileCube avatars={myStudio.user.avatars} />}
+            {myStudio && <ProfileCube avatars={myStudio.user.avatars} feelColor={feelColor} />}
           </div>
         </div>
         <div className="studioDetail">
