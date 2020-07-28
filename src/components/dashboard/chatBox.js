@@ -257,7 +257,11 @@ class ChatBox extends Component {
                 <Link to={`/dashboard/studio/${user.slug}`} >{user.username}</Link>
               </p>
               }
-              <span>Time Ago Active</span>
+              {user &&
+                user.online === 1 ?
+                <span>Online</span> : user && <span>{user.last_login}</span>
+              }
+
             </div>
 
             <div className="call-btn">
@@ -499,21 +503,21 @@ class ChatBox extends Component {
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
               <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
-              Add Image
-              </div>  
+                Add Image
+              </div>
               <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
             </label>
             <label>
-            <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-            <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
-            Add Video
-              </div>  
+              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+              <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
+                Add Video
+              </div>
               <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
             </label>
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
               <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
-            Add Document
+                Add Document
               </div>
               <input
                 type="file"

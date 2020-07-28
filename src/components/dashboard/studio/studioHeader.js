@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 const StudioHeader = ({ userStudio, onModelOpen, onModelOpen2 }) => {
   const history = useHistory();
-
   return (
     <div
       className="studio-header-bar"

@@ -1,18 +1,18 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Search from './search';
-import {userKey} from "../../../constants/keys";
+import {useSelector} from "react-redux";
 
 const Header = () => {
   const history = useHistory();
-  const feelColor=JSON.parse(localStorage.getItem(userKey))
+  const { feelColor } = useSelector(state => state.feelColor);
 
   return (
     <>
       <div
         className="top"
         id="main-menu"
-        style={{ backgroundColor: feelColor.feel.color_code }}
+        style={{ backgroundColor: feelColor }}
       >
         <div className="contentFit d-flex">
           <div className="logo-icon">
