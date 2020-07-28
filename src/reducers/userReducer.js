@@ -15,7 +15,8 @@ import {
   GET_FAV_AND_SPRFVS_USERS,
   STROKE_POST,
   UNSTROKE_POST,
-  ADD_POST_COMMENT
+  ADD_POST_COMMENT,
+  ONLINE_USERS,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -28,7 +29,8 @@ const initialState = {
   sprfvsUsers: null,
   userRequests: null,
   invitedUsers: null,
-  faveAndSprfvsUsers: null
+  faveAndSprfvsUsers: null,
+  onlineUsers: []
 };
 
 export default (state = initialState, action) => {
@@ -140,6 +142,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         faveAndSprfvsUsers: action.payload
+      };
+    case ONLINE_USERS:
+      return {
+        ...state,
+        onlineUsers: action.payload
       };
     default:
       return state;

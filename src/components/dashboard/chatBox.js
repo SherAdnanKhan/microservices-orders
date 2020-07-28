@@ -30,7 +30,7 @@ class ChatBox extends Component {
     progress: 0,
     page: 1,
     scrollHeight: '',
-    typingText: ''
+    typingText: '',
   };
 
   preview = createRef();
@@ -40,7 +40,6 @@ class ChatBox extends Component {
   componentDidMount() {
     const currentUser = getCurrentUser();
     this.props.getConversation(this.props.match.params.slug);
-
 
     socket.on('recieveMessage', async (data) => {
       await this.props.updateConversation(data.message);
@@ -89,6 +88,7 @@ class ChatBox extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     this.preview.current.scrollIntoView({ behavior: 'auto' });
+    console.log('online users: ', this.props.onlineUsers);
 
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
@@ -258,7 +258,7 @@ class ChatBox extends Component {
               </p>
               }
               {user &&
-                user.online === 1 ?
+                this.props.onlineUsers.some(slug => slug === user.slug) ?
                 <span>Online</span> : user && <span>{user.last_login}</span>
               }
 
@@ -535,7 +535,8 @@ class ChatBox extends Component {
 
 const mapStateToProps = state => {
   return {
-    conversation: state.conversation
+    conversation: state.conversation,
+    onlineUsers: state.user.onlineUsers
   }
 };
 
