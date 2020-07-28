@@ -30,7 +30,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
               <div className="editTool Edit" onClick={() => history.push('/dashboard/my-studio/profile')}>
                 <img src="/assets/images/paintbrush.png" alt="" className="clickable profile-brush" />
               </div>
-              <ProfileCube avatars={myStudio.user.avatars} />
+              <ProfileCube avatars={myStudio.user.avatars} feelColor={feelColor} />
             </div>
           }
         </div>
