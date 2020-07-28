@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Avatar from '../../common/avatar';
 import Input from '../../common/input';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { createFeed, getCollectiveFeeds } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
@@ -25,6 +25,7 @@ const FeedSection = ({
     video: null,
     image: null
   });
+  const {feelColor}=useSelector(state=>state.feelColor);
 
   const feedRef = useRef();
 
@@ -135,11 +136,12 @@ const FeedSection = ({
         {showModel &&
           <div className="add-img-vid-box">
             <i
+            style={{backgroundColor:feelColor}}
               className="fa fa-times close-add-box"
               onClick={() => onModelChange(false)}
             />
             <label>
-              <img alt="" src="/assets/images/plus.png" />
+              <img alt="" src="/assets/images/plus.png" style={{backgroundColor:feelColor}} />
               Add Image
               <input
                 type="file"
@@ -149,7 +151,7 @@ const FeedSection = ({
               />
             </label>
             <label>
-              <img alt="" src="/assets/images/plus.png" />
+              <img alt="" src="/assets/images/plus.png" style={{backgroundColor:feelColor}} />
               Add Video
               <input
                 type="file"
