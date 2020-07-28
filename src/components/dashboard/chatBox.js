@@ -62,8 +62,6 @@ class ChatBox extends Component {
 
     socket.on('read', (data) => {
       if (data.message.user.id !== currentUser.id) {
-        console.log('i will update my status');
-        console.log(data.user);
       }
 
       this.props.changeReadMessageStatus(data.message);
@@ -88,8 +86,6 @@ class ChatBox extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     this.preview.current.scrollIntoView({ behavior: 'auto' });
-    console.log('online users: ', this.props.onlineUsers);
-
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
     const currentUser = getCurrentUser();
