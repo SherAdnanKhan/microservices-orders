@@ -16,7 +16,8 @@ import {
   SPRFVS_USERS,
   USER_REQUESTS,
   INVITED_USERS,
-  GET_FAV_AND_SPRFVS_USERS
+  GET_FAV_AND_SPRFVS_USERS,
+  ONLINE_USERS
 } from '../constants/actionTypes';
 
 export const getFavourites = () => dispatch => {
@@ -191,5 +192,12 @@ export const getFaveAndSprfvsUsers = () => dispatch => {
         payload: res.data.data.faves
       });
     });
+};
+
+export const getOnlineUsers = (users) => {
+  return {
+    type: ONLINE_USERS,
+    payload: users
+  };
 };
 
