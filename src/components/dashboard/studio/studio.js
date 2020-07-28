@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
-import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly } from "../../../actions/studioActions";
+import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly, unSuperFav } from "../../../actions/studioActions";
 import Gallery from "./galleries";
 import Post from '../../common/posts';
 import PostBar from './postBar';
@@ -12,20 +12,19 @@ import StudioFooter from './studioFooter';
 import GalleryModel from './galleryModel';
 import Spinner from '../../common/spinner';
 import queryString from 'query-string';
+import UnSuperFvtModal from "./unsprfvtModal"; 
 
 const Studio = () => {
   const [showModel, setShowModel] = useState(false);
+  const [showModel2, setShowModel2] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
-
   const { params: { slug } } = useRouteMatch();
   const location = useLocation();
-
   const dispatch = useDispatch();
   const {
     studio: { userStudio, loading },
     gallery: { gallery, myGalleries },
   } = useSelector(state => state);
-
   useEffect(() => {
     const { gallery } = queryString.parse(location.search);
 
@@ -70,6 +69,9 @@ const Studio = () => {
   const handleShowModel = value => {
     setShowModel(value);
   };
+  const handleShowModel2 = value => {
+    setShowModel2(value);
+  };
 
   const handleChange = ({ target: input }, galleryId) => {
     const privacy = {
@@ -78,11 +80,23 @@ const Studio = () => {
       gallery_id: galleryId
     };
 
+  
+
     if (input.checked)
       dispatch(addToInviteOnly(privacy));
     else
       dispatch(removeFromInviteOnly(privacy));
   };
+  const handleUnSprFav= (status) => {
+    console.log("status=",status)
+    console.log("user is unfriend")
+    const privacy = {
+      privacy_type_id: 4,
+      user_id: userStudio.user.id,
+    };
+    dispatch(unSuperFav(privacy))
+    setShowModel2(false);
+  }
 
   return (
     <div className='studio'>
@@ -95,9 +109,19 @@ const Studio = () => {
           galleryInvitedList={userStudio && userStudio.gallery_invited_list}
           user={userStudio && userStudio.user}
         />
+
+      }
+         {showModel2 &&
+        <UnSuperFvtModal
+          myGalleries={myGalleries}
+          onModelClose={handleShowModel2}
+          onUnSprFav={handleUnSprFav}
+        />
+        
       }
       <StudioHeader
         userStudio={userStudio}
+        onModelOpen2={handleShowModel2}
         onModelOpen={handleShowModel}
       />
       <StudioDetail

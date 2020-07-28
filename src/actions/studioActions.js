@@ -6,7 +6,8 @@ import {
   ADD_TO_INVITE_ONLY,
   REMOVE_FROM_INVITE_ONLY,
   START_STUDIO_LOADER,
-  STOP_STUDIO_LOADER
+  STOP_STUDIO_LOADER,
+  UN_SUPER_FAV,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -67,6 +68,17 @@ export const addToSuperFavs = privacy => dispatch => {
       dispatch({
         type: ADD_TO_SPRFVS,
         payload: 2
+      });
+    });
+};
+export const unSuperFav = privacy => dispatch => {
+  http
+    .post('/user/privacy/unsprfvs', privacy)
+    .then((res) => {
+      toast.success('user UnSuper Favourtie Successfully');
+      dispatch({
+        type: UN_SUPER_FAV,
+        payload: 0
       });
     });
 };
