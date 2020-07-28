@@ -32,7 +32,8 @@ import {
   FEED_STROKE,
   FEED_UNSTROKE,
   POST_STROKE,
-  POST_UNSTROKE
+  POST_UNSTROKE,
+  usersOnlineKey
 } from './constants/keys';
 
 
@@ -106,6 +107,10 @@ function App() {
           dispatch(updateCounter());
           dispatch(updateConversationUnreadCount(data.message));
         }
+      });
+
+      socket.on('onlineUsers', data => {
+        localStorage.setItem(usersOnlineKey, data);
       });
     }
 
