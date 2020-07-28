@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StudioHeader = ({ userStudio, onModelOpen }) => {
+const StudioHeader = ({ userStudio, onModelOpen, onModelOpen2 }) => {
   const history = useHistory();
   return (
     <div
@@ -16,22 +16,29 @@ const StudioHeader = ({ userStudio, onModelOpen }) => {
 
       <div className="actions">
         <span className="sprfav" onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}> SPRFAV </span>
-        <img
-          src={userStudio?.is_sprfvs
-            ? '/assets/images/sprfvs_full.png'
-            : '/assets/images/sprfvs_empty.png'
-          }
-          alt=""
-          className="clickable sprvs-empty"
-          onClick={() => onModelOpen(true)}
-         
-        />
-        <img
-          onClick={() => onModelOpen(true)}
-          src="/assets/images/invite_gallery_icon.png"
-          className="clickable fav-icon invite-only"
-          alt=""
-        />
+        {userStudio?.is_sprfvs !== 0 ?
+          <img
+            src={
+              '/assets/images/sprfvs_full.png'
+            }
+            alt=""
+            className="clickable sprvs-empty"
+            onClick={() => onModelOpen2(true)}
+          /> :
+          <img
+            src={
+              '/assets/images/sprfvs_empty.png'
+            }
+            alt=""
+            className="clickable sprvs-empty"
+          />
+}
+          <img
+            onClick={() => onModelOpen(true)}
+            src="/assets/images/invite_gallery_icon.png"
+            className="clickable fav-icon invite-only"
+            alt=""
+          />
       </div>
 
       <div className="heart">

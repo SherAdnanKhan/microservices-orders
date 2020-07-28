@@ -11,6 +11,7 @@ import {
   REMOVE_FROM_INVITE_ONLY,
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
+  UN_SUPER_FAV,
 } from "../constants/actionTypes";
 import { SPRFVS } from "../constants/privacyTypes";
 
@@ -104,6 +105,14 @@ export default (state = initialState, action) => {
           is_sprfvs: action.payload
         }
       }
+      case UN_SUPER_FAV:
+        return {
+          ...state,
+          userStudio: {
+            ...state.userStudio,
+            is_sprfvs: action.payload
+          }
+        }
     case REMOVE_FROM_INVITE_ONLY:
       return {
         ...state,
