@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import {Link} from "react-router-dom";
 
 const PostBody = ({ post }) => {
   const [show, setShow] = useState(false);
@@ -50,6 +51,7 @@ const PostBody = ({ post }) => {
           {post && post.other_posts &&
             post.other_posts.map((other, index) => (
               <div className="boxes img-align" key={index}>
+                <Link to={`/dashboard/viewpost/${other.slug}`}>
                 {other.post_type <= 1 &&
                   <img
                     className="valut-img"
@@ -64,6 +66,7 @@ const PostBody = ({ post }) => {
                     Your browser does not support the video tag.
                   </video>
                 }
+                </Link>
               </div>
             ))
           }
