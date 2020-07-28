@@ -19,6 +19,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
   const { loading } = useSelector(state => state.gallery);
   const [croppedImage, setCroppedImage] = useState('');
   const [toggle, setToggle] = useState(false);
+  const { feelColor } = useSelector(state => state.feelColor);
 
   useEffect(() => {
     if (gallery) {
@@ -102,14 +103,13 @@ const GalleryForm = ({ onModelClose, gallery }) => {
       setError(error);
     }
   };
-  const feelColor=JSON.parse(localStorage.getItem(userKey));
 
   return (
     <div className="gallery-form">
       {loading && <Spinner />}
       <div className="update-image">
         <div className="nag-btn"  >
-        <i className="fas fa-window-close" style={{backgroundColor:feelColor.feel.color_code}} onClick={() => onModelClose(false)}></i>
+        <i className="fas fa-window-close" style={{backgroundColor:feelColor}} onClick={() => onModelClose(false)}></i>
         </div>
         <ImageCropper
           imageUrl={imageUrl}
@@ -129,23 +129,23 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             <div className="add-nag-icon">
               {gallery && gallery.image &&
                 <div className="nag">
-                  <div className="nag-icon" style={{backgroundColor:feelColor.feel.color_code}} onClick={handleRemove}>
+                  <div className="nag-icon" style={{backgroundColor:feelColor}} onClick={handleRemove}>
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
-                  <div className="nag-btn" style={{backgroundColor:feelColor.feel.color_code}}> 
+                  <div className="nag-btn" style={{backgroundColor:feelColor}}> 
                     Remove gallery cover
                   </div>
                 </div>
               }
               <div className="nag">
-                <div className="nag-icon" style={{backgroundColor:feelColor.feel.color_code}}>
+                <div className="nag-icon" style={{backgroundColor:feelColor}}>
                   <img
                     alt=""
                     src="/assets/images/plus.png"
                     onClick={handleRemove}
                   />
                 </div>
-                <div className="nag-btn" style={{backgroundColor:feelColor.feel.color_code}}>
+                <div className="nag-btn" style={{backgroundColor:feelColor}}>
                   Add gallery cover
                 </div>
                 <input
@@ -164,12 +164,12 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             value={data.title}
             onChange={handleChange}
             error={error}
-            style={{backgroundColor:feelColor.feel.color_code}}
+            style={{backgroundColor:feelColor}}
           />
           {/* </div> */}
        
           <div className="actions">
-            <button style={{backgroundColor:feelColor.feel.color_code}}> Save </button>
+            <button style={{backgroundColor:feelColor}}> Save </button>
           </div>
         </form>
       </div>
