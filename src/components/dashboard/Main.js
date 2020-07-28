@@ -4,7 +4,7 @@ import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import { useLocation } from 'react-router-dom';
 import ChangeColor from './layout/changeColor';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { changeFeelColor } from '../../actions/colorActions';
 
 const Main = () => {
@@ -12,7 +12,6 @@ const Main = () => {
   const split = location.pathname.split('/');
 
   const dispatch = useDispatch();
-  const { feelColor } = useSelector(state => state.feelColor);
 
   const Component = lazy(() => {
     switch (split[2]) {
