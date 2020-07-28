@@ -5,7 +5,6 @@ import { updateGallery, createGallery, removeGalleryImage } from '../../../actio
 import Spinner from '../../common/spinner';
 import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
-import {userKey} from "../../../constants/keys";
 const GalleryForm = ({ onModelClose, gallery }) => {
   const [imageUrl, setImageUrl] = useState('/assets/images/gray.png');
 
