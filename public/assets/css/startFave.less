@@ -1,4 +1,9 @@
-// Start Fav Page Start
+@desktop:   ~"only screen and (min-width: 960px) and (max-width: 1380px)";
+@tablet:    ~"only screen and (min-width: 769px) and (max-width: 959px)";
+@mobile:    ~"only screen and (max-width: 768px)";
+@landscape: ~"only screen and (orientation:landscape)";// Start Fav Page Start
+
+
 .fav-page{
   .header {
     height: 50px;
@@ -24,7 +29,6 @@
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-   
     @media @mobile {
       display: block;
     }
@@ -41,19 +45,20 @@
       padding: 10px;
 
       @media @mobile {
-        display: block;
-        max-width: 70%;
+        // display: block;
+        // max-width: 70%;
+        display: none;
       }  
     }
 
     .my-slider-horizontal {
       width: 50%;
-      margin: 60px auto 0 auto;
+      margin: 0px auto 0 auto;
       text-align: center;
       
       @media @mobile {
-        width: 80%;
-        margin: 60px auto 0 auto;
+        width: 70%;
+        margin: 40px auto 0 auto;
         display: block;
       }
 
@@ -139,6 +144,9 @@
                   // @media @mobile {
                   //   height: 298px;
                   // }
+                  @media @mobile {
+                    height: 350px;
+                  }
                   
                   img{
                     width: 100%;
