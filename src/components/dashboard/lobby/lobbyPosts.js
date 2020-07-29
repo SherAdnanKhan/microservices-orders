@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
@@ -6,12 +6,16 @@ import Comment from '../viewPost/comments';
 import { completeFormattedDate } from '../../../utils/helperFunctions';
 import ImageVideoSlider from '../../common/imageVideoSlider';
 import VideoPlayer from '../../common/videoPlayer';
+import UserContext from "../../../context/userContext";
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
   activeNcomm, onActivePost, activePost,
   onStrokePost, onUnstrokePost
 }) => {
+  const user = useContext(UserContext);
+  const loggedInUserId=user.id;
+
 
   return (
     <div className="post-page">
@@ -31,24 +35,30 @@ const LobbyPosts = ({
           </>
         }
       </div>
-
       <div className="image-option-box">
-
         <div className="add-img-vid-box">
           <div className="img-option">
+            {post.created_by === loggedInUserId ? 
+            <>     
             <p>Edit </p>
-            <p>Valut </p>
             <p>Delete </p>
+            <p>Valut </p>
             <p>Share </p>
             <p>Share On STRQ chat </p>
             <p>Turn off critiques </p>
+            </>
+            :
+            <>  
             <p>Report </p>
             <p>Unfave Gallery</p>
             <p>Repost </p>
+            <p>Share </p>
+            <p>Vault</p>
             <p>MzFlash </p>
+            </>
+           }
           </div>
         </div>
-
       </div>
       <div className={
         activePost.id === post.id
