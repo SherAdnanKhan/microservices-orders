@@ -100,7 +100,7 @@ input {
   display: block;
   overflow: auto;
   @media @mobile {
-  width:100vw;
+  width:95vw;
   }
 }
 
@@ -3191,7 +3191,7 @@ img {
   // width: 100%;
   // margin: 50px 0;
   .scr-inner{
-    margin: 6vw 3vw;
+    margin: 6vw 0vw;
     display: inline-flex;
     // display: flex;
     // width: 90%;
@@ -3425,6 +3425,9 @@ img {
   .gallery{
     width: 60%;
     text-align: center;
+    @media @mobile {
+      width: 50%;
+    }
     p{
       margin: 0;
     }
@@ -3661,6 +3664,9 @@ img {
   .gallery{
     width: 60%;
     text-align: center;
+    @media @mobile {
+      width: 50%;
+    }
     p{
       margin: 0;
     }
@@ -3965,8 +3971,11 @@ img {
             height: 100%;
           }
         }
-        a:hover {
+        a {
           color: #fff;
+          &:hover{
+            color:blue
+          }
         }
       }
       .favas-avatar{
@@ -4857,12 +4866,13 @@ img {
   bottom: 0;
   z-index: 10;
   background:#000000f5;
+  opacity: 0.7;
 
   .comment-bar{
     width: 100%;
     margin: 0 auto;
     border: 2px solid rgba(128,128,128,.5);
-    opacity: 0.7;
+    // opacity: 0.7;
   }
 
   .commnent-img{
