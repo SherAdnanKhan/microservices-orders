@@ -8,7 +8,7 @@ import { completeFormattedDate, formatTime } from '../../../utils/helperFunction
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
   activeTab, activeUser, onTabChange, onCommentChange,
-  activeFeedComment, onActiveFeedComment, onPostComment,
+  activeFeedComment, onActiveFeedComment, onPostComment,onPostModal,
   comments, onRepost, onStroke, onUnstroke, myFeeds, activeUserList
 }) => {
 
@@ -180,6 +180,8 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
+                          onClick={()=>onPostModal(true,feed.image)}
+                          
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -338,6 +340,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
+                          onClick={()=>onPostModal(true,feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -495,6 +498,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
+                          onClick={()=>onPostModal(true,feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -649,6 +653,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
+                          onClick={()=>onPostModal(true,feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites, getFaveAndSprfvsUsers, getSprfvsUsers } from '../../../actions/userActions';
+import PostModal from "./postModal";
 import UserContext from '../../../context/userContext';
 import Spinner from '../../common/spinner';
 import UserSection from './userSection';
@@ -27,8 +28,10 @@ const MzFlashGroup = () => {
   const [activeUser, setActiveUser] = useState('');
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
+  const [imagePath,setImagepath]=useState("");
 
   const [showModel, setShowModel] = useState(false);
+  const [showPostModel, setShowPostModel] = useState(false);
 
   const currentUser = useContext(UserContext);
   const dispatch = useDispatch();
@@ -40,6 +43,19 @@ const MzFlashGroup = () => {
       sprfvsFeeds, favesAndSprfvsFeeds, userFeeds
     }
   } = useSelector(state => state);
+
+  const handleShowModel= value => {
+    setShowModel(value);
+  };
+  const handlePostShowModel= (value,image) => {
+    if(value === true)
+    {
+      setImagepath(image.path)
+    }    
+    setShowPostModel(value);
+
+  };
+
 
   useEffect(() => {
     dispatch(getFavourites());
@@ -146,6 +162,12 @@ const MzFlashGroup = () => {
     <section className="mz-flash-group">
       {loading && <Spinner />}
       <div className="row">
+      {showPostModel &&
+        <PostModal
+          onPostModalClose={handlePostShowModel}
+          imagePath={imagePath}
+        />
+      }
         <UserSection
           favouriteUsers={favouriteUsers}
           sprfvsUsers={sprfvsUsers}
@@ -171,6 +193,7 @@ const MzFlashGroup = () => {
           onRepost={handleRepost}
           onStroke={handleFeedStroke}
           onUnstroke={handleFeedUnstroke}
+          onPostModal={handlePostShowModel}
         />
         <FeedSection
           collectiveFeeds={collectiveFeeds}
@@ -185,6 +208,8 @@ const MzFlashGroup = () => {
           onRepost={handleRepost}
           onStroke={handleFeedStroke}
           onUnstroke={handleFeedUnstroke}
+          onModelOpen={handleShowModel}
+          onPostModal={handlePostShowModel}
         />
       </div>
     </section >
