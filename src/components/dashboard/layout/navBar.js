@@ -36,7 +36,7 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <Search />
+      <Search feelColor={feelColor} />
       <ChangeColor onColorChange={handleColorChange} />
       <hr className="do-not-delete" />
 

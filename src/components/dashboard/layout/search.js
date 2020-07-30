@@ -30,7 +30,7 @@ const Search = ({ feelColor }) => {
         <div className="back-btn" id="go-back">
           <i className="fa fa-arrow-left"></i>
         </div>
-        <div className="search-input">
+        <div className="search-input"  style={{ backgroundColor: feelColor }} >
           <input
             type="text"
             id="search-field"
