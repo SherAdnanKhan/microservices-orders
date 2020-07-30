@@ -17,7 +17,7 @@ const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
     const [showModel2, setShowModel2] = useState(false);
-    const [singlePost,setSinglePost]=useState({});
+    const [editablePost, seteEditablePost] = useState({});
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
@@ -124,20 +124,14 @@ const Lobby = () => {
     console.log("post and user id=",value,post)
     setShowModel2(value);
   };
-  const handleDelete=(status,id)=>
+  const handleDelete=(status,post)=>
   {
+    console.log("delete is called=",status,post)
     setShowModel2(status);
-    console.log("delete is called",id)
-   const res= dispatch(deletePost(id));
-   console.log(res);
+   dispatch(deletePost(post));
+
   
   }
-const getSinglePost=(singlePost)=>
-{
-  console.log("post data=",singlePost);
-  setSinglePost(singlePost);
-
-}
 
   return (
     <div className="lobby-page">
@@ -163,7 +157,7 @@ const getSinglePost=(singlePost)=>
         <LobbyModal
         onDelete={handleDelete}
         onModalClose={handleLobbyModal}
-        singlePostData={singlePost}
+        editablePost={editablePost}
         />
         
       }
@@ -207,7 +201,6 @@ const getSinglePost=(singlePost)=>
           {favouritePosts?.map((post, index) => (
             <div key={index}>
               <LobbyPosts
-                singlePostData={singlePost}
                 onClickNcomm={handleNcomm}
                 onActivePost={handleActivePost}
                 onStrokePost={handleStrokePost}
@@ -217,7 +210,9 @@ const getSinglePost=(singlePost)=>
                 activeNcomm={activeNcomm}
                 activePost={activePost}
                 onModelOpen2={handleLobbyModal}
-                onGetPost={getSinglePost}
+                editablePost={editablePost}
+                onEditPost={(post)=>seteEditablePost(post)}
+
               />
             </div>
           ))

@@ -17,6 +17,7 @@ import {
   UNSTROKE_POST,
   ADD_POST_COMMENT,
   ONLINE_USERS,
+  // DELETE_POST
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -30,7 +31,8 @@ const initialState = {
   userRequests: null,
   invitedUsers: null,
   faveAndSprfvsUsers: null,
-  onlineUsers: []
+  onlineUsers: [],
+  post:null
 };
 
 export default (state = initialState, action) => {
@@ -148,6 +150,13 @@ export default (state = initialState, action) => {
         ...state,
         onlineUsers: action.payload
       };
+      // case DELETE_POST:
+      //   console.log("post=",post)
+      //   return {
+      //     ...state,
+      //     favouritePosts: state.favouritePosts.filter(post=>post.id != action.payload.post.id)
+      //   }          
+
     default:
       return state;
   }

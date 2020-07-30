@@ -5,14 +5,14 @@ import {
   ADD_POST_COMMENT,
   GET_COMMENTS,
   GET_NCOMM,
-  CLEAR_NCOMM
+  CLEAR_NCOMM,
+  DELETE_POST
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
 import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
 import { toast } from 'react-toastify';
-import {getFavourites} from "../actions/userActions";
 
 export const getPost = (post) => dispatch => {
   http
@@ -109,17 +109,17 @@ export const getComments = postId => dispatch => {
       });
     });
 };
-export const deletePost = postId => dispatch => {
-  console.log(postId);
+export const deletePost = post => dispatch => {
+  console.log("id in API=",post);
   http
-    .delete(`/post/${postId}`)
+    .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
       console.log("response=",res)
-      // dispatch({
-      //   type: GET_COMMENTS,
-      //   payload: res.data.data.comments
-      // });
+      dispatch({
+        type: DELETE_POST,
+        payload:post
+      });
     });
 };
 
