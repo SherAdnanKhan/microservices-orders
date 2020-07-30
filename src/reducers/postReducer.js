@@ -5,7 +5,8 @@ import {
   ADD_POST_COMMENT,
   GET_COMMENTS,
   GET_NCOMM,
-  CLEAR_NCOMM
+  CLEAR_NCOMM,
+  DELETE_POST,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -71,6 +72,11 @@ export default (state = initialState, action) => {
         ...state,
         ncomm: null
       };
+      case DELETE_POST:
+        return {
+          ...state,
+            post: null
+        };
     default:
       return state;
   }

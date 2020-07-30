@@ -71,6 +71,7 @@ export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_NCOMM = 'GET_NCOMM';
 export const CLEAR_NCOMM = 'CLEAR_NCOMM';
+export const DELETE_POST = 'DELETE_POST';
 
 //Conversations
 export const GET_CONVERSATION = 'GET_CONVERSATION';

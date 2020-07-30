@@ -121,7 +121,6 @@ const Studio = () => {
       }
       <StudioHeader
         userStudio={userStudio}
-        onModelOpen2={handleShowModel2}
         onModelOpen={handleShowModel}
       />
       <StudioDetail
