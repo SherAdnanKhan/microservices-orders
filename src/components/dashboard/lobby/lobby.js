@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
+import {unfavGallery} from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
 import { getNcomm, clearNcomm, strokePost, unstrokePost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
@@ -18,14 +19,17 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm },
-    feelColor: { feelColor }
+    postView: { ncomm },  
+    feelColor: { feelColor },
   } = useSelector(state => state);
+  
+
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
   const [activePost, setActivePost] = useState('');
   const [activeNcomm, setActiveNcomm] = useState('');
+  const [editablePost, seteEditablePost] = useState({});
 
   const currentUser = useContext(UserContext);
 
@@ -117,6 +121,9 @@ const Lobby = () => {
       setActivePost(post);
     }
   }
+  const handleUnfavGallery= (gallery) => {
+    dispatch(unfavGallery(gallery));
+  }
 
   return (
     <div className="lobby-page">
@@ -182,10 +189,13 @@ const Lobby = () => {
                 onActivePost={handleActivePost}
                 onStrokePost={handleStrokePost}
                 onUnstrokePost={handleUnstrokePost}
+                onUnFavGallery={handleUnfavGallery}
                 post={post}
                 ncomm={ncomm}
                 activeNcomm={activeNcomm}
                 activePost={activePost}
+                editablePost={editablePost}
+                onEditPost={(post)=>seteEditablePost(post)}
               />
             </div>
           ))
