@@ -125,15 +125,17 @@ export const favGallery = gallery => dispatch => {
     });
 };
 
-export const unfavGallery = gallery => dispatch => {
+export const unfavGallery = (gallery) => dispatch => {
   dispatch({
     type: UNFAV_GALLERY,
     payload: { gallery, hasFaved: false }
-  });
-
+  }); 
   http
-    .post('/galleries/unfav', { gallery_id: gallery.id })
-    .then()
+    .post('/galleries/unfav', { gallery_id: gallery.id  })
+    .then(res=>
+    {
+      toast.success("Gallery Unfave successfully");
+    })
     .catch(() => {
       dispatch({
         type: FAV_GALLERY,

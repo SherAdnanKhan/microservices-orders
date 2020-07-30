@@ -17,6 +17,7 @@ import {
   UNSTROKE_POST,
   ADD_POST_COMMENT,
   ONLINE_USERS,
+  UNFAV_GALLERY,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -148,6 +149,11 @@ export default (state = initialState, action) => {
         ...state,
         onlineUsers: action.payload
       };
+      case UNFAV_GALLERY:
+        return {
+          ...state,
+          favouritePosts: state.favouritePosts.filter(post=>post.gallery_id !== action.payload.gallery.id)
+        }
     default:
       return state;
   }
