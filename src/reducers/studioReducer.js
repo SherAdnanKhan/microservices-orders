@@ -80,7 +80,9 @@ export default (state = initialState, action) => {
         }
       };
     case UNFAV_GALLERY:
-      console.log(state.userStudio)
+      if(!state.userStudio){
+        return state;
+      }
       return {
         ...state,
         userStudio: {

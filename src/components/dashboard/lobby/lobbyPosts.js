@@ -10,8 +10,8 @@ import UserContext from "../../../context/userContext";
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
-  activeNcomm, onActivePost, activePost,editablePost,
-  onStrokePost, onUnstrokePost,onModelOpen2,onEditPost
+  activeNcomm, onActivePost, activePost,editablePost,onModelOpen2,
+  onStrokePost, onUnstrokePost, onUnFavGallery, onEditPost
 }) => {
   const user = useContext(UserContext);
   const loggedInUserId=user.id;
@@ -48,7 +48,7 @@ const LobbyPosts = ({
             :
             <>
             <p>Report </p>
-            <p>Unfave Gallery</p>
+            <p onClick={()=>onUnFavGallery(editablePost.gallery)}>Unfave Gallery</p>
             <p>Repost </p>
             <p>Share </p>
             <p>Vault</p>
