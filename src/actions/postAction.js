@@ -11,6 +11,8 @@ import http from '../services/httpService';
 import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
 import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
+import { toast } from 'react-toastify';
+import {getFavourites} from "../actions/userActions";
 
 export const getPost = (post) => dispatch => {
   http
@@ -107,6 +109,20 @@ export const getComments = postId => dispatch => {
       });
     });
 };
+export const deletePost = postId => dispatch => {
+  console.log(postId);
+  http
+    .delete(`/post/${postId}`)
+    .then(res => {
+      toast.success("Post Deleted Successfully");
+      console.log("response=",res)
+      // dispatch({
+      //   type: GET_COMMENTS,
+      //   payload: res.data.data.comments
+      // });
+    });
+};
+
 
 export const getNcomm = slug => dispatch => {
   http

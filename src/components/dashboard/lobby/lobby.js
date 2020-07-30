@@ -8,13 +8,16 @@ import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost,deletePost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
+import LobbyModal from "../lobby/lobbyModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
+    const [showModel2, setShowModel2] = useState(false);
+    const [singlePost,setSinglePost]=useState({});
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
@@ -117,6 +120,24 @@ const Lobby = () => {
       setActivePost(post);
     }
   }
+  const handleLobbyModal = (value,post) => {
+    console.log("post and user id=",value,post)
+    setShowModel2(value);
+  };
+  const handleDelete=(status,id)=>
+  {
+    setShowModel2(status);
+    console.log("delete is called",id)
+   const res= dispatch(deletePost(id));
+   console.log(res);
+  
+  }
+const getSinglePost=(singlePost)=>
+{
+  console.log("post data=",singlePost);
+  setSinglePost(singlePost);
+
+}
 
   return (
     <div className="lobby-page">
@@ -137,6 +158,14 @@ const Lobby = () => {
             </div>
           </div>
         </div>
+      }
+       {showModel2 &&
+        <LobbyModal
+        onDelete={handleDelete}
+        onModalClose={handleLobbyModal}
+        singlePostData={singlePost}
+        />
+        
       }
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
@@ -178,6 +207,7 @@ const Lobby = () => {
           {favouritePosts?.map((post, index) => (
             <div key={index}>
               <LobbyPosts
+                singlePostData={singlePost}
                 onClickNcomm={handleNcomm}
                 onActivePost={handleActivePost}
                 onStrokePost={handleStrokePost}
@@ -186,6 +216,8 @@ const Lobby = () => {
                 ncomm={ncomm}
                 activeNcomm={activeNcomm}
                 activePost={activePost}
+                onModelOpen2={handleLobbyModal}
+                onGetPost={getSinglePost}
               />
             </div>
           ))

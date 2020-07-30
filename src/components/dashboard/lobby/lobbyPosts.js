@@ -10,13 +10,11 @@ import UserContext from "../../../context/userContext";
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
-  activeNcomm, onActivePost, activePost,
-  onStrokePost, onUnstrokePost
+  activeNcomm, onActivePost, activePost,onGetPost,  singlePostData,
+  onStrokePost, onUnstrokePost,onModelOpen2
 }) => {
   const user = useContext(UserContext);
   const loggedInUserId=user.id;
-
-
   return (
     <div className="post-page">
       <div className="post-head">
@@ -38,17 +36,17 @@ const LobbyPosts = ({
       <div className="image-option-box">
         <div className="add-img-vid-box">
           <div className="img-option">
-            {post.created_by === loggedInUserId ? 
+            {singlePostData.created_by === loggedInUserId ? 
             <>     
             <p>Edit </p>
-            <p>Delete </p>
+            <p onClick={() => onModelOpen2(singlePostData,true)}>Delete </p>
             <p>Valut </p>
             <p>Share </p>
             <p>Share On STRQ chat </p>
             <p>Turn off critiques </p>
             </>
             :
-            <>  
+            <>
             <p>Report </p>
             <p>Unfave Gallery</p>
             <p>Repost </p>
@@ -65,7 +63,7 @@ const LobbyPosts = ({
           ? 'valut-icon show-valut'
           : 'valut-icon'
       }>
-        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>onGetPost(post)} ></i>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
       <div className="post-body" onClick={() => onActivePost(post)}>

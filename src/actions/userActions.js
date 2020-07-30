@@ -21,6 +21,7 @@ import {
 } from '../constants/actionTypes';
 
 export const getFavourites = () => dispatch => {
+  console.log("lobby posts are called")
   http
     .get('/lobby')
     .then(res => {
@@ -29,6 +30,7 @@ export const getFavourites = () => dispatch => {
         payload: res.data.data
       });
     });
+    
 };
 
 export const getAllUsers = query => dispatch => {
