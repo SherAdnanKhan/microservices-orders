@@ -180,8 +180,8 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={()=>onPostModal(true,feed.image)}
-                          
+                          onClick={() => onPostModal(true, feed.image)}
+
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -221,6 +221,8 @@ const FaveSection = ({
                             src={feed.parent.image.path}
                             alt="Snow"
                             className="img-css-fave"
+                            onClick={() => onPostModal(true, feed.image)}
+                            
                           />
                         }
                         {feed.parent.feed_type === 2 &&
@@ -260,13 +262,13 @@ const FaveSection = ({
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
                     </div>
-                    
-                     <div className="actions-repost">
-                    <img src="/assets/images/icons/repost_icon.png" 
-                     onClick={e => onRepost(e, feed)} alt=""
-                    >
-                    </img>
-                  </div>
+
+                    <div className="actions-repost">
+                      <img src="/assets/images/icons/repost_icon.png"
+                        onClick={e => onRepost(e, feed)} alt=""
+                      >
+                      </img>
+                    </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -340,7 +342,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={()=>onPostModal(true,feed.image)}
+                          onClick={() => onPostModal(true, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -380,6 +382,7 @@ const FaveSection = ({
                             src={feed.parent.image.path}
                             alt="Snow"
                             className="img-css-fave"
+                            onClick={() => onPostModal(true, feed.image)}
                           />
                         }
                         {feed.parent.feed_type === 2 &&
@@ -420,11 +423,11 @@ const FaveSection = ({
                       />
                     </div>
                     <div className="actions-repost"  >
-                <img  src="/assets/images/icons/repost_icon.png" 
-                 onClick={e=> onRepost(e,feed) }alt=""
-               >
-                </img>
-              </div>
+                      <img src="/assets/images/icons/repost_icon.png"
+                        onClick={e => onRepost(e, feed)} alt=""
+                      >
+                      </img>
+                    </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -498,7 +501,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={()=>onPostModal(true,feed.image)}
+                          onClick={() => onPostModal(true, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -538,6 +541,7 @@ const FaveSection = ({
                             src={feed.parent.image.path}
                             alt="Snow"
                             className="img-css-fave"
+                            onClick={() => onPostModal(true, feed.image)}
                           />
                         }
                         {feed.parent.feed_type === 2 &&
@@ -578,11 +582,11 @@ const FaveSection = ({
                       />
                     </div>
                     <div className="actions-repost">
-                    <img src="/assets/images/icons/repost_icon.png" 
-                     onClick={e => onRepost(e, feed)} alt=""
-                    >
-                    </img>
-                  </div>
+                      <img src="/assets/images/icons/repost_icon.png"
+                        onClick={e => onRepost(e, feed)} alt=""
+                      >
+                      </img>
+                    </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -653,7 +657,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={()=>onPostModal(true,feed.image)}
+                          onClick={() => onPostModal(true, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -693,6 +697,7 @@ const FaveSection = ({
                             src={feed.parent.image.path}
                             alt="Snow"
                             className="img-css-fave"
+                            onClick={() => onPostModal(true, feed.image)}
                           />
                         }
                         {feed.parent.feed_type === 2 &&
@@ -733,11 +738,11 @@ const FaveSection = ({
                       />
                     </div>
                     <div className="actions-repost">
-                    <img src="/assets/images/icons/repost_icon.png" 
-                     onClick={e => onRepost(e, feed)} alt=""
-                    >
-                    </img>
-                  </div>
+                      <img src="/assets/images/icons/repost_icon.png"
+                        onClick={e => onRepost(e, feed)} alt=""
+                      >
+                      </img>
+                    </div>
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
@@ -812,6 +817,7 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
+                          onClick={() => onPostModal(true, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
@@ -851,6 +857,7 @@ const FaveSection = ({
                             src={feed.parent.image.path}
                             alt="Snow"
                             className="img-css-fave"
+                            onClick={() => onPostModal(true, feed.image)}
                           />
                         }
                         {feed.parent.feed_type === 2 &&
@@ -890,20 +897,20 @@ const FaveSection = ({
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
                     </div>
-                    <div className="actions-repost">
-                      <button
-                        className="repost"
-                        onClick={e => onRepost(e, feed)}
+                    <div className="actions-repost"  >
+                      <img src="/assets/images/icons/repost_icon.png"
+                        onClick={e => onRepost(e, feed)} alt=""
                       >
-                        Repost
-                        </button>
+                      </img>
                     </div>
+                    
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
                       <Link
                         to="#"
                         onClick={e => onActiveFeedComment(e, feed.id)}
+                        style={{paddingLeft:"5px"}}
                       >
                         View Comments
                         </Link>
