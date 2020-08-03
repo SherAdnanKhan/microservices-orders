@@ -179,6 +179,13 @@ const Lobby = () => {
           onModalClose={handleLobbyModal}
           editablePost={editablePost}
           mediaType={mediaType}
+          onSharePost={handleShareModel}
+        />
+      }
+      {showModelShare &&
+        <SharePostModal
+          onModalClose={handleShareModel}
+          post={editablePost}
         />
       }
       <div className="row">
