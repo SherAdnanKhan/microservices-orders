@@ -29,8 +29,6 @@ const Lobby = () => {
     feelColor: { feelColor },
   } = useSelector(state => state);
 
-
-
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [showPostModel, setShowPostModel] = useState(false);
   const [imagePath, setImagepath] = useState("");
