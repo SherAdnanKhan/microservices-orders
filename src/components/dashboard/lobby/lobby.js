@@ -7,21 +7,27 @@ import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
+import {unfavGallery} from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost,deletePost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
+import LobbyModal from "../lobby/lobbyModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
+    const [showModel2, setShowModel2] = useState(false);
+    const [editablePost, seteEditablePost] = useState({});
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm },
-    feelColor: { feelColor }
+    postView: { ncomm },  
+    feelColor: { feelColor },
   } = useSelector(state => state);
+  
+
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [showPostModel, setShowPostModel] = useState(false);
@@ -29,6 +35,7 @@ const Lobby = () => {
   const [comments, setComments] = useState({})
   const [activePost, setActivePost] = useState('');
   const [activeNcomm, setActiveNcomm] = useState('');
+
 
   const currentUser = useContext(UserContext);
 
@@ -130,6 +137,21 @@ const Lobby = () => {
 
   };
 
+  const handleLobbyModal = (value,post) => {
+    console.log("post and user id=",value,post)
+    setShowModel2(value);
+  };
+  const handleDelete=(status,post)=>
+  {
+    console.log("delete is called=",status,post)
+    setShowModel2(status);
+   dispatch(deletePost(post));
+  }
+
+  
+  const handleUnfavGallery= (gallery) => {
+    dispatch(unfavGallery(gallery));
+  }
 
   return (
     <div className="lobby-page">
@@ -150,6 +172,14 @@ const Lobby = () => {
             </div>
           </div>
         </div>
+      }
+       {showModel2 &&
+        <LobbyModal
+        onDelete={handleDelete}
+        onModalClose={handleLobbyModal}
+        editablePost={editablePost}
+        />
+        
       }
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
@@ -195,10 +225,15 @@ const Lobby = () => {
                 onActivePost={handleActivePost}
                 onStrokePost={handleStrokePost}
                 onUnstrokePost={handleUnstrokePost}
+                onUnFavGallery={handleUnfavGallery}
                 post={post}
                 ncomm={ncomm}
                 activeNcomm={activeNcomm}
                 activePost={activePost}
+                onModelOpen2={handleLobbyModal}
+                editablePost={editablePost}
+                onEditPost={(post)=>seteEditablePost(post)}
+
               />
             </div>
           ))
@@ -247,5 +282,5 @@ const Lobby = () => {
       </div>
     </div >
   );
-};
+}
 export default Lobby;

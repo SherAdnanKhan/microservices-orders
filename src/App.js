@@ -16,7 +16,7 @@ import StartFaves from './components/dashboard/startFavas';
 import SocketContext from './context/socketContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { updateCounter } from './actions/userActions';
+import { updateCounter, getOnlineUsers } from './actions/userActions';
 import { useDispatch } from 'react-redux';
 import { updateConversationUnreadCount } from './actions/conversationActions';
 
@@ -106,6 +106,10 @@ function App() {
           dispatch(updateCounter());
           dispatch(updateConversationUnreadCount(data.message));
         }
+      });
+
+      socket.on('onlineUsers', data => {
+        dispatch(getOnlineUsers(data));
       });
     }
 

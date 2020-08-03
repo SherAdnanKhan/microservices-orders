@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
@@ -6,13 +6,15 @@ import Comment from '../viewPost/comments';
 import { completeFormattedDate } from '../../../utils/helperFunctions';
 import ImageVideoSlider from '../../common/imageVideoSlider';
 import VideoPlayer from '../../common/videoPlayer';
+import UserContext from "../../../context/userContext";
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
-  activeNcomm, onActivePost, activePost,
-  onStrokePost, onUnstrokePost
+  activeNcomm, onActivePost, activePost,editablePost,onModelOpen2,
+  onStrokePost, onUnstrokePost, onUnFavGallery, onEditPost
 }) => {
-
+  const user = useContext(UserContext);
+  const loggedInUserId=user.id;
   return (
     <div className="post-page">
       <div className="post-head">
@@ -31,31 +33,37 @@ const LobbyPosts = ({
           </>
         }
       </div>
-
       <div className="image-option-box">
-
         <div className="add-img-vid-box">
           <div className="img-option">
+            {editablePost.created_by === loggedInUserId ? 
+            <>     
             <p>Edit </p>
+            <p onClick={() => onModelOpen2(editablePost,true)}>Delete </p>
             <p>Valut </p>
-            <p>Delete </p>
             <p>Share </p>
             <p>Share On STRQ chat </p>
             <p>Turn off critiques </p>
+            </>
+            :
+            <>
             <p>Report </p>
-            <p>Unfave Gallery</p>
+            <p onClick={()=>onUnFavGallery(editablePost.gallery)}>Unfave Gallery</p>
             <p>Repost </p>
+            <p>Share </p>
+            <p>Vault</p>
             <p>MzFlash </p>
+            </>
+}
           </div>
         </div>
-
       </div>
       <div className={
         activePost.id === post.id
           ? 'valut-icon show-valut'
           : 'valut-icon'
       }>
-        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>onEditPost(post)} ></i>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
       <div className="post-body" onClick={() => onActivePost(post)}>

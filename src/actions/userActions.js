@@ -16,10 +16,12 @@ import {
   SPRFVS_USERS,
   USER_REQUESTS,
   INVITED_USERS,
-  GET_FAV_AND_SPRFVS_USERS
+  GET_FAV_AND_SPRFVS_USERS,
+  ONLINE_USERS
 } from '../constants/actionTypes';
 
 export const getFavourites = () => dispatch => {
+  console.log("lobby posts are called")
   http
     .get('/lobby')
     .then(res => {
@@ -28,6 +30,7 @@ export const getFavourites = () => dispatch => {
         payload: res.data.data
       });
     });
+    
 };
 
 export const getAllUsers = query => dispatch => {
@@ -191,5 +194,12 @@ export const getFaveAndSprfvsUsers = () => dispatch => {
         payload: res.data.data.faves
       });
     });
+};
+
+export const getOnlineUsers = (users) => {
+  return {
+    type: ONLINE_USERS,
+    payload: users
+  };
 };
 

@@ -15,7 +15,9 @@ import {
   GET_FAV_AND_SPRFVS_USERS,
   STROKE_POST,
   UNSTROKE_POST,
-  ADD_POST_COMMENT
+  ADD_POST_COMMENT,
+  ONLINE_USERS,
+  UNFAV_GALLERY,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -28,7 +30,9 @@ const initialState = {
   sprfvsUsers: null,
   userRequests: null,
   invitedUsers: null,
-  faveAndSprfvsUsers: null
+  faveAndSprfvsUsers: null,
+  onlineUsers: [],
+  post:null
 };
 
 export default (state = initialState, action) => {
@@ -141,6 +145,23 @@ export default (state = initialState, action) => {
         ...state,
         faveAndSprfvsUsers: action.payload
       };
+    case ONLINE_USERS:
+      return {
+        ...state,
+        onlineUsers: action.payload
+      };
+      // case DELETE_POST:
+      //   console.log("post=",post)
+      //   return {
+      //     ...state,
+      //     favouritePosts: state.favouritePosts.filter(post=>post.id != action.payload.post.id)
+      //   }          
+
+      case UNFAV_GALLERY:
+        return {
+          ...state,
+          favouritePosts: state.favouritePosts.filter(post=>post.gallery_id !== action.payload.gallery.id)
+        }
     default:
       return state;
   }

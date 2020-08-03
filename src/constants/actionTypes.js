@@ -29,6 +29,7 @@ export const GET_FAV_BY_USER = 'GET_FAV_BY_USER';
 export const UPDATE_BIO = 'UPDATE_BIO';
 export const GET_ALL_FEELS = 'GET_ALL_FEELS';
 export const GET_FAV_AND_SPRFVS_USERS = 'GET_FAV_AND_SPRFVS_USERS';
+export const ONLINE_USERS = 'ONLINE_USERS';
 
 //Studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO';
@@ -70,6 +71,7 @@ export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_NCOMM = 'GET_NCOMM';
 export const CLEAR_NCOMM = 'CLEAR_NCOMM';
+export const DELETE_POST = 'DELETE_POST';
 
 //Conversations
 export const GET_CONVERSATION = 'GET_CONVERSATION';
