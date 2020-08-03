@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LobbyModal= ({ onDelete,onModalClose,  editablePost }) => {
+const LobbyModal= ({ onDelete,onModalClose,  editablePost}) => {
     return (
         <div className="studio">
              <div className="gallery-model">
