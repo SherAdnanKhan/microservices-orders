@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import Avatar from "../../common/avatar";
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
@@ -10,11 +10,11 @@ import UserContext from "../../../context/userContext";
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
-  activeNcomm, onActivePost, activePost,editablePost,onModelOpen2,
-  onStrokePost, onUnstrokePost, onUnFavGallery, onEditPost
+  activeNcomm, onActivePost, activePost, onModelOpen2,
+  onStrokePost, onUnstrokePost, onUnFavGallery, onEditPost, onSharePost
 }) => {
   const user = useContext(UserContext);
-  const loggedInUserId=user.id;
+  const loggedInUserId = user.id;
   return (
     <div className="post-page">
       <div className="post-head">
@@ -36,25 +36,25 @@ const LobbyPosts = ({
       <div className="image-option-box">
         <div className="add-img-vid-box">
           <div className="img-option">
-            {editablePost.created_by === loggedInUserId ? 
-            <>     
-            <p>Edit </p>
-            <p onClick={() => onModelOpen2(editablePost,true)}>Delete </p>
-            <p>Valut </p>
-            <p>Share </p>
-            <p>Share On STRQ chat </p>
-            <p>Turn off critiques </p>
-            </>
-            :
-            <>
-            <p>Report </p>
-            <p onClick={()=>onUnFavGallery(editablePost.gallery)}>Unfave Gallery</p>
-            <p>Repost </p>
-            <p>Share </p>
-            <p>Vault</p>
-            <p>MzFlash </p>
-            </>
-}
+            {post.created_by === loggedInUserId ?
+              <>
+                <p>Edit </p>
+                <p onClick={() => onModelOpen2(post, true)}>Delete </p>
+                <p>Valut </p>
+                <p>Share </p>
+                <p>Share On STRQ chat </p>
+                <p>Turn off critiques </p>
+              </>
+              :
+              <>
+                <p>Report </p>
+                <p onClick={() => onUnFavGallery(post.gallery)}>Unfave Gallery</p>
+                <p>Repost </p>
+                <p onClick={() => onSharePost(true, post)}> Share </p>
+                <p>Vault</p>
+                <p>MzFlash </p>
+              </>
+            }
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@ const LobbyPosts = ({
           ? 'valut-icon show-valut'
           : 'valut-icon'
       }>
-        <i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>onEditPost(post)} ></i>
+        <i className="fa fa-ellipsis-v" aria-hidden="true" onClick={() => onEditPost(post)} ></i>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
       <div className="post-body" onClick={() => onActivePost(post)}>
