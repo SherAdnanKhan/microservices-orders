@@ -18,6 +18,7 @@ const MzFlash = () => {
   const [activeComments, setActiveComments] = useState('');
   const [imagePath,setImagepath]=useState("");
   const [showPostModel, setShowPostModel] = useState(false);
+  const [mediaType,setMediaType]=useState("");
 
   const dispatch = useDispatch();
   const {
@@ -91,10 +92,11 @@ const MzFlash = () => {
   }, [dispatch, slug]);
   const feelColor=JSON.parse(localStorage.getItem(userKey));
 
-  const handlePostModal= (value,image) => {
+  const handlePostModal= (value,type,image) => {
     if(value === true)
     {
-      setImagepath(image.path)
+      setImagepath(image.path);
+      setMediaType(type);
     }    
     setShowPostModel(value);
 
@@ -106,6 +108,7 @@ const MzFlash = () => {
         <PostModal
           onPostModalClose={handlePostModal}
           imagePath={imagePath}
+          mediaType={mediaType}
         />
       }
       <>
@@ -179,12 +182,12 @@ const MzFlash = () => {
                       src={feed.image.path}
                       alt="Snow"
                       className="img-css"
-                      onClick={()=>handlePostModal(true,feed.image,true)}
+                      onClick={()=>handlePostModal(true,feed.feed_type,feed.image)}
                     />
                   }
                   {feed.feed_type === 2 &&
                     feed.image &&
-                    <video controls>
+                    <video onClick={()=>handlePostModal(true,feed.feed_type,feed.image)}>
                       <source src={feed.image.path} type="video/mp4" />
                       <source src={feed.image.path} type="video/ogg" />
                       Your browser does not support the video tag.

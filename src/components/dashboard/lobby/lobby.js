@@ -21,6 +21,7 @@ const Lobby = () => {
   const dispatch = useDispatch();
   const [showModel2, setShowModel2] = useState(false);
   const [editablePost, seteEditablePost] = useState({});
+  const [mediaType, setMediaType] = useState("");
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
@@ -128,9 +129,11 @@ const Lobby = () => {
       setActivePost(post);
     }
   }
-  const handlePostShowModel = (value, image) => {
+  const handlePostShowModel = (value, type, image) => {
+    console.log("Handler is called", image, type)
     if (value === true) {
-      setImagepath(image.path)
+      setImagepath(image.path);
+      setMediaType(type);
     }
     setShowPostModel(value);
   };
@@ -177,12 +180,7 @@ const Lobby = () => {
           onDelete={handleDelete}
           onModalClose={handleLobbyModal}
           editablePost={editablePost}
-        />
-      }
-      {showModelShare &&
-        <SharePostModal
-          onModalClose={handleShareModel}
-          post={editablePost}
+          mediaType={mediaType}
         />
       }
       <div className="row">
@@ -246,6 +244,7 @@ const Lobby = () => {
           <PostModal
             onPostModalClose={handlePostShowModel}
             imagePath={imagePath}
+            mediaType={mediaType}
           />
         }
         <div className="section-3 box-3 col4">
