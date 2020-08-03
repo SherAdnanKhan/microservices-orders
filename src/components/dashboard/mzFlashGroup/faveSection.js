@@ -8,7 +8,7 @@ import { completeFormattedDate, formatTime } from '../../../utils/helperFunction
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
   activeTab, activeUser, onTabChange, onCommentChange,
-  activeFeedComment, onActiveFeedComment, onPostComment,onPostModal,
+  activeFeedComment, onActiveFeedComment, onPostComment, onPostModal,
   comments, onRepost, onStroke, onUnstroke, myFeeds, activeUserList
 }) => {
 
@@ -180,14 +180,14 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type,feed.image)}
+                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
 
                         />
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
                         <div className="video left-space">
-                          <video  onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                          <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
                               Your browser does not support the video tag.
@@ -222,13 +222,13 @@ const FaveSection = ({
                             alt="Snow"
                             className="img-css-fave"
                             onClick={() => onPostModal(true, feed.image)}
-                            
+
                           />
                         }
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
                           <div className="video left-space">
-                            <video onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                            <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                               <source src={feed.parent.image.path} type="video/mp4" />
                               <source src={feed.parent.image.path} type="video/ogg" />
                               Your browser does not support the video tag.
@@ -342,13 +342,13 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type,feed.image)}
+                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
                         <div className="video left-space">
-                          <video onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                          <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
                             Your browser does not support the video tag.
@@ -388,7 +388,7 @@ const FaveSection = ({
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
                           <div className="video left-space">
-                            <video onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                            <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                               <source src={feed.parent.image.path} type="video/mp4" />
                               <source src={feed.parent.image.path} type="video/ogg" />
                               Your browser does not support the video tag.
@@ -501,13 +501,13 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type,feed.image)}
+                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
                         <div className="video left-space">
-                          <video onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                          <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
                             Your browser does not support the video tag.
@@ -547,7 +547,7 @@ const FaveSection = ({
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
                           <div className="video left-space" >
-                            <video onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                            <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                               <source src={feed.parent.image.path} type="video/mp4" />
                               <source src={feed.parent.image.path} type="video/ogg" />
                               Your browser does not support the video tag.
@@ -657,13 +657,13 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={() => onPostModal(true,feed.feed_type,feed.image)}
+                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
                         <div className="video left-space">
-                          <video  onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                          <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
                             Your browser does not support the video tag.
@@ -703,7 +703,7 @@ const FaveSection = ({
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
                           <div className="video left-space">
-                            <video  onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                            <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                               <source src={feed.parent.image.path} type="video/mp4" />
                               <source src={feed.parent.image.path} type="video/ogg" />
                               Your browser does not support the video tag.
@@ -817,13 +817,13 @@ const FaveSection = ({
                           src={feed.image.path}
                           alt="Snow"
                           className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type,feed.image)}
+                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
                         />
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
                         <div className="video left-space">
-                          <video  onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                          <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                             <source src={feed.image.path} type="video/mp4" />
                             <source src={feed.image.path} type="video/ogg" />
                             Your browser does not support the video tag.
@@ -863,7 +863,7 @@ const FaveSection = ({
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
                           <div className="video left-space">
-                            <video  onClick={()=>onPostModal(true,feed.feed_type,feed.image)}> 
+                            <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                               <source src={feed.parent.image.path} type="video/mp4" />
                               <source src={feed.parent.image.path} type="video/ogg" />
                               Your browser does not support the video tag.
@@ -903,14 +903,14 @@ const FaveSection = ({
                       >
                       </img>
                     </div>
-                    
+
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
                       <Link
                         to="#"
                         onClick={e => onActiveFeedComment(e, feed.id)}
-                        style={{paddingLeft:"5px"}}
+                        style={{ paddingLeft: "5px" }}
                       >
                         View Comments
                         </Link>

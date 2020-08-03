@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Avatar from '../../common/avatar';
 import Input from '../../common/input';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createFeed, getCollectiveFeeds } from '../../../actions/mzFlashActions';
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
@@ -10,7 +10,7 @@ import { completeFormattedDate, formatTime } from '../../../utils/helperFunction
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
   currentUser, onCommentChange, onActiveFeedComment,
-  activeFeedComment, comments, onPostComment, onRepost,  onPostModal,
+  activeFeedComment, comments, onPostComment, onRepost, onPostModal,
   onStroke, onUnstroke
 }) => {
 
@@ -25,7 +25,7 @@ const FeedSection = ({
     video: null,
     image: null
   });
-  const {feelColor}=useSelector(state=>state.feelColor);
+  const { feelColor } = useSelector(state => state.feelColor);
 
   const feedRef = useRef();
 
@@ -136,12 +136,12 @@ const FeedSection = ({
         {showModel &&
           <div className="add-img-vid-box">
             <i
-            style={{backgroundColor:feelColor}}
+              style={{ backgroundColor: feelColor }}
               className="fa fa-times close-add-box"
               onClick={() => onModelChange(false)}
             />
             <label>
-              <img alt="" src="/assets/images/plus.png" style={{backgroundColor:feelColor}} />
+              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: feelColor }} />
               Add Image
               <input
                 type="file"
@@ -151,7 +151,7 @@ const FeedSection = ({
               />
             </label>
             <label>
-              <img alt="" src="/assets/images/plus.png" style={{backgroundColor:feelColor}} />
+              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: feelColor }} />
               Add Video
               <input
                 type="file"
@@ -203,17 +203,17 @@ const FeedSection = ({
                   src={feed.image.path}
                   alt="Snow"
                   className="img-css"
-                  onClick={()=>onPostModal(true,feed.feed_type,feed.image)}
+                  onClick={() => onPostModal(true, feed.feed_type, feed.image)}
                 />
               }
               {feed.feed_type === 2 &&
                 feed.image &&
                 <div className="video" >
-                  <video onClick={()=>onPostModal(true,feed.feed_type,feed.image)}>
+                  <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
                     <source src={feed.image.path} type="video/mp4" />
                     <source src={feed.image.path} type="video/ogg" />
                     Your browser does not support the video tag.
-                    
+
                   </video>
                 </div>
               }
@@ -243,17 +243,17 @@ const FeedSection = ({
                 </div>
                 <p className="submit-text">{feed.parent.feed} </p>
                 <div>
-                        {feed.parent.feed_type === 1 &&
-                  feed.parent.image &&
-                  <img
-                    src={feed.parent.image.path}
-                    alt="Snow"
-                    className="img-css-fave"                  
-                  />
-                  
-                        }
+                  {feed.parent.feed_type === 1 &&
+                    feed.parent.image &&
+                    <img
+                      src={feed.parent.image.path}
+                      alt="Snow"
+                      className="img-css"
+                    />
+
+                  }
                 </div>
-          
+
                 {feed.parent.feed_type === 2 &&
                   feed.parent.image &&
                   <div className="video left-space">
@@ -291,9 +291,9 @@ const FeedSection = ({
                 />
               </div>
               <div className="actions-repost"  >
-                <img  src="/assets/images/icons/repost_icon.png" 
-                 onClick={e=> onRepost(e,feed) }alt=""
-               >
+                <img src="/assets/images/icons/repost_icon.png"
+                  onClick={e => onRepost(e, feed)} alt=""
+                >
                 </img>
               </div>
             </div>
