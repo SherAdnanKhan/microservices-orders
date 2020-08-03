@@ -82,24 +82,26 @@ const Post = ({
                     </div>
 
                     <div className="show-list">
-                      <div className="s-l-header">
-                        <p className="usernames">
-                          <Link to={`/dashboard/studio/${user.slug}`} >
-                            {user.username}
-                          </Link>
-                        </p>
-                        <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
-                        {user && user.art
-                          && (
-                            <>
-                              {user.art.parent && `${user.art.parent.name}/`}
-                              {user.art.name && user.art.name}
-                            </>
-                          )}
-                      </div>
                       {gallery &&
                         gallery.posts.map((post, index) => (
                           <div className="list-body" key={index}>
+                            <div className="s-l-header">
+                              <p>
+                                {
+                                  user &&
+                                  <Link to={`/dashboard/studio/${user.slug}`} >
+                                    {user.username}
+                                  </Link>
+                                }
+                              </p>
+                              <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
+                              {user && user.art &&
+                                <>
+                                  {user.art.parent && user.art.parent.name + '/'}
+                                  {user.art.name && user.art.name}
+                                </>
+                              }
+                            </div>
                             <div
                               className={
                                 activePost.id === post.id
