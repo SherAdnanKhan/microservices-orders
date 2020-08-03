@@ -29,6 +29,7 @@ const MzFlashGroup = () => {
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
   const [imagePath,setImagepath]=useState("");
+  const [mediaType,setMediaType]=useState("");
 
   const [showModel, setShowModel] = useState(false);
   const [showPostModel, setShowPostModel] = useState(false);
@@ -47,10 +48,12 @@ const MzFlashGroup = () => {
   const handleShowModel= value => {
     setShowModel(value);
   };
-  const handlePostShowModel= (value,image) => {
+  const handlePostShowModel= (value,type,image) => {
+    console.log("type=",type ,"image=",image)
     if(value === true)
     {
-      setImagepath(image.path)
+      setImagepath(image.path);
+      setMediaType(type);
     }    
     setShowPostModel(value);
 
@@ -166,6 +169,7 @@ const MzFlashGroup = () => {
         <PostModal
           onPostModalClose={handlePostShowModel}
           imagePath={imagePath}
+          mediaType={mediaType}
         />
       }
         <UserSection
