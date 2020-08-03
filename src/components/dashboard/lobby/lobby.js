@@ -12,6 +12,7 @@ import UserContext from '../../../context/userContext';
 import { getNcomm, clearNcomm, strokePost, unstrokePost,deletePost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
+import PostModal from "../../dashboard/mzFlashGroup/postModal";
 import LobbyModal from "../lobby/lobbyModal";
 
 const Lobby = () => {
@@ -29,6 +30,8 @@ const Lobby = () => {
 
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
+  const [showPostModel, setShowPostModel] = useState(false);
+  const [imagePath,setImagepath]=useState("");
   const [comments, setComments] = useState({})
   const [activePost, setActivePost] = useState('');
   const [activeNcomm, setActiveNcomm] = useState('');
@@ -124,6 +127,16 @@ const Lobby = () => {
       setActivePost(post);
     }
   }
+  const handlePostShowModel= (value,image) => {
+    console.log("Handler is called")
+    if(value === true)
+    {
+      setImagepath(image.path)
+    }    
+    setShowPostModel(value);
+
+  };
+
   const handleLobbyModal = (value,post) => {
     console.log("post and user id=",value,post)
     setShowModel2(value);
@@ -226,6 +239,12 @@ const Lobby = () => {
           ))
           }
         </div>
+        {showPostModel &&
+        <PostModal
+          onPostModalClose={handlePostShowModel}
+          imagePath={imagePath}
+        />
+      }
         <div className="section-3 box-3 col4">
           <FeedSection
             collectiveFeeds={collectiveFeeds}
@@ -238,6 +257,7 @@ const Lobby = () => {
             onRepost={handleRepost}
             onStroke={handleFeedStroke}
             onUnstroke={handleFeedUnstroke}
+            onPostModal={handlePostShowModel}
           />
         </div>
         <div className="assist">

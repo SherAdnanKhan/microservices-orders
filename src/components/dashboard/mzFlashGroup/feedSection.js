@@ -10,7 +10,7 @@ import { completeFormattedDate, formatTime } from '../../../utils/helperFunction
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
   currentUser, onCommentChange, onActiveFeedComment,
-  activeFeedComment, comments, onPostComment, onRepost,
+  activeFeedComment, comments, onPostComment, onRepost,  onPostModal,
   onStroke, onUnstroke
 }) => {
 
@@ -203,6 +203,7 @@ const FeedSection = ({
                   src={feed.image.path}
                   alt="Snow"
                   className="img-css"
+                  onClick={()=>onPostModal(true,feed.image)}
                 />
               }
               {feed.feed_type === 2 &&
@@ -240,14 +241,18 @@ const FeedSection = ({
                   </p>
                 </div>
                 <p className="submit-text">{feed.parent.feed} </p>
-                {feed.parent.feed_type === 1 &&
+                <div>
+                        {feed.parent.feed_type === 1 &&
                   feed.parent.image &&
                   <img
                     src={feed.parent.image.path}
                     alt="Snow"
-                    className="img-css-fave"
+                    className="img-css-fave"                  
                   />
-                }
+                  
+                        }
+                </div>
+          
                 {feed.parent.feed_type === 2 &&
                   feed.parent.image &&
                   <div className="video left-space">

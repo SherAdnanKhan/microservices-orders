@@ -11,10 +11,13 @@ import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed }
 import Spinner from "../common/spinner";
 import { completeFormattedDate, formatTime } from "../../utils/helperFunctions";
 import {userKey} from "../../constants/keys";
+import PostModal from "../../components/dashboard/mzFlashGroup/postModal";
 
 const MzFlash = () => {
   const [comments, setComments] = useState({});
   const [activeComments, setActiveComments] = useState('');
+  const [imagePath,setImagepath]=useState("");
+  const [showPostModel, setShowPostModel] = useState(false);
 
   const dispatch = useDispatch();
   const {
@@ -87,9 +90,24 @@ const MzFlash = () => {
     dispatch(getUserFeeds(slug))
   }, [dispatch, slug]);
   const feelColor=JSON.parse(localStorage.getItem(userKey));
+
+  const handlePostModal= (value,image) => {
+    if(value === true)
+    {
+      setImagepath(image.path)
+    }    
+    setShowPostModel(value);
+
+  };
   return (
     <div className='mz-flash-page'>
       {loading && <Spinner />}
+      {showPostModel &&
+        <PostModal
+          onPostModalClose={handlePostModal}
+          imagePath={imagePath}
+        />
+      }
       <>
         <div className="mz-flash-head">
           {userStudio &&
@@ -161,6 +179,7 @@ const MzFlash = () => {
                       src={feed.image.path}
                       alt="Snow"
                       className="img-css"
+                      onClick={()=>handlePostModal(true,feed.image,true)}
                     />
                   }
                   {feed.feed_type === 2 &&
