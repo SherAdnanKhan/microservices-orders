@@ -143,8 +143,7 @@ const Lobby = () => {
     dispatch(deletePost(post));
   }
 
-  const handleShareModel = (status, post) => {
-    console.log(post);
+  const handleShareModel = (status) => {
     setShowModelShare(status);
   };
 
