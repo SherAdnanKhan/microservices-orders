@@ -50,7 +50,7 @@ const LobbyPosts = ({
                 <p>Report </p>
                 <p onClick={() => onUnFavGallery(post.gallery)}>Unfave Gallery</p>
                 <p>Repost </p>
-                <p onClick={() => onSharePost(true, post)}> Share </p>
+                <p onClick={() => onSharePost(true)}> Share </p>
                 <p>Vault</p>
                 <p>MzFlash </p>
               </>
