@@ -7,35 +7,35 @@ import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
-import {unfavGallery} from "../../../actions/galleryActions";
+import { unfavGallery } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost,deletePost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
 import LobbyModal from "../lobby/lobbyModal";
+import SharePostModal from '../../common/sharePostModal';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
-    const [showModel2, setShowModel2] = useState(false);
-    const [editablePost, seteEditablePost] = useState({});
-    const [mediaType,setMediaType]=useState("");
+  const [showModel2, setShowModel2] = useState(false);
+  const [editablePost, seteEditablePost] = useState({});
+  const [mediaType, setMediaType] = useState("");
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm },  
+    postView: { ncomm },
     feelColor: { feelColor },
   } = useSelector(state => state);
-  
-
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [showPostModel, setShowPostModel] = useState(false);
-  const [imagePath,setImagepath]=useState("");
+  const [imagePath, setImagepath] = useState("");
   const [comments, setComments] = useState({})
   const [activePost, setActivePost] = useState('');
   const [activeNcomm, setActiveNcomm] = useState('');
+  const [showModelShare, setShowModelShare] = useState(false);
 
 
   const currentUser = useContext(UserContext);
@@ -68,7 +68,6 @@ const Lobby = () => {
 
   const handleCommentChange = ({ target: input }) => {
     setComments({ ...comments, [input.name]: input.value });
-    console.log(comments)
   };
 
   const handleActiveFeedComment = (e, feedId) => {
@@ -128,30 +127,29 @@ const Lobby = () => {
       setActivePost(post);
     }
   }
-  const handlePostShowModel= (value,type,image) => {
-    console.log("Handler is called",image,type)
-    if(value === true)
-    {
+  const handlePostShowModel = (value, type, image) => {
+    console.log("Handler is called", image, type)
+    if (value === true) {
       setImagepath(image.path);
       setMediaType(type);
-    }    
+    }
     setShowPostModel(value);
-
   };
 
-  const handleLobbyModal = (value,post) => {
-    console.log("post and user id=",value,post)
+  const handleLobbyModal = (value, post) => {
     setShowModel2(value);
   };
-  const handleDelete=(status,post)=>
-  {
-    console.log("delete is called=",status,post)
+  const handleDelete = (status, post) => {
     setShowModel2(status);
-   dispatch(deletePost(post));
+    dispatch(deletePost(post));
   }
 
-  
-  const handleUnfavGallery= (gallery) => {
+  const handleShareModel = (status) => {
+    setShowModelShare(status);
+  };
+
+
+  const handleUnfavGallery = (gallery) => {
     dispatch(unfavGallery(gallery));
   }
 
@@ -175,14 +173,13 @@ const Lobby = () => {
           </div>
         </div>
       }
-       {showModel2 &&
+      {showModel2 &&
         <LobbyModal
-        onDelete={handleDelete}
-        onModalClose={handleLobbyModal}
-        editablePost={editablePost}
-        mediaType={mediaType}
+          onDelete={handleDelete}
+          onModalClose={handleLobbyModal}
+          editablePost={editablePost}
+          mediaType={mediaType}
         />
-        
       }
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
@@ -234,21 +231,20 @@ const Lobby = () => {
                 activeNcomm={activeNcomm}
                 activePost={activePost}
                 onModelOpen2={handleLobbyModal}
-                editablePost={editablePost}
-                onEditPost={(post)=>seteEditablePost(post)}
-
+                onEditPost={(post) => seteEditablePost(post)}
+                onSharePost={handleShareModel}
               />
             </div>
           ))
           }
         </div>
         {showPostModel &&
-        <PostModal
-          onPostModalClose={handlePostShowModel}
-          imagePath={imagePath}
-          mediaType={mediaType}
-        />
-      }
+          <PostModal
+            onPostModalClose={handlePostShowModel}
+            imagePath={imagePath}
+            mediaType={mediaType}
+          />
+        }
         <div className="section-3 box-3 col4">
           <FeedSection
             collectiveFeeds={collectiveFeeds}
