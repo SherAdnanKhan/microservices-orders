@@ -8,7 +8,7 @@ import { completeFormattedDate, formatTime } from '../../../utils/helperFunction
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
   activeTab, activeUser, onTabChange, onCommentChange,
-  activeFeedComment, onActiveFeedComment, onPostComment,onPostModal,
+  activeFeedComment, onActiveFeedComment, onPostComment, onPostModal,
   comments, onRepost, onStroke, onUnstroke, myFeeds, activeUserList
 }) => {
 
@@ -174,16 +174,18 @@ const FaveSection = ({
                         </Link>
                       </span>
                       <p className="submit-text">{feed.feed} </p>
-                      {feed.feed_type === 1 &&
-                        feed.image &&
-                        <img
-                          src={feed.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.image)}
+                      <div className="fave-img">
+                        {feed.feed_type === 1 &&
+                          feed.image &&
+                          <img
+                            src={feed.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                            onClick={() => onPostModal(true, feed.image)}
 
-                        />
-                      }
+                          />
+                        }
+                      </div>
                       {feed.feed_type === 2 &&
                         feed.image &&
                         <div className="video left-space">
@@ -222,7 +224,7 @@ const FaveSection = ({
                             alt="Snow"
                             className="img-css-fave"
                             onClick={() => onPostModal(true, feed.image)}
-                            
+
                           />
                         }
                         {feed.parent.feed_type === 2 &&
@@ -903,14 +905,14 @@ const FaveSection = ({
                       >
                       </img>
                     </div>
-                    
+
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&
                       <Link
                         to="#"
                         onClick={e => onActiveFeedComment(e, feed.id)}
-                        style={{paddingLeft:"5px"}}
+                        style={{ paddingLeft: "5px" }}
                       >
                         View Comments
                         </Link>
