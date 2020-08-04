@@ -11,7 +11,7 @@ import LobbyPostOption from './lobbyPostOption';
 
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
-  activeNcomm, onActivePost, activePost, onModelDelete,
+  activeNcomm, onActivePost, activePost, onModelDelete, onReportPost,
   onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost
 }) => {
   return (
@@ -33,7 +33,12 @@ const LobbyPosts = ({
         }
       </div>
       <div className="image-option-box">
-        <LobbyPostOption post={activePost} onUnFavGallery={onUnFavGallery} onSharePost={onSharePost} onModelDelete={onModelDelete} />
+        <LobbyPostOption
+          post={activePost}
+          onUnFavGallery={onUnFavGallery}
+          onSharePost={onSharePost}
+          onReportPost={onReportPost}
+          onModelDelete={onModelDelete} />
       </div>
       <div className={
         activePost.id === post.id

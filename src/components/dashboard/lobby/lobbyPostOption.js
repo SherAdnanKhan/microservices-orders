@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import UserContext from "../../../context/userContext";
 
-const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete }) => {
+const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost }) => {
   const user = useContext(UserContext);
   const loggedInUserId = user.id;
   return (
@@ -10,7 +10,7 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete }) =
         {post.created_by === loggedInUserId ?
           <>
             <p>Edit </p>
-            <p onClick={() => onModelDelete(post, true)}>Delete </p>
+            <p onClick={() => onModelDelete(post, true)}> Delete </p>
             <p>Valut </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
             <p>Share On STRQ chat </p>
@@ -18,9 +18,9 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete }) =
           </>
           :
           <>
-            <p>Report </p>
-            <p onClick={() => onUnFavGallery(post.gallery)}>Unfave Gallery</p>
-            <p>Repost </p>
+            <p onClick={() => onReportPost(true, post)}>Report </p>
+            <p onClick={() => onUnFavGallery(post.gallery)}> Unfave Gallery</p>
+            <p> Repost </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
             <p>Vault</p>
             <p>MzFlash </p>

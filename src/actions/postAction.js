@@ -99,6 +99,19 @@ export const createComment = (data, postId, galleryId, user) => dispatch => {
     });
 };
 
+export const standardSharePost = (postId) => dispatch => {
+  http
+    .post(`/post/share/${postId}`)
+}
+
+export const reportPost = (postId) => dispatch => {
+  http
+    .post(`/post/report/${postId}`)
+    .then(res => {
+      toast.success("Post Reported Successfully");
+    });
+}
+
 export const getComments = postId => dispatch => {
   http
     .get(`/comments/${postId}`)
@@ -110,15 +123,13 @@ export const getComments = postId => dispatch => {
     });
 };
 export const deletePost = post => dispatch => {
-  console.log("id in API=",post);
   http
     .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
-      console.log("response=",res)
       dispatch({
         type: DELETE_POST,
-        payload:post
+        payload: post
       });
     });
 };
