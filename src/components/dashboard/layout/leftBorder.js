@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const LeftBorder = () => {
   const history = useHistory();
@@ -8,7 +8,7 @@ const LeftBorder = () => {
   return (
     <div
       className="left"
-      style={{ backgroundColor:feelColor }}
+      style={{ backgroundColor: feelColor }}
     >
       <img
         className="lobby-img"
@@ -26,7 +26,7 @@ const LeftBorder = () => {
         className="add-img"
         alt=""
         src="/assets/images/add.png"
-        onClick={() => history.push('/dashboard/exhibition/new')}
+        onClick={() => history.push('/dashboard/exhibition')}
       />
     </div>
   );

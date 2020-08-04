@@ -35,7 +35,7 @@ const PostBar = ({ myStudio, activeGallery, totalPosts, feelColor }) => {
             <img
               src="/assets/images/add.png"
               className="clickable"
-              onClick={() => history.push(`/dashboard/exhibition/${activeGallery.id}`)}
+              onClick={() => history.push(`/dashboard/exhibition?gallery=${activeGallery.id}`)}
               alt=""
             />
           </>

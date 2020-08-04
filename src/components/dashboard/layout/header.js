@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Search from './search';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const history = useHistory();
@@ -26,7 +26,7 @@ const Header = () => {
           <div className="left-icon">
             <img className="valut-img" alt="" src="/assets/images/lobbyicon.png" onClick={() => history.push('/dashboard/lobby')} />
             <img className="valut-img" alt="" src="/assets/images/newstudioicon.png" onClick={() => history.push('/dashboard/my-studio')} />
-            <img className="valut-img" alt="" src="/assets/images/add.png" onClick={() => history.push('/dashboard/exhibition/new')} />
+            <img className="valut-img" alt="" src="/assets/images/add.png" onClick={() => history.push('/dashboard/exhibition')} />
           </div>
           <div className="search" id="search">
             <img src="/assets/images/icons/searchicon.png" alt="search Icon" />

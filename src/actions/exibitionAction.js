@@ -19,3 +19,11 @@ export const artPost = (data, history) => () => {
       history.push('/dashboard/my-studio');
     });
 };
+
+export const updatePost = (data, postId, history) => () => {
+  http
+    .post(`/post/update/${postId}`, data, {})
+    .then(() => {
+      history.push('/dashboard/my-studio');
+    });
+};

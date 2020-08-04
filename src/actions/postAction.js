@@ -6,7 +6,8 @@ import {
   GET_COMMENTS,
   GET_NCOMM,
   CLEAR_NCOMM,
-  DELETE_POST
+  DELETE_POST,
+  CLEAR_POST
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import socket from '../services/socketService';
@@ -26,6 +27,10 @@ export const getPost = (post) => dispatch => {
       }
     });
 };
+
+export const clearPost = () => {
+  return { type: CLEAR_POST };
+}
 
 export const strokePost = (postId, galleryId, user) => dispatch => {
   const currentUser = getCurrentUser();

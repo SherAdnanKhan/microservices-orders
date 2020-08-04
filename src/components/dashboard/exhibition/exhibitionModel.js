@@ -1,19 +1,21 @@
-import React, { useState,useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
 import { useHistory } from 'react-router-dom';
 import UserContext from "../../../context/userContext";
 
-const ExhibitionModel = ({ onSave }) => {
+const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
   const [croppedImage, setCroppedImage] = useState(null);
   const [video, setVideo] = useState(null);
+  const [videoUrl, setVideoUrl] = useState(null);
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [toggle, setToggle] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const user = useContext(UserContext);
-  console.log("user=",user)
+
   const history = useHistory();
+
   const handleCompleteCrop = blob => {
     setCroppedImage(blob);
   };
@@ -34,11 +36,13 @@ const ExhibitionModel = ({ onSave }) => {
       setImageUrl(URL.createObjectURL(input.files[0]));
       setToggle(true);
       setVideo(null);
+      setVideoUrl(null);
       setIsValid(true);
     } else if (input.name === 'video' && input.files[0]) {
       setVideo(input.files[0]);
+      setVideoUrl(URL.createObjectURL(input.files[0]))
       setImage(null);
-      setImageUrl('');
+      setImageUrl(null);
       setToggle(false);
       setIsValid(true);
       setCroppedImage(null);
@@ -54,6 +58,14 @@ const ExhibitionModel = ({ onSave }) => {
       onSave('video', video);
     }
   };
+
+  useEffect(() => {
+    if (selectedImage) {
+      setImageUrl(imageUrl => imageUrl = selectedImage);
+    } else if (selectedVideo) {
+      setVideoUrl(videoUrl => videoUrl = selectedVideo);
+    }
+  }, [selectedImage, selectedVideo]);
 
   return (
     <div className="exhibition-model">
@@ -79,22 +91,33 @@ const ExhibitionModel = ({ onSave }) => {
           <h2 >Add an Exhibit</h2>
         </div>
         <div className="up-img-box">
-
-          {isEmpty(croppedImage) && !isEmpty(imageUrl) && <img className="update-pic" src={imageUrl} alt="gallery" />}
-          {!isEmpty(croppedImage) && <img className="update-pic" src={URL.createObjectURL(croppedImage)} alt="gallery" />}
-          {video &&
+          {isEmpty(croppedImage) && !isEmpty(imageUrl) &&
+            <img
+              className="update-pic"
+              src={imageUrl}
+              alt="gallery1"
+            />
+          }
+          {!isEmpty(croppedImage) &&
+            <img
+              className="update-pic"
+              src={URL.createObjectURL(croppedImage)}
+              alt="gallery2"
+            />
+          }
+          {videoUrl &&
             <video width="320" height="240" controls>
-              <source src={URL.createObjectURL(video)} type="video/mp4" />
-              <source src={URL.createObjectURL(video)} type="video/ogg" />
+              <source src={videoUrl} type="video/mp4" />
+              <source src={videoUrl} type="video/ogg" />
               Your browser does not support the video tag.
             </video>
           }
-          <div className="add-nag-icon" > 
+          <div className="add-nag-icon" >
             <div className="nag">
-              <div className="nag-icon" style={{backgroundColor:user.feel.color_code}} >
+              <div className="nag-icon" style={{ backgroundColor: user.feel.color_code }} >
                 <img alt="" src="/assets/images/plus.png" />
               </div>
-              <div className="nag-btn" style={{backgroundColor:user.feel.color_code}} >
+              <div className="nag-btn" style={{ backgroundColor: user.feel.color_code }} >
                 Add image
               </div>
               <input
@@ -105,13 +128,13 @@ const ExhibitionModel = ({ onSave }) => {
               />
             </div>
             <div className="nag">
-              <div className="nag-icon" style={{backgroundColor:user.feel.color_code}}>
+              <div className="nag-icon" style={{ backgroundColor: user.feel.color_code }}>
                 <img
                   alt=""
                   src="/assets/images/plus.png"
                 />
               </div>
-              <div className="nag-btn" style={{backgroundColor:user.feel.color_code}}>
+              <div className="nag-btn" style={{ backgroundColor: user.feel.color_code }}>
                 Add video
                 </div>
               <input
@@ -123,12 +146,12 @@ const ExhibitionModel = ({ onSave }) => {
             </div>
           </div>
         </div>
-        <div className="actions" > 
+        <div className="actions" >
           <button
             onClick={handleSave}
             className={isValid ? 'clickable' : 'btn-disable'}
             disabled={!isValid}
-            style={{backgroundColor:user.feel.color_code}}
+            style={{ backgroundColor: user.feel.color_code }}
           >
             Save
            </button>

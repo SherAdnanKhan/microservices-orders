@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { artSearch, artPost } from "../../../actions/exibitionAction"
+import { artSearch, artPost, updatePost } from "../../../actions/exibitionAction"
 import InputAutoComplete from "../../common/autoComplete";
-import { useHistory, useRouteMatch } from "react-router-dom";
-import UserContext from "../../../context/userContext";
+import { useHistory, useLocation } from "react-router-dom";
 import Spinner from "../../common/spinner";
 import { getMyGalleries } from "../../../actions/galleryActions";
 import ExhibitionModel from "./exhibitionModel";
+import queryString from 'query-string';
+import { getPost, clearPost } from "../../../actions/postAction";
 
 const AddExibit = () => {
-  const [showModel, setShowModel] = useState(true);
-
-  const { params: { id } } = useRouteMatch();
-
+  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -22,37 +20,26 @@ const AddExibit = () => {
   const { loading } = useSelector(state => state.loading);
   const {
     gallery: { myGalleries },
+    postView: { post }
   } = useSelector(state => state);
 
-  let initialData = {
+  const params = queryString.parse(location.search);
+
+  const [showModel, setShowModel] = useState(params.post ? false : true);
+  const [error, setError] = useState('');
+  const [image, setImage] = useState('');
+  const [video, setVideo] = useState('')
+  const [data, setData] = useState({
     title: "",
     description: "",
     gallery_id: 0,
     image: null,
     video: null,
     art_id: null
-  }
-
-  const [error, setError] = useState('');
-  const [image, setImage] = useState('');
-  const [video, setVideo] = useState('')
-  const [data, setData] = useState(initialData);
-
-  const user = useContext(UserContext);
+  });
 
   const handleChange = ({ target: input }) => {
-    if (input.type === 'file' && input.files[0]) {
-      const fileType = input.files[0].type.split("/")[0];
-
-      if (fileType === 'image') {
-        setImage(URL.createObjectURL(input.files[0]));
-        setData({ ...data, image: input.files[0] });
-      } else {
-        setVideo(URL.createObjectURL(input.files[0]));
-        setData({ ...data, video: input.files[0] });
-      }
-
-    } else if (input.type === 'radio') {
+    if (input.type === 'radio') {
       setData({ ...data, [input.name]: parseInt(input.value) });
     } else {
       setData({ ...data, [input.name]: input.value });
@@ -68,11 +55,6 @@ const AddExibit = () => {
     setData({ ...data, art_id: option.id });
     // setArts(option.name)
   }
-
-  useEffect(() => {
-    dispatch(getMyGalleries())
-
-  }, [dispatch]);
 
   const hasErrors = () => {
     if (!data.title) {
@@ -101,7 +83,7 @@ const AddExibit = () => {
   const Submit = (e) => {
     e.preventDefault();
     const error = hasErrors();
-
+    console.log(data);
     if (!error) {
       const formData = new FormData();
       for (let key in data) {
@@ -110,33 +92,74 @@ const AddExibit = () => {
             formData.append(key, data[key]);
           }
         } else {
-          formData.append(key, data[key]);
+          if (key !== 'id') {
+            formData.append(key, data[key]);
+          }
         }
       }
-      setData(initialData);
-      dispatch(artPost(formData, history))
+
+      if (data.id) {
+        dispatch(updatePost(formData, data.id, history));
+      } else {
+        dispatch(artPost(formData, history))
+      }
     }
     setError(error || '');
   }
 
   useEffect(() => {
-    if (id !== 'new') {
+    if (params.gallery) {
       setData(data => {
         return {
           ...data,
-          gallery_id: parseInt(id)
+          gallery_id: parseInt(params.gallery)
         }
       });
     }
-  }, [id, user]);
+
+    if (params.post) {
+      dispatch(getPost(params.post));
+    }
+    dispatch(getMyGalleries());
+
+    return () => {
+      dispatch(clearPost());
+    }
+  }, [dispatch, params]);
+
+  useEffect(() => {
+    if (post) {
+      const splittedPath = post?.post?.image.path.split('.');
+      const fileType = splittedPath[splittedPath.length - 1];
+
+      if (fileType === 'mp4') {
+        setVideo(post?.post?.image.path);
+      } else {
+        setImage(post?.post?.image.path);
+      }
+
+      setData(data => {
+        return {
+          ...data,
+          id: post?.post?.id,
+          title: post?.post?.title,
+          description: post?.post?.description,
+          art_id: post?.post?.art_id
+        }
+      });
+      setShowModel(false);
+    }
+  }, [post, dispatch]);
 
   const handleSave = (name, file) => {
     if (name === 'image') {
       setImage(URL.createObjectURL(file));
-      setData({ ...data, image: file });
+      setData({ ...data, image: file, video: null });
+      setVideo(null);
     } else {
       setVideo(URL.createObjectURL(file));
-      setData({ ...data, video: file });
+      setData({ ...data, video: file, image: null });
+      setImage(null);
     }
     setShowModel(false);
   };
@@ -144,7 +167,11 @@ const AddExibit = () => {
   return (
     <div>
       {showModel &&
-        <ExhibitionModel onSave={handleSave} />
+        <ExhibitionModel
+          onSave={handleSave}
+          selectedImage={image}
+          selectedVideo={video}
+        />
       }
       {!showModel &&
         <div className={`frameReady ${feelColor}`}>
@@ -164,7 +191,11 @@ const AddExibit = () => {
             <form className="exibition-page-form" onSubmit={Submit}>
               <div className="exibition-top-textboxes">
                 <div className="exbition-img" style={{ textAlign: "center" }}>
-                  <label htmlFor="image" className="exibition-input clickable" onClick={() => console.log('label')}>
+                  <label
+                    htmlFor="image"
+                    className="exibition-input clickable"
+                    onClick={() => setShowModel(true)}
+                  >
                     {video &&
                       <video width="320" height="240" controls>
                         <source src={video} type="video/mp4" />
@@ -172,10 +203,11 @@ const AddExibit = () => {
                         Your browser does not support the video tag.
                       </video>
                     }
-                    {!video &&
+                    {image &&
                       <img
                         id="preview"
-                        src={image ? image : '/assets/images/input-image.png'} alt="dummy"
+                        src={image ? image : '/assets/images/input-image.png'}
+                        alt="dummy"
                       />
                     }
                   </label>
@@ -185,10 +217,10 @@ const AddExibit = () => {
                     options={listCategory}
                     displayProperty="name"
                     placeholder="Choose an art"
+                    defaultValue={post?.post?.art?.name}
                     onChange={handleAutoChange}
                     onSelect={handleAutoSelect}
                   />
-
                   <input
                     className="exibition-title-input"
                     type="text"
@@ -197,7 +229,14 @@ const AddExibit = () => {
                     onChange={handleChange}
                     autoComplete="off"
                   />
-                  <textarea className="exibition-description-input" placeholder="Tell us something about this work..." name="description" value={data.description} onChange={handleChange} autoComplete="off"></textarea>
+                  <textarea
+                    className="exibition-description-input"
+                    placeholder="Tell us something about this work..."
+                    name="description"
+                    value={data.description}
+                    onChange={handleChange}
+                    autoComplete="off">
+                  </textarea>
                 </div>
               </div>
 
