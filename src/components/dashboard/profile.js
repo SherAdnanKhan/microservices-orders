@@ -105,7 +105,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[0] ? images[0].path : "/assets/images/icons/galleryCover.png"}
+                    src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
                     alt=""
 
                   />
@@ -119,7 +119,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[1] ? images[1].path : "/assets/images/icons/galleryCover.png"}
+                    src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
                     alt=""
 
                   />
@@ -133,7 +133,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[2] ? images[2].path : "/assets/images/icons/galleryCover.png"}
+                    src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
                     alt=""
                   />
                 </div>
@@ -146,7 +146,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[3] ? images[3].path : "/assets/images/icons/galleryCover.png"}
+                    src={images[3] ? images[3].path : "/assets/images/avataricon.png"}
                     alt=""
                   />
                 </div>
