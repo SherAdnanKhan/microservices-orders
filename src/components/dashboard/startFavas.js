@@ -4,7 +4,6 @@ import { getRecommendedGalleries, unfavRecommendedGallery, favRecommendedGallery
 import { useHistory } from 'react-router-dom';
 import HorizontalSlider from '../common/horizontalSlider';
 import Avatar from '../common/avatar';
-
 const StartFaves = ({ user }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -27,7 +26,6 @@ const StartFaves = ({ user }) => {
       dispatch(favRecommendedGallery(data));
     }
   };
-
   return (
     <div className="fav-page">
       <div
@@ -68,9 +66,7 @@ const StartFaves = ({ user }) => {
 
                   <div className="f-img-box">
                     <div className="main-img">
-                      {user && 
-                       <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" /> 
-                       }
+                       <img src={user.galleries[0].image ? user.galleries[0].image.path :"/assets/images/galleryicon.png" } alt="avatar" /> 
                     </div>
                     <div className="other-img">
                       {/* {user.galleries[0].posts.map((post, in_key) => (
