@@ -21,17 +21,17 @@ const SharePostModal = ({ onModalClose, post }) => {
           <div className="btn-section" >
             <FacebookShareButton
               url={url}
-              hashtag="#programing joke">
+              hashtag={post.title}>
               <FacebookIcon logoFillColor="white" />
             </FacebookShareButton>
             <TwitterShareButton
               url={url}
-              hashtag="#programing joke">
+              hashtag={post.title}>
               <TwitterIcon logoFillColor="white" />
             </TwitterShareButton>
             <WhatsappShareButton
               url={url}
-              hashtag="#programing joke">
+              hashtag={post.title}>
               <WhatsappIcon logoFillColor="white" />
             </WhatsappShareButton>
             <LinkedinShareButton

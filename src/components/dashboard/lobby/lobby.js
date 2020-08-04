@@ -19,8 +19,7 @@ import SharePostModal from '../../common/sharePostModal';
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
-  const [showModel2, setShowModel2] = useState(false);
-  const [editablePost, seteEditablePost] = useState({});
+  const [showDeleteModel, setShowDeleteModel] = useState(false);
   const [mediaType, setMediaType] = useState("");
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
@@ -128,7 +127,6 @@ const Lobby = () => {
     }
   }
   const handlePostShowModel = (value, type, image) => {
-    console.log("Handler is called", image, type)
     if (value === true) {
       setImagepath(image.path);
       setMediaType(type);
@@ -136,18 +134,17 @@ const Lobby = () => {
     setShowPostModel(value);
   };
 
-  const handleLobbyModal = (value, post) => {
-    setShowModel2(value);
+  const handlePostDeleteModel = (value, post) => {
+    setShowDeleteModel(value);
   };
   const handleDelete = (status, post) => {
-    setShowModel2(status);
+    setShowDeleteModel(status);
     dispatch(deletePost(post));
   }
 
-  const handleShareModel = (status) => {
+  const handleShareModel = (status, post) => {
     setShowModelShare(status);
   };
-
 
   const handleUnfavGallery = (gallery) => {
     dispatch(unfavGallery(gallery));
@@ -173,11 +170,11 @@ const Lobby = () => {
           </div>
         </div>
       }
-      {showModel2 &&
+      {showDeleteModel &&
         <LobbyModal
           onDelete={handleDelete}
-          onModalClose={handleLobbyModal}
-          editablePost={editablePost}
+          onModalClose={handlePostDeleteModel}
+          editablePost={activePost}
           mediaType={mediaType}
           onSharePost={handleShareModel}
         />
@@ -185,7 +182,7 @@ const Lobby = () => {
       {showModelShare &&
         <SharePostModal
           onModalClose={handleShareModel}
-          post={editablePost}
+          post={activePost}
         />
       }
       <div className="row">
@@ -237,8 +234,7 @@ const Lobby = () => {
                 ncomm={ncomm}
                 activeNcomm={activeNcomm}
                 activePost={activePost}
-                onModelOpen2={handleLobbyModal}
-                onEditPost={(post) => seteEditablePost(post)}
+                onModelDelete={handlePostDeleteModel}
                 onSharePost={handleShareModel}
               />
             </div>
