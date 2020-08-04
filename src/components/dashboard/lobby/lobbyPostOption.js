@@ -12,7 +12,7 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete }) =
             <p>Edit </p>
             <p onClick={() => onModelDelete(post, true)}>Delete </p>
             <p>Valut </p>
-            <p>Share </p>
+            <p onClick={() => onSharePost(true, post)}> Share </p>
             <p>Share On STRQ chat </p>
             <p>Turn off critiques </p>
           </>
