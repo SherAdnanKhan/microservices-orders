@@ -13,7 +13,6 @@ const StartFaves = ({ user }) => {
   useEffect(() => {
     if (!recommendedGalleries)
       dispatch(getRecommendedGalleries())
-    console.log(recommendedGalleries);
   }, [dispatch, recommendedGalleries])
 
   const handleLike = (user, gallery) => {
@@ -69,7 +68,9 @@ const StartFaves = ({ user }) => {
 
                   <div className="f-img-box">
                     <div className="main-img">
-                      <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" />
+                      {user && 
+                       <img src={user.galleries[0].image ? user.galleries[0].image.path : user.galleries[0].posts[0].image.path} alt="avatar" /> 
+                       }
                     </div>
                     <div className="other-img">
                       {/* {user.galleries[0].posts.map((post, in_key) => (
