@@ -9,12 +9,13 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { unfavGallery } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, standardSharePost, reportPost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
 import LobbyModal from "../lobby/lobbyModal";
 import SharePostModal from '../../common/sharePostModal';
+import ReportPostModel from './reportPostModel';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -35,6 +36,7 @@ const Lobby = () => {
   const [activePost, setActivePost] = useState('');
   const [activeNcomm, setActiveNcomm] = useState('');
   const [showModelShare, setShowModelShare] = useState(false);
+  const [showModelReport, setShowModelReport] = useState(false);
 
 
   const currentUser = useContext(UserContext);
@@ -143,11 +145,21 @@ const Lobby = () => {
   }
 
   const handleShareModel = (status, post) => {
+    //dispatch(standardSharePost(post.id));
     setShowModelShare(status);
   };
 
   const handleUnfavGallery = (gallery) => {
     dispatch(unfavGallery(gallery));
+  }
+
+  const handleReportModel = (status, post) => {
+    setShowModelReport(status);
+  }
+
+  const onReport = (post) => {
+    dispatch(reportPost(post.id));
+    setShowModelReport(false);
   }
 
   return (
@@ -174,7 +186,7 @@ const Lobby = () => {
         <LobbyModal
           onDelete={handleDelete}
           onModalClose={handlePostDeleteModel}
-          editablePost={activePost}
+          activePost={activePost}
           mediaType={mediaType}
           onSharePost={handleShareModel}
         />
@@ -182,6 +194,13 @@ const Lobby = () => {
       {showModelShare &&
         <SharePostModal
           onModalClose={handleShareModel}
+          post={activePost}
+        />
+      }
+      {showModelReport &&
+        <ReportPostModel
+          onReport={onReport}
+          onModalClose={handleReportModel}
           post={activePost}
         />
       }
@@ -236,6 +255,7 @@ const Lobby = () => {
                 activePost={activePost}
                 onModelDelete={handlePostDeleteModel}
                 onSharePost={handleShareModel}
+                onReportPost={handleReportModel}
               />
             </div>
           ))
