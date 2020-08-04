@@ -5958,8 +5958,11 @@ img {
   border: 1px solid #444;
   z-index: 20;
   @media @mobile{
-    width: 72%;
-    height: 50vh;
+    width: 80%;
+    height: 40vh;
+  }
+  .model .model-image .ReactCrop > div {
+    height: 350px;
   }
   .model-actions {
     position: absolute;
@@ -5990,12 +5993,14 @@ img {
     height: 80%;
     .ReactCrop {
       width: 100%;
-      height: 100%;
       > div {
         width: 100%;
+        height: 350px;
         .ReactCrop__image {
           margin: 0 auto;
           width: 100%;
+          height:100%;
+          object-fit: cover;
         }
       }
     }
@@ -6053,7 +6058,8 @@ img {
     border: 2px solid #444;
     background: black;
     @media @mobile {
-      height: 54%;
+      height: 53%;
+      width:80%;
     }
     form{
       @media @mobile {
