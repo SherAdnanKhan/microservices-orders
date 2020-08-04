@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import UserContext from "../../../context/userContext";
 
-const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost }) => {
+const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel }) => {
   const user = useContext(UserContext);
   const loggedInUserId = user.id;
   return (
@@ -13,7 +13,7 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onR
             <p onClick={() => onModelDelete(post, true)}> Delete </p>
             <p>Valut </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
-            <p>Share On STRQ chat </p>
+            <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
             <p>Turn off critiques </p>
           </>
           :

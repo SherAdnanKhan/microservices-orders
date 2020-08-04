@@ -9,13 +9,14 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { unfavGallery } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, standardSharePost, reportPost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
 import LobbyModal from "../lobby/lobbyModal";
 import SharePostModal from '../../common/sharePostModal';
 import ReportPostModel from './reportPostModel';
+import sharePostStrqModal from './sharePostStrqModal';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -37,6 +38,7 @@ const Lobby = () => {
   const [activeNcomm, setActiveNcomm] = useState('');
   const [showModelShare, setShowModelShare] = useState(false);
   const [showModelReport, setShowModelReport] = useState(false);
+  const [showModelStrqShare, setshowModelStrqShare] = useState(false);
 
 
   const currentUser = useContext(UserContext);
@@ -162,6 +164,14 @@ const Lobby = () => {
     setShowModelReport(false);
   }
 
+  const handleStrqShareModel = (status, post) => {
+    setshowModelStrqShare(status);
+  }
+
+  const onStrqShare = (post, toUser) => {
+    setshowModelStrqShare(false);
+  }
+
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
@@ -201,6 +211,13 @@ const Lobby = () => {
         <ReportPostModel
           onReport={onReport}
           onModalClose={handleReportModel}
+          post={activePost}
+        />
+      }
+      {showModelStrqShare &&
+        <sharePostStrqModal
+          onshare={onStrqShare}
+          onModalClose={handleStrqShareModel}
           post={activePost}
         />
       }
@@ -256,6 +273,8 @@ const Lobby = () => {
                 onModelDelete={handlePostDeleteModel}
                 onSharePost={handleShareModel}
                 onReportPost={handleReportModel}
+                onShareStrqModel={handleStrqShareModel}
+                onStrqShare={onStrqShare}
               />
             </div>
           ))
