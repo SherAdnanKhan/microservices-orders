@@ -208,14 +208,14 @@ const FeedSection = ({
               }
               {feed.feed_type === 2 &&
                 feed.image &&
-                <div className="video" >
-                  <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
-                    <source src={feed.image.path} type="video/mp4" />
-                    <source src={feed.image.path} type="video/ogg" />
+
+                <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
+                  <source src={feed.image.path} type="video/mp4" />
+                  <source src={feed.image.path} type="video/ogg" />
                     Your browser does not support the video tag.
 
                   </video>
-                </div>
+
               }
             </div>
             {feed.parent &&
