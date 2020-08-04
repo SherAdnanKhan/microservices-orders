@@ -7,6 +7,7 @@ import {
   GET_NCOMM,
   CLEAR_NCOMM,
   DELETE_POST,
+  CLEAR_POST
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -72,11 +73,16 @@ export default (state = initialState, action) => {
         ...state,
         ncomm: null
       };
-      case DELETE_POST:
-        return {
-          ...state,
-            post: null
-        };
+    case DELETE_POST:
+      return {
+        ...state,
+        post: null
+      };
+    case CLEAR_POST:
+      return {
+        ...state,
+        post: null
+      };
     default:
       return state;
   }

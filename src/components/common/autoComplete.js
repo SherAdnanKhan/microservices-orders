@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const InputAutoComplete = ({
-  options, displayProperty, onChange, onSelect, placeholder
+  options, displayProperty, onChange,
+  onSelect, placeholder, defaultValue
 }) => {
   const [list, setList] = useState([]);
   const [selected, setSelected] = useState('');
@@ -15,6 +16,12 @@ const InputAutoComplete = ({
       setList(options);
     }
   }, [options]);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setSelected(selected => selected = defaultValue);
+    }
+  }, [defaultValue]);
 
   const handleChange = ({ target: input }) => {
     optionRef.current.scrollTo(0, 0);

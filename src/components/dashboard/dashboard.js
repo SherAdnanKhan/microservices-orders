@@ -16,7 +16,7 @@ const Dashboard = ({ user }) => {
       <Switch>
         <Route exact path="/dashboard/change-password" component={Main} />
         <Route exact path="/dashboard/lobby" component={Main} />
-        <Route exact path="/dashboard/exhibition/:id" component={AddExibit} />
+        <Route exact path="/dashboard/exhibition" component={AddExibit} />
         <Route exact path="/dashboard/my-studio/profile" component={Profile} />
         <Route exact path="/dashboard/my-studio/fave" component={Main} />
         <Route exact path="/dashboard/my-studio/fave-by" component={Main} />

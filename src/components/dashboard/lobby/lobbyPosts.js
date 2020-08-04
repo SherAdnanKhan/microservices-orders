@@ -71,8 +71,6 @@ const LobbyPosts = ({
       >
         <ImageVideoSlider ncomm={ncomm} />
       </div>
-
-
       <div className="onearttitle">
         <p>{post && post.title}</p>
         <div className={

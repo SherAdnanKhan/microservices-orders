@@ -65,6 +65,7 @@ export const STOP_GALLERY_LOADER = 'STOP_GALLERY_LOADER';
 
 // Post
 export const GET_POST = "GET_POST";
+export const CLEAR_POST = "CLEAR_POST";
 export const STROKE_POST = 'STROKE_POST';
 export const UNSTROKE_POST = 'UNSTROKE_POST';
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT';
