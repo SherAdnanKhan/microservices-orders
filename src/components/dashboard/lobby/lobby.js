@@ -19,7 +19,7 @@ import SharePostModal from '../../common/sharePostModal';
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
-  const [showModel2, setShowModel2] = useState(false);
+  const [showDeleteModel, setShowDeleteModel] = useState(false);
   const [mediaType, setMediaType] = useState("");
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
@@ -134,11 +134,11 @@ const Lobby = () => {
     setShowPostModel(value);
   };
 
-  const handleLobbyModal = (value, post) => {
-    setShowModel2(value);
+  const handlePostDeleteModel = (value, post) => {
+    setShowDeleteModel(value);
   };
   const handleDelete = (status, post) => {
-    setShowModel2(status);
+    setShowDeleteModel(status);
     dispatch(deletePost(post));
   }
 
@@ -170,10 +170,10 @@ const Lobby = () => {
           </div>
         </div>
       }
-      {showModel2 &&
+      {showDeleteModel &&
         <LobbyModal
           onDelete={handleDelete}
-          onModalClose={handleLobbyModal}
+          onModalClose={handlePostDeleteModel}
           editablePost={activePost}
           mediaType={mediaType}
           onSharePost={handleShareModel}
@@ -234,7 +234,7 @@ const Lobby = () => {
                 ncomm={ncomm}
                 activeNcomm={activeNcomm}
                 activePost={activePost}
-                onModelDelete={handleLobbyModal}
+                onModelDelete={handlePostDeleteModel}
                 onSharePost={handleShareModel}
               />
             </div>
