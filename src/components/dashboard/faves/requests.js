@@ -30,12 +30,13 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
               </div>
               <div className="actions">
                 <button
+                 style={{backgroundColor:user.feel.color_code}}
                   onClick={() => onApprovedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Approve
                 </button>
                 <button
-                  className="btn-reject"
+                    style={{backgroundColor:user.feel.color_code}}
                   onClick={() => onRejectedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Reject
