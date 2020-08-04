@@ -20,7 +20,6 @@ const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const [showModel2, setShowModel2] = useState(false);
-  const [editablePost, seteEditablePost] = useState({});
   const [mediaType, setMediaType] = useState("");
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
@@ -128,7 +127,6 @@ const Lobby = () => {
     }
   }
   const handlePostShowModel = (value, type, image) => {
-    console.log("Handler is called", image, type)
     if (value === true) {
       setImagepath(image.path);
       setMediaType(type);
@@ -144,10 +142,9 @@ const Lobby = () => {
     dispatch(deletePost(post));
   }
 
-  const handleShareModel = (status) => {
+  const handleShareModel = (status, post) => {
     setShowModelShare(status);
   };
-
 
   const handleUnfavGallery = (gallery) => {
     dispatch(unfavGallery(gallery));
@@ -177,7 +174,7 @@ const Lobby = () => {
         <LobbyModal
           onDelete={handleDelete}
           onModalClose={handleLobbyModal}
-          editablePost={editablePost}
+          editablePost={activePost}
           mediaType={mediaType}
           onSharePost={handleShareModel}
         />
@@ -185,7 +182,7 @@ const Lobby = () => {
       {showModelShare &&
         <SharePostModal
           onModalClose={handleShareModel}
-          post={editablePost}
+          post={activePost}
         />
       }
       <div className="row">
@@ -237,8 +234,7 @@ const Lobby = () => {
                 ncomm={ncomm}
                 activeNcomm={activeNcomm}
                 activePost={activePost}
-                onModelOpen2={handleLobbyModal}
-                onEditPost={(post) => seteEditablePost(post)}
+                onModelDelete={handleLobbyModal}
                 onSharePost={handleShareModel}
               />
             </div>
