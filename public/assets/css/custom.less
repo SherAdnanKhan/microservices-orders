@@ -2928,17 +2928,18 @@ img {
       margin-top: 10px;
       width: 100%;
       label {
-        width: 92%;
+        width: 97%;
         text-align: center;
         display: flex;
         margin-left:8px;
         margin-bottom:25px;
         div {
-          width:90%;
+          width:70%;
+          margin: 0 auto;
           max-height:auto;
           white-space: pre-wrap;
           background: black;
-	  word-wrap:break-word;
+	        word-wrap:break-word;
           color: white;
           padding: 15px;
           font-size: 1em;
@@ -3113,19 +3114,29 @@ img {
   }
   
   .studio-Screen {
-    margin-top: 65px;
+    margin-top: 30px;
     text-align: center;
     width: 100%;
+    display: flex;
+    justify-content: space-around;
+    @media @mobile {
+      // display: flow-root;
+    }
     .studio-Head{
       display: flex;
       flex-direction: row;
       justify-content: space-around; 
+      align-items: center;
+      width: 50%;
       img {
           width: 10%;
           // background-color: red;
           padding: 10px 15px;
           border-radius: 25px;
           }
+    }
+    .studioDetail{
+      width: 50%;
     }
     h2 {
       margin-top: 20px;
@@ -3142,7 +3153,7 @@ img {
         display: flex;
         margin: 0 auto 25px;
         div {
-          width: 90%;
+          width: 93%;
           background: black;
           white-space: pre-line;
           color: white;
@@ -3745,7 +3756,7 @@ img {
   }
 }
 .profilebioname{
-    width: 85%;
+    width: 70%;
     margin: 35px auto 0;
     background: #2d2d2d;
     border-radius: 5px;

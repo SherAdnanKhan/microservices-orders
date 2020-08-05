@@ -44,7 +44,7 @@ const EditProfile = ({ myStudio, feelColor }) => {
                   className="faved-by-btn"
                   style={{ backgroundColor: feelColor }}
                 >
-                  <img src="/assets/images/icons/galleryCover.png" alt="" />
+                  <img src="/assets/images/fave_icon.png" alt="" />
                   Faves
               </div>
               </Link>
