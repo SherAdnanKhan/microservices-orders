@@ -37,6 +37,7 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
                 </button>
                 <button
                     style={{backgroundColor:user.feel.color_code}}
+                    className="opacity"
                   onClick={() => onRejectedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Reject
