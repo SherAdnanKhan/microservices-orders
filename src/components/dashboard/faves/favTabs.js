@@ -15,7 +15,8 @@ const FavTabs = ({ tabs, activeTab, onTabChange }) => {
         {tabs &&
           tabs.map((tab, index) => (
             <button
-              className={activeTab === tab.id ? "clickable btn-active" : "clickable"}
+              style={{backgroundColor:feelColor}}
+              // className={activeTab === tab.id ? "clickable btn-active" : "clickable"}
               key={index}
               onClick={() => onTabChange(tab.id)}
               disabled={activeTab === tab.id}
