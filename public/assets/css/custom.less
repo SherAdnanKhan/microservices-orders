@@ -914,6 +914,9 @@ input {
     width: 51% ;
     padding:10px;
     box-sizing: border-box;
+    @media @mobile {
+      padding:0px;
+    }
   }
   .section-3{
     // width: 25%;
@@ -4662,6 +4665,10 @@ img {
     justify-content: space-around;
     align-items: center;
     width: 100%;
+    .artcubecase {
+       display: flex;
+       justify-content: start;
+    }
   }
   .counts {
     display: inherit;
@@ -4691,7 +4698,7 @@ img {
 }
 
 .post-body{
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -7204,9 +7211,8 @@ img {
   }
   
   .lobby-page{
-    width:97%;
+    width:100%;
     overflow-x: hidden;
-
     .row{
     .section-1, .section-2,.section-3{
        width:100%;
