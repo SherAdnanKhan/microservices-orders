@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from "../../common/avatar";
+import { Link } from 'react-router-dom';
 
 const PostHead = ({ post }) => {
   return (
@@ -8,10 +9,12 @@ const PostHead = ({ post }) => {
         <div className="post-heder-inner">
           {<p>{post.user.username}</p>}
           {
-            <Avatar
-              avatars={post.user.avatars}
-              feelColor={post.user.feel.color_code}
-            />
+            <Link to="/dashboard/my-studio">
+              <Avatar
+                avatars={post.user.avatars}
+                feelColor={post.user.feel.color_code}
+              />
+            </Link>
           }
           <>
             {post?.user?.art?.parent && post.user.art.parent.name + '/'}

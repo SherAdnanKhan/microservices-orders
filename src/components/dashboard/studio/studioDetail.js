@@ -63,45 +63,46 @@ const StudioDetail = ({ userStudio, slug }) => {
             }
 
           </div>
-          {userStudio &&
-            <div className="profilebioname">
-              <span className="nameof" id="nameof"> {userStudio.user.username}</span>
-              <br />
-              <span className="artof" id="artof">
-                {userStudio.user.art &&
-                  <>
-                    {userStudio.user.art.parent && userStudio.user.art.parent.name + '/'}
-                    {userStudio.user.art.name && userStudio.user.art.name}
-                  </>
-                }
-              </span>
-            </div>
-          }
-          <form onSubmit={e => e.preventDefault()}>
-            {hasAllowedBio() &&
-              <label htmlFor="addbio" className="addbio-input">
-                <span className="labelText"> </span>
-                <div
-                  type="text"
-                  name="username"
-                  id="addbio"
-                  value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
-                  disabled
-                >  {userStudio && userStudio.user.bio ? userStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''}
-                </div>
-              </label>
-            }
-            <div className="stuion-faved-btn">
-              <div>
-                <img
-                  className="clickable"
-                  src="/assets/images/strqicon.png" alt=""
-                  onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
-                  style={{ backgroundColor: userStudio?.user.feel.color_code }}
-
-                />
+          <div className="studioDetail">
+            {userStudio &&
+              <div className="profilebioname">
+                <span className="nameof" id="nameof"> {userStudio.user.username}</span>
+                <br />
+                <span className="artof" id="artof">
+                  {userStudio.user.art &&
+                    <>
+                      {userStudio.user.art.parent && userStudio.user.art.parent.name + '/'}
+                      {userStudio.user.art.name && userStudio.user.art.name}
+                    </>
+                  }
+                </span>
               </div>
-              {/* <Link to="#" onClick={e => {
+            }
+            <form onSubmit={e => e.preventDefault()}>
+              {hasAllowedBio() &&
+                <label htmlFor="addbio" className="addbio-input">
+                  <span className="labelText"> </span>
+                  <div
+                    type="text"
+                    name="username"
+                    id="addbio"
+                    value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
+                    disabled
+                  >  {userStudio && userStudio.user.bio ? userStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''}
+                  </div>
+                </label>
+              }
+              <div className="stuion-faved-btn">
+                <div>
+                  <img
+                    className="clickable"
+                    src="/assets/images/strqicon.png" alt=""
+                    onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
+                    style={{ backgroundColor: userStudio?.user.feel.color_code }}
+
+                  />
+                </div>
+                {/* <Link to="#" onClick={e => {
                 e.preventDefault();
                 hasAllowedFavedBy();
               }}>
@@ -111,29 +112,29 @@ const StudioDetail = ({ userStudio, slug }) => {
                 </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link> */}
-              <Link to={`/dashboard/studio/fave-galleries/${userStudio?.user?.id}`}>
-                <div
-                  className="faved-by-btn"
-                  style={{ backgroundColor: userStudio?.user.feel.color_code }}
-                >
-                  <img src="/assets/images/fave_icon.png" alt="" />
+                <Link to={`/dashboard/studio/fave-galleries/${userStudio?.user?.id}`}>
+                  <div
+                    className="faved-by-btn"
+                    style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                  >
+                    <img src="/assets/images/fave_icon.png" alt="" />
                   Faves
                 </div>
-              </Link>
-              <div>
-                <Link to="#" onClick={e => {
-                  e.preventDefault();
-                  hasAllowedMzflash(slug)
-                }}>
-                  <img
-                    className="mzflash-studio"
-                    src="/assets/images/mzflash.png"
-                    alt=""
-                    style={{ backgroundColor: userStudio?.user.feel.color_code }}
-                  />
                 </Link>
-              </div>
-              {/* <Link to="#" onClick={e => {
+                <div>
+                  <Link to="#" onClick={e => {
+                    e.preventDefault();
+                    hasAllowedMzflash(slug)
+                  }}>
+                    <img
+                      className="mzflash-studio"
+                      src="/assets/images/mzflash.png"
+                      alt=""
+                      style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                    />
+                  </Link>
+                </div>
+                {/* <Link to="#" onClick={e => {
                 e.preventDefault();
                 hasAllowedFaves();
               }}>
@@ -143,8 +144,9 @@ const StudioDetail = ({ userStudio, slug }) => {
                 </div>
                 {userStudio && <span>{userStudio.favs_count}</span>}
               </Link> */}
-            </div>
-          </form>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
       <div
