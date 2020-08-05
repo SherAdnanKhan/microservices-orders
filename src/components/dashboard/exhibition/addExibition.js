@@ -23,8 +23,7 @@ const AddExibit = () => {
     postView: { post }
   } = useSelector(state => state);
 
-  const params = queryString.parse(location.search);
-
+  const [params] = useState(queryString.parse(location.search))
   const [showModel, setShowModel] = useState(params.post ? false : true);
   const [error, setError] = useState('');
   const [image, setImage] = useState('');
