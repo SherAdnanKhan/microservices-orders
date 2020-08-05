@@ -40,10 +40,6 @@ const StudioHeader = ({ userStudio, onModelOpen, onUnSprFavModal }) => {
           alt=""
         />
       </div>
-
-      {/* <div className="heart">
-        <img src="/assets/images/favebackoff.png" alt="" />
-      </div> */}
     </div>
   );
 };

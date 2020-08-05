@@ -12,11 +12,11 @@ import StudioFooter from './studioFooter';
 import GalleryModel from './galleryModel';
 import Spinner from '../../common/spinner';
 import queryString from 'query-string';
-import UnSuperFvtModal from "./unsprfvtModal"; 
+import UnSuperFvtModal from "./unsprfvtModal";
 
 const Studio = () => {
   const [showModel, setShowModel] = useState(false);
-  const [showModel2, setShowModel2] = useState(false);
+  const [showUnsprfvsModal, setUnsprfvsModal] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
   const { params: { slug } } = useRouteMatch();
   const location = useLocation();
@@ -69,8 +69,9 @@ const Studio = () => {
   const handleShowModel = value => {
     setShowModel(value);
   };
+
   const handleUnSprFavModal = value => {
-    setShowModel2(value);
+    setUnsprfvsModal(value);
   };
 
   const handleChange = ({ target: input }, galleryId) => {
@@ -80,22 +81,20 @@ const Studio = () => {
       gallery_id: galleryId
     };
 
-  
+
 
     if (input.checked)
       dispatch(addToInviteOnly(privacy));
     else
       dispatch(removeFromInviteOnly(privacy));
   };
-  const handleUnSprFav= (status) => {
-    console.log("status=",status)
-    console.log("user is unfriend")
+  const handleUnSprFav = (status) => {
     const privacy = {
       privacy_type_id: 4,
       user_id: userStudio.user.id,
     };
     dispatch(unSuperFav(privacy))
-    setShowModel2(false);
+    setUnsprfvsModal(false);
   }
 
   return (
@@ -111,13 +110,13 @@ const Studio = () => {
         />
 
       }
-         {showModel2 &&
+      {showUnsprfvsModal &&
         <UnSuperFvtModal
           myGalleries={myGalleries}
           onModelClose={handleUnSprFavModal}
           onUnSprFav={handleUnSprFav}
         />
-        
+
       }
       <StudioHeader
         userStudio={userStudio}
