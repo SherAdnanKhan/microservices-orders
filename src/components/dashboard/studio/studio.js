@@ -16,7 +16,7 @@ import UnSuperFvtModal from "./unsprfvtModal";
 
 const Studio = () => {
   const [showModel, setShowModel] = useState(false);
-  const [showUnsprfvsModal, setUnsprfvsModal] = useState(false);
+  const [showUnsprfvsModal, setShowUnsprfvsModal] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
   const { params: { slug } } = useRouteMatch();
   const location = useLocation();
@@ -71,7 +71,7 @@ const Studio = () => {
   };
 
   const handleUnSprFavModal = value => {
-    setUnsprfvsModal(value);
+    setShowUnsprfvsModal(value);
   };
 
   const handleChange = ({ target: input }, galleryId) => {
@@ -94,7 +94,7 @@ const Studio = () => {
       user_id: userStudio.user.id,
     };
     dispatch(unSuperFav(privacy))
-    setUnsprfvsModal(false);
+    setShowUnsprfvsModal(false);
   }
 
   return (
