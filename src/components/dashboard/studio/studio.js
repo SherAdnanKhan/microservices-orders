@@ -69,7 +69,7 @@ const Studio = () => {
   const handleShowModel = value => {
     setShowModel(value);
   };
-  const handleShowModel2 = value => {
+  const handleUnSprFavModal = value => {
     setShowModel2(value);
   };
 
@@ -114,7 +114,7 @@ const Studio = () => {
          {showModel2 &&
         <UnSuperFvtModal
           myGalleries={myGalleries}
-          onModelClose={handleShowModel2}
+          onModelClose={handleUnSprFavModal}
           onUnSprFav={handleUnSprFav}
         />
         
@@ -122,6 +122,7 @@ const Studio = () => {
       <StudioHeader
         userStudio={userStudio}
         onModelOpen={handleShowModel}
+        onUnSprFavModal={handleUnSprFavModal}
       />
       <StudioDetail
         userStudio={userStudio}

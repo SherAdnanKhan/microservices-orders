@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StudioHeader = ({ userStudio, onModelOpen, onModelOpen2 }) => {
+const StudioHeader = ({ userStudio, onModelOpen, onUnSprFavModal }) => {
   const history = useHistory();
   return (
     <div
@@ -23,7 +23,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onModelOpen2 }) => {
             }
             alt=""
             className="clickable sprvs-empty"
-            onClick={() => onModelOpen2(true)}
+            onClick={() => onUnSprFavModal(true)}
           /> :
           <img
             src={
@@ -32,18 +32,18 @@ const StudioHeader = ({ userStudio, onModelOpen, onModelOpen2 }) => {
             alt=""
             className="clickable sprvs-empty"
           />
-}
-          <img
-            onClick={() => onModelOpen(true)}
-            src="/assets/images/invite_gallery_icon.png"
-            className="clickable fav-icon invite-only"
-            alt=""
-          />
+        }
+        <img
+          onClick={() => onModelOpen(true)}
+          src="/assets/images/invite_gallery_icon.png"
+          className="clickable fav-icon invite-only"
+          alt=""
+        />
       </div>
 
-      <div className="heart">
+      {/* <div className="heart">
         <img src="/assets/images/favebackoff.png" alt="" />
-      </div>
+      </div> */}
     </div>
   );
 };
