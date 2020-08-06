@@ -15,8 +15,6 @@ const PostBar = ({
     const found = galleryPrivacy?.find(g => g.gallery_id === activeGallery.id);
     return found && found.is_allowed === 1 ? true : false;
   };
-  console.log("Active gallery=", activeGallery)
-
   return (
     <div
       className="total-post"
@@ -38,7 +36,9 @@ const PostBar = ({
           </>
         }
         {(activeGallery && isAllowed()) &&
-          <p>{activeGallery.title}</p>
+          <>
+            <p>{activeGallery.title}</p>
+          </>
 
         }
       </div>
