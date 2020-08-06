@@ -204,7 +204,7 @@ const FeedSection = ({
                     src={feed.image.path}
                     alt="Snow"
                     className="img-css"
-                    onClick={() => onPostModal(true, feed.feed_type, feed.image)}
+                  // onClick={() => onPostModal(true, feed.feed_type, feed.image)}
                   />
                 </Link>
 

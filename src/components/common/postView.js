@@ -7,7 +7,7 @@ const PostView = ({ avatars, feelColor = 'red' }) => {
   const params = queryString.parse(location.search);
 
   return (
-    <div>
+    <div className="postView_img">
       {/* {query?.postType === 1 &&
         <img src={params} alt="user Image" />
       }
