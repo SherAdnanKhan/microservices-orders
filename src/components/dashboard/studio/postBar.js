@@ -15,6 +15,7 @@ const PostBar = ({
     const found = galleryPrivacy?.find(g => g.gallery_id === activeGallery.id);
     return found && found.is_allowed === 1 ? true : false;
   };
+  console.log("Active gallery=", activeGallery)
 
   return (
     <div
@@ -37,7 +38,8 @@ const PostBar = ({
           </>
         }
         {(activeGallery && isAllowed()) &&
-          <p>Total Post: {activeGallery.posts.length}</p>
+          <p>{activeGallery.title}</p>
+
         }
       </div>
       <div className="heart-icon">
