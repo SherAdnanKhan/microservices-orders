@@ -7,7 +7,8 @@ import {
   GET_NCOMM,
   CLEAR_NCOMM,
   DELETE_POST,
-  CLEAR_POST
+  CLEAR_POST,
+  CHANGE_CRITIQUES_STATUS,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import socket from '../services/socketService';
@@ -155,5 +156,25 @@ export const clearNcomm = () => {
   return {
     type: CLEAR_NCOMM,
   };
+};
+export const changeCritqueStatus = (post, status) => dispatch => {
+  const postObject = {
+    critiques_status: status
+  }
+
+  http
+    .post(`/post/critiques/${post.id}`, postObject)
+    .then(res => {
+      if (res.data.success) {
+        toast.success("Successfully Done")
+        dispatch({
+          type: CHANGE_CRITIQUES_STATUS,
+          payload: res.data.data.post.critiques_status
+        });
+      }
+      else {
+        toast.success("Something went wrong")
+      }
+    });
 };
 

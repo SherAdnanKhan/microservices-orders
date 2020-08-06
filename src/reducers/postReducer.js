@@ -7,13 +7,15 @@ import {
   GET_NCOMM,
   CLEAR_NCOMM,
   DELETE_POST,
-  CLEAR_POST
+  CLEAR_POST,
+  CHANGE_CRITIQUES_STATUS,
 } from "../constants/actionTypes";
 
 const initialState = {
   post: null,
   ncomm: null,
-  comments: []
+  comments: [],
+  crtiqueStatus: 0,
 };
 
 export default (state = initialState, action) => {
@@ -82,6 +84,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         post: null
+      };
+    case CHANGE_CRITIQUES_STATUS:
+      return {
+        ...state,
+        crtiqueStatus: action.payload
       };
     default:
       return state;

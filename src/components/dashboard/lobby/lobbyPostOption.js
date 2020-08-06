@@ -2,11 +2,10 @@ import React, { useContext } from 'react';
 import UserContext from "../../../context/userContext";
 import { useHistory } from 'react-router-dom';
 
-const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel }) => {
+const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus }) => {
   const user = useContext(UserContext);
   const loggedInUserId = user.id;
   const history = useHistory();
-
   return (
     <div className="add-img-vid-box">
       <div className="img-option">
@@ -23,7 +22,13 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onR
             <p>Valut </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
             <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
-            <p>Turn off critiques </p>
+            {updatedCritqueStatus === 0 &&  //if crtiques are on
+              <p onClick={() => onTurnOffCrtiques(true, post)}>Turn On critiques </p>
+            }
+            {updatedCritqueStatus === 1 &&   //if crtiques are off
+              <p onClick={() => onTurnOffCrtiques(true, post)}>Turn Off critiques </p>
+            }
+
           </>
           :
           <>
