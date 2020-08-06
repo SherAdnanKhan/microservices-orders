@@ -73,6 +73,7 @@ export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_NCOMM = 'GET_NCOMM';
 export const CLEAR_NCOMM = 'CLEAR_NCOMM';
 export const DELETE_POST = 'DELETE_POST';
+export const CHANGE_CRITIQUES_STATUS = 'CHANGE_CRITIQUES_STATUS';
 
 //Conversations
 export const GET_CONVERSATION = 'GET_CONVERSATION';

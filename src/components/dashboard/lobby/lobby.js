@@ -9,7 +9,7 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { unfavGallery } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
@@ -17,6 +17,7 @@ import LobbyModal from "../lobby/lobbyModal";
 import SharePostModal from '../../common/sharePostModal';
 import ReportPostModel from './reportPostModel';
 import SharePostStrqModal from './sharePostStrqModal';
+import TurnOffCrtiqueModal from "./turnOffCritqueModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -26,10 +27,10 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm },
+    postView: { ncomm, crtiqueStatus },
     feelColor: { feelColor },
-  } = useSelector(state => state);
 
+  } = useSelector(state => state);
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [showPostModel, setShowPostModel] = useState(false);
   const [imagePath, setImagepath] = useState("");
@@ -39,6 +40,7 @@ const Lobby = () => {
   const [showModelShare, setShowModelShare] = useState(false);
   const [showModelReport, setShowModelReport] = useState(false);
   const [showModelStrqShare, setshowModelStrqShare] = useState(false);
+  const [showModalTurnOffCritque, setshowModalTurnOffCritque] = useState(false);
 
 
   const currentUser = useContext(UserContext);
@@ -171,6 +173,14 @@ const Lobby = () => {
   const onStrqShare = (post, toUser) => {
     setshowModelStrqShare(false);
   }
+  const handleTurnOffCrtiquesModal = (value) => {
+    setshowModalTurnOffCritque(value);
+  }
+  const handleTurnOnOffCrtique = (modalStatus, post, status) => {
+    setshowModalTurnOffCritque(modalStatus);
+    dispatch(changeCritqueStatus(post, status));
+
+  }
 
   return (
     <div className="lobby-page">
@@ -221,6 +231,9 @@ const Lobby = () => {
           post={activePost}
           favouriteUsers={favouriteUsers}
         />
+      }
+      {showModalTurnOffCritque &&
+        <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} updatedCritqueStatus={crtiqueStatus} onHandleCrtique={handleTurnOnOffCrtique} />
       }
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
@@ -276,6 +289,8 @@ const Lobby = () => {
                 onReportPost={handleReportModel}
                 onShareStrqModel={handleStrqShareModel}
                 onStrqShare={onStrqShare}
+                onTurnOffCrtiques={handleTurnOffCrtiquesModal}
+                updatedCritqueStatus={crtiqueStatus}
               />
             </div>
           ))

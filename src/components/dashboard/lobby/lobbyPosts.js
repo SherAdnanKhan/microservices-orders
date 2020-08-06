@@ -10,9 +10,9 @@ import LobbyPostOption from './lobbyPostOption';
 
 
 const LobbyPosts = ({
-  post, ncomm, onClickNcomm,
+  post, ncomm, onClickNcomm, updatedCritqueStatus,
   activeNcomm, onActivePost, activePost, onModelDelete, onReportPost,
-  onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare
+  onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques
 }) => {
   return (
     <div className="post-page">
@@ -40,7 +40,9 @@ const LobbyPosts = ({
           onReportPost={onReportPost}
           onModelDelete={onModelDelete}
           onStrqShare={onStrqShare}
-          onShareStrqModel={onShareStrqModel} />
+          onShareStrqModel={onShareStrqModel}
+          onTurnOffCrtiques={onTurnOffCrtiques}
+          updatedCritqueStatus={updatedCritqueStatus} />
       </div>
       <div className={
         activePost.id === post.id
@@ -89,14 +91,18 @@ const LobbyPosts = ({
               <p> strokes {post.stroke_users.length} </p>
             </div>
           </div>
-          <div className="action">
-            <img
-              className="comment-img open-commet clickable"
-              alt=""
-              src="/assets/images/crit1.png"
-            />
-            <p> comments {post.comments.length} </p>
-          </div>
+          {updatedCritqueStatus === 1 &&
+            <>
+              <div className="action">
+                <img
+                  className="comment-img open-commet clickable"
+                  alt=""
+                  src="/assets/images/crit1.png"
+                />
+                <p> comments {post.comments.length} </p>
+              </div>
+            </>
+          }
           <div className="action">
             <img
               className="comment-img clickable"
