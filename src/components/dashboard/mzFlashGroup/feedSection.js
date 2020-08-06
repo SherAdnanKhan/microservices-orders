@@ -199,26 +199,30 @@ const FeedSection = ({
             <div className="imgvideo-mzflash">
               {feed.feed_type === 1 &&
                 feed.image &&
-                <img
-                  src={feed.image.path}
-                  alt="Snow"
-                  className="img-css"
-                  onClick={() => onPostModal(true, feed.feed_type, feed.image)}
-                />
+                <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                  <img
+                    src={feed.image.path}
+                    alt="Snow"
+                    className="img-css"
+                  // onClick={() => onPostModal(true, feed.feed_type, feed.image)}
+                  />
+                </Link>
+
               }
               {feed.feed_type === 2 &&
                 feed.image &&
-
-                <video onClick={() => onPostModal(true, feed.feed_type, feed.image)}>
-                  <source src={feed.image.path} type="video/mp4" />
-                  <source src={feed.image.path} type="video/ogg" />
+                <Link target="_blank" to={{ pathName: `/dashboard/post/${feed.user.slug}?video=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                  <video >
+                    <source src={feed.image.path} type="video/mp4" />
+                    <source src={feed.image.path} type="video/ogg" />
                     Your browser does not support the video tag.
-
                   </video>
+                </Link>
 
               }
             </div>
-            {feed.parent &&
+            {
+              feed.parent &&
               <div className="flex-container-nested">
                 <div className="action-cube">
                   <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
@@ -242,7 +246,7 @@ const FeedSection = ({
                   </p>
                 </div>
                 <p className="submit-text">{feed.parent.feed} </p>
-                <div>
+                <div className="imgvideo-mzflash">
                   {feed.parent.feed_type === 1 &&
                     feed.parent.image &&
                     <img
@@ -266,7 +270,7 @@ const FeedSection = ({
                 }
               </div>
             }
-            <div className="flex-container">
+            < div className="flex-container" >
               <div className="action">
                 <span className="coment-counter">
                   {feed.comments_count > 1
@@ -323,9 +327,9 @@ const FeedSection = ({
               onChange={onCommentChange}
               onKeyUp={e => onPostComment(e, feed.id, `feed${feed.id}`, feed.user)}
             />
-          </div>
+          </div >
         ))}
-    </div>
+    </div >
   );
 };
 

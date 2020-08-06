@@ -10,15 +10,15 @@ import { getUserStudio } from "../../actions/studioActions";
 import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed } from "../../actions/mzFlashActions";
 import Spinner from "../common/spinner";
 import { completeFormattedDate, formatTime } from "../../utils/helperFunctions";
-import {userKey} from "../../constants/keys";
+import { userKey } from "../../constants/keys";
 import PostModal from "../../components/dashboard/mzFlashGroup/postModal";
 
 const MzFlash = () => {
   const [comments, setComments] = useState({});
   const [activeComments, setActiveComments] = useState('');
-  const [imagePath,setImagepath]=useState("");
+  const [imagePath, setImagepath] = useState("");
   const [showPostModel, setShowPostModel] = useState(false);
-  const [mediaType,setMediaType]=useState("");
+  const [mediaType, setMediaType] = useState("");
 
   const dispatch = useDispatch();
   const {
@@ -90,14 +90,13 @@ const MzFlash = () => {
     dispatch(getUserStudio(slug));
     dispatch(getUserFeeds(slug))
   }, [dispatch, slug]);
-  const feelColor=JSON.parse(localStorage.getItem(userKey));
+  const feelColor = JSON.parse(localStorage.getItem(userKey));
 
-  const handlePostModal= (value,type,image) => {
-    if(value === true)
-    {
+  const handlePostModal = (value, type, image) => {
+    if (value === true) {
       setImagepath(image.path);
       setMediaType(type);
-    }    
+    }
     setShowPostModel(value);
 
   };
@@ -178,16 +177,20 @@ const MzFlash = () => {
                 <div className="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
                     feed.image &&
-                    <img
-                      src={feed.image.path}
-                      alt="Snow"
-                      className="img-css"
-                      onClick={()=>handlePostModal(true,feed.feed_type,feed.image)}
-                    />
+                    <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                      <img
+                        src={feed.image.path}
+                        alt="Snow"
+                        className="img-css"
+                      // onClick={()=>handlePostModal(true,feed.feed_type,feed.image)}
+                      />
+                    </Link>
                   }
                   {feed.feed_type === 2 &&
                     feed.image &&
-                    <video onClick={()=>handlePostModal(true,feed.feed_type,feed.image)}>
+                    <video
+                    // onClick={()=>handlePostModal(true,feed.feed_type,feed.image)}
+                    >
                       <source src={feed.image.path} type="video/mp4" />
                       <source src={feed.image.path} type="video/ogg" />
                       Your browser does not support the video tag.
@@ -252,7 +255,7 @@ const MzFlash = () => {
                   </div>
 
                   <div className="actions-repost">
-                    <img src="/assets/images/icons/repost_icon.png" style={{width:"30px"}}
+                    <img src="/assets/images/icons/repost_icon.png" style={{ width: "30px" }}
                       onClick={e => handleRepost(e, feed)} alt=""
                     >
                     </img>

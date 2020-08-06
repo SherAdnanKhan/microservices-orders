@@ -9,6 +9,7 @@ import AddExibit from './exhibition/addExibition';
 import VideoCall from '../video/VideoCall';
 import AddVideoArtist from '../video/addVideoArtist';
 import GroupVideoCall from "../video/groupVideo";
+import PostView from "../common/postView";
 
 const Dashboard = ({ user }) => {
   return (
@@ -24,7 +25,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/my-studio/gallery-followers/:slug" component={Main} />
         <Route exact path="/dashboard/my-studio/sprfvs/:slug" component={Main} />
         <Route exact path="/dashboard/my-studio" component={Main} />
-
+        <Route exact path="/dashboard/post/:slug" component={PostView} />
         <Route exact path="/dashboard/studio/gallery-followers/:slug" component={Main} />
         <Route exact path="/dashboard/studio/fave-galleries/:id" component={Main} />
         <Route exact path="/dashboard/studio/sprfvs/:slug" component={Main} />
