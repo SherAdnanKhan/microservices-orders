@@ -15,7 +15,7 @@ const PostView = ({ avatars, feelColor = 'red' }) => {
         query?.postType === 2 &&
         <video src={params}></video>
       } */}
-      {params.image && <img src={params.image} alt="user Image" />}
+      {params.image && <img src={params.image} alt="post" />}
       {params.video && <video src={params.video}></video>}
 
     </div>
