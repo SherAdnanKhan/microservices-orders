@@ -177,7 +177,6 @@ const Lobby = () => {
     setshowModalTurnOffCritque(value);
   }
   const handleTurnOnOffCrtique = (modalStatus, post, status) => {
-    console.log("modal status=", modalStatus, "post=", post, "status=", status);
     setshowModalTurnOffCritque(modalStatus);
     dispatch(changeCritqueStatus(post, status));
 
