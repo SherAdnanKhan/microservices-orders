@@ -1,16 +1,30 @@
 import React from 'react';
+import Avatar from '../../common/avatar';
 
-const sharePostStrqModal = ({ onshare, onModalClose, post }) => {
+const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers }) => {
   return (
     <div className="studio">
       <div className="gallery-model">
         <i className="fas fa-window-close" onClick={() => onModalClose(false)}></i>
         <div className="gallery-container">
-          <div className="heading"> Shared Post Model</div>
-          <div className="btn-section" >
-            <button className="button success" onClick={() => onshare(post)}>Send</button>
-            <button className="button danger" onClick={() => onModalClose(false)}>Cancel</button>
-          </div>
+          <div className="heading"> Send Post to your Faves</div>
+          {favouriteUsers &&
+            favouriteUsers.map((user, index) => (
+              <div
+                className={'col-3'}
+                key={index}
+              >
+                <div className="cube">
+                  <Avatar
+                    avatars={user.avatars}
+                    feelColor={user.feel.color_code}
+                  />
+                  <div>{user.username}</div>
+                  <button className="button success" onClick={() => onShare(post)}>Send</button>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
 
@@ -19,4 +33,4 @@ const sharePostStrqModal = ({ onshare, onModalClose, post }) => {
   );
 };
 
-export default sharePostStrqModal;
+export default SharePostStrqModal;

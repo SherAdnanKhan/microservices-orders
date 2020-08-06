@@ -16,7 +16,7 @@ import PostModal from "../../dashboard/mzFlashGroup/postModal";
 import LobbyModal from "../lobby/lobbyModal";
 import SharePostModal from '../../common/sharePostModal';
 import ReportPostModel from './reportPostModel';
-import sharePostStrqModal from './sharePostStrqModal';
+import SharePostStrqModal from './sharePostStrqModal';
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -215,10 +215,11 @@ const Lobby = () => {
         />
       }
       {showModelStrqShare &&
-        <sharePostStrqModal
-          onshare={onStrqShare}
+        <SharePostStrqModal
+          onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
+          favouriteUsers={favouriteUsers}
         />
       }
       <div className="row">
