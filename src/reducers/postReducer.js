@@ -9,6 +9,8 @@ import {
   DELETE_POST,
   CLEAR_POST,
   CHANGE_CRITIQUES_STATUS,
+  SHARE_POST_STRQ,
+  CLEAR_STATUS,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -16,6 +18,7 @@ const initialState = {
   ncomm: null,
   comments: [],
   crtiqueStatus: 0,
+  sendObject: false
 };
 
 export default (state = initialState, action) => {
@@ -89,6 +92,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         crtiqueStatus: action.payload
+      };
+    case SHARE_POST_STRQ:
+      return {
+        ...state,
+        sendObject: action.payload
+      };
+    case CLEAR_STATUS:
+      return {
+        ...state,
+        sendObject: null
       };
     default:
       return state;

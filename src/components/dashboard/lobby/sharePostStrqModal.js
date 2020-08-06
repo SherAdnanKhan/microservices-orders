@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from '../../common/avatar';
 
-const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers }) => {
+const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendObject }) => {
   return (
     <div className="studio">
       <div className="gallery-model">
@@ -20,8 +20,14 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers }) => 
                     feelColor={user.feel.color_code}
                   />
                   <div>{user.username}</div>
-                  <button className="button success" onClick={() => onShare(post)}>Send</button>
+                  {sendObject?.userId !== user.id &&
+                    <button className="button success" onClick={() => onShare(post, user.id)}>Send</button>
+                  }
+                  {sendObject?.sendStatus && sendObject.userId === user.id &&
+                    <button className="button success" >Sent</button>
+                  }
                 </div>
+
               </div>
             ))
           }
