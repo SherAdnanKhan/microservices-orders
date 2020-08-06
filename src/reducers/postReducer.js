@@ -18,7 +18,7 @@ const initialState = {
   ncomm: null,
   comments: [],
   crtiqueStatus: 0,
-  sendObject: false
+  sendUser: false
 };
 
 export default (state = initialState, action) => {
@@ -96,12 +96,12 @@ export default (state = initialState, action) => {
     case SHARE_POST_STRQ:
       return {
         ...state,
-        sendObject: action.payload
+        sendUser: action.payload
       };
     case CLEAR_STATUS:
       return {
         ...state,
-        sendObject: null
+        sendUser: null
       };
     default:
       return state;

@@ -27,7 +27,7 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm, crtiqueStatus, sendObject },
+    postView: { ncomm, crtiqueStatus, sendUser },
     feelColor: { feelColor },
 
   } = useSelector(state => state);
@@ -230,7 +230,7 @@ const Lobby = () => {
           onModalClose={handleStrqShareModel}
           post={activePost}
           favouriteUsers={favouriteUsers}
-          sendObject={sendObject}
+          sendUser={sendUser}
         />
       }
       {showModalTurnOffCritque &&
