@@ -181,7 +181,6 @@ const Lobby = () => {
     dispatch(changeCritqueStatus(post, status));
 
   }
-
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
