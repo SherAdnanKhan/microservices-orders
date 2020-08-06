@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 
 const PostBar = ({ myStudio, activeGallery, totalPosts, feelColor }) => {
   const history = useHistory();
-
   return (
     <div
       className="total-post"
