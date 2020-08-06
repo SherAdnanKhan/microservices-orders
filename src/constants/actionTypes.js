@@ -74,6 +74,8 @@ export const GET_NCOMM = 'GET_NCOMM';
 export const CLEAR_NCOMM = 'CLEAR_NCOMM';
 export const DELETE_POST = 'DELETE_POST';
 export const CHANGE_CRITIQUES_STATUS = 'CHANGE_CRITIQUES_STATUS';
+export const SHARE_POST_STRQ = 'SHARE_POST_STRQ';
+export const CLEAR_STATUS = 'CLEAR_STATUS';
 
 //Conversations
 export const GET_CONVERSATION = 'GET_CONVERSATION';

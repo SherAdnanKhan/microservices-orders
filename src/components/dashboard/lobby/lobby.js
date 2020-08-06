@@ -9,7 +9,7 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { unfavGallery } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
@@ -27,7 +27,7 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm, crtiqueStatus },
+    postView: { ncomm, crtiqueStatus, sendUser },
     feelColor: { feelColor },
 
   } = useSelector(state => state);
@@ -170,8 +170,9 @@ const Lobby = () => {
     setshowModelStrqShare(status);
   }
 
-  const onStrqShare = (post, toUser) => {
-    setshowModelStrqShare(false);
+  const onStrqShare = (post, userId) => {
+    dispatch(sharePostOnStrq(post, userId))
+    dispatch(clearStatus())
   }
   const handleTurnOffCrtiquesModal = (value) => {
     setshowModalTurnOffCritque(value);
@@ -229,6 +230,7 @@ const Lobby = () => {
           onModalClose={handleStrqShareModel}
           post={activePost}
           favouriteUsers={favouriteUsers}
+          sendUser={sendUser}
         />
       }
       {showModalTurnOffCritque &&
