@@ -120,7 +120,6 @@ const AddExibit = () => {
       dispatch(getPost(params.post));
     }
     dispatch(getMyGalleries());
-
     return () => {
       dispatch(clearPost());
     }

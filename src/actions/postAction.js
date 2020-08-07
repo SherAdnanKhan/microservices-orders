@@ -6,7 +6,6 @@ import {
   GET_COMMENTS,
   GET_NCOMM,
   CLEAR_NCOMM,
-  DELETE_POST,
   CLEAR_POST,
   CHANGE_CRITIQUES_STATUS,
   SHARE_POST_STRQ,
@@ -17,6 +16,7 @@ import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
 import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
 import { toast } from 'react-toastify';
+import { getFavourites } from "../actions/userActions";
 
 export const getPost = (post) => dispatch => {
   http
@@ -135,10 +135,7 @@ export const deletePost = post => dispatch => {
     .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
-      dispatch({
-        type: DELETE_POST,
-        payload: post
-      });
+      dispatch(getFavourites())
     });
 };
 
@@ -203,6 +200,24 @@ export const clearStatus = () => {
   return {
     type: CLEAR_STATUS,
   };
+};
+export const repost = (postId, gallery) => dispatch => {
+  const repostObject = {
+    gallery_id: gallery.id,
+    post_id: postId
+  }
+  http
+    .post(`/post/repost`, repostObject)
+    .then(res => {
+
+      if (res.data.success) {
+        toast.success(`Post Shared in Gallery Named ${gallery.title}`)
+        dispatch(getFavourites())
+      }
+      else {
+        toast.error("Something went wrong");
+      }
+    });
 };
 
 

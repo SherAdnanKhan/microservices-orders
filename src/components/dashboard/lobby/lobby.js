@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
-import { unfavGallery } from "../../../actions/galleryActions";
+import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus, repost } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
@@ -18,6 +18,7 @@ import SharePostModal from '../../common/sharePostModal';
 import ReportPostModel from './reportPostModel';
 import SharePostStrqModal from './sharePostStrqModal';
 import TurnOffCrtiqueModal from "./turnOffCritqueModal";
+import RepostModal from "./repostModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -29,6 +30,7 @@ const Lobby = () => {
     mzFlash: { collectiveFeeds },
     postView: { ncomm, crtiqueStatus, sendUser },
     feelColor: { feelColor },
+    gallery: { myGalleries },
 
   } = useSelector(state => state);
   const [activeFeedComment, setActiveFeedComment] = useState(0);
@@ -41,6 +43,8 @@ const Lobby = () => {
   const [showModelReport, setShowModelReport] = useState(false);
   const [showModelStrqShare, setshowModelStrqShare] = useState(false);
   const [showModalTurnOffCritque, setshowModalTurnOffCritque] = useState(false);
+  const [showModalRepost, setShowModalRepost] = useState(false);
+  const [galleryId, setGalleryId] = useState('');
 
 
   const currentUser = useContext(UserContext);
@@ -58,6 +62,10 @@ const Lobby = () => {
   useEffect(() => {
     dispatch(getCollectiveFeeds());
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getMyGalleries());
+  }, [dispatch]);
 
   const handleEnter = (e, feedId, comment) => {
     if (e.keyCode === 13 && comments[comment]) {
@@ -182,6 +190,16 @@ const Lobby = () => {
     dispatch(changeCritqueStatus(post, status));
 
   }
+  const getSelectedGalleryId = (gallery) => {
+    setGalleryId(gallery);
+  }
+  const handleRepostModal = (status, post) => {
+    setShowModalRepost(status);
+  }
+  const handleRepostLobby = (status, post, gallery) => {
+    dispatch(repost(post.id, gallery))
+    setShowModalRepost(status);
+  }
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
@@ -222,6 +240,7 @@ const Lobby = () => {
           onReport={onReport}
           onModalClose={handleReportModel}
           post={activePost}
+          selectedGallery={galleryId}
         />
       }
       {showModelStrqShare &&
@@ -231,6 +250,16 @@ const Lobby = () => {
           post={activePost}
           favouriteUsers={favouriteUsers}
           sendUser={sendUser}
+        />
+      }
+      {showModalRepost &&
+        <RepostModal
+          onRepost={handleRepostLobby}
+          onModalClose={handleRepostModal}
+          post={activePost}
+          myGalleries={myGalleries}
+          selectedGalleryId={galleryId}
+          onGalleryId={getSelectedGalleryId}
         />
       }
       {showModalTurnOffCritque &&
@@ -292,6 +321,7 @@ const Lobby = () => {
                 onStrqShare={onStrqShare}
                 onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                 updatedCritqueStatus={crtiqueStatus}
+                onRepostModal={handleRepostModal}
               />
             </div>
           ))
