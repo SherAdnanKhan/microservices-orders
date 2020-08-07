@@ -11,7 +11,7 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendU
           {favouriteUsers &&
             favouriteUsers.map((user, index) => (
               <div
-                className={'col-3'}
+                className={'cube-info'}
                 key={index}
               >
                 <div className="cube">
@@ -20,9 +20,11 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendU
                     feelColor={user.feel.color_code}
                   />
                   <div>{user.username}</div>
-                  {sendUser?.userId !== user.id &&
-                    <button className="button success" onClick={() => onShare(post, user.id)}>Send</button>
-                  }
+                  <div className="send-btn-modal">
+                    {sendUser?.userId !== user.id &&
+                      <button className="button success" onClick={() => onShare(post, user.id)}>Send</button>
+                    }
+                  </div>
                   {sendUser?.sendStatus && sendUser.userId === user.id &&
                     <button className="button success" >Sent</button>
                   }
