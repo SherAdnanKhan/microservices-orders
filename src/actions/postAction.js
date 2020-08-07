@@ -218,6 +218,22 @@ export const repost = (postId, gallery) => dispatch => {
         toast.error("Something went wrong");
       }
     });
+}
+export const shareMzFlash = (post) => dispatch => {
+  const postObject = {
+    post_id: post.id
+  }
+
+  http
+    .post(`post/to-mzflash`, postObject)
+    .then(res => {
+      if (res.data.success) {
+        toast.success(`post named ${post.title} shared in Mzflash`)
+      }
+      else {
+        toast.warning("Something went wrong")
+      }
+    });
 };
 
 

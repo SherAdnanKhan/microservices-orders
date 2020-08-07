@@ -5,14 +5,14 @@ const Like = ({ faved, onLike }) => (
     {!faved
       ? (
         <img
-          src="/assets/images/catfave.png"
+          src="/assets/images/fave_gallery_empty.png"
           className="clickable"
           onClick={onLike}
           alt=""
         />
       ) : (
         <img
-          src="/assets/images/catfaveon.png"
+          src="/assets/images/FaveGalleryFull.png"
           className="clickable"
           onClick={onLike}
           alt=""

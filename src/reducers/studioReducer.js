@@ -80,7 +80,7 @@ export default (state = initialState, action) => {
         }
       };
     case UNFAV_GALLERY:
-      if(!state.userStudio){
+      if (!state.userStudio) {
         return state;
       }
       return {
@@ -89,7 +89,7 @@ export default (state = initialState, action) => {
           ...state.userStudio,
           gallery_privacy: state.userStudio.gallery_privacy.map(gallery => {
             if (gallery.gallery_id === action.payload.gallery.id
-              && action.payload.gallery.privacy.privacy_type_id !== SPRFVS) {
+              && action.payload.gallery.privacy?.privacy_type_id !== SPRFVS) {
               return {
                 ...gallery,
                 is_allowed: 0
@@ -107,14 +107,14 @@ export default (state = initialState, action) => {
           is_sprfvs: action.payload
         }
       }
-      case UN_SUPER_FAV:
-        return {
-          ...state,
-          userStudio: {
-            ...state.userStudio,
-            is_sprfvs: action.payload
-          }
+    case UN_SUPER_FAV:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          is_sprfvs: action.payload
         }
+      }
     case REMOVE_FROM_INVITE_ONLY:
       return {
         ...state,

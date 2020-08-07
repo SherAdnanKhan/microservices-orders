@@ -32,7 +32,7 @@ const initialState = {
   invitedUsers: null,
   faveAndSprfvsUsers: null,
   onlineUsers: [],
-  post:null
+  post: null
 };
 
 export default (state = initialState, action) => {
@@ -150,18 +150,11 @@ export default (state = initialState, action) => {
         ...state,
         onlineUsers: action.payload
       };
-      // case DELETE_POST:
-      //   console.log("post=",post)
-      //   return {
-      //     ...state,
-      //     favouritePosts: state.favouritePosts.filter(post=>post.id != action.payload.post.id)
-      //   }          
-
-      case UNFAV_GALLERY:
-        return {
-          ...state,
-          favouritePosts: state.favouritePosts.filter(post=>post.gallery_id !== action.payload.gallery.id)
-        }
+    case UNFAV_GALLERY:
+      return {
+        ...state,
+        favouritePosts: state.favouritePosts?.filter(post => post.gallery_id !== action.payload.gallery.id)
+      }
     default:
       return state;
   }
