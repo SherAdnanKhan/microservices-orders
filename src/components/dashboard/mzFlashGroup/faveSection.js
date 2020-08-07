@@ -176,13 +176,13 @@ const FaveSection = ({
                       <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
-                        <img
-                          src={feed.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
-
-                        />
+                        <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                          <img
+                            src={feed.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        </Link>
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
@@ -217,13 +217,14 @@ const FaveSection = ({
                         <p className="submit-text"> {feed.parent.feed}</p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
-                          <img
-                            src={feed.parent.image.path}
-                            alt="Snow"
-                            className="img-css-fave"
-                            onClick={() => onPostModal(true, feed.image)}
+                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                            <img
+                              src={feed.parent.image.path}
+                              alt="Snow"
+                              className="img-css-fave"
 
-                          />
+                            />
+                          </Link>
                         }
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
@@ -338,12 +339,13 @@ const FaveSection = ({
                       <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
-                        <img
-                          src={feed.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
-                        />
+                        <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                          <img
+                            src={feed.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        </Link>
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
@@ -378,12 +380,13 @@ const FaveSection = ({
                         <p className="submit-text">{feed.parent.feed} </p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
-                          <img
-                            src={feed.parent.image.path}
-                            alt="Snow"
-                            className="img-css-fave"
-                            onClick={() => onPostModal(true, feed.image)}
-                          />
+                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                            <img
+                              src={feed.parent.image.path}
+                              alt="Snow"
+                              className="img-css-fave"
+                            />
+                          </Link>
                         }
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
@@ -497,12 +500,13 @@ const FaveSection = ({
                       <p className="submit-text"> {feed.feed}</p>
                       {feed.feed_type === 1 &&
                         feed.image &&
-                        <img
-                          src={feed.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
-                        />
+                        <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                          <img
+                            src={feed.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        </Link>
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
@@ -537,12 +541,13 @@ const FaveSection = ({
                         <p className="submit-text">{feed.parent.feed} </p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
-                          <img
-                            src={feed.parent.image.path}
-                            alt="Snow"
-                            className="img-css-fave"
-                            onClick={() => onPostModal(true, feed.image)}
-                          />
+                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                            <img
+                              src={feed.parent.image.path}
+                              alt="Snow"
+                              className="img-css-fave"
+                            />
+                          </Link>
                         }
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
@@ -653,12 +658,13 @@ const FaveSection = ({
                       <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
-                        <img
-                          src={feed.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
-                        />
+                        <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                          <img
+                            src={feed.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        </Link>
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
@@ -693,12 +699,13 @@ const FaveSection = ({
                         <p className="submit-text"> {feed.parent.feed}</p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
-                          <img
-                            src={feed.parent.image.path}
-                            alt="Snow"
-                            className="img-css-fave"
-                            onClick={() => onPostModal(true, feed.image)}
-                          />
+                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                            <img
+                              src={feed.parent.image.path}
+                              alt="Snow"
+                              className="img-css-fave"
+                            />
+                          </Link>
                         }
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
@@ -813,12 +820,13 @@ const FaveSection = ({
                       <p className="submit-text">{feed.feed} </p>
                       {feed.feed_type === 1 &&
                         feed.image &&
-                        <img
-                          src={feed.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                          onClick={() => onPostModal(true, feed.feed_type, feed.image)}
-                        />
+                        <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                          <img
+                            src={feed.image.path}
+                            alt="Snow"
+                            className="img-css-fave"
+                          />
+                        </Link>
                       }
                       {feed.feed_type === 2 &&
                         feed.image &&
@@ -853,12 +861,13 @@ const FaveSection = ({
                         <p className="submit-text"> {feed.parent.feed}</p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
-                          <img
-                            src={feed.parent.image.path}
-                            alt="Snow"
-                            className="img-css-fave"
-                            onClick={() => onPostModal(true, feed.image)}
-                          />
+                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                            <img
+                              src={feed.parent.image.path}
+                              alt="Snow"
+                              className="img-css-fave"
+                            />
+                          </Link>
                         }
                         {feed.parent.feed_type === 2 &&
                           feed.parent.image &&
