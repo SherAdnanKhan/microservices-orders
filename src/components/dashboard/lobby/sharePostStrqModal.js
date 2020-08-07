@@ -27,7 +27,6 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendU
                     <button className="button success" >Sent</button>
                   }
                 </div>
-
               </div>
             ))
           }

@@ -12,7 +12,7 @@ import LobbyPostOption from './lobbyPostOption';
 const LobbyPosts = ({
   post, ncomm, onClickNcomm, updatedCritqueStatus,
   activeNcomm, onActivePost, activePost, onModelDelete, onReportPost,
-  onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques
+  onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal,
 }) => {
   return (
     <div className="post-page">
@@ -42,7 +42,10 @@ const LobbyPosts = ({
           onStrqShare={onStrqShare}
           onShareStrqModel={onShareStrqModel}
           onTurnOffCrtiques={onTurnOffCrtiques}
-          updatedCritqueStatus={updatedCritqueStatus} />
+          updatedCritqueStatus={updatedCritqueStatus}
+          onRepostModal={onRepostModal}
+
+        />
       </div>
       <div className={
         activePost.id === post.id
