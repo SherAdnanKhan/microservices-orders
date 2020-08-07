@@ -9,7 +9,7 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus, repost } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
@@ -19,6 +19,7 @@ import ReportPostModel from './reportPostModel';
 import SharePostStrqModal from './sharePostStrqModal';
 import TurnOffCrtiqueModal from "./turnOffCritqueModal";
 import RepostModal from "./repostModal";
+import MzFlashModal from "./mzFlashModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -45,6 +46,7 @@ const Lobby = () => {
   const [showModalTurnOffCritque, setshowModalTurnOffCritque] = useState(false);
   const [showModalRepost, setShowModalRepost] = useState(false);
   const [galleryId, setGalleryId] = useState('');
+  const [showMzFlashModal, setShowMzFlashModal] = useState(false);
 
 
   const currentUser = useContext(UserContext);
@@ -188,6 +190,13 @@ const Lobby = () => {
   const handleTurnOnOffCrtique = (modalStatus, post, status) => {
     setshowModalTurnOffCritque(modalStatus);
     dispatch(changeCritqueStatus(post, status));
+  }
+  const handleMzFlashModal = (status) => {
+    setShowMzFlashModal(status);
+  }
+  const handleMzFlash = (status, post) => {
+    setShowMzFlashModal(status);
+    dispatch(shareMzFlash(post));
 
   }
   const getSelectedGalleryId = (gallery) => {
@@ -265,6 +274,9 @@ const Lobby = () => {
       {showModalTurnOffCritque &&
         <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} updatedCritqueStatus={crtiqueStatus} onHandleCrtique={handleTurnOnOffCrtique} />
       }
+      {showMzFlashModal &&
+        <MzFlashModal onModalClose={handleMzFlashModal} post={activePost} onConfirm={handleMzFlash} />
+      }
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
           <VerticalSlider>
@@ -322,6 +334,8 @@ const Lobby = () => {
                 onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                 updatedCritqueStatus={crtiqueStatus}
                 onRepostModal={handleRepostModal}
+                onMzFlashModal={handleMzFlashModal}
+
               />
             </div>
           ))

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import UserContext from "../../../context/userContext";
 import { useHistory } from 'react-router-dom';
 
-const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal }) => {
+const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
   const user = useContext(UserContext);
   const loggedInUserId = user.id;
   const history = useHistory();
@@ -37,7 +37,7 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onR
             <p onClick={() => onRepostModal(true, post)}> Repost </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
             <p>Vault</p>
-            <p>MzFlash </p>
+            <p onClick={() => onMzFlashModal(true, post)}>MzFlash </p>
           </>
         }
       </div>
