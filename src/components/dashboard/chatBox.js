@@ -493,26 +493,27 @@ class ChatBox extends Component {
           hidden &&
           <div className="add-img-vid-box">
             <i
+              style={{ backgroundColor: currentUser.feel.color_code }}
               className="fa fa-times close-add-box"
               onClick={() => this.setState({ hidden: false })}
             />
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
+              <div className="nag-btn">
                 Add Image
               </div>
               <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
             </label>
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
+              <div className="nag-btn">
                 Add Video
               </div>
               <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
             </label>
             <label>
               <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              <div className="nag-btn" style={{ backgroundColor: currentUser.feel.color_code }}>
+              <div className="nag-btn">
                 Add Document
               </div>
               <input
