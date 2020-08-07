@@ -164,7 +164,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="my-studio-edit">
-          <div className="header-bar "style={{ backgroundColor: feelColor }}>
+          <div className="header-bar " style={{ backgroundColor: feelColor }}>
             <div className="back-icon go-to-profile">
               <i className="fa fa-arrow-left" />
             </div>
@@ -203,16 +203,16 @@ const Profile = () => {
                       <div className="nag-icon" style={{ backgroundColor: feelColor }}>
                         <img alt="" src="/assets/images/minus.png" onClick={handleDelete} />
                       </div>
-                      <div className="nag-btn" style={{ backgroundColor: feelColor }}>
+                      <div className="nag-btn">
                         Remove profile picture
                       </div>
                     </div>
                   }
                   <div className="nag">
                     <div className="nag-icon" style={{ backgroundColor: feelColor }}>
-                      <img alt="" src="/assets/images/plus.png"  />
+                      <img alt="" src="/assets/images/plus.png" />
                     </div>
-                    <div className="nag-btn" style={{ backgroundColor: feelColor }} >
+                    <div className="nag-btn">
                       {selectedImage.id ? "Update profile picture" : "Add profile picture"}
                     </div>
                     <input type="file" size={60} onChange={handleChange} accept="image/*" />

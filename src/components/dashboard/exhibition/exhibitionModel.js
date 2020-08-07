@@ -117,7 +117,7 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
               <div className="nag-icon" style={{ backgroundColor: user.feel.color_code }} >
                 <img alt="" src="/assets/images/plus.png" />
               </div>
-              <div className="nag-btn" style={{ backgroundColor: user.feel.color_code }} >
+              <div className="nag-btn">
                 Add image
               </div>
               <input
@@ -134,7 +134,7 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
                   src="/assets/images/plus.png"
                 />
               </div>
-              <div className="nag-btn" style={{ backgroundColor: user.feel.color_code }}>
+              <div className="nag-btn" >
                 Add video
                 </div>
               <input
