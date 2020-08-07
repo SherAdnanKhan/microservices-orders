@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import LobbyPostOption from '../lobby/lobbyPostOption';
 
 const PostBody = ({ post }) => {
   const [show, setShow] = useState(false);
@@ -8,7 +9,6 @@ const PostBody = ({ post }) => {
   const handleButtonPress = () => {
     eventRef.current = setTimeout(() => {
       setShow(!show);
-
     }, 2000)
   };
 
@@ -18,7 +18,13 @@ const PostBody = ({ post }) => {
 
   return (
     <>
+      <div className="image-option-box">
+        {post &&
+          <LobbyPostOption post={post.post} />
+        }
+      </div>
       <div className="valut-icon show-valut">
+        <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
         <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
       </div>
 
@@ -52,20 +58,20 @@ const PostBody = ({ post }) => {
             post.other_posts.map((other, index) => (
               <div className="boxes img-align" key={index}>
                 <Link to={`/dashboard/viewpost/${other.slug}`}>
-                {other.post_type <= 1 &&
-                  <img
-                    className="valut-img"
-                    alt=""
-                    src={other.image.path}
-                  />
-                }
-                {other.post_type === 2 &&
-                  <video controls>
-                    <source src={other.image.path} type="video/mp4" />
-                    <source src={other.image.path} type="video/ogg" />
+                  {other.post_type <= 1 &&
+                    <img
+                      className="valut-img"
+                      alt=""
+                      src={other.image.path}
+                    />
+                  }
+                  {other.post_type === 2 &&
+                    <video controls>
+                      <source src={other.image.path} type="video/mp4" />
+                      <source src={other.image.path} type="video/ogg" />
                     Your browser does not support the video tag.
                   </video>
-                }
+                  }
                 </Link>
               </div>
             ))
