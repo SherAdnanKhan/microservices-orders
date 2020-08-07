@@ -46,20 +46,15 @@ const PostBar = ({
         {(activeGallery?.privacy?.privacy_type_id === FAVES || isAllowed())
           && gallery &&
           <>
-            <img
-              src="/assets/images/fave_gallery_empty.png"
-              className="clickable"
-              onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}
-              alt=""
-            />
-            <Like
+            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved</span>
+            <Like    //heart with brush icon
               faved={gallery.has_faved}
               onLike={onPostLike}
             />
           </>
         }
       </div>
-    </div>
+    </div >
   );
 };
 
