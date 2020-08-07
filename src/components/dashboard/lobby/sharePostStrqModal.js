@@ -25,9 +25,11 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendU
                       <button className="button success" onClick={() => onShare(post, user.id)}>Send</button>
                     }
                   </div>
+
                   {sendUser?.sendStatus && sendUser.userId === user.id &&
-                    <button className="button success" >Sent</button>
+                    <button className="button success sents" >Sent</button>
                   }
+
                 </div>
               </div>
             ))

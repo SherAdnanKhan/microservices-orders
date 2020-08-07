@@ -3013,11 +3013,15 @@ img {
     }
 
     .gallery-container {
-      margin-top: 80px;
+      // margin-top: 25px;
       height:40vh;
-      overflow-y: scroll;
+      overflow-y: auto;
+      position: absolute;
+      top: 55%;
+      transform: translate(0px, -50%);
+      width: 96%;
       @media @mobile {
-        margin-top: 50px;
+        margin-top: 20px;
       }
       .heading {
         text-align: center;
@@ -3045,18 +3049,25 @@ img {
       .btn-section{
         text-align: center;
       }
+      .sents {
+        padding: 10px 26.5px !important;
+      }
       .button {
         background-color: #4CAF50; /* Green */
         border: none;
         color: white;
-        padding: 10px 32px;
+        padding: 10px 24px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
+        border-radius: 6px;
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
         margin-right: 5px;
+        @media @mobile {
+          padding: 10px 18px;
+        }
       }
       .success
       {
@@ -4756,7 +4767,7 @@ border: 5px solid rgba(61,61,61,.5);
 .valut-icon{
   width:100%; 
   display:flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   height:0;
   overflow: hidden;
   transition: 0.3s all ease-in-out;
@@ -4766,6 +4777,7 @@ border: 5px solid rgba(61,61,61,.5);
   i.fa.fa-ellipsis-v{
     width: 110px;
     margin-top: 23px ;
+    margin-left:80px;
   }
   .valut-img{
     width:40px;
