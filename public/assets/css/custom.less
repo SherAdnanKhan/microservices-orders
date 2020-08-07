@@ -3000,6 +3000,10 @@ img {
     border: 1px solid #444;
     padding: 10px;
     box-sizing: border-box;
+    @media @mobile{
+      width: 70%;
+      left: 13%;
+    }
 
     .fa-window-close {
       position: absolute;
@@ -3009,10 +3013,34 @@ img {
     }
 
     .gallery-container {
-      margin-top: 120px;
+      margin-top: 80px;
+      height:40vh;
+      overflow-y: scroll;
+      @media @mobile {
+        margin-top: 50px;
+      }
       .heading {
         text-align: center;
         margin-bottom: 30px;
+      }
+      .cube-info{
+        .cube {
+          align-items: center;
+          display: flex;
+        }
+        .artcubecase {
+          width: 80px;
+          height: auto;
+          @media @mobile {
+            width: 100px;
+          }
+        }
+        .send-btn-modal{
+          width: 85%;
+        }
+        button {
+          float: right;
+        }
       }
       .btn-section{
         text-align: center;
