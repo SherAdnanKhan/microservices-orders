@@ -150,13 +150,6 @@ export default (state = initialState, action) => {
         ...state,
         onlineUsers: action.payload
       };
-    // case DELETE_POST:
-    //   console.log("post=",post)
-    //   return {
-    //     ...state,
-    //     favouritePosts: state.favouritePosts.filter(post=>post.id != action.payload.post.id)
-    //   }          
-
     case UNFAV_GALLERY:
       return {
         ...state,
