@@ -16,7 +16,6 @@ const RepostModal = ({ onModalClose, post, myGalleries, feelColor, onRepost, onG
                                 <>
                                     <div className="flex" key={index}>
                                         <div className="padd">
-                                            <p>{gallery.id}</p>
                                             <input
                                                 type="radio"
                                                 name="gallery_id"
