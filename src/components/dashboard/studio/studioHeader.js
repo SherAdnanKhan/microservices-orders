@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 const StudioHeader = ({ userStudio, onModelOpen, onUnSprFavModal }) => {
   const history = useHistory();
+  console.log(userStudio);
   return (
     <div
       className="studio-header-bar"
@@ -15,7 +16,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onUnSprFavModal }) => {
       {userStudio && <p>{userStudio.user.username}</p>}
 
       <div className="actions">
-        <span className="sprfav" onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}> SPRFAV </span>
+        <span className="sprfav" onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}> SPRFV: {userStudio?.sprfvs_count}  </span>
         {userStudio?.is_sprfvs !== 0 ?
           <img
             src={
