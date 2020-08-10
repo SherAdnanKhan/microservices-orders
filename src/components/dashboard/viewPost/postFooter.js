@@ -11,7 +11,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const {
     postView: { ncomm },
   } = useSelector(state => state);
-
+  console.log("post=", post);
   const handleNcomm = post => {
     if (hasNcomm) {
       setHasNcomm(false);
@@ -27,9 +27,9 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
     }
   }, [dispatch]);
 
-  // const hasAllowedCritiques = () => {
-  //   return post && post.other_privacy.is_allowed ? true : false;
-  // };
+  const hasAllowedCritiques = () => {
+    return post && post?.other_privacy?.is_allowed ? true : false;
+  };
 
   return (
     <div className="post-footer">
@@ -59,9 +59,9 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
               />
             )
           }
-          <p>strokes {post && post.stroke_users_count}</p>
+          <p>strokes {post && post?.stroke_users_count}</p>
         </div>
-        {post?.critiques_status === 1 &&
+        {hasAllowedCritiques() && post?.critiques_status === 1 &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"
