@@ -29,7 +29,7 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm, crtiqueStatus, sendUser },
+    postView: { ncomm, crtiqueStatus, sendUser, post },
     feelColor: { feelColor },
     gallery: { myGalleries },
 
@@ -50,7 +50,7 @@ const Lobby = () => {
 
 
   const currentUser = useContext(UserContext);
-
+  console.log("post=", post)
   useEffect(() => {
     dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id));

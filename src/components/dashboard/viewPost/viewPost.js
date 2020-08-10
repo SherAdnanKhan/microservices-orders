@@ -183,7 +183,7 @@ const ViewPost = () => {
       {showMzFlashModal &&
         <MzFlashModal onModalClose={handleMzFlashModal} post={post?.post} onConfirm={handleMzFlash} />
       }
-      <div className={`post-page ${post && post.post.user.feel_color}`}>
+      <div className={`post-page ${post && post?.user?.feel_color}`}>
         <ViewPostHeader
           post={post && post?.post}
         />
@@ -206,7 +206,7 @@ const ViewPost = () => {
           onMzFlashModal={handleMzFlashModal}
         />
         <PostFooter
-          post={post}
+          post={post?.post}
           comments={comments}
           handleStoke={handleStoke}
           handleUnStoke={handleUnStoke}

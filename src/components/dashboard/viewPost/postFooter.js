@@ -6,6 +6,7 @@ import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
 
 const PostFooter = ({ post, comments, handleStoke, handleUnStoke, updatedCritqueStatus }) => {
+  console.log("post=", post);
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const {
@@ -59,9 +60,9 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke, updatedCritque
               />
             )
           }
-          <p>strokes {post && post.post && post.post.stroke_users_count}</p>
+          <p>strokes {post && post.stroke_users_count}</p>
         </div>
-        {updatedCritqueStatus === 1 &&
+        {post?.critiques_status === 1 &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"
@@ -92,7 +93,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke, updatedCritque
             expanded={false}
             width={600}
           >
-            {post.post.description}
+            {post?.description}
           </ShowMoreText>
         }
       </div>
@@ -103,10 +104,10 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke, updatedCritque
             width: '80%',
             marginTop: '20px',
             textAlign: 'left',
-            color: post.post.user.feel.color_code
+            color: post.user.feel.color_code
           }}
         >
-          {completeFormattedDate(post.post.created_at)}
+          {completeFormattedDate(post.created_at)}
         </div>
       }
     </div>

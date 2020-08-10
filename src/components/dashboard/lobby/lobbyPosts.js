@@ -93,7 +93,7 @@ const LobbyPosts = ({
               <p> strokes {post.stroke_users.length} </p>
             </div>
           </div>
-          {updatedCritqueStatus === 1 &&
+          {post.critiques_status === 1 &&
             <>
               <div className="action">
                 <img

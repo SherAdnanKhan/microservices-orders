@@ -22,10 +22,10 @@ const ImagePostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onR
             <p>Valut </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
             <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
-            {updatedCritqueStatus === 0 &&  //if crtiques are on
+            {post.critiques_status === 0 &&  //if crtiques are on
               <p onClick={() => onTurnOffCrtiques(true, post)}>Turn On critiques </p>
             }
-            {updatedCritqueStatus === 1 &&   //if crtiques are off
+            {post.critiques_status === 1 &&   //if crtiques are off
               <p onClick={() => onTurnOffCrtiques(true, post)}>Turn Off critiques </p>
             }
 
