@@ -11,7 +11,6 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const {
     postView: { ncomm },
   } = useSelector(state => state);
-  console.log("post=", post);
   const handleNcomm = post => {
     if (hasNcomm) {
       setHasNcomm(false);
