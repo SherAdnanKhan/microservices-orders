@@ -11,7 +11,6 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const {
     postView: { ncomm },
   } = useSelector(state => state);
-
   const handleNcomm = post => {
     if (hasNcomm) {
       setHasNcomm(false);
@@ -28,7 +27,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   }, [dispatch]);
 
   const hasAllowedCritiques = () => {
-    return post && post.other_privacy.is_allowed ? true : false;
+    return post && post?.other_privacy?.is_allowed ? true : false;
   };
 
   return (
@@ -59,9 +58,9 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
               />
             )
           }
-          <p>strokes {post && post.post && post.post.stroke_users_count}</p>
+          <p>strokes {post && post?.stroke_users_count}</p>
         </div>
-        {hasAllowedCritiques() && post.post.critiques_status === 1 &&
+        {hasAllowedCritiques() && post?.critiques_status === 1 &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"
@@ -71,6 +70,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
             <p> comments {comments.length} </p>
           </div>
         }
+
         <div className="post-footer-icons action-w">
           <img
             className="post-non-color-icon clickable"
@@ -81,6 +81,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
         </div>
       </div>
 
+
       <div className='post-description' style={{ width: '80%', textAlign: 'center' }}>
         {post &&
           <ShowMoreText
@@ -90,7 +91,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
             expanded={false}
             width={600}
           >
-            {post.post.description}
+            {post?.description}
           </ShowMoreText>
         }
       </div>
@@ -101,10 +102,10 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
             width: '80%',
             marginTop: '20px',
             textAlign: 'left',
-            color: post.post.user.feel.color_code
+            color: post.user.feel.color_code
           }}
         >
-          {completeFormattedDate(post.post.created_at)}
+          {completeFormattedDate(post.created_at)}
         </div>
       }
     </div>

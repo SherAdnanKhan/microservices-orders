@@ -6,11 +6,11 @@ import Comment from '../viewPost/comments';
 import { completeFormattedDate } from '../../../utils/helperFunctions';
 import ImageVideoSlider from '../../common/imageVideoSlider';
 import VideoPlayer from '../../common/videoPlayer';
-import LobbyPostOption from './lobbyPostOption';
+import ImagePostOption from '../../common/ImagePostOption';
 
 
 const LobbyPosts = ({
-  post, ncomm, onClickNcomm, updatedCritqueStatus,
+  post, ncomm, onClickNcomm,
   activeNcomm, onActivePost, activePost, onModelDelete, onReportPost,
   onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal
 }) => {
@@ -33,7 +33,7 @@ const LobbyPosts = ({
         }
       </div>
       <div className="image-option-box">
-        <LobbyPostOption
+        <ImagePostOption
           post={activePost}
           onUnFavGallery={onUnFavGallery}
           onSharePost={onSharePost}
@@ -42,7 +42,6 @@ const LobbyPosts = ({
           onStrqShare={onStrqShare}
           onShareStrqModel={onShareStrqModel}
           onTurnOffCrtiques={onTurnOffCrtiques}
-          updatedCritqueStatus={updatedCritqueStatus}
           onRepostModal={onRepostModal}
           onMzFlashModal={onMzFlashModal} />
       </div>
@@ -93,7 +92,7 @@ const LobbyPosts = ({
               <p> strokes {post.stroke_users.length} </p>
             </div>
           </div>
-          {updatedCritqueStatus === 1 &&
+          {post.critiques_status === 1 &&
             <>
               <div className="action">
                 <img

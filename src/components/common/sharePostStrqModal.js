@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from '../../common/avatar';
+import Avatar from '../common/avatar';
 
 const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendUser }) => {
   return (

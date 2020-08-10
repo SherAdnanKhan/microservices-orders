@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
     case CHANGE_CRITIQUES_STATUS:
       return {
         ...state,
-        crtiqueStatus: action.payload
+        post: action.payload
       };
     case SHARE_POST_STRQ:
       return {

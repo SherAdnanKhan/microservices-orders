@@ -13,13 +13,13 @@ import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost,
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
-import LobbyModal from "../lobby/lobbyModal";
+import LobbyModal from "../../common/lobbyModal";
 import SharePostModal from '../../common/sharePostModal';
-import ReportPostModel from './reportPostModel';
-import SharePostStrqModal from './sharePostStrqModal';
-import TurnOffCrtiqueModal from "./turnOffCritqueModal";
-import RepostModal from "./repostModal";
-import MzFlashModal from "./mzFlashModal";
+import ReportPostModel from '../../common/reportPostModel';
+import SharePostStrqModal from '../../common/sharePostStrqModal';
+import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
+import RepostModal from "../../common/repostModal";
+import MzFlashModal from "../../common/mzFlashModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
@@ -29,7 +29,7 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm, crtiqueStatus, sendUser },
+    postView: { ncomm, sendUser, post },
     feelColor: { feelColor },
     gallery: { myGalleries },
 
@@ -50,7 +50,6 @@ const Lobby = () => {
 
 
   const currentUser = useContext(UserContext);
-
   useEffect(() => {
     dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id));
@@ -269,10 +268,11 @@ const Lobby = () => {
           myGalleries={myGalleries}
           selectedGalleryId={galleryId}
           onGalleryId={getSelectedGalleryId}
+          Updatedpost={post}
         />
       }
       {showModalTurnOffCritque &&
-        <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} updatedCritqueStatus={crtiqueStatus} onHandleCrtique={handleTurnOnOffCrtique} />
+        <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} onHandleCrtique={handleTurnOnOffCrtique} />
       }
       {showMzFlashModal &&
         <MzFlashModal onModalClose={handleMzFlashModal} post={activePost} onConfirm={handleMzFlash} />
@@ -332,7 +332,6 @@ const Lobby = () => {
                 onShareStrqModel={handleStrqShareModel}
                 onStrqShare={onStrqShare}
                 onTurnOffCrtiques={handleTurnOffCrtiquesModal}
-                updatedCritqueStatus={crtiqueStatus}
                 onRepostModal={handleRepostModal}
                 onMzFlashModal={handleMzFlashModal}
 

@@ -168,7 +168,7 @@ export const changeCritqueStatus = (post, status) => dispatch => {
         toast.success("Successfully Done")
         dispatch({
           type: CHANGE_CRITIQUES_STATUS,
-          payload: res.data.data.post.critiques_status
+          payload: res.data.data.post
         });
       }
       else {
