@@ -37,6 +37,7 @@ const PostBar = ({
         {(activeGallery && isAllowed()) &&
           <>
             <p>{activeGallery.title}</p>
+            <p>Exhibits Faved by: {gallery?.faved_users.length}</p>
           </>
 
         }
@@ -45,7 +46,7 @@ const PostBar = ({
         {(activeGallery?.privacy?.privacy_type_id === FAVES || isAllowed())
           && gallery &&
           <>
-            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved: {gallery && gallery.faved_users.length}</span>
+            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved: ({gallery && gallery.faved_users.length})</span>
             <Like    //heart with brush icon
               faved={gallery.has_faved}
               onLike={onPostLike}
