@@ -13,13 +13,13 @@ import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost,
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
-import LobbyModal from "../lobby/lobbyModal";
+import LobbyModal from "../../common/lobbyModal";
 import SharePostModal from '../../common/sharePostModal';
-import ReportPostModel from './reportPostModel';
-import SharePostStrqModal from './sharePostStrqModal';
-import TurnOffCrtiqueModal from "./turnOffCritqueModal";
-import RepostModal from "./repostModal";
-import MzFlashModal from "./mzFlashModal";
+import ReportPostModel from '../../common/reportPostModel';
+import SharePostStrqModal from '../../common/sharePostStrqModal';
+import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
+import RepostModal from "../../common/repostModal";
+import MzFlashModal from "../../common/mzFlashModal";
 
 const Lobby = () => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id

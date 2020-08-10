@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import UserContext from "../../../context/userContext";
+import UserContext from "../../context/userContext";
 import { useHistory } from 'react-router-dom';
 
-const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
+const ImagePostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
   const user = useContext(UserContext);
   const loggedInUserId = user.id;
   const history = useHistory();
   return (
     <div className="add-img-vid-box">
       <div className="img-option">
-        {post.created_by === loggedInUserId ?
+        {post?.created_by === loggedInUserId ?
           <>
             <p
               onClick={
@@ -46,4 +46,4 @@ const LobbyPostOption = ({ post, onUnFavGallery, onSharePost, onModelDelete, onR
   );
 };
 
-export default LobbyPostOption;
+export default ImagePostOption;

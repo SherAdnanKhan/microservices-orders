@@ -5,7 +5,7 @@ import ShowMoreText from 'react-show-more-text';
 import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
 
-const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
+const PostFooter = ({ post, comments, handleStoke, handleUnStoke, updatedCritqueStatus }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const {
@@ -27,9 +27,9 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
     }
   }, [dispatch]);
 
-  const hasAllowedCritiques = () => {
-    return post && post.other_privacy.is_allowed ? true : false;
-  };
+  // const hasAllowedCritiques = () => {
+  //   return post && post.other_privacy.is_allowed ? true : false;
+  // };
 
   return (
     <div className="post-footer">
@@ -61,7 +61,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           }
           <p>strokes {post && post.post && post.post.stroke_users_count}</p>
         </div>
-        {hasAllowedCritiques() && post.post.critiques_status === 1 &&
+        {updatedCritqueStatus === 1 &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"
@@ -71,6 +71,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
             <p> comments {comments.length} </p>
           </div>
         }
+
         <div className="post-footer-icons action-w">
           <img
             className="post-non-color-icon clickable"
@@ -80,6 +81,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           />
         </div>
       </div>
+
 
       <div className='post-description' style={{ width: '80%', textAlign: 'center' }}>
         {post &&

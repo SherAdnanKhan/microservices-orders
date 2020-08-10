@@ -6,7 +6,7 @@ import Comment from '../viewPost/comments';
 import { completeFormattedDate } from '../../../utils/helperFunctions';
 import ImageVideoSlider from '../../common/imageVideoSlider';
 import VideoPlayer from '../../common/videoPlayer';
-import LobbyPostOption from './lobbyPostOption';
+import ImagePostOption from '../../common/ImagePostOption';
 
 
 const LobbyPosts = ({
@@ -33,7 +33,7 @@ const LobbyPosts = ({
         }
       </div>
       <div className="image-option-box">
-        <LobbyPostOption
+        <ImagePostOption
           post={activePost}
           onUnFavGallery={onUnFavGallery}
           onSharePost={onSharePost}

@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import LobbyPostOption from '../lobby/lobbyPostOption';
+import ImagePostOption from '../../common/ImagePostOption';
 
-const PostBody = ({ post }) => {
+
+const PostBody = ({ post, updatedCritqueStatus, OnActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
   const [show, setShow] = useState(false);
   const eventRef = useRef();
 
@@ -20,7 +21,19 @@ const PostBody = ({ post }) => {
     <>
       <div className="image-option-box">
         {post &&
-          <LobbyPostOption post={post.post} />
+          <ImagePostOption
+            post={post}
+            onUnFavGallery={onUnFavGallery}
+            onSharePost={onSharePost}
+            onReportPost={onReportPost}
+            onModelDelete={onModelDelete}
+            onStrqShare={onStrqShare}
+            onShareStrqModel={onShareStrqModel}
+            onTurnOffCrtiques={onTurnOffCrtiques}
+            updatedCritqueStatus={updatedCritqueStatus}
+            onRepostModal={onRepostModal}
+            onMzFlashModal={onMzFlashModal}
+          />
         }
       </div>
       <div className="valut-icon show-valut">
@@ -34,7 +47,7 @@ const PostBody = ({ post }) => {
             onTouchStart={handleButtonPress}
             onTouchEnd={handleButtonRelease}
           >
-            {post.post.post_type === 2
+            {post.post_type === 2
               ? (
                 <video
                   width="320"
@@ -47,7 +60,7 @@ const PostBody = ({ post }) => {
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <img src={post.post.image.path} alt="" style={{ width: "100%", heigth: "100%" }} />
+                <img src={post.image.path} alt="" style={{ width: "100%", heigth: "100%" }} />
               )
             }
           </div>

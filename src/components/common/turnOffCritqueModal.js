@@ -1,6 +1,7 @@
 import React from 'react';
 
 const TurnOffCrtiqueModal = ({ onModalClose, post, onHandleCrtique, updatedCritqueStatus }) => {
+    console.log("post=", post);
     return (
         <div className="studio">
             <div className="gallery-model">
