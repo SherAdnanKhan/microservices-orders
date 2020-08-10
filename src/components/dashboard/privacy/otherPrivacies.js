@@ -5,7 +5,8 @@ const OtherPrivacy = ({
   activeOtherPage,
   onActiveOtherPage,
   privacyTypes,
-  onOtherPrivacyChange
+  onOtherPrivacyChange,
+  feelColor
 }) => {
 
   const handlePrivacy = (privacyType, privacyId, privacyTypeId) => {
@@ -38,16 +39,16 @@ const OtherPrivacy = ({
                 <label htmlFor="">{other.name}</label>
                 <div className="lock-bar" onClick={() => onActiveOtherPage(other.id)}>
                   {(!other.privacy || other.privacy.privacy_type_id === 1) &&
-                    <i className="fas fa-lock-open"></i>
+                    <i className="fas fa-lock-open" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} ></i>
                   }
                   {(other.privacy && other.privacy.privacy_type_id === 2) &&
-                    <i className="fas fa-lock">+</i>
+                    <i className="fas fa-lock" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} >+</i>
                   }
                   {(other.privacy && other.privacy.privacy_type_id === 3) &&
-                    <i className="fas fa-lock"></i>
+                    <i className="fas fa-lock" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} ></i>
                   }
                   {(other.privacy && other.privacy.privacy_type_id === 4) &&
-                    <i className="fas fa-lock">++</i>
+                    <i className="fas fa-lock" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} >++</i>
                   }
                   {other.id === activeOtherPage
                     ? <i className="fas fa-chevron-down down-tab3"></i>
@@ -65,9 +66,9 @@ const OtherPrivacy = ({
                           {type.id === 1 &&
                             <button
                               onClick={() => handlePrivacy('other', other.id, type.id)}
-                              className={
+                              style={
                                 !other.privacy ||
-                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                                  other.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -77,9 +78,9 @@ const OtherPrivacy = ({
                           {type.id === 2 &&
                             <button
                               onClick={() => handlePrivacy('other', other.id, type.id)}
-                              className={
+                              style={
                                 other.privacy &&
-                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                                  other.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -89,9 +90,9 @@ const OtherPrivacy = ({
                           {type.id === 3 &&
                             <button
                               onClick={() => handlePrivacy('other', other.id, type.id)}
-                              className={
+                              style={
                                 other.privacy &&
-                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                                  other.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -101,9 +102,9 @@ const OtherPrivacy = ({
                           {type.id === 4 &&
                             <button
                               onClick={() => handlePrivacy('other', other.id, type.id)}
-                              className={
+                              style={
                                 other.privacy &&
-                                  other.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                                  other.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}

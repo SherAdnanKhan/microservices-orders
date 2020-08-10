@@ -8,7 +8,7 @@ import Spinner from '../../common/spinner';
 const Privacy = () => {
   const [activeGallery, setActiveGallery] = useState('');
   const [activeOtherPage, setActiveOtherPage] = useState('');
-
+  const { feelColor } = useSelector(state => state.feelColor);
   const dispatch = useDispatch();
   const {
     userGalleries,
@@ -16,7 +16,6 @@ const Privacy = () => {
     userOtherPages,
     loading
   } = useSelector(state => state.privacies);
-
   useEffect(() => {
     dispatch(getPrivacies());
   }, [dispatch]);
@@ -28,7 +27,6 @@ const Privacy = () => {
   const handleOtherPrivacyChange = privacy => {
     dispatch(changeOtherPrivacy(privacy));
   };
-
   return (
     <div className="privacy">
       {loading && <Spinner />}
@@ -40,6 +38,7 @@ const Privacy = () => {
         onActiveGallery={id => {
           id === activeGallery ? setActiveGallery('') : setActiveGallery(id);
         }}
+        feelColor={feelColor}
       />
       <OtherPrivacy
         userOtherPages={userOtherPages}
@@ -49,6 +48,7 @@ const Privacy = () => {
         onActiveOtherPage={id => {
           id === activeOtherPage ? setActiveOtherPage('') : setActiveOtherPage(id);
         }}
+        feelColor={feelColor}
       />
     </div>
   )
