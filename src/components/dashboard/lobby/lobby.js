@@ -29,7 +29,7 @@ const Lobby = () => {
   const {
     user: { favouriteUsers, favouritePosts, unreadCount },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm, crtiqueStatus, sendUser, post },
+    postView: { ncomm, sendUser, post },
     feelColor: { feelColor },
     gallery: { myGalleries },
 
@@ -50,7 +50,6 @@ const Lobby = () => {
 
 
   const currentUser = useContext(UserContext);
-  console.log("post=", post)
   useEffect(() => {
     dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id));
@@ -272,7 +271,7 @@ const Lobby = () => {
         />
       }
       {showModalTurnOffCritque &&
-        <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} updatedCritqueStatus={crtiqueStatus} onHandleCrtique={handleTurnOnOffCrtique} />
+        <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} onHandleCrtique={handleTurnOnOffCrtique} />
       }
       {showMzFlashModal &&
         <MzFlashModal onModalClose={handleMzFlashModal} post={activePost} onConfirm={handleMzFlash} />
@@ -332,7 +331,6 @@ const Lobby = () => {
                 onShareStrqModel={handleStrqShareModel}
                 onStrqShare={onStrqShare}
                 onTurnOffCrtiques={handleTurnOffCrtiquesModal}
-                updatedCritqueStatus={crtiqueStatus}
                 onRepostModal={handleRepostModal}
                 onMzFlashModal={handleMzFlashModal}
 

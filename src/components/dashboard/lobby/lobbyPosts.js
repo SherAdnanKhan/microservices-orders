@@ -10,7 +10,7 @@ import ImagePostOption from '../../common/ImagePostOption';
 
 
 const LobbyPosts = ({
-  post, ncomm, onClickNcomm, updatedCritqueStatus,
+  post, ncomm, onClickNcomm,
   activeNcomm, onActivePost, activePost, onModelDelete, onReportPost,
   onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal
 }) => {
@@ -42,7 +42,6 @@ const LobbyPosts = ({
           onStrqShare={onStrqShare}
           onShareStrqModel={onShareStrqModel}
           onTurnOffCrtiques={onTurnOffCrtiques}
-          updatedCritqueStatus={updatedCritqueStatus}
           onRepostModal={onRepostModal}
           onMzFlashModal={onMzFlashModal} />
       </div>

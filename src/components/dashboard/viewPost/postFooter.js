@@ -5,8 +5,7 @@ import ShowMoreText from 'react-show-more-text';
 import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
 
-const PostFooter = ({ post, comments, handleStoke, handleUnStoke, updatedCritqueStatus }) => {
-  console.log("post=", post);
+const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const {
