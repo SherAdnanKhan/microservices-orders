@@ -5,7 +5,8 @@ const GalleryPrivacy = ({
   privacyTypes,
   activeGallery,
   onActiveGallery,
-  onGalleryPrivacyChange
+  onGalleryPrivacyChange,
+  feelColor
 }) => {
   const handlePrivacy = (privacyType, privacyId, privacyTypeId) => {
     const privacy = {
@@ -34,16 +35,16 @@ const GalleryPrivacy = ({
                 <label htmlFor=""> {gallery.title} </label>
                 <div className="lock-bar" onClick={() => onActiveGallery(gallery.id)}>
                   {(!gallery.privacy || gallery.privacy.privacy_type_id === 1) &&
-                    <i className="fas fa-lock-open"></i>
+                    <i className="fas fa-lock-open" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} ></i>
                   }
                   {(gallery.privacy && gallery.privacy.privacy_type_id === 2) &&
-                    <i className="fas fa-lock">+</i>
+                    <i className="fas fa-lock" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} >+</i>
                   }
                   {(gallery.privacy && gallery.privacy.privacy_type_id === 3) &&
-                    <i className="fas fa-lock"></i>
+                    <i className="fas fa-lock" style={{ backgroundColor: feelColor ? feelColor : 'grey' }} ></i>
                   }
                   {(gallery.privacy && gallery.privacy.privacy_type_id === 4) &&
-                    <i className="fas fa-lock">++</i>
+                    <i className="fas fa-lock" style={{ backgroundColor: feelColor ? feelColor : 'grey' }}>++</i>
                   }
                   {activeGallery === gallery.id
                     ? <i className="fas fa-chevron-down down-tab1"></i>
@@ -61,9 +62,9 @@ const GalleryPrivacy = ({
                           {type.id === 1 &&
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
-                              className={
+                              style={
                                 !gallery.privacy ||
-                                  gallery.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -73,9 +74,9 @@ const GalleryPrivacy = ({
                           {type.id === 2 &&
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
-                              className={
-                                gallery.privacy &&
-                                  gallery.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              style={
+                                !gallery.privacy ||
+                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -85,9 +86,9 @@ const GalleryPrivacy = ({
                           {type.id === 3 &&
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
-                              className={
-                                gallery.privacy &&
-                                  gallery.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              style={
+                                !gallery.privacy ||
+                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -97,9 +98,9 @@ const GalleryPrivacy = ({
                           {type.id === 4 &&
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
-                              className={
-                                gallery.privacy &&
-                                  gallery.privacy.privacy_type_id === type.id ? 'btn-active' : ''
+                              style={
+                                !gallery.privacy ||
+                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
