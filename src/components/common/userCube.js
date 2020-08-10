@@ -73,7 +73,7 @@ const UserCube = ({ user }) => (
                         boxShadow: `0 0 20px ${user.feel.color_code}`
                       }}
                     >
-                      <img alt="" src={user.avatars[1].path} height="100%" />
+                      <img alt="" src={user.avatars[0].path} height="100%" />
                     </div>
                     <div
                       className="cube-face  cube-face-left"
@@ -83,7 +83,7 @@ const UserCube = ({ user }) => (
                         boxShadow: `0 0 20px ${user.feel.color_code}`
                       }}
                     >
-                      <img alt="" src={user.avatars[0].path} height="100%" />
+                      <img alt="" src={user.avatars[1].path} height="100%" />
                     </div>
                     <div
                       className="cube-face  cube-face-right"
