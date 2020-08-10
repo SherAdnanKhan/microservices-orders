@@ -268,6 +268,7 @@ const Lobby = () => {
           myGalleries={myGalleries}
           selectedGalleryId={galleryId}
           onGalleryId={getSelectedGalleryId}
+          Updatedpost={post}
         />
       }
       {showModalTurnOffCritque &&
