@@ -19,13 +19,18 @@ const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) =>
             {myStudio && <p>Total posts: {totalPosts}</p>}
           </>
         }
-        {activeGallery && <p>{activeGallery.title}</p>}
+        {activeGallery &&
+          <>
+            <p>{activeGallery.title}</p>
+            <p>Exhibits Faved by: {gallery?.faved_users.length}</p>
+          </>
+        }
       </div>
       <div className="heart-icon">
 
         {activeGallery &&
           <>
-            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved: {gallery && gallery.faved_users.length}</span>
+            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved: ({gallery && gallery.faved_users.length})</span>
             <img
               src="/assets/images/add.png"
               className="clickable"
