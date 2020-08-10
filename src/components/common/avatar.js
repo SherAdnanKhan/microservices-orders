@@ -33,10 +33,10 @@ const Avatar = ({ avatars, feelColor = 'red' }) => (
                         <img alt="" src={avatars[0].path} height="100%" />
                       </div>
                       <div className="cube-facesmall  cube-face-backsmall" style={{ borderColor: feelColor, boxShadow: `1px 1px 10px ${feelColor}` }}>
-                        <img alt="" src={avatars[1].path} height="100%" />
+                        <img alt="" src={avatars[0].path} height="100%" />
                       </div>
                       <div className="cube-facesmall  cube-face-leftsmall" style={{ borderColor: feelColor, boxShadow: `1px 1px 10px ${feelColor}` }}>
-                        <img alt="" src={avatars[0].path} height="100%" />
+                        <img alt="" src={avatars[1].path} height="100%" />
                       </div>
                       <div className="cube-facesmall  cube-face-rightsmall" style={{ borderColor: feelColor, boxShadow: `1px 1px 10px ${feelColor}` }}>
                         <img alt="" src={avatars[1].path} height="100%" />
