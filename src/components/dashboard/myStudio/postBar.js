@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const PostBar = ({ myStudio, activeGallery, totalPosts, feelColor }) => {
+const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) => {
   const history = useHistory();
   return (
     <div
@@ -25,7 +25,7 @@ const PostBar = ({ myStudio, activeGallery, totalPosts, feelColor }) => {
 
         {activeGallery &&
           <>
-            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved</span>
+            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved: {gallery && gallery.faved_users.length}</span>
             <img
               src="/assets/images/add.png"
               className="clickable"
