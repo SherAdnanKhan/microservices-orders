@@ -116,7 +116,9 @@ export const favGallery = gallery => dispatch => {
 
   http
     .post('/galleries/fav', { gallery_id: gallery.id })
-    .then()
+    .then(() => {
+      toast.success("Gallery Fave Successfully");
+    })
     .catch(() => {
       dispatch({
         type: UNFAV_GALLERY,
@@ -129,12 +131,11 @@ export const unfavGallery = (gallery) => dispatch => {
   dispatch({
     type: UNFAV_GALLERY,
     payload: { gallery, hasFaved: false }
-  }); 
+  });
   http
-    .post('/galleries/unfav', { gallery_id: gallery.id  })
-    .then(res=>
-    {
-      toast.success("Gallery Unfave successfully");
+    .post('/galleries/unfav', { gallery_id: gallery.id })
+    .then(res => {
+      toast.success("Gallery Unfave Successfully");
     })
     .catch(() => {
       dispatch({
