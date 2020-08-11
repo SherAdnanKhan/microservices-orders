@@ -22,7 +22,7 @@ import RepostModal from "../common/repostModal";
 import MzFlashModal from "../common/mzFlashModal";
 const Post = ({
   gallery, user, activeGallery,
-  galleryPrivacy, onSuperFav, isSprFvs
+  galleryPrivacy, onSuperFav, isSprFvs, onFave
 }) => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
@@ -345,6 +345,7 @@ const Post = ({
                         src="/assets/images/catfave.png"
                         className="clickable fav-icon"
                         alt=""
+                        onClick={onFave}
                       />
                       <div>Fav this Gallery to view</div>
                     </div>
