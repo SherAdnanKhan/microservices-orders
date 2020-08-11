@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 const PostBar = ({
   gallery, activeGallery,
-  onPostLike, totalPosts, galleryPrivacy, user
+  onFave, totalPosts, galleryPrivacy, user
 }) => {
 
   const history = useHistory();
@@ -34,7 +34,7 @@ const PostBar = ({
             <p>Total posts: {totalPosts}</p>
           </>
         }
-        {(activeGallery && isAllowed()) &&
+        {(activeGallery) &&
           <>
             <p>{activeGallery.title}</p>
             <p>Exhibits Faved by: {gallery?.faved_users.length}</p>
@@ -49,7 +49,7 @@ const PostBar = ({
             <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved({gallery && gallery.faved_users.length})</span>
             <Like    //heart with brush icon
               faved={gallery.has_faved}
-              onLike={onPostLike}
+              onLike={onFave}
             />
           </>
         }
