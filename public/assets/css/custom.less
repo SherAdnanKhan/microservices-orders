@@ -4192,7 +4192,7 @@ border: 5px solid rgba(61,61,61,.5);
       margin: 15px 10px;
       box-sizing: border-box;
       @media @mobile{
-        width: 65%;
+        // width: 65%;
         margin: 15px auto;
       }
       .details {
@@ -4261,7 +4261,7 @@ border: 5px solid rgba(61,61,61,.5);
         background: #2d2d2d;
         position: relative;
         cursor: pointer;
-        height: 290px;
+        // height: 290px;
         overflow: hidden;
         img{
           width: 100%;
@@ -4300,6 +4300,11 @@ border: 5px solid rgba(61,61,61,.5);
 
 .my-studio-edit{
   display: none;
+  .update-image {
+    @media @mobile {
+      margin-top: 100px;
+    }
+  }
   .header-bar{
     background: #00cd4f;
     text-align: center;
@@ -4349,6 +4354,9 @@ border: 5px solid rgba(61,61,61,.5);
       border: 2px solid #444;
       position: relative;
       overflow: hidden;
+      @media @mobile {
+        height: unset;
+      }
       .update-pic{
         width: 80%;
       }
@@ -6232,7 +6240,7 @@ border: 5px solid rgba(61,61,61,.5);
     border: 2px solid #444;
     background: black;
     @media @mobile {
-      height: 53%;
+      height: 59%;
       width:80%;
     }
     form{
@@ -7666,6 +7674,9 @@ border: 5px solid rgba(61,61,61,.5);
     margin: auto;
     border: 2px solid #444;
     background: black;
+    @media @mobile{
+      // margin-top: 100px;
+    }
     .actions {
       button {
         display: block;
