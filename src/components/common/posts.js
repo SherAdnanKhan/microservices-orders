@@ -264,7 +264,9 @@ const Post = ({
                                     : 'valut-icon'
                                 }
                               >
-                                <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
+                                <div style={{ marginRight: "auto", paddingLeft: "15px", paddingTop: "20px" }}>
+                                  <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
+                                </div>
                                 <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
                               </div>
                               <div onClick={() => handleActivePost(post)}>

@@ -3425,6 +3425,7 @@ img {
       align-items: center;
       width: 60%;
       margin: 0 auto;
+
       p{
         white-space: nowrap;
 
@@ -3435,6 +3436,60 @@ img {
       }
     }
     .list-body{
+      .image-option-box{
+        text-align: center;
+        .fa-ellipsis-v{
+          cursor: pointer;
+          margin-right: auto;
+        }
+       .add-img-vid-box{
+         display: flex;
+         display: none;
+         position: fixed;
+         border: 1px solid;
+         top: 23%;
+         left: 35%;
+         background: #000;
+         text-align: center;
+         border-radius:10px;
+         width: 16%;
+         height: auto;
+         // height: 70%;
+         z-index: 10;
+         justify-content: center;
+         align-items: center;
+         @media @mobile{
+           left: 25%;
+           width: 50%;
+         }
+         p{
+           cursor: pointer;
+         }
+         .close-add-box{
+           position: absolute;
+           top: 50px;
+           right: 27px;
+           border: 1px solid;
+           border-radius: 100%;
+           padding: 8px 10px;
+           cursor: pointer;
+         }
+         label{
+           text-align: center;
+           display: flex;
+           flex-direction: column;
+           margin: 0 30px;
+           cursor: pointer;
+           
+           img{
+             width: 40px;
+             border: 1px solid;
+             border-radius: 100%;
+             padding: 5px;
+           }
+         }
+       }
+      }
       .ncomm-slider {
         height: 0;
         transition: 0.3s all ease-in-out;
