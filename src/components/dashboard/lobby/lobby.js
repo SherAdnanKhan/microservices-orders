@@ -13,7 +13,7 @@ import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost,
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
-import LobbyModal from "../../common/lobbyModal";
+import DeleteModal from "../../common/deleteModal";
 import SharePostModal from '../../common/sharePostModal';
 import ReportPostModel from '../../common/reportPostModel';
 import SharePostStrqModal from '../../common/sharePostStrqModal';
@@ -229,7 +229,7 @@ const Lobby = () => {
         </div>
       }
       {showDeleteModel &&
-        <LobbyModal
+        <DeleteModal
           onDelete={handleDelete}
           onModalClose={handlePostDeleteModel}
           activePost={activePost}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const LobbyModal = ({ onDelete, onModalClose, activePost }) => {
+const DeleteModal = ({ onDelete, onModalClose, activePost }) => {
     // const handleDelete = (status, post) => {
     //     setShowDeleteModel(status);
     //     dispatch(deletePost(post));
@@ -24,4 +24,4 @@ const LobbyModal = ({ onDelete, onModalClose, activePost }) => {
     );
 };
 
-export default LobbyModal;
+export default DeleteModal;

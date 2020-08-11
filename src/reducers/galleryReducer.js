@@ -15,7 +15,8 @@ import {
   STROKE_POST,
   UNSTROKE_POST,
   GET_USER_FAV_GALLERIES,
-  ADD_POST_COMMENT
+  ADD_POST_COMMENT,
+  CHANGE_CRITIQUES_STATUS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -33,6 +34,25 @@ export default (state = initialState, action) => {
         ...state,
         gallery: action.payload
       };
+    case CHANGE_CRITIQUES_STATUS:
+      if (!state.gallery) {
+        return state
+      }
+      return {
+        ...state,
+        gallery: {
+          ...state.gallery,
+          posts: state.gallery.posts.map(post => {
+            if (action.payload.id === post.id) {
+              return {
+                ...post,
+                critiques_status: action.payload.critiques_status
+              };
+            }
+            return post
+          })
+        }
+      }
     case ADD_POST_COMMENT:
       if (!state.gallery) {
         return state

@@ -6,7 +6,7 @@ import ViewPostHead from "./postHead";
 import ViewPostBody from "./postBody";
 import ViewPostHeader from "./postHeader";
 import Comment from './comments';
-import LobbyModal from "../../common/lobbyModal";
+import DeleteModal from "../../common/deleteModal";
 import SharePostModal from '../../common/sharePostModal';
 import ReportPostModel from '../../common/reportPostModel';
 import SharePostStrqModal from '../../common/sharePostStrqModal';
@@ -133,7 +133,7 @@ const ViewPost = () => {
   return (
     <>
       {showDeleteModel &&
-        <LobbyModal
+        <DeleteModal
           onDelete={handleDelete}
           onModalClose={handlePostDeleteModel}
           activePost={post?.post}
