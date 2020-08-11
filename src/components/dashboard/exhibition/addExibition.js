@@ -82,7 +82,6 @@ const AddExibit = () => {
   const Submit = (e) => {
     e.preventDefault();
     const error = hasErrors();
-    console.log(data);
     if (!error) {
       const formData = new FormData();
       for (let key in data) {
@@ -127,7 +126,7 @@ const AddExibit = () => {
 
   useEffect(() => {
     if (post) {
-      const splittedPath = post?.post?.image.path.split('.');
+      const splittedPath = post?.post?.image?.path.split('.');
       const fileType = splittedPath[splittedPath.length - 1];
 
       if (fileType === 'mp4') {

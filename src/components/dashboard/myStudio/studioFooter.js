@@ -1,7 +1,8 @@
 import React from 'react';
 import Avatar from '../../common/avatar';
+import ImagePostOption from "../../common/ImagePostOption";
 
-const StudioFooter = ({ gallery, user }) => {
+const StudioFooter = ({ gallery, user, activePost, handleActivePost, activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
   return (
     <>
       <div className="wrapper">
@@ -39,18 +40,48 @@ const StudioFooter = ({ gallery, user }) => {
                       </>
                     }
                   </div>
-                  {post.post_type === 2
-                    ? (
-                      <video width="320" height="240" controls>
-                        <source src={post.image.path} type="video/mp4" />
-                        <source src={post.image.path} type="video/ogg" />
+                  <div className="image-option-box">
+                    <ImagePostOption
+                      post={post}
+                      onUnFavGallery={onUnFavGallery}
+                      onSharePost={onSharePost}
+                      onReportPost={onReportPost}
+                      onModelDelete={onModelDelete}
+                      onStrqShare={onStrqShare}
+                      onShareStrqModel={onShareStrqModel}
+                      onTurnOffCrtiques={onTurnOffCrtiques}
+                      onRepostModal={onRepostModal}
+                      onMzFlashModal={onMzFlashModal} />
+                  </div>
+                  <div
+                    className={
+                      activePost?.id === post?.id
+                        ? 'valut-icon show-valut'
+                        : 'valut-icon'
+                    }
+                  >
+                    <div style={{ marginRight: "auto", paddingLeft: "15px", paddingTop: "20px" }}>
+                      <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
+                    </div>
+                    <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+                  </div >
+                  <div onClick={() => handleActivePost(post)}>
+
+                    {post.post_type === 2
+                      ? (
+                        <video width="320" height="240" controls>
+                          <source src={post.image.path} type="video/mp4" />
+                          <source src={post.image.path} type="video/ogg" />
                         Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <img src={`${post.image.path}`} alt="" />
-                    )
-                  }
-                  <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
+                        </video>
+                      ) : (
+                        <img src={`${post.image.path}`} alt="" />
+                      )
+                    }
+                    <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
+
+                  </div>
+
                 </div>
               ))
             }

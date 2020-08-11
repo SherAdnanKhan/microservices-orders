@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../../actions/studioActions';
 import Gallery from './galleries';
-import { getGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
+import { getFavourites } from '../../../actions/userActions';
+import { getUserArtById } from "../../../actions/userActions";
+import { getGallery, clearGallery, getMyGalleries, unfavGallery } from "../../../actions/galleryActions";
+import { deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
 import StudioHeader from './studioHeader';
 import EditProfile from './editProfile';
 import ViewProfile from './viewProfile';
@@ -11,21 +14,39 @@ import ViewButton from './viewbutton';
 import PostBar from './postBar';
 import StudioFooter from './studioFooter';
 import GalleryForm from './galleryForm';
+import DeleteModal from "../../common/deleteModal";
+import SharePostModal from '../../common/sharePostModal';
+import ReportPostModel from '../../common/reportPostModel';
+import SharePostStrqModal from '../../common/sharePostStrqModal';
+import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
+import RepostModal from "../../common/repostModal";
+import MzFlashModal from "../../common/mzFlashModal";
 
 const MyStudio = () => {
+  const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id;
   const [show, setShow] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState('');
-
   const [edit, setEdit] = useState(true);
   const [activeGallery, setActiveGallery] = useState('');
-  const dispatch = useDispatch();
+  const [activePost, setActivePost] = useState({});
+  const [showModelShare, setShowModelShare] = useState(false);
+  const [showModelReport, setShowModelReport] = useState(false);
+  const [showModelStrqShare, setshowModelStrqShare] = useState(false);
+  const [showModalTurnOffCritque, setshowModalTurnOffCritque] = useState(false);
+  const [showModalRepost, setShowModalRepost] = useState(false);
+  const [galleryId, setGalleryId] = useState('');
+  const [showMzFlashModal, setShowMzFlashModal] = useState(false);
+  const [showDeleteModel, setShowDeleteModel] = useState(false);
 
   const {
+    user: { favouriteUsers },
     studio: { myStudio },
     gallery: { gallery, myGalleries },
-    feelColor: { feelColor }
+    feelColor: { feelColor },
+    postView: { sendUser }
   } = useSelector(state => state);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!myStudio)
       dispatch(getMyStudio());
@@ -40,6 +61,10 @@ const MyStudio = () => {
     }
   }, [myGalleries, dispatch])
 
+  useEffect(() => {
+    dispatch(getFavourites());
+    dispatch(getUserArtById(user_art_id));
+  }, [dispatch, user_art_id]);
 
   const handleGalleryChange = gallery => {
     dispatch(getGallery(gallery.slug));
@@ -52,7 +77,6 @@ const MyStudio = () => {
   };
 
   const handleModelOpen = gallery => {
-    console.log(gallery);
     setShow(true);
     setSelectedGallery(gallery)
   };
@@ -60,40 +84,175 @@ const MyStudio = () => {
   const handleModelClose = (value) => {
     setShow(value);
   };
+  const handleActivePost = post => {
+    if (post.id === activePost.id) {
+      setActivePost('');
+    } else {
+      setActivePost(post);
+    }
+  }
+  const handlePostDeleteModel = (value) => {
+    setShowDeleteModel(value);
+  };
+  const handleDelete = (status, post) => {
+    setShowDeleteModel(status);
+    dispatch(deletePost(post));
+  }
+
+  const handleShareModel = (status) => {
+    //dispatch(standardSharePost(post.id));
+    setShowModelShare(status);
+  };
+
+  const handleUnfavGallery = (gallery) => {
+    dispatch(unfavGallery(gallery));
+  }
+
+  const handleReportModel = (status) => {
+    setShowModelReport(status);
+  }
+
+  const onReport = (post) => {
+    dispatch(reportPost(post.id));
+    setShowModelReport(false);
+  }
+
+  const handleStrqShareModel = (status) => {
+    setshowModelStrqShare(status);
+  }
+
+  const onStrqShare = (post, userId) => {
+
+    dispatch(sharePostOnStrq(post, userId));
+  }
+  const handleTurnOffCrtiquesModal = (value) => {
+    setshowModalTurnOffCritque(value);
+  }
+  const handleTurnOnOffCrtique = (modalStatus, post, status) => {
+    setshowModalTurnOffCritque(modalStatus);
+    dispatch(changeCritqueStatus(post, status));
+  }
+  const handleMzFlashModal = (status) => {
+    setShowMzFlashModal(status);
+  }
+  const handleMzFlash = (status, post) => {
+    setShowMzFlashModal(status);
+    dispatch(shareMzFlash(post));
+  }
+  const handleRepostLobby = (status, post, gallery) => {
+    dispatch(repost(post.id, gallery))
+    setShowModalRepost(status);
+  }
+  const handleRepostModal = (status,) => {
+    setShowModalRepost(status);
+  }
+  const getSelectedGalleryId = (gallery) => {
+    setGalleryId(gallery);
+  }
 
   return (
-    <div className="my-studio">
-      {show &&
-        <GalleryForm
-          onModelClose={handleModelClose}
-          gallery={selectedGallery}
+    <>
+      {showDeleteModel &&
+        <DeleteModal
+          onDelete={handleDelete}
+          onModalClose={handlePostDeleteModel}
+          activePost={activePost}
+          onSharePost={handleShareModel}
         />
       }
-      <StudioHeader myStudio={myStudio && myStudio} feelColor={feelColor} />
-      {edit
-        ? <EditProfile myStudio={myStudio} feelColor={feelColor} />
-        : <ViewProfile myStudio={myStudio} feelColor={feelColor} />
+      {showModelShare &&
+        <SharePostModal
+          onModalClose={handleShareModel}
+          post={activePost}
+        />
       }
-      {edit
-        ? <EditButton onEdit={handleEdit} feelColor={feelColor} />
-        : <ViewButton onEdit={handleEdit} feelColor={feelColor} />
+      {showModelReport &&
+        <ReportPostModel
+          onReport={onReport}
+          onModalClose={handleReportModel}
+          post={activePost}
+          selectedGallery={galleryId}
+        />
       }
-      <Gallery
-        galleries={myGalleries}
-        edit={edit}
-        activeGallery={activeGallery}
-        onGalleryChange={handleGalleryChange}
-        onModelOpen={handleModelOpen}
-      />
-      <PostBar
-        myStudio={myStudio}
-        activeGallery={activeGallery}
-        gallery={gallery}
-        totalPosts={myStudio && myStudio.user.posts_count}
-        feelColor={feelColor}
-      />
-      <StudioFooter gallery={gallery} user={myStudio && myStudio.user} />
-    </div>
+      {showModelStrqShare &&
+        <SharePostStrqModal
+          onShare={onStrqShare}
+          onModalClose={handleStrqShareModel}
+          post={activePost}
+          favouriteUsers={favouriteUsers}
+          sendUser={sendUser}
+        />
+      }
+      {showModalRepost &&
+        <RepostModal
+          onRepost={handleRepostLobby}
+          onModalClose={handleRepostModal}
+          post={activePost}
+          myGalleries={myGalleries}
+          selectedGalleryId={galleryId}
+          onGalleryId={getSelectedGalleryId}
+        />
+      }
+      {showModalTurnOffCritque &&
+        <TurnOffCrtiqueModal
+          onModalClose={handleTurnOffCrtiquesModal}
+          post={activePost}
+          onHandleCrtique={handleTurnOnOffCrtique} />
+      }
+      {showMzFlashModal &&
+        <MzFlashModal onModalClose={handleMzFlashModal}
+          post={activePost}
+          onConfirm={handleMzFlash} />
+      }
+      <div className="my-studio">
+        {show &&
+          <GalleryForm
+            onModelClose={handleModelClose}
+            gallery={selectedGallery}
+          />
+        }
+        <StudioHeader myStudio={myStudio && myStudio} feelColor={feelColor} />
+        {edit
+          ? <EditProfile myStudio={myStudio} feelColor={feelColor} />
+          : <ViewProfile myStudio={myStudio} feelColor={feelColor} />
+        }
+        {edit
+          ? <EditButton onEdit={handleEdit} feelColor={feelColor} />
+          : <ViewButton onEdit={handleEdit} feelColor={feelColor} />
+        }
+        <Gallery
+          galleries={myGalleries}
+          edit={edit}
+          activeGallery={activeGallery}
+          onGalleryChange={handleGalleryChange}
+          onModelOpen={handleModelOpen}
+        />
+        <PostBar
+          myStudio={myStudio}
+          activeGallery={activeGallery}
+          gallery={gallery}
+          totalPosts={myStudio && myStudio.user.posts_count}
+          feelColor={feelColor}
+        />
+        <StudioFooter
+          gallery={gallery}
+          user={myStudio && myStudio.user}
+          activeGallery={activeGallery}
+          onActivePost={handleActivePost}
+          onUnFavGallery={handleUnfavGallery}
+          activePost={activePost}
+          onModelDelete={handlePostDeleteModel}
+          onSharePost={handleShareModel}
+          onReportPost={handleReportModel}
+          onShareStrqModel={handleStrqShareModel}
+          onStrqShare={onStrqShare}
+          onTurnOffCrtiques={handleTurnOffCrtiquesModal}
+          onRepostModal={handleRepostModal}
+          onMzFlashModal={handleMzFlashModal}
+          handleActivePost={handleActivePost}
+        />
+      </div>
+    </>
   );
 };
 
