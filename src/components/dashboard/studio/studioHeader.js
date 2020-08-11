@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StudioHeader = ({ userStudio, onModelOpen, onUnSprFavModal }) => {
+const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal }) => {
   const history = useHistory();
   return (
     <div
@@ -31,6 +31,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onUnSprFavModal }) => {
             }
             alt=""
             className="clickable sprvs-empty"
+            onClick={() => onSuperFav()}
           />
         }
         <img
