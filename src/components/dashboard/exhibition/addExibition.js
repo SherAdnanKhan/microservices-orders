@@ -193,20 +193,22 @@ const AddExibit = () => {
                     className="exibition-input clickable"
                     onClick={() => setShowModel(true)}
                   >
-                    {video &&
-                      <video width="320" height="240" controls>
-                        <source src={video} type="video/mp4" />
-                        <source src={video} type="video/ogg" />
+                    <div className="exhibit-imgVid-container">
+                      {video &&
+                        <video width="320" height="240" controls>
+                          <source src={video} type="video/mp4" />
+                          <source src={video} type="video/ogg" />
                         Your browser does not support the video tag.
                       </video>
-                    }
-                    {image &&
-                      <img
-                        id="preview"
-                        src={image ? image : '/assets/images/input-image.png'}
-                        alt="dummy"
-                      />
-                    }
+                      }
+                      {image &&
+                        <img
+                          id="preview"
+                          src={image ? image : '/assets/images/input-image.png'}
+                          alt="dummy"
+                        />
+                      }
+                    </div>
                   </label>
                 </div>
                 <div className="exibition-form-input">
