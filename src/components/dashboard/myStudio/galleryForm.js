@@ -131,7 +131,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                   <div className="nag-icon" style={{ backgroundColor: feelColor }} onClick={handleRemove}>
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
-                  <div className="nag-btn" style={{ backgroundColor: feelColor }}>
+                  <div className="nag-btn">
                     Remove gallery cover
                   </div>
                 </div>
@@ -144,7 +144,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
                     onClick={handleRemove}
                   />
                 </div>
-                <div className="nag-btn" style={{ backgroundColor: feelColor }}>
+                <div className="nag-btn" >
                   Add gallery cover
                 </div>
                 <input
