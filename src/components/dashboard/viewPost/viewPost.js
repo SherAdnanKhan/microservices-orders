@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useRouteMatch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PostFooter from "./postFooter";
 import ViewPostHead from "./postHead";
 import ViewPostBody from "./postBody";
+import UserContext from "../../../context/userContext";
 import ViewPostHeader from "./postHeader";
 import Comment from './comments';
 import DeleteModal from "../../common/deleteModal";
@@ -21,7 +22,8 @@ import { deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, s
 
 
 const ViewPost = () => {
-  const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
+  const user = useContext(UserContext);
+  const userArtId = user.art_id;
   const dispatch = useDispatch();
   const { params: { id } } = useRouteMatch();
   const {
@@ -54,8 +56,8 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getUserArtById(user_art_id));
-  }, [dispatch, user_art_id]);
+    dispatch(getUserArtById(userArtId));
+  }, [dispatch, userArtId]);
 
   const handleUnStoke = () => {
     dispatch(unstrokePost(post.post.id, post.post.gallery_id, post.post.user))

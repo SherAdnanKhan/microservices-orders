@@ -126,7 +126,7 @@ const AddExibit = () => {
 
   useEffect(() => {
     if (post) {
-      const splittedPath = post?.post?.image.path.split('.');
+      const splittedPath = post?.post?.image?.path.split('.');
       const fileType = splittedPath[splittedPath.length - 1];
 
       if (fileType === 'mp4') {
