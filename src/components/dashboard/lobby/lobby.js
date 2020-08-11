@@ -22,7 +22,8 @@ import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
 
 const Lobby = () => {
-  const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
+  const user = useContext(UserContext);
+  const userArtId = user.art_id;
   const dispatch = useDispatch();
   const [showDeleteModel, setShowDeleteModel] = useState(false);
   const [mediaType, setMediaType] = useState("");
@@ -52,8 +53,8 @@ const Lobby = () => {
   const currentUser = useContext(UserContext);
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getUserArtById(user_art_id));
-  }, [dispatch, user_art_id]);
+    dispatch(getUserArtById(userArtId));
+  }, [dispatch, userArtId]);
 
   useEffect(() => {
     dispatch(clearNcomm);
