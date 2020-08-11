@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../../actions/studioActions';
 import Gallery from './galleries';
@@ -21,9 +21,12 @@ import SharePostStrqModal from '../../common/sharePostStrqModal';
 import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
 import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
+import UserContext from "../../../context/userContext";
+
 
 const MyStudio = () => {
-  const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id;
+  const user = useContext(UserContext);
+  const userArtId = user.art_id;
   const [show, setShow] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState('');
   const [edit, setEdit] = useState(true);
@@ -63,8 +66,8 @@ const MyStudio = () => {
 
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getUserArtById(user_art_id));
-  }, [dispatch, user_art_id]);
+    dispatch(getUserArtById(userArtId));
+  }, [dispatch, userArtId]);
 
   const handleGalleryChange = gallery => {
     dispatch(getGallery(gallery.slug));
