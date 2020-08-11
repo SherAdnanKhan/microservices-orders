@@ -80,9 +80,6 @@ const Studio = () => {
       user_id: userStudio.user.id,
       gallery_id: galleryId
     };
-
-
-
     if (input.checked)
       dispatch(addToInviteOnly(privacy));
     else
@@ -121,6 +118,7 @@ const Studio = () => {
       <StudioHeader
         userStudio={userStudio}
         onModelOpen={handleShowModel}
+        onSuperFav={handleSuperFav}
         onUnSprFavModal={handleUnSprFavModal}
       />
       <StudioDetail
