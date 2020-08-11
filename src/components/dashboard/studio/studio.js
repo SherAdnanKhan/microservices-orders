@@ -18,6 +18,7 @@ const Studio = () => {
   const [showModel, setShowModel] = useState(false);
   const [showUnsprfvsModal, setShowUnsprfvsModal] = useState(false);
   const [activeGallery, setActiveGallery] = useState('');
+  const [defuaultGallery, setDefuaultGallery] = useState(false);
   const { params: { slug } } = useRouteMatch();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -28,14 +29,15 @@ const Studio = () => {
   useEffect(() => {
     const { gallery } = queryString.parse(location.search);
 
-    if (userStudio) {
+    if (userStudio && defuaultGallery === false) {
       const foundGallery = userStudio.user.galleries.find(g => g.id === parseInt(gallery));
       if (foundGallery) {
         setActiveGallery(foundGallery);
+        setDefuaultGallery(true);
         dispatch(getGallery(foundGallery.slug));
       }
     }
-  }, [userStudio, dispatch, location]);
+  }, [userStudio, dispatch, location, defuaultGallery]);
 
   useEffect(() => {
     dispatch(getUserStudio(slug));
@@ -135,7 +137,7 @@ const Studio = () => {
         galleries={userStudio && userStudio.user.galleries}
         activeGallery={activeGallery}
         gallery={gallery}
-        onPostLike={handleLike}
+        onFave={handleLike}
         totalPosts={userStudio && userStudio.user.posts_count}
         galleryPrivacy={userStudio && userStudio.gallery_privacy}
         user={userStudio?.user}
@@ -145,6 +147,7 @@ const Studio = () => {
         gallery={gallery}
         user={userStudio && userStudio.user}
         galleryPrivacy={userStudio && userStudio.gallery_privacy}
+        onFave={handleLike}
         onSuperFav={handleSuperFav}
         isSprFvs={userStudio && userStudio.is_sprfvs}
       />
