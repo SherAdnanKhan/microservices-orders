@@ -66,18 +66,22 @@ const StartFaves = ({ user }) => {
 
                   <div className="f-img-box">
                     <div className="main-img">
-                       <img src={user.galleries[0].image ? user.galleries[0].image.path :"/assets/images/galleryicon.png" } alt="avatar" /> 
+                      <img src={user.galleries[0].image ? user.galleries[0].image.path : "/assets/images/icons/galleryCover.png"} alt="avatar" />
                     </div>
                     <div className="other-img">
-                      {/* {user.galleries[0].posts.map((post, in_key) => (
-                      <img key={in_key} src={post.image.path} alt="avatar" />
-                    ))} */}
-                      <img src="/assets/images/pic1.png" alt="avatar" />
-                      <img src="/assets/images/pic1.png" alt="avatar" />
-                      <img src="/assets/images/pic1.png" alt="avatar" />
-                      <img src="/assets/images/pic1.png" alt="avatar" />
-                      <img src="/assets/images/pic1.png" alt="avatar" />
-
+                      {user.galleries[0].posts.map((post, in_key) => (
+                        <div key={in_key}>
+                          {post.type === 2 ? (
+                            <video width="180" height="192" controls>
+                              <source src={post.image && post.image.path} type="video/mp4" />
+                              <source src={post.image && post.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                              <img src={`${post.image && post.image.path}`} alt="" />
+                            )}
+                        </div>
+                      ))}
                     </div>
                   </div>
                   <h2>{user.galleries[0].title}</h2>

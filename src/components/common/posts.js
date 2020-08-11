@@ -342,7 +342,7 @@ const Post = ({
                   && (
                     <div className="privacy-actions">
                       <img
-                        src="/assets/images/catfave.png"
+                        src="/assets/images/fave_gallery_empty.png"
                         className="clickable fav-icon"
                         alt=""
                         onClick={onFave}
