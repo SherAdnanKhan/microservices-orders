@@ -27,8 +27,7 @@ const MyStudio = () => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    if (!myStudio)
-      dispatch(getMyStudio());
+    dispatch(getMyStudio());
   }, [dispatch, myStudio]);
 
   useEffect(() => {
@@ -52,7 +51,6 @@ const MyStudio = () => {
   };
 
   const handleModelOpen = gallery => {
-    console.log(gallery);
     setShow(true);
     setSelectedGallery(gallery)
   };

@@ -82,7 +82,6 @@ const AddExibit = () => {
   const Submit = (e) => {
     e.preventDefault();
     const error = hasErrors();
-    console.log(data);
     if (!error) {
       const formData = new FormData();
       for (let key in data) {
