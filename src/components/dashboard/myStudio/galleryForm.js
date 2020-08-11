@@ -108,7 +108,7 @@ const GalleryForm = ({ onModelClose, gallery }) => {
       {loading && <Spinner />}
       <div className="update-image">
         <div className="nag-btn"  >
-        <i className="fas fa-window-close" style={{backgroundColor:feelColor}} onClick={() => onModelClose(false)}></i>
+          <i className="fas fa-window-close" onClick={() => onModelClose(false)}></i>
         </div>
         <ImageCropper
           imageUrl={imageUrl}
@@ -128,23 +128,23 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             <div className="add-nag-icon">
               {gallery && gallery.image &&
                 <div className="nag">
-                  <div className="nag-icon" style={{backgroundColor:feelColor}} onClick={handleRemove}>
+                  <div className="nag-icon" style={{ backgroundColor: feelColor }} onClick={handleRemove}>
                     <img alt="" src="/assets/images/minus.png" />
                   </div>
-                  <div className="nag-btn" style={{backgroundColor:feelColor}}> 
+                  <div className="nag-btn">
                     Remove gallery cover
                   </div>
                 </div>
               }
               <div className="nag">
-                <div className="nag-icon" style={{backgroundColor:feelColor}}>
+                <div className="nag-icon" style={{ backgroundColor: feelColor }}>
                   <img
                     alt=""
                     src="/assets/images/plus.png"
                     onClick={handleRemove}
                   />
                 </div>
-                <div className="nag-btn" style={{backgroundColor:feelColor}}>
+                <div className="nag-btn" >
                   Add gallery cover
                 </div>
                 <input
@@ -163,12 +163,11 @@ const GalleryForm = ({ onModelClose, gallery }) => {
             value={data.title}
             onChange={handleChange}
             error={error}
-            style={{backgroundColor:feelColor}}
           />
           {/* </div> */}
-       
+
           <div className="actions">
-            <button style={{backgroundColor:feelColor}}> Save </button>
+            <button style={{ backgroundColor: feelColor }}> Save </button>
           </div>
         </form>
       </div>
