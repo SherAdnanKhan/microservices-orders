@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import { updateBio } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const [bio, setBio] = useState('');
-
-  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,15 +18,16 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     let my_bio = bio.replace(/\n/g, '<br/>');
     dispatch(updateBio(my_bio));
   }
-
   return (
     <div className="wrapper">
       <div className="edit-studioScreen">
         <div className="studioHead">
           {myStudio &&
             <div className="procu">
-              <div className="editTool Edit" onClick={() => history.push('/dashboard/my-studio/profile')}>
-                <img src="/assets/images/paintbrush.png" alt="" className="clickable profile-brush" />
+              <div className="editTool Edit">
+                <Link to={`/dashboard/my-studio/profile`}>
+                  <img src="/assets/images/paintbrush.png" alt="" className="clickable profile-brush" />
+                </Link>
               </div>
               <ProfileCube avatars={myStudio.user.avatars} feelColor={feelColor} />
             </div>

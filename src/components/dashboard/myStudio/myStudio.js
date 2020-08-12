@@ -22,6 +22,7 @@ import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
 import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
 import UserContext from "../../../context/userContext";
+import { useRouteMatch } from 'react-router-dom';
 
 
 const MyStudio = () => {
@@ -40,6 +41,7 @@ const MyStudio = () => {
   const [galleryId, setGalleryId] = useState('');
   const [showMzFlashModal, setShowMzFlashModal] = useState(false);
   const [showDeleteModel, setShowDeleteModel] = useState(false);
+  const { params: { slug } } = useRouteMatch();
 
   const {
     user: { favouriteUsers },
@@ -51,8 +53,8 @@ const MyStudio = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMyStudio());
-  }, [dispatch, myStudio]);
+    dispatch(getMyStudio(slug));
+  }, [dispatch, myStudio, slug]);
 
   useEffect(() => {
     if (!myGalleries)

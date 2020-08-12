@@ -25,17 +25,21 @@ const Profile = () => {
   const { loading } = useSelector(state => state.loading);
   const { feelColor } = useSelector(state => state.feelColor);
 
+  const color = user?.feel?.color;
   useEffect(() => {
     if (avatars)
       setImages(avatars);
 
   }, [avatars, images])
 
+
+
   const handleImageSelect = (image) => {
     setSelectedImage(image || {});
   }
 
   const handleChange = ({ target: input }) => {
+    console.log("handler has been called")
     if (input.files[0]) {
       const image = { ...selectedImage };
       image.path = URL.createObjectURL(input.files[0]);
@@ -44,6 +48,7 @@ const Profile = () => {
       setToggle(true);
       setImageUrl(URL.createObjectURL(input.files[0]))
       setSelectedImage(image);
+
     }
   }
 
@@ -79,8 +84,8 @@ const Profile = () => {
     setToggle(value);
     setCroppedImage('');
   };
-
   return (
+    //feelColor is color code
     <div className={`frameReady ${feelColor}`}>
       <LeftBorder feelColor={feelColor} />
       <RightBorder feelColor={feelColor} />
@@ -105,10 +110,11 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
+                    src={images[0] ? images[0].path : `/assets/images/${color}.png`}
                     alt=""
 
                   />
+                  {/* <img src={`/assets/images/${color}.png`} alt="" /> */}
                 </div>
                 <div
                   className="item-box"
@@ -119,7 +125,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
+                    src={images[1] ? images[1].path : `/assets/images/${color}.png`}
                     alt=""
 
                   />
@@ -133,7 +139,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
+                    src={images[2] ? images[2].path : `/assets/images/${color}.png`}
                     alt=""
                   />
                 </div>
@@ -146,7 +152,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[3] ? images[3].path : "/assets/images/avataricon.png"}
+                    src={images[3] ? images[3].path : `/assets/images/${color}.png`}
                     alt=""
                   />
                 </div>
