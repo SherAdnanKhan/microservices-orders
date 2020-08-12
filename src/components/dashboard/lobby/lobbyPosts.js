@@ -92,18 +92,14 @@ const LobbyPosts = ({
               <p> strokes {post.stroke_users.length} </p>
             </div>
           </div>
-          {post.critiques_status === 1 &&
-            <>
-              <div className="action">
-                <img
-                  className="comment-img open-commet clickable"
-                  alt=""
-                  src="/assets/images/crit1.png"
-                />
-                <p> comments {post.comments.length} </p>
-              </div>
-            </>
-          }
+          <div className="action">
+            <img
+              className="comment-img open-commet clickable"
+              alt=""
+              src="/assets/images/crit1.png"
+            />
+            <p> comments {post.comments.length} </p>
+          </div>
           <div className="action">
             <img
               className="comment-img clickable"
