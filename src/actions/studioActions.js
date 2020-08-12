@@ -25,7 +25,7 @@ export const getMyStudio = () => dispatch => {
     });
 };
 
-export const createOrUpdateProfile = (data, history, slug) => () => {
+export const createOrUpdateProfile = (data, history) => () => {
   http
     .post('/my-studio/avatar', data, {})
     .then(res => {
@@ -33,7 +33,7 @@ export const createOrUpdateProfile = (data, history, slug) => () => {
       user.avatars = res.data.data.avatars;
       localStorage.setItem(userKey, JSON.stringify(user));
 
-      window.location.href = `/dashboard/my-studio/profile/${slug}`;
+      window.location.href = `/dashboard/my-studio/profile/`;
     });
 };
 
@@ -127,6 +127,6 @@ export const deleteProfileImage = (id, history, slug) => () => {
 
       user.avatars = user.avatars.filter(avatar => avatar.id !== id);
       localStorage.setItem(userKey, JSON.stringify(user));
-      window.location.href = `/dashboard/my-studio/profile/${slug}`;
+      window.location.href = `/dashboard/my-studio/profile/`;
     });
 };

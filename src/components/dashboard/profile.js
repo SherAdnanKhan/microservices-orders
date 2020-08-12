@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrUpdateProfile, deleteProfileImage, getUserStudio } from '../../actions/studioActions';
+import { createOrUpdateProfile, deleteProfileImage } from '../../actions/studioActions';
 import Spinner from '../common/spinner';
 import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import Footer from './layout/footer';
 import ImageCropper from '../common/imageCropper';
-import { useRouteMatch } from 'react-router-dom';
 
 const Profile = () => {
   const history = useHistory();
@@ -25,21 +24,14 @@ const Profile = () => {
 
   const { loading } = useSelector(state => state.loading);
   const { feelColor } = useSelector(state => state.feelColor);
-  const { params: { slug } } = useRouteMatch();
-  const {
-    studio: { userStudio },
-  } = useSelector(state => state);
-  const color = userStudio?.user?.feel?.color;
 
+  const color = user?.feel?.color;
   useEffect(() => {
     if (avatars)
       setImages(avatars);
 
   }, [avatars, images])
 
-  useEffect(() => {
-    dispatch(getUserStudio(slug));
-  }, [dispatch, slug]);
 
 
   const handleImageSelect = (image) => {
@@ -61,7 +53,7 @@ const Profile = () => {
   }
 
   const handleDelete = () => {
-    dispatch(deleteProfileImage(selectedImage.id, history, slug));
+    dispatch(deleteProfileImage(selectedImage.id, history));
   }
 
   const handleSubmit = () => {
@@ -76,7 +68,7 @@ const Profile = () => {
       data.append('avatar', selectedImage.avatar);
     }
 
-    dispatch(createOrUpdateProfile(data, history, slug));
+    dispatch(createOrUpdateProfile(data, history));
   }
 
   const handleCompleteCrop = croppedImage => {

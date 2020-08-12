@@ -25,7 +25,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
           {myStudio &&
             <div className="procu">
               <div className="editTool Edit">
-                <Link to={`/dashboard/my-studio/profile/${myStudio.user.slug}`}>
+                <Link to={`/dashboard/my-studio/profile`}>
                   <img src="/assets/images/paintbrush.png" alt="" className="clickable profile-brush" />
                 </Link>
               </div>
