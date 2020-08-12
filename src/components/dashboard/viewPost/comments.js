@@ -117,18 +117,20 @@ const Comment = ({ post }) => {
             }
             <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
-          <div className="text-area">
-            <div className="msg-input">
-              <textarea
-                placeholder=" Add a critique..."
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-              />
+          {post?.critiques_status === 1 &&
+            <div className="text-area">
+              <div className="msg-input">
+                <textarea
+                  placeholder=" Add a critique..."
+                  value={comment}
+                  onChange={e => setComment(e.target.value)}
+                />
+              </div>
+              <button onClick={handleSubmit} className="clickable">
+                <img src="/assets/images/crit1.png" alt="" />
+              </button>
             </div>
-            <button onClick={handleSubmit} className="clickable">
-              <img src="/assets/images/crit1.png" alt="" />
-            </button>
-          </div>
+          }
         </div>
       </div>
     </>

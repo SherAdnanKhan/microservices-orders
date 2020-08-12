@@ -172,7 +172,7 @@ export const changeCritqueStatus = (post, status) => dispatch => {
         });
       }
       else {
-        toast.success("Something went wrong")
+        toast.error("Something went wrong")
       }
     });
 };

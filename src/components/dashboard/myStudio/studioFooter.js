@@ -52,7 +52,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                   </div>
                   <div className="image-option-box">
                     <ImagePostOption
-                      post={post}
+                      post={activePost}
                       onUnFavGallery={onUnFavGallery}
                       onSharePost={onSharePost}
                       onReportPost={onReportPost}

@@ -52,9 +52,6 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getMyGalleries());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(getFavourites());
     dispatch(getUserArtById(userArtId));
   }, [dispatch, userArtId]);
@@ -105,6 +102,7 @@ const ViewPost = () => {
   const handleTurnOnOffCrtique = (modalStatus, post, status) => {
     setshowModalTurnOffCritque(modalStatus);
     dispatch(changeCritqueStatus(post, status));
+    // handleActivePost('');
   }
   const handleMzFlashModal = (status) => {
     setShowMzFlashModal(status);
@@ -124,7 +122,6 @@ const ViewPost = () => {
     setGalleryId(gallery);
   }
   const handleActivePost = post => {
-
     if (post.id === activePost.id) {
       setActivePost('');
     } else {
@@ -214,7 +211,7 @@ const ViewPost = () => {
           handleUnStoke={handleUnStoke}
           updatedCritqueStatus={crtiqueStatus}
         />
-        <Comment post={post && post.post} />
+        <Comment post={post && post?.post} />
       </div>
     </>
   )

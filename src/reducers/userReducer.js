@@ -18,6 +18,7 @@ import {
   ADD_POST_COMMENT,
   ONLINE_USERS,
   UNFAV_GALLERY,
+  CHANGE_CRITIQUES_STATUS,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -154,6 +155,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         favouritePosts: state.favouritePosts?.filter(post => post.gallery_id !== action.payload.gallery.id)
+      }
+    case CHANGE_CRITIQUES_STATUS:
+      if (!state.favouritePosts) {
+        return state
+      }
+      return {
+        ...state,
+        favouritePosts: state.favouritePosts.map(post => {
+          if (action.payload.id === post.id) {
+            return {
+              ...post,
+              critiques_status: action.payload.critiques_status
+            };
+          }
+          return post
+        })
       }
     default:
       return state;

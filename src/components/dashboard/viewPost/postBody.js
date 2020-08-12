@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ImagePostOption from '../../common/ImagePostOption';
 
 
-const PostBody = ({ post, updatedCritqueStatus, OnActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
+const PostBody = ({ post, updatedCritqueStatus, onActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
   const [show, setShow] = useState(false);
   const eventRef = useRef();
 
@@ -46,6 +46,7 @@ const PostBody = ({ post, updatedCritqueStatus, OnActivePost, onUnFavGallery, on
           <div className="image-div"
             onTouchStart={handleButtonPress}
             onTouchEnd={handleButtonRelease}
+            onActivePost={onActivePost}
           >
             {post.post_type === 2
               ? (
@@ -55,8 +56,8 @@ const PostBody = ({ post, updatedCritqueStatus, OnActivePost, onUnFavGallery, on
                   controls
                   style={{ width: "100%", heigth: "100%" }}
                 >
-                  <source src={post.post.image.path} type="video/mp4" />
-                  <source src={post.post.image.path} type="video/ogg" />
+                  <source src={post?.post?.image?.path} type="video/mp4" />
+                  <source src={post?.post?.image?.path} type="video/ogg" />
                   Your browser does not support the video tag.
                 </video>
               ) : (

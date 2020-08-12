@@ -136,6 +136,7 @@ const MyStudio = () => {
   const handleTurnOnOffCrtique = (modalStatus, post, status) => {
     setshowModalTurnOffCritque(modalStatus);
     dispatch(changeCritqueStatus(post, status));
+    handleActivePost('');
   }
   const handleMzFlashModal = (status) => {
     setShowMzFlashModal(status);
