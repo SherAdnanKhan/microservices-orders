@@ -1,8 +1,16 @@
 import React from 'react';
 import Avatar from '../../common/avatar';
 import ImagePostOption from "../../common/ImagePostOption";
+import ImageVideoSlider from "../../common/imageVideoSlider";
+import Stroke from "../../common/stroke";
+import Comment from '../../dashboard/viewPost/comments';
+import { Link } from "react-router-dom";
 
-const StudioFooter = ({ gallery, user, activePost, handleActivePost, activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
+const StudioFooter = ({ gallery, user, activePost, handleActivePost,
+  activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
+  onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal,
+  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, post
+}) => {
   return (
     <>
       <div className="wrapper">
@@ -11,17 +19,19 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost, activeGalle
             {gallery &&
               gallery.posts.map((gallery, index) => (
                 <div className="" key={index}>
-                  {gallery.post_type === 2
-                    ? (
-                      <video width="320" height="220" controls>
-                        <source src={gallery.image && gallery.image.path} type="video/mp4" />
-                        <source src={gallery.image && gallery.image.path} type="video/ogg" />
+                  <Link to={`/dashboard/viewpost/${gallery?.slug}`}>
+                    {gallery.post_type === 2
+                      ? (
+                        <video width="320" height="220" controls>
+                          <source src={gallery.image && gallery.image.path} type="video/mp4" />
+                          <source src={gallery.image && gallery.image.path} type="video/ogg" />
                         Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <img src={`${gallery.image && gallery.image.path}`} alt="" />
-                    )
-                  }
+                        </video>
+                      ) : (
+                        <img src={`${gallery.image && gallery.image.path}`} alt="" />
+                      )
+                    }
+                  </Link>
                 </div>
               ))}
           </div>
@@ -81,10 +91,52 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost, activeGalle
                     <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
 
                   </div>
+                  <div
+                    className={
+                      activeNcomm === post
+                        ? 'ncomm-slider show'
+                        : 'ncomm-slider'
+                    }
+                  >
+                    <ImageVideoSlider ncomm={ncomm} />
+                  </div>
+                  <div className={
+                    activePost.id === post.id
+                      ? 'lobby-icon lobby-icon-slide'
+                      : 'lobby-icon'
+                  }>
+                    <div className="strk-btn">
+                      <Stroke
+                        className="strk-img"
+                        hasStroke={post.has_stroke.length}
+                        onStroke={() => onStroke(post)}
+                        onUnstroke={() => onUnStroke(post)}
+                      />
+                      <p> strokes {post.stroke_users_count} </p>
+                    </div>
+
+                    <div className="action">
+                      <img
+                        className="comment-img open-commet clickable"
+                        alt=""
+                        src="/assets/images/crit1.png"
+                      />
+                      <p> comments {post.comments.length}</p>
+                    </div>
+                    <div className="action">
+                      <img
+                        className="comment-img clickable"
+                        alt=""
+                        src="/assets/images/ncommnicon.png"
+                        onClick={() => onNcomm(post)}
+                      />
+                    </div>
+                  </div>
 
                 </div>
               ))
             }
+            <Comment post={activePost} />
           </div>
         </div>
       </div>

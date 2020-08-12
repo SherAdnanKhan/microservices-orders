@@ -25,7 +25,6 @@ const Comment = ({ post }) => {
       comment,
       post_id: post.id
     };
-    console.log('post: ', post)
     dispatch(createComment(data, post.id, post.gallery_id, post.user));
     setComment('');
   };

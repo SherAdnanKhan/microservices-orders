@@ -257,6 +257,7 @@ const Post = ({
                                   onRepostModal={handleRepostModal}
                                   onMzFlashModal={handleMzFlashModal} />
                               </div>
+                              {/* studio post secondary options */}
                               <div
                                 className={
                                   activePost.id === post.id
@@ -269,7 +270,10 @@ const Post = ({
                                 </div>
                                 <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
                               </div>
-                              <div onClick={() => handleActivePost(post)}>
+                              <div
+                                // for opening image option
+                                onClick={() => handleActivePost(post)}
+                              >
                                 {post.post_type === 2
                                   ? (
                                     <video controls onClick={e => e.preventDefault()}>
