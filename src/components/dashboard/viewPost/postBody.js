@@ -56,8 +56,8 @@ const PostBody = ({ post, updatedCritqueStatus, onActivePost, onUnFavGallery, on
                   controls
                   style={{ width: "100%", heigth: "100%" }}
                 >
-                  <source src={post.post.image.path} type="video/mp4" />
-                  <source src={post.post.image.path} type="video/ogg" />
+                  <source src={post?.post?.image?.path} type="video/mp4" />
+                  <source src={post?.post?.image?.path} type="video/ogg" />
                   Your browser does not support the video tag.
                 </video>
               ) : (
