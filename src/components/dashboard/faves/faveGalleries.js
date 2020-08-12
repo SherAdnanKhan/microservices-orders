@@ -11,7 +11,8 @@ const FaveGalleries = () => {
 
   const {
     loading: { loading },
-    gallery: { userFavGalleries }
+    gallery: { userFavGalleries },
+    feelColor: { feelColor }
   } = useSelector(state => state);
 
   // const [query, setQuery] = useState('');
@@ -27,6 +28,11 @@ const FaveGalleries = () => {
 
   return (
     <div className="favas">
+      <div className="faves-heading"
+        style={{ backgroundColor: feelColor }}
+      >
+        <p class="faves-text">Faves</p>
+      </div>
       {loading && <Spinner />}
       {/* <div className="search-input">
         <input

@@ -4101,6 +4101,12 @@ img {
   display: flex;
   flex-direction: column;
   width: 100%;
+  .faves-heading {
+    border-top:1px solid black;
+    .faves-text {
+      text-align: center;
+    }
+  }
 
   .fav-container {
     border-top: 1px solid #444;
@@ -4176,7 +4182,6 @@ img {
         background-color: limegreen;
       }
     }
-
     .favas-box{
       border: 7px solid rgba(61,61,61,.5);
       display: flex;
@@ -4187,8 +4192,10 @@ img {
       margin: 15px 10px;
       box-sizing: border-box;
       @media @mobile{
-        // width: 65%;
         margin: 15px auto;
+        &:nth-last-child(1) {
+          margin: 7px ;
+        }
       }
       .details {
         .gallery-cover {
@@ -4341,7 +4348,7 @@ img {
     }
     .up-img-box{
       width: 96%;
-      height: 1000px;
+      height: 80vh;
       display: flex;
       justify-content: center;
       align-items: center;
