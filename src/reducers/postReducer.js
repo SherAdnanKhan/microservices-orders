@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
           has_stroke: action.payload.value,
           post: {
             ...state.post.post,
-            stroke_users_count: state.post.post.stroke_users_count + 1
+            stroke_users_count: state?.post?.post?.stroke_users_count + 1
           }
         }
       };
@@ -89,9 +89,18 @@ export default (state = initialState, action) => {
         post: null
       };
     case CHANGE_CRITIQUES_STATUS:
+      if (!state.post) {
+        return state
+      }
       return {
         ...state,
-        post: action.payload
+        post: {
+          ...state.post,
+          post: {
+            ...state.post.post,
+            critiques_status: action.payload.critiques_status
+          }
+        }
       };
     case SHARE_POST_STRQ:
       return {

@@ -60,7 +60,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           }
           <p>strokes {post && post?.stroke_users_count}</p>
         </div>
-        {hasAllowedCritiques() && post?.critiques_status === 1 &&
+        {hasAllowedCritiques() &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"
