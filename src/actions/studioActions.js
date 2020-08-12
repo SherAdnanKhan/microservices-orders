@@ -25,7 +25,7 @@ export const getMyStudio = () => dispatch => {
     });
 };
 
-export const createOrUpdateProfile = data => () => {
+export const createOrUpdateProfile = (data, history, slug) => () => {
   http
     .post('/my-studio/avatar', data, {})
     .then(res => {
@@ -33,7 +33,7 @@ export const createOrUpdateProfile = data => () => {
       user.avatars = res.data.data.avatars;
       localStorage.setItem(userKey, JSON.stringify(user));
 
-      window.location.href = '/dashboard/my-studio/profile';
+      window.location.href = `/dashboard/my-studio/profile/${slug}`;
     });
 };
 
@@ -119,7 +119,7 @@ export const removeFromInviteOnly = privacy => dispatch => {
     });
 };
 
-export const deleteProfileImage = id => () => {
+export const deleteProfileImage = (id, history, slug) => () => {
   http
     .delete(`/my-studio/avatar/${id}`)
     .then(() => {
@@ -127,6 +127,6 @@ export const deleteProfileImage = id => () => {
 
       user.avatars = user.avatars.filter(avatar => avatar.id !== id);
       localStorage.setItem(userKey, JSON.stringify(user));
-      window.location.href = '/dashboard/my-studio/profile';
+      window.location.href = `/dashboard/my-studio/profile/${slug}`;
     });
 };

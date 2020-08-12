@@ -2,12 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrUpdateProfile, deleteProfileImage } from '../../actions/studioActions';
+import { createOrUpdateProfile, deleteProfileImage, getUserStudio } from '../../actions/studioActions';
 import Spinner from '../common/spinner';
 import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import Footer from './layout/footer';
 import ImageCropper from '../common/imageCropper';
+import { useRouteMatch } from 'react-router-dom';
 
 const Profile = () => {
   const history = useHistory();
@@ -24,6 +25,11 @@ const Profile = () => {
 
   const { loading } = useSelector(state => state.loading);
   const { feelColor } = useSelector(state => state.feelColor);
+  const { params: { slug } } = useRouteMatch();
+  const {
+    studio: { userStudio },
+  } = useSelector(state => state);
+  const color = userStudio?.user?.feel?.color;
 
   useEffect(() => {
     if (avatars)
@@ -31,11 +37,17 @@ const Profile = () => {
 
   }, [avatars, images])
 
+  useEffect(() => {
+    dispatch(getUserStudio(slug));
+  }, [dispatch, slug]);
+
+
   const handleImageSelect = (image) => {
     setSelectedImage(image || {});
   }
 
   const handleChange = ({ target: input }) => {
+    console.log("handler has been called")
     if (input.files[0]) {
       const image = { ...selectedImage };
       image.path = URL.createObjectURL(input.files[0]);
@@ -44,11 +56,12 @@ const Profile = () => {
       setToggle(true);
       setImageUrl(URL.createObjectURL(input.files[0]))
       setSelectedImage(image);
+
     }
   }
 
   const handleDelete = () => {
-    dispatch(deleteProfileImage(selectedImage.id, history));
+    dispatch(deleteProfileImage(selectedImage.id, history, slug));
   }
 
   const handleSubmit = () => {
@@ -63,7 +76,7 @@ const Profile = () => {
       data.append('avatar', selectedImage.avatar);
     }
 
-    dispatch(createOrUpdateProfile(data, history));
+    dispatch(createOrUpdateProfile(data, history, slug));
   }
 
   const handleCompleteCrop = croppedImage => {
@@ -79,8 +92,8 @@ const Profile = () => {
     setToggle(value);
     setCroppedImage('');
   };
-
   return (
+    //feelColor is color code
     <div className={`frameReady ${feelColor}`}>
       <LeftBorder feelColor={feelColor} />
       <RightBorder feelColor={feelColor} />
@@ -105,10 +118,11 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[0] ? images[0].path : "/assets/images/avataricon.png"}
+                    src={images[0] ? images[0].path : `/assets/images/${color}.png`}
                     alt=""
 
                   />
+                  {/* <img src={`/assets/images/${color}.png`} alt="" /> */}
                 </div>
                 <div
                   className="item-box"
@@ -119,7 +133,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[1] ? images[1].path : "/assets/images/avataricon.png"}
+                    src={images[1] ? images[1].path : `/assets/images/${color}.png`}
                     alt=""
 
                   />
@@ -133,7 +147,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[2] ? images[2].path : "/assets/images/avataricon.png"}
+                    src={images[2] ? images[2].path : `/assets/images/${color}.png`}
                     alt=""
                   />
                 </div>
@@ -146,7 +160,7 @@ const Profile = () => {
                     <img src="/assets/images/paintbrush.png" alt="" />
                   </div>
                   <img
-                    src={images[3] ? images[3].path : "/assets/images/avataricon.png"}
+                    src={images[3] ? images[3].path : `/assets/images/${color}.png`}
                     alt=""
                   />
                 </div>
