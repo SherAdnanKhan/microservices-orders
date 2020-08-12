@@ -17,7 +17,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
       dispatch(clearNcomm());
     } else {
       setHasNcomm(true);
-      dispatch(getNcomm(post.post.slug));
+      dispatch(getNcomm(post?.post?.slug));
     }
   };
   useEffect(() => {

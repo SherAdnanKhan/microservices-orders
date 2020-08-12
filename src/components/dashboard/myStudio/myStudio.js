@@ -5,7 +5,7 @@ import Gallery from './galleries';
 import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getGallery, clearGallery, getMyGalleries, unfavGallery } from "../../../actions/galleryActions";
-import { deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
+import { strokePost, unstrokePost, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
 import StudioHeader from './studioHeader';
 import EditProfile from './editProfile';
 import ViewProfile from './viewProfile';
@@ -42,13 +42,14 @@ const MyStudio = () => {
   const [showMzFlashModal, setShowMzFlashModal] = useState(false);
   const [showDeleteModel, setShowDeleteModel] = useState(false);
   const { params: { slug } } = useRouteMatch();
+  const [activeNcomm, setActiveNcomm] = useState('');
 
   const {
     user: { favouriteUsers },
     studio: { myStudio },
     gallery: { gallery, myGalleries },
     feelColor: { feelColor },
-    postView: { sendUser }
+    postView: { sendUser, ncomm }
   } = useSelector(state => state);
 
   const dispatch = useDispatch();
@@ -153,6 +154,24 @@ const MyStudio = () => {
   const getSelectedGalleryId = (gallery) => {
     setGalleryId(gallery);
   }
+  const handleStroke = post => {
+    dispatch(strokePost(post.id, post.gallery_id, post.user));
+  };
+
+  const handleUnstroke = post => {
+    dispatch(unstrokePost(post.id, post.gallery_id, post.user));
+  };
+  const handleNcomm = post => {
+    dispatch(clearNcomm());
+
+    if (post.id === activeNcomm.id) {
+      setActiveNcomm('');
+    } else {
+      setActiveNcomm(post);
+      dispatch(getNcomm(post.slug));
+    }
+  };
+
 
   return (
     <>
@@ -254,6 +273,11 @@ const MyStudio = () => {
           onRepostModal={handleRepostModal}
           onMzFlashModal={handleMzFlashModal}
           handleActivePost={handleActivePost}
+          onStroke={handleStroke}
+          onUnStroke={handleUnstroke}
+          onNcomm={handleNcomm}
+          activeNcomm={activeNcomm}
+          ncomm={ncomm}
         />
       </div>
     </>
