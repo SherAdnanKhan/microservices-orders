@@ -7,7 +7,7 @@ const SPRFVS = ({ sprfvsUsers }) => {
     <div>
       <div className="favas-row">
         {Array.isArray(sprfvsUsers) && sprfvsUsers.length === 0 &&
-          <p>No Super Favourite User Exists</p>
+          <p className="p-style">No Super Favourite User Exists</p>
         }
         {sprfvsUsers &&
           sprfvsUsers.map((user, index) => (
