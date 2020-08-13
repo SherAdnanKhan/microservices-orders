@@ -3363,6 +3363,7 @@ img {
       overflow: hidden;
       width: 23.4vw;
       height: 23.8vw;
+      opacity: 0.6;
       @media @mobile{
         width: 22.8vw;
         height: 23vw;
@@ -3382,6 +3383,11 @@ img {
         object-fit: cover;
         // opacity: .6;
       }
+    }
+    .zoom-in {
+      transform: scale(1.3) !important;
+      z-index: 9 !important;
+      opacity: 1;
     }
   }
   .privacy-actions {
