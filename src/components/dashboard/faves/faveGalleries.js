@@ -69,9 +69,13 @@ const FaveGalleries = () => {
                   >
                     {gallery?.title}
                   </Link>
-                  <div className="gallery-cover">
-                    <img src={gallery?.image?.path} alt="" />
-                  </div>
+                  <Link
+                    to={`/dashboard/studio/${gallery?.user?.slug}/?gallery=${gallery?.id}`}
+                  >
+                    <div className="gallery-cover">
+                      <img src={gallery?.image?.path} alt="" />
+                    </div>
+                  </Link>
                 </div>
               </div>
             ))}
