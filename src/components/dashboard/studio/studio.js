@@ -13,6 +13,7 @@ import GalleryModel from './galleryModel';
 import Spinner from '../../common/spinner';
 import queryString from 'query-string';
 import UnSuperFvtModal from "./unsprfvtModal";
+import { toast } from "react-toastify";
 
 const Studio = () => {
   const [showModel, setShowModel] = useState(false);
@@ -96,6 +97,10 @@ const Studio = () => {
     setShowUnsprfvsModal(false);
   }
 
+  const handleSuperFavRequested = () => {
+    toast('You already requested wait for approval.');
+  }
+
   return (
     <div className='studio'>
       {loading && <Spinner />}
@@ -121,6 +126,7 @@ const Studio = () => {
         userStudio={userStudio}
         onModelOpen={handleShowModel}
         onSuperFav={handleSuperFav}
+        onSuperFavRequested={handleSuperFavRequested}
         onUnSprFavModal={handleUnSprFavModal}
       />
       <StudioDetail

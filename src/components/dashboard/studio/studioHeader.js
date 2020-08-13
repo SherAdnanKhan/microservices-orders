@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal }) => {
+const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, onSuperFavRequested }) => {
   const history = useHistory();
   return (
     <div
@@ -16,7 +16,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal }) 
 
       <div className="actions">
         <span className="sprfav" onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}> SPRFV({userStudio?.sprfvs_count})  </span>
-        {userStudio?.is_sprfvs !== 0 ?
+        {userStudio?.is_sprfvs === 1 ?
           <img
             src={
               '/assets/images/sprfvs_full.png'
@@ -24,15 +24,23 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal }) 
             alt=""
             className="clickable sprvs-empty"
             onClick={() => onUnSprFavModal(true)}
-          /> :
-          <img
-            src={
-              '/assets/images/sprfvs_empty.png'
-            }
-            alt=""
-            className="clickable sprvs-empty"
-            onClick={() => onSuperFav()}
-          />
+          /> : userStudio?.is_sprfvs === 0 ?
+            <img
+              src={
+                '/assets/images/sprfvs_empty.png'
+              }
+              alt=""
+              className="clickable sprvs-empty"
+              onClick={() => onSuperFav()}
+            /> :
+            <img
+              src={
+                '/assets/images/sprfvs_empty.png'
+              }
+              alt=""
+              className="clickable sprvs-empty"
+              onClick={() => onSuperFavRequested()}
+            />
         }
         <img
           onClick={() => onModelOpen(true)}
