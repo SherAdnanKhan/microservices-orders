@@ -5,7 +5,7 @@ import Gallery from './galleries';
 import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getGallery, clearGallery, getMyGalleries, unfavGallery } from "../../../actions/galleryActions";
-import { strokePost, unstrokePost, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
+import { strokePost, unstrokePost, storeVault, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
 import StudioHeader from './studioHeader';
 import EditProfile from './editProfile';
 import ViewProfile from './viewProfile';
@@ -172,6 +172,10 @@ const MyStudio = () => {
       dispatch(getNcomm(post.slug));
     }
   };
+  const handleVault = (post) => {
+    dispatch(storeVault(post));
+    handleActivePost('');
+  }
 
 
   return (
@@ -279,6 +283,7 @@ const MyStudio = () => {
           onNcomm={handleNcomm}
           activeNcomm={activeNcomm}
           ncomm={ncomm}
+          onVault={handleVault}
         />
       </div>
     </>

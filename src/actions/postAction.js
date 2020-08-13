@@ -242,5 +242,22 @@ export const shareMzFlash = (post) => dispatch => {
       }
     });
 };
+export const storeVault = (post) => dispatch => {
+  const vaultObject = {
+    vaultable_id: post.id,
+    vaultable_type: post.post_type
+  }
+
+  http
+    .post(`vault`, vaultObject)
+    .then(res => {
+      if (res.data.success) {
+        toast.success(`post ${post.title} saved in vault`)
+      }
+      else {
+        toast.warning("Something went wrong")
+      }
+    });
+};
 
 

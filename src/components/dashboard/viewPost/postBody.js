@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ImagePostOption from '../../common/ImagePostOption';
 
 
-const PostBody = ({ post, updatedCritqueStatus, onActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
+const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
   const [show, setShow] = useState(false);
   const eventRef = useRef();
 
@@ -33,6 +33,7 @@ const PostBody = ({ post, updatedCritqueStatus, onActivePost, onUnFavGallery, on
             updatedCritqueStatus={updatedCritqueStatus}
             onRepostModal={onRepostModal}
             onMzFlashModal={onMzFlashModal}
+            onVault={onVault}
           />
         }
       </div>

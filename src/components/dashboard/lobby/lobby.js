@@ -9,7 +9,7 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash } from '../../../actions/postAction';
+import { getNcomm, clearNcomm, strokePost, storeVault, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash } from '../../../actions/postAction';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
@@ -210,6 +210,9 @@ const Lobby = () => {
     dispatch(repost(post.id, gallery))
     setShowModalRepost(status);
   }
+  const handleVault = (post) => {
+    dispatch(storeVault(post))
+  }
   return (
     <div className="lobby-page">
       {unreadCount > 0 &&
@@ -336,6 +339,7 @@ const Lobby = () => {
                 onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                 onRepostModal={handleRepostModal}
                 onMzFlashModal={handleMzFlashModal}
+                onVault={handleVault}
 
               />
             </div>
