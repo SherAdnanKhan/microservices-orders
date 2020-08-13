@@ -9,7 +9,7 @@ const PostHead = ({ post }) => {
         <div className="post-heder-inner">
           {<p>{post.user.username}</p>}
           {
-            <Link to="/dashboard/my-studio">
+            <Link to={`/dashboard/studio/${post.user.slug}`} >
               <Avatar
                 avatars={post.user.avatars}
                 feelColor={post.user.feel.color_code}
@@ -22,7 +22,7 @@ const PostHead = ({ post }) => {
           </>
         </div>
       }
-    </div>
+    </div >
   );
 };
 
