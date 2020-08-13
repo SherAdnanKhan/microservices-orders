@@ -165,7 +165,14 @@ export const changeCritqueStatus = (post, status) => dispatch => {
     .post(`/post/critiques/${post.id}`, postObject)
     .then(res => {
       if (res.data.success) {
-        toast.success("Successfully Done")
+        if (status === 0) {
+          toast.success(`You have Successfully Turn Off Critiques on ${post.title}`)
+        }
+        else {
+          toast.success(`You have Successfully Turn On Critiques on ${post.title}`)
+
+        }
+
         dispatch({
           type: CHANGE_CRITIQUES_STATUS,
           payload: res.data.data.post
