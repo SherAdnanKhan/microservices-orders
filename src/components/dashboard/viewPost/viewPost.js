@@ -23,6 +23,7 @@ import { deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, s
 
 const ViewPost = () => {
   const user = useContext(UserContext);
+  const loggedInUserId = user.id;
   const userArtId = user.art_id;
   const dispatch = useDispatch();
   const { params: { id } } = useRouteMatch();
@@ -188,6 +189,7 @@ const ViewPost = () => {
         />
         <ViewPostHead
           post={post && post?.post}
+          userId={loggedInUserId}
         />
         <ViewPostBody
           post={post?.post}
