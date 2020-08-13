@@ -6,7 +6,7 @@ import Comment from '../dashboard/viewPost/comments';
 import Stroke from './stroke';
 import { getFavourites, getUserArtById } from '../../actions/userActions';
 import {
-  strokePost, unstrokePost, getNcomm, clearNcomm, deletePost, reportPost,
+  strokePost, storeVault, unstrokePost, getNcomm, clearNcomm, deletePost, reportPost,
   changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash
 } from '../../actions/postAction';
 import { unfavGallery, getMyGalleries } from "../../actions/galleryActions";
@@ -22,7 +22,7 @@ import RepostModal from "../common/repostModal";
 import MzFlashModal from "../common/mzFlashModal";
 const Post = ({
   gallery, user, activeGallery,
-  galleryPrivacy, onSuperFav, isSprFvs, onFave
+  galleryPrivacy, onSuperFav, isSprFvs, onFave, onVault
 }) => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
@@ -145,6 +145,10 @@ const Post = ({
     dispatch(repost(post.id, gallery))
     setShowModalRepost(status);
   }
+  const handleVault = (post) => {
+    dispatch(storeVault(post));
+    handleActivePost('')
+  }
   return (
     <>
       {showDeleteModel &&
@@ -255,7 +259,8 @@ const Post = ({
                                   onShareStrqModel={handleStrqShareModel}
                                   onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                                   onRepostModal={handleRepostModal}
-                                  onMzFlashModal={handleMzFlashModal} />
+                                  onMzFlashModal={handleMzFlashModal}
+                                  onVault={handleVault} />
                               </div>
                               {/* studio post secondary options */}
                               <div

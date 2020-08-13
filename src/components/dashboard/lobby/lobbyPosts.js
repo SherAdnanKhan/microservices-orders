@@ -12,7 +12,7 @@ import ImagePostOption from '../../common/ImagePostOption';
 const LobbyPosts = ({
   post, ncomm, onClickNcomm,
   activeNcomm, onActivePost, activePost, onModelDelete, onReportPost,
-  onStrokePost, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal
+  onStrokePost, onVault, onUnstrokePost, onUnFavGallery, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal
 }) => {
   return (
     <div className="post-page">
@@ -43,7 +43,8 @@ const LobbyPosts = ({
           onShareStrqModel={onShareStrqModel}
           onTurnOffCrtiques={onTurnOffCrtiques}
           onRepostModal={onRepostModal}
-          onMzFlashModal={onMzFlashModal} />
+          onMzFlashModal={onMzFlashModal}
+          onVault={onVault} />
       </div>
       <div className={
         activePost.id === post.id

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
   onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal,
-  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, post
+  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, post, onVault
 }) => {
   return (
     <>
@@ -61,7 +61,8 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       onShareStrqModel={onShareStrqModel}
                       onTurnOffCrtiques={onTurnOffCrtiques}
                       onRepostModal={onRepostModal}
-                      onMzFlashModal={onMzFlashModal} />
+                      onMzFlashModal={onMzFlashModal}
+                      onVault={onVault} />
                   </div>
                   <div
                     className={

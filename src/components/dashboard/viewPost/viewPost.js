@@ -18,7 +18,7 @@ import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
-import { deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
+import { deletePost, reportPost, storeVault, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
 
 
 const ViewPost = () => {
@@ -129,6 +129,9 @@ const ViewPost = () => {
       setActivePost(post);
     }
   }
+  const handleVault = (post) => {
+    dispatch(storeVault(post));
+  }
 
   return (
     <>
@@ -205,6 +208,7 @@ const ViewPost = () => {
           updatedCritqueStatus={crtiqueStatus}
           onRepostModal={handleRepostModal}
           onMzFlashModal={handleMzFlashModal}
+          onVault={handleVault}
         />
         <PostFooter
           post={post?.post}
