@@ -23,6 +23,7 @@
     "react-show-more-text": "^1.4.2",
     "react-simple-image-slider": "^1.0.4",
     "react-slick": "^0.26.1",
+    "react-tiny-link": "^3.6.0",
     "react-toastify": "^6.0.5",
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
