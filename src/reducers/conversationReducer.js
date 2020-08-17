@@ -113,18 +113,23 @@ export default (state = initialState, action) => {
         loading: false
       };
     case READ_MESSAGE:
+      console.log(state.conversation);
       return {
         ...state,
         messages: {
           ...state.messages,
           data: state?.messages?.data?.map(message => {
-            if (message.id === action.payload.id) {
+            if (message.id === action.payload.message.id) {
               return {
                 ...message,
                 messages_logs: message.messages_logs?.map(log => {
-                  return {
-                    ...log,
-                    status: 1
+                  if (action.payload.reader.id === log.user_id) {
+                    return {
+                      ...log,
+                      status: 1
+                    }
+                  } else {
+                    return log
                   }
                 })
               }

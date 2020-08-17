@@ -55,16 +55,19 @@ class ChatBox extends Component {
         const user = {
           user_id: currentUser.id
         };
+
+        data.reader = currentUser;
+
         socket.emit("onRead", data.message.id, user, data, getAuthToken(), () => { });
         this.setState({ typingText: '' });
       }
     });
 
     socket.on('read', (data) => {
-      if (data.message.user.id !== currentUser.id) {
+      console.log(data);
+      if (data.reader.id !== currentUser.id) {
+        this.props.changeReadMessageStatus(data);
       }
-
-      this.props.changeReadMessageStatus(data.message);
     });
 
     socket.on('readAll', (data) => {
@@ -290,14 +293,14 @@ class ChatBox extends Component {
                     >
                       <div className='outgoing'>
                         <div className="user-message">
-                          <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
+                          {/* <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
                             {data.messages_logs.length > 0
                               ? data.messages_logs[0].status === 1
                                 ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
                                 : <img alt="" src="/assets/images/avatarblack.png" />
                               : <img src="/assets/images/avatarblack.png" alt="" />
                             }
-                          </div>
+                          </div> */}
                           <div className="text"
                             style={{
                               backgroundColor: data.feel.color_code,
@@ -306,6 +309,7 @@ class ChatBox extends Component {
                             }}
                           >
                             {data.message}
+
                             {data.type === 1 &&
                               <div className="msgImg">
                                 <a href={data.url} target="_blank" rel="noopener noreferrer">
@@ -342,6 +346,14 @@ class ChatBox extends Component {
                             }
                           </div>
                         </div>
+                        <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
+                          {data.messages_logs.length > 0
+                            ? data.messages_logs[0].status === 1
+                              ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
+                              : <img alt="" src="/assets/images/avatarblack.png" />
+                            : <img src="/assets/images/avatarblack.png" alt="" />
+                          }
+                        </div>
                         {data.created_at &&
                           <p className='time'>
                             {data.created_at === 'now'
@@ -366,6 +378,7 @@ class ChatBox extends Component {
                             }}
                           >
                             {data.message}
+
                             {data.type === 1 &&
                               <div className="msgImg">
                                 <a href={data.url} target="_blank" rel="noopener noreferrer">

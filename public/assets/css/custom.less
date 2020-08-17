@@ -1,7 +1,7 @@
 @import 'feelHistory';
 @import 'video';
-@import 'startFave';
 @import 'artSelection';
+@import 'startFave';
 
 @font-face {
   font-family: "Font Awesome 5 Free";
@@ -5533,6 +5533,24 @@ img {
         float: right;
         max-width: 100%;
 
+        .send-icon {
+          text-align: right;
+          margin-top: 5px;
+          img{
+            width: 15px;
+            border: 1px solid rgba(255,255,255, .5);
+            opacity: 0.5;
+            margin-right: 0;
+            // margin-left: 10px;
+          }
+
+          &.high {
+            img {
+              opacity: 1;
+            }
+          }
+        }
+
         .user-message {
           display: flex;
           align-items: center;
@@ -5572,82 +5590,19 @@ img {
               border-radius: 5px;
             }
           }
-      }
+         }
 
-      .time {
-        font-size: 12px;
-        padding: 5px;
-        margin-top: 0;	
-        margin-right: 30px;
-        color: rgba(255,255,255,.7);
-        float:right; 
+        .time {
+          font-size: 12px;
+          padding: 5px;
+          margin-top: 0;	
+          margin-right: 30px;
+          color: rgba(255,255,255,.7);
+          float:right; 
 
-        background-color: none;
-      }
-
-        &.orange {
-          .user-message {
-            .text {
-              background: rgba(@orangeRGB , .7);
-              border-color:#ffa500;
-              box-shadow:1px 1px 10px #FFA500, -1px -1px 10px #FFA500;
-            }
-          } 
+          background-color: none;
         }
-        &.red {
-          .user-message {
-            .text{
-              background: rgba(@redRGB ,.7);
-              border-color:#ff0000;
-              box-shadow:1px 1px 10px #FF0000, -1px -1px 10px #FF0000;
-            }        
-          }
-        }
-        &.gold {
-          .user-message {
-            .text{
-              background: rgba(@goldRGB ,.7);
-              border-color:@color_gold;
-              box-shadow:1px 1px 10px @color_gold, -1px -1px 10px @color_gold;
-            }
-          }
-        }
-        &.gray {
-          .user-message {
-            .text {
-              background: rgba(@grayRGB ,.7);
-              border-color: #808080;
-              box-shadow:1px 1px 10px #808080, -1px -1px 10px #808080;
-            }
-          }
-        }
-        &.limegreen {
-          .user-message {
-            .text {
-              background: rgba(@limegreenRGB ,.7);
-              border-color: #32CD32;
-              box-shadow:1px 1px 10px #32CD32, -1px -1px 10px #32CD32;
-            }
-          }
-        }
-        &.purple {
-          .user-message{
-            .text {
-              background: rgba(@purpleRGB , .7);
-              border-color: #800080;
-              box-shadow:1px 1px 10px #800080, -1px -1px 10px #800080;
-            }
-          }
-        }
-        &.dodgerblue {  
-          .user-message {
-            .text {
-              background: rgba(@dodgerblueRGB ,.7);
-              border-color: #1E90FF;
-              box-shadow:1px 1px 10px #1E90FF, -1px -1px 10px #1E90FF;
-            }  
-          }
-        }
+       
         .user-message {
           .text{
             width: auto;
@@ -5657,7 +5612,7 @@ img {
             text-align: left;
             word-wrap: break-word;
             clear: both;
-	          border: 1px solid;
+            border: 1px solid;
             border-radius: 10px 10px 0 10px;
           }
           .send-icon {
