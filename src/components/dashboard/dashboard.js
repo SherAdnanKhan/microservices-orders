@@ -10,6 +10,7 @@ import VideoCall from '../video/VideoCall';
 import AddVideoArtist from '../video/addVideoArtist';
 import GroupVideoCall from "../video/groupVideo";
 import PostView from "../common/postView";
+import MyVault from './vault/myVault';
 
 const Dashboard = ({ user }) => {
   return (
@@ -19,6 +20,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/lobby" component={Main} />
         <Route exact path="/dashboard/exhibition" component={AddExibit} />
         <Route exact path="/dashboard/my-studio/profile/" component={Profile} />
+        <Route exact path="/dashboard/my-studio/vault/" component={MyVault} />
         <Route exact path="/dashboard/my-studio/fave" component={Main} />
         <Route exact path="/dashboard/my-studio/fave-by" component={Main} />
         <Route exact path="/dashboard/my-studio/fave-galleries/:id" component={Main} />
