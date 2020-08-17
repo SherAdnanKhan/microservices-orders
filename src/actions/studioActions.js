@@ -8,6 +8,7 @@ import {
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
   UN_SUPER_FAV,
+  GET_MY_VAULTS
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -20,6 +21,17 @@ export const getMyStudio = () => dispatch => {
     .then(res => {
       dispatch({
         type: GET_MY_STUDIO,
+        payload: res.data.data
+      });
+    });
+};
+export const getMyVault = () => dispatch => {
+  http
+    .get('/vault')
+    .then(res => {
+      console.log(res);
+      dispatch({
+        type: GET_MY_VAULTS,
         payload: res.data.data
       });
     });

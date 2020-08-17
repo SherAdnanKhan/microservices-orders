@@ -31,8 +31,8 @@ const NavBar = () => {
             <img src="/assets/images/icons/searchicon.png" alt="search Icon" />
           </div>
         </div>
-        <Link to="" className="feelIcon"  
-        style={{
+        <Link to="" className="feelIcon"
+          style={{
             borderLeft: '1px solid black',
             borderBottom: '1px solid black'
           }}
@@ -52,6 +52,9 @@ const NavBar = () => {
           </li>
           <li>
             <Link to="/dashboard/my-studio/profile">My Profile</Link>
+          </li>
+          <li>
+            <Link to="/dashboard/my-studio/vault">My Vault</Link>
           </li>
           <li>
             <Link to="/dashboard/change-password">Change Password</Link>

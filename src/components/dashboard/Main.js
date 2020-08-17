@@ -4,7 +4,7 @@ import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import { useLocation } from 'react-router-dom';
 import ChangeColor from './layout/changeColor';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeFeelColor } from '../../actions/colorActions';
 
 const Main = () => {
