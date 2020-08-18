@@ -11,6 +11,7 @@ import AddVideoArtist from '../video/addVideoArtist';
 import GroupVideoCall from "../video/groupVideo";
 import PostView from "../common/postView";
 import MyVault from './vault/myVault';
+import ChatBox from './chatBox';
 
 const Dashboard = ({ user }) => {
   return (
@@ -39,7 +40,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/mz-flash-group" component={Main} />
         <Route exact path="/dashboard/viewpost/:id" component={Main} />
         <Route exact path="/dashboard/privacy" component={Main} />
-        <Route exact path="/dashboard/chat/:slug" component={Main} />
+        <Route exact path="/dashboard/chat/:slug" component={ChatBox} />
         <Route exact path="/dashboard/video-call" component={VideoCall} />
         <Route exact path="/dashboard/video-call/group" component={GroupVideoCall} />
         <Route exact path="/dashboard/video-call/add" component={AddVideoArtist} />

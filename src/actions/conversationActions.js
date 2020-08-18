@@ -142,5 +142,18 @@ export const updateConversationUnreadCount = data => {
   }
 };
 
+export const createGroupConversation = data => dispatch => {
+  http
+    .post(`/chats/group-chat`, data)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        toast(err.response.data.errors.error)
+      }
+    });
+}
+
 
 export const readAll = data => ({ type: READ_ALL, payload: data });

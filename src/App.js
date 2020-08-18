@@ -13,7 +13,6 @@ import Tutorial from './components/tutorial';
 import { getCurrentUser, getAuthToken } from './actions/authActions';
 import StartFaves from './components/dashboard/startFavas';
 
-import SocketContext from './context/socketContext';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateCounter, getOnlineUsers } from './actions/userActions';
@@ -34,7 +33,6 @@ import {
   POST_STROKE,
   POST_UNSTROKE
 } from './constants/keys';
-
 
 if (getCurrentUser()) {
   const user = getCurrentUser();
@@ -124,7 +122,8 @@ function App() {
   }, [dispatch, currentUser])
 
   return (
-    <SocketContext.Provider value={socket}>
+
+    <div>
       <ToastContainer
         autoClose={5000}
         hideProgressBar={true}
@@ -141,7 +140,7 @@ function App() {
         <Route exact path='/home' component={Home} />
         <Redirect exact from='/' to='/home' />
       </Switch>
-    </SocketContext.Provider>
+    </div>
   );
 };
 

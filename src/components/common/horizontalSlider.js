@@ -28,7 +28,7 @@ const HorizontalSlider = ({ children, slidesToShow = '' }) => {
     );
   }
   const [settings] = useState({
-    arrows: false,
+    arrows: true,
     dots: false,
     infinite: true,
     speed: 500,
