@@ -19,6 +19,7 @@ import {
   changeReadMessageStatus,
 } from '../../actions/conversationActions';
 import { toast } from 'react-toastify';
+import ChatInvitationModel from '../common/chatInvitationModal';
 
 class ChatBox extends Component {
   state = {
@@ -31,6 +32,7 @@ class ChatBox extends Component {
     page: 1,
     scrollHeight: '',
     typingText: '',
+    show: false
   };
 
   preview = createRef();
@@ -169,6 +171,10 @@ class ChatBox extends Component {
     this.sendMessage(e);
   }
 
+  handleClose = () => {
+    this.setState({ show: false });
+  }
+
   handleUpload = ({ target: input }) => {
     this.setState({ hidden: false });
 
@@ -232,7 +238,7 @@ class ChatBox extends Component {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
     const { history } = this.props;
-    const { user, messages } = this.props.conversation
+    const { user, messages, conversation } = this.props.conversation;
 
     return (
       <div className="chat-box">
@@ -252,23 +258,28 @@ class ChatBox extends Component {
             }
 
             <div className="user-Status">
-              {user && <p>
-                <Link to={`/dashboard/studio/${user.slug}`} >{user.username}</Link>
-              </p>
+              {user &&
+                <p>
+                  <Link to={`/dashboard/studio/${user.slug}`} >{user.username}</Link>
+                </p>
               }
               {user &&
-                this.props.onlineUsers.some(slug => slug === user.slug) ?
-                <span>Online</span> : user && <span>{user.last_login}</span>
+                <span>
+                  {this.props.onlineUsers.some(slug => slug === user.slug)
+                    ? <> Online </>
+                    : <>{user.last_login}</>
+                  }
+                </span>
               }
 
             </div>
 
             <div className="call-btn">
+              <button className="addPeople" onClick={() => this.setState({ show: true })}> add people </button>
               <Link to="/dashboard/video-call">
-                <img href="#" src="/assets/images/icons/VidStrq.png" style={{ width: "40px" }} alt="Video Call"></img>
+                <img href="#" src="/assets/images/icons/VidStrq.png" className="call-icon" alt="Video Call"></img>
               </Link>
-
-              <img src="/assets/images/icons/DrawStrq.png" style={{ width: "40px", marginLeft: "43px" }} alt="Draw"></img>
+              <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
             </div>
           </div>
 
@@ -431,114 +442,122 @@ class ChatBox extends Component {
             <div ref={ref => this.bottomRef.current = ref}></div>
           </div>
         </>
-        {
-          progress > 0 &&
-          <div>
-            <div className='progressBar'>
-              <span className="text"> {progress}% </span>
-              <div
-                className="percent"
-                style={{
-                  width: `${progress}%`,
-                  backgroundColor: currentUser.feel.color_code
-                }}
-              >
+        <div className="chat-footer">
+          {progress > 0 &&
+            <div>
+              <div className='progressBar'>
+                <span className="text"> {progress}% </span>
+                <div
+                  className="percent"
+                  style={{
+                    width: `${progress}%`,
+                    backgroundColor: currentUser.feel.color_code
+                  }}
+                >
+                </div>
               </div>
             </div>
-          </div>
-        }
+          }
 
-        <div className="message-input">
-          <i
-            className="fa fa-plus add-items-btn"
-            onClick={() => this.setState({ hidden: true })}
-          />
-          <input
-            autoFocus
-            placeholder="Type a message"
-            type="text"
-            name="message"
-            value={message}
-            onChange={this.handleChange}
-            onKeyUp={this.handleEnter}
-          />
-          <button
-            onClick={this.handlePost}
-            className='clickable btn-send'
-            style={{ backgroundColor: currentUser.feel.color_code }}
-          >
-            Post
+          <div className="message-input">
+            <i
+              className="fa fa-plus add-items-btn"
+              onClick={() => this.setState({ hidden: true })}
+            />
+            <input
+              autoFocus
+              placeholder="Type a message"
+              type="text"
+              name="message"
+              value={message}
+              onChange={this.handleChange}
+              onKeyUp={this.handleEnter}
+            />
+            <button
+              onClick={this.handlePost}
+              className='clickable btn-send'
+              style={{ backgroundColor: currentUser.feel.color_code }}
+            >
+              Post
           </button>
-        </div>
-        {
-          this.state.typingText &&
-          <div className='typing-text'>
-            {this.state.typingText}
           </div>
-        }
-        <div className="preview">
-          {image &&
-            <div className="image-preview">
-              <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
-              <img src={image} alt="" />
+          {
+            this.state.typingText &&
+            <div className='typing-text'>
+              {this.state.typingText}
             </div>
           }
-          {video &&
-            <div className="video-preview">
-              <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
-              <video width="320" height="240" controls>
-                <source src={video} type="video/mp4" />
-                <source src={video} type="video/ogg" />
+          <div className="preview">
+            {image &&
+              <div className="image-preview">
+                <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
+                <img src={image} alt="" />
+              </div>
+            }
+            {video &&
+              <div className="video-preview">
+                <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
+                <video width="320" height="240" controls>
+                  <source src={video} type="video/mp4" />
+                  <source src={video} type="video/ogg" />
                 Your browser does not support the video tag.
               </video>
-            </div>
-          }
-          {document &&
-            <div className="document-preview">
-              <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
-              <i className="fas fa-file-alt"></i>
-              <div> {document.doc_name && document.doc_name}</div>
-            </div>
-          }
-          <div ref={ref => this.preview.current = ref}> </div>
-        </div>
-        {
-          hidden &&
-          <div className="add-img-vid-box">
-            <i
-              style={{ backgroundColor: currentUser.feel.color_code }}
-              className="fa fa-times close-add-box"
-              onClick={() => this.setState({ hidden: false })}
-            />
-            <label>
-              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              <div className="nag-btn">
-                Add Image
               </div>
-              <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
-            </label>
-            <label>
-              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              <div className="nag-btn">
-                Add Video
+            }
+            {document &&
+              <div className="document-preview">
+                <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
+                <i className="fas fa-file-alt"></i>
+                <div> {document.doc_name && document.doc_name}</div>
               </div>
-              <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
-            </label>
-            <label>
-              <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-              <div className="nag-btn">
-                Add Document
-              </div>
-              <input
-                type="file"
-                name="video"
-                onChange={this.handleUpload}
-                accept=".pdf,.doc,.docx,.xlsx,.xlsm,.xlsb,.xltx,.csv"
-              />
-            </label>
+            }
+            <div ref={ref => this.preview.current = ref}> </div>
           </div>
+          {
+            hidden &&
+            <div className="add-img-vid-box">
+              <i
+                style={{ backgroundColor: currentUser.feel.color_code }}
+                className="fa fa-times close-add-box"
+                onClick={() => this.setState({ hidden: false })}
+              />
+              <label>
+                <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+                <div className="nag-btn">
+                  Add Image
+              </div>
+                <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
+              </label>
+              <label>
+                <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+                <div className="nag-btn">
+                  Add Video
+              </div>
+                <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
+              </label>
+              <label>
+                <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+                <div className="nag-btn">
+                  Add Document
+              </div>
+                <input
+                  type="file"
+                  name="video"
+                  onChange={this.handleUpload}
+                  accept=".pdf,.doc,.docx,.xlsx,.xlsm,.xlsb,.xltx,.csv"
+                />
+              </label>
+            </div>
+          }
+        </div>
+        {this.state.show &&
+          <ChatInvitationModel
+            onClose={this.handleClose}
+            participants={conversation?.participants}
+            currentUser={currentUser}
+          />
         }
-      </div >
+      </div>
     );
   }
 };

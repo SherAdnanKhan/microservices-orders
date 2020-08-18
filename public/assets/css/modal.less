@@ -1,0 +1,68 @@
+.myModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: #0000007c;
+  .innerModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:#000;
+    box-shadow: 0 0 5px #999999;
+    min-width: 500px;
+    max-height: 85vh;
+    min-height: 250px;
+    border-radius: 7px;
+
+    @media screen and (max-width: 600px){
+      min-width: 300px;
+    }
+    .modalHeader {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #999999;
+      min-height: 3vh;
+      .fa-times-circle {
+        font-size: 22px;
+        cursor: pointer;
+      }
+    }
+    .modalBody {
+      min-height: 150px;
+      border-bottom: 1px solid #999;
+      .modalContent {
+        margin: 0 auto;
+        padding: 10px;
+      }
+    }
+    .modalFooter {
+      margin: 0 auto;
+      padding: 10px;
+      min-height: 3vh;
+        @media @mobile{
+          padding: 5px 10px;
+          min-height: 5vh;
+        }
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        button{
+          margin-left: 10px;
+          background-color: #000000;
+          padding: 8px;
+          color: #ffffff;
+          border-radius: 10px;
+          cursor: pointer;
+            @media @mobile{
+              padding:5px;
+            }
+        }
+      }
+    }
+  } 
+}
