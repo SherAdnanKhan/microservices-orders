@@ -6,6 +6,7 @@ import Avatar from '../common/avatar';
 import Spinner from '../common/spinner';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
 import { Link } from 'react-router-dom';
+import MeuzmLogo from '../common/meuzmLogo';
 
 const Conversation = () => {
   const currentUser = useContext(UserContext);
@@ -44,45 +45,82 @@ const Conversation = () => {
           conversations.map((conversation, index) => (
             <div className="singleMsg" key={index}>
               {conversation.unread_messages_logs_count > 0 &&
-                <span className='notify'
-                  style={{
-                    borderColor:
-                      conversation.participants[0].id !== currentUser.id
-                        ? conversation.participants[0].feel.color_code
-                        : conversation.participants[1].feel.color_code
-                  }}
-                >
-                  {conversation.unread_messages_logs_count}
-                </span>
+                <>
+                  {conversation.participants.length > 2
+                    ? (
+                      <span
+                        className='notify'
+                        style={{ borderColor: 'white' }}
+                      >
+                        {conversation.unread_messages_logs_count}
+                      </span>
+                    ) : (
+                      <span
+                        className='notify'
+                        style={{
+                          borderColor:
+                            conversation.participants[0].id !== currentUser.id
+                              ? conversation.participants[0].feel.color_code
+                              : conversation.participants[1].feel.color_code
+                        }}
+                      >
+                        {conversation.unread_messages_logs_count}
+                      </span>
+                    )
+                  }
+                </>
               }
               {conversation.participants.length > 0 &&
                 <>
-                  {conversation.participants[0].id !== currentUser.id &&
-                    <Link to={`/dashboard/chat/${conversation.participants[0].slug}`}>
-                      <Avatar
-                        avatars={conversation.participants[0].avatars}
-                        feelColor={conversation.participants[0].feel.color_code}
-                      />
-                    </Link>
-                  }
-                  {conversation.participants[1].id !== currentUser.id &&
-                    <Link to={`/dashboard/chat/${conversation.participants[1].slug}`}>
-                      <Avatar
-                        avatars={conversation.participants[1].avatars}
-                        feelColor={conversation.participants[1].feel.color_code}
-                      />
-                    </Link>
+                  {conversation.participants.length > 2
+                    ? (
+                      <>
+                        <Link to={`/dashboard/chat/${conversation.id}`}>
+                          <MeuzmLogo />
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        {conversation.participants[0].id !== currentUser.id &&
+                          <Link to={`/dashboard/chat/${conversation.participants[0].slug}`}>
+                            <Avatar
+                              avatars={conversation.participants[0].avatars}
+                              feelColor={conversation.participants[0].feel.color_code}
+                            />
+                          </Link>
+                        }
+                        {conversation.participants[1].id !== currentUser.id &&
+                          <Link to={`/dashboard/chat/${conversation.participants[1].slug}`}>
+                            <Avatar
+                              avatars={conversation.participants[1].avatars}
+                              feelColor={conversation.participants[1].feel.color_code}
+                            />
+                          </Link>
+                        }
+                      </>
+                    )
                   }
                 </>
               }
               <div className="msg">
                 {conversation.participants.length > 0 &&
                   <>
-                    {conversation.participants[0].id !== currentUser.id &&
-                      <div className="name"> {conversation.participants[0].username} </div>
-                    }
-                    {conversation.participants[1].id !== currentUser.id &&
-                      <div className="name"> {conversation.participants[1].username} </div>
+                    {conversation.participants.length > 2
+                      ? (
+                        <>
+                          <div className="name">  Total participants {conversation.participants.length} </div>
+                        </>
+                      )
+                      : (
+                        <>
+                          {conversation.participants[0].id !== currentUser.id &&
+                            <div className="name"> {conversation.participants[0].username} </div>
+                          }
+                          {conversation.participants[1].id !== currentUser.id &&
+                            <div className="name"> {conversation.participants[1].username} </div>
+                          }
+                        </>
+                      )
                     }
                   </>
                 }
@@ -104,7 +142,7 @@ const Conversation = () => {
         }
 
       </div>
-    </div>
+    </div >
   );
 };
 

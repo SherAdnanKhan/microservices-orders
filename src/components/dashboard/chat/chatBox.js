@@ -1,11 +1,11 @@
 import React, { Component, createRef } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Avatar from '../common/avatar';
-import { formatTime, formatDate } from '../../utils/helperFunctions';
-import SocketContext from '../../context/socketContext';
-import { getCurrentUser, getAuthToken } from '../../actions/authActions';
-import socket from '../../services/socketService';
+import Avatar from '../../common/avatar';
+import { formatTime, formatDate } from '../../../utils/helperFunctions';
+import SocketContext from '../../../context/socketContext';
+import { getCurrentUser, getAuthToken } from '../../../actions/authActions';
+import socket from '../../../services/socketService';
 
 import {
   getConversation,
@@ -17,9 +17,12 @@ import {
   readMessage,
   readAll,
   changeReadMessageStatus,
-} from '../../actions/conversationActions';
+} from '../../../actions/conversationActions';
 import { toast } from 'react-toastify';
-import ChatInvitationModel from '../common/chatInvitationModal';
+import ChatInvitationModel from '../../common/chatInvitationModal';
+import ChatHeader from './chatHeader';
+import ParticipantsModel from './participantsModel';
+import MeuzmLogo from '../../common/meuzmLogo';
 
 class ChatBox extends Component {
   state = {
@@ -32,7 +35,8 @@ class ChatBox extends Component {
     page: 1,
     scrollHeight: '',
     typingText: '',
-    show: false
+    show: false,
+    showParticipantsModal: false
   };
 
   preview = createRef();
@@ -47,11 +51,11 @@ class ChatBox extends Component {
       await this.props.updateConversation(data.message);
       this.bottomRef.current.scrollIntoView({ behavior: 'auto' });
 
-      if (data.message.created_by === this.props.conversation.user.id) {
-        if (data.message.feel.color !== this.props.conversation.user.feel.color) {
-          this.componentRefreshUser();
-        }
-      }
+      // if (data.message.created_by === this.props.conversation.user.id) {
+      //   if (data.message.feel.color !== this.props.conversation.user.feel.color) {
+      //     this.componentRefreshUser();
+      //   }
+      // }
 
       if (data.message.user.id !== currentUser.id) {
         const user = {
@@ -100,10 +104,10 @@ class ChatBox extends Component {
 
       if (previos?.id !== currentConversation.id) {
         this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-        socket.emit('join', { room: currentConversation.id }, () => {
+        socket.emit('join', { room: currentConversation.id, user: currentUser }, () => {
           socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, getAuthToken(), () => {
           });
-        });
+        })
       }
     }
   }
@@ -111,12 +115,11 @@ class ChatBox extends Component {
   componentCleanup = () => {
     const { conversation } = this.props.conversation;
     localStorage.removeItem('activeConversation');
-
     conversation && socket.emit('leave', { room: conversation.id });
-
     socket.off('recieveMessage');
     socket.off('onRead');
     socket.off('onReadAll');
+    socket.off('typing')
 
     this.props.clearConversation();
   }
@@ -140,7 +143,11 @@ class ChatBox extends Component {
         message_type: image ? 1 : video ? 2 : document ? 3 : 0,
         user_id: user.id,
         conversation_id: conversation.id,
-        reciver: this.props.match.params.slug
+        recievers:
+          conversation
+            ?.participants
+            ?.filter(p => p.id !== user.id)
+            ?.map(p => p.slug)
       };
 
       if (message.trim() !== '') {
@@ -169,10 +176,6 @@ class ChatBox extends Component {
 
   handlePost = e => {
     this.sendMessage(e);
-  }
-
-  handleClose = () => {
-    this.setState({ show: false });
   }
 
   handleUpload = ({ target: input }) => {
@@ -234,65 +237,63 @@ class ChatBox extends Component {
     }
   }
 
+  handleOpenInvitationModel = () => {
+    this.setState({ show: true });
+  }
+
+  handleOpenPartcipantsModel = () => {
+    this.setState({ showParticipantsModal: true });
+  }
+
+  handleCloseInvitationModal = () => {
+    this.setState({ show: false });
+  }
+
+  handleCloseParticipantsModal = () => {
+    this.setState({ showParticipantsModal: false });
+  }
+
   render() {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
-    const { history } = this.props;
     const { user, messages, conversation } = this.props.conversation;
+    const { onlineUsers } = this.props;
 
     return (
       <div className="chat-box">
         <>
-          <div
-            className='chat-header'
-            style={{ backgroundColor: user?.feel.color_code }}>
-            <i
-              className="fa fa-arrow-left clickable"
-              onClick={() => history.goBack()}
-            />
-
-            {user &&
-              <Link to={`/dashboard/studio/${user.slug}`} >
-                <Avatar avatars={user.avatars} feelColor={user?.feel.color_code} />
-              </Link>
-            }
-
-            <div className="user-Status">
-              {user &&
-                <p>
-                  <Link to={`/dashboard/studio/${user.slug}`} >{user.username}</Link>
-                </p>
-              }
-              {user &&
-                <span>
-                  {this.props.onlineUsers.some(slug => slug === user.slug)
-                    ? <> Online </>
-                    : <>{user.last_login}</>
-                  }
-                </span>
-              }
-
-            </div>
-
-            <div className="call-btn">
-              <button className="addPeople" onClick={() => this.setState({ show: true })}> add people </button>
-              <Link to="/dashboard/video-call">
-                <img href="#" src="/assets/images/icons/VidStrq.png" className="call-icon" alt="Video Call"></img>
-              </Link>
-              <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
-            </div>
-          </div>
+          <ChatHeader
+            user={user}
+            conversation={conversation}
+            onlineUsers={onlineUsers}
+            onOpenInvitationModel={this.handleOpenInvitationModel}
+            onOpenParticipatsModel={this.handleOpenPartcipantsModel}
+          />
 
           <div className="chat-container"
             ref={ref => this.containerRef.current = ref}
             onScroll={this.handleScroll}
           >
             <div className="chat-uesr">
-              {user && <Avatar avatars={user.avatars} feelColor={user?.feel.color_code} />}
-              <div className="chat-uesr-name">
-                <p>	You are now Strqing with </p>
-                {user && <span>{user.username}</span>}
-              </div>
+              {conversation?.participants.length > 2
+                ? (
+                  <>
+                    <MeuzmLogo />
+                    <div className="chat-uesr-name">
+                      <p>	You are now Strqing with {conversation?.participants.length - 1} peaple </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Avatar avatars={user?.avatars} feelColor={user?.feel.color_code} />
+                    <div className="chat-uesr-name">
+                      <p>	You are now Strqing with </p>
+                      <span>{user?.username}</span>
+                    </div>
+                  </>
+                )
+              }
+
             </div>
 
             {messages?.data?.map((data, index) => (
@@ -304,14 +305,16 @@ class ChatBox extends Component {
                     >
                       <div className='outgoing'>
                         <div className="user-message">
-                          {/* <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
-                            {data.messages_logs.length > 0
-                              ? data.messages_logs[0].status === 1
-                                ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
-                                : <img alt="" src="/assets/images/avatarblack.png" />
-                              : <img src="/assets/images/avatarblack.png" alt="" />
-                            }
-                          </div> */}
+                          {conversation?.participants.length === 2 &&
+                            <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
+                              {data.messages_logs.length > 0
+                                ? data.messages_logs[0].status === 1
+                                  ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
+                                  : <img alt="" src="/assets/images/avatarblack.png" />
+                                : <img src="/assets/images/avatarblack.png" alt="" />
+                              }
+                            </div>
+                          }
                           <div className="text"
                             style={{
                               backgroundColor: data.feel.color_code,
@@ -357,14 +360,19 @@ class ChatBox extends Component {
                             }
                           </div>
                         </div>
-                        <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
-                          {data.messages_logs.length > 0
-                            ? data.messages_logs[0].status === 1
-                              ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
-                              : <img alt="" src="/assets/images/avatarblack.png" />
-                            : <img src="/assets/images/avatarblack.png" alt="" />
-                          }
-                        </div>
+                        {conversation?.participants.length > 2 &&
+                          <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
+                            {data?.messages_logs?.map(log => (
+                              <>
+                                {log.status === 1 &&
+                                  <img alt=""
+                                    src={`/assets/images/${log.feel.color}.png`}
+                                  />
+                                }
+                              </>
+                            ))}
+                          </div>
+                        }
                         {data.created_at &&
                           <p className='time'>
                             {data.created_at === 'now'
@@ -552,8 +560,16 @@ class ChatBox extends Component {
         </div>
         {this.state.show &&
           <ChatInvitationModel
-            onClose={this.handleClose}
+            onClose={this.handleCloseInvitationModal}
             participants={conversation?.participants}
+            currentUser={currentUser}
+          />
+        }
+        {this.state.showParticipantsModal &&
+          <ParticipantsModel
+            participants={conversation?.participants}
+            onlineUsers={onlineUsers}
+            onClose={this.handleCloseParticipantsModal}
             currentUser={currentUser}
           />
         }
