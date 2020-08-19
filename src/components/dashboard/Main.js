@@ -59,6 +59,8 @@ const Main = () => {
         return import('./privacy/privacy');
       case 'chat':
         return import('./chat/chatBox');
+      case 'chat-screen':
+        return import('./chat/chat');
       case 'conversations':
         return import('./conversation');
       case 'settings':

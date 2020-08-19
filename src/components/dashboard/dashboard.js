@@ -40,6 +40,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/mz-flash-group" component={Main} />
         <Route exact path="/dashboard/viewpost/:id" component={Main} />
         <Route exact path="/dashboard/privacy" component={Main} />
+        <Route exact path="/dashboard/chat-screen" component={Main} />
         <Route exact path="/dashboard/chat/:slug" component={ChatBox} />
         <Route exact path="/dashboard/video-call" component={VideoCall} />
         <Route exact path="/dashboard/video-call/group" component={GroupVideoCall} />
