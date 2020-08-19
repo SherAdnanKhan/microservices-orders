@@ -11,7 +11,7 @@ import AddVideoArtist from '../video/addVideoArtist';
 import GroupVideoCall from "../video/groupVideo";
 import PostView from "../common/postView";
 import MyVault from './vault/myVault';
-import ChatBox from './chatBox';
+import ChatBox from './chat/chatBox';
 
 const Dashboard = ({ user }) => {
   return (

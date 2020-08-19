@@ -34,14 +34,15 @@ import {
   POST_UNSTROKE
 } from './constants/keys';
 
+
+const currentUser = getCurrentUser();
+
 if (getCurrentUser()) {
-  const user = getCurrentUser();
-  store.dispatch(updateFeelColor(user?.feel?.color_code));
+  store.dispatch(updateFeelColor(currentUser?.feel?.color_code));
 }
 
 function App() {
   const dispatch = useDispatch();
-  const currentUser = getCurrentUser();
 
   useEffect(() => {
     let url1 = history.location.pathname.split('/')[2];
@@ -55,7 +56,6 @@ function App() {
 
   useEffect(() => {
     if (currentUser) {
-
       socket.emit('joinUser', currentUser, getAuthToken());
 
       socket.on('notifyColrChange', (user) => {
@@ -89,9 +89,11 @@ function App() {
       });
 
       socket.on('notify', data => {
+        console.log(data)
+
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
+        console.log(activeConversation)
         if (activeConversation !== data.message.conversation_id) {
-          playNotificationSound();
           toast(() => {
             return (
               <Link
@@ -103,23 +105,23 @@ function App() {
           });
           dispatch(updateCounter());
           dispatch(updateConversationUnreadCount(data.message));
+          playNotificationSound();
         }
       });
 
       socket.on('onlineUsers', data => {
         dispatch(getOnlineUsers(data));
       });
-    }
 
-    return () => {
-      if (socket) {
+      return () => {
+        socket.emit('leave')
         socket.emit('disconnect', getAuthToken());
         socket.emit('userLeft', currentUser);
         socket.disconnect();
         socket.close();
       }
     }
-  }, [dispatch, currentUser])
+  }, [dispatch])
 
   return (
 

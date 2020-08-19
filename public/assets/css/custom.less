@@ -5321,6 +5321,35 @@ img {
       }
     }
   }
+  .participantsModel {
+    .myModal {
+      .innerModal {
+        .modalBody {
+          .modalContent {
+            .users {
+              overflow-y: auto;
+              max-height: 350px;
+              margin-top: 10px;
+              .row {
+                display: flex;
+                justify-content: space-between;
+                .userStatus{
+                  margin-top: 22px;
+                }
+                .user {
+                  display: flex;
+                  align-items: center;
+                  span {
+                    margin-left: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .chat-header{
     display: flex;
     align-items: center;
@@ -5590,12 +5619,14 @@ img {
 
         .send-icon {
           text-align: right;
-          margin-top: 5px;
+          margin-top: 10px;
           img{
             width: 15px;
             border: 1px solid rgba(255,255,255, .5);
             opacity: 0.5;
             margin-right: 0;
+            margin-left: 2px;
+
             // margin-left: 10px;
           }
 

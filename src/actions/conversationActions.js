@@ -11,12 +11,14 @@ import {
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
 } from '../constants/actionTypes';
+import { isNumber } from '../utils/helperFunctions';
 
-export const getAllConversations = () => dispatch => {
+export const getAllConversations = (callback) => dispatch => {
   http
     .get('/chats')
     .then(res => {
       localStorage.setItem('conversations', JSON.stringify(res.data.data.conversations));
+      callback && callback(res.data.data.conversations);
 
       dispatch({
         type: GET_ALL_CONVERSATIONS,
@@ -25,9 +27,14 @@ export const getAllConversations = () => dispatch => {
     });
 };
 
-export const getConversation = (slug, page = 1, callback) => dispatch => {
+export const getConversation = (idOrSlug, page = 1, callback) => dispatch => {
+  console.log(isNumber(idOrSlug));
+  const url = isNumber(idOrSlug)
+    ? `/chats/user/${idOrSlug}/group?page=${page}`
+    : `/chats/user/${idOrSlug}?page=${page}`;
+
   http
-    .get(`/chats/user/${slug}?page=${page}`)
+    .get(url)
     .then(res => {
       dispatch({
         type: GET_CONVERSATION,
@@ -142,11 +149,11 @@ export const updateConversationUnreadCount = data => {
   }
 };
 
-export const createGroupConversation = data => dispatch => {
+export const createGroupConversation = (data, history) => dispatch => {
   http
     .post(`/chats/group-chat`, data)
     .then(res => {
-      console.log(res);
+      window.location.href = `/dashboard/chat/${res.data.data.conversation.id}`;
     })
     .catch(err => {
       if (err.response && err.response.data) {

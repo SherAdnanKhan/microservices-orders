@@ -7,9 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers } from '../../actions/userActions';
 import Avatar from './avatar';
 import { createGroupConversation } from '../../actions/conversationActions';
+import { useHistory } from 'react-router-dom';
 
 const ChatInvitationModel = ({ onClose, participants, currentUser }) => {
+  const history = useHistory();
   const { users } = useSelector(state => state.user);
+
   const [selectedUsers, setSelectedUsers] = useState({});
 
   const dispatch = useDispatch();
@@ -46,13 +49,13 @@ const ChatInvitationModel = ({ onClose, participants, currentUser }) => {
       user_ids: selectedIds
     };
 
-    dispatch(createGroupConversation(data));
+    dispatch(createGroupConversation(data, history));
   };
 
   return (
     <div className="invitationModal">
       <Modal>
-        <ModalHeader onClose={onClose} feelColor={currentUser?.feel.color_code}></ModalHeader>
+        <ModalHeader onClose={onClose}></ModalHeader>
         <ModalBody>
           <div className="search">
             <input
