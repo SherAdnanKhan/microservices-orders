@@ -89,15 +89,14 @@ function App() {
       });
 
       socket.on('notify', data => {
-        console.log(data)
-
         const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
-        console.log(activeConversation)
+
         if (activeConversation !== data.message.conversation_id) {
+          playNotificationSound();
           toast(() => {
             return (
               <Link
-                to={`/dashboard/chat/${data.message.user.slug}`}
+                to={`/dashboard/chat/${data.message.conversation_id}`}
                 style={{ textDecoration: 'none', color: currentUser.feel.color_code }}>
                 You have new message from {data.message.user.username}
               </Link>
@@ -105,16 +104,15 @@ function App() {
           });
           dispatch(updateCounter());
           dispatch(updateConversationUnreadCount(data.message));
-          playNotificationSound();
         }
       });
 
       socket.on('onlineUsers', data => {
+        console.log(data);
         dispatch(getOnlineUsers(data));
       });
 
       return () => {
-        socket.emit('leave')
         socket.emit('disconnect', getAuthToken());
         socket.emit('userLeft', currentUser);
         socket.disconnect();
