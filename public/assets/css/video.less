@@ -18,6 +18,13 @@
     height: 46px;
   }
 }
+.top-Header {
+  background: rgb(50, 205, 50);
+  position: fixed;
+  z-index: 70;
+  width: 100%;
+  height: 50px;
+}
 .all-artist{
   // width: calc(100% - 40px);
   max-width: 1380px;
@@ -41,6 +48,8 @@
   align-items: center;
   background: GRAY;
   height: 100PX;
+  position: relative;
+  top: 49px;
   .dropdown{
     position: relative;
     display: inline-block;
@@ -86,17 +95,65 @@
   position: relative;
   .main-user{
    display: flex;
-   justify-content: center;
+   flex-direction: column;
    margin-top:60px;
    width: 52%;
    margin:50px auto;
-   @media @mobile{
+   .call-Actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    top: 43%;
+    right: 12%;
+    @media @mobile{
+      top: 38%;
+      right: 7%;
+    }
+    i {
+      margin-bottom: 29px;
+      font-size: 43px;
+      @media @mobile{
+        margin-bottom: 27px;
+        font-size: 31px;
+      }
+    }
+    i.fa.fa-microphone{
+      margin-right: 13px;
+    }
+   }
+   .call-Actions2 {
+    display: flex;
+    justify-content: space-evenly;
+    @media @mobile {
+      i.fa.fa-comments, 
+      i.fas.fa-pencil-alt {
+        display: none;
+      }
+    }
+    i {
+      font-size: 43px;
+      @media @mobile {
+        font-size: 31px;
+      }
+    }
+   }
+   @media @mobile {
      width:100% !important;
    }
    img{
      width:100%;
    }
- }
+   .mobile-Icon {
+     display: none;
+     @media @mobile {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 15px;
+      font-size: 31px;
+     }
+   }
+  }
  .own-cube{
     border:10px solid red;
     width: 15%;
@@ -104,6 +161,9 @@
     bottom: -5%;
     right: 0;
     z-index: 1000;
+    @media @mobile{
+      bottom: -22%;
+    }
     img{
       width:100%;
     }
