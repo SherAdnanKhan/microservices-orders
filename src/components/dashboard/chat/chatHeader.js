@@ -3,8 +3,9 @@ import { useHistory, Link } from 'react-router-dom';
 import MeuzmLogo from '../../common/meuzmLogo';
 import Avatar from '../../common/avatar';
 
-const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, onOpenParticipatsModel }) => {
+const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, onOpenParticipatsModel, currentUser }) => {
   const history = useHistory();
+  const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
 
   return (
     <div
@@ -13,7 +14,7 @@ const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, on
         backgroundColor:
           conversation?.participants.length > 2
             ? 'red'
-            : user?.feel.color_code
+            : filtered?.feel.color_code
       }}
     >
       <i
@@ -26,8 +27,8 @@ const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, on
             <MeuzmLogo />
           </div>
         ) : (
-          <Link to={`/dashboard/studio/${user?.slug}`} >
-            <Avatar avatars={user?.avatars} feelColor={user?.feel.color_code} />
+          <Link to={`/dashboard/studio/${filtered?.slug}`} >
+            <Avatar avatars={filtered?.avatars} feelColor={filtered?.feel.color_code} />
           </Link>
         )
       }
@@ -43,12 +44,12 @@ const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, on
           ) : (
             <>
               <p>
-                <Link to={`/dashboard/studio/${user?.slug}`} >{user?.username}</Link>
+                <Link to={`/dashboard/studio/${filtered?.slug}`} >{filtered?.username}</Link>
               </p>
               <span>
-                {onlineUsers?.some(slug => slug === user?.slug)
+                {onlineUsers?.some(slug => slug === filtered?.slug)
                   ? <> Online </>
-                  : <>{user?.last_login}</>
+                  : <>{filtered?.last_login}</>
                 }
               </span>
             </>

@@ -34,7 +34,7 @@ class ChatBox extends Component {
     progress: 0,
     page: 1,
     scrollHeight: '',
-    typingText: '',
+    typings: [],
     show: false,
     showParticipantsModal: false
   };
@@ -65,7 +65,7 @@ class ChatBox extends Component {
         data.reader = currentUser;
 
         socket.emit("onRead", data.message.id, user, data, getAuthToken(), () => { });
-        this.setState({ typingText: '' });
+        this.setState({ typings: this.state.typings.filter(typing => typing.id !== data.message.user.id) });
       }
     });
 
@@ -84,10 +84,16 @@ class ChatBox extends Component {
 
     socket.on('typing', (data) => {
       if (data.user.id !== currentUser.id) {
+        const typings = [...this.state.typings];
+
         if (data.message) {
-          this.setState({ typingText: `${data.user.username} is typing...` });
+          if (!typings.some(typing => typing.id === data.user.id)) {
+            console.log(true)
+
+            this.setState({ typings: [data.user, ...typings] });
+          }
         } else {
-          this.setState({ typingText: '' });
+          this.setState({ typings: typings.filter(typing => typing.id !== data.user.id) });
         }
       }
     });
@@ -263,6 +269,7 @@ class ChatBox extends Component {
       <div className="chat-box">
         <>
           <ChatHeader
+            currentUser={currentUser}
             user={user}
             conversation={conversation}
             onlineUsers={onlineUsers}
@@ -322,6 +329,20 @@ class ChatBox extends Component {
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
                           >
+                            {/* {isValidURL(data.message)
+                              ? (
+                                <ReactTinyLink
+                                  cardSize="small"
+                                  showGraphic={true}
+                                  maxLine={2}
+                                  minLine={1}
+                                  url={data.message}
+                                  defaultMedia={data.message}
+                                />
+                              ) : (
+                                data.message
+                              )
+                            } */}
                             {data.message}
 
                             {data.type === 1 &&
@@ -396,6 +417,21 @@ class ChatBox extends Component {
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
                           >
+
+                            {/* {isValidURL(data.message)
+                              ? (
+                                <ReactTinyLink
+                                  cardSize="small"
+                                  showGraphic={true}
+                                  maxLine={2}
+                                  minLine={1}
+                                  efaultMedia={data.message}
+                                  url={data.message}
+                                />
+                              ) : (
+                                data.message
+                              )
+                            } */}
                             {data.message}
 
                             {data.type === 1 &&
@@ -489,12 +525,20 @@ class ChatBox extends Component {
               Post
           </button>
           </div>
-          {
-            this.state.typingText &&
-            <div className='typing-text'>
-              {this.state.typingText}
-            </div>
-          }
+          <div className='typing-text'>
+            {this.state.typings.length > 1 &&
+              <>
+                {this.state.typings?.map((typing, index) => (
+                  <span key={index}> {typing.username} {index < this.state.typings.length - 1 && 'and'}</span>
+                ))
+                }
+                are typing..
+              </>
+            }
+            {this.state.typings.length === 1 &&
+              <span> {this.state.typings[0].username} is typing </span>
+            }
+          </div>
           <div className="preview">
             {image &&
               <div className="image-preview">
@@ -558,14 +602,16 @@ class ChatBox extends Component {
             </div>
           }
         </div>
-        {this.state.show &&
+        {
+          this.state.show &&
           <ChatInvitationModel
             onClose={this.handleCloseInvitationModal}
             participants={conversation?.participants}
             currentUser={currentUser}
           />
         }
-        {this.state.showParticipantsModal &&
+        {
+          this.state.showParticipantsModal &&
           <ParticipantsModel
             participants={conversation?.participants}
             onlineUsers={onlineUsers}
@@ -573,7 +619,7 @@ class ChatBox extends Component {
             currentUser={currentUser}
           />
         }
-      </div>
+      </div >
     );
   }
 };

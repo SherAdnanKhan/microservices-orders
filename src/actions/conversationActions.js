@@ -30,7 +30,7 @@ export const getAllConversations = (callback) => dispatch => {
 export const getConversation = (idOrSlug, page = 1, callback) => dispatch => {
   console.log(isNumber(idOrSlug));
   const url = isNumber(idOrSlug)
-    ? `/chats/user/${idOrSlug}/group?page=${page}`
+    ? `/chats/user/${idOrSlug}/id?page=${page}`
     : `/chats/user/${idOrSlug}?page=${page}`;
 
   http
