@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const RightBorder = () => {
   const history = useHistory();
@@ -8,12 +8,12 @@ const RightBorder = () => {
   return (
     <div
       className="right right-border"
-      style={{ backgroundColor: feelColor}}
+      style={{ backgroundColor: feelColor }}
     >
       <img
         alt=""
         src="/assets/images/strqicon.png"
-        onClick={() => history.push('/dashboard/conversations')}
+        onClick={() => history.push('/dashboard/chat')}
       />
       <img
         alt=""

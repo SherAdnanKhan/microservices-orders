@@ -17,6 +17,7 @@ import {
   readMessage,
   readAll,
   changeReadMessageStatus,
+  resetConversationCount,
 } from '../../../actions/conversationActions';
 import { toast } from 'react-toastify';
 import ChatInvitationModel from '../../common/chatInvitationModal';
@@ -42,10 +43,15 @@ class ChatBox extends Component {
   preview = createRef();
   containerRef = createRef();
   bottomRef = createRef();
+  footerRef = createRef();
 
   componentDidMount() {
     const currentUser = getCurrentUser();
-    this.props.getConversation(this.props.match.params.slug);
+    if (this.props.activeConversation) {
+      this.props.getConversation(this.props.activeConversation.id);
+    } else {
+      this.props.getConversation(this.props.match.params.slug);
+    }
 
     socket.on('recieveMessage', async (data) => {
       await this.props.updateConversation(data.message);
@@ -100,7 +106,11 @@ class ChatBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this.preview.current.scrollIntoView({ behavior: 'auto' });
+    if (this.props.activeConversation !== prevProps.activeConversation) {
+      this.componentCleanup();
+      this.componentDidMount();
+    }
+
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
     const currentUser = getCurrentUser();
@@ -112,6 +122,7 @@ class ChatBox extends Component {
         this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
         socket.emit('join', { room: currentConversation.id, user: currentUser }, () => {
           socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, getAuthToken(), () => {
+            this.props.resetConversationCount(currentConversation);
           });
         })
       }
@@ -201,6 +212,7 @@ class ChatBox extends Component {
           } else {
             this.setState({ [result.doc_type]: result.path, progress: 0 });
           }
+          this.preview.current.scrollIntoView({ behavior: 'auto' });
         },
         err => {
           this.setState({ progress: 0 });
@@ -223,6 +235,10 @@ class ChatBox extends Component {
     socket.emit('onType', data);
   }
 
+  handleDeletePreview = () => {
+    this.setState({ image: '', video: '', document: '' });
+  }
+
   handleScroll = () => {
     const scrollTop = this.containerRef.current.scrollTop;
     const { scrollHeight } = this.state;
@@ -235,9 +251,15 @@ class ChatBox extends Component {
 
       this.setState({ page: page + 1, }, () => {
         if (this.props.conversation.messages.next_page_url) {
-          this.props.getConversation(this.props.match.params.slug, page + 1, () => {
-            this.containerRef.current.scrollTo(0, this.state.scrollHeight);
-          });
+          if (this.props.activeConversation) {
+            this.props.getConversation(this.props.activeConversation.id, page + 1, () => {
+              this.containerRef.current.scrollTo(0, this.state.scrollHeight);
+            })
+          } else {
+            this.props.getConversation(this.props.match.params.slug, page + 1, () => {
+              this.containerRef.current.scrollTo(0, this.state.scrollHeight);
+            })
+          }
         }
       });
     }
@@ -486,7 +508,7 @@ class ChatBox extends Component {
             <div ref={ref => this.bottomRef.current = ref}></div>
           </div>
         </>
-        <div className="chat-footer">
+        <div className="chat-footer" ref={this.footerRef}>
           {progress > 0 &&
             <div>
               <div className='progressBar'>
@@ -542,14 +564,14 @@ class ChatBox extends Component {
           <div className="preview">
             {image &&
               <div className="image-preview">
-                <i className="fas fa-trash" onClick={() => this.setState({ image: '' })}></i>
+                <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
                 <img src={image} alt="" />
               </div>
             }
             {video &&
               <div className="video-preview">
-                <i className="fas fa-trash" onClick={() => this.setState({ video: '' })}></i>
-                <video width="320" height="240" controls>
+                <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
+                <video controls>
                   <source src={video} type="video/mp4" />
                   <source src={video} type="video/ogg" />
                 Your browser does not support the video tag.
@@ -558,7 +580,7 @@ class ChatBox extends Component {
             }
             {document &&
               <div className="document-preview">
-                <i className="fas fa-trash" onClick={() => this.setState({ document: '' })}></i>
+                <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
                 <i className="fas fa-file-alt"></i>
                 <div> {document.doc_name && document.doc_name}</div>
               </div>
@@ -644,4 +666,5 @@ export default connect(
   readMessage,
   readAll,
   changeReadMessageStatus,
+  resetConversationCount
 })(withRouter(ChatBox));

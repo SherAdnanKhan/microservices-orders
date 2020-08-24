@@ -54,3 +54,7 @@ export const playNotificationSound = async () => {
 export const isNumber = (value) => {
   return numerics.test(value);
 }
+
+export const isChrome = () => {
+  return navigator.userAgent.indexOf('Chrome') === -1 ? false : true;
+}

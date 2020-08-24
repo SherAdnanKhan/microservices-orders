@@ -1,90 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Conversation from '../conversation';
+import ChatBox from './chatBox';
+import { isChrome } from '../../../utils/helperFunctions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllConversations, getConversation } from '../../../actions/conversationActions';
+import Spinner from '../../common/spinner';
+import { useRouteMatch } from 'react-router-dom';
 
 const Chat = () => {
+  const dispatch = useDispatch();
+  const { params } = useRouteMatch();
+  const { conversation } = useSelector(state => state.conversation);
+
+  const {
+    conversation: { conversations },
+    loading: { loading }
+  } = useSelector(state => state);
+
+  const [activeConversation, setActiveConversation] = useState("");
+  const [hasConversation, setHasConversation] = useState(false);
+
+  useEffect(() => {
+    dispatch(getAllConversations());
+  }, [dispatch]);
+
+
+  useEffect(() => {
+    if (params.slug) {
+      if (conversation) {
+        if (!hasConversation) {
+          setActiveConversation(conversation);
+          setHasConversation(hasConversation => hasConversation = true)
+        }
+      }
+
+    }
+  }, [params, conversation, hasConversation])
+
+  useEffect(() => {
+    if (params.slug) {
+      dispatch(getConversation(params.slug));
+    }
+  }, [params, dispatch])
+
+
+  const handleActiveConversation = conversation => {
+    setActiveConversation(conversation)
+  }
+
   return (
-    <div className="chat-Row">
-      <div className="chat-Users">
-        {/* <div className="User1">
-          <div className="user-image">
-            <img src="abc.jpg" />
-          </div>
-          <div className="user-First">
-            Ahmad khan
-          </div>
-        </div>
-        <div className="User2">
-          <div className="user-image2">
-            <img src="abcx.jpg" />
-          </div>
-          <div className="user-Second">
-            Ahmad khan
-          </div>
-        </div>
-        <div className="User3">
-          <div className="user-image3">
-            <img src="abcx.jpg" />
-          </div>
-          <div className="user-Third">
-            Ahmad khan
-          </div>
-        </div>
-        <div className="User4">
-          <div className="user-image4">
-            <img src="abcx.jpg" />
-          </div>
-          <div className="user-Four">
-            Ahmad khan
-          </div>
-        </div> */}
+    <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
+      {loading && <Spinner />}
+      <div className="conversation">
+        <Conversation
+          conversations={conversations}
+          onActiveConversation={handleActiveConversation}
+          activeConversation={activeConversation}
+        />
       </div>
-      <div className="chat-Conversation">
-        {/* <div className="active-User">
-          <div className="active-Img">
-            <img src="abcx.jpg" />
-          </div>
-          <div className="active-Name">
-            Ahmad Khan
-          </div>
-          <div className="icon-Img">
-            <img src="abcx.jpg" />
-          </div>
-        </div> */}
-        <div className="chat-Block">
-          {/* <div className="conversation1">
-            <div className="con-img">
-              <img src="abcd.jpg" />
-            </div>
-            <div className="chat-Text">
-              gshvvhjvhjvv dsdgvcgs dcgs dcs dc
-            </div>
-          </div>
-          <div className="conversation2">
-            <div className="chat-Text2">
-              there is non txt.
-            </div>
-            <div className="con-img2">
-              <img src="cons.jpg" />
-            </div>
-          </div>
-          <div className="conversation1">
-            <div className="con-img">
-              <img src="abcd.jpg" />
-            </div>
-            <div className="chat-Text">
-              gshvvhjvhjvv dsdgvcgs dcgs dcs dc
-            </div>
-          </div>
-          <div className="conversation2">
-            <div className="chat-Text2">
-              there is non txt.
-            </div>
-            <div className="con-img2">
-              <img src="cons.jpg" />
-            </div>
-          </div> */}
-        </div>
+      <div className="chat-Block">
+        {activeConversation &&
+          <ChatBox
+            activeConversation={activeConversation}
+          />
+        }
       </div>
     </div>
+
   );
 };
 
