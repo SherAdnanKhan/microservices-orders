@@ -1,24 +1,11 @@
-import React, { useEffect, useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllConversations } from '../../actions/conversationActions';
+import React, { useContext } from 'react'
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
-import Spinner from '../common/spinner';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
-import { Link } from 'react-router-dom';
 import MeuzmLogo from '../common/meuzmLogo';
 
-const Conversation = () => {
+const Conversation = ({ onActiveConversation, conversations, activeConversation }) => {
   const currentUser = useContext(UserContext);
-  const dispatch = useDispatch();
-  const {
-    conversation: { conversations },
-    loading: { loading }
-  } = useSelector(state => state);
-
-  useEffect(() => {
-    dispatch(getAllConversations());
-  }, [dispatch]);
 
   const getDateOrTime = date => {
     const current = new Date();
@@ -31,8 +18,7 @@ const Conversation = () => {
   }
 
   return (
-    <div className="conversation">
-      {loading && <Spinner />}
+    <div className="conversationContainer">
       {(!conversations || conversations.length === 0) &&
         <div className="logo">
           <img src="/assets/images/strqicon.png" alt="" />
@@ -43,7 +29,11 @@ const Conversation = () => {
       <div className="chatMsgLists">
         {conversations &&
           conversations.map((conversation, index) => (
-            <div className="singleMsg" key={index}>
+            <div
+              className={conversation.id === activeConversation.id ? "singleMsg active" : "singleMsg"}
+              key={index}
+              onClick={() => onActiveConversation(conversation)}
+            >
               {conversation.unread_messages_logs_count > 0 &&
                 <>
                   {conversation.participants.length > 2
@@ -74,28 +64,20 @@ const Conversation = () => {
                 <>
                   {conversation.participants.length > 2
                     ? (
-                      <>
-                        <Link to={`/dashboard/chat/${conversation.id}`}>
-                          <MeuzmLogo />
-                        </Link>
-                      </>
+                      <MeuzmLogo />
                     ) : (
                       <>
                         {conversation.participants[0].id !== currentUser.id &&
-                          <Link to={`/dashboard/chat/${conversation.participants[0].slug}`}>
-                            <Avatar
-                              avatars={conversation.participants[0].avatars}
-                              feelColor={conversation.participants[0].feel.color_code}
-                            />
-                          </Link>
+                          <Avatar
+                            avatars={conversation.participants[0].avatars}
+                            feelColor={conversation.participants[0].feel.color_code}
+                          />
                         }
                         {conversation.participants[1].id !== currentUser.id &&
-                          <Link to={`/dashboard/chat/${conversation.participants[1].slug}`}>
-                            <Avatar
-                              avatars={conversation.participants[1].avatars}
-                              feelColor={conversation.participants[1].feel.color_code}
-                            />
-                          </Link>
+                          <Avatar
+                            avatars={conversation.participants[1].avatars}
+                            feelColor={conversation.participants[1].feel.color_code}
+                          />
                         }
                       </>
                     )
@@ -108,7 +90,16 @@ const Conversation = () => {
                     {conversation.participants.length > 2
                       ? (
                         <>
-                          <div className="name">  Total participants {conversation.participants.length} </div>
+                          <div className="name">
+                            {conversation?.participants?.filter(p => p.id !== currentUser.id)[0].username + ', '}
+                            {conversation?.participants?.filter(p => p.id !== currentUser.id)[1].username}
+                            {conversation?.participants.filter(p => p.id !== currentUser.id).length > 2 &&
+                              <>
+                                {` and ${conversation?.participants.length - 3}`} participants
+                              </>
+                            }
+                            {/* Total participants {conversation?.participants.length} */}
+                          </div>
                         </>
                       )
                       : (

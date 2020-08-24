@@ -8,6 +8,7 @@ import {
   READ_MESSAGE,
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
+  RESET_CONVERSATION_COUNT
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -53,7 +54,15 @@ export default (state = initialState, action) => {
           to: action.payload.conversation.messages.to,
           total: action.payload.conversation.messages.total
         },
-        user: action.payload.user
+        user: action.payload.user,
+        conversations:
+          state.conversations
+            ? state
+              ?.conversations
+              ?.some(c => c.id === action.payload.conversation.id)
+              ? state.conversations
+              : [action.payload.conversation, ...state.conversations]
+            : null
       };
     case GET_ALL_CONVERSATIONS:
       return {
@@ -77,6 +86,19 @@ export default (state = initialState, action) => {
               ...conversation,
               unread_messages_logs_count: conversation.unread_messages_logs_count + 1,
               last_message: action.payload
+            }
+          }
+          return conversation
+        })
+      };
+    case RESET_CONVERSATION_COUNT:
+      return {
+        ...state,
+        conversations: state?.conversations?.map(conversation => {
+          if (conversation.id === action.payload.id) {
+            return {
+              ...conversation,
+              unread_messages_logs_count: 0,
             }
           }
           return conversation

@@ -1,10 +1,9 @@
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MeuzmLogo from '../../common/meuzmLogo';
 import Avatar from '../../common/avatar';
 
 const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, onOpenParticipatsModel, currentUser }) => {
-  const history = useHistory();
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
 
   return (
@@ -19,7 +18,6 @@ const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, on
     >
       <i
         className="fa fa-arrow-left clickable"
-        onClick={() => history.goBack()}
       />
       {conversation?.participants.length > 2
         ? (

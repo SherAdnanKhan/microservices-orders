@@ -10,6 +10,7 @@ import {
   READ_MESSAGE,
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
+  RESET_CONVERSATION_COUNT
 } from '../constants/actionTypes';
 import { isNumber } from '../utils/helperFunctions';
 
@@ -148,6 +149,13 @@ export const updateConversationUnreadCount = data => {
     payload: data
   }
 };
+
+export const resetConversationCount = conversation => {
+  return {
+    type: RESET_CONVERSATION_COUNT,
+    payload: conversation
+  }
+}
 
 export const createGroupConversation = (data, history) => dispatch => {
   http

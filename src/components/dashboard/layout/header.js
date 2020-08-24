@@ -35,7 +35,7 @@ const Header = () => {
             <img className="valut-img"
               alt=""
               src="/assets/images/strqicon.png"
-              onClick={() => history.push('/dashboard/conversations')}
+              onClick={() => history.push('/dashboard/chat')}
             />
             <img className="valut-img"
               alt=""
