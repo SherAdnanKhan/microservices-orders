@@ -275,3 +275,117 @@
     }
   }
 }
+// New Video-Chat Less Starts here
+.main {
+  width: 100%;
+  .own-Video {
+    border: 9px solid green;
+    position: absolute;
+    border-radius: 9px;
+    right: 100px;
+    top: 44px;
+    @media @mobile {
+    border: 5px solid green;
+    border-radius: 6px;
+    right: 7px;
+    top: 44px;
+    }
+  }
+  .settings-Icon {
+    position: absolute;
+    top: 149px;
+    right: 124px;
+    @media @mobile {
+      top: 134px;
+      right: 33px;
+    }
+    i {
+      font-size: 43px;
+      @media @mobile {
+        font-size: 35px;
+      }
+    }
+  }
+  .draw-Icon {
+    position: absolute;
+    left: 50px;
+    top: 65px;
+    @media @mobile {
+    left: 11px;
+    top: 70px;
+    }
+    i {
+      font-size: 30px;
+      @media @mobile {
+        font-size: 25px;
+      }
+    }
+  }
+  .video-Icon {
+    position: absolute;
+    top: 119px;
+    left: 48px;
+     @media @mobile {
+      top: 112px;
+      left: 11px;
+     }
+    i {
+      font-size: 32px;
+       @media @mobile {
+         font-size: 25px;
+       }
+    }
+  }
+  .screen-Maximize {
+    position: absolute;
+    bottom: 50%;
+    left: 46px;
+    @media @mobile {
+      left: 9px;
+    }
+    i {
+      font-size: 32px;
+    }
+  }
+  .item-List {
+    width: 1280px;
+    margin: 0 auto 0 50px;
+    display: flex;
+    flex-wrap: wrap;
+    @media @mobile {
+      width: unset;
+      margin: 10px 0px;
+    }
+    .item {
+    margin: 1%;
+    width: 31.333333%;
+    float: left;
+    text-align: center;
+    // border: 9px solid red;
+    border-radius: 11px;
+    box-sizing: border-box;
+    padding: 40px 10px;
+    @media @mobile {
+      width: 41%;
+      padding: 10px 10px;
+      border: 5px solid red;
+      border-radius: 5px;
+    }
+    &.border-item1 {
+      border: 9px solid orangered;
+    }
+    &.border-item2 {
+      border: 9px solid purple;
+    }
+    &.border-item3 {
+      border: 9px solid rgb(179, 40, 70);
+    }
+    &.border-item4 {
+      border: 9px solid green;
+    }
+    &.border-item5 {
+      border: 9px solid rgb(105, 212, 34);
+    }
+    }
+  }
+}
