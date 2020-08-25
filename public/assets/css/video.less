@@ -50,6 +50,7 @@
   height: 100PX;
   position: relative;
   top: 49px;
+  white-space: nowrap;
   .dropdown{
     position: relative;
     display: inline-block;
@@ -116,7 +117,7 @@
       font-size: 43px;
       @media @mobile{
         margin-bottom: 27px;
-        font-size: 31px;
+        font-size: 26px;
       }
     }
     i.fa.fa-microphone{
@@ -126,6 +127,13 @@
    .call-Actions2 {
     display: flex;
     justify-content: space-evenly;
+    img {
+      width: 4%;
+      cursor: pointer;
+      @media @mobile {
+        width: 7%;
+      }
+    }
     @media @mobile {
       i.fa.fa-comments, 
       i.fas.fa-pencil-alt {
@@ -136,7 +144,7 @@
       font-size: 43px;
       cursor: pointer;
       @media @mobile {
-        font-size: 31px;
+        font-size: 26px;
       }
     }
    }
@@ -153,6 +161,9 @@
       justify-content: space-evenly;
       margin-top: 15px;
       font-size: 31px;
+      img {
+        width: 7%;
+      }
      }
    }
   }
@@ -164,7 +175,7 @@
     right: 0;
     z-index: 1000;
     @media @mobile{
-      bottom: 3%;
+      bottom: 8%;
     }
     img{
       width:100%;
