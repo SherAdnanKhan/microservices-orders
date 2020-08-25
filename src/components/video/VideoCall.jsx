@@ -40,7 +40,7 @@ const VideoCall = () => {
         <div className="main-user">
           {/* For Mobile View Start */}
           <div className="mobile-Icon">
-          <img class="valut-img" alt="" src="/assets/images/strqicon.png"></img>
+          <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
             <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
           </div>
           {/* Mobile View Code End */}
@@ -51,7 +51,7 @@ const VideoCall = () => {
             <i className="fa fa-camera" aria-hidden="true" />
           </div>
           <div className="call-Actions2">
-            <img class="valut-img" alt="" src="/assets/images/strqicon.png"></img>
+            <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
             <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
             <i className="fas fa-user-plus" aria-hidden="true" />
             <i className="far fa-times-circle" />
