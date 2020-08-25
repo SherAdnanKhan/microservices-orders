@@ -40,19 +40,19 @@ const VideoCall = () => {
         <div className="main-user">
           {/* For Mobile View Start */}
           <div className="mobile-Icon">
-            <i className="fa fa-comments" aria-hidden="true" />
-            <i className="fas fa-pencil-alt" aria-hidden="true" />
+          <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
+            <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
           </div>
           {/* Mobile View Code End */}
           <img className="add-user" src="/assets/images/avataricon.png" alt="add" />
           <div className="call-Actions">
-            <i className="fa fa-microphone" aria-hidden="true" />
+            <i className="fa fa-microphone" aria-hidden="true" data-tip="hello world" />
             <i className="fa fa-retweet" aria-hidden="true" />
             <i className="fa fa-camera" aria-hidden="true" />
           </div>
           <div className="call-Actions2">
-            <i className="fa fa-comments" aria-hidden="true" />
-            <i className="fas fa-pencil-alt" aria-hidden="true" />
+            <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
+            <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
             <i className="fas fa-user-plus" aria-hidden="true" />
             <i className="far fa-times-circle" />
           </div>

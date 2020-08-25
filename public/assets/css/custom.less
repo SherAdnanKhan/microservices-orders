@@ -2961,6 +2961,15 @@ img {
           padding: 7px 15px;
       }
     }
+    .studioDetail {
+      width: 50%;
+      @media @mobile {
+        width: unset;
+      }
+      @media screen and (max-width: 857px) {
+        width: unset;
+      }
+    }
     h2 {
       margin-top: 20px;
       position: relative;
@@ -2976,6 +2985,10 @@ img {
         display: flex;
         margin-left:8px;
         margin-bottom:25px;
+        @media @mobile {
+          width: 93%;
+        }
+        
         div {
           width:70%;
           margin: 0 auto;

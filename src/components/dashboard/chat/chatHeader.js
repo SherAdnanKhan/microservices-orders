@@ -57,7 +57,7 @@ const ChatHeader = ({ user, conversation, onlineUsers, onOpenInvitationModel, on
       </div>
 
       <div className="call-btn">
-        <button className="addPeople" onClick={onOpenInvitationModel}> add people </button>
+        <i className="fas fa-user-plus" aria-hidden="true" onClick={onOpenInvitationModel}/>
         <Link to="/dashboard/video-call">
           <img href="#" src="/assets/images/icons/VidStrq.png" className="call-icon" alt="Video Call"></img>
         </Link>

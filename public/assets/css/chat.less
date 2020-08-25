@@ -273,16 +273,25 @@
           justify-content: center;
           margin-left: auto;
           margin-right: 57px;
+          i {
+            font-size: 34px;
+            margin: 0 22px;
+            cursor: pointer;
+            @media @mobile {
+              font-size: 24px;
+              margin: 0 20px;
+            }
+          }
           @media @mobile{
             margin-right:12px;
     
           }
-          .addPeople {
-            margin-right: 16px;
-            @media @mobile{
-              margin-right: 26px;
-            }
-          }
+          // .addPeople {
+          //   margin-right: 16px;
+          //   @media @mobile{
+          //     margin-right: 26px;
+          //   }
+          // }
     
           button{
             margin-left: 10px;
@@ -305,6 +314,7 @@
           }
           img {
             width:40px;
+            cursor: pointer;
             @media @mobile{
               width: 25px;
             }
@@ -596,6 +606,7 @@
             color: white;
             font-size: 16px;
             padding: 10px;
+            margin-left: 7px;
             @media @desktop {
               font-size:12px;
             }
