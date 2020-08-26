@@ -41,7 +41,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/privacy" component={Main} />
         <Route exact path="/dashboard/chat/:slug?" component={Main} />
         <Route exact path="/dashboard/video-call" component={VideoCall} />
-        <Route exact path="/dashboard/video-call/group" component={GroupVideoCall} />
+        <Route exact path="/dashboard/video-call/group/:room" component={GroupVideoCall} />
         <Route exact path="/dashboard/video-call/add" component={AddVideoArtist} />
         <Route exact path="/dashboard/group-chat" component={Main} />
         <Route exact path="/dashboard/settings" component={NavBar} />
