@@ -14,6 +14,7 @@
     "react": "^16.13.1",
     "react-customizable-progressbar": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-draggable": "^4.4.3",
     "react-image-crop": "^8.6.4",
     "react-progressbar": "^15.4.1",
     "react-redux": "^7.2.0",
@@ -28,6 +29,7 @@
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "simple-peer": "^9.7.2",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^2.3.0"
   },
