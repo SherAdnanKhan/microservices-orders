@@ -1,11 +1,11 @@
 
-import React, { useEffect, useRef, useContext, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
-import UserContext from '../../context/userContext';
 import { useRouteMatch } from 'react-router-dom';
 import socket from '../../services/socketService';
 import Peer from 'simple-peer';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
+import { getCurrentUser } from '../../actions/authActions';
 
 
 const Video = ({ peer, index, user }) => {
@@ -13,8 +13,6 @@ const Video = ({ peer, index, user }) => {
 
   useEffect(() => {
     peer.on('stream', stream => {
-      console.log(stream);
-
       ref.current.srcObject = stream
     });
   });
@@ -24,9 +22,6 @@ const Video = ({ peer, index, user }) => {
       className={`item border-item1`}
       style={{ borderColor: user.feel.color_code }}>
       <video
-        // poster="/assets/images/avataricon.png"
-        width="100%"
-        height="100%"
         ref={ref}
         autoPlay
       >
@@ -39,11 +34,10 @@ const GroupVideoCall = () => {
   const localVideo = useRef();
   const [peers, setPeers] = useState([]);
   const peersRef = useRef([]);
-  const user = useContext(UserContext);
+  const user = getCurrentUser();
   const { params } = useRouteMatch();
 
   const [hasRendered, setHasRendered] = useState(false);
-
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
@@ -54,8 +48,8 @@ const GroupVideoCall = () => {
 
 
   useEffect(() => {
-
     if (!hasRendered) {
+      console.log('inn')
       const addPeer = (data, stream) => {
         const peer = new Peer({
           initiator: false,
@@ -99,7 +93,7 @@ const GroupVideoCall = () => {
 
       navigator
         .mediaDevices
-        .getUserMedia({ video: true, audio: true })
+        .getUserMedia({ video: { width: { min: 1280 }, height: { min: 720 } }, audio: true })
         .then(stream => {
           localVideo.current.srcObject = stream;
           socket.emit('joinVideo', { room: params.room, user });
@@ -150,7 +144,7 @@ const GroupVideoCall = () => {
           });
 
           socket.on('user-leave', data => {
-            removePeer(data.socketId)
+            removePeer(data.socketId ? data.socketId : data)
           });
         });
       setHasRendered(true);
@@ -162,7 +156,7 @@ const GroupVideoCall = () => {
   return (
     <React.Fragment>
       <div className="main">
-        <Draggable bounds="parent">
+        <Draggable>
           <div className="own-Video">
             <video
               muted
@@ -180,25 +174,27 @@ const GroupVideoCall = () => {
         <div className="draw-Icon"><img src="/assets/images/icons/DrawStrq.png" alt="Draw" /></div>
         <div className="video-Icon"><img href="#" src="/assets/images/icons/VidStrq.png" alt="Video Call" /></div>
         <div className="screen-Maximize"><i className="far fa-square" /></div>
-        <div className="item-List">
-          {peers.map(({ peer, user }, index) => (
-            <>
-              <Video
-                index={index}
-                peer={peer}
-                user={user}
-              />
-            </>
-          ))}
-
-          {/* <div className="item border-item2"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item3"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item4"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item5"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item1"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item2"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item4"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div>
-          <div className="item border-item3"><video poster="/assets/images/avataricon.png" width="120" height="120px"></video></div> */}
+        <div className="video-container">
+          <div className={`item-List item${peers.length}`}>
+            {peers.map(({ peer, user }, index) => (
+              <>
+                <Video
+                  index={index}
+                  peer={peer}
+                  user={user}
+                />
+              </>
+            ))}
+            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
+            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
+            <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
+            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
+            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
+            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
+            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
+            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
+            <div className="item"><video poster="/assets/images/avataricon.png" ></video></div> */}
+          </div>
         </div>
       </div>
     </React.Fragment>

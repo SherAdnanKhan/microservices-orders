@@ -293,25 +293,28 @@
     border: 9px solid green;
     position: absolute;
     border-radius: 9px;
-    right: 95px;
-    width: 300px;
+    right: 0px;
+    width: 250px;
     top: 15px;
+    z-index: 1;
     @media @mobile {
     border: 5px solid green;
     border-radius: 6px;
-    right: 7px;
-    top: 44px;
+    right: 0px;
+    top: 12px;
+    width: 120px;
     }
   }
   .settings-Icon {
     position: absolute;
     right: 40%;
+    cursor: pointer;
     @media @mobile {
-      top: 134px;
-      right: 33px;
+      top: 92px;
+      right:56px;
     }
     i {
-      font-size: 43px;
+      font-size: 40px;
       @media @mobile {
         font-size: 35px;
       }
@@ -321,6 +324,8 @@
     position: absolute;
     left: 50px;
     top: 65px;
+    cursor: pointer;
+    z-index: 1;
     @media @mobile {
     left: 11px;
     top: 70px;
@@ -333,6 +338,8 @@
     position: absolute;
     top: 119px;
     left: 48px;
+    cursor: pointer;
+    z-index: 1;
      @media @mobile {
       top: 112px;
       left: 11px;
@@ -345,6 +352,8 @@
     position: absolute;
     bottom: 50%;
     left: 46px;
+    cursor: pointer;
+    z-index: 1;
     @media @mobile {
       left: 9px;
     }
@@ -352,46 +361,61 @@
       font-size: 32px;
     }
   }
-  .item-List {
-    width: 78%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 76px;
-
+  .video-container {
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
     @media @mobile {
-      width: unset;
-      margin: 10px 0px;
+      width: 100%;
+      max-height: 100vh;
     }
-    .item {
-    margin: 1%;
-    width: 31.333333%;
-    float: left;
-    text-align: center;
-    // border: 9px solid red;
-    border-radius: 11px;
-    box-sizing: border-box;
-    // padding: 40px 10px;
-    @media @mobile {
-      width: 41%;
-      padding: 10px 10px;
-      border: 5px solid red;
-      border-radius: 5px;
-    }
-    &.border-item1 {
-      border: 9px solid orangered;
-    }
-    &.border-item2 {
-      border: 9px solid purple;
-    }
-    &.border-item3 {
-      border: 9px solid rgb(179, 40, 70);
-    }
-    &.border-item4 {
-      border: 9px solid green;
-    }
-    &.border-item5 {
-      border: 9px solid rgb(105, 212, 34);
-    }
+    .item-List {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      &.item1 {
+        .item {
+          width: 100%;
+          height: 99vh;
+        } 
+      }
+      &.item2 {
+        .item {
+          width: 48%;
+          height: 99vh;
+          @media @mobile {
+            height: unset;
+          }
+        } 
+      }
+      &.item3 {
+        .item {
+          width: 31.33%;
+          min-height: 100%;
+        } 
+      }
+      @media @mobile {
+        width: unset;
+        margin: 10px 0px;
+      }
+      .item {
+        margin: 0 1%;
+        width: 31%;
+        text-align: center;
+        border: 9px solid;
+        border-radius: 11px;
+        box-sizing: border-box;
+        video {
+          width: 100%;
+          height: 100%;
+        }
+        @media @mobile {
+          width: 48%;
+          padding: 10px 10px;
+          border: 5px solid;
+          border-radius: 5px;
+        }
+      }
     }
   }
 }

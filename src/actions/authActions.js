@@ -60,8 +60,9 @@ const setCurrentUser = ({ user, token }) => {
 };
 
 export const logout = () => {
-  localStorage.clear();
+  socket.emit('logout')
   socket.disconnect();
   socket.close();
+  localStorage.clear();
   window.location.href = '/login';
 };
