@@ -34,7 +34,6 @@ import {
   POST_UNSTROKE
 } from './constants/keys';
 
-
 const currentUser = getCurrentUser();
 
 if (getCurrentUser()) {
