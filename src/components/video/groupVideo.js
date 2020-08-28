@@ -19,7 +19,7 @@ const Video = ({ peer, index, user }) => {
 
   return (
     <div
-      className={`item border-item1`}
+      className="item"
       style={{ borderColor: user.feel.color_code }}>
       <video
         ref={ref}
@@ -91,6 +91,7 @@ const GroupVideoCall = () => {
         return peer;
       }
 
+
       navigator
         .mediaDevices
         .getUserMedia({ video: { width: { min: 1280 }, height: { min: 720 } }, audio: true })
@@ -156,25 +157,26 @@ const GroupVideoCall = () => {
   return (
     <React.Fragment>
       <div className="main">
-        <Draggable>
-          <div className="own-Video">
-            <video
-              muted
-              ref={localVideo}
-              onDoubleClick={() => localVideo.current.requestFullscreen()}
-              poster="/assets/images/avataricon.png"
-              width="100%"
-              height="100%"
-              autoPlay
-            >
-            </video>
-            <div className="settings-Icon"><i className="fas fa-ellipsis-h" /></div>
-          </div>
-        </Draggable>
         <div className="draw-Icon"><img src="/assets/images/icons/DrawStrq.png" alt="Draw" /></div>
         <div className="video-Icon"><img href="#" src="/assets/images/icons/VidStrq.png" alt="Video Call" /></div>
-        <div className="screen-Maximize"><i className="far fa-square" /></div>
+        <div className="screen-Maximize"><i className="fas fa-expand" /></div>
         <div className="video-container">
+          <Draggable bounds="parent">
+            <div className="own-Video">
+              <video
+                muted
+                ref={localVideo}
+                onDoubleClick={() => localVideo.current.requestFullscreen()}
+                poster="/assets/images/avataricon.png"
+                width="100%"
+                height="100%"
+                autoPlay
+              >
+              </video>
+              <div className="settings-Icon"><i className="fas fa-ellipsis-h" /></div>
+            </div>
+          </Draggable>
+
           <div className={`item-List item${peers.length}`}>
             {peers.map(({ peer, user }, index) => (
               <>
@@ -185,10 +187,10 @@ const GroupVideoCall = () => {
                 />
               </>
             ))}
+            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
             {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
-            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
             {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
