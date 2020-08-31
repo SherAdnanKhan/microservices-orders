@@ -31,7 +31,7 @@ const FaveGalleries = () => {
       <div className="faves-heading"
         style={{ backgroundColor: feelColor }}
       >
-        <p class="faves-text">Faves</p>
+        <p className="faves-text">Faves</p>
       </div>
       {loading && <Spinner />}
       {/* <div className="search-input">
@@ -56,14 +56,14 @@ const FaveGalleries = () => {
                 <div className="details">
                   {/* <p>{gallery?.user?.first_name}</p>
                   <p>{gallery?.user?.art?.name}</p> */}
-                  <p>
-                    {gallery?.user.art &&
+                  {/* <p>
+                    {gallery.user.art &&
                       <>
                         {gallery?.user.art.parent && <> {gallery?.user.art.parent.name + '/'} </>}
                         {gallery?.user.art.name && <> {gallery?.user.art.name} </>}
                       </>
                     }
-                  </p>
+                  </p> */}
                   <Link
                     to={`/dashboard/studio/${gallery?.user?.slug}/?gallery=${gallery?.id}`}
                   >

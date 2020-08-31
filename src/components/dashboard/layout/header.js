@@ -47,10 +47,10 @@ const Header = () => {
         <Link
           to=""
           className="feelIcon"
-          style={{
-            borderLeft: '1px solid black',
-            borderBottom: '1px solid black'
-          }}
+          // style={{
+          //   borderLeft: '1px solid black',
+          //   borderBottom: '1px solid black'
+          // }}
         >
           <img alt="" src="/assets/images/icons/feelicon.png" />
         </Link>

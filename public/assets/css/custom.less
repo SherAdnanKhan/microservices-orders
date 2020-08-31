@@ -1119,8 +1119,10 @@ input {
     }
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#FFD700, 10%);
-        border-bottom: 1px solid darken(#FFD700, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#FFD700, 10%);
+          // border-bottom: 1px solid darken(#FFD700, 10%);
+        }
       }
     }
     nav,
@@ -1167,8 +1169,11 @@ input {
     }
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#FFA500, 10%);
-        border-bottom: 1px solid darken(#FFA500, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#FFA500, 10%);
+          // border-bottom: 1px solid darken(#FFA500, 10%);
+        }
+       
       }
     }
     nav,
@@ -1215,8 +1220,10 @@ input {
     }
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#808080, 10%);
-        border-bottom: 1px solid darken(#808080, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#808080, 10%);
+          // border-bottom: 1px solid darken(#808080, 10%);
+        }
       }
     }
     nav,
@@ -1263,8 +1270,10 @@ input {
     }
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#32CD32, 10%);
-        border-bottom: 1px solid darken(#32CD32, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#808080, 10%);
+          // border-bottom: 1px solid darken(#808080, 10%);
+        }
       }
     }
     nav,
@@ -1311,8 +1320,10 @@ input {
     }
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#FF0000, 10%);
-        border-bottom: 1px solid darken(#FF0000, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#808080, 10%);
+          // border-bottom: 1px solid darken(#808080, 10%);
+        }
       }
     }
     nav,
@@ -1359,8 +1370,10 @@ input {
     }
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#800080, 10%);
-        border-bottom: 1px solid darken(#800080, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#808080, 10%);
+          // border-bottom: 1px solid darken(#808080, 10%);
+        }
       }
     }
     nav,
@@ -1408,8 +1421,10 @@ input {
    
     .top {
       .feelIcon {
-        border-left: 1px solid darken(#1E90FF, 10%);
-        border-bottom: 1px solid darken(#1E90FF, 10%);
+        @media @mobile {
+          // border-left: 1px solid darken(#808080, 10%);
+          // border-bottom: 1px solid darken(#808080, 10%);
+        }
       }
     }
     nav,
@@ -1435,14 +1450,24 @@ input {
     transition-duration: 0.5s;
     .feelIcon {
       position: absolute;
-      right: 0;
-      width: 36px;
-      border-radius: 0 0 0 20px;
+      right: 45px;
+      width: 53px;
+      border-radius: 50%;
       display: block;
       text-align: center;
-      padding: 5px;
+      padding: 15px;
       margin-top: -1px;
-      top: 0;
+      top: 91px;
+      border: 2px solid #ffffff61;
+      @media @mobile {
+        right: 0;
+        top: 0;
+        padding: 4px;
+        border-radius: 0 0 0 20px;
+        width: 36px;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+      }
       img {
         width: 100%;
       }
@@ -1505,7 +1530,7 @@ input {
   nav {
     width: 100%;
     position: absolute;
-    z-index: 11;
+    z-index: 99;
     ul.dropdownM {
       padding-left: 0;
       list-style: none;
@@ -2943,7 +2968,7 @@ img {
   }
   
   .studioScreen {
-    margin-top: 30px;
+    margin-top: 43px;
     text-align: center;
     width: 100%;
     display: flex;
@@ -2953,7 +2978,7 @@ img {
       flex-direction: row;
       justify-content: space-around; 
       align-items: center;
-      width: 50%;
+      width: 30%;
       img {
           width: 10%;
           background-color: transparent;
@@ -2962,7 +2987,7 @@ img {
       }
     }
     .studioDetail {
-      width: 50%;
+      width: 70%;
       @media @mobile {
         width: unset;
       }
@@ -3240,7 +3265,7 @@ img {
       flex-direction: row;
       justify-content: space-around; 
       align-items: center;
-      width: 50%;
+      width: 30%;
       @media @mobile {
         width: 100%;
       }
@@ -3252,7 +3277,7 @@ img {
           }
     }
     .studioDetail{
-      width: 50%;
+      width: 70%;
       @media @mobile {
         width: 100%;
       }
@@ -3959,11 +3984,14 @@ img {
 }
 .profilebioname{
     width: 70%;
-    margin: 35px auto 0;
+    margin: 50px auto 0;
     background: #2d2d2d;
     border-radius: 5px;
     position: relative;
     padding: 10px;
+    @media @mobile {
+      margin-top: 35px;
+    }
 }
 
 // Start tutorial page style
@@ -4215,6 +4243,10 @@ img {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-top: 68px;
+    @media @mobile {
+      margin-top: unset;
+    }
     p{
       margin-right: auto;
       margin-left: auto;
@@ -5596,6 +5628,10 @@ img {
   width:95%;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 95px;
+  @media @mobile {
+    margin-top: 0px;   
+  }
   .add-img-vid-box{
     display: flex;
     position: fixed;
