@@ -6,7 +6,6 @@ import Main from './Main';
 import Profile from './profile';
 import NavBar from './layout/navBar';
 import AddExibit from './exhibition/addExibition';
-import VideoCall from '../video/VideoCall';
 import AddVideoArtist from '../video/addVideoArtist';
 import GroupVideoCall from "../video/groupVideo";
 import PostView from "../common/postView";
@@ -40,8 +39,7 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/viewpost/:id" component={Main} />
         <Route exact path="/dashboard/privacy" component={Main} />
         <Route exact path="/dashboard/chat/:slug?" component={Main} />
-        <Route exact path="/dashboard/video-call" component={VideoCall} />
-        <Route exact path="/dashboard/video-call/group/:room" component={GroupVideoCall} />
+        <Route exact path="/dashboard/video-call/:room" component={GroupVideoCall} />
         <Route exact path="/dashboard/video-call/add" component={AddVideoArtist} />
         <Route exact path="/dashboard/group-chat" component={Main} />
         <Route exact path="/dashboard/settings" component={NavBar} />

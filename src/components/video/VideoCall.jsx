@@ -5,42 +5,42 @@ import { Link } from 'react-router-dom';
 const VideoCall = () => {
 
   return (
-    <React.Fragment>
-      <div className="top-Header">
-      </div>
-      <div className="add-strq">
-        <div className=" dropdown">
-          <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-          <div className="dropdown-content">
-            <a href="/dashboard/video-call">View galleries</a>
-            <a href="/dashboard/video-call">View profile</a>
-            <a href="/dashboard/video-call">Send ticket</a>
-            <a href="/dashboard/video-call">Block</a>
-            <a href="/dashboard/video-call">Mute</a>
-            <a href="/dashboard/video-call">Report</a>
-            <a href="/dashboard/video-call">End chat</a>
-          </div>
-        </div>
-        <div className="video-cube">
-        </div>
-        <div className="artist-name">
-          salwa
-    </div>
-        <div style={{ marginLeft: "auto" }} >
-          <Link to="/dashboard/video-call/add">
-            <button className="btn-style" >Add Artist</button>
-          </Link>
-          <Link to="/dashboard/video-call/group">
-            <button className="btn-style" style={{ marginLeft: "12px", marginRight: "12px" }} >Group Video</button>
-          </Link>
-
-        </div>
-      </div>
+    <div className="video-call-screen">
+      {/* <div className="top-Header">
+      </div> */}
       <div className="head-main-user">
         <div className="main-user">
+          <div className="add-strq">
+            <div className=" dropdown">
+              <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+              <div className="dropdown-content">
+                <a href="/dashboard/video-call">View galleries</a>
+                <a href="/dashboard/video-call">View profile</a>
+                <a href="/dashboard/video-call">Send ticket</a>
+                <a href="/dashboard/video-call">Block</a>
+                <a href="/dashboard/video-call">Mute</a>
+                <a href="/dashboard/video-call">Report</a>
+                <a href="/dashboard/video-call">End chat</a>
+              </div>
+            </div>
+            <div className="video-cube">
+            </div>
+            <div className="artist-name">
+              salwa
+            </div>
+            <div style={{ marginLeft: "auto" }} >
+              {/* <Link to="/dashboard/video-call/add">
+                <button className="btn-style" >Add Artist</button>
+              </Link>
+              <Link to="/dashboard/video-call/group">
+                <button className="btn-style" style={{ marginLeft: "12px", marginRight: "12px" }} >Group Video</button>
+              </Link> */}
+
+            </div>
+          </div>
           {/* For Mobile View Start */}
           <div className="mobile-Icon">
-          <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
+            <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
             <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
           </div>
           {/* Mobile View Code End */}
@@ -60,9 +60,8 @@ const VideoCall = () => {
         <div className="own-cube">
           <img src="/assets/images/red.png" alt="red" />
         </div>
-
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 export default VideoCall;
