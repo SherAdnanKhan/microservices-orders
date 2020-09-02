@@ -81,19 +81,12 @@ const GroupVideoCall = () => {
       room: params.room,
       user: user
     });
-
-    peersRef.current.forEach(peer => {
-      peer.destroy && peer.destroy();
-    });
-
-    peersRef.current = [];
-    setPeers([]);
   }, true);
 
 
   useEffect(() => {
     if (!hasRendered) {
-      console.log('inn')
+
       const addPeer = (data, stream) => {
         const peer = new Peer({
           initiator: false,
@@ -204,6 +197,7 @@ const GroupVideoCall = () => {
           socket.on('user-leave', data => {
             removePeer(data.socketId ? data.socketId : data)
           });
+          console.log('inn')
         });
       setHasRendered(true);
     }
