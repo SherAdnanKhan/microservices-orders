@@ -83,10 +83,11 @@ const GroupVideoCall = () => {
     });
 
     peersRef.current.forEach(peer => {
-      peer.destroy();
+      peer.destroy && peer.destroy();
     });
+
     peersRef.current = [];
-    setPeers([])
+    setPeers([]);
   }, true);
 
 
@@ -138,8 +139,9 @@ const GroupVideoCall = () => {
         .mediaDevices
         .getUserMedia({
           video: {
-            width: 1280,
-            height: 720
+            width: { min: 640, ideal: 1920 },
+            height: { min: 400, ideal: 1080 },
+            aspectRatio: { ideal: 1.7777777778 }
           }, audio: true
         })
         .then(stream => {
