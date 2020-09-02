@@ -209,8 +209,6 @@ const GroupVideoCall = () => {
           });
 
           socket.on('user-leave', data => {
-            console.log('user left: ', data.user.username)
-            console.log('socket: ', data.socketId)
             removePeer(data.socketId)
           });
           console.log('inn')
