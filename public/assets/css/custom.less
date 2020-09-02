@@ -589,10 +589,10 @@ input {
         @media @mobile {
           width: calc(100% - 10px);
         }
-        .labelText {
-          margin-right: auto;
-          display: block;
-        }
+        // .labelText {
+        //   margin-right: auto;
+        //   display: block;
+        // }
         input {
           width: calc(100% - 22px);
           border-radius: 5px;
@@ -656,7 +656,10 @@ input {
       text-align: left;
       display: inline-block;
       margin-bottom: 15px;
-      margin-top: 15px; 
+      margin-top: 15px;
+      .labelText {
+        margin-left: 10px;
+      }
       input {
         width: calc(100% - 22px);
         background: black;
@@ -666,6 +669,10 @@ input {
         border-radius: 5px;
         border: 1px solid gray;
         margin-top: 3px;
+          @media @mobile {
+            width: calc(94% - 22px);
+            margin-left: 9px;
+          }
       }
     }
     .btn {
@@ -680,6 +687,9 @@ input {
       color: gray;
       transition: all;
       transition-duration: 1s;
+        @media @mobile {
+          width: 93%;
+        }
     }
 
     .btn:enabled{
@@ -722,7 +732,7 @@ input {
       width: 100%;
       text-align: left;
       display: inline-block;
-      margin-bottom: 15px; 
+      margin-bottom: 15px;
       input {
         width: calc(100% - 22px);
         background: black;
@@ -3304,7 +3314,7 @@ img {
         display: flex;
         margin: 0 auto 25px;
         div {
-          width: 93%;
+          width: 100%;
           background: black;
           white-space: pre-line;
           color: white;
