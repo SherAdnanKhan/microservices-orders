@@ -81,13 +81,18 @@ const GroupVideoCall = () => {
       room: params.room,
       user: user
     });
+
+    socket.off('userList')
+    socket.off('answer-made');
+    socket.off('call-made');
+    socket.off('user-leave');
   }, true);
 
 
   useEffect(() => {
     if (!hasRendered) {
-
       const addPeer = (data, stream) => {
+        console.log('add peer');
         const peer = new Peer({
           initiator: false,
           trickle: false,
@@ -96,6 +101,7 @@ const GroupVideoCall = () => {
 
         peer.on('signal', signal => {
           if (signal.type) {
+
             socket.emit("make-answer", {
               signal,
               user: user,
@@ -110,7 +116,14 @@ const GroupVideoCall = () => {
       };
 
       const removePeer = (socketId) => {
+        const peer = peersRef.current.find(p => p.socketId !== socketId);
+
+        if (peer) {
+          peer.peer.destroy();
+        }
+
         peersRef.current = peersRef.current.filter(p => p.socketId !== socketId);
+        console.log('removed: ', peersRef.current)
         setPeers([...peersRef.current]);
       }
 
@@ -143,7 +156,7 @@ const GroupVideoCall = () => {
 
           socket.on('userList', users => {
             const myPeers = [];
-
+            console.log('user list', users)
             users.forEach((user) => {
               const peer = createNewPeer(user, stream);
 
@@ -163,6 +176,7 @@ const GroupVideoCall = () => {
           });
 
           socket.on('call-made', (data) => {
+            console.log('call-made');
             const peer = addPeer(data, stream)
 
             peersRef.current.push({
@@ -195,7 +209,9 @@ const GroupVideoCall = () => {
           });
 
           socket.on('user-leave', data => {
-            removePeer(data.socketId ? data.socketId : data)
+            console.log('user left: ', data.user.username)
+            console.log('socket: ', data.socketId)
+            removePeer(data.socketId)
           });
           console.log('inn')
         });
