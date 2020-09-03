@@ -380,9 +380,9 @@ const FaveSection = ({
                         <p className="submit-text">{feed.parent.feed} </p>
                         {feed.parent.feed_type === 1 &&
                           feed.parent.image &&
-                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                          <Link target="_blank" to={{ pathname: `/dashboard/post/${feed?.user?.slug}?image=${feed?.image?.path}`, query: { postUrl: feed?.image?.path, postType: feed.feed_type } }}>
                             <img
-                              src={feed.parent.image.path}
+                              src={feed?.parent?.image?.path}
                               alt="Snow"
                               className="img-css-fave"
                             />
