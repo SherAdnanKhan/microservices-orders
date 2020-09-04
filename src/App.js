@@ -33,6 +33,7 @@ import {
   POST_STROKE,
   POST_UNSTROKE
 } from './constants/keys';
+import { useWindowUnloadEffect } from './components/common/useWindowUnloadEffect';
 
 const currentUser = getCurrentUser();
 
@@ -42,6 +43,20 @@ if (getCurrentUser()) {
 
 function App() {
   const dispatch = useDispatch();
+
+  const cleanupEvents = () => {
+    socket.off('onlineUsers');
+    socket.off('notifyColrChange');
+    socket.off('reciveUserNotifications');
+    socket.off('notify');
+    socket.emit('userLeft', currentUser);
+    socket.disconnect();
+    socket.close();
+  };
+
+  useWindowUnloadEffect(() => {
+    cleanupEvents();
+  }, true);
 
   useEffect(() => {
     let url1 = history.location.pathname.split('/')[2];
@@ -110,17 +125,14 @@ function App() {
         dispatch(getOnlineUsers(data));
       });
 
-      return () => {
-        socket.emit('disconnect', getAuthToken());
-        socket.emit('userLeft', currentUser);
-        socket.disconnect();
-        socket.close();
-      }
+      socket.on('reconnect', () => {
+        console.log('yes connected');
+        // socket.emit('joinUser', currentUser, getAuthToken());
+      })
     }
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
-
     <div>
       <ToastContainer
         autoClose={5000}
