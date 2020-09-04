@@ -18,6 +18,11 @@ const Video = ({ peer, index, user }) => {
         ref.current.srcObject = stream;
       });
 
+      // peer._pc.onconnectionstatechange = () => {
+      //   console.log(peer._pc.connectionState);
+      //   console.log('peer: ', peer._pc);
+      // }
+
       setHasListner(listner => listner = true);
     }
 
@@ -110,8 +115,10 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: false,
           trickle: false,
+          reconnectTimer: 30000,
           stream
         });
+
 
         peer.on('signal', signal => {
           if (signal.type) {
@@ -151,24 +158,25 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: true,
           trickle: false,
+          reconnectTimer: 30000,
           stream: stream
         });
 
         peer.on('signal', signal => {
           socket.emit('call-user', { signal, sender: user, userToCall: data.socketId, senderSocket: socket.id });
         });
-
         return peer;
       }
-
       navigator
         .mediaDevices
         .getUserMedia({
           video: {
             width: { min: 640, ideal: 1920 },
             height: { min: 400, ideal: 1080 },
-            aspectRatio: { ideal: 1.7777777778 }
-          }, audio: true
+            aspectRatio: { ideal: 1.7777777778 },
+            facingMode: 'user'
+          },
+          audio: true
         })
         .then(stream => {
           localVideo.current.srcObject = stream;
@@ -254,6 +262,40 @@ const GroupVideoCall = () => {
     setShowActions(!showActions);
   }
 
+  const handleCameraSwitch = (e) => {
+    e.stopPropagation();
+    console.log('camera');
+
+    navigator
+      .mediaDevices
+      .getUserMedia({
+        video: {
+          width: { exact: 640 },
+          height: { exact: 400 },
+          facingMode: 'environment'
+        },
+      })
+      .then(stream => {
+        peersRef.current.forEach((peer) => {
+          if (peer) {
+            peer
+              .peer
+              .replaceTrack &&
+              peer
+                .peer
+                .replaceTrack(
+                  peer.peer.streams[0].getVideoTracks()[0],
+                  stream.getVideoTracks()[0],
+                  peer.peer.streams[0]
+                )
+
+            localVideo.current.srcObject = stream;
+          }
+        });
+      });
+    ;
+  }
+
   return (
     <React.Fragment>
       <div
@@ -331,7 +373,7 @@ const GroupVideoCall = () => {
             <div className="item"><video poster="/assets/images/avataricon.png" ></video></div> */}
             <div className="call-Actions">
               <i className="fa fa-microphone" aria-hidden="true" data-tip="hello world" />
-              <i className="fa fa-retweet" aria-hidden="true" />
+              <i className="fa fa-retweet" aria-hidden="true" onClick={handleCameraSwitch} />
               <i className="fa fa-camera" aria-hidden="true" />
             </div>
             <div className="call-Actions2">
