@@ -18,6 +18,7 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
     if (!hasListner) {
       peer.on('stream', stream => {
         ref.current.srcObject = stream;
+        console.log(stream.getAudioTracks()[0]);
       });
 
       peer.on('close', () => {
@@ -27,11 +28,6 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
       peer.on('error', () => {
         onPeerClose(socketId);
       })
-
-      // peer._pc.onconnectionstatechange = () => {
-      //   console.log(peer._pc.connectionState);
-      //   console.log('peer: ', peer._pc);
-      // }
 
       setHasListner(listner => listner = true);
     }
@@ -100,6 +96,7 @@ const GroupVideoCall = () => {
   const [showActions, setShowActions] = useState(false);
   const [hasRendered, setHasRendered] = useState(false);
   const [facingMode, setFacingMode] = useState('user');
+  const [microPhone, setMicroPhone] = useState(true);
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
@@ -126,7 +123,18 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: false,
           trickle: false,
-          reconnectTimer: 30000,
+          config: {
+            iceServers: [
+              {
+                urls: "stun:numb.viagenie.ca"
+              },
+              {
+                urls: 'turn:numb.viagenie.ca',
+                credential: 'Akif3334796768',
+                username: 'm.akif.farooq@gmail.com'
+              },
+            ]
+          },
           stream
         });
 
@@ -164,15 +172,29 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: true,
           trickle: false,
-          reconnectTimer: 30000,
+          config: {
+            iceServers: [
+              {
+                urls: "stun:numb.viagenie.ca"
+              },
+              {
+                urls: 'turn:numb.viagenie.ca',
+                credential: 'Akif3334796768',
+                username: 'm.akif.farooq@gmail.com'
+              },
+            ]
+          },
           stream: stream
         });
+
+        console.log(peer._pc)
 
         peer.on('signal', signal => {
           socket.emit('call-user', { signal, sender: user, userToCall: data.socketId, senderSocket: socket.id });
         });
         return peer;
       }
+
       navigator
         .mediaDevices
         .getUserMedia({
@@ -238,6 +260,10 @@ const GroupVideoCall = () => {
             }
           });
 
+          socket.on('toggle-microphone', data => {
+            toast(data.message);
+          })
+
           socket.on('user-leave', data => {
             removePeer(data.socketId);
           });
@@ -263,53 +289,23 @@ const GroupVideoCall = () => {
     setShowActions(!showActions);
   }
 
-  // const handleShareScreen = (e) => {
-  //   e.stopPropagation();
+  const handleToggleMicroPhone = () => {
+    localVideo.current.srcObject.getAudioTracks()[0].enabled = !localVideo.current.srcObject.getAudioTracks()[0].enabled;
 
-  //   navigator
-  //     .mediaDevices
-  //     .getDisplayMedia({ cursor: true })
-  //     .then(stream => {
+    const message = microPhone
+      ? `${user.username} has turned off his microphone`
+      : `${user.username} has turned on his microphone`;
 
-  //       stream.getVideoTracks()[0].onended = function () {
-  //         peersRef.current.forEach((peer) => {
-  //           if (peer) {
-  //             peer
-  //               .peer
-  //               .replaceTrack &&
-  //               peer
-  //                 .peer
-  //                 .replaceTrack(
-  //                   peer.peer.streams[0].getVideoTracks()[0],
-  //                   localVideo.current.srcObject.getVideoTracks()[0],
-  //                   peer.peer.streams[0]
-  //                 )
-  //           }
-  //         });
-  //       };
+    socket.emit('on-toggle-microphone', { room: params.room, message });
 
-  //       peersRef.current.forEach((peer) => {
-  //         if (peer) {
-  //           peer
-  //             .peer
-  //             .replaceTrack &&
-  //             peer
-  //               .peer
-  //               .replaceTrack(
-  //                 peer.peer.streams[0].getVideoTracks()[0],
-  //                 stream.getVideoTracks()[0],
-  //                 peer.peer.streams[0]
-  //               )
-  //         }
-  //       });
-  //     }).catch(err => {
-  //       toast.error(err)
-  //     });
+    setMicroPhone(!microPhone);
+  }
+
+  // const handleToggleVideo = () => {
+  //   localVideo.current.srcObject.getVideoTracks()[0].enabled = !localVideo.current.srcObject.getVideoTracks()[0].enabled;
   // }
 
   const handleCameraSwitch = (e) => {
-    e.stopPropagation();
-
     if (isMobile()) {
       localVideo.current.srcObject.getTracks().forEach(track => track.stop());
 
@@ -448,8 +444,22 @@ const GroupVideoCall = () => {
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png" ></video></div> */}
             {/* <button onClick={handleShareScreen} style={{ position: 'absolute', zIndex: 1000 }}> Share screen </button> */}
-            <div className="call-Actions">
-              <i className="fa fa-microphone" aria-hidden="true" data-tip="hello world" />
+            <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
+              {microPhone
+                ? <i
+                  className="fa fa-microphone"
+                  aria-hidden="true"
+                  data-tip="hello world"
+                  onClick={handleToggleMicroPhone}
+                />
+
+                : <i
+                  className="fa fa-microphone-slash"
+                  aria-hidden="true"
+                  data-tip="hello world"
+                  onClick={handleToggleMicroPhone}
+                />
+              }
               <i className="fa fa-retweet" aria-hidden="true" onClick={handleCameraSwitch} />
               <i className="fa fa-camera" aria-hidden="true" />
             </div>
