@@ -12,7 +12,7 @@ const HorizontalSlider = ({ children, slidesToShow = '' }) => {
       <i
         className="arrow-up fa fa-caret-up fa-3x"
         onClick={onClick}
-        style={{ display: 'block' }}
+        style={{ display: 'none' }}
       >
       </i>
     );
@@ -22,7 +22,7 @@ const HorizontalSlider = ({ children, slidesToShow = '' }) => {
       <i
         className="arrow-down fa fa-caret-down fa-3x"
         onClick={onClick}
-        style={{ display: 'block' }}
+        style={{ display: 'none' }}
       >
       </i>
     );
