@@ -7,8 +7,10 @@ import Peer from 'simple-peer';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 import { getCurrentUser } from '../../actions/authActions';
 import Avatar from '../common/avatar';
+import { toast } from 'react-toastify';
+import { isMobile } from '../../utils/helperFunctions';
 
-const Video = ({ peer, index, user }) => {
+const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
 
@@ -18,6 +20,14 @@ const Video = ({ peer, index, user }) => {
         ref.current.srcObject = stream;
       });
 
+      peer.on('close', () => {
+        onPeerClose(socketId);
+      })
+
+      peer.on('error', () => {
+        onPeerClose(socketId);
+      })
+
       // peer._pc.onconnectionstatechange = () => {
       //   console.log(peer._pc.connectionState);
       //   console.log('peer: ', peer._pc);
@@ -26,10 +36,11 @@ const Video = ({ peer, index, user }) => {
       setHasListner(listner => listner = true);
     }
 
-  }, [hasListner, peer]);
+  }, [hasListner, peer, user, socketId, onPeerClose]);
 
   return (
     <div
+      key={index}
       className="item"
       style={{ borderColor: user.feel.color_code }}
     >
@@ -88,6 +99,7 @@ const GroupVideoCall = () => {
   const [totalPeers, setTotalPeers] = useState(0);
   const [showActions, setShowActions] = useState(false);
   const [hasRendered, setHasRendered] = useState(false);
+  const [facingMode, setFacingMode] = useState('user');
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
@@ -111,7 +123,6 @@ const GroupVideoCall = () => {
   useEffect(() => {
     if (!hasRendered) {
       const addPeer = (data, stream) => {
-        console.log('add peer');
         const peer = new Peer({
           initiator: false,
           trickle: false,
@@ -119,11 +130,8 @@ const GroupVideoCall = () => {
           stream
         });
 
-
         peer.on('signal', signal => {
           if (signal.type) {
-
-            console.log(signal)
             socket.emit("make-answer", {
               signal,
               user: user,
@@ -138,7 +146,6 @@ const GroupVideoCall = () => {
       };
 
       const removePeer = (socketId) => {
-
         let filtered = peersRef.current.map(peer => {
           if (peer?.socketId === socketId) {
             peer.peer.destroy();
@@ -151,7 +158,6 @@ const GroupVideoCall = () => {
 
         setPeers(filtered);
         setTotalPeers(filtered.filter(peer => peer !== null).length);
-        console.log('removed: ', filtered)
       }
 
       const createNewPeer = (data, stream) => {
@@ -176,6 +182,7 @@ const GroupVideoCall = () => {
             aspectRatio: { ideal: 1.7777777778 },
             facingMode: 'user'
           },
+
           audio: true
         })
         .then(stream => {
@@ -184,7 +191,7 @@ const GroupVideoCall = () => {
 
           socket.on('userList', users => {
             const myPeers = [];
-            console.log('user list', users)
+
             users.forEach((user) => {
               const peer = createNewPeer(user, stream);
 
@@ -206,7 +213,6 @@ const GroupVideoCall = () => {
           });
 
           socket.on('call-made', (data) => {
-            console.log('call-made');
             const peer = addPeer(data, stream)
 
             peersRef.current.push({
@@ -220,12 +226,9 @@ const GroupVideoCall = () => {
           });
 
           socket.on("answer-made", data => {
-            console.log(peersRef.current)
-            console.log('data', data.from)
             const item = peersRef.current.find(p => p.socketId === data.from);
 
             if (item) {
-              console.log('item', item)
               try {
                 item.peer.signal(data.signal)
               } catch (ex) {
@@ -236,10 +239,8 @@ const GroupVideoCall = () => {
           });
 
           socket.on('user-leave', data => {
-            removePeer(data.socketId)
+            removePeer(data.socketId);
           });
-
-          console.log('inn')
         });
       setHasRendered(true);
     }
@@ -262,39 +263,112 @@ const GroupVideoCall = () => {
     setShowActions(!showActions);
   }
 
+  // const handleShareScreen = (e) => {
+  //   e.stopPropagation();
+
+  //   navigator
+  //     .mediaDevices
+  //     .getDisplayMedia({ cursor: true })
+  //     .then(stream => {
+
+  //       stream.getVideoTracks()[0].onended = function () {
+  //         peersRef.current.forEach((peer) => {
+  //           if (peer) {
+  //             peer
+  //               .peer
+  //               .replaceTrack &&
+  //               peer
+  //                 .peer
+  //                 .replaceTrack(
+  //                   peer.peer.streams[0].getVideoTracks()[0],
+  //                   localVideo.current.srcObject.getVideoTracks()[0],
+  //                   peer.peer.streams[0]
+  //                 )
+  //           }
+  //         });
+  //       };
+
+  //       peersRef.current.forEach((peer) => {
+  //         if (peer) {
+  //           peer
+  //             .peer
+  //             .replaceTrack &&
+  //             peer
+  //               .peer
+  //               .replaceTrack(
+  //                 peer.peer.streams[0].getVideoTracks()[0],
+  //                 stream.getVideoTracks()[0],
+  //                 peer.peer.streams[0]
+  //               )
+  //         }
+  //       });
+  //     }).catch(err => {
+  //       toast.error(err)
+  //     });
+  // }
+
   const handleCameraSwitch = (e) => {
     e.stopPropagation();
-    console.log('camera');
 
-    navigator
-      .mediaDevices
-      .getUserMedia({
-        video: {
-          width: { exact: 640 },
-          height: { exact: 400 },
-          facingMode: 'environment'
-        },
-      })
-      .then(stream => {
-        peersRef.current.forEach((peer) => {
-          if (peer) {
-            peer
-              .peer
-              .replaceTrack &&
-              peer
-                .peer
-                .replaceTrack(
-                  peer.peer.streams[0].getVideoTracks()[0],
-                  stream.getVideoTracks()[0],
-                  peer.peer.streams[0]
-                )
+    if (isMobile()) {
+      localVideo.current.srcObject.getTracks().forEach(track => track.stop());
 
-            localVideo.current.srcObject = stream;
-          }
-        });
-      });
-    ;
+      if (navigator.mediaDevices) {
+        navigator
+          .mediaDevices
+          .getUserMedia({
+            video: {
+              width: { min: 640, ideal: 1920 },
+              height: { min: 400, ideal: 1080 },
+              facingMode: facingMode === 'user' ? 'environment' : 'user'
+            },
+            audio: true
+          })
+
+          .then(stream => {
+            localVideo.current.srcObject = stream
+
+            peersRef.current.forEach((peer) => {
+              if (peer) {
+                peer
+                  .peer
+                  .replaceTrack &&
+                  peer
+                    .peer
+                    .replaceTrack(
+                      peer.peer.streams[0].getVideoTracks()[0],
+                      stream.getVideoTracks()[0],
+                      peer.peer.streams[0]
+                    )
+              }
+            });
+
+            if (facingMode === 'user') {
+              setFacingMode('environment')
+            } else {
+              setFacingMode('user')
+            }
+          }).catch(err => {
+            toast.error(err.message)
+          });
+      }
+    }
   }
+
+  const handlePeerClose = (socketId) => {
+    let filtered = peersRef.current.map(peer => {
+      if (peer?.socketId === socketId) {
+        peer.peer.destroy();
+        return null
+      }
+      return peer;
+    });
+
+    peersRef.current = filtered;
+
+    setPeers(filtered);
+    setTotalPeers(filtered.filter(peer => peer !== null).length);
+  };
 
   return (
     <React.Fragment>
@@ -331,6 +405,8 @@ const GroupVideoCall = () => {
                     index={index}
                     peer={peer.peer}
                     user={peer.user}
+                    socketId={peer.socketId}
+                    onPeerClose={handlePeerClose}
                   />
                   : ""
                 }
@@ -371,6 +447,7 @@ const GroupVideoCall = () => {
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
             <div className="item"><video poster="/assets/images/avataricon.png" ></video></div> */}
+            {/* <button onClick={handleShareScreen} style={{ position: 'absolute', zIndex: 1000 }}> Share screen </button> */}
             <div className="call-Actions">
               <i className="fa fa-microphone" aria-hidden="true" data-tip="hello world" />
               <i className="fa fa-retweet" aria-hidden="true" onClick={handleCameraSwitch} />

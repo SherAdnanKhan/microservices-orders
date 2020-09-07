@@ -58,3 +58,7 @@ export const isNumber = (value) => {
 export const isChrome = () => {
   return navigator.userAgent.indexOf('Chrome') === -1 ? false : true;
 }
+
+export const isMobile = () => {
+  return /Android|iPhone|iPad/i.test(navigator.userAgent);
+}
