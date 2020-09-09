@@ -37,7 +37,8 @@ class ChatBox extends Component {
     scrollHeight: '',
     typings: [],
     show: false,
-    showParticipantsModal: false
+    showParticipantsModal: false,
+    showCallingModal: false
   };
 
   preview = createRef();
@@ -624,16 +625,16 @@ class ChatBox extends Component {
             </div>
           }
         </div>
-        {
-          this.state.show &&
+
+        {this.state.show &&
           <ChatInvitationModel
             onClose={this.handleCloseInvitationModal}
             participants={conversation?.participants}
             currentUser={currentUser}
           />
         }
-        {
-          this.state.showParticipantsModal &&
+
+        {this.state.showParticipantsModal &&
           <ParticipantsModel
             participants={conversation?.participants}
             onlineUsers={onlineUsers}
@@ -641,7 +642,7 @@ class ChatBox extends Component {
             currentUser={currentUser}
           />
         }
-      </div >
+      </div>
     );
   }
 };

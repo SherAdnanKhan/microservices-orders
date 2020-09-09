@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import LoginForm from './components/auth/loginForm';
-import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import { Switch, Route, Redirect, Link, useHistory } from 'react-router-dom';
 import RegisterForm from './components/auth/registerForm';
 import Home from './components/home';
 import ForgotPasswordForm from './components/auth/forgotPasswordForm';
@@ -8,7 +8,6 @@ import ProtectedRoute from './components/common/protectedRoute';
 import ArtSelection from "./components/artSelection";
 import Welcome from './components/welcome';
 import Dashboard from './components/dashboard/dashboard';
-import history from "./components/common/history";
 import Tutorial from './components/tutorial';
 import { getCurrentUser, getAuthToken } from './actions/authActions';
 import StartFaves from './components/dashboard/startFavas';
@@ -34,6 +33,7 @@ import {
   POST_UNSTROKE
 } from './constants/keys';
 import { useWindowUnloadEffect } from './components/common/useWindowUnloadEffect';
+import Call from './components/call';
 
 const currentUser = getCurrentUser();
 
@@ -42,6 +42,7 @@ if (getCurrentUser()) {
 }
 
 function App() {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const cleanupEvents = () => {
@@ -66,7 +67,7 @@ function App() {
     } else {
       document.title = `Meuzm: ${url2}`
     }
-  }, []);
+  }, [history]);
 
   useEffect(() => {
     if (currentUser) {
@@ -133,7 +134,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="app">
       <ToastContainer
         autoClose={5000}
         hideProgressBar={true}
@@ -150,6 +151,8 @@ function App() {
         <Route exact path='/home' component={Home} />
         <Redirect exact from='/' to='/home' />
       </Switch>
+
+      <Call />
     </div>
   );
 };

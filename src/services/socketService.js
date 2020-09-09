@@ -3,8 +3,6 @@ import { tokenKey, userKey } from '../constants/keys';
 import { isEmpty } from '../utils/helperFunctions';
 
 class Socket {
-
-
   config = {
     secure: true,
     resource: process.env.REACT_APP_SOCKET_BASE_PATH,
@@ -24,4 +22,4 @@ class Socket {
   };
 };
 
-export default new Socket().getSocketConection()
+export default new Socket().getSocketConection();

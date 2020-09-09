@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import socket from '../../services/socketService';
 import Peer from 'simple-peer';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
@@ -84,14 +84,14 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
 }
 
 const GroupVideoCall = () => {
-  const localVideo = useRef();
-
-  const [peers, setPeers] = useState([]);
-
-  const peersRef = useRef([]);
   const user = getCurrentUser();
   const { params } = useRouteMatch();
+  const history = useHistory();
 
+  const localVideo = useRef();
+  const peersRef = useRef([]);
+
+  const [peers, setPeers] = useState([]);
   const [totalPeers, setTotalPeers] = useState(0);
   const [showActions, setShowActions] = useState(false);
   const [hasRendered, setHasRendered] = useState(false);
@@ -104,8 +104,15 @@ const GroupVideoCall = () => {
       user: user
     });
 
+    if (localVideo.current) {
+      localVideo.current.srcObject.getTracks().forEach(track => track.stop());
+      localVideo.current = null;
+    }
+
     peersRef.current.forEach((peer) => {
-      peer.destroy();
+      if (peer) {
+        peer.peer.destroy();
+      }
     });
     peersRef.current = [];
     setPeers([]);
@@ -115,7 +122,6 @@ const GroupVideoCall = () => {
     socket.off('call-made');
     socket.off('user-leave');
   }, true);
-
 
   useEffect(() => {
     if (!hasRendered) {
@@ -132,7 +138,7 @@ const GroupVideoCall = () => {
                 urls: 'turn:numb.viagenie.ca',
                 credential: 'Akif3334796768',
                 username: 'm.akif.farooq@gmail.com'
-              },
+              }
             ]
           },
           stream
@@ -174,6 +180,7 @@ const GroupVideoCall = () => {
           trickle: false,
           config: {
             iceServers: [
+
               {
                 urls: "stun:numb.viagenie.ca"
               },
@@ -186,8 +193,6 @@ const GroupVideoCall = () => {
           },
           stream: stream
         });
-
-        console.log(peer._pc)
 
         peer.on('signal', signal => {
           socket.emit('call-user', { signal, sender: user, userToCall: data.socketId, senderSocket: socket.id });
@@ -293,17 +298,13 @@ const GroupVideoCall = () => {
     localVideo.current.srcObject.getAudioTracks()[0].enabled = !localVideo.current.srcObject.getAudioTracks()[0].enabled;
 
     const message = microPhone
-      ? `${user.username} has turned off his microphone`
-      : `${user.username} has turned on his microphone`;
+      ? `${user.username} has muted his microphone`
+      : `${user.username} has unmuted his microphone`;
 
     socket.emit('on-toggle-microphone', { room: params.room, message });
 
     setMicroPhone(!microPhone);
   }
-
-  // const handleToggleVideo = () => {
-  //   localVideo.current.srcObject.getVideoTracks()[0].enabled = !localVideo.current.srcObject.getVideoTracks()[0].enabled;
-  // }
 
   const handleCameraSwitch = (e) => {
     if (isMobile()) {
@@ -366,6 +367,10 @@ const GroupVideoCall = () => {
     setTotalPeers(filtered.filter(peer => peer !== null).length);
   };
 
+  const handleEndCall = () => {
+    history.goBack();
+  }
+
   return (
     <React.Fragment>
       <div
@@ -408,42 +413,6 @@ const GroupVideoCall = () => {
                 }
               </>
             ))}
-            {/* <div className="item">
-              <div className="add-strq">
-                <div className=" dropdown">
-                  <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-                  <div className="dropdown-content">
-                    <a href="/dashboard/video-call">View galleries</a>
-                    <a href="/dashboard/video-call">View profile</a>
-                    <a href="/dashboard/video-call">Send ticket</a>
-                    <a href="/dashboard/video-call">Block</a>
-                    <a href="/dashboard/video-call">Mute</a>
-                    <a href="/dashboard/video-call">Report</a>
-                    <a href="/dashboard/video-call">End chat</a>
-                  </div>
-                </div>
-                <div className="video-cube">
-                </div>
-                <div className="artist-name">
-                  salwa
-                </div>
-                <div style={{ marginLeft: "auto" }} >
-
-                </div>
-              </div>
-              <div className="user-video">
-                <video poster="/assets/images/red.png"></video>
-              </div>
-            </div> */}
-            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
-            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
-            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div> */}
-            {/* <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
-            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
-            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
-            <div className="item"><video poster="/assets/images/avataricon.png"></video></div>
-            <div className="item"><video poster="/assets/images/avataricon.png" ></video></div> */}
-            {/* <button onClick={handleShareScreen} style={{ position: 'absolute', zIndex: 1000 }}> Share screen </button> */}
             <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
               {microPhone
                 ? <i
@@ -452,7 +421,6 @@ const GroupVideoCall = () => {
                   data-tip="hello world"
                   onClick={handleToggleMicroPhone}
                 />
-
                 : <i
                   className="fa fa-microphone-slash"
                   aria-hidden="true"
@@ -467,7 +435,7 @@ const GroupVideoCall = () => {
               <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
               <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
               <i className="fas fa-user-plus" aria-hidden="true" />
-              <i className="far fa-times-circle" />
+              <i className="far fa-times-circle" onClick={handleEndCall} />
             </div>
           </div>
         </div>
