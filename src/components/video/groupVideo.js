@@ -130,6 +130,7 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: false,
           trickle: false,
+          reconnectTimer: 30000,
           config: {
             iceServers: [
               {
@@ -179,6 +180,7 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: true,
           trickle: false,
+          reconnectTimer: 30000,
           config: {
             iceServers: [
 
