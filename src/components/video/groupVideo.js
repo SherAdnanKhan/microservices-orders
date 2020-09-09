@@ -121,6 +121,7 @@ const GroupVideoCall = () => {
     socket.off('answer-made');
     socket.off('call-made');
     socket.off('user-leave');
+    socket.off('toggle-microphone');
   }, true);
 
   useEffect(() => {

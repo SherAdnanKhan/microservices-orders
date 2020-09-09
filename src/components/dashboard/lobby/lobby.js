@@ -220,7 +220,7 @@ const Lobby = () => {
           className="popUpChatMsg"
           style={{ backgroundColor: feelColor }}
         >
-          <Link to="/dashboard/conversations">
+          <Link to="/dashboard/chat">
             <img src="/assets/images/strqicon.png" alt="" />
           </Link>
           <div className="noticeicons" >
