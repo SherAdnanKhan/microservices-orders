@@ -29,7 +29,6 @@ export const getAllConversations = (callback) => dispatch => {
 };
 
 export const getConversation = (idOrSlug, page = 1, callback) => dispatch => {
-  console.log(isNumber(idOrSlug));
   const url = isNumber(idOrSlug)
     ? `/chats/user/${idOrSlug}/id?page=${page}`
     : `/chats/user/${idOrSlug}?page=${page}`;
@@ -126,7 +125,6 @@ export const readMessage = (message_id, user_id) => dispatch => {
   http
     .post(`/chats/message/read/${message_id}`, data)
     .then(() => {
-      console.log('succeed');
     })
     .catch(err => {
       if (err.response && err.response.data) {
@@ -136,7 +134,6 @@ export const readMessage = (message_id, user_id) => dispatch => {
 };
 
 export const changeReadMessageStatus = data => {
-  console.log('read message is read')
   return {
     type: READ_MESSAGE,
     payload: data

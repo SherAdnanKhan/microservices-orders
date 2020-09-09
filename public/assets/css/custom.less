@@ -25,7 +25,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
 
 
-
 @bodyBG: #000000;
 @fontColor: #ffffff;
 @gray: #a5a5a5;
@@ -113,6 +112,69 @@ input {
   overflow: auto;
   @media @mobile {
   // width:100vw;
+  }
+}
+
+//App
+
+.app {
+  .ringing-modal {
+    .myModal {          
+      .innerModal {
+        .modalHeader {
+          .btn-close {
+            display: none;
+          }
+        }
+        .modalBody {
+          .modalContent {
+            .artcubecase {
+              width: 100%;
+              margin-top: 29px;
+              .procusmallmove {
+                text-align: center;
+                display: block;
+                margin-left: unset;
+                padding: unset;
+              }
+            }
+            .caller-name {
+              text-align: center;
+            }
+            .ringing {
+              text-align: center;
+            }
+           
+          }
+        }
+        .modalFooter {
+          .actions {
+            justify-content: center;
+            .end-call {
+              border: 2px solid #e51111;
+              border-radius: 50%;
+              padding: 9px 10px;
+              i {
+                font-size: 22px;
+                margin-top: 5px;
+                color: #e51111;
+              }
+            }
+            .accept-call {
+              border: 2px solid #67ae0f;
+              border-radius: 50%;
+              padding: 8px 12px;
+              margin-right: 15px;
+              i {
+                font-size: 22px;
+                margin-top: 5px;
+                color: #67ae0f;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
