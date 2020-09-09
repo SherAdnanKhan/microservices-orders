@@ -6,6 +6,7 @@ import { getCurrentUser } from '../actions/authActions';
 import { useHistory } from 'react-router-dom';
 import { useWindowUnloadEffect } from './common/useWindowUnloadEffect';
 
+const currentUser = getCurrentUser();
 
 const Call = () => {
   const history = useHistory();
@@ -14,39 +15,40 @@ const Call = () => {
   const [incomingPayload, setIncomingPayload] = useState({});
   const audioRef = useRef();
   const timeout = useRef()
-  const currentUser = getCurrentUser();
 
   useEffect(() => {
-    socket.on('incoming-call', async payload => {
-      setIncomingPayload(payload);
-      setShowRingingModal(true);
+    if (currentUser) {
+      socket.on('incoming-call', async payload => {
+        setIncomingPayload(payload);
+        setShowRingingModal(true);
 
-      audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
+        audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
 
-      timeout.current = setTimeout(() => {
-        setShowRingingModal(false);
+        timeout.current = setTimeout(() => {
+          setShowRingingModal(false);
+          if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+          }
+        }, 30000);
+
+
+        try {
+          await audioRef.current.play();
+        } catch (ex) {
+        }
+      });
+
+      socket.on('call-declined', data => {
+
         if (audioRef.current) {
           audioRef.current.pause();
           audioRef.current.currentTime = 0;
         }
-      }, 30000);
 
-
-      try {
-        await audioRef.current.play();
-      } catch (ex) {
-      }
-    });
-
-    socket.on('call-declined', data => {
-
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-
-      setShowRingingModal(false);
-    });
+        setShowRingingModal(false);
+      });
+    }
   }, []);
 
   useWindowUnloadEffect(() => {
