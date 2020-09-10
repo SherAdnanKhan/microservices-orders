@@ -13,6 +13,7 @@ import { isMobile } from '../../utils/helperFunctions';
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
+  const [connection, setConnection] = useState('connecting...');
 
   useEffect(() => {
     if (!hasListner) {
@@ -24,20 +25,32 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
       });
 
       peer._pc.onconnectionstatechange = () => {
-        console.log(peer._pc.connectionState);
+        switch (peer._pc.connectionState) {
+          case 'connected':
+            setConnection('');
+            break;
+          case 'connecting':
+            setConnection('connecting...');
+            break;
+          default:
+            setConnection('Poor connection...');
+        }
+        console.log(peer._pc.connectionState)
       };
 
       peer.on('close', () => {
+        console.log('closed');
         onPeerClose(socketId);
-      })
+      });
 
       peer.on('error', () => {
+        console.log('error');
         onPeerClose(socketId);
       })
       setHasListner(listner => listner = true);
     }
 
-  }, [hasListner, peer, user, socketId, onPeerClose]);
+  }, [hasListner, peer, user, socketId, onPeerClose, connection]);
 
   return (
     <div
@@ -45,6 +58,13 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
       className="item"
       style={{ borderColor: user.feel.color_code }}
     >
+      {connection &&
+        <div className="connection">
+          <div className="text">
+            {connection}
+          </div>
+        </div>
+      }
       <div className="add-strq">
         <div className=" dropdown">
           <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
@@ -295,7 +315,6 @@ const GroupVideoCall = () => {
           })
 
           socket.on('user-leave', data => {
-            console.log('leaved ')
             removePeer(data.socketId);
           });
 
