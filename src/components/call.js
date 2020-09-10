@@ -32,7 +32,6 @@ const Call = () => {
           }
         }, 30000);
 
-
         try {
           await audioRef.current.play();
         } catch (ex) {

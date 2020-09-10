@@ -128,7 +128,7 @@ function App() {
 
       socket.on('reconnect', () => {
         console.log('yes connected');
-        // socket.emit('joinUser', currentUser, getAuthToken());
+        socket.emit('joinUser', currentUser, getAuthToken());
       })
     }
   }, [dispatch]);
