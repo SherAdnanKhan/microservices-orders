@@ -158,7 +158,7 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: false,
           trickle: false,
-          reconnectTimer: 30000,
+          reconnectTimer: 20000,
           config: {
             iceServers: [
               {
@@ -189,9 +189,9 @@ const GroupVideoCall = () => {
         return peer;
       };
 
-      const removePeer = (socketId) => {
+      const removePeer = (user) => {
         let filtered = peersRef.current.map(peer => {
-          if (peer?.socketId === socketId) {
+          if (peer?.user?.id === user.id) {
             peer.peer.destroy();
             return null
           }
@@ -219,7 +219,7 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: true,
           trickle: false,
-          reconnectTimer: 30000,
+          reconnectTimer: 20000,
           config: {
             iceServers: [
               {
@@ -315,7 +315,7 @@ const GroupVideoCall = () => {
           })
 
           socket.on('user-leave', data => {
-            removePeer(data.socketId);
+            removePeer(data.user);
           });
 
           socket.on('call-rejoined', data => {
@@ -363,6 +363,10 @@ const GroupVideoCall = () => {
     socket.emit('on-toggle-microphone', { room: params.room, message });
 
     setMicroPhone(!microPhone);
+  };
+
+  const handleToggleVideo = () => {
+    localVideo.current.srcObject.getVideoTracks()[0].enabled = !localVideo.current.srcObject.getVideoTracks()[0].enabled;
   };
 
   const handleCameraSwitch = (e) => {
@@ -436,11 +440,11 @@ const GroupVideoCall = () => {
         className={showActions ? "main show-actions" : "main"}
         onClick={handleShowActions}
       >
-
         {/* <div className="draw-Icon"><img src="/assets/images/icons/DrawStrq.png" alt="Draw" /></div>
         <div className="video-Icon"><img href="#" src="/assets/images/icons/VidStrq.png" alt="Video Call" /></div>
         <div className="screen-Maximize"><i className="fas fa-expand" /></div> */}
         <div className="video-container">
+
           <Draggable bounds="parent">
             <div className="own-Video">
               <video
@@ -448,7 +452,6 @@ const GroupVideoCall = () => {
                 ref={localVideo}
                 onDoubleClick={handleFullScreen}
                 onClick={(e) => e.stopPropagation()}
-                onTou
                 poster="/assets/images/avataricon.png"
                 autoPlay
               >
@@ -456,6 +459,7 @@ const GroupVideoCall = () => {
               <div className="settings-Icon"><i className="fas fa-ellipsis-h" /></div>
             </div>
           </Draggable>
+
 
           <div className={`item-List item${totalPeers}`}>
             {peers.map((peer, index) => (
@@ -488,7 +492,7 @@ const GroupVideoCall = () => {
                 />
               }
               <i className="fa fa-retweet" aria-hidden="true" onClick={handleCameraSwitch} />
-              <i className="fa fa-camera" aria-hidden="true" />
+              <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} />
             </div>
             <div className="call-Actions2">
               <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
