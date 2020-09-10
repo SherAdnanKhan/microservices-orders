@@ -34,7 +34,6 @@ const ChatHeader = ({
           audioRef.current.currentTime = 0;
         }
 
-        socket.off('call-accepted');
         history.push(`/dashboard/video-call/${data.room}`)
       });
 

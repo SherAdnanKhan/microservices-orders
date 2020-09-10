@@ -16,10 +16,16 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
 
   useEffect(() => {
     if (!hasListner) {
+
       peer.on('stream', stream => {
         ref.current.srcObject = stream;
-        console.log(stream.getAudioTracks()[0]);
+        // console.log(stream.getAudioTracks()[0]);
+        console.log(peer._pc);
       });
+
+      peer._pc.onconnectionstatechange = () => {
+        console.log(peer._pc.connectionState);
+      };
 
       peer.on('close', () => {
         onPeerClose(socketId);
@@ -28,7 +34,6 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
       peer.on('error', () => {
         onPeerClose(socketId);
       })
-
       setHasListner(listner => listner = true);
     }
 
@@ -104,9 +109,9 @@ const GroupVideoCall = () => {
       user: user
     });
 
-    if (localVideo.current) {
+    if (localVideo?.current?.srcObject) {
       localVideo.current.srcObject.getTracks().forEach(track => track.stop());
-      localVideo.current = null;
+      localVideo.current.srcObject = null;
     }
 
     peersRef.current.forEach((peer) => {
@@ -114,6 +119,7 @@ const GroupVideoCall = () => {
         peer.peer.destroy();
       }
     });
+
     peersRef.current = [];
     setPeers([]);
 
@@ -122,6 +128,8 @@ const GroupVideoCall = () => {
     socket.off('call-made');
     socket.off('user-leave');
     socket.off('toggle-microphone');
+    socket.off('call-rejoined');
+    socket.off('reconnect');
   }, true);
 
   useEffect(() => {
@@ -174,7 +182,18 @@ const GroupVideoCall = () => {
 
         setPeers(filtered);
         setTotalPeers(filtered.filter(peer => peer !== null).length);
-      }
+      };
+
+      const updatePeer = (data) => {
+        peersRef
+          .current
+          .map(peer => {
+            return (peer && peer.user.id === data.user.id)
+              ? { ...peer, socketId: data.socketId }
+              : peer;
+          })
+        setPeers(peersRef.current);
+      };
 
       const createNewPeer = (data, stream) => {
         const peer = new Peer({
@@ -183,7 +202,6 @@ const GroupVideoCall = () => {
           reconnectTimer: 30000,
           config: {
             iceServers: [
-
               {
                 urls: "stun:numb.viagenie.ca"
               },
@@ -201,7 +219,7 @@ const GroupVideoCall = () => {
           socket.emit('call-user', { signal, sender: user, userToCall: data.socketId, senderSocket: socket.id });
         });
         return peer;
-      }
+      };
 
       navigator
         .mediaDevices
@@ -217,7 +235,11 @@ const GroupVideoCall = () => {
         })
         .then(stream => {
           localVideo.current.srcObject = stream;
-          socket.emit('joinVideo', { room: params.room, user });
+
+          socket.emit('joinVideo', { room: params.room, user }, (message) => {
+            toast.error(message);
+            history.push('/dashboard/chat');
+          });
 
           socket.on('userList', users => {
             const myPeers = [];
@@ -273,13 +295,28 @@ const GroupVideoCall = () => {
           })
 
           socket.on('user-leave', data => {
+            console.log('leaved ')
             removePeer(data.socketId);
+          });
+
+          socket.on('call-rejoined', data => {
+            console.log(`${data.user.username} is back`);
+            updatePeer(data);
+          });
+
+          socket.on('reconnect', () => {
+            const payload = {
+              user: user,
+              room: params.room
+            };
+
+            console.log('call reconnected');
+            socket.emit('rejoin-call', payload);
           });
         });
       setHasRendered(true);
     }
-
-  }, [peers, hasRendered, params, user]);
+  }, [peers, hasRendered, params, user, history]);
 
   const handleFullScreen = () => {
     if (localVideo.current.requestFullscreen) {
@@ -295,7 +332,7 @@ const GroupVideoCall = () => {
 
   const handleShowActions = e => {
     setShowActions(!showActions);
-  }
+  };
 
   const handleToggleMicroPhone = () => {
     localVideo.current.srcObject.getAudioTracks()[0].enabled = !localVideo.current.srcObject.getAudioTracks()[0].enabled;
@@ -307,7 +344,7 @@ const GroupVideoCall = () => {
     socket.emit('on-toggle-microphone', { room: params.room, message });
 
     setMicroPhone(!microPhone);
-  }
+  };
 
   const handleCameraSwitch = (e) => {
     if (isMobile()) {
@@ -353,7 +390,7 @@ const GroupVideoCall = () => {
           });
       }
     }
-  }
+  };
 
   const handlePeerClose = (socketId) => {
     let filtered = peersRef.current.map(peer => {
