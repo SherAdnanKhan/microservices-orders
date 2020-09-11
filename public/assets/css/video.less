@@ -309,6 +309,56 @@
   width: 100%;
   transition: all 0.5s;
 
+  .invitationModal {
+    .myModal {
+      .innerModal {
+        .modalBody {
+          .modalContent {
+            .search {
+              width: 100%;
+              input {
+                display: block;
+                width: 95%;
+                margin: 0;
+                padding: 5px;
+                border: 1px solid white;
+                border-radius: 5px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-variant: small-caps;
+                background-color: black;
+                color: white;
+
+                &::placeholder {
+                  color: white;
+                }
+              }
+            }
+            .users {
+              overflow-y: auto;
+              max-height: 350px;
+              margin-top: 10px;
+              .row {
+                display: flex;
+                justify-content: space-between;
+                input{
+                  outline: none;
+                  margin-top: 22px;
+                }
+  
+                .user {
+                  display: flex;
+                  align-items: center;
+                  span {
+                    margin-left: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   &.show-actions {
     .call-Actions{
       opacity: 1;

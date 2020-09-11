@@ -48,11 +48,12 @@ class ChatBox extends Component {
 
   componentDidMount() {
     const currentUser = getCurrentUser();
-    if (this.props.activeConversation) {
-      this.props.getConversation(this.props.activeConversation.id);
-    } else {
-      this.props.getConversation(this.props.match.params.slug);
-    }
+    // if (this.props.activeConversation) {
+    this.props.getConversation(this.props.activeConversation.id);
+    console.log(this.props.activeConversation.id)
+    // } else {
+    //   this.props.getConversation(this.props.match.params.slug);
+    // }
 
     socket.on('recieveMessage', async (data) => {
       await this.props.updateConversation(data.message);
