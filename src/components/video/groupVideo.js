@@ -20,18 +20,29 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
 
       peer.on('stream', stream => {
         ref.current.srcObject = stream;
-        console.log(peer._pc);
+        console.log(peer);
       });
 
       peer._pc.onconnectionstatechange = () => {
         switch (peer._pc.connectionState) {
           case 'connected':
+            console.log(peer._pc.connectionState);
             setConnection('');
             break;
           case 'connecting':
+            console.log(peer._pc.connectionState)
             setConnection('connecting...');
             break;
+          case 'disconnected':
+            console.log(peer._pc.connectionState);
+            setConnection('Poor connection...');
+            break;
           default:
+            peer._pc.createOffer({ iceRestart: true })
+              .then(function (offer) {
+                return peer._pc.setLocalDescription(offer);
+              })
+            console.log(peer._pc.connectionState)
             setConnection('Poor connection...');
         }
       };
@@ -248,8 +259,9 @@ const GroupVideoCall = () => {
             width: { min: 640, ideal: 1920 },
             height: { min: 400, ideal: 1080 },
             aspectRatio: { ideal: 1.7777777778 },
-            facingMode: 'user'
+            facingMode: 'user',
           },
+
 
           audio: true
         })
