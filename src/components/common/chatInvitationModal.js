@@ -8,8 +8,10 @@ import { getAllUsers } from '../../actions/userActions';
 import Avatar from './avatar';
 import { createGroupConversation } from '../../actions/conversationActions';
 import { useHistory } from 'react-router-dom';
+import socket from '../../services/socketService';
+import { toast } from 'react-toastify';
 
-const ChatInvitationModel = ({ onClose, participants, currentUser }) => {
+const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUsers = false }) => {
   const history = useHistory();
   const { users } = useSelector(state => state.user);
 
@@ -28,10 +30,10 @@ const ChatInvitationModel = ({ onClose, participants, currentUser }) => {
   const handleChange = (user) => {
     const selected = { ...selectedUsers };
 
-    if (selected[user.username]) {
-      delete selected[user.username];
+    if (selected[user.slug]) {
+      delete selected[user.slug];
     } else {
-      selected[user.username] = user.id;
+      selected[user.slug] = user.id;
     }
     setSelectedUsers(selected);
   };
@@ -41,15 +43,31 @@ const ChatInvitationModel = ({ onClose, participants, currentUser }) => {
       [...Object
         .values(selectedUsers),
       ...participants
-        .filter(participant => participant.id !== currentUser.id)
-        .map(participant => participant.id)
+        ?.filter(participant => participant.id !== currentUser.id)
+        ?.map(participant => participant.id)
       ];
+
+    const slugs = [...Object.keys(selectedUsers)].map(p => {
+      return { slug: p }
+    });
+
 
     const data = {
       user_ids: selectedIds
     };
 
-    dispatch(createGroupConversation(data, history));
+    if (callUsers && slugs.length > 0) {
+      socket.emit('outgoing-call', {
+        caller: currentUser,
+        room,
+        participants: slugs
+      });
+
+      toast.success('Invitation sent');
+      onClose();
+    } else {
+      dispatch(createGroupConversation(data, history));
+    }
   };
 
   return (
@@ -86,8 +104,8 @@ const ChatInvitationModel = ({ onClose, participants, currentUser }) => {
                       : (
                         <input
                           type="checkbox"
-                          value={selectedUsers[user.username] || ''}
-                          checked={selectedUsers[user.username] || false}
+                          value={selectedUsers[user.slug] || ''}
+                          checked={selectedUsers[user.slug] || false}
                           onChange={() => handleChange(user)}
                         />
                       )

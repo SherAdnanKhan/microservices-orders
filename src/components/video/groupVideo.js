@@ -9,6 +9,9 @@ import { getCurrentUser } from '../../actions/authActions';
 import Avatar from '../common/avatar';
 import { toast } from 'react-toastify';
 import { isMobile } from '../../utils/helperFunctions';
+import ChatInvitationModel from '../common/chatInvitationModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { getConversation } from '../../actions/conversationActions';
 
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
@@ -20,40 +23,29 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
 
       peer.on('stream', stream => {
         ref.current.srcObject = stream;
-        console.log(peer);
       });
 
       peer._pc.onconnectionstatechange = () => {
         switch (peer._pc.connectionState) {
           case 'connected':
-            console.log(peer._pc.connectionState);
             setConnection('');
             break;
           case 'connecting':
-            console.log(peer._pc.connectionState)
             setConnection('connecting...');
             break;
           case 'disconnected':
-            console.log(peer._pc.connectionState);
             setConnection('Poor connection...');
             break;
           default:
-            peer._pc.createOffer({ iceRestart: true })
-              .then(function (offer) {
-                return peer._pc.setLocalDescription(offer);
-              })
-            console.log(peer._pc.connectionState)
-            setConnection('Poor connection...');
+            onPeerClose(user);
         }
       };
 
       peer.on('close', () => {
-        console.log('closed');
         onPeerClose(user);
       });
 
       peer.on('error', () => {
-        console.log('error');
         onPeerClose(user);
       });
 
@@ -122,6 +114,7 @@ const GroupVideoCall = () => {
   const user = getCurrentUser();
   const { params } = useRouteMatch();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const localVideo = useRef();
   const peersRef = useRef([]);
@@ -133,6 +126,10 @@ const GroupVideoCall = () => {
   const [facingMode, setFacingMode] = useState('user');
   const [microPhone, setMicroPhone] = useState(true);
   const [video, setVideo] = useState(true);
+
+  const [showInvitationModal, setShowInvitationModal] = useState(false);
+
+  const { conversation } = useSelector(state => state.conversation);
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
@@ -162,6 +159,10 @@ const GroupVideoCall = () => {
     socket.off('call-rejoined');
     socket.off('reconnect');
   }, true);
+
+  useEffect(() => {
+    dispatch(getConversation(params.room));
+  }, [dispatch, params]);
 
   useEffect(() => {
     if (!hasRendered) {
@@ -444,6 +445,16 @@ const GroupVideoCall = () => {
     history.goBack();
   }
 
+  const handleCloseInvitationModal = () => {
+    setShowInvitationModal(false);
+  };
+
+  const handleOpenInvitationModal = () => {
+    setShowInvitationModal(true);
+  };
+
+
+
   return (
     <React.Fragment>
       <div
@@ -469,7 +480,6 @@ const GroupVideoCall = () => {
               <div className="settings-Icon"><i className="fas fa-ellipsis-h" /></div>
             </div>
           </Draggable>
-
 
           <div className={`item-List item${totalPeers}`}>
             {peers.map((peer, index) => (
@@ -507,16 +517,24 @@ const GroupVideoCall = () => {
                 : <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" />
               }
 
-
             </div>
             <div className="call-Actions2">
               <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
               <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
-              <i className="fas fa-user-plus" aria-hidden="true" />
+              <i className="fas fa-user-plus" aria-hidden="true" onClick={handleOpenInvitationModal} />
               <i className="far fa-times-circle" onClick={handleEndCall} />
             </div>
           </div>
         </div>
+        {showInvitationModal &&
+          <ChatInvitationModel
+            onClose={handleCloseInvitationModal}
+            participants={conversation?.participants}
+            currentUser={user}
+            room={params.room}
+            callUsers={true}
+          />
+        }
       </div>
     </React.Fragment>
   );

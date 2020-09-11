@@ -14,7 +14,6 @@ const Call = () => {
   const [showRingingModal, setShowRingingModal] = useState(false);
   const [incomingPayload, setIncomingPayload] = useState({});
   const audioRef = useRef();
-  const timeout = useRef()
 
   useEffect(() => {
     if (currentUser) {
@@ -23,14 +22,6 @@ const Call = () => {
         setShowRingingModal(true);
 
         audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
-
-        timeout.current = setTimeout(() => {
-          setShowRingingModal(false);
-          if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-          }
-        }, 30000);
 
         try {
           await audioRef.current.play();
@@ -56,7 +47,7 @@ const Call = () => {
   }, true);
 
   const handleAcceptCall = () => {
-    clearTimeout(timeout);
+    setShowRingingModal(false);
 
     const payload = {
       user: currentUser,
@@ -65,7 +56,6 @@ const Call = () => {
     }
 
     socket.emit('accept-call', payload);
-    setShowRingingModal(false);
 
     if (audioRef.current) {
       audioRef.current.pause();

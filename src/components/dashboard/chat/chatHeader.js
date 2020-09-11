@@ -4,6 +4,7 @@ import MeuzmLogo from '../../common/meuzmLogo';
 import Avatar from '../../common/avatar';
 import socket from '../../../services/socketService';
 import CallingModal from './callingModal';
+import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
 
 const ChatHeader = ({
   user, conversation, onlineUsers, onOpenInvitationModel,
@@ -17,6 +18,11 @@ const ChatHeader = ({
   const [showCallingModal, setShowCallingModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
+
+  useWindowUnloadEffect(() => {
+    socket.off('call-accepted');
+    clearTimeout(timeout);
+  }, true);
 
   useEffect(() => {
     if (conversation?.participants) {
@@ -34,6 +40,7 @@ const ChatHeader = ({
           audioRef.current.currentTime = 0;
         }
 
+        console.log('redirect')
         history.push(`/dashboard/video-call/${data.room}`)
       });
 
@@ -55,8 +62,7 @@ const ChatHeader = ({
     }
   }, [history, hasRendered, conversation]);
 
-  const handleCall = async e => {
-    e.preventDefault();
+  const handleCall = async () => {
     rejectedUsers.current = [];
     setShowCallingModal(true);
 
@@ -151,9 +157,9 @@ const ChatHeader = ({
 
       <div className="call-btn">
         <i className="fas fa-user-plus" aria-hidden="true" onClick={onOpenInvitationModel} />
-        <Link to="#" onClick={handleCall}>
+        <div onClick={handleCall}>
           <img href="#" src="/assets/images/icons/VidStrq.png" className="call-icon" alt="Video Call"></img>
-        </Link>
+        </div>
         <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
       </div>
 
