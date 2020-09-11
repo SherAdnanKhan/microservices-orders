@@ -20,7 +20,6 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
 
       peer.on('stream', stream => {
         ref.current.srcObject = stream;
-        // console.log(stream.getAudioTracks()[0]);
         console.log(peer._pc);
       });
 
@@ -32,21 +31,25 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
           case 'connecting':
             setConnection('connecting...');
             break;
+          case 'failed':
+            setConnection('');
+            onPeerClose(user);
+            break;
           default:
             setConnection('Poor connection...');
         }
-        console.log(peer._pc.connectionState)
       };
 
       peer.on('close', () => {
         console.log('closed');
-        onPeerClose(socketId);
+        onPeerClose(user);
       });
 
       peer.on('error', () => {
         console.log('error');
-        onPeerClose(socketId);
-      })
+        onPeerClose(user);
+      });
+
       setHasListner(listner => listner = true);
     }
 
@@ -122,6 +125,7 @@ const GroupVideoCall = () => {
   const [hasRendered, setHasRendered] = useState(false);
   const [facingMode, setFacingMode] = useState('user');
   const [microPhone, setMicroPhone] = useState(true);
+  const [video, setVideo] = useState(true);
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
@@ -158,7 +162,7 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: false,
           trickle: false,
-          reconnectTimer: 20000,
+          reconnectTimer: 40000,
           config: {
             iceServers: [
               {
@@ -219,7 +223,7 @@ const GroupVideoCall = () => {
         const peer = new Peer({
           initiator: true,
           trickle: false,
-          reconnectTimer: 20000,
+          reconnectTimer: 40000,
           config: {
             iceServers: [
               {
@@ -367,6 +371,7 @@ const GroupVideoCall = () => {
 
   const handleToggleVideo = () => {
     localVideo.current.srcObject.getVideoTracks()[0].enabled = !localVideo.current.srcObject.getVideoTracks()[0].enabled;
+    setVideo(!video);
   };
 
   const handleCameraSwitch = (e) => {
@@ -392,14 +397,11 @@ const GroupVideoCall = () => {
               if (peer) {
                 peer
                   .peer
-                  .replaceTrack &&
-                  peer
-                    .peer
-                    .replaceTrack(
-                      peer.peer.streams[0].getVideoTracks()[0],
-                      stream.getVideoTracks()[0],
-                      peer.peer.streams[0]
-                    )
+                  .replaceTrack(
+                    peer.peer.streams[0].getVideoTracks()[0],
+                    stream.getVideoTracks()[0],
+                    peer.peer.streams[0]
+                  )
               }
             });
 
@@ -415,9 +417,9 @@ const GroupVideoCall = () => {
     }
   };
 
-  const handlePeerClose = (socketId) => {
+  const handlePeerClose = (user) => {
     let filtered = peersRef.current.map(peer => {
-      if (peer?.socketId === socketId) {
+      if (peer?.user?.id === user.id) {
         peer.peer.destroy();
         return null
       }
@@ -492,7 +494,12 @@ const GroupVideoCall = () => {
                 />
               }
               <i className="fa fa-retweet" aria-hidden="true" onClick={handleCameraSwitch} />
-              <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} />
+              {video
+                ? <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} />
+                : <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" />
+              }
+
+
             </div>
             <div className="call-Actions2">
               <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
