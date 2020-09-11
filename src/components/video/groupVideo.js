@@ -31,10 +31,6 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
           case 'connecting':
             setConnection('connecting...');
             break;
-          case 'failed':
-            setConnection('');
-            onPeerClose(user);
-            break;
           default:
             setConnection('Poor connection...');
         }
