@@ -390,11 +390,6 @@ const GroupVideoCall = () => {
         .srcObject
         .getVideoTracks()[0].stop();
 
-      localVideo
-        .current
-        .srcObject
-        .removeTrack(localVideo.current.srcObject.getVideoTracks()[0])
-
       if (navigator.mediaDevices) {
         navigator
           .mediaDevices
@@ -405,12 +400,7 @@ const GroupVideoCall = () => {
               facingMode: facingMode === 'user' ? 'environment' : 'user'
             },
           })
-
           .then(stream => {
-            localVideo
-              .current
-              .srcObject
-              .addTrack(stream.getVideoTracks()[0]);
             // localVideo.current.srcObject = stream
 
             peersRef.current.forEach((peer) => {
@@ -424,6 +414,21 @@ const GroupVideoCall = () => {
                   )
               }
             });
+
+            localVideo
+              .current
+              .srcObject
+              .removeTrack(
+                localVideo
+                  .current
+                  .srcObject
+                  .getVideoTracks()[0]
+              );
+
+            localVideo
+              .current
+              .srcObject
+              .addTrack(stream.getVideoTracks()[0]);
 
             if (facingMode === 'user') {
               setFacingMode('environment')
