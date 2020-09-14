@@ -5,6 +5,7 @@ import ImageVideoSlider from "../../common/imageVideoSlider";
 import Stroke from "../../common/stroke";
 import Comment from '../../dashboard/viewPost/comments';
 import { Link } from "react-router-dom";
+import ShowMoreText from 'react-show-more-text';
 
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
@@ -133,7 +134,19 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       />
                     </div>
                   </div>
-
+                  <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
+                    {post &&
+                      <ShowMoreText
+                        lines={2}
+                        more="View more"
+                        less="View less"
+                        expanded={false}
+                        width={600}
+                      >
+                        {post?.description}
+                      </ShowMoreText>
+                    }
+                  </div>
                 </div>
               ))
             }

@@ -383,8 +383,6 @@ const GroupVideoCall = () => {
 
   const handleCameraSwitch = (e) => {
     if (isMobile()) {
-
-      // localVideo.current.srcObject.getTracks().forEach(track => track.stop());
       localVideo
         .current
         .srcObject
@@ -401,8 +399,6 @@ const GroupVideoCall = () => {
             },
           })
           .then(stream => {
-            // localVideo.current.srcObject = stream
-
             peersRef.current.forEach((peer) => {
               if (peer) {
                 peer
@@ -468,8 +464,6 @@ const GroupVideoCall = () => {
   const handleOpenInvitationModal = () => {
     setShowInvitationModal(true);
   };
-
-
 
   return (
     <React.Fragment>
