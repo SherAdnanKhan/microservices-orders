@@ -262,8 +262,6 @@ const GroupVideoCall = () => {
             aspectRatio: { ideal: 1.7777777778 },
             facingMode: 'user',
           },
-
-
           audio: true
         })
         .then(stream => {
@@ -385,7 +383,12 @@ const GroupVideoCall = () => {
 
   const handleCameraSwitch = (e) => {
     if (isMobile()) {
-      localVideo.current.srcObject.getTracks().forEach(track => track.stop());
+
+      // localVideo.current.srcObject.getTracks().forEach(track => track.stop());
+      localVideo
+        .current
+        .srcObject
+        .removeTrack(localVideo.current.srcObject.getVideoTracks()[0])
 
       if (navigator.mediaDevices) {
         navigator
@@ -396,11 +399,14 @@ const GroupVideoCall = () => {
               height: { min: 400, ideal: 1080 },
               facingMode: facingMode === 'user' ? 'environment' : 'user'
             },
-            audio: true
           })
 
           .then(stream => {
-            localVideo.current.srcObject = stream
+            localVideo
+              .current
+              .srcObject
+              .addTrack(stream.getVideoTracks()[0]);
+            // localVideo.current.srcObject = stream
 
             peersRef.current.forEach((peer) => {
               if (peer) {
