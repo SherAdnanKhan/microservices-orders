@@ -7,6 +7,7 @@ import { completeFormattedDate } from '../../../utils/helperFunctions';
 import ImageVideoSlider from '../../common/imageVideoSlider';
 import VideoPlayer from '../../common/videoPlayer';
 import ImagePostOption from '../../common/ImagePostOption';
+import ShowMoreText from 'react-show-more-text';
 
 
 const LobbyPosts = ({
@@ -112,6 +113,19 @@ const LobbyPosts = ({
               onClick={() => onClickNcomm(post)}
             />
           </div>
+        </div>
+        <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
+          {post &&
+            <ShowMoreText
+              lines={2}
+              more="View more"
+              less="View less"
+              expanded={false}
+              width={600}
+            >
+              {post?.description}
+            </ShowMoreText>
+          }
         </div>
         <div className={
           activePost.id === post.id

@@ -60,6 +60,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           }
           <p>strokes {post && post?.stroke_users_count}</p>
         </div>
+
         {hasAllowedCritiques() &&
           <div className="post-footer-icons">
             <img
@@ -80,7 +81,6 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           />
         </div>
       </div>
-
 
       <div className='post-description' style={{ width: '80%', textAlign: 'center' }}>
         {post &&

@@ -20,6 +20,8 @@ import SharePostStrqModal from '../common/sharePostStrqModal';
 import TurnOffCrtiqueModal from "../common/turnOffCritqueModal";
 import RepostModal from "../common/repostModal";
 import MzFlashModal from "../common/mzFlashModal";
+import ShowMoreText from 'react-show-more-text';
+
 const Post = ({
   gallery, user, activeGallery,
   galleryPrivacy, onSuperFav, isSprFvs, onFave, onVault
@@ -83,8 +85,6 @@ const Post = ({
   const handleUnstroke = post => {
     dispatch(unstrokePost(post.id, post.gallery_id, post.user));
   };
-
-
 
   const handlePostDeleteModel = (value) => {
     setShowDeleteModel(value);
@@ -328,9 +328,7 @@ const Post = ({
                                       <p> comments {post.comments.length}</p>
                                     </>
                                   }
-
                                 </div>
-
 
                                 <div className="action">
                                   <img
@@ -340,6 +338,20 @@ const Post = ({
                                     onClick={() => handleNcomm(post)}
                                   />
                                 </div>
+                              </div>
+
+                              <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
+                                {post &&
+                                  <ShowMoreText
+                                    lines={2}
+                                    more="View more"
+                                    less="View less"
+                                    expanded={false}
+                                    width={600}
+                                  >
+                                    {post?.description}
+                                  </ShowMoreText>
+                                }
                               </div>
                             </div>
                           ))}
