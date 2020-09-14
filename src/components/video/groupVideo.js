@@ -388,6 +388,11 @@ const GroupVideoCall = () => {
       localVideo
         .current
         .srcObject
+        .getVideoTracks()[0].stop();
+
+      localVideo
+        .current
+        .srcObject
         .removeTrack(localVideo.current.srcObject.getVideoTracks()[0])
 
       if (navigator.mediaDevices) {
