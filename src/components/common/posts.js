@@ -240,7 +240,11 @@ const Post = ({
                                     </Link>
                                   }
                                 </p>
-                                <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
+
+                                <Avatar
+                                  user={user}
+                                />
+
                                 {user && user.art &&
                                   <>
                                     {user.art.parent && user.art.parent.name + '/'}

@@ -88,7 +88,9 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
               ?.map((user, index) => (
                 <div className="row" key={index}>
                   <div className="user">
-                    <Avatar avatars={user.avatars} feelColor={user.feel.color_code} />
+                    <Avatar
+                      user={user}
+                    />
                     <span>{user.username} </span>
                   </div>
                   <div className="option">

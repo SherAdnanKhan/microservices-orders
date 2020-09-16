@@ -104,8 +104,7 @@ const Comment = ({ post }) => {
                 <div className="user-commet" key={index}>
                   <div className="user-cude">
                     <Avatar
-                      avatars={comment.user.avatars && comment.user.avatars}
-                      feelColor={comment.user.feel.color_code}
+                      user={comment.user}
                     />
                   </div>
                   <div className="comment-info">

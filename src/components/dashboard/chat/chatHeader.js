@@ -132,7 +132,9 @@ const ChatHeader = ({
           </div>
         ) : (
           <Link to={`/dashboard/studio/${filtered?.slug}`} >
-            <Avatar avatars={filtered?.avatars} feelColor={filtered?.feel.color_code} />
+            <Avatar
+              user={filtered}
+            />
           </Link>
         )
       }

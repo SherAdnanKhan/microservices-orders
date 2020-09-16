@@ -18,8 +18,7 @@ const ParticipantsModel = ({ onClose, participants, currentUser, onlineUsers }) 
                 <div className="row" key={index}>
                   <div className="user">
                     <Avatar
-                      avatars={participant.avatars}
-                      feelColor={participant.feel.color_code}
+                      user={participant}
                     />
                     <span> {participant.username} </span>
                   </div>

@@ -43,7 +43,9 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                 <div className="list-body" key={index}>
                   <div className="s-l-header">
                     <p>{user && user.username}</p>
-                    <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
+                    <Avatar
+                      user={user}
+                    />
                     {user && user.art &&
                       <>
                         {user.art.parent && user.art.parent.name + '/'}

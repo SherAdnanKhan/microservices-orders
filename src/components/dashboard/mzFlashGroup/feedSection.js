@@ -177,8 +177,7 @@ const FeedSection = ({
             <div className="col-12 cube-top">
               <Link to={`/dashboard/studio/${feed.user.slug}`}>
                 <Avatar
-                  avatars={feed.user.avatars}
-                  feelColor={feed.feel.color_code}
+                  user={feed.user}
                 />
               </Link>
               <span className="date-time">
@@ -227,8 +226,7 @@ const FeedSection = ({
                 <div className="action-cube">
                   <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
                     <Avatar
-                      avatars={feed.parent.user.avatars}
-                      feelColor={feed.parent.user.feel.color_code}
+                      user={feed.parent.user}
                     />
                   </Link>
                   <span className="date-time">

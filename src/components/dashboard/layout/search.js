@@ -30,7 +30,7 @@ const Search = ({ feelColor }) => {
         <div className="back-btn" id="go-back">
           <i className="fa fa-arrow-left"></i>
         </div>
-        <div className="search-input"  style={{ backgroundColor: feelColor }} >
+        <div className="search-input" style={{ backgroundColor: feelColor }} >
           <input
             type="text"
             id="search-field"
@@ -49,7 +49,9 @@ const Search = ({ feelColor }) => {
                   to={`/dashboard/studio/${user.slug}`}
                   onClick={handleClear}
                 >
-                  <Avatar avatars={user && user.avatars} feelColor={user.feel.color_code} />
+                  <Avatar
+                    user={user}
+                  />
                 </Link>
                 <div>
                   <p className="usernames">

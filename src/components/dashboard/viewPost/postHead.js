@@ -12,8 +12,7 @@ const PostHead = ({ post, userId }) => {
           {userId === post.user.id &&
             <Link to="/dashboard/my-studio" >
               <Avatar
-                avatars={post.user.avatars}
-                feelColor={post.user.feel.color_code}
+                user={post.user}
               />
             </Link>
           }
@@ -21,8 +20,7 @@ const PostHead = ({ post, userId }) => {
           {userId !== post.user.id &&
             <Link to={`/dashboard/studio/${post.user.slug}`} >
               <Avatar
-                avatars={post.user.avatars}
-                feelColor={post.user.feel.color_code}
+                user={post.user}
               />
             </Link>
           }

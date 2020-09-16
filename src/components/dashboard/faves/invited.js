@@ -11,7 +11,9 @@ const Invited = ({ invitedUsers }) => {
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
                 <Link to={`/dashboard/studio/${user.slug}`}  >
-                  <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
+                  <Avatar
+                    user={user}
+                  />
                 </Link>
               </div>
               <div>

@@ -46,8 +46,7 @@ const FaveSection = ({
             }
             {activeUser && activeUserList === 1 &&
               <Avatar
-                avatars={activeUser.avatars}
-                feelColor={activeUser.feel.color_code}
+                user={activeUser}
               />
             }
           </button>
@@ -81,8 +80,7 @@ const FaveSection = ({
             }
             {activeUser && activeUserList === 2 &&
               <Avatar
-                avatars={activeUser.avatars}
-                feelColor={activeUser.feel.color_code}
+                user={activeUser}
               />
             }
           </button>
@@ -119,8 +117,7 @@ const FaveSection = ({
             }
             {activeUser && activeUserList === 3 &&
               <Avatar
-                avatars={activeUser.avatars}
-                feelColor={activeUser.feel.color_code}
+                user={activeUser}
               />
             }
           </button>
@@ -131,8 +128,7 @@ const FaveSection = ({
         >
           <button className="tablinks">
             <Avatar
-              avatars={currentUser.avatars}
-              feelColor={currentUser.feel.color_code}
+              user={currentUser}
             />
           </button>
         </div>
@@ -156,8 +152,7 @@ const FaveSection = ({
                     <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
-                          avatars={feed.user.avatars}
-                          feelColor={feed.feel.color_code}
+                          user={feed.user}
                         />
                       </Link>
                       <span className="date-time">
@@ -205,8 +200,7 @@ const FaveSection = ({
                       <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
-                            avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel.color_code}
+                            user={feed.parent.user}
                           />
                         </Link>
                         <span className="date-time">
@@ -330,8 +324,7 @@ const FaveSection = ({
                     <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
-                          avatars={feed.user.avatars}
-                          feelColor={feed.feel.color_code}
+                          user={feed.user}
                         />
                       </Link>
                       <span className="date-time">
@@ -383,8 +376,7 @@ const FaveSection = ({
                       <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
-                            avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel.color_code}
+                            user={feed.parent.user}
                           />
                         </Link>
                         <span className="date-time">
@@ -507,8 +499,7 @@ const FaveSection = ({
                     <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
-                          avatars={feed.user.avatars}
-                          feelColor={feed.feel.color_code}
+                          user={feed.user}
                         />
                       </Link>
                       <span className="date-time">
@@ -560,8 +551,7 @@ const FaveSection = ({
                       <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
-                            avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel.color_code}
+                            user={feed.parent.user}
                           />
                         </Link>
                         <span className="date-time">
@@ -685,8 +675,7 @@ const FaveSection = ({
                     <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
-                          avatars={feed.user.avatars}
-                          feelColor={feed.feel.color_code}
+                          user={feed.user}
                         />
                       </Link>
                       <span className="date-time">
@@ -735,8 +724,7 @@ const FaveSection = ({
                       <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
-                            avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel.color_code}
+                            user={feed.parent.user}
                           />
                         </Link>
                         <span className="date-time">
@@ -860,8 +848,7 @@ const FaveSection = ({
                     <div className="col-12 cube-fave">
                       <Link to={`/dashboard/studio/${feed.user.slug}`}>
                         <Avatar
-                          avatars={feed.user.avatars}
-                          feelColor={feed.feel.color_code}
+                          user={feed.user}
                         />
                       </Link>
                       <span className="date-time">
@@ -913,8 +900,7 @@ const FaveSection = ({
                       <div className="col-12 action-cube">
                         <Link to={`/dashboard/studio/${feed.user.slug}`}>
                           <Avatar
-                            avatars={feed.parent.user.avatars}
-                            feelColor={feed.parent.user.feel.color_code}
+                            user={feed.parent.user}
                           />
                         </Link>
                         <span className="date-time">
@@ -988,7 +974,6 @@ const FaveSection = ({
                       >
                       </img>
                     </div>
-
                   </div>
                   <div className="view-comment">
                     {feed.limited_comments.length > 0 &&

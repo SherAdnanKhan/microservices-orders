@@ -50,7 +50,9 @@ const FaveGalleries = () => {
               <div className="favas-box" key={index}>
                 <div className="favas-avatar">
                   <Link to={`/dashboard/studio/${gallery.user.slug}`}  >
-                    <Avatar avatars={gallery?.user?.avatars} feelColor={gallery?.user?.feel.color_code} />
+                    <Avatar
+                      user={gallery?.user}
+                    />
                   </Link>
                 </div>
                 <div className="details">

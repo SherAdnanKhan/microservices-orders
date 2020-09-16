@@ -156,8 +156,7 @@ const MzFlash = () => {
                 }
                 <div className="col-12 mz-flash-flex">
                   <Avatar
-                    avatars={feed.user.avatars}
-                    feelColor={feed.user.feel.color_code}
+                    user={feed.user}
                   />
                   <span className="date-time">
                     {completeFormattedDate(feed.created_at)}
@@ -201,8 +200,7 @@ const MzFlash = () => {
                   <div className="flex-container-nested">
                     <div className="action-cube">
                       <Avatar
-                        avatars={feed.parent.user.avatars}
-                        feelColor={feed.parent.user.feel.color_code}
+                        user={feed.parent.user}
                       />
                       <span className="date-time">
                         {completeFormattedDate(feed.parent.created_at)}

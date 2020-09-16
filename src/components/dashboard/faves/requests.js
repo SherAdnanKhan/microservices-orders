@@ -11,7 +11,9 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
                 <Link to={`/dashboard/studio/${user.slug}`}>
-                  <Avatar avatars={user && user.avatars} feelColor={user && user.feel.color_code} />
+                  <Avatar
+                    user={user}
+                  />
                 </Link>
               </div>
               <div>
@@ -30,14 +32,14 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
               </div>
               <div className="actions">
                 <button
-                 style={{backgroundColor:user.feel.color_code}}
+                  style={{ backgroundColor: user.feel.color_code }}
                   onClick={() => onApprovedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Approve
                 </button>
                 <button
-                    style={{backgroundColor:user.feel.color_code}}
-                    className="opacity"
+                  style={{ backgroundColor: user.feel.color_code }}
+                  className="opacity"
                   onClick={() => onRejectedRequest({ privacy_type_id: 3, user_id: user.id })}
                 >
                   Reject
