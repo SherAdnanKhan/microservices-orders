@@ -6,7 +6,11 @@ import { formatTime, formatDate } from '../../../utils/helperFunctions';
 import SocketContext from '../../../context/socketContext';
 import { getCurrentUser, getAuthToken } from '../../../actions/authActions';
 import socket from '../../../services/socketService';
-
+import { toast } from 'react-toastify';
+import ChatInvitationModel from '../../common/chatInvitationModal';
+import ChatHeader from './chatHeader';
+import ParticipantsModel from './participantsModel';
+import MeuzmLogo from '../../common/meuzmLogo';
 import {
   getConversation,
   updateConversation,
@@ -19,11 +23,6 @@ import {
   changeReadMessageStatus,
   resetConversationCount,
 } from '../../../actions/conversationActions';
-import { toast } from 'react-toastify';
-import ChatInvitationModel from '../../common/chatInvitationModal';
-import ChatHeader from './chatHeader';
-import ParticipantsModel from './participantsModel';
-import MeuzmLogo from '../../common/meuzmLogo';
 
 class ChatBox extends Component {
   state = {
@@ -38,22 +37,25 @@ class ChatBox extends Component {
     typings: [],
     show: false,
     showParticipantsModal: false,
-    showCallingModal: false
+    showCallingModal: false,
+    width: window.innerWidth
   };
 
   preview = createRef();
   containerRef = createRef();
   bottomRef = createRef();
   footerRef = createRef();
+  breakPoint = 768;
+
+  handleWindowResize = () => {
+    this.setState({ width: window.innerWidth });
+  }
 
   componentDidMount() {
+    window.addEventListener("resize", this.handleWindowResize);
+
     const currentUser = getCurrentUser();
-    // if (this.props.activeConversation) {
     this.props.getConversation(this.props.activeConversation.id);
-    console.log(this.props.activeConversation.id)
-    // } else {
-    //   this.props.getConversation(this.props.match.params.slug);
-    // }
 
     socket.on('recieveMessage', async (data) => {
       await this.props.updateConversation(data.message);
@@ -78,7 +80,6 @@ class ChatBox extends Component {
     });
 
     socket.on('read', (data) => {
-      console.log(data);
       if (data.reader.id !== currentUser.id) {
         this.props.changeReadMessageStatus(data);
       }
@@ -96,7 +97,6 @@ class ChatBox extends Component {
 
         if (data.message) {
           if (!typings.some(typing => typing.id === data.user.id)) {
-            console.log(true)
 
             this.setState({ typings: [data.user, ...typings] });
           }
@@ -108,9 +108,11 @@ class ChatBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.activeConversation !== prevProps.activeConversation) {
-      this.componentCleanup();
-      this.componentDidMount();
+    if (this.state.width > this.breakPoint) {
+      if (this.props.activeConversation !== prevProps.activeConversation) {
+        this.componentCleanup();
+        this.componentDidMount();
+      }
     }
 
     const { conversation: currentConversation } = this.props.conversation;
@@ -140,6 +142,7 @@ class ChatBox extends Component {
     socket.off('onReadAll');
     socket.off('typing')
 
+    window.removeEventListener("resize", this.handleWindowResize)
     this.props.clearConversation();
   }
 
@@ -253,15 +256,9 @@ class ChatBox extends Component {
 
       this.setState({ page: page + 1, }, () => {
         if (this.props.conversation.messages.next_page_url) {
-          if (this.props.activeConversation) {
-            this.props.getConversation(this.props.activeConversation.id, page + 1, () => {
-              this.containerRef.current.scrollTo(0, this.state.scrollHeight);
-            })
-          } else {
-            this.props.getConversation(this.props.match.params.slug, page + 1, () => {
-              this.containerRef.current.scrollTo(0, this.state.scrollHeight);
-            })
-          }
+          this.props.getConversation(this.props.activeConversation.id, page + 1, () => {
+            this.containerRef.current.scrollTo(0, this.state.scrollHeight);
+          })
         }
       });
     }
@@ -299,6 +296,7 @@ class ChatBox extends Component {
             onlineUsers={onlineUsers}
             onOpenInvitationModel={this.handleOpenInvitationModel}
             onOpenParticipatsModel={this.handleOpenPartcipantsModel}
+            onBackPress={this.props.onBackPress}
           />
 
           <div className="chat-container"

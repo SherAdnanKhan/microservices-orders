@@ -5,10 +5,11 @@ import Avatar from '../../common/avatar';
 import socket from '../../../services/socketService';
 import CallingModal from './callingModal';
 import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
+import useViewport from '../../common/useViewport';
 
 const ChatHeader = ({
   user, conversation, onlineUsers, onOpenInvitationModel,
-  onOpenParticipatsModel, currentUser
+  onOpenParticipatsModel, currentUser, onBackPress
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
@@ -18,6 +19,8 @@ const ChatHeader = ({
   const [showCallingModal, setShowCallingModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
+  const { width } = useViewport();
+  const breakPoint = 768;
 
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
@@ -116,9 +119,12 @@ const ChatHeader = ({
             : filtered?.feel.color_code
       }}
     >
-      <i
-        className="fa fa-arrow-left clickable"
-      />
+      {width <= breakPoint &&
+        <i
+          className="fa fa-arrow-left clickable"
+          onClick={onBackPress}
+        />
+      }
       {conversation?.participants.length > 2
         ? (
           <div onClick={onOpenParticipatsModel}>
