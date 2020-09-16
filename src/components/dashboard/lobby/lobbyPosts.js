@@ -27,7 +27,9 @@ const LobbyPosts = ({
           </Link>
         </p>
         <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
-          <Avatar avatars={post.user.avatars && post.user.avatars} feelColor={post.user.feel.color_code} />
+          <Avatar
+            user={post.user}
+          />
         </Link>
         {post.user.art &&
           <>

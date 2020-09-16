@@ -69,14 +69,12 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation 
                       <>
                         {conversation.participants[0].id !== currentUser.id &&
                           <Avatar
-                            avatars={conversation.participants[0].avatars}
-                            feelColor={conversation.participants[0].feel.color_code}
+                            user={conversation.participants[0]}
                           />
                         }
                         {conversation.participants[1].id !== currentUser.id &&
                           <Avatar
-                            avatars={conversation.participants[1].avatars}
-                            feelColor={conversation.participants[1].feel.color_code}
+                            user={conversation.participants[1]}
                           />
                         }
                       </>

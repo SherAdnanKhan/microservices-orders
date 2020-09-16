@@ -314,7 +314,9 @@ class ChatBox extends Component {
                   </>
                 ) : (
                   <>
-                    <Avatar avatars={user?.avatars} feelColor={user?.feel.color_code} />
+                    <Avatar
+                      user={user}
+                    />
                     <div className="chat-uesr-name">
                       <p>	You are now Strqing with </p>
                       <span>{user?.username}</span>
@@ -430,7 +432,9 @@ class ChatBox extends Component {
                     <div className="message-row group">
                       <div className='incoming'>
                         <div className="user-message">
-                          <Avatar avatars={data.user.avatars} feelColor={data.feel.color_code} />
+                          <Avatar
+                            user={user}
+                          />
                           <div
                             className='text'
                             style={{

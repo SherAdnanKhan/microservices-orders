@@ -82,8 +82,7 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
         </div>
         <div className="video-cube">
           <Avatar
-            avatars={user?.avatars}
-            feelColor={user?.feel.color_code}
+            user={user}
           />
         </div>
         <div className="artist-name">
@@ -477,7 +476,9 @@ const GroupVideoCall = () => {
         <div className="video-container">
 
           <Draggable bounds="parent">
-            <div className="own-Video">
+            <div
+              className="own-Video"
+              style={{ border: `9px solid ${user?.feel.color_code}` }}>
               <video
                 muted
                 ref={localVideo}

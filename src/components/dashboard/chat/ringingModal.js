@@ -12,8 +12,7 @@ const RingingModal = ({ onAcceptCall, onRejectCall, payload }) => {
         <ModalHeader></ModalHeader>
         <ModalBody>
           <Avatar
-            avatars={payload?.caller?.avatars}
-            feelColor={payload?.caller?.feel?.color_code}
+            user={payload?.caller}
           />
           <div className="caller-name">
             {payload?.caller?.username}

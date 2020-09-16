@@ -16,8 +16,7 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, favouriteUsers, sendU
               >
                 <div className="cube">
                   <Avatar
-                    avatars={user.avatars}
-                    feelColor={user.feel.color_code}
+                    user={user}
                   />
                   <div>{user.username}</div>
                   <div className="send-btn-modal">

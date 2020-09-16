@@ -26,7 +26,9 @@ const Welcome = ({ user }) => {
       <div className="cubecenter">
         <div className="procufull">
           <div className="scenefull">
-            <Avatar avatars={user.avatars} feelColor={user.feel.color_code} />
+            <Avatar
+              user={user}
+            />
           </div>
         </div>
       </div>

@@ -58,7 +58,9 @@ const StartFaves = ({ user }) => {
                 <div className="f-header">
                   <h4>{user.username}</h4>
                   <div className='avatar'>
-                    <Avatar avatars={user.avatars} feelColor={user.feel.color_code} />
+                    <Avatar
+                      user={user}
+                    />
                   </div>
                   <h4>{user.art_id && user.art.name}</h4>
                 </div>
