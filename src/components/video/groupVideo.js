@@ -125,7 +125,7 @@ const GroupVideoCall = () => {
   const [facingMode, setFacingMode] = useState('user');
   const [microPhone, setMicroPhone] = useState(true);
   const [video, setVideo] = useState(true);
-
+  const [isSwitching, setIsSwitching] = useState(false);
   const [showInvitationModal, setShowInvitationModal] = useState(false);
 
   const { conversation } = useSelector(state => state.conversation);
@@ -381,59 +381,61 @@ const GroupVideoCall = () => {
   };
 
   const handleCameraSwitch = (e) => {
-    if (isMobile()) {
+    if (isMobile() && !isSwitching) {
+      setIsSwitching(true);
+
       localVideo
         .current
         .srcObject
         .getVideoTracks()[0].stop();
 
-      if (navigator.mediaDevices) {
-        navigator
-          .mediaDevices
-          .getUserMedia({
-            video: {
-              width: { min: 640, ideal: 1920 },
-              height: { min: 400, ideal: 1080 },
-              facingMode: facingMode === 'user' ? 'environment' : 'user'
-            },
-          })
-          .then(stream => {
-            peersRef.current.forEach((peer) => {
-              if (peer) {
-                peer
-                  .peer
-                  .replaceTrack(
-                    peer.peer.streams[0].getVideoTracks()[0],
-                    stream.getVideoTracks()[0],
-                    peer.peer.streams[0]
-                  )
-              }
-            });
-
-            localVideo
-              .current
-              .srcObject
-              .removeTrack(
-                localVideo
-                  .current
-                  .srcObject
-                  .getVideoTracks()[0]
-              );
-
-            localVideo
-              .current
-              .srcObject
-              .addTrack(stream.getVideoTracks()[0]);
-
-            if (facingMode === 'user') {
-              setFacingMode('environment')
-            } else {
-              setFacingMode('user')
+      navigator
+        .mediaDevices
+        .getUserMedia({
+          video: {
+            width: { min: 640, ideal: 1920 },
+            height: { min: 400, ideal: 1080 },
+            facingMode: facingMode === 'user' ? 'environment' : 'user'
+          },
+        })
+        .then(stream => {
+          peersRef.current.forEach((peer) => {
+            if (peer) {
+              peer
+                .peer
+                .replaceTrack(
+                  peer.peer.streams[0].getVideoTracks()[0],
+                  stream.getVideoTracks()[0],
+                  peer.peer.streams[0]
+                )
             }
-          }).catch(err => {
-            toast.error(err.message)
           });
-      }
+
+          localVideo
+            .current
+            .srcObject
+            .removeTrack(
+              localVideo
+                .current
+                .srcObject
+                .getVideoTracks()[0]
+            );
+
+          localVideo
+            .current
+            .srcObject
+            .addTrack(stream.getVideoTracks()[0]);
+
+          if (facingMode === 'user') {
+            setFacingMode('environment')
+          } else {
+            setFacingMode('user')
+          }
+          setIsSwitching(false);
+        }).catch(err => {
+          toast.error(err.message);
+          setIsSwitching(false);
+        });
     }
   };
 
