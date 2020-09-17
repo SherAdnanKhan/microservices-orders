@@ -12,6 +12,7 @@ import {
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
   UN_SUPER_FAV,
+  CLEAR_USER_STUDIO
 } from "../constants/actionTypes";
 import { SPRFVS } from "../constants/privacyTypes";
 
@@ -44,6 +45,11 @@ export default (state = initialState, action) => {
         ...state,
         userStudio: action.payload
       };
+    case CLEAR_USER_STUDIO:
+      return {
+        ...state,
+        userStudio: null
+      };
     case FAV_USER:
       return {
         ...state,
@@ -63,7 +69,6 @@ export default (state = initialState, action) => {
         }
       };
     case FAV_GALLERY:
-      console.log(action);
       return {
         ...state,
         userStudio: {

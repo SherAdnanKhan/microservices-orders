@@ -8,7 +8,8 @@ import {
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
   UN_SUPER_FAV,
-  GET_MY_VAULTS
+  GET_MY_VAULTS,
+  CLEAR_USER_STUDIO
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -71,6 +72,10 @@ export const getUserStudio = (slug) => dispatch => {
       });
     });
 };
+
+export const clearUserStudio = () => {
+  return { type: CLEAR_USER_STUDIO };
+}
 
 export const addToSuperFavs = privacy => dispatch => {
   http
