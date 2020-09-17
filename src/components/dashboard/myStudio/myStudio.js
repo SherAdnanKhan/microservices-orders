@@ -53,9 +53,10 @@ const MyStudio = () => {
   } = useSelector(state => state);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getMyStudio(slug));
-  }, [dispatch, myStudio, slug]);
+  }, [dispatch, slug]);
 
   useEffect(() => {
     if (!myGalleries)
