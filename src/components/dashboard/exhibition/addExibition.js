@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { artSearch, artPost, updatePost } from "../../../actions/exibitionAction"
+import { artSearch, artPost, updatePost, clearArtSearch } from "../../../actions/exibitionAction"
 import InputAutoComplete from "../../common/autoComplete";
 import { useHistory, useLocation } from "react-router-dom";
 import Spinner from "../../common/spinner";
@@ -8,6 +8,7 @@ import { getMyGalleries } from "../../../actions/galleryActions";
 import ExhibitionModel from "./exhibitionModel";
 import queryString from 'query-string';
 import { getPost, clearPost } from "../../../actions/postAction";
+import { useWindowUnloadEffect } from "../../common/useWindowUnloadEffect";
 
 const AddExibit = () => {
   const location = useLocation();
@@ -104,6 +105,10 @@ const AddExibit = () => {
     }
     setError(error || '');
   }
+
+  useWindowUnloadEffect(() => {
+    dispatch(clearArtSearch());
+  }, true);
 
   useEffect(() => {
     if (params.gallery) {

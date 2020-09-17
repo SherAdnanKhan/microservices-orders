@@ -122,10 +122,6 @@ const ImageCropper = ({
     });
   }
 
-  // function drawRotated(degrees, img) {
-
-  // }
-
   const getCroppedImg = (image, crop, fileName) => {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;

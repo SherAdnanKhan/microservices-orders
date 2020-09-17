@@ -1,7 +1,7 @@
-import { ART_SEARCH } from "../constants/actionTypes";
+import { ART_SEARCH, CLEAR_ART } from "../constants/actionTypes";
 
 const initialState = {
-  ListOfArts: [],
+  ListOfArts: null,
   ListOfGalleries: []
 };
 
@@ -12,6 +12,11 @@ export default (state = initialState, action) => {
         ...state,
         ListOfArts: action.payload
       };
+    case CLEAR_ART:
+      return {
+        ...state,
+        ListOfArts: null
+      }
     default:
       return state;
   }
