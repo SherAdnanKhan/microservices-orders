@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from '../../common/avatar';
-import { formatTime, formatDate } from '../../../utils/helperFunctions';
+import { formatTime, formatDate, getText, getURL } from '../../../utils/helperFunctions';
 import SocketContext from '../../../context/socketContext';
 import { getCurrentUser, getAuthToken } from '../../../actions/authActions';
 import socket from '../../../services/socketService';
@@ -11,6 +11,7 @@ import ChatInvitationModel from '../../common/chatInvitationModal';
 import ChatHeader from './chatHeader';
 import ParticipantsModel from './participantsModel';
 import MeuzmLogo from '../../common/meuzmLogo';
+import { ReactTinyLink } from 'react-tiny-link';
 import {
   getConversation,
   updateConversation,
@@ -304,22 +305,37 @@ class ChatBox extends Component {
             onScroll={this.handleScroll}
           >
             <div className="chat-uesr">
-              {conversation?.participants.length > 2
+              {conversation?.participants?.length > 2
                 ? (
                   <>
                     <MeuzmLogo />
                     <div className="chat-uesr-name">
-                      <p>	You are now Strqing with {conversation?.participants.length - 1} peaple </p>
+                      <p>	You are now Strqing with
+                        <span>
+                          &nbsp;
+                          {conversation?.participants?.filter(p => p.id !== currentUser.id)[0].username + ', '}
+                          {conversation?.participants?.filter(p => p.id !== currentUser.id)[1].username}
+                          {conversation?.participants.filter(p => p.id !== currentUser.id).length > 2 &&
+                            <>
+                              {` and ${conversation?.participants.length - 3}`} participants
+                              </>
+                          }
+                        </span>
+                      </p>
                     </div>
                   </>
                 ) : (
                   <>
                     <Avatar
-                      user={user}
+                      user={conversation?.participants?.filter(p => p.id !== currentUser.id)[0]}
                     />
                     <div className="chat-uesr-name">
-                      <p>	You are now Strqing with </p>
-                      <span>{user?.username}</span>
+                      <p>	You are now Strqing with
+                        <span>
+                          &nbsp;
+                          {conversation?.participants?.filter(p => p.id !== currentUser.id)[0]?.username}
+                        </span>
+                      </p>
                     </div>
                   </>
                 )
@@ -353,21 +369,18 @@ class ChatBox extends Component {
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
                           >
-                            {/* {isValidURL(data.message)
-                              ? (
-                                <ReactTinyLink
-                                  cardSize="small"
-                                  showGraphic={true}
-                                  maxLine={2}
-                                  minLine={1}
-                                  url={data.message}
-                                  defaultMedia={data.message}
-                                />
-                              ) : (
-                                data.message
-                              )
-                            } */}
-                            {data.message}
+
+                            {getText(data.message) && getText(data.message)}
+                            {getURL(data.message) &&
+                              <ReactTinyLink
+                                cardSize="small"
+                                showGraphic={true}
+                                maxLine={2}
+                                minLine={1}
+                                url={getURL(data.message)}
+                              // defaultMedia={data.message}
+                              />
+                            }
 
                             {data.type === 1 &&
                               <div className="msgImg">
@@ -433,7 +446,7 @@ class ChatBox extends Component {
                       <div className='incoming'>
                         <div className="user-message">
                           <Avatar
-                            user={user}
+                            user={data.user}
                           />
                           <div
                             className='text'
@@ -444,21 +457,17 @@ class ChatBox extends Component {
                             }}
                           >
 
-                            {/* {isValidURL(data.message)
-                              ? (
-                                <ReactTinyLink
-                                  cardSize="small"
-                                  showGraphic={true}
-                                  maxLine={2}
-                                  minLine={1}
-                                  efaultMedia={data.message}
-                                  url={data.message}
-                                />
-                              ) : (
-                                data.message
-                              )
-                            } */}
-                            {data.message}
+                            {getText(data.message) && getText(data.message)}
+                            {getURL(data.message) &&
+                              <ReactTinyLink
+                                cardSize="small"
+                                showGraphic={true}
+                                maxLine={2}
+                                minLine={1}
+                                url={getURL(data.message)}
+                              // defaultMedia={data.message}
+                              />
+                            }
 
                             {data.type === 1 &&
                               <div className="msgImg">
