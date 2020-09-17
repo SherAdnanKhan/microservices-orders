@@ -1,5 +1,5 @@
 import http from '../services/httpService';
-import { ART_SEARCH } from '../constants/actionTypes';
+import { ART_SEARCH, CLEAR_ART } from '../constants/actionTypes';
 
 export const artSearch = (art) => dispatch => {
   http
@@ -11,6 +11,10 @@ export const artSearch = (art) => dispatch => {
       });
     });
 };
+
+export const clearArtSearch = () => {
+  return { type: CLEAR_ART };
+}
 
 export const artPost = (data, history) => () => {
   http
