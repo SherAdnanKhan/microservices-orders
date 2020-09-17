@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
-import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly, unSuperFav } from "../../../actions/studioActions";
+import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly, unSuperFav, clearUserStudio } from "../../../actions/studioActions";
 import Gallery from "./galleries";
 import Post from '../../common/posts';
 import PostBar from './postBar';
@@ -27,6 +27,7 @@ const Studio = () => {
     studio: { userStudio, loading },
     gallery: { gallery, myGalleries },
   } = useSelector(state => state);
+
   useEffect(() => {
     const { gallery } = queryString.parse(location.search);
 
@@ -46,6 +47,7 @@ const Studio = () => {
 
     return () => {
       dispatch(clearGallery());
+      dispatch(clearUserStudio());
     }
   }, [dispatch, slug]);
 
