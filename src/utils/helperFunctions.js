@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { numerics } from '../constants/regex';
+import { isUrl, numerics } from '../constants/regex';
 
 export const isEmpty = value =>
   value === undefined ||
@@ -44,16 +44,53 @@ export const playNotificationSound = async () => {
   }
 }
 
-// export const isValidURL = (str) => {
+export const getText = (text) => {
+  if (!text) return null;
 
-//   console.log(urls.test(str));
-//   return urls.test(str);
-// }
+  const splitted = text
+    .replace(/\s+/g, ' ')
+    .trim('')
+    .split(' ');
+
+  let stringBuilder = '';
+
+  for (let i = 0; i < splitted.length; i++) {
+    if (!isValidURL(splitted[i])) {
+      if (i < splitted.length - 1) {
+        stringBuilder += splitted[i] + ' ';
+      } else {
+        stringBuilder += splitted[i];
+      }
+    }
+  }
+
+  return stringBuilder ? stringBuilder : null;
+};
+
+export const getURL = (text) => {
+  if (!text) return null;
+
+  const splitted = text
+    .replace(/\s+/g, ' ')
+    .trim('')
+    .split(' ');
+
+  for (let str of splitted) {
+    if (isValidURL(str)) {
+      return str;
+    }
+  }
+  return null;
+};
+
+export const isValidURL = (text) => {
+  return isUrl.test(text);
+};
 
 
 export const isNumber = (value) => {
   return numerics.test(value);
-}
+};
 
 export const isChrome = () => {
   return navigator.userAgent.indexOf('Chrome') === -1 ? false : true;
