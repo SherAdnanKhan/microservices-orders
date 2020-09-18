@@ -199,7 +199,6 @@ const ImageCropper = ({
                 </i>
                 <ToolTip position="top" id="rotate" />
               </div>
-
               <div className="done">
                 <button className="btn-done" onClick={() => onToggle(false)}> Done </button>
               </div>

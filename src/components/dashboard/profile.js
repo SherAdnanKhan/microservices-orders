@@ -8,6 +8,7 @@ import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
 import Footer from './layout/footer';
 import ImageCropper from '../common/imageCropper';
+import ToolTip from '../common/toolTip/toolTip';
 
 const Profile = () => {
   const history = useHistory();
@@ -102,7 +103,13 @@ const Profile = () => {
         <div className="edit-user-page">
           <div className="header-bar" style={{ backgroundColor: feelColor }} >
             <div className="back-icon">
-              <i className="fa fa-arrow-left clickable" onClick={handleBackPress} />
+              <i
+                className="fa fa-arrow-left clickable"
+                onClick={handleBackPress}
+                data-tip="Back"
+                data-for="back"
+              />
+              <ToolTip id="back" />
             </div>
             <p>Edit Your Profile Cube {user.username}</p>
           </div>
@@ -115,12 +122,17 @@ const Profile = () => {
                   style={{ border: `2px solid ${feelColor}` }}
                 >
                   <div className="editTool Edit">
-                    <img src="/assets/images/paintbrush.png" alt="" />
+                    <img
+                      src="/assets/images/paintbrush.png"
+                      alt=""
+                      data-tip="Edit Profile picture"
+                      data-for="editProfile"
+                    />
+                    <ToolTip id="editProfile" />
                   </div>
                   <img
                     src={images[0] ? images[0].path : `/assets/images/${color}.png`}
                     alt=""
-
                   />
                   {/* <img src={`/assets/images/${color}.png`} alt="" /> */}
                 </div>
@@ -130,12 +142,17 @@ const Profile = () => {
                   style={{ border: `2px solid ${feelColor}` }}
                 >
                   <div className="editTool Edit">
-                    <img src="/assets/images/paintbrush.png" alt="" />
+                    <img
+                      src="/assets/images/paintbrush.png"
+                      alt=""
+                      data-tip="Edit Profile picture 2"
+                      data-for="editProfile2"
+                    />
+                    <ToolTip id="editProfile2" />
                   </div>
                   <img
                     src={images[1] ? images[1].path : `/assets/images/${color}.png`}
                     alt=""
-
                   />
                 </div>
                 <div
@@ -144,7 +161,13 @@ const Profile = () => {
                   style={{ border: `2px solid ${feelColor}` }}
                 >
                   <div className="editTool Edit">
-                    <img src="/assets/images/paintbrush.png" alt="" />
+                    <img
+                      src="/assets/images/paintbrush.png"
+                      alt=""
+                      data-tip="Edit Profile picture 3"
+                      data-for="editProfile3"
+                    />
+                    <ToolTip id="editProfile3" />
                   </div>
                   <img
                     src={images[2] ? images[2].path : `/assets/images/${color}.png`}
@@ -157,7 +180,13 @@ const Profile = () => {
                   style={{ border: `2px solid ${feelColor}` }}
                 >
                   <div className="editTool Edit">
-                    <img src="/assets/images/paintbrush.png" alt="" />
+                    <img
+                      src="/assets/images/paintbrush.png"
+                      alt=""
+                      data-tip="Edit Profile picture 4"
+                      data-for="editProfile4"
+                    />
+                    <ToolTip id="editProfile4" />
                   </div>
                   <img
                     src={images[3] ? images[3].path : `/assets/images/${color}.png`}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import { updateBio } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
+import ToolTip from '../../common/toolTip/toolTip';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const [bio, setBio] = useState('');
@@ -26,8 +27,15 @@ const ViewProfile = ({ myStudio, feelColor }) => {
             <div className="procu">
               <div className="editTool Edit">
                 <Link to={`/dashboard/my-studio/profile`}>
-                  <img src="/assets/images/paintbrush.png" alt="" className="clickable profile-brush" />
+                  <img
+                    src="/assets/images/paintbrush.png"
+                    alt=""
+                    className="clickable profile-brush"
+                    data-for="editProfile"
+                    data-tip="edit profile"
+                  />
                 </Link>
+                <ToolTip id="editProfile" />
               </div>
               <ProfileCube avatars={myStudio.user.avatars} feelColor={feelColor} />
             </div>
@@ -36,7 +44,13 @@ const ViewProfile = ({ myStudio, feelColor }) => {
         <div className="studioDetail">
           <div className="profilebioname">
             <div className="editTool Edit">
-              <img src="/assets/images/paintbrush.png" alt="" />
+              <img
+                src="/assets/images/paintbrush.png"
+                alt=""
+                data-for="editName"
+                data-tip="edit name"
+              />
+              <ToolTip id="editName" />
             </div>
             {myStudio && <span className="nameof" id="nameof">{myStudio.user.username}</span>}
             <br />
@@ -47,7 +61,13 @@ const ViewProfile = ({ myStudio, feelColor }) => {
               <div
                 className="editTool Edit clickable"
                 onClick={handleSave}>
-                <img src="/assets/images/paintbrush.png" alt="" />
+                <img
+                  src="/assets/images/paintbrush.png"
+                  alt=""
+                  data-for="editBio"
+                  data-tip="edit bio"
+                />
+                <ToolTip id="editBio" />
               </div>
               <span className="labelText">Click edit Studio to add a bio.</span>
               <div>
@@ -76,9 +96,15 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                   className="faved-by-btn"
                   style={{ backgroundColor: feelColor }}
                 >
-                  <img src="/assets/images/fave_icon.png" alt="" />
+                  <img
+                    src="/assets/images/fave_icon.png"
+                    alt=""
+                    data-for="faves"
+                    data-tip="faved galleries"
+                  />
                   Faves
-              </div>
+                  <ToolTip id="faves" />
+                </div>
               </Link>
               {/* <Link to="#">
                 <div className="faved-by-btn">

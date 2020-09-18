@@ -24,6 +24,7 @@ import {
   changeReadMessageStatus,
   resetConversationCount,
 } from '../../../actions/conversationActions';
+import ToolTip from '../../common/toolTip/toolTip';
 
 class ChatBox extends Component {
   state = {
@@ -538,10 +539,15 @@ class ChatBox extends Component {
           }
 
           <div className="message-input">
-            <i
-              className="fa fa-plus add-items-btn"
-              onClick={() => this.setState({ hidden: true })}
-            />
+            <span
+              data-for="uplaodPost"
+              data-tip="upload">
+              <i
+                className="fa fa-plus add-items-btn"
+                onClick={() => this.setState({ hidden: true })}
+              />
+            </span>
+            <ToolTip id="uploadPost" />
             <input
               autoFocus
               placeholder="Type a message"

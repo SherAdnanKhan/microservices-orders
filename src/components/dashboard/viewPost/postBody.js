@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import ImagePostOption from '../../common/ImagePostOption';
+import ToolTip from '../../common/toolTip/toolTip';
 
 
 const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
@@ -38,10 +39,22 @@ const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGa
         }
       </div>
       <div className="valut-icon show-valut">
-        <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
-        <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+        <i
+          className="fa fa-ellipsis-v"
+          aria-hidden="true"
+          data-for="more"
+          data-tip="more"
+        ></i>
+        <ToolTip id="more" />
+        <img
+          className="valut-img"
+          alt=""
+          src="/assets/images/vaulticon.png"
+          data-for="vault"
+          data-tip="vault"
+        />
+        <ToolTip id="vault" />
       </div>
-
       <div className="post-body">
         {post &&
           <div className="image-div"
@@ -67,7 +80,6 @@ const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGa
             }
           </div>
         }
-
         <div className={show ? 'right-clicked show' : 'right-clicked'}>
           {post && post.other_posts &&
             post.other_posts.map((other, index) => (
@@ -101,8 +113,10 @@ const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGa
           src="/assets/images/gallerypeek.png"
           alt=""
           onClick={() => setShow(!show)}
-
+          data-for="galleryPeak"
+          data-tip="gallery peak"
         />
+        <ToolTip id="galleryPeak" />
       </div>
     </>
   )

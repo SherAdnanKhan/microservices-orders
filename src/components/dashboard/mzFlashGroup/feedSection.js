@@ -105,8 +105,11 @@ const FeedSection = ({
             className="fa fa-plus"
             aria-hidden="true"
             onClick={() => onModelChange(true)}
+            data-for="addPost"
+            data-tip="upload post"
           >
           </i>
+          <ToolTip id="addPost" />
           <Input
             type="text"
             id="feed"

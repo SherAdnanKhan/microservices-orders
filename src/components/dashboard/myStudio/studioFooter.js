@@ -79,11 +79,10 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="More" data-for="more" ></i>
                       <ToolTip position="top" id="more" />
                     </div>
-                    <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-for="vault" />
-                    <ToolTip position="bottom" id="vault" />
+                    <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" />
+                    <ToolTip position="top" id="vault" />
                   </div >
                   <div onClick={() => handleActivePost(post)}>
-
                     {post.post_type === 2
                       ? (
                         <video width="320" height="240" controls>
@@ -96,7 +95,6 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       )
                     }
                     <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
-
                   </div>
                   <div
                     className={
@@ -119,10 +117,9 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                         onStroke={() => onStroke(post)}
                         onUnstroke={() => onUnStroke(post)}
                       />
-                      <ToolTip position="bottom" />
+                      <ToolTip position="bottom" id="stroke" />
                       <p> strokes {post.stroke_users_count} </p>
                     </div>
-
                     <div className="action">
                       <img
                         className="comment-img open-commet clickable"
