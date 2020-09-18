@@ -52,7 +52,7 @@ export const createOrUpdateProfile = (data, history) => () => {
 
 export const updateBio = bio => dispatch => {
   http
-    .put(`/users/user-bio?bio=${bio}`)
+    .put(`/users/user-bio`, { bio: bio })
     .then(() => {
       toast('Bio saved successfully');
       dispatch({

@@ -84,6 +84,14 @@ const Profile = () => {
     setToggle(value);
     setCroppedImage('');
   };
+
+  const handleClearState = () => {
+    setSelectedImage({});
+    setImageUrl('');
+    setToggle(false);
+    setCroppedImage('');
+  }
+
   return (
     //feelColor is color code
     <div className={`frameReady ${feelColor}`}>
@@ -172,7 +180,7 @@ const Profile = () => {
         <div className="my-studio-edit">
           <div className="header-bar " style={{ backgroundColor: feelColor }}>
             <div className="back-icon go-to-profile">
-              <i className="fa fa-arrow-left" />
+              <i className="fa fa-arrow-left" onClick={handleClearState} />
             </div>
             <p>Edit your Profile Cube {user.username}</p>
           </div>
