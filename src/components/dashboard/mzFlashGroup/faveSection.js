@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 import UserContext from '../../../context/userContext';
 import { completeFormattedDate, formatTime } from '../../../utils/helperFunctions';
+import ToolTip from '../../common/toolTip/toolTip';
 
 const FaveSection = ({
   sprfvsFeeds, favesFeeds, favesAndSprfvsFeeds, userFeeds,
@@ -20,6 +21,8 @@ const FaveSection = ({
         <div
           className={`col-3 hide-mobile fav-tab-1 ${activeTab === 1 && 'active'}`}
           onClick={() => onTabChange(1)}
+          data-for="favSuperFavTab"
+          data-tip="sprfvs and fvs"
         >
           <button className="tablinks">
             {((activeUser && activeUserList !== 1) || !activeUser) &&
@@ -50,10 +53,13 @@ const FaveSection = ({
               />
             }
           </button>
+          <ToolTip id="favSuperFavTab" />
         </div>
         <div
           className={`col-3 mobile-view fav-tab-2 ${activeTab === 2 && 'active'}`}
           onClick={() => onTabChange(2)}
+          data-tip="SuperFav users Tab"
+          data-for="sprfvs"
         >
           <button className="tablinks">
             {((activeUser && activeUserList !== 2) || !activeUser) &&
@@ -84,6 +90,7 @@ const FaveSection = ({
               />
             }
           </button>
+          <ToolTip position="top" id="superFavTab" />
         </div>
         <div
           className={`col-3 mobile-view fav-tab-3 ${activeTab === 3 && 'active'}`}
@@ -91,6 +98,8 @@ const FaveSection = ({
             e.preventDefault();
             onTabChange(3)
           }}
+          data-for="favouriteTab"
+          data-tip="faves"
         >
           <button className="tablinks">
             {((activeUser && activeUserList !== 3) || !activeUser) &&
@@ -121,16 +130,20 @@ const FaveSection = ({
               />
             }
           </button>
+          <ToolTip id="favouriteTab" />
         </div>
         <div
           className={`col-3 mobile-view fav-tab-4 ${activeTab === 4 && 'active'}`}
           onClick={() => onTabChange(4)}
+          data-for="myTab"
+          data-tip="My feeds"
         >
           <button className="tablinks">
             <Avatar
               user={currentUser}
             />
           </button>
+          <ToolTip id="myTab" />
         </div>
       </div>
       <div className="box-container">
@@ -252,7 +265,8 @@ const FaveSection = ({
                           : <> {feed.comments_count} comment </>
                         }
                       </div>
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" data-for="comments" data-tip="comments" />
+                      <ToolTip id="comments" />
                     </div>
                     <div className="strk-btn">
                       <span className="strk-counter">
@@ -267,13 +281,17 @@ const FaveSection = ({
                         onStroke={() => onStroke(feed.id, feed.user)}
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
+                      <ToolTip id="stroke" />
                     </div>
 
                     <div className="actions-repost">
                       <img src="/assets/images/icons/repost_icon.png"
                         onClick={e => onRepost(e, feed)} alt=""
+                        data-for="repost"
+                        data-tip="respost"
                       >
                       </img>
+                      <ToolTip id="repost" />
                     </div>
                   </div>
                   <div className="view-comment">
@@ -428,7 +446,8 @@ const FaveSection = ({
                           : <> {feed.comments_count} comment </>
                         }
                       </span>
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" data-for="comments" data-tip="comments" />
+                      <ToolTip id="comments" />
                     </div>
                     <div className="strk-btn">
                       <span className="strk-counter">
@@ -443,12 +462,16 @@ const FaveSection = ({
                         onStroke={() => onStroke(feed.id, feed.user)}
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
+                      <ToolTip id="stroke" />
                     </div>
                     <div className="actions-repost"  >
                       <img src="/assets/images/icons/repost_icon.png"
                         onClick={e => onRepost(e, feed)} alt=""
+                        data-for="repost"
+                        data-tipst="Repost"
                       >
                       </img>
+                      <ToolTip id="repost" />
                     </div>
                   </div>
                   <div className="view-comment">
@@ -603,7 +626,8 @@ const FaveSection = ({
                           : <> {feed.comments_count} comment </>
                         }
                       </span>
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" data-for="comments" data-tip="comments" />
+                      <ToolTip id="comments" />
                     </div>
                     <div className="strk-btn">
                       <span className="strk-counter">
@@ -618,12 +642,16 @@ const FaveSection = ({
                         onStroke={() => onStroke(feed.id, feed.user)}
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
+                      <ToolTip id="stroke" />
                     </div>
                     <div className="actions-repost">
                       <img src="/assets/images/icons/repost_icon.png"
                         onClick={e => onRepost(e, feed)} alt=""
+                        data-for="repost"
+                        data-tip="repost"
                       >
                       </img>
+                      <ToolTip id="repost" />
                     </div>
                   </div>
                   <div className="view-comment">
@@ -776,7 +804,8 @@ const FaveSection = ({
                           : <> {feed.comments_count} comment </>
                         }
                       </span>
-                      <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                      <img className="comment-img" alt="" src="/assets/images/crit1.png" data-for="comments" data-tip="comments" />
+                      <ToolTip id="comments" />
                     </div>
                     <div className="strk-btn">
                       <span className="strk-counter">
@@ -791,12 +820,16 @@ const FaveSection = ({
                         onStroke={() => onStroke(feed.id, feed.user)}
                         onUnstroke={() => onUnstroke(feed.id, feed.user)}
                       />
+                      <ToolTip id="stroke" />
                     </div>
                     <div className="actions-repost">
                       <img src="/assets/images/icons/repost_icon.png"
                         onClick={e => onRepost(e, feed)} alt=""
+                        data-for="repost"
+                        data-tip="repost"
                       >
                       </img>
+                      <ToolTip id="repost" />
                     </div>
                   </div>
                   <div className="view-comment">

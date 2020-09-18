@@ -20,6 +20,7 @@ import SharePostStrqModal from '../../common/sharePostStrqModal';
 import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
 import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
+import ToolTip from "../../common/toolTip/toolTip";
 
 const Lobby = () => {
   const user = useContext(UserContext);
@@ -319,6 +320,7 @@ const Lobby = () => {
           </HorizontalSlider>
         </div>
         <div className="col-6 section-2 box-2">
+        <ToolTip id="search" position="bottom" text="search"/>
           {favouritePosts?.map((post, index) => (
             <div key={index}>
               <LobbyPosts
@@ -354,6 +356,7 @@ const Lobby = () => {
           />
         }
         <div className="section-3 box-3 col4">
+          <ToolTip/>
           <FeedSection
             collectiveFeeds={collectiveFeeds}
             currentUser={currentUser}

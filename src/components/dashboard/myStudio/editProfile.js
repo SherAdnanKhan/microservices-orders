@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
+import ToolTip from "../../common/toolTip/toolTip";
 
 const EditProfile = ({ myStudio, feelColor }) => {
   return (
@@ -44,9 +45,16 @@ const EditProfile = ({ myStudio, feelColor }) => {
                   className="faved-by-btn"
                   style={{ backgroundColor: feelColor }}
                 >
-                  <img src="/assets/images/fave_icon.png" alt="" />
-                  Faves
-              </div>
+                  <img
+                    src="/assets/images/fave_icon.png"
+                    alt=""
+                    data-for="favedGalleries"
+                    data-tip="Faved Galleries"
+                  />
+                    Faves
+
+                  <ToolTip id="favedGalleries" />
+                </div>
               </Link>
               {/* <Link to="/dashboard/my-studio/fave">
                 <div className="faved-by-btn">

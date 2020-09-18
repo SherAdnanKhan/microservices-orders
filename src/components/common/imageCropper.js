@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-
+import ToolTip from "../common/toolTip/toolTip";
 const ImageCropper = ({
   toggle, onToggle, onCompleteCrop,
   imageUrl, onSkip, croppedImage
@@ -177,18 +177,27 @@ const ImageCropper = ({
                 <i
                   className={`fas fa-crop ${selected === 'crop' ? 'selected' : ''}`}
                   onClick={() => setSelected('crop')}
+                  data-for="crop"
+                  data-tip="Crop"
                 >
+                  <ToolTip position="top" id="crop" />
                 </i>
                 <i
                   className={`fab fa-flipboard ${selected === 'flip' ? 'selected' : ''}`}
                   onClick={handleFlip}
+                  data-for="mirror"
+                  data-tip="Flip"
                 >
                 </i>
+                <ToolTip position="top" id="mirror" />
                 <i
                   className={`fas fa-undo ${selected === 'rotate' ? 'selected' : ''}`}
                   onClick={handleRotate}
+                  data-for="rotate"
+                  data-tip="Rotate"
                 >
                 </i>
+                <ToolTip position="top" id="rotate" />
               </div>
 
               <div className="done">

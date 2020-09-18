@@ -6,6 +6,7 @@ import Stroke from "../../common/stroke";
 import Comment from '../../dashboard/viewPost/comments';
 import { Link } from "react-router-dom";
 import ShowMoreText from 'react-show-more-text';
+import ToolTip from "../../common/toolTip/toolTip";
 
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
@@ -75,9 +76,11 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                     }
                   >
                     <div style={{ marginRight: "auto", paddingLeft: "15px", paddingTop: "20px" }}>
-                      <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
+                      <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="More" data-for="more" ></i>
+                      <ToolTip position="top" id="more" />
                     </div>
-                    <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+                    <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-for="vault" />
+                    <ToolTip position="bottom" id="vault" />
                   </div >
                   <div onClick={() => handleActivePost(post)}>
 
@@ -116,6 +119,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                         onStroke={() => onStroke(post)}
                         onUnstroke={() => onUnStroke(post)}
                       />
+                      <ToolTip position="bottom" />
                       <p> strokes {post.stroke_users_count} </p>
                     </div>
 
@@ -124,7 +128,10 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                         className="comment-img open-commet clickable"
                         alt=""
                         src="/assets/images/crit1.png"
+                        data-tip="Comments"
+                        data-for="comments"
                       />
+                      <ToolTip position="bottom" id="comments" />
                       <p> comments {post.comments.length}</p>
                     </div>
                     <div className="action">
@@ -133,7 +140,10 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                         alt=""
                         src="/assets/images/ncommnicon.png"
                         onClick={() => onNcomm(post)}
+                        data-tip="Ncomm"
+                        data-for="ncomm"
                       />
+                      <ToolTip position="bottom" id="ncomm" />
                     </div>
                   </div>
                   <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
