@@ -55,7 +55,7 @@ export const getText = (text) => {
   let stringBuilder = '';
 
   for (let i = 0; i < splitted.length; i++) {
-    if (!isValidURL(splitted[i])) {
+    if (!getURL(splitted[i])) {
       if (i < splitted.length - 1) {
         stringBuilder += splitted[i] + ' ';
       } else {
@@ -76,17 +76,21 @@ export const getURL = (text) => {
     .split(' ');
 
   for (let str of splitted) {
-    if (isValidURL(str)) {
-      return str;
+    if (isUrl.test(str)) {
+      if (
+        str.split('.')[0].includes('http://') ||
+        str.split('.')[0].includes('https://')) {
+
+        return str;
+      } else {
+        if (str.split('.')[0] === 'www') {
+          return `https://${str}`;
+        }
+      }
     }
   }
   return null;
 };
-
-export const isValidURL = (text) => {
-  return isUrl.test(text);
-};
-
 
 export const isNumber = (value) => {
   return numerics.test(value);

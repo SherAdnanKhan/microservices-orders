@@ -369,7 +369,6 @@ class ChatBox extends Component {
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
                           >
-
                             {getText(data.message) && getText(data.message)}
                             {getURL(data.message) &&
                               <ReactTinyLink
