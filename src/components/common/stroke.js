@@ -10,6 +10,8 @@ const Stroke = ({ hasStroke, onStroke, onUnstroke, className }) => {
             src="/assets/images/strokeiconfull.png"
             alt=""
             onClick={onUnstroke}
+            data-for="stroke"
+            data-tip="unStroke"
           />
         ) : (
           <img
@@ -17,6 +19,8 @@ const Stroke = ({ hasStroke, onStroke, onUnstroke, className }) => {
             src="/assets/images/strokeiconem.png"
             alt=""
             onClick={onStroke}
+            data-for="stroke"
+            data-tip="stroke"
           />
         )
       }

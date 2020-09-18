@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import ToolTip from "../../common/toolTip/toolTip";
 
 const LeftBorder = () => {
   const history = useHistory();
@@ -15,19 +16,25 @@ const LeftBorder = () => {
         alt=""
         src="/assets/images/lobbyicon.png"
         onClick={() => history.push('/dashboard/lobby')}
+        data-tip="lobby"
       />
+      <ToolTip position="right" />
       <img
         className="mystudio-img"
         alt=""
         src="/assets/images/newstudioicon.png"
         onClick={() => history.push('/dashboard/my-studio')}
+        data-tip="my studio"
       />
+      <ToolTip id="my" position="right" />
       <img
         className="add-img"
         alt=""
         src="/assets/images/add.png"
         onClick={() => history.push('/dashboard/exhibition')}
+        data-tip="add exhibit"
       />
+      <ToolTip position="right" />
     </div>
   );
 };

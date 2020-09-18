@@ -6,6 +6,7 @@ import { createFeed, getCollectiveFeeds } from '../../../actions/mzFlashActions'
 import { Link } from 'react-router-dom';
 import Stroke from '../../common/stroke';
 import { completeFormattedDate, formatTime } from '../../../utils/helperFunctions';
+import ToolTip from "../../common/toolTip/toolTip";
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
@@ -276,7 +277,13 @@ const FeedSection = ({
                     : <>{feed.comments_count} comment </>
                   }
                 </span>
-                <img className="comment-img" alt="" src="/assets/images/crit1.png" />
+                <img className="comment-img"
+                  alt=""
+                  src="/assets/images/crit1.png"
+                  data-for="comments"
+                  data-tip="comments"
+                />
+                <ToolTip id="comments" position="top" />
               </div>
               <div className="strk-btn">
                 <span className="strk-counter">
@@ -290,13 +297,19 @@ const FeedSection = ({
                   className="strk-img"
                   onStroke={() => onStroke(feed.id, feed.user)}
                   onUnstroke={() => onUnstroke(feed.id, feed.user)}
+
                 />
+                <ToolTip id="stroke" position="top" />
               </div>
-              <div className="actions-repost"  >
+              <div className="actions-repost" >
                 <img src="/assets/images/icons/repost_icon.png"
                   onClick={e => onRepost(e, feed)} alt=""
+                  data-tip="Repost"
+                  data-for="repost"
+                  style={{ cursor: "pointer" }}
                 >
                 </img>
+                <ToolTip id="repost" position="top" />
               </div>
             </div>
             <div className="view-comment">
