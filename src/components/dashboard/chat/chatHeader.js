@@ -6,6 +6,7 @@ import socket from '../../../services/socketService';
 import CallingModal from './callingModal';
 import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
 import useViewport from '../../common/useViewport';
+import ToolTip from '../../common/toolTip/toolTip';
 
 const ChatHeader = ({
   user, conversation, onlineUsers, onOpenInvitationModel,
@@ -164,11 +165,28 @@ const ChatHeader = ({
       </div>
 
       <div className="call-btn">
-        <i className="fas fa-user-plus" aria-hidden="true" onClick={onOpenInvitationModel} />
+        <i
+          className="fas fa-user-plus"
+          aria-hidden="true"
+          onClick={onOpenInvitationModel}
+          data-tip="Invite Others"
+          data-for="invite"
+        />
+        <ToolTip id="invite" />
+
         <div onClick={handleCall}>
-          <img href="#" src="/assets/images/icons/VidStrq.png" className="call-icon" alt="Video Call"></img>
+          <img
+            href="#"
+            src="/assets/images/icons/VidStrq.png"
+            className="call-icon"
+            alt="Video Call"
+            data-for="call"
+            data-tip="call"
+          />
+          <ToolTip id="call" />
         </div>
-        <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
+        <img src="/assets/images/icons/DrawStrq.png" alt="Draw" data-tip="Draw" data-for="draw" />
+        <ToolTip id="draw" />
       </div>
 
       {showCallingModal &&
