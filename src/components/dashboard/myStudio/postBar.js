@@ -32,7 +32,6 @@ const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) =>
 
         {activeGallery &&
           <>
-
             <span
               onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}
               data-for="faved"
@@ -40,8 +39,6 @@ const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) =>
               Faved
                 ({gallery && gallery.faved_users.length})
               </span>
-
-
             <ToolTip postion="left" id="faved" />
             <img
               src="/assets/images/add.png"

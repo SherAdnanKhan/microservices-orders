@@ -52,7 +52,6 @@ const EditProfile = ({ myStudio, feelColor }) => {
                     data-tip="Faved Galleries"
                   />
                     Faves
-
                   <ToolTip id="favedGalleries" />
                 </div>
               </Link>

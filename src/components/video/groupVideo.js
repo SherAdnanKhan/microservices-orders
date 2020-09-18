@@ -12,6 +12,7 @@ import { isMobile } from '../../utils/helperFunctions';
 import ChatInvitationModel from '../common/chatInvitationModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getConversation } from '../../actions/conversationActions';
+import ToolTip from '../common/toolTip/toolTip';
 
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
@@ -511,31 +512,74 @@ const GroupVideoCall = () => {
             ))}
             <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
               {microPhone
-                ? <i
-                  className="fa fa-microphone"
-                  aria-hidden="true"
-                  data-tip="hello world"
-                  onClick={handleToggleMicroPhone}
-                />
-                : <i
-                  className="fa fa-microphone-slash"
-                  aria-hidden="true"
-                  data-tip="hello world"
-                  onClick={handleToggleMicroPhone}
-                />
+                ?
+                <>
+                  <i
+                    className="fa fa-microphone"
+                    aria-hidden="true"
+                    data-for="turnOffMic"
+                    data-tip="Turn Off Mic"
+                    onClick={handleToggleMicroPhone}
+                  />
+                  <ToolTip id="turnOffMic" />
+                </>
+                :
+                <>
+                  <i
+                    className="fa fa-microphone-slash"
+                    aria-hidden="true"
+                    onClick={handleToggleMicroPhone}
+                    data-for="turnOnMic"
+                    data-tip="Turn On Mic"
+                  />
+                  <ToolTip id="turnOnMic" />
+                </>
               }
-              <i className="fa fa-retweet" aria-hidden="true" onClick={handleCameraSwitch} />
+              <i
+                className="fa fa-retweet"
+                aria-hidden="true"
+                onClick={handleCameraSwitch}
+                data-for="switchCamera"
+                data-tip="switch camera" />
+              <ToolTip id="switchCamera" />
               {video
-                ? <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} />
-                : <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" />
+                ?
+                <>
+                  <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} data-for="cameraOff" data-tip="turn off camera" />
+                  <ToolTip id="cameraOff" />
+                </>
+                :
+                <>
+                  <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" data-for="cameraOn" data-tip="turn on camera" />
+                  <ToolTip id="cameraOn" />
+                </>
               }
 
             </div>
             <div className="call-Actions2">
-              <img className="valut-img" alt="" src="/assets/images/strqicon.png"></img>
-              <img src="/assets/images/icons/DrawStrq.png" alt="Draw"></img>
-              <i className="fas fa-user-plus" aria-hidden="true" onClick={handleOpenInvitationModal} />
-              <i className="far fa-times-circle" onClick={handleEndCall} />
+              <img className="valut-img" alt="" src="/assets/images/strqicon.png" data-for="chat" data-tip="Chat"></img>
+              <ToolTip id="chat" />
+              <img
+                src="/assets/images/icons/DrawStrq.png"
+                alt="Draw"
+                data-for="chat" data-tip="draw"
+              ></img>
+              <ToolTip id="draw strq" />
+              <i
+                className="fas fa-user-plus"
+                aria-hidden="true"
+                onClick={handleOpenInvitationModal}
+                data-for="inviteUser"
+                data-tip="invite users"
+              />
+              <ToolTip id="inviteUser" />
+              <i
+                className="far fa-times-circle"
+                onClick={handleEndCall}
+                data-for="endCall"
+                data-tip="end call"
+              />
+              <ToolTip id="endCall" />
             </div>
           </div>
         </div>

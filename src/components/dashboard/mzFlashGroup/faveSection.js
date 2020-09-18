@@ -22,7 +22,7 @@ const FaveSection = ({
           className={`col-3 hide-mobile fav-tab-1 ${activeTab === 1 && 'active'}`}
           onClick={() => onTabChange(1)}
           data-for="favSuperFavTab"
-          data-tip="sprfvs and fvs"
+          data-tip="sprfvs and faves feeds"
         >
           <button className="tablinks">
             {((activeUser && activeUserList !== 1) || !activeUser) &&
@@ -58,7 +58,7 @@ const FaveSection = ({
         <div
           className={`col-3 mobile-view fav-tab-2 ${activeTab === 2 && 'active'}`}
           onClick={() => onTabChange(2)}
-          data-tip="SuperFav users Tab"
+          data-tip="Sprfvs Feeds"
           data-for="sprfvs"
         >
           <button className="tablinks">
@@ -90,7 +90,7 @@ const FaveSection = ({
               />
             }
           </button>
-          <ToolTip position="top" id="superFavTab" />
+          <ToolTip position="top" id="sprfvs" />
         </div>
         <div
           className={`col-3 mobile-view fav-tab-3 ${activeTab === 3 && 'active'}`}
@@ -99,7 +99,7 @@ const FaveSection = ({
             onTabChange(3)
           }}
           data-for="favouriteTab"
-          data-tip="faves"
+          data-tip="faves feeds"
         >
           <button className="tablinks">
             {((activeUser && activeUserList !== 3) || !activeUser) &&

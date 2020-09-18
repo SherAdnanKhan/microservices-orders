@@ -320,7 +320,7 @@ const Lobby = () => {
           </HorizontalSlider>
         </div>
         <div className="col-6 section-2 box-2">
-        <ToolTip id="search" position="bottom" text="search"/>
+          <ToolTip id="search" position="bottom" text="search" />
           {favouritePosts?.map((post, index) => (
             <div key={index}>
               <LobbyPosts
@@ -342,7 +342,6 @@ const Lobby = () => {
                 onRepostModal={handleRepostModal}
                 onMzFlashModal={handleMzFlashModal}
                 onVault={handleVault}
-
               />
             </div>
           ))
@@ -356,7 +355,6 @@ const Lobby = () => {
           />
         }
         <div className="section-3 box-3 col4">
-          <ToolTip/>
           <FeedSection
             collectiveFeeds={collectiveFeeds}
             currentUser={currentUser}

@@ -4,6 +4,7 @@ import { getNcomm, clearNcomm } from "../../../actions/postAction";
 import ShowMoreText from 'react-show-more-text';
 import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
+import ToolTip from "../../common/toolTip/toolTip";
 
 const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
   const dispatch = useDispatch();
@@ -48,40 +49,49 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
                 src="/assets/images/strokeiconfull.png"
                 alt=""
                 onClick={handleUnStoke}
+                data-tip="unStroke"
+                data-for="stroke"
               />
+
             ) : (
               <img
                 className="post-non-color-icon"
                 src="/assets/images/strokeiconem.png"
                 alt=""
                 onClick={handleStoke}
+                data-tip="Stroke"
+                data-for="stroke"
               />
             )
           }
+          <ToolTip id="stroke" />
           <p>strokes {post && post?.stroke_users_count}</p>
         </div>
-
         {hasAllowedCritiques() &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"
               src="/assets/images/crit1.png"
               alt=""
+              data-for="comments"
+              data-tip="comments"
             />
+            <ToolTip id="comments" />
             <p> comments {comments.length} </p>
           </div>
         }
-
         <div className="post-footer-icons action-w">
           <img
             className="post-non-color-icon clickable"
             src="/assets/images/ncommnicon.png"
             onClick={() => handleNcomm(post)}
             alt=""
+            data-for="ncomm"
+            data-tip="ncomm"
           />
+          <ToolTip id="ncomm" />
         </div>
       </div>
-
       <div className='post-description' style={{ width: '80%', textAlign: 'center' }}>
         {post &&
           <ShowMoreText

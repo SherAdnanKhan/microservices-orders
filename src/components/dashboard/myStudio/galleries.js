@@ -1,4 +1,5 @@
 import React from 'react';
+import ToolTip from '../../common/toolTip/toolTip';
 
 const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen }) => {
   return (
@@ -30,7 +31,10 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                     src="/assets/images/paintbrush.png"
                     alt=""
                     onClick={() => onModelOpen(gallery)}
+                    data-for="editGallery"
+                    data-tip="edit gallery"
                   />
+                  <ToolTip id="editGallery" />
                 </div>
                 <img
                   src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
@@ -38,7 +42,15 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen 
                 />
               </div>
             ))}
-            <h1 onClick={() => onModelOpen('')} className="clickable"> <img src='/assets/images/add.png' alt="" /> </h1>
+            <h1 onClick={() => onModelOpen('')} className="clickable">
+              <img
+                src='/assets/images/add.png'
+                alt=""
+                data-for="uploadGallery"
+                data-tip="upload gallery"
+              />
+              <ToolTip id="uploadGallery" />
+            </h1>
           </div>
         </div>
       }

@@ -18,7 +18,6 @@ const RightBorder = () => {
         data-tip="chat"
       />
       <ToolTip position="left" id="chat-right" />
-
       <img
         alt=""
         src="/assets/images/mzflash.png"

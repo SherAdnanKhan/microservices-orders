@@ -6,8 +6,6 @@ const ToolTip = ({ position, id }) => (
   <Tooltip
     backgroundColor="#5C5B5A"
     textColor="white"
-    style={{ marginTop: "1px" }}
-
     place={position} id={id}>
   </Tooltip>
 
