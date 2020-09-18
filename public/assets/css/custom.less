@@ -1869,8 +1869,14 @@ input {
     cursor: pointer;
   }
   .search-input{
-    width: 100%;
-    max-width: calc(100% - 110px);
+    width: 50%;
+    max-width: calc(50% - 110px);
+    margin: 0 auto;
+    @media @mobile {
+      width: 100%;
+      max-width: calc(100% - 110px);
+      margin: unset;
+    }
     input{
       width: 100%;
       background-color: rgba(0, 0, 0, 0.2);
