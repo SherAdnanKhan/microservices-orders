@@ -5506,7 +5506,7 @@ img {
   z-index: 20;
   @media @mobile{
     width: 80%;
-    height: 40vh;
+    height: 51vh;
   }
   // .model .model-image .ReactCrop > div {
   //   height: 350px;
@@ -5523,6 +5523,9 @@ img {
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+      @media screen and (max-width: 768px) and (min-width:600px){
+        padding-top: 25px;
+      }
 
       i {
         cursor: pointer;
@@ -5531,6 +5534,9 @@ img {
         }
         font-size: xxx-large;
         color: gray;
+        @media @mobile {
+          font-size: 30px;
+        }
       }
     }
 
@@ -5539,38 +5545,37 @@ img {
       width: 100%;
       bottom: 0;
       @media screen and (max-width: 768px){
-        top: 98px;
+        top: 66px;
       }
       @media screen and (max-width: 700px){
-        top: 96px;
+        top: 64px;
       }
       @media screen and (max-width: 600px){
-        top: 96px;
+        top: 50px;
       }
       @media screen and (max-width: 490px){
-        top: 97px;
+        top: 50px;
       }
       @media screen and (max-width: 450px){
-        top: 81px;
+        top: 38px;
       }
       @media screen and (max-width: 420px){
-        top: 92px;
+        top: 49px;
       }
       @media screen and (max-width: 400px){
-        top: 88px;
+        top: 47px;
       }
       @media screen and (max-width: 375px){
-        top: 98px;
+        top: 43px;
       }
       @media screen and (max-width: 360px) {
-        top: 83px;
+        top: 41px;
       }
       @media screen and (max-width: 320px) {
-        top: 78px;
+        top: 37px;
       }
       .btn-done {
         padding: 10px;
-        display: block;
         box-sizing: border-box;
         outline: none;
         border: none;
@@ -5580,6 +5585,11 @@ img {
         display: block;
         width: 100%;
         margin-bottom: 5px;
+        @media @mobile {
+          margin: 0 auto;
+          width: 76%;
+          padding: 7px;
+        }
       }
     }
   }
