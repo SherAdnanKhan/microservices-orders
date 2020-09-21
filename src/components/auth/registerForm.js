@@ -45,6 +45,12 @@ const RegisterForm = () => {
   }, true);
 
   useEffect(() => {
+    return () => {
+      localStorage.removeItem('data')
+    };
+  });
+
+  useEffect(() => {
     if (localStorage.data) {
       setData(JSON.parse(localStorage.getItem('data')));
     }
