@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavourites } from '../../../actions/userActions';
+import { getAllConversations } from "../../../actions/conversationActions";
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';
 import { Link } from "react-router-dom";
@@ -27,13 +28,15 @@ const Lobby = () => {
   const userArtId = user.art_id;
   const dispatch = useDispatch();
   const [showDeleteModel, setShowDeleteModel] = useState(false);
+  const [unReadMsgCount, setUnreadMsgCount] = useState("0");
   const [mediaType, setMediaType] = useState("");
   const {
-    user: { favouriteUsers, favouritePosts, unreadCount },
+    user: { favouriteUsers, favouritePosts },
     mzFlash: { collectiveFeeds },
     postView: { ncomm, sendUser, post },
     feelColor: { feelColor },
     gallery: { myGalleries },
+    conversation: { conversations }
 
   } = useSelector(state => state);
   const [activeFeedComment, setActiveFeedComment] = useState(0);
@@ -49,9 +52,17 @@ const Lobby = () => {
   const [showModalRepost, setShowModalRepost] = useState(false);
   const [galleryId, setGalleryId] = useState('');
   const [showMzFlashModal, setShowMzFlashModal] = useState(false);
-
-
   const currentUser = useContext(UserContext);
+
+  useEffect(() => {
+    const totalCount = conversations
+      ?.map(conversation => conversation.unread_messages_logs_count)
+      .filter(messageCount => messageCount !== 0)
+      .length
+    setUnreadMsgCount(count => count = totalCount);
+    clearCount(totalCount);
+  }, [conversations])
+
   useEffect(() => {
     dispatch(getFavourites());
     dispatch(getUserArtById(userArtId));
@@ -67,9 +78,20 @@ const Lobby = () => {
   }, [dispatch])
 
   useEffect(() => {
+    dispatch(getAllConversations());
+  }, [dispatch])
+
+  useEffect(() => {
     dispatch(getMyGalleries());
   }, [dispatch]);
 
+  const clearCount = (unReadMsgCount) => {
+    if (unReadMsgCount && unReadMsgCount > 0) {
+      setTimeout(() => {
+        setUnreadMsgCount("0")
+      }, 5000)    //It will clear notification after 5 seconds
+    }
+  }
   const handleEnter = (e, feedId, comment) => {
     if (e.keyCode === 13 && comments[comment]) {
       const commentData = {
@@ -216,7 +238,7 @@ const Lobby = () => {
   }
   return (
     <div className="lobby-page">
-      {unreadCount > 0 &&
+      {unReadMsgCount > "0" &&
         <div
           className="popUpChatMsg"
           style={{ backgroundColor: feelColor }}
@@ -229,7 +251,7 @@ const Lobby = () => {
               className="noticecountright"
               style={{ border: `2px solid ${feelColor}` }}
             >
-              {unreadCount}
+              {unReadMsgCount}
             </div>
           </div>
         </div>
