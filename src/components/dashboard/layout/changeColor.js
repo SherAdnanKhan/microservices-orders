@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFeelColors } from '../../../actions/colorActions';
+import UserContext from '../../../context/userContext';
+import Avatar from '../../common/avatar';
+import ProfileCube from '../../common/profileCube';
+import useViewport from '../../common/useViewport';
 
 const ChangeColor = ({ onColorChange }) => {
   const dispatch = useDispatch();
   const { feelColors } = useSelector(state => state.feelColor);
+  const currentUser = useContext(UserContext);
+  const { width } = useViewport();
+  const breakpoint = 600;
 
   useEffect(() => {
     if (!feelColors)
@@ -14,6 +21,20 @@ const ChangeColor = ({ onColorChange }) => {
   return (
     <div className="colorChangerScreen">
       <div className="centerCenter">
+        {width > breakpoint
+          ? (
+            <div className="procu">
+              <ProfileCube
+                avatars={currentUser?.avatars}
+                feelColor={currentUser?.feel.color_code}
+              />
+            </div>
+          ) : (
+            <Avatar
+              user={currentUser}
+            />
+          )
+        }
         <div className="feelImg">
           {feelColors?.map((color, index) => (
             <div className={color.name} key={index}>
