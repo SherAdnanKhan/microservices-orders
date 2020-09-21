@@ -55,6 +55,9 @@ const RegisterForm = () => {
     } else {
       setStep(1);
     }
+    return () => {
+      localStorage.removeItem('data')
+    };
   }, []);
 
   const validate = () => {
