@@ -517,11 +517,11 @@ const GroupVideoCall = () => {
                   <i
                     className="fa fa-microphone"
                     aria-hidden="true"
-                    data-for="turnOffMic"
-                    data-tip="Turn Off Mic"
+                    data-for="mic"
+                    data-tip="Mic"
                     onClick={handleToggleMicroPhone}
                   />
-                  <ToolTip id="turnOffMic" />
+                  <ToolTip id="mic" />
                 </>
                 :
                 <>
@@ -529,10 +529,10 @@ const GroupVideoCall = () => {
                     className="fa fa-microphone-slash"
                     aria-hidden="true"
                     onClick={handleToggleMicroPhone}
-                    data-for="turnOnMic"
-                    data-tip="Turn On Mic"
+                    data-for="mic"
+                    data-tip="Mic"
                   />
-                  <ToolTip id="turnOnMic" />
+                  <ToolTip id="mic" />
                 </>
               }
               <i
@@ -545,13 +545,13 @@ const GroupVideoCall = () => {
               {video
                 ?
                 <>
-                  <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} data-for="cameraOff" data-tip="turn off camera" />
-                  <ToolTip id="cameraOff" />
+                  <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} data-for="camera" data-tip="Camera" />
+                  <ToolTip id="camera" />
                 </>
                 :
                 <>
-                  <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" data-for="cameraOn" data-tip="turn on camera" />
-                  <ToolTip id="cameraOn" />
+                  <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" data-for="camera" data-tip="camera" />
+                  <ToolTip id="camera" />
                 </>
               }
 

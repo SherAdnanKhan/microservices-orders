@@ -69,11 +69,10 @@ const Header = () => {
               alt=""
               src="/assets/images/mzflash.png"
               onClick={() => history.push('/dashboard/mz-flash-group')}
-              data-for="mzflash"
+              data-for="mzflash-top"
               data-tip="mz flash"
             />
-            <ToolTip id="mzflash" position="bottom" />
-
+            <ToolTip id="mzflash-top" position="bottom" />
           </div>
         </div>
         <Link

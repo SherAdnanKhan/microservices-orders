@@ -8,6 +8,7 @@ import { register, getCurrentUser } from '../../actions/authActions';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 import ImageCropper from '../common/imageCropper';
 import { isEmpty } from '../../utils/helperFunctions';
+import { nameRegex } from "../../constants/regex";
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -65,11 +66,37 @@ const RegisterForm = () => {
           errors.name = 'Please fill first and last name.';
           errors.first_name = true;
           errors.last_name = true;
-        } else if (!data.first_name) {
+        }
+        else if (!data.first_name) {
           errors.name = 'Please fill first name.';
           errors.first_name = true;
-        } else if (!data.last_name) {
+        }
+        else if (!data.last_name) {
           errors.name = 'Please fill last name.';
+          errors.last_name = true;
+        }
+        else if (data.first_name.length < 3) {
+          errors.name = 'First name must be atleast 3 charcters long';
+          errors.first_name = true;
+        }
+        else if (data.last_name.length < 3) {
+          errors.name = 'Last name must be atleast 3 charcters long';
+          errors.last_name = true;
+        }
+        else if (data.first_name.length < 3 && data.last_name.length < 3) {
+          errors.name = 'First and last name must be atleast 3 charcters long';
+          errors.last_name = true;
+        }
+        else if (!nameRegex.test(data.first_name)) {
+          errors.name = 'First name must only contains alphabets';
+          errors.first_name = true;
+        }
+        else if (!nameRegex.test(data.last_name)) {
+          errors.name = 'Last name must only contains alphabets';
+          errors.last_name = true;
+        }
+        else if (!nameRegex.test(data.first_name) && !nameRegex.test(data.last_name)) {
+          errors.name = 'First and last name must only contains alphabets';
           errors.last_name = true;
         }
         break;
@@ -153,7 +180,6 @@ const RegisterForm = () => {
   };
 
   const handleToggle = value => {
-    console.log(croppedImage);
     setToggle(value);
   };
 
