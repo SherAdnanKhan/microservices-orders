@@ -196,7 +196,6 @@ $(window).scroll(function () {
     $(".frameReady .bottom").css({ 'opacity': '0.5' });
     $(".frameReady .left").css({ 'opacity': '0.5' });
     $(".frameReady .right").css({ 'opacity': '0.5' });
-
     $(".left").removeClass("toggle");
     $(".right").removeClass("toggle");
     $(".bottom").removeClass("toggle");
