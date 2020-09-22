@@ -107,6 +107,9 @@ const RegisterForm = () => {
         if (!data.username) {
           errors.username = 'Please fillout your Artist name.';
         }
+        else if (!nameRegex.test(data.username)) {
+          errors.username = 'Artist name must only contains alphabets';
+        }
         break;
       case 4:
         if (!data.email) {
