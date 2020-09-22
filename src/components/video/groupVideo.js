@@ -72,8 +72,12 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
         <div className=" dropdown">
           <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
           <div className="dropdown-content">
-            <a href="/dashboard/video-call">View galleries</a>
-            <a href="/dashboard/video-call">View profile</a>
+            <a href={`/dashboard/studio/${user.slug}`} target="_blank" rel="noopener noreferrer">
+              View galleries
+            </a>
+            <a href={`/dashboard/studio/${user.slug}`} target="_blank" rel="noopener noreferrer">
+              View profile
+            </a>
             <a href="/dashboard/video-call">Send ticket</a>
             <a href="/dashboard/video-call">Block</a>
             <a href="/dashboard/video-call">Mute</a>
