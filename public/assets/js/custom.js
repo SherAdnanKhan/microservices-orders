@@ -192,6 +192,7 @@ $(window).scroll(function () {
   const scroll = $(window).scrollTop();
   if (scroll > position) {
     $(".frameReady .top").css({ 'opacity': '0.5' });
+    $(".frameReady .popUpChatMsg").css({ 'opacity': '0.5' });
     $(".frameReady .bottom").css({ 'opacity': '0.5' });
     $(".frameReady .left").css({ 'opacity': '0.5' });
     $(".frameReady .right").css({ 'opacity': '0.5' });
