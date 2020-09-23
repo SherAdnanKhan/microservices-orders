@@ -1,15 +1,16 @@
 import React from "react"
+import { useSelector } from "react-redux";
 import Tooltip from "react-tooltip";
 
-const ToolTip = ({ position, id }) => (
 
-  <Tooltip
-    backgroundColor="#5C5B5A"
-    textColor="white"
-    place={position} id={id}>
-  </Tooltip>
-
-
-
-)
+const ToolTip = ({ position, id }) => {
+  const { feelColor } = useSelector(state => state.feelColor);
+  return (
+    <Tooltip
+      backgroundColor={feelColor}
+      textColor="white"
+      place={position} id={id}>
+    </Tooltip>
+  )
+}
 export default ToolTip;
