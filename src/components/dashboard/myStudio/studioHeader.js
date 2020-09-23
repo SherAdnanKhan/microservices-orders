@@ -26,7 +26,7 @@ const StudioHeader = ({ myStudio, feelColor }) => {
           alt=""
           className="clickable"
           onClick={() => history.push(`/dashboard/my-studio/sprfvs/${myStudio.user.slug}`)}
-          data-tip="Super favs Users"
+          data-tip="Sprfvs list"
           data-for="mySprfvs"
 
         />

@@ -101,8 +101,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                     onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
                     style={{ backgroundColor: userStudio?.user.feel.color_code }}
                     data-for="chatUser"
-                    data-tip="chat"
-
+                    data-tip="strq"
                   />
                   <ToolTip position="bottom" id="chatUser" />
                 </div>

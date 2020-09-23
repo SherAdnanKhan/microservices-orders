@@ -9,6 +9,7 @@ const ToolTip = ({ position, id }) => {
     <Tooltip
       backgroundColor={feelColor}
       textColor="white"
+      className="tooltip-style"
       place={position} id={id}>
     </Tooltip>
   )

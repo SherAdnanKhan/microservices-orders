@@ -62,7 +62,7 @@ const Header = () => {
               src="/assets/images/strqicon.png"
               onClick={() => history.push('/dashboard/chat')}
               data-for="Chat"
-              data-tip="Chat"
+              data-tip="strq"
             />
             <ToolTip id="Chat" position="bottom" />
             <img className="valut-img"
