@@ -21,6 +21,7 @@ import TurnOffCrtiqueModal from "../common/turnOffCritqueModal";
 import RepostModal from "../common/repostModal";
 import MzFlashModal from "../common/mzFlashModal";
 import ShowMoreText from 'react-show-more-text';
+import ToolTip from './toolTip/toolTip';
 
 const Post = ({
   gallery, user, activeGallery,
@@ -275,9 +276,11 @@ const Post = ({
                                 }
                               >
                                 <div style={{ marginRight: "auto", paddingLeft: "15px", paddingTop: "20px" }}>
-                                  <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
+                                  <i className="fa fa-ellipsis-v" aria-hidden="true" data-for="more" data-tip="more" ></i>
+                                  <ToolTip position="bottom" id="more" />
                                 </div>
-                                <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+                                <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-for="vault" data-tip="vault" />
+                                <ToolTip position="bottom" id="vault" />
                               </div>
                               <div
                                 // for opening image option
@@ -318,6 +321,7 @@ const Post = ({
                                     onStroke={() => handleStroke(post)}
                                     onUnstroke={() => handleUnstroke(post)}
                                   />
+                                  <ToolTip id="stroke" position="bottom" />
                                   <p> strokes {post.stroke_users_count} </p>
                                 </div>
 
@@ -328,7 +332,10 @@ const Post = ({
                                         className="comment-img open-commet clickable"
                                         alt=""
                                         src="/assets/images/crit1.png"
+                                        data-for="comments"
+                                        data-tip="comments"
                                       />
+                                      <ToolTip id="comments" position="bottom" />
                                       <p> comments {post.comments.length}</p>
                                     </>
                                   }
@@ -340,7 +347,10 @@ const Post = ({
                                     alt=""
                                     src="/assets/images/ncommnicon.png"
                                     onClick={() => handleNcomm(post)}
+                                    data-for="ncomm"
+                                    data-tip="ncomm"
                                   />
+                                  <ToolTip id="ncomm" />
                                 </div>
                               </div>
 
