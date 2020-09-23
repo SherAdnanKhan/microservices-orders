@@ -15,7 +15,7 @@ const RightBorder = () => {
         alt=""
         src="/assets/images/strqicon.png"
         onClick={() => history.push('/dashboard/chat')}
-        data-tip="chat"
+        data-tip="strq"
         data-for="chat"
       />
       <ToolTip position="left" id="chat" />

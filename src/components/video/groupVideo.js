@@ -561,7 +561,7 @@ const GroupVideoCall = () => {
 
             </div>
             <div className="call-Actions2">
-              <img className="valut-img" alt="" src="/assets/images/strqicon.png" data-for="chat" data-tip="Chat"></img>
+              <img className="valut-img" alt="" src="/assets/images/strqicon.png" data-for="chat" data-tip="strq"></img>
               <ToolTip id="chat" />
               <img
                 src="/assets/images/icons/DrawStrq.png"
