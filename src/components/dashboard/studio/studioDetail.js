@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import { toast } from 'react-toastify';
+import ToolTip from "../../common/toolTip/toolTip";
 
 const StudioDetail = ({ userStudio, slug }) => {
   const history = useHistory();
@@ -99,8 +100,11 @@ const StudioDetail = ({ userStudio, slug }) => {
                     src="/assets/images/strqicon.png" alt=""
                     onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
                     style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                    data-for="chatUser"
+                    data-tip="chat"
 
                   />
+                  <ToolTip position="bottom" id="chatUser" />
                 </div>
                 {/* <Link to="#" onClick={e => {
                 e.preventDefault();
@@ -117,9 +121,10 @@ const StudioDetail = ({ userStudio, slug }) => {
                     className="faved-by-btn"
                     style={{ backgroundColor: userStudio?.user.feel.color_code }}
                   >
-                    <img src="/assets/images/fave_icon.png" alt="" />
+                    <img src="/assets/images/fave_icon.png" alt="" data-for="userFavedGalleries" data-tip="faved galleries" />
                   Faves
-                </div>
+                  <ToolTip position="bottom" id="userFavedGalleries" />
+                  </div>
                 </Link>
                 <div>
                   <Link to="#" onClick={e => {
@@ -131,7 +136,10 @@ const StudioDetail = ({ userStudio, slug }) => {
                       src="/assets/images/mzflash.png"
                       alt=""
                       style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                      data-for="userMzflash"
+                      data-tip="mzflash"
                     />
+                    <ToolTip position="bottom" id="userMzflash" />
                   </Link>
                 </div>
                 {/* <Link to="#" onClick={e => {

@@ -2,6 +2,7 @@ import React from 'react';
 import Like from '../../common/like';
 import { FAVES } from '../../../constants/privacyTypes';
 import { useHistory } from 'react-router-dom';
+import ToolTip from "../../common/toolTip/toolTip";
 
 const PostBar = ({
   gallery, activeGallery,
@@ -22,8 +23,10 @@ const PostBar = ({
       <div className="icon-side">
         {activeGallery && isAllowed() &&
           <>
-            <i className="fas fa-square" />
-            <i className="fas fa-th" />
+            <i className="fas fa-square" data-for="fullView" data-tip="full view" />
+            <ToolTip position="bottom" id="fullView" />
+            <i className="fas fa-th" data-for="partialView" data-tip="partial view" />
+            <ToolTip position="bottom" id="partialView" />
           </>
         }
       </div>
@@ -39,18 +42,19 @@ const PostBar = ({
             <p>{activeGallery.title}</p>
             <p>Exhibits Faved by: {gallery?.faved_users.length}</p>
           </>
-
         }
       </div>
       <div className="heart-icon">
         {(activeGallery?.privacy?.privacy_type_id === FAVES || isAllowed())
           && gallery &&
           <>
-            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}>Faved({gallery && gallery.faved_users.length})</span>
+            <span onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)} data-for="favedUsersList" data-tip="faved users">Faved({gallery && gallery.faved_users.length})</span>
+            <ToolTip position="bottom" id="favedUsersList" />
             <Like    //heart with brush icon
               faved={gallery.has_faved}
               onLike={onFave}
             />
+            <ToolTip position="bottom" id="fav" />
           </>
         }
       </div>
