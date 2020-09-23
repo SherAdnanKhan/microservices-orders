@@ -13,15 +13,13 @@ const Call = () => {
 
   const [showRingingModal, setShowRingingModal] = useState(false);
   const [incomingPayload, setIncomingPayload] = useState({});
-  const audioRef = useRef();
+  const audioRef = useRef(new Audio('/assets/sounds/Skype Ringtone 2018.mp3'));
 
   useEffect(() => {
     if (currentUser) {
       socket.on('incoming-call', async payload => {
         setIncomingPayload(payload);
         setShowRingingModal(true);
-
-        audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
 
         try {
           await audioRef.current.play();

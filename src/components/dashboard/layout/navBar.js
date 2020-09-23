@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { logout } from '../../../actions/authActions';
+import { getAuthToken, getCurrentUser, logout } from '../../../actions/authActions';
 import Search from './search';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFeelColor } from '../../../actions/colorActions';
 import ChangeColor from './changeColor';
+import socket from '../../../services/socketService';
 
 const NavBar = () => {
   const history = useHistory();
@@ -14,6 +15,15 @@ const NavBar = () => {
   const handleColorChange = color => {
     dispatch(changeFeelColor(color));
   };
+
+  const handleLogout = () => {
+    const user = getCurrentUser();
+    const token = getAuthToken();
+
+    socket.emit('logout', { user, token });
+    logout();
+
+  }
 
   return (
     <div className={`frameReady ${feelColor}`}>
@@ -32,10 +42,10 @@ const NavBar = () => {
           </div>
         </div>
         <Link to="" className="feelIcon"
-          // style={{
-          //   borderLeft: '1px solid black',
-          //   borderBottom: '1px solid black'
-          // }}
+        // style={{
+        //   borderLeft: '1px solid black',
+        //   borderBottom: '1px solid black'
+        // }}
         >
           <img alt="" src="/assets/images/icons/feelicon.png" />
         </Link>
@@ -84,7 +94,7 @@ const NavBar = () => {
             <a href="#__searchHistory">Search History</a>
           </li>
           <li>
-            <Link className="logout" to="" onClick={() => logout()}>Logout</Link>
+            <Link className="logout" to="" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       </nav>
