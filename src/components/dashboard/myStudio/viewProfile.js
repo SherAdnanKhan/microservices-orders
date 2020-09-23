@@ -7,17 +7,30 @@ import ToolTip from '../../common/toolTip/toolTip';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const [bio, setBio] = useState('');
+  const [username, setUserName] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (myStudio && myStudio.user.bio) {
       setBio(bio => bio = myStudio.user.bio);
     }
+    if (myStudio && myStudio.user.username) {
+      setUserName(myStudio.user.username);
+    }
   }, [myStudio]);
 
   const handleSave = () => {
     let my_bio = bio.replace(/\n/g, '<br/>');
-    dispatch(updateBio(my_bio));
+    let object = {
+      bio: my_bio
+    }
+    dispatch(updateBio(object));
+  }
+  const updateUserName = () => {
+    let object = {
+      username: username
+    }
+    dispatch(updateBio(object))
   }
   return (
     <div className="wrapper">
@@ -42,21 +55,23 @@ const ViewProfile = ({ myStudio, feelColor }) => {
           }
         </div>
         <div className="studioDetail">
-          <div className="profilebioname">
-            <div className="editTool Edit">
-              <img
-                src="/assets/images/paintbrush.png"
-                alt=""
-                data-for="editName"
-                data-tip="edit name"
-              />
-              <ToolTip id="editName" />
-            </div>
-            {myStudio && <span className="nameof" id="nameof">{myStudio.user.username}</span>}
-            <br />
-            <span className="artof" id="artof">Cosplay/1213</span>
-          </div>
           <form onSubmit={e => e.preventDefault()}>
+            <div className="profilebioname" >
+              <input type="text" name="name" value={username} onChange={(event) => setUserName(event.target.value)} ></input>
+              <div className="editTool Edit">
+                <img
+                  src="/assets/images/paintbrush.png"
+                  alt=""
+                  data-for="editName"
+                  data-tip="edit name"
+                  onClick={updateUserName}
+                />
+                <ToolTip id="editName" />
+              </div>
+              {/* {myStudio && <span className="nameof" id="nameof">{myStudio.user.username}</span>} */}
+              <br />
+              <span className="artof" id="artof">Cosplay/1213</span>
+            </div>
             <label htmlFor="addbio" className="addbio-input">
               <div
                 className="editTool Edit clickable"
