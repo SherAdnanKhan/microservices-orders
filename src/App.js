@@ -9,7 +9,7 @@ import ArtSelection from "./components/artSelection";
 import Welcome from './components/welcome';
 import Dashboard from './components/dashboard/dashboard';
 import Tutorial from './components/tutorial';
-import { getCurrentUser, getAuthToken } from './actions/authActions';
+import { getCurrentUser, getAuthToken, logout } from './actions/authActions';
 import StartFaves from './components/dashboard/startFavas';
 
 import { ToastContainer, toast } from "react-toastify";
@@ -50,6 +50,8 @@ function App() {
     socket.off('notifyColrChange');
     socket.off('reciveUserNotifications');
     socket.off('notify');
+    socket.off('logout-called');
+
     socket.emit('userLeft', currentUser);
     socket.disconnect();
     socket.close();
@@ -126,8 +128,14 @@ function App() {
         dispatch(getOnlineUsers(data));
       });
 
+      socket.on('logout-called', data => {
+        const token = getAuthToken();
+        if (!token || data.token === token) {
+          logout();
+        }
+      })
+
       socket.on('reconnect', () => {
-        console.log('yes connected');
         socket.emit('joinUser', currentUser, getAuthToken());
       })
     }
@@ -151,7 +159,6 @@ function App() {
         <Route exact path='/home' component={Home} />
         <Redirect exact from='/' to='/home' />
       </Switch>
-
       <Call />
     </div>
   );

@@ -60,7 +60,6 @@ const setCurrentUser = ({ user, token }) => {
 };
 
 export const logout = () => {
-  socket.emit('logout')
   socket.disconnect();
   socket.close();
   localStorage.clear();
