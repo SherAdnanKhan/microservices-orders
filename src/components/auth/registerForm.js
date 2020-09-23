@@ -8,7 +8,7 @@ import { register, getCurrentUser } from '../../actions/authActions';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 import ImageCropper from '../common/imageCropper';
 import { isEmpty } from '../../utils/helperFunctions';
-import { nameRegex, userNameRegex } from "../../constants/regex";
+import { alphabets, alphabetsWithChars } from "../../constants/regex";
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -90,15 +90,15 @@ const RegisterForm = () => {
           errors.name = 'First and last name must be atleast 3 charcters long';
           errors.last_name = true;
         }
-        else if (!nameRegex.test(data.first_name)) {
+        else if (!alphabets.test(data.first_name)) {
           errors.name = 'First name must only contains alphabets';
           errors.first_name = true;
         }
-        else if (!nameRegex.test(data.last_name)) {
+        else if (!alphabets.test(data.last_name)) {
           errors.name = 'Last name must only contains alphabets';
           errors.last_name = true;
         }
-        else if (!nameRegex.test(data.first_name) && !nameRegex.test(data.last_name)) {
+        else if (!alphabets.test(data.first_name) && !alphabets.test(data.last_name)) {
           errors.name = 'First and last name must only contains alphabets';
           errors.last_name = true;
         }
@@ -107,8 +107,8 @@ const RegisterForm = () => {
         if (!data.username) {
           errors.username = 'Please fillout your Artist name.';
         }
-        else if (!userNameRegex.test(data.username)) {
-          errors.username = 'Artist name must only contains alphabets,digits and special characters';
+        else if (!alphabetsWithChars.test(data.username)) {
+          errors.username = 'Artist name must only contains alphabets ,digits or special characters';
         }
         else if (data.username.length < 8) {
           errors.username = 'Artist name must be atleast 8 characters long';
