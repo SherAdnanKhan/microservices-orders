@@ -104,6 +104,7 @@ export const uploadFile = (video, onUpload, success, faliure) => dispatch => {
     .post('/chats/message/uploads', video, config)
     .then(res => {
       dispatch({ type: STOP_FILE_LOADER });
+      // dispatch(getAllConversations())
       success(res.data.data);
     })
     .catch(err => {

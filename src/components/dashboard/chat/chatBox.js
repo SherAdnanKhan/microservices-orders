@@ -40,7 +40,7 @@ class ChatBox extends Component {
     show: false,
     showParticipantsModal: false,
     showCallingModal: false,
-    width: window.innerWidth
+    width: window.innerWidth,
   };
 
   preview = createRef();
@@ -201,6 +201,26 @@ class ChatBox extends Component {
   handlePost = e => {
     this.sendMessage(e);
   }
+  convertFileSize = (sizeBytes) => {
+    const fileSizeKb = sizeBytes / 1000;
+    const fileSizeMb = fileSizeKb / 1000;
+    return fileSizeMb
+  }
+
+  validateFile = (size, type) => {
+    let error;
+    if (type === "video/mp4" && size > 51.2) {
+      error = "Video size must be 50MB long";
+    }
+    else if ((type === "image/png" || type === "image/jpeg" || type === "image/png") && size > 25.6) {
+      error = "Image size must be 25MB long"
+    }
+    else if (type === "application/document" && size > 51.2) {
+      error = "Document size must be 25MB long"
+    }
+    return error ? error : false
+  }
+
 
   handleUpload = ({ target: input }) => {
     this.setState({ hidden: false });
@@ -208,22 +228,29 @@ class ChatBox extends Component {
     if (input.files[0]) {
       const data = new FormData();
       data.append('file_upload', input.files[0]);
-
-      this.props.uploadFile(data,
-        progress => {
-          this.setState({ progress });
-        },
-        result => {
-          if (result.doc_type === 'document') {
-            this.setState({ [result.doc_type]: result, progress: 0 });
-          } else {
-            this.setState({ [result.doc_type]: result.path, progress: 0 });
-          }
-          this.preview.current.scrollIntoView({ behavior: 'auto' });
-        },
-        err => {
-          this.setState({ progress: 0 });
-        })
+      const fileSizeMb = this.convertFileSize(input.files[0].size);
+      const fileType = input.files[0].type;
+      const isErrors = this.validateFile(fileSizeMb, fileType);
+      if (isErrors === false) {
+        this.props.uploadFile(data,
+          progress => {
+            this.setState({ progress });
+          },
+          result => {
+            if (result.doc_type === 'document') {
+              this.setState({ [result.doc_type]: result, progress: 0 });
+            } else {
+              this.setState({ [result.doc_type]: result.path, progress: 0 });
+            }
+            this.preview.current.scrollIntoView({ behavior: 'auto' });
+          },
+          err => {
+            this.setState({ progress: 0 });
+          })
+      }
+      else {
+        toast.error(isErrors)
+      }
     }
   }
 
