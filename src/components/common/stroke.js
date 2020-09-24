@@ -3,6 +3,7 @@ import React from 'react'
 const Stroke = ({ hasStroke, onStroke, onUnstroke, className }) => {
   return (
     <>
+
       {hasStroke
         ? (
           <img
@@ -28,4 +29,4 @@ const Stroke = ({ hasStroke, onStroke, onUnstroke, className }) => {
   )
 }
 
-export default Stroke
+export default Stroke;

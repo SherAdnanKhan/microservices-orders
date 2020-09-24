@@ -54,6 +54,7 @@ const Post = ({
   const [showModalRepost, setShowModalRepost] = useState(false);
   const [galleryId, setGalleryId] = useState('');
   const [showMzFlashModal, setShowMzFlashModal] = useState(false);
+  const [commentModal, setCommentModal] = useState(false);
 
   const handleNcomm = post => {
     dispatch(clearNcomm());
@@ -328,12 +329,13 @@ const Post = ({
                                 <div className="action">
                                   {post?.critiques_status === 1 &&
                                     <>
-                                      < img
-                                        className="comment-img open-commet clickable"
+                                      <img
+                                        className="comment-img clickable"
                                         alt=""
                                         src="/assets/images/crit1.png"
                                         data-for="comments"
                                         data-tip="comments"
+                                        onClick={() => setCommentModal(true)}
                                       />
                                       <ToolTip id="comments" position="bottom" />
                                       <p> comments {post.comments.length}</p>
@@ -369,7 +371,12 @@ const Post = ({
                               </div>
                             </div>
                           ))}
-                        <Comment post={activePost} />
+                        {commentModal &&
+                          <Comment
+                            post={activePost}
+                            onClose={() => setCommentModal(false)}
+                          />
+                        }
                       </div>
                     </div>
                   )}

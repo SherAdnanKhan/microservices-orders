@@ -8,50 +8,29 @@ import { Link } from "react-router-dom";
 import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
-import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
+import { getMyGalleries } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-import { getNcomm, clearNcomm, strokePost, storeVault, unstrokePost, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash } from '../../../actions/postAction';
+
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
-import PostModal from "../../dashboard/mzFlashGroup/postModal";
-import DeleteModal from "../../common/deleteModal";
-import SharePostModal from '../../common/sharePostModal';
-import ReportPostModel from '../../common/reportPostModel';
-import SharePostStrqModal from '../../common/sharePostStrqModal';
-import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
-import RepostModal from "../../common/repostModal";
-import MzFlashModal from "../../common/mzFlashModal";
+
 import ToolTip from "../../common/toolTip/toolTip";
 
 const Lobby = () => {
-  const user = useContext(UserContext);
-  const userArtId = user.art_id;
   const dispatch = useDispatch();
-  const [showDeleteModel, setShowDeleteModel] = useState(false);
   const [unReadMsgCount, setUnreadMsgCount] = useState("0");
-  const [mediaType, setMediaType] = useState("");
   const {
-    user: { favouriteUsers, favouritePosts },
+    lobby: { favouriteUsers, favouritePosts },
     mzFlash: { collectiveFeeds },
-    postView: { ncomm, sendUser, post },
+    postView: { sendUser },
     feelColor: { feelColor },
     gallery: { myGalleries },
     conversation: { conversations }
-
   } = useSelector(state => state);
+
   const [activeFeedComment, setActiveFeedComment] = useState(0);
-  const [showPostModel, setShowPostModel] = useState(false);
-  const [imagePath, setImagepath] = useState("");
+
   const [comments, setComments] = useState({})
-  const [activePost, setActivePost] = useState('');
-  const [activeNcomm, setActiveNcomm] = useState('');
-  const [showModelShare, setShowModelShare] = useState(false);
-  const [showModelReport, setShowModelReport] = useState(false);
-  const [showModelStrqShare, setshowModelStrqShare] = useState(false);
-  const [showModalTurnOffCritque, setshowModalTurnOffCritque] = useState(false);
-  const [showModalRepost, setShowModalRepost] = useState(false);
-  const [galleryId, setGalleryId] = useState('');
-  const [showMzFlashModal, setShowMzFlashModal] = useState(false);
   const currentUser = useContext(UserContext);
 
   useEffect(() => {
@@ -61,37 +40,24 @@ const Lobby = () => {
       .length
     setUnreadMsgCount(count => count = totalCount);
     clearCount(totalCount);
-  }, [conversations])
+  }, [conversations]);
 
   useEffect(() => {
     dispatch(getFavourites());
-    dispatch(getUserArtById(userArtId));
-  }, [dispatch, userArtId]);
-
-  useEffect(() => {
-    dispatch(clearNcomm);
-    setActiveNcomm('');
-  }, [dispatch]);
-
-  useEffect(() => {
+    dispatch(getUserArtById(currentUser.art_id));
     dispatch(getCollectiveFeeds());
-  }, [dispatch])
-
-  useEffect(() => {
     dispatch(getAllConversations());
-  }, [dispatch])
-
-  useEffect(() => {
     dispatch(getMyGalleries());
-  }, [dispatch]);
+  }, [dispatch, currentUser]);
 
   const clearCount = (unReadMsgCount) => {
     if (unReadMsgCount && unReadMsgCount > 0) {
       setTimeout(() => {
         setUnreadMsgCount("0")
-      }, 5000)    //It will clear notification after 5 seconds
+      }, 5000)
     }
-  }
+  };
+
   const handleEnter = (e, feedId, comment) => {
     if (e.keyCode === 13 && comments[comment]) {
       const commentData = {
@@ -125,117 +91,21 @@ const Lobby = () => {
     dispatch(createFeed(formData));
   };
 
-  const handleFeedStroke = id => {
+
+  const handleFeedStroke = (id, user) => {
     const data = {
       feed_id: id
     };
-    dispatch(strokeFeed(data));
+    dispatch(strokeFeed(data, user));
   };
 
-  const handleFeedUnstroke = id => {
+  const handleFeedUnstroke = (id, user) => {
     const data = {
       feed_id: id
     };
-    dispatch(unstrokeFeed(data));
+    dispatch(unstrokeFeed(data, user));
   };
 
-  const handleUnstrokePost = (post) => {
-    dispatch(unstrokePost(post.id, post.gallery_id, post.user))
-  }
-
-  const handleStrokePost = (post) => {
-    dispatch(strokePost(post.id, post.gallery_id, post.user));
-  }
-
-  const handleNcomm = post => {
-    dispatch(clearNcomm());
-
-    if (post.id === activeNcomm.id) {
-      setActiveNcomm('');
-    } else {
-      dispatch(getNcomm(post.slug));
-      setActiveNcomm(post);
-    }
-  };
-
-  const handleActivePost = post => {
-    if (post.id === activePost.id) {
-      setActivePost('');
-    } else {
-      setActivePost(post);
-    }
-  }
-  const handlePostShowModel = (value, type, image) => {
-    if (value === true) {
-      setImagepath(image.path);
-      setMediaType(type);
-    }
-    setShowPostModel(value);
-  };
-
-  const handlePostDeleteModel = (value, post) => {
-    setShowDeleteModel(value);
-  };
-  const handleDelete = (status, post) => {
-    setShowDeleteModel(status);
-    dispatch(deletePost(post));
-  }
-
-  const handleShareModel = (status, post) => {
-    //dispatch(standardSharePost(post.id));
-    setShowModelShare(status);
-  };
-
-  const handleUnfavGallery = (gallery) => {
-    dispatch(unfavGallery(gallery));
-  }
-
-  const handleReportModel = (status, post) => {
-    setShowModelReport(status);
-  }
-
-  const onReport = (post) => {
-    dispatch(reportPost(post.id));
-    setShowModelReport(false);
-  }
-
-  const handleStrqShareModel = (status, post) => {
-    setshowModelStrqShare(status);
-  }
-
-  const onStrqShare = (post, userId) => {
-    dispatch(sharePostOnStrq(post, userId))
-    dispatch(clearStatus())
-  }
-  const handleTurnOffCrtiquesModal = (value) => {
-    setshowModalTurnOffCritque(value);
-  }
-  const handleTurnOnOffCrtique = (modalStatus, post, status) => {
-    setshowModalTurnOffCritque(modalStatus);
-    dispatch(changeCritqueStatus(post, status));
-    handleActivePost('');
-  }
-  const handleMzFlashModal = (status) => {
-    setShowMzFlashModal(status);
-  }
-  const handleMzFlash = (status, post) => {
-    setShowMzFlashModal(status);
-    dispatch(shareMzFlash(post));
-
-  }
-  const getSelectedGalleryId = (gallery) => {
-    setGalleryId(gallery);
-  }
-  const handleRepostModal = (status, post) => {
-    setShowModalRepost(status);
-  }
-  const handleRepostLobby = (status, post, gallery) => {
-    dispatch(repost(post.id, gallery))
-    setShowModalRepost(status);
-  }
-  const handleVault = (post) => {
-    dispatch(storeVault(post))
-  }
   return (
     <div className="lobby-page">
       {unReadMsgCount > "0" &&
@@ -256,55 +126,7 @@ const Lobby = () => {
           </div>
         </div>
       }
-      {showDeleteModel &&
-        <DeleteModal
-          onDelete={handleDelete}
-          onModalClose={handlePostDeleteModel}
-          activePost={activePost}
-          mediaType={mediaType}
-          onSharePost={handleShareModel}
-        />
-      }
-      {showModelShare &&
-        <SharePostModal
-          onModalClose={handleShareModel}
-          post={activePost}
-        />
-      }
-      {showModelReport &&
-        <ReportPostModel
-          onReport={onReport}
-          onModalClose={handleReportModel}
-          post={activePost}
-          selectedGallery={galleryId}
-        />
-      }
-      {showModelStrqShare &&
-        <SharePostStrqModal
-          onShare={onStrqShare}
-          onModalClose={handleStrqShareModel}
-          post={activePost}
-          favouriteUsers={favouriteUsers}
-          sendUser={sendUser}
-        />
-      }
-      {showModalRepost &&
-        <RepostModal
-          onRepost={handleRepostLobby}
-          onModalClose={handleRepostModal}
-          post={activePost}
-          myGalleries={myGalleries}
-          selectedGalleryId={galleryId}
-          onGalleryId={getSelectedGalleryId}
-          Updatedpost={post}
-        />
-      }
-      {showModalTurnOffCritque &&
-        <TurnOffCrtiqueModal onModalClose={handleTurnOffCrtiquesModal} post={activePost} onHandleCrtique={handleTurnOnOffCrtique} />
-      }
-      {showMzFlashModal &&
-        <MzFlashModal onModalClose={handleMzFlashModal} post={activePost} onConfirm={handleMzFlash} />
-      }
+
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
           <VerticalSlider>
@@ -343,39 +165,16 @@ const Lobby = () => {
         </div>
         <div className="col-6 section-2 box-2">
           <ToolTip id="search" position="bottom" text="search" />
-          {favouritePosts?.map((post, index) => (
-            <div key={index}>
-              <LobbyPosts
-                onClickNcomm={handleNcomm}
-                onActivePost={handleActivePost}
-                onStrokePost={handleStrokePost}
-                onUnstrokePost={handleUnstrokePost}
-                onUnFavGallery={handleUnfavGallery}
-                post={post}
-                ncomm={ncomm}
-                activeNcomm={activeNcomm}
-                activePost={activePost}
-                onModelDelete={handlePostDeleteModel}
-                onSharePost={handleShareModel}
-                onReportPost={handleReportModel}
-                onShareStrqModel={handleStrqShareModel}
-                onStrqShare={onStrqShare}
-                onTurnOffCrtiques={handleTurnOffCrtiquesModal}
-                onRepostModal={handleRepostModal}
-                onMzFlashModal={handleMzFlashModal}
-                onVault={handleVault}
-              />
-            </div>
-          ))
-          }
+          <div>
+            <LobbyPosts
+              posts={favouritePosts}
+              users={favouriteUsers}
+              galleries={myGalleries}
+              sendUser={sendUser}
+            />
+          </div>
         </div>
-        {showPostModel &&
-          <PostModal
-            onPostModalClose={handlePostShowModel}
-            imagePath={imagePath}
-            mediaType={mediaType}
-          />
-        }
+
         <div className="section-3 box-3 col4">
           <FeedSection
             collectiveFeeds={collectiveFeeds}
@@ -388,7 +187,6 @@ const Lobby = () => {
             onRepost={handleRepost}
             onStroke={handleFeedStroke}
             onUnstroke={handleFeedUnstroke}
-            onPostModal={handlePostShowModel}
           />
         </div>
         <div className="assist">
@@ -396,22 +194,8 @@ const Lobby = () => {
             <img src="/assets/images/icons/LogoIconWhite.png" alt="support" />
           </a>
         </div>
-        {/* <div className="smallCube">
-        <div className="procusmaller">
-          <div className="scenesmaller">
-            <div className="cubesmallerload">
-              <div id="frontload" className="cube-facesmallerload cube-face-frontsmaller tutorfeel cube-face-frontsmallerload"></div>
-              <div id="backload" className="cube-facesmallerload cube-face-backsmaller tutorfeel cube-face-backsmallerload"></div>
-              <div id="leftload" className="cube-facesmallerload cube-face-leftsmaller tutorfeel cube-face-leftsmallerload"></div>
-              <div id="rightload" className="cube-facesmallerload cube-face-rightsmaller tutorfeel cube-face-rightsmallerload"></div>
-              <div id="topload" className="cube-facesmallerload cutsmaller tutorfeel cutsmallerload"></div>
-              <div id="bottomload" className="cube-facesmallerload cubsmaller tutorfeel cubsmallerload"></div>
-            </div>
-          </div>
-        </div>
-      </div> */}
       </div>
     </div >
   );
 }
-export default Lobby;
+export default React.memo(Lobby);
