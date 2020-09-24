@@ -50,15 +50,19 @@ export const createOrUpdateProfile = (data, history) => () => {
     });
 };
 
-export const updateBio = bio => dispatch => {
+export const updateBio = user => dispatch => {
   http
-    .put(`/users/user-bio`, { bio: bio })
-    .then(() => {
+    .put(`/users/user-bio`, user)
+    .then((res) => {
       toast('Bio saved successfully');
       dispatch({
         type: UPDATE_BIO,
-        payload: bio
+        payload: user.user
       });
+    })
+    .catch(err => {
+      err.response &&
+        toast.error(`Something failed while updating`);
     });
 };
 
