@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getComments, createComment } from '../../../actions/postAction';
 import Avatar from '../../common/avatar';
 
-const Comment = ({ post }) => {
+const Comment = ({ post, onClose }) => {
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
   const { comments } = useSelector(state => state.postView);
+
 
   const bottomRef = useRef();
 
   useEffect(() => {
     if (post) {
+      console.log(post)
       dispatch(getComments(post.id))
     }
   }, [post, dispatch]);
@@ -96,7 +98,7 @@ const Comment = ({ post }) => {
               ? <img src={post.image.path} alt="" />
               : <img src="/assets/images/gray.png" alt="" />
             }
-            <i className="fa fa-times close-comment"></i>
+            <i className="fa fa-times close-comment" onClick={onClose}></i>
           </div>
           <div className="comment-sec">
             {comments &&
@@ -136,4 +138,4 @@ const Comment = ({ post }) => {
   );
 };
 
-export default Comment;
+export default React.memo(Comment);

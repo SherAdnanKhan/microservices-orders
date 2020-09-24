@@ -11,6 +11,7 @@ import conversationReducer from '../reducers/conversationReducer';
 import privacyReducer from '../reducers/privacyReducer';
 import mzFlashReducer from '../reducers/mzFlashReducer';
 import colorReducer from '../reducers/colorReducer';
+import lobbyReducer from '../reducers/lobbyReducer';
 
 export default combineReducers({
   error: errorReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
   conversation: conversationReducer,
   privacies: privacyReducer,
   mzFlash: mzFlashReducer,
-  feelColor: colorReducer
+  feelColor: colorReducer,
+  lobby: lobbyReducer
 });

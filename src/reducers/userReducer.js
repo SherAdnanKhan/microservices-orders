@@ -1,11 +1,9 @@
 import {
-  GET_FAV,
   GET_ALL_USERS,
   GET_FAV_USER,
   GET_FAV_BY_USER,
   GET_USER_ART_NAME,
   CLEAR_USERS,
-  UPDATE_COUNT,
   GET_ALL_FEELS,
   REQUEST_APPROVED,
   REQUEST_REJECTED,
@@ -13,18 +11,10 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
-  STROKE_POST,
-  UNSTROKE_POST,
-  ADD_POST_COMMENT,
   ONLINE_USERS,
-  UNFAV_GALLERY,
-  CHANGE_CRITIQUES_STATUS,
 } from "../constants/actionTypes";
 
 const initialState = {
-  favouriteUsers: null,
-  favouritePosts: null,
-  unreadCount: 0,
   users: null,
   faveUsers: null,
   faveByUsers: null,
@@ -33,59 +23,10 @@ const initialState = {
   invitedUsers: null,
   faveAndSprfvsUsers: null,
   onlineUsers: [],
-  post: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_FAV:
-      return {
-        ...state,
-        favouriteUsers: action.payload.all_faved_users,
-        favouritePosts: action.payload.faved_galleries_posts,
-        unreadCount: action.payload.user_with_count_unread
-      };
-    case STROKE_POST:
-      return {
-        ...state,
-        favouritePosts: state?.favouritePosts?.map(post => {
-          if (post.id === action.payload.postId) {
-            return {
-              ...post,
-              has_stroke: [1],
-              stroke_users: [...post.stroke_users, { id: 0 }]
-            }
-          }
-          return post
-        })
-      };
-    case UNSTROKE_POST:
-      return {
-        ...state,
-        favouritePosts: state?.favouritePosts?.map(post => {
-          if (post.id === action.payload.postId) {
-            return {
-              ...post,
-              has_stroke: [],
-              stroke_users: post.stroke_users.filter((user, index) => index !== post.stroke_users.length - 1)
-            }
-          }
-          return post
-        })
-      };
-    case ADD_POST_COMMENT:
-      return {
-        ...state,
-        favouritePosts: state?.favouritePosts?.map(post => {
-          if (post.id === action.payload.postId) {
-            return {
-              ...post,
-              comments: [...post.comments, action.payload.comment]
-            }
-          }
-          return post
-        })
-      };
     case GET_ALL_USERS:
       return {
         ...state,
@@ -110,11 +51,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userArtName: action.payload
-      };
-    case UPDATE_COUNT:
-      return {
-        ...state,
-        unreadCount: state.unreadCount + 1
       };
     case GET_ALL_FEELS:
       return {
@@ -151,27 +87,6 @@ export default (state = initialState, action) => {
         ...state,
         onlineUsers: action.payload
       };
-    case UNFAV_GALLERY:
-      return {
-        ...state,
-        favouritePosts: state.favouritePosts?.filter(post => post.gallery_id !== action.payload.gallery.id)
-      }
-    case CHANGE_CRITIQUES_STATUS:
-      if (!state.favouritePosts) {
-        return state
-      }
-      return {
-        ...state,
-        favouritePosts: state.favouritePosts.map(post => {
-          if (action.payload.id === post.id) {
-            return {
-              ...post,
-              critiques_status: action.payload.critiques_status
-            };
-          }
-          return post
-        })
-      }
     default:
       return state;
   }

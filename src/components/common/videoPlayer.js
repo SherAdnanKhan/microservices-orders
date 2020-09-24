@@ -6,9 +6,15 @@ const VideoPlayer = ({ path }) => {
 
   const handleVisibility = isVisible => {
     if (isVisible) {
-      videoRef.current.play();
+      try {
+        videoRef.current.play();
+      } catch (ex) {
+      }
     } else {
-      videoRef.current.pause();
+      try {
+        videoRef.current.pause();
+      } catch (ex) {
+      }
     }
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '../../common/avatar';
 import ImagePostOption from "../../common/ImagePostOption";
 import ImageVideoSlider from "../../common/imageVideoSlider";
@@ -11,8 +11,11 @@ import ToolTip from "../../common/toolTip/toolTip";
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
   onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal,
-  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, post, onVault
+  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, onVault
 }) => {
+
+  const [commentModal, setCommentModal] = useState(false);
+
   return (
     <>
       <div className="wrapper">
@@ -122,11 +125,12 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                     </div>
                     <div className="action">
                       <img
-                        className="comment-img open-commet clickable"
+                        className="comment-img clickable"
                         alt=""
                         src="/assets/images/crit1.png"
                         data-tip="Comments"
                         data-for="comments"
+                        onClick={() => setCommentModal(true)}
                       />
                       <ToolTip position="bottom" id="comments" />
                       <p> comments {post.comments.length}</p>
@@ -159,7 +163,11 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                 </div>
               ))
             }
-            <Comment post={activePost} />
+            {commentModal &&
+              <Comment
+                post={activePost}
+                onClose={() => setCommentModal(false)} />
+            }
           </div>
         </div>
       </div>

@@ -174,13 +174,13 @@ $(document).on('click', '.fa-th', function () {
   $(".fa-square , .post-picture").show();
 });
 
-$(document).on('click', '.open-commet', function () {
-  $(".comments-box").show();
-});
+// $(document).on('click', '.open-commet', function () {
+//   $(".comments-box").show();
+// });
 
-$(document).on('click', '.close-comment', function () {
-  $(".comments-box").hide();
-});
+// $(document).on('click', '.close-comment', function () {
+//   $(".comments-box").hide();
+// });
 //for input
 $(document).on('input', '#addbio', function () {
   this.style.width = this.value.length + "ch";

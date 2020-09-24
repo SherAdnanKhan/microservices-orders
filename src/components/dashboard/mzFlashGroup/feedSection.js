@@ -11,7 +11,7 @@ import ToolTip from "../../common/toolTip/toolTip";
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
   currentUser, onCommentChange, onActiveFeedComment,
-  activeFeedComment, comments, onPostComment, onRepost, onPostModal,
+  activeFeedComment, comments, onPostComment, onRepost,
   onStroke, onUnstroke
 }) => {
 
