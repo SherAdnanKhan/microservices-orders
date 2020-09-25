@@ -5,6 +5,7 @@ import UserContext from '../../../context/userContext';
 import Avatar from '../../common/avatar';
 import ProfileCube from '../../common/profileCube';
 import useViewport from '../../common/useViewport';
+import UserCube from "../../common/userCube";
 
 const ChangeColor = ({ onColorChange }) => {
   const dispatch = useDispatch();
@@ -30,9 +31,12 @@ const ChangeColor = ({ onColorChange }) => {
               />
             </div>
           ) : (
-            <Avatar
-              user={currentUser}
-            />
+            <div className="feelColorCube">
+              <UserCube
+                user={currentUser}
+              />
+            </div>
+
           )
         }
         <div className="feelImg">
