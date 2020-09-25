@@ -1,12 +1,11 @@
 import React from 'react';
 
-const TurnOffCrtiqueModal = ({ onModalClose, post, onHandleCrtique, updatedCritqueStatus }) => {
+const TurnOffCrtiqueModal = ({ onModalClose, post, onHandleCrtique }) => {
     return (
         <div className="studio">
             <div className="gallery-model">
                 <i className="fas fa-window-close" onClick={() => onModalClose(false)}></i>
-                < div className="gallery-container">
-
+                <div className="gallery-container">
                     {post.critiques_status === 1 &&  //if crtiques are on
                         <div className="heading">  Are you sure you want to Turn Off critiques?
                     </div>
@@ -24,7 +23,6 @@ const TurnOffCrtiqueModal = ({ onModalClose, post, onHandleCrtique, updatedCritq
                             <button className="button success" onClick={() => onHandleCrtique(false, post, 1)}>
                                 Confirm</button>
                         }
-
                         <button className="button danger" onClick={() => onModalClose(false)}>Cancel</button>
                     </div>
                 </div>

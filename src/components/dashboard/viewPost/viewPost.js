@@ -34,6 +34,7 @@ const ViewPost = () => {
 
   } = useSelector(state => state);
   const [activePost, setActivePost] = useState('');
+  const [commentModal, setCommentModal] = useState(false);
   const [showModelShare, setShowModelShare] = useState(false);
   const [showModelReport, setShowModelReport] = useState(false);
   const [showModelStrqShare, setshowModelStrqShare] = useState(false);
@@ -42,7 +43,6 @@ const ViewPost = () => {
   const [galleryId, setGalleryId] = useState('');
   const [showMzFlashModal, setShowMzFlashModal] = useState(false);
   const [showDeleteModel, setShowDeleteModel] = useState(false);
-
   const {
     postView: { post, comments },
   } = useSelector(state => state);
@@ -135,6 +135,12 @@ const ViewPost = () => {
 
   return (
     <>
+      {commentModal &&
+        <Comment
+          post={post?.post}
+          onClose={() => setCommentModal(false)}
+        />
+      }
       {showDeleteModel &&
         <DeleteModal
           onDelete={handleDelete}
@@ -217,7 +223,6 @@ const ViewPost = () => {
           handleUnStoke={handleUnStoke}
           updatedCritqueStatus={crtiqueStatus}
         />
-        <Comment post={post && post?.post} />
       </div>
     </>
   )
