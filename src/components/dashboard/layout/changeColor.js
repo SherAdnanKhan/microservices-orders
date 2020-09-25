@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFeelColors } from '../../../actions/colorActions';
 import UserContext from '../../../context/userContext';
-import Avatar from '../../common/avatar';
 import ProfileCube from '../../common/profileCube';
 import useViewport from '../../common/useViewport';
 import UserCube from "../../common/userCube";
