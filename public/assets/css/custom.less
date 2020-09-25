@@ -241,8 +241,11 @@ input {
     margin-bottom: 5px;
     z-index: 1;
     margin-top: 15px;
-    position:absolute;
-    top:43%;
+    @media @mobile{
+      position:absolute;
+      top:43%;
+    }
+    
     .scene {
       display: inline-block;
       margin-left: 5vw;
