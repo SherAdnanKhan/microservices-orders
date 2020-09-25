@@ -346,3 +346,10 @@ $('body').click(function (event) {
     $(".add-img-vid-box").hide();
   }
 });
+
+$(document).mouseup(function (e) {
+  const container = $(`.colorChangerScreen`);
+  if (!container.is(e.target) && container.has(e.target).length === 0) {
+    container.hide();
+  }
+});
