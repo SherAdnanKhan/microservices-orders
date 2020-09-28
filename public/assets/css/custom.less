@@ -5507,6 +5507,9 @@ img {
     position: relative;
     img{
       height: 100%;
+      filter:brightness(1.73);
+      filter:contrast(1.73);
+      border:1px solid #EAEAEA ;
     }
     .fa-times{
       position: absolute;
@@ -5523,7 +5526,8 @@ img {
     min-height: 40vh;
     border-bottom: 1px solid rgba(128,128,128,.5);
     overflow-y: scroll !important;
-    background:  #000000f5;
+    background:  #A19D9C;
+    opacity: 0.3;
     .user-commet{
       width: 100%;
       font-size: 14px;
@@ -5545,6 +5549,7 @@ img {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    opacity: 1;
     .msg-input{
       width: 80%;
       margin-right: 10px;
@@ -5555,7 +5560,12 @@ img {
         border: 1px solid #444;
         border-radius: 10px;
         font-size: 20px;
+        border:1px solid white;
         color: #fff;
+      }
+      ::placeholder {
+        color:#FFFFFF ;
+        padding-top: 12px;
       }
     }
     button{
@@ -5565,6 +5575,7 @@ img {
       width: 18%;
       border-radius: 50px;
       padding: 5px 10px;
+      border:1px solid white;
       img{
         width: 30px;
       }
