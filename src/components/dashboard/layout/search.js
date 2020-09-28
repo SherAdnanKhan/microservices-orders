@@ -6,13 +6,16 @@ import Avatar from '../../common/avatar';
 
 const Search = ({ feelColor }) => {
   const [query, setQuery] = useState('');
-
   const dispatch = useDispatch();
   const { users } = useSelector(state => state.user);
-
   const handleChange = ({ target: input }) => {
-    dispatch(getAllUsers(input.value));
-    setQuery(input.value);
+    if ((input.value.length > 0)) {
+      dispatch(getAllUsers(input.value));
+      setQuery(input.value);
+    }
+    else {
+      handleClear();
+    }
   }
 
   const handleClear = () => {
