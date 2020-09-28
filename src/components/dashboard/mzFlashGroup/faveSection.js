@@ -456,7 +456,7 @@ const FaveSection = ({
                       <img src="/assets/images/icons/repost_icon.png"
                         onClick={e => onRepost(e, feed)} alt=""
                         data-for="repost"
-                        data-tipst="Repost"
+                        data-tip="Repost"
                       >
                       </img>
                       <ToolTip id="repost" />
