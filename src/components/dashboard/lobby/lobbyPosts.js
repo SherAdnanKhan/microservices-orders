@@ -18,6 +18,7 @@ import MzFlashModal from "../../common/mzFlashModal";
 import PostModal from "../../dashboard/mzFlashGroup/postModal";
 import { useDispatch, useSelector } from 'react-redux';
 import { unfavGallery } from '../../../actions/galleryActions';
+import LazyLoad from 'react-lazyload';
 import {
   getNcomm,
   clearNcomm,
@@ -226,6 +227,7 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
         />
       }
       {posts?.map((post, index) => (
+
         <div className="post-page" key={index}>
           <div className="post-head">
             <p className="usernames">
@@ -270,15 +272,17 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
             <ToolTip id="vault" position="top" />
           </div>
           <div className="post-body" onClick={() => handleActivePost(post, index)}>
-            {post.post_type === 2
-              ? (
-                <VideoPlayer
-                  path={post.image.path}
-                />
-              ) : (
-                <img src={post.image.path} alt="" />
-              )
-            }
+            <LazyLoad>
+              {post.post_type === 2
+                ? (
+                  <VideoPlayer
+                    path={post.image.path}
+                  />
+                ) : (
+                  <img src={post.image.path} alt="" />
+                )
+              }
+            </LazyLoad>
           </div>
 
           <div

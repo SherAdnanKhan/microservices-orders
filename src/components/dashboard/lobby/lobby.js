@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavourites } from '../../../actions/userActions';
+import { getFavourites } from '../../../actions/lobbyActions';
 import { getAllConversations } from "../../../actions/conversationActions";
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';

@@ -11,7 +11,7 @@ const ChangeColor = ({ onColorChange }) => {
   const { feelColors } = useSelector(state => state.feelColor);
   const currentUser = useContext(UserContext);
   const { width } = useViewport();
-  const breakpoint = 600;
+  const breakpoint = 768;
 
   useEffect(() => {
     if (!feelColors)
