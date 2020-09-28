@@ -22,6 +22,7 @@ import RepostModal from "../common/repostModal";
 import MzFlashModal from "../common/mzFlashModal";
 import ShowMoreText from 'react-show-more-text';
 import ToolTip from './toolTip/toolTip';
+import LazyLoad from "react-lazyload";
 
 const Post = ({
   gallery, user, activeGallery,
@@ -287,16 +288,18 @@ const Post = ({
                                 // for opening image option
                                 onClick={() => handleActivePost(post)}
                               >
-                                {post.post_type === 2
-                                  ? (
-                                    <video controls onClick={e => e.preventDefault()}>
-                                      <source src={post.image.path} type="video/mp4" />
-                                      <source src={post.image.path} type="video/ogg" />
+                                <LazyLoad>
+                                  {post.post_type === 2
+                                    ? (
+                                      <video controls onClick={e => e.preventDefault()}>
+                                        <source src={post.image.path} type="video/mp4" />
+                                        <source src={post.image.path} type="video/ogg" />
                                     Your browser does not support the video tag.
-                                    </video>
-                                  ) : (
-                                    <img src={`${post.image.path}`} alt="" />
-                                  )}
+                                      </video>
+                                    ) : (
+                                      <img src={`${post.image.path}`} alt="" />
+                                    )}
+                                </LazyLoad>
                                 <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
                               </div>
 

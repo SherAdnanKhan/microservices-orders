@@ -7,6 +7,7 @@ import Comment from '../../dashboard/viewPost/comments';
 import { Link } from "react-router-dom";
 import ShowMoreText from 'react-show-more-text';
 import ToolTip from "../../common/toolTip/toolTip";
+import LazyLoad from "react-lazyload";
 
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
@@ -24,19 +25,21 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
             {gallery &&
               gallery.posts.map((gallery, index) => (
                 <div className="" key={index}>
-                  <Link to={`/dashboard/viewpost/${gallery?.slug}`}>
-                    {gallery.post_type === 2
-                      ? (
-                        <video width="320" height="220" controls>
-                          <source src={gallery.image && gallery.image.path} type="video/mp4" />
-                          <source src={gallery.image && gallery.image.path} type="video/ogg" />
+                  <LazyLoad>
+                    <Link to={`/dashboard/viewpost/${gallery?.slug}`}>
+                      {gallery.post_type === 2
+                        ? (
+                          <video width="320" height="220" controls>
+                            <source src={gallery.image && gallery.image.path} type="video/mp4" />
+                            <source src={gallery.image && gallery.image.path} type="video/ogg" />
                         Your browser does not support the video tag.
-                        </video>
-                      ) : (
-                        <img src={`${gallery.image && gallery.image.path}`} alt="" />
-                      )
-                    }
-                  </Link>
+                          </video>
+                        ) : (
+                          <img src={`${gallery.image && gallery.image.path}`} alt="" />
+                        )
+                      }
+                    </Link>
+                  </LazyLoad>
                 </div>
               ))}
           </div>
@@ -86,17 +89,19 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                     <ToolTip position="top" id="vault" />
                   </div >
                   <div onClick={() => handleActivePost(post)}>
-                    {post.post_type === 2
-                      ? (
-                        <video width="320" height="240" controls>
-                          <source src={post.image.path} type="video/mp4" />
-                          <source src={post.image.path} type="video/ogg" />
+                    <LazyLoad>
+                      {post.post_type === 2
+                        ? (
+                          <video width="320" height="240" controls>
+                            <source src={post.image.path} type="video/mp4" />
+                            <source src={post.image.path} type="video/ogg" />
                         Your browser does not support the video tag.
-                        </video>
-                      ) : (
-                        <img src={`${post.image.path}`} alt="" />
-                      )
-                    }
+                          </video>
+                        ) : (
+                          <img src={`${post.image.path}`} alt="" />
+                        )
+                      }
+                    </LazyLoad>
                     <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
                   </div>
                   <div
