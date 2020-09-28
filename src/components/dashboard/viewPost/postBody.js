@@ -1,13 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import ImagePostOption from '../../common/ImagePostOption';
 import ToolTip from '../../common/toolTip/toolTip';
 
 
-const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGallery, onReportPost, onModelDelete, onSharePost, onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal }) => {
+const PostBody = ({
+  post, updatedCritqueStatus, onVault, onActivePost,
+  onUnFavGallery, onReportPost, onModelDelete,
+  onSharePost, onShareStrqModel, onStrqShare,
+  onTurnOffCrtiques, onRepostModal,
+  onMzFlashModal
+}) => {
   const [show, setShow] = useState(false);
   const eventRef = useRef();
 
+  useEffect(() => {
+    if (post)
+      console.log(post);
+  }, [post])
   const handleButtonPress = () => {
     eventRef.current = setTimeout(() => {
       setShow(!show);
@@ -23,7 +33,7 @@ const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGa
       <div className="image-option-box">
         {post &&
           <ImagePostOption
-            post={post}
+            post={post.post}
             onUnFavGallery={onUnFavGallery}
             onSharePost={onSharePost}
             onReportPost={onReportPost}
@@ -62,7 +72,7 @@ const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGa
             onTouchEnd={handleButtonRelease}
             onActivePost={onActivePost}
           >
-            {post.post_type === 2
+            {post?.post?.post_type === 2
               ? (
                 <video
                   width="320"
@@ -75,7 +85,7 @@ const PostBody = ({ post, updatedCritqueStatus, onVault, onActivePost, onUnFavGa
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <img src={post.image.path} alt="" style={{ width: "100%", heigth: "100%" }} />
+                <img src={post?.post?.image?.path} alt="" style={{ width: "100%", heigth: "100%" }} />
               )
             }
           </div>

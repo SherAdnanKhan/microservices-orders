@@ -201,7 +201,7 @@ const ViewPost = () => {
           userId={loggedInUserId}
         />
         <ViewPostBody
-          post={post?.post}
+          post={post}
           onActivePost={handleActivePost}
           onUnFavGallery={handleUnfavGallery}
           activePost={activePost}
