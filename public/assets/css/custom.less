@@ -1954,6 +1954,10 @@ input {
   z-index: 12;
   display: none;
   transition: opacity 1s all ease-in-out;
+  @media @mobile {
+    background: #060606b5;
+    height: 100%;
+  }
   .centerCenter {
     position: absolute;
     top: 50%;
@@ -2099,6 +2103,7 @@ input {
        width:26vw;
        height:26vw;
        margin:-13vw;
+       z-index: 20;
        @media @landscape {
          width:26vh;
          height:26vh;      
