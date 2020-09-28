@@ -32,6 +32,7 @@ import {
   repost,
   shareMzFlash
 } from '../../../actions/postAction';
+import ToolTip from '../../common/toolTip/toolTip';
 
 const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
 
@@ -263,8 +264,10 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
               ? 'valut-icon show-valut'
               : 'valut-icon'
           }>
-            <i className="fa fa-ellipsis-v" aria-hidden="true" ></i>
-            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" />
+            <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="more" data-for="more" ></i>
+            <ToolTip id="more" position="top" />
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" />
+            <ToolTip id="vault" position="top" />
           </div>
           <div className="post-body" onClick={() => handleActivePost(post, index)}>
             {post.post_type === 2
@@ -305,6 +308,7 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
                     onStroke={() => handleStrokePost(post)}
                     onUnstroke={() => handleUnstrokePost(post)}
                   />
+                  <ToolTip id="stroke" />
                   <p> strokes {post.stroke_users.length} </p>
                 </div>
               </div>
@@ -314,7 +318,10 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
                   alt=""
                   src="/assets/images/crit1.png"
                   onClick={handleOpenCommentModal}
+                  data-tip="comments"
+                  data-for="comments"
                 />
+                <ToolTip id="comments" position="top" />
                 <p> comments {post.comments.length} </p>
               </div>
               <div className="action">
@@ -323,7 +330,10 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
                   alt=""
                   src="/assets/images/ncommnicon.png"
                   onClick={() => handleNcomm(post)}
+                  data-for="ncomm"
+                  data-tip="ncomm"
                 />
+                <ToolTip id="ncomm" position="top" />
               </div>
             </div>
             <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
