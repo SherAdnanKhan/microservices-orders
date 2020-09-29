@@ -5,7 +5,7 @@ import ModalHeader from '../../common/modal/modalHeader';
 import ModalBody from '../../common/modal/modalBody';
 import ModalFooter from '../../common/modal/modalFooter';
 
-const CallingModal = ({ onDecline }) => {
+const CallingModal = ({ onDecline, feelColor }) => {
   return (
     <div className="calling-modal">
       <Modal>
@@ -17,8 +17,8 @@ const CallingModal = ({ onDecline }) => {
           </div>
         </ModalBody>
         <ModalFooter>
-          <div className="end-call" onClick={onDecline}>
-            <i className="fas fa-phone-slash clickable"></i>
+          <div className="end-call" onClick={onDecline} style={{ backgroundColor: feelColor, opacity: "0.5" }}>
+            <i className="fas fa-phone clickable"></i>
           </div>
         </ModalFooter>
       </Modal>

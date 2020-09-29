@@ -13,6 +13,7 @@ const ChatHeader = ({
   onOpenParticipatsModel, currentUser, onBackPress
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
+  const feelColor = currentUser?.feel?.color_code;
   const history = useHistory();
   const rejectedUsers = useRef([]);
   const timeout = useRef();
@@ -27,6 +28,7 @@ const ChatHeader = ({
     socket.off('call-accepted');
     clearTimeout(timeout);
   }, true);
+
 
   useEffect(() => {
     if (conversation?.participants) {
@@ -192,6 +194,7 @@ const ChatHeader = ({
       {showCallingModal &&
         <CallingModal
           onDecline={handleDecline}
+          feelColor={feelColor}
         />
       }
     </div>
