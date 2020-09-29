@@ -272,7 +272,7 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
             <ToolTip id="vault" position="top" />
           </div>
           <div className="post-body" onClick={() => handleActivePost(post, index)}>
-            <LazyLoad>
+            <LazyLoad once={true}>
               {post.post_type === 2
                 ? (
                   <VideoPlayer

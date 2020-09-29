@@ -193,14 +193,10 @@ const UserCube = ({ user }) => (
     </div>
     <div className="cuna">
       <div className="namerow">
-        {' '}
         {user.first_name}
-        {' '}
       </div>
       <div className="artrow">
-        {' '}
         {user.last_name}
-        {' '}
       </div>
       <div className="user-art">
         {user.art
