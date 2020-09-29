@@ -5,7 +5,7 @@ import ModalHeader from '../../common/modal/modalHeader';
 import ModalFooter from '../../common/modal/modalFooter';
 import Avatar from '../../common/avatar';
 
-const RingingModal = ({ onAcceptCall, onRejectCall, payload }) => {
+const RingingModal = ({ onAcceptCall, onRejectCall, payload, feelColor }) => {
   return (
     <div className="ringing-modal">
       <Modal>
@@ -21,16 +21,20 @@ const RingingModal = ({ onAcceptCall, onRejectCall, payload }) => {
             incoming call
           </div>
         </ModalBody>
+        {/* Accept Button will be brighter */}
         <ModalFooter>
           <div
             className="accept-call"
             onClick={onAcceptCall}
+            style={{ backgroundColor: feelColor, opacity: "1" }}
           >
             <i className="fas fa-phone clickable"></i>
           </div>
+          {/* reject Button will be darker */}
           <div
             className="end-call"
             onClick={onRejectCall}
+            style={{ backgroundColor: feelColor, opacity: "0.5" }}
           >
             <i className="fas fa-phone-slash clickable"></i>
           </div>

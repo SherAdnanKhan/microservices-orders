@@ -5,6 +5,7 @@ import { getCurrentUser } from '../actions/authActions';
 // import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useWindowUnloadEffect } from './common/useWindowUnloadEffect';
+import { useSelector } from "react-redux";
 
 const currentUser = getCurrentUser();
 
@@ -13,6 +14,8 @@ const Call = () => {
 
   const [showRingingModal, setShowRingingModal] = useState(false);
   const [incomingPayload, setIncomingPayload] = useState({});
+  const { feelColor } = useSelector(state => state.feelColor)
+  console.log("feel color=", feelColor)
   const audioRef = useRef(new Audio('/assets/sounds/Skype Ringtone 2018.mp3'));
 
   useEffect(() => {
@@ -86,6 +89,7 @@ const Call = () => {
           payload={incomingPayload}
           onAcceptCall={handleAcceptCall}
           onRejectCall={handleRejectCall}
+          feelColor={feelColor}
         />
         : null
       }

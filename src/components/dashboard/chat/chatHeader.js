@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import MeuzmLogo from '../../common/meuzmLogo';
+import { useSelector } from "react-redux";
 import Avatar from '../../common/avatar';
 import socket from '../../../services/socketService';
 import CallingModal from './callingModal';
 import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
 import useViewport from '../../common/useViewport';
 import ToolTip from '../../common/toolTip/toolTip';
+import { getUserStudio } from "../../../actions/userActions";
 
 const ChatHeader = ({
   user, conversation, onlineUsers, onOpenInvitationModel,
@@ -18,6 +20,11 @@ const ChatHeader = ({
   const timeout = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
+  const { feelColor } = useSelector(state => state.feelColor);
+  const {
+    studio: { userStudio },
+  } = useSelector(state => state);
+  console.log("user Studio=", userStudio)
   const allParticipants = useRef([]);
   const audioRef = useRef();
   const { width } = useViewport();
@@ -27,6 +34,7 @@ const ChatHeader = ({
     socket.off('call-accepted');
     clearTimeout(timeout);
   }, true);
+
 
   useEffect(() => {
     if (conversation?.participants) {
@@ -192,6 +200,7 @@ const ChatHeader = ({
       {showCallingModal &&
         <CallingModal
           onDecline={handleDecline}
+          feelColor={feelColor}
         />
       }
     </div>
