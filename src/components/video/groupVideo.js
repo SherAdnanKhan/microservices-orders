@@ -13,7 +13,7 @@ import ChatInvitationModel from '../common/chatInvitationModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getConversation } from '../../actions/conversationActions';
 import ToolTip from '../common/toolTip/toolTip';
-
+import { Link } from "react-router-dom";
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
@@ -384,6 +384,9 @@ const GroupVideoCall = () => {
     localVideo.current.srcObject.getVideoTracks()[0].enabled = !localVideo.current.srcObject.getVideoTracks()[0].enabled;
     setVideo(!video);
   };
+  const navigateToSTRQ = () => {
+    history.push(`/dashboard/chat/${params.room}`)
+  }
 
   const handleCameraSwitch = (e) => {
     if (isMobile() && !isSwitching) {
@@ -561,7 +564,13 @@ const GroupVideoCall = () => {
 
             </div>
             <div className="call-Actions2">
-              <img className="valut-img" alt="" src="/assets/images/strqicon.png" data-for="chat" data-tip="strq"></img>
+              <img
+                className="valut-img"
+                alt="strq"
+                src="/assets/images/strqicon.png"
+                onClick={navigateToSTRQ}
+                data-for="chat"
+                data-tip="strq" />
               <ToolTip id="chat" />
               <img
                 src="/assets/images/icons/DrawStrq.png"
