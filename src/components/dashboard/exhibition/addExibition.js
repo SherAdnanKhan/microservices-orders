@@ -9,7 +9,6 @@ import ExhibitionModel from "./exhibitionModel";
 import queryString from 'query-string';
 import { getPost, clearPost } from "../../../actions/postAction";
 import { useWindowUnloadEffect } from "../../common/useWindowUnloadEffect";
-
 const AddExibit = () => {
   const location = useLocation();
   const history = useHistory();
@@ -184,7 +183,7 @@ const AddExibit = () => {
               style={{ backgroundColor: feelColor }}
             >
               <span className="exibition-exit-icon">
-                <i className="fas fa-arrow-left clickable" onClick={() => history.goBack()}></i>
+                <i className="fas fa-arrow-left clickable" onClick={() => setShowModel(true)}></i>
               </span>
               <span className="exibition-header-name">Exhibit Your Art</span>
             </div>
