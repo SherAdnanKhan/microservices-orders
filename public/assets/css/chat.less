@@ -413,16 +413,18 @@
 
               .text {    
                 width: auto;
-                max-width: 65vw;
+                max-width: 30vw;
                 padding:4px 6px ;
                 box-sizing: border-box;
                 text-align: left;
                 word-wrap: break-word;
                 clear: both;
-    
                 border:1px solid ;
                 border-radius: 10px 10px 10px 0;
                 opacity: 1;
+                @media @mobile {
+                  max-width:35vw;
+                }
               }
     
               .msgDocument {
@@ -508,7 +510,7 @@
 
               .text{
                 width: auto;
-                max-width:65vw;
+                max-width:30vw;
                 padding: 4px 6px;
                 box-sizing: border-box;
                 text-align: left;
@@ -517,6 +519,9 @@
                 border: 1px solid;
                 border-radius: 10px 10px 0 10px;
                 opacity: 0.8;
+                @media @mobile {
+                max-width:35vw;
+                }
               }
 
               .send-icon {
