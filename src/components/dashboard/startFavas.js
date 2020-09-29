@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRecommendedGalleries, unfavRecommendedGallery, favRecommendedGallery } from '../../actions/galleryActions';
 import { useHistory } from 'react-router-dom';
-import HorizontalSlider from '../common/horizontalSlider';
 import Avatar from '../common/avatar';
+import MySlider from '../common/mySlider';
+
+
 const StartFaves = ({ user }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -51,7 +53,7 @@ const StartFaves = ({ user }) => {
             {'>>'}
           </h1>
         </div>
-        <HorizontalSlider slidesToShow={1}>
+        <MySlider>
           {recommendedGalleries &&
             recommendedGalleries.map((user, index) => (
               <div key={index} className="f-image-box">
@@ -110,7 +112,7 @@ const StartFaves = ({ user }) => {
                 </div>
               </div>
             ))}
-        </HorizontalSlider>
+        </ MySlider>
       </div>
 
     </div>

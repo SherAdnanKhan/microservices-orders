@@ -67,13 +67,11 @@ const UserSection = ({
           {sprfvsUsers &&
             sprfvsUsers.map((user, index) => (
               <div
-                className={index === 0 ? 'item active' : 'item'}
+                className="item"
                 key={index}
                 onClick={() => onActiveUser(user)}
               >
-                <div className="cube">
-                  <UserCube user={user} />
-                </div>
+                <UserCube user={user} />
               </div>
             ))
           }
@@ -84,13 +82,11 @@ const UserSection = ({
           {favouriteUsers &&
             favouriteUsers.map((user, index) => (
               <div
-                className={index === 0 ? 'item active' : 'item'}
+                className="item"
                 key={index}
                 onClick={() => onActiveUser(user)}
               >
-                <div className="cube">
-                  <UserCube user={user} />
-                </div>
+                <UserCube user={user} />
               </div>
             ))
           }
@@ -102,13 +98,11 @@ const UserSection = ({
           {faveAndSprfvsUsers &&
             faveAndSprfvsUsers.map((user, index) => (
               <div
-                className={index === 0 ? 'item active' : 'item'}
+                className="item"
                 key={index}
                 onClick={() => onActiveUser(user)}
               >
-                <div className="cube">
-                  <UserCube user={user} />
-                </div>
+                <UserCube user={user} />
               </div>
             ))
           }

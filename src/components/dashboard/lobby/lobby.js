@@ -17,6 +17,7 @@ import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
 
 const Lobby = () => {
+  console.log('lobby')
   const dispatch = useDispatch();
   const [unReadMsgCount, setUnreadMsgCount] = useState("0");
   const {
@@ -132,15 +133,10 @@ const Lobby = () => {
           <VerticalSlider>
             {favouriteUsers &&
               favouriteUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                >
-                  <div className="cube">
-                    <Link to={`/dashboard/studio/${user.slug}`}>
-                      <UserCube user={user} />
-                    </Link>
-                  </div>
+                <div key={index}>
+                  <Link to={`/dashboard/studio/${user.slug}`}>
+                    <UserCube user={user} />
+                  </Link>
                 </div>
               ))
             }
@@ -149,11 +145,8 @@ const Lobby = () => {
           <HorizontalSlider>
             {favouriteUsers &&
               favouriteUsers.map((user, index) => (
-                <div
-                  className={index === 0 ? 'item active' : 'item'}
-                  key={index}
-                >
-                  <div className="cube">
+                <div key={index}>
+                  <div className="item">
                     <Link to={`/dashboard/studio/${user.slug}`}>
                       <UserCube user={user} />
                     </Link>
