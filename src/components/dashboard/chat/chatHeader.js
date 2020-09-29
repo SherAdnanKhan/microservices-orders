@@ -20,10 +20,6 @@ const ChatHeader = ({
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
   const { feelColor } = useSelector(state => state.feelColor);
-  const {
-    studio: { userStudio },
-  } = useSelector(state => state);
-  console.log("user Studio=", userStudio)
   const allParticipants = useRef([]);
   const audioRef = useRef();
   const { width } = useViewport();
