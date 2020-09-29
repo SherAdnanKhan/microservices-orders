@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import MeuzmLogo from '../../common/meuzmLogo';
-import { useSelector } from "react-redux";
 import Avatar from '../../common/avatar';
 import socket from '../../../services/socketService';
 import CallingModal from './callingModal';
@@ -14,12 +13,12 @@ const ChatHeader = ({
   onOpenParticipatsModel, currentUser, onBackPress
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
+  const feelColor = currentUser?.feel?.color_code;
   const history = useHistory();
   const rejectedUsers = useRef([]);
   const timeout = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
-  const { feelColor } = useSelector(state => state.feelColor);
   const allParticipants = useRef([]);
   const audioRef = useRef();
   const { width } = useViewport();
