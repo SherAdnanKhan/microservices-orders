@@ -15,7 +15,6 @@ const Call = () => {
   const [showRingingModal, setShowRingingModal] = useState(false);
   const [incomingPayload, setIncomingPayload] = useState({});
   const { feelColor } = useSelector(state => state.feelColor)
-  console.log("feel color=", feelColor)
   const audioRef = useRef(new Audio('/assets/sounds/Skype Ringtone 2018.mp3'));
 
   useEffect(() => {

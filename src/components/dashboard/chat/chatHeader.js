@@ -8,7 +8,6 @@ import CallingModal from './callingModal';
 import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
 import useViewport from '../../common/useViewport';
 import ToolTip from '../../common/toolTip/toolTip';
-import { getUserStudio } from "../../../actions/userActions";
 
 const ChatHeader = ({
   user, conversation, onlineUsers, onOpenInvitationModel,
