@@ -8,7 +8,9 @@ const Search = ({ feelColor }) => {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const { users } = useSelector(state => state.user);
+  const [searchTerm, setSearchTerm] = useState('');
   const handleChange = ({ target: input }) => {
+    setSearchTerm(input.value);
     if ((input.value.length > 0)) {
       dispatch(getAllUsers(input.value));
       setQuery(input.value);
@@ -44,7 +46,7 @@ const Search = ({ feelColor }) => {
       </div>
 
       <div id="search-result">
-        {users &&
+        {users && searchTerm.length > 0 &&
           users.map((user, index) => (
             <div key={index} className="result-box">
               <div className="profile-pic">
