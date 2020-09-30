@@ -13,7 +13,7 @@ import ChatInvitationModel from '../common/chatInvitationModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getConversation } from '../../actions/conversationActions';
 import ToolTip from '../common/toolTip/toolTip';
-import { Link } from "react-router-dom";
+
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
