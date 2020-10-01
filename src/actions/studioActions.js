@@ -9,7 +9,8 @@ import {
   STOP_STUDIO_LOADER,
   UN_SUPER_FAV,
   GET_MY_VAULTS,
-  CLEAR_USER_STUDIO
+  CLEAR_USER_STUDIO,
+  UPDATE_USERNAME
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -50,19 +51,34 @@ export const createOrUpdateProfile = (data, history) => () => {
     });
 };
 
-export const updateBio = user => dispatch => {
+export const updateBio = bio => dispatch => {
   http
-    .put(`/users/user-bio`, user)
-    .then((res) => {
+    .put(`/users/user-bio`, bio)
+    .then(() => {
       toast('Bio saved successfully');
       dispatch({
         type: UPDATE_BIO,
-        payload: user.user
+        payload: bio.bio
       });
     })
     .catch(err => {
       err.response &&
-        toast.error(`Something failed while updating`);
+        toast.error(`Something failed while updating user bio`);
+    });
+};
+export const updateUsername = username => dispatch => {
+  http
+    .put(`/users/user-name`, username)
+    .then(() => {
+      toast('Username saved successfully');
+      dispatch({
+        type: UPDATE_USERNAME,
+        payload: username.username
+      });
+    })
+    .catch(err => {
+      err.response &&
+        toast.error(`Something failed while updating username`);
     });
 };
 

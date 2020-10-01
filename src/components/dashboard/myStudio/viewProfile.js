@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
-import { updateBio } from '../../../actions/studioActions';
+import { updateBio, updateUsername } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
 import ToolTip from '../../common/toolTip/toolTip';
 
@@ -30,7 +30,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     let object = {
       username: username
     }
-    dispatch(updateBio(object))
+    dispatch(updateUsername(object))
   }
   return (
     <div className="wrapper">
