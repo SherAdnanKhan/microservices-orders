@@ -3,28 +3,33 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
-
+import { alphabetsWithoutSpecialChars } from "../../../constants/regex";
 const Search = ({ feelColor }) => {
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const { users } = useSelector(state => state.user);
-  const [searchTerm, setSearchTerm] = useState('');
-  const handleChange = ({ target: input }) => {
-    setSearchTerm(input.value);
-    if ((input.value.length > 0)) {
-      dispatch(getAllUsers(input.value));
-      setQuery(input.value);
+
+  const validate = (value) => {
+    if (!alphabetsWithoutSpecialChars.test(value) && value.length > 0) {
+      setError("Special characters are not allowed in search")
+      return true;
     }
     else {
-      handleClear();
+      setError("")
+      return false
     }
   }
-
-  const handleClear = () => {
-    setQuery('');
-    dispatch(clearUsers());
+  const handleChange = ({ target: input }) => {
+    setQuery(input.value);
+    const IsErrors = validate(input.value);
+    if (!IsErrors) {
+      dispatch(getAllUsers(input.value));
+    }
+    else {
+      dispatch(clearUsers());
+    }
   }
-
   return (
     <>
       <div
@@ -42,17 +47,20 @@ const Search = ({ feelColor }) => {
             value={query}
             onChange={handleChange}
             placeholder="Search" />
+          {
+            error.length > 0 &&
+            <span className="error">{error}</span>
+          }
         </div>
       </div>
-
       <div id="search-result">
-        {users && searchTerm.length > 0 &&
+        {users && query.length > 0 && error.length === 0 &&
           users.map((user, index) => (
             <div key={index} className="result-box">
               <div className="profile-pic">
                 <Link
                   to={`/dashboard/studio/${user.slug}`}
-                  onClick={handleClear}
+                  onClick={clearUsers}
                 >
                   <Avatar
                     user={user}
