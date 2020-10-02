@@ -8,7 +8,7 @@ import { register, getCurrentUser } from '../../actions/authActions';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 import ImageCropper from '../common/imageCropper';
 import { isEmpty } from '../../utils/helperFunctions';
-import { alphabets, alphabetsWithChars } from "../../constants/regex";
+import { alphabets, alphabetsWithoutSpecialChars } from "../../constants/regex";
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -107,7 +107,7 @@ const RegisterForm = () => {
         if (!data.username) {
           errors.username = 'Please fillout your Artist name.';
         }
-        else if (!alphabetsWithChars.test(data.username)) {
+        else if (!alphabetsWithoutSpecialChars.test(data.username)) {
           errors.username = 'Artist name must only contains alphabets ,digits or special characters';
         }
         else if (data.username.length < 8) {

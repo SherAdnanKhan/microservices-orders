@@ -17,7 +17,6 @@ import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
 
 const Lobby = () => {
-  console.log('lobby')
   const dispatch = useDispatch();
   const [unReadMsgCount, setUnreadMsgCount] = useState("0");
   const {
