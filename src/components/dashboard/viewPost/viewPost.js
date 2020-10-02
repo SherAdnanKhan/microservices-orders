@@ -18,7 +18,7 @@ import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
-import { deletePost, reportPost, storeVault, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
+import { deletePost, reportPost, storeVault, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash, clearPost } from '../../../actions/postAction';
 
 
 const ViewPost = () => {
@@ -49,6 +49,9 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getPost(id))
+    return () => {
+      dispatch(clearPost())
+    };
   }, [dispatch, id]);
 
   useEffect(() => {
