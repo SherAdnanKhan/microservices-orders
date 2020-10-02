@@ -111,7 +111,7 @@ const Comment = ({ post, onClose }) => {
                   </div>
                   <div className="comment-info">
                     <p>{comment.user.username} : <span>{comment.description}</span> </p>
-                    <p> {getCommentTime(comment)} </p>
+                    <p><span className="dim">{getCommentTime(comment)}</span></p>
                   </div>
                 </div>
               ))
