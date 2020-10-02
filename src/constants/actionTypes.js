@@ -28,6 +28,7 @@ export const GET_USER_ART_NAME = 'GET_USER_ART_NAME';
 export const GET_FAV_USER = 'GET_FAV_USER';
 export const GET_FAV_BY_USER = 'GET_FAV_BY_USER';
 export const UPDATE_BIO = 'UPDATE_BIO';
+export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const GET_ALL_FEELS = 'GET_ALL_FEELS';
 export const GET_FAV_AND_SPRFVS_USERS = 'GET_FAV_AND_SPRFVS_USERS';
 export const ONLINE_USERS = 'ONLINE_USERS';

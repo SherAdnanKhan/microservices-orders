@@ -12,7 +12,8 @@ import {
   START_STUDIO_LOADER,
   STOP_STUDIO_LOADER,
   UN_SUPER_FAV,
-  CLEAR_USER_STUDIO
+  CLEAR_USER_STUDIO,
+  UPDATE_USERNAME
 } from "../constants/actionTypes";
 import { SPRFVS } from "../constants/privacyTypes";
 
@@ -37,6 +38,17 @@ export default (state = initialState, action) => {
           user: {
             ...state.myStudio.user,
             bio: action.payload
+          }
+        }
+      };
+    case UPDATE_USERNAME:
+      return {
+        ...state,
+        myStudio: {
+          ...state.myStudio,
+          user: {
+            ...state.myStudio.user,
+            username: action.payload
           }
         }
       };
