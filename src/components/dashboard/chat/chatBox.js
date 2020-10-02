@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from '../../common/avatar';
-import { formatTime, formatDate, getText, getURL } from '../../../utils/helperFunctions';
+import { formatTime, formatDate, getText, getURL, convertHexToRGBA } from '../../../utils/helperFunctions';
 import SocketContext from '../../../context/socketContext';
 import { getCurrentUser, getAuthToken } from '../../../actions/authActions';
 import socket from '../../../services/socketService';
@@ -392,7 +392,7 @@ class ChatBox extends Component {
                           }
                           <div className="text"
                             style={{
-                              backgroundColor: data.feel.color_code,
+                              backgroundColor: convertHexToRGBA(data.feel.color_code, 1),
                               borderColor: data.feel.color_code,
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
@@ -478,7 +478,7 @@ class ChatBox extends Component {
                           <div
                             className='text'
                             style={{
-                              backgroundColor: data.feel.color_code,
+                              backgroundColor: convertHexToRGBA(data.feel.color_code, 0.5),
                               borderColor: data.feel.color_code,
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
@@ -686,7 +686,7 @@ class ChatBox extends Component {
             currentUser={currentUser}
           />
         }
-      </div>
+      </div >
     );
   }
 };
