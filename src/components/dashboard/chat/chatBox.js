@@ -392,7 +392,7 @@ class ChatBox extends Component {
                           }
                           <div className="text"
                             style={{
-                              backgroundColor: convertHexToRGBA(data.feel.color_code, 1),
+                              backgroundColor: convertHexToRGBA(data.feel.color_code, .6),
                               borderColor: data.feel.color_code,
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
@@ -478,7 +478,7 @@ class ChatBox extends Component {
                           <div
                             className='text'
                             style={{
-                              backgroundColor: convertHexToRGBA(data.feel.color_code, 0.5),
+                              backgroundColor: convertHexToRGBA(data.feel.color_code, 0.3),
                               borderColor: data.feel.color_code,
                               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
                             }}
