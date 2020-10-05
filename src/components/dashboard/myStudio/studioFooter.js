@@ -12,7 +12,7 @@ import LazyLoad from "react-lazyload";
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
   onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal,
-  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, onVault
+  onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, onAddVault
 }) => {
 
   const [commentModal, setCommentModal] = useState(false);
@@ -72,7 +72,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       onTurnOffCrtiques={onTurnOffCrtiques}
                       onRepostModal={onRepostModal}
                       onMzFlashModal={onMzFlashModal}
-                      onVault={onVault} />
+                      onAddVault={onAddVault} />
                   </div>
                   <div
                     className={
@@ -85,7 +85,14 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="More" data-for="more" ></i>
                       <ToolTip position="top" id="more" />
                     </div>
-                    <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" />
+                    <img
+                      className="valut-img"
+                      alt=""
+                      src="/assets/images/vaulticon.png"
+                      data-tip="vault"
+                      data-for="vault"
+                      onClick={() => onAddVault(post)}
+                    />
                     <ToolTip position="top" id="vault" />
                   </div >
                   <div onClick={() => handleActivePost(post)}>

@@ -179,7 +179,6 @@ const MyStudio = () => {
     handleActivePost('');
   }
 
-
   return (
     <>
       {showDeleteModel &&
@@ -285,7 +284,7 @@ const MyStudio = () => {
           onNcomm={handleNcomm}
           activeNcomm={activeNcomm}
           ncomm={ncomm}
-          onVault={handleVault}
+          onAddVault={handleVault}
         />
       </div>
     </>
