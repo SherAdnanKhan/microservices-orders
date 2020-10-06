@@ -217,13 +217,19 @@ const Post = ({
                               <Link to={`/dashboard/viewpost/${post.slug}`}>
                                 {post.post_type === 2
                                   ? (
-                                    <video width="320" height="240" controls>
-                                      <source src={post.image.path} type="video/mp4" />
-                                      <source src={post.image.path} type="video/ogg" />
+                                    <>
+                                      <p id="post-title">{post.title}</p>
+                                      <video width="320" height="240" controls>
+                                        <source src={post.image.path} type="video/mp4" />
+                                        <source src={post.image.path} type="video/ogg" />
                                     Your browser does not support the video tag.
                                     </video>
+                                    </>
                                   ) : (
-                                    <img src={`${post.image.path}`} alt="" />
+                                    <>
+                                      <p id="post-title">{post.title}</p>
+                                      <img src={`${post.image.path}`} alt="" />
+                                    </>
                                   )}
                               </Link>
                             </div>
@@ -291,13 +297,20 @@ const Post = ({
                                 <LazyLoad>
                                   {post.post_type === 2
                                     ? (
-                                      <video controls onClick={e => e.preventDefault()}>
-                                        <source src={post.image.path} type="video/mp4" />
-                                        <source src={post.image.path} type="video/ogg" />
-                                    Your browser does not support the video tag.
+                                      <>
+                                        <p id="post-title">{post.title}</p>
+                                        <video controls onClick={e => e.preventDefault()}>
+                                          <source src={post.image.path} type="video/mp4" />
+                                          <source src={post.image.path} type="video/ogg" />
+                                        Your browser does not support the video tag.
                                       </video>
+                                      </>
+
                                     ) : (
-                                      <img src={`${post.image.path}`} alt="" />
+                                      <>
+                                        <p id="post-title">{post.title}</p>
+                                        <img src={`${post.image.path}`} alt="" />
+                                      </>
                                     )}
                                 </LazyLoad>
                                 <p style={{ textAlign: 'center' }}>{post.title && post.title}</p>
