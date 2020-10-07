@@ -24,18 +24,24 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
           <div className="post-picture">
             {gallery &&
               gallery.posts.map((gallery, index) => (
-                <div className="" key={index}>
+                <div key={index}>
                   <LazyLoad>
                     <Link to={`/dashboard/viewpost/${gallery?.slug}`}>
                       {gallery.post_type === 2
                         ? (
-                          <video width="320" height="220" controls>
-                            <source src={gallery.image && gallery.image.path} type="video/mp4" />
-                            <source src={gallery.image && gallery.image.path} type="video/ogg" />
-                        Your browser does not support the video tag.
+                          <>
+                            <p id="post-title">{gallery.title}</p>
+                            <video width="320" height="220" controls>
+                              <source src={gallery.image && gallery.image.path} type="video/mp4" />
+                              <source src={gallery.image && gallery.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
                           </video>
+                          </>
                         ) : (
-                          <img src={`${gallery.image && gallery.image.path}`} alt="" />
+                          <>
+                            <p id="post-title"> {gallery.title}</p>
+                            <img src={`${gallery.image && gallery.image.path}`} alt="" />
+                          </>
                         )
                       }
                     </Link>
@@ -99,13 +105,19 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                     <LazyLoad>
                       {post.post_type === 2
                         ? (
-                          <video width="320" height="240" controls>
-                            <source src={post.image.path} type="video/mp4" />
-                            <source src={post.image.path} type="video/ogg" />
-                        Your browser does not support the video tag.
+                          <>
+                            <p id="post-title">{post.title}</p>
+                            <video width="320" height="240" controls>
+                              <source src={post.image.path} type="video/mp4" />
+                              <source src={post.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
                           </video>
+                          </>
                         ) : (
-                          <img src={`${post.image.path}`} alt="" />
+                          <>
+                            <p id="post-title">{post.title}</p>
+                            <img src={`${post.image.path}`} alt="" />
+                          </>
                         )
                       }
                     </LazyLoad>
