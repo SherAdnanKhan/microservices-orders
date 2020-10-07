@@ -167,11 +167,13 @@ $(document).on('click', '.result-box', function () {
 $(document).on('click', '.fa-square', function () {
   $(".fa-square , .post-picture").hide();
   $(".show-list , .fa-th").show();
+  $(".gallery-cover").css({ 'display': 'flex' })
 });
 
 $(document).on('click', '.fa-th', function () {
   $(".show-list , .fa-th").hide();
   $(".fa-square , .post-picture").show();
+  $(".gallery-cover").css({ 'display': 'block' })
 });
 
 // $(document).on('click', '.open-commet', function () {
