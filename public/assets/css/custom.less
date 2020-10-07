@@ -2027,6 +2027,32 @@ img {
   z-index: 10;
   background: #00000098;
   color: #fff;
+
+  .feelIcon {
+    position: absolute;
+    right: 45px;
+    width: 53px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    padding: 15px;
+    margin-top: -1px;
+    top: 91px;
+    border: 2px solid #ffffff61;
+    @media @mobile {
+      right: 0;
+      top: 0;
+      padding: 4px;
+      border-radius: 0 0 0 20px;
+      width: 36px;
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  
   .welcomeText {
     position: absolute;
     top: 5vh;
