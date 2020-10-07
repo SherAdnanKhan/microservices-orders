@@ -7,13 +7,13 @@ import CallingModal from './callingModal';
 import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
 import useViewport from '../../common/useViewport';
 import ToolTip from '../../common/toolTip/toolTip';
+import { useSelector } from "react-redux";
 
 const ChatHeader = ({
-  user, conversation, onlineUsers, onOpenInvitationModel,
+  conversation, onlineUsers, onOpenInvitationModel,
   onOpenParticipatsModel, currentUser, onBackPress
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
-  const feelColor = currentUser?.feel?.color_code;
   const history = useHistory();
   const rejectedUsers = useRef([]);
   const timeout = useRef();
@@ -23,6 +23,7 @@ const ChatHeader = ({
   const audioRef = useRef();
   const { width } = useViewport();
   const breakPoint = 768;
+  const { feelColor } = useSelector(state => state.feelColor)
 
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
