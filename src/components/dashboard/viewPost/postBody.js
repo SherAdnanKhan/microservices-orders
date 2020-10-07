@@ -5,11 +5,11 @@ import ToolTip from '../../common/toolTip/toolTip';
 
 
 const PostBody = ({
-  post, updatedCritqueStatus, onVault, onActivePost,
+  post, updatedCritqueStatus, onAddVault, onActivePost,
   onUnFavGallery, onReportPost, onModelDelete,
   onSharePost, onShareStrqModel, onStrqShare,
   onTurnOffCrtiques, onRepostModal,
-  onMzFlashModal
+  onMzFlashModal,
 }) => {
   const [show, setShow] = useState(false);
   const eventRef = useRef();
@@ -44,7 +44,7 @@ const PostBody = ({
             updatedCritqueStatus={updatedCritqueStatus}
             onRepostModal={onRepostModal}
             onMzFlashModal={onMzFlashModal}
-            onVault={onVault}
+            onAddVault={onAddVault}
           />
         }
       </div>
@@ -62,6 +62,7 @@ const PostBody = ({
           src="/assets/images/vaulticon.png"
           data-for="vault"
           data-tip="vault"
+          onClick={() => onAddVault(post?.post)}
         />
         <ToolTip id="vault" />
       </div>

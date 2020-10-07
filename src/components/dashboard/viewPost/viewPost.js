@@ -217,7 +217,7 @@ const ViewPost = () => {
           updatedCritqueStatus={crtiqueStatus}
           onRepostModal={handleRepostModal}
           onMzFlashModal={handleMzFlashModal}
-          onVault={handleVault}
+          onAddVault={handleVault}
         />
         <PostFooter
           post={post?.post}
