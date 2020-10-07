@@ -18,7 +18,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
       dispatch(clearNcomm());
     } else {
       setHasNcomm(true);
-      dispatch(getNcomm(post?.post?.slug));
+      dispatch(getNcomm(post?.slug));
     }
   };
   useEffect(() => {
@@ -81,14 +81,16 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
           </div>
         }
         <div className="post-footer-icons action-w">
-          <img
-            className="post-non-color-icon clickable"
-            src="/assets/images/ncommnicon.png"
-            onClick={() => handleNcomm(post)}
-            alt=""
-            data-for="ncomm"
-            data-tip="ncomm"
-          />
+          {post &&
+            <img
+              className="post-non-color-icon clickable"
+              src="/assets/images/ncommnicon.png"
+              onClick={() => handleNcomm(post)}
+              alt=""
+              data-for="ncomm"
+              data-tip="ncomm"
+            />
+          }
           <ToolTip id="ncomm" />
         </div>
       </div>
