@@ -4,6 +4,7 @@ import Modal from '../../common/modal/modal';
 import ModalHeader from '../../common/modal/modalHeader';
 import ModalBody from '../../common/modal/modalBody';
 import ModalFooter from '../../common/modal/modalFooter';
+import { convertHexToRGBA } from '../../../utils/helperFunctions';
 
 const CallingModal = ({ onDecline, feelColor }) => {
   return (
@@ -17,8 +18,8 @@ const CallingModal = ({ onDecline, feelColor }) => {
           </div>
         </ModalBody>
         <ModalFooter>
-          <div className="end-call" onClick={onDecline} style={{ backgroundColor: feelColor, opacity: "0.5" }}>
-            <i className="fas fa-phone clickable"></i>
+          <div className="end-call" onClick={onDecline} style={{ backgroundColor: convertHexToRGBA(feelColor, 0.5) }}>
+            <i class="fas fa-times"></i>
           </div>
         </ModalFooter>
       </Modal>

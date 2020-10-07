@@ -13,14 +13,16 @@ import {
   STOP_STUDIO_LOADER,
   UN_SUPER_FAV,
   CLEAR_USER_STUDIO,
-  UPDATE_USERNAME
+  UPDATE_USERNAME,
+  GET_MY_VAULTS,
 } from "../constants/actionTypes";
 import { SPRFVS } from "../constants/privacyTypes";
 
 const initialState = {
   myStudio: null,
   userStudio: null,
-  loading: false
+  loading: false,
+  vaultsList: []
 };
 
 export default (state = initialState, action) => {
@@ -157,6 +159,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false
+      }
+    case GET_MY_VAULTS:
+      return {
+        ...state,
+        vaultsList: action.payload
       }
     default:
       return state;

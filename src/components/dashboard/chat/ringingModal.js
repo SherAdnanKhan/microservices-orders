@@ -4,6 +4,7 @@ import ModalBody from '../../common/modal/modalBody';
 import ModalHeader from '../../common/modal/modalHeader';
 import ModalFooter from '../../common/modal/modalFooter';
 import Avatar from '../../common/avatar';
+import { convertHexToRGBA } from '../../../utils/helperFunctions';
 
 const RingingModal = ({ onAcceptCall, onRejectCall, payload, feelColor }) => {
   return (
@@ -26,17 +27,17 @@ const RingingModal = ({ onAcceptCall, onRejectCall, payload, feelColor }) => {
           <div
             className="accept-call"
             onClick={onAcceptCall}
-            style={{ backgroundColor: feelColor, opacity: "1" }}
+            style={{ backgroundColor: convertHexToRGBA(feelColor, 1) }}
           >
-            <i className="fas fa-phone clickable"></i>
+            <img src="/assets/images/call.png" alt="call" />
           </div>
           {/* reject Button will be darker */}
           <div
             className="end-call"
             onClick={onRejectCall}
-            style={{ backgroundColor: feelColor, opacity: "0.5" }}
+            style={{ backgroundColor: convertHexToRGBA(feelColor, 0.4) }}
           >
-            <i className="fas fa-phone-slash clickable"></i>
+            <i className="fas fa-times clickable"></i>
           </div>
         </ModalFooter>
       </Modal>

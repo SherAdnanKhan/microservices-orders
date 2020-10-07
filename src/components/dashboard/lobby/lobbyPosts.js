@@ -164,6 +164,10 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
   const handleStrokePost = (post) => {
     dispatch(strokePost(post.id, post.gallery_id, post.user));
   }
+  const addVault = (post) => {
+    dispatch(storeVault(post))
+    handleActivePost("")
+  }
 
   return (
     <>
@@ -268,7 +272,7 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
           }>
             <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="more" data-for="more" ></i>
             <ToolTip id="more" position="top" />
-            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" />
+            <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
             <ToolTip id="vault" position="top" />
           </div>
           <div className="post-body" onClick={() => handleActivePost(post, index)}>

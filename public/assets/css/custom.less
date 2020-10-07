@@ -154,12 +154,16 @@ input {
             .end-call {
               border: 3px solid #fff;
               border-radius: 50%;
-              padding: 9px 10px;
+              padding: 8px 12px;
+              margin-right: 15px;
+              width:36px;
               i {
-                font-size: 22px;
+                font-size: 42px;
                 margin-top: 5px;
-                color: #fff;
-                opacity:1
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                height:30px;
               }
             }
             .accept-call {
@@ -167,11 +171,9 @@ input {
               border-radius: 50%;
               padding: 8px 12px;
               margin-right: 15px;
-              i {
-                font-size: 22px;
-                margin-top: 5px;
-                color: #fff;
-                opacity:0.5
+              img {
+                height:40px;
+                width:40px;
               }
             }
           }
@@ -2025,6 +2027,32 @@ img {
   z-index: 10;
   background: #00000098;
   color: #fff;
+
+  .feelIcon {
+    position: absolute;
+    right: 45px;
+    width: 53px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    padding: 15px;
+    margin-top: -1px;
+    top: 91px;
+    border: 2px solid #ffffff61;
+    @media @mobile {
+      right: 0;
+      top: 0;
+      padding: 4px;
+      border-radius: 0 0 0 20px;
+      width: 36px;
+      border-left: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  
   .welcomeText {
     position: absolute;
     top: 5vh;
@@ -3872,6 +3900,27 @@ img {
     }
   }
 }
+// vault css
+
+.vault-page{
+  .vault-bar{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .back-icon{
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+    }
+    .heading{
+      width:100%;
+      text-align: center;
+    }
+  }
+}
 
 .my-studio-edit{
   display: none;
@@ -4372,8 +4421,11 @@ img {
   justify-content: center;
   cursor: pointer;
   .image-div {
-    width: 100%;
-}
+    width: 45%;
+    @media @mobile {
+      width: 100%;
+    }
+  }
   .right-clicked{
     opacity: 0;
     width: 0;

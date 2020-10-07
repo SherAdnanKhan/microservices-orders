@@ -152,6 +152,10 @@ const Post = ({
     dispatch(storeVault(post));
     handleActivePost('')
   }
+  const addVault = (post) => {
+    dispatch(storeVault(post))
+  }
+
   return (
     <>
       {showDeleteModel &&
@@ -287,7 +291,14 @@ const Post = ({
                                   <i className="fa fa-ellipsis-v" aria-hidden="true" data-for="more" data-tip="more" ></i>
                                   <ToolTip position="bottom" id="more" />
                                 </div>
-                                <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-for="vault" data-tip="vault" />
+                                <img
+                                  className="valut-img"
+                                  alt=""
+                                  src="/assets/images/vaulticon.png"
+                                  data-for="vault"
+                                  data-tip="vault"
+                                  onClick={() => addVault(post)}
+                                />
                                 <ToolTip position="bottom" id="vault" />
                               </div>
                               <div

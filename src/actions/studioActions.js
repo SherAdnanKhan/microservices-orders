@@ -31,7 +31,6 @@ export const getMyVault = () => dispatch => {
   http
     .get('/vault')
     .then(res => {
-      console.log(res);
       dispatch({
         type: GET_MY_VAULTS,
         payload: res.data.data
