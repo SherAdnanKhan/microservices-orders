@@ -29,7 +29,7 @@ const RingingModal = ({ onAcceptCall, onRejectCall, payload, feelColor }) => {
             onClick={onAcceptCall}
             style={{ backgroundColor: convertHexToRGBA(feelColor, 1) }}
           >
-            <img src="/assets/images/call.png" />
+            <img src="/assets/images/call.png" alt="call" />
           </div>
           {/* reject Button will be darker */}
           <div
