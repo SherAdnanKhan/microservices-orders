@@ -10,7 +10,8 @@ import {
   UN_SUPER_FAV,
   GET_MY_VAULTS,
   CLEAR_USER_STUDIO,
-  UPDATE_USERNAME
+  UPDATE_USERNAME,
+  UPDATE_USER_ART,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -65,6 +66,25 @@ export const updateBio = bio => dispatch => {
         toast.error(`Something failed while updating user bio`);
     });
 };
+export const updateArt = artId => dispatch => {
+  http
+    .post(`/arts/user-art-selection`, artId)
+    .then(res => {
+      toast.success("art updated successfully")
+      localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
+      let id = res.data.data.user.art.id;
+      let name = res.data.data.user.art.name;
+      localStorage.setItem('art_id', id);
+      dispatch({
+        type: UPDATE_USER_ART,
+        payload: [id, name]
+      })
+    })
+    .catch(err => {
+      err.response &&
+        toast.error(`Something failed while updating user art`);
+    });
+}
 export const updateUsername = username => dispatch => {
   http
     .put(`/users/user-name`, username)

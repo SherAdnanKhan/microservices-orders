@@ -3,7 +3,7 @@ import React from 'react';
 const ProfileCube = ({ avatars, feelColor }) => (
   <div className="scene">
     <div className="cube">
-      {avatars.length === 1
+      {avatars && avatars.length === 1
         && (
           <>
             <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[0].path} alt="" /></div>
@@ -12,7 +12,7 @@ const ProfileCube = ({ avatars, feelColor }) => (
             <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[0].path} alt="" /></div>
           </>
         )}
-      {avatars.length === 2
+      {avatars && avatars.length === 2
         && (
           <>
             <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[0].path} alt="" /></div>
@@ -21,7 +21,7 @@ const ProfileCube = ({ avatars, feelColor }) => (
             <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[1].path} alt="" /></div>
           </>
         )}
-      {avatars.length === 3
+      {avatars && avatars.length === 3
         && (
           <>
             <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[0].path} alt="" /></div>
@@ -30,7 +30,7 @@ const ProfileCube = ({ avatars, feelColor }) => (
             <div className="cube-face  cube-face-right" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[0].path} alt="" /></div>
           </>
         )}
-      {avatars.length >= 4
+      {avatars && avatars.length >= 4
         && (
           <>
             <div className="cube-face  cube-face-front" style={{ borderColor: 'transparent', backgroundColor: feelColor }}><img src={avatars[0].path} alt="" /></div>
