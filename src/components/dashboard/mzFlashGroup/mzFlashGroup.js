@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavourites, getFaveAndSprfvsUsers, getSprfvsUsers } from '../../../actions/userActions';
+import { getFaveAndSprfvsUsers, getSprfvsUsers } from '../../../actions/userActions';
 import PostModal from "./postModal";
 import UserContext from '../../../context/userContext';
 import Spinner from '../../common/spinner';
@@ -28,8 +28,8 @@ const MzFlashGroup = () => {
   const [activeUser, setActiveUser] = useState('');
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [comments, setComments] = useState({})
-  const [imagePath,setImagepath]=useState("");
-  const [mediaType,setMediaType]=useState("");
+  const [imagePath, setImagepath] = useState("");
+  const [mediaType, setMediaType] = useState("");
 
   const [showModel, setShowModel] = useState(false);
   const [showPostModel, setShowPostModel] = useState(false);
@@ -45,23 +45,22 @@ const MzFlashGroup = () => {
     }
   } = useSelector(state => state);
 
-  const handleShowModel= value => {
+  const handleShowModel = value => {
     setShowModel(value);
   };
-  const handlePostShowModel= (value,type,image) => {
-    console.log("type=",type ,"image=",image)
-    if(value === true)
-    {
+  const handlePostShowModel = (value, type, image) => {
+    console.log("type=", type, "image=", image)
+    if (value === true) {
       setImagepath(image.path);
       setMediaType(type);
-    }    
+    }
     setShowPostModel(value);
 
   };
 
 
   useEffect(() => {
-    dispatch(getFavourites());
+    // dispatch(getFavourites());
     dispatch(getFaveAndSprfvsUsers());
     dispatch(getSprfvsUsers(3, 1));
     dispatch(getCollectiveFeeds());
@@ -165,13 +164,13 @@ const MzFlashGroup = () => {
     <section className="mz-flash-group">
       {loading && <Spinner />}
       <div className="row">
-      {showPostModel &&
-        <PostModal
-          onPostModalClose={handlePostShowModel}
-          imagePath={imagePath}
-          mediaType={mediaType}
-        />
-      }
+        {showPostModel &&
+          <PostModal
+            onPostModalClose={handlePostShowModel}
+            imagePath={imagePath}
+            mediaType={mediaType}
+          />
+        }
         <UserSection
           favouriteUsers={favouriteUsers}
           sprfvsUsers={sprfvsUsers}

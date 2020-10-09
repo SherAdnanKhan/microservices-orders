@@ -20,8 +20,12 @@ export const CLEAR_ART = 'CLEAR_ART';
 // ART SELECT
 export const SELECT_USER = "SELECT_USER";
 
+//lobby
+export const GET_FAV_POSTS = 'GET_FAV_POSTS';
+export const GET_FAV_GALLERY_USERS = 'GET_FAV_GALLERY_USERS';
+
 //Users 
-export const GET_FAV = 'GET_FAV_USERS';
+
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const CLEAR_USERS = 'CLEAR_USERS';
 export const GET_USER_ART_NAME = 'GET_USER_ART_NAME';

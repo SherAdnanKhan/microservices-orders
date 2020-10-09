@@ -4,7 +4,7 @@ import Avatar from './avatar';
 import { FAVES, SPRFVS, INVITE_ONLY } from '../../constants/privacyTypes';
 import Comment from '../dashboard/viewPost/comments';
 import Stroke from './stroke';
-import { getFavourites, getUserArtById } from '../../actions/userActions';
+import { getUserArtById } from '../../actions/userActions';
 import {
   strokePost, storeVault, unstrokePost, getNcomm, clearNcomm, deletePost, reportPost,
   changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash
@@ -37,7 +37,7 @@ const Post = ({
   } = useSelector(state => state);
 
   useEffect(() => {
-    dispatch(getFavourites());
+    // dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id));
   }, [dispatch, user_art_id]);
 
