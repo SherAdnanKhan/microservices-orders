@@ -1,12 +1,13 @@
 import {
-  // GET_FAV,
   STROKE_POST,
   UNSTROKE_POST,
   ADD_POST_COMMENT,
   UNFAV_GALLERY,
   CHANGE_CRITIQUES_STATUS,
   GET_FAV_GALLERY_USERS,
-  GET_FAV_POSTS
+  GET_FAV_POSTS,
+  START_POST_LOADER,
+  STOP_POST_LOADER,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
     current_page: 0,
     data: [],
     next_page_url: null
-  }
+  },
+  postLoader: false,
 };
 
 export default (state = initialState, action) => {
@@ -122,6 +124,16 @@ export default (state = initialState, action) => {
             return post
           })
         }
+      }
+    case START_POST_LOADER:
+      return {
+        ...state,
+        postLoader: true
+      }
+    case STOP_POST_LOADER:
+      return {
+        ...state,
+        postLoader: false
       }
     default:
       return state;
