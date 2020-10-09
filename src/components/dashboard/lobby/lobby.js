@@ -184,7 +184,7 @@ const Lobby = () => {
           <div>
             <LobbyPosts
               posts={favouritePosts?.data}
-              users={favouriteUsers}
+              users={favouriteUsers?.data}
               galleries={myGalleries}
               sendUser={sendUser}
             />

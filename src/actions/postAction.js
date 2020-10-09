@@ -135,7 +135,6 @@ export const deletePost = post => dispatch => {
     .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
-      // dispatch(getFavourites())
     });
 };
 

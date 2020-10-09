@@ -44,7 +44,6 @@ const MyStudio = () => {
   const [activeNcomm, setActiveNcomm] = useState('');
 
   const {
-    user: { favouriteUsers },
     studio: { myStudio },
     gallery: { gallery, myGalleries },
     feelColor: { feelColor },
@@ -67,7 +66,6 @@ const MyStudio = () => {
   }, [myGalleries, dispatch])
 
   useEffect(() => {
-    // dispatch(getFavourites());
     dispatch(getUserArtById(userArtId));
   }, [dispatch, userArtId]);
 
@@ -206,7 +204,6 @@ const MyStudio = () => {
           onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          favouriteUsers={favouriteUsers}
           sendUser={sendUser}
         />
       }
