@@ -10,22 +10,22 @@ import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import { getMyGalleries } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
-
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
-
 import ToolTip from "../../common/toolTip/toolTip";
+import Loader from "../../common/loader";
 
 const Lobby = () => {
   const dispatch = useDispatch();
   const [unReadMsgCount, setUnreadMsgCount] = useState("0");
   const {
-    lobby: { favouriteUsers, favouritePosts },
+    lobby: { favouriteUsers, favouritePosts, postLoader },
     mzFlash: { collectiveFeeds },
     postView: { sendUser },
     feelColor: { feelColor },
     gallery: { myGalleries },
     conversation: { conversations }
+
   } = useSelector(state => state);
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
@@ -183,6 +183,9 @@ const Lobby = () => {
               galleries={myGalleries}
               sendUser={sendUser}
             />
+            {postLoader &&
+              <Loader />
+            }
           </div>
         </div>
 
