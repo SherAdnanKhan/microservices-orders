@@ -34,7 +34,7 @@ import {
 } from '../../../actions/postAction';
 import ToolTip from '../../common/toolTip/toolTip';
 
-const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
+const LobbyPosts = ({ posts, galleries, sendUser }) => {
   const dispatch = useDispatch();
   const [activePost, setActivePost] = useState('');
   const [showDeleteModel, setShowDeleteModel] = useState(false);
@@ -197,7 +197,6 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
           onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          favUsers={users}
           sendUser={sendUser}
         />
       }
