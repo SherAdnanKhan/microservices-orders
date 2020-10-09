@@ -34,12 +34,12 @@ jobs:
       run: |
         rm .env
         mv .env.staging .env
-    - name: Yarn Install
+    - name: npm Install
       run: |
-        yarn install
+        npm install
     - name: Staging Build
       run: |
-        yarn build      
+        npm run build      
 
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
