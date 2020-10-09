@@ -40,29 +40,33 @@ const MyVault = () => {
                 <div className="wrapper">
                   <div className="screen">
                     <div className="details">
-
-                      <div className="post-picture">
-                        <Link
-                          to={`/dashboard/studio/sarahsajjad`}
-                        >
+                      <div className="vault-post">
+                        <div className="post-picture">
+                          {/* FOR list VIEW */}
                           <div className="gallery-cover">
                             <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
                             <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
                             <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
                           </div>
-                        </Link>
-                      </div>
-                      {/* FOR LIST VIEW */}
-                      <div className="show-list">
-                        <Link
-                          to={`/dashboard/studio/sarahsajjad`}
-                        >
-                          <div className="gallery-cover">
-                            <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                            <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                            <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                          </div>
-                        </Link>
+                        </div>
+                        {/* FOR Grid VIEW */}
+                        <div className="show-list">
+                          <Link
+                            to={`/dashboard/studio/sarahsajjad`}
+                          >
+                            <div className="gallery-cover">
+                              <div className="image-style">
+                                <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
+                              </div>
+                              <div className="image-style">
+                                <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
+                              </div>
+                              <div className="image-style">
+                                <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
