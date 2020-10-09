@@ -38,7 +38,7 @@ const MzFlashGroup = () => {
   const dispatch = useDispatch();
 
   const {
-    user: { favouriteUsers, faveAndSprfvsUsers, sprfvsUsers },
+    user: { faveAndSprfvsUsers, sprfvsUsers },
     mzFlash: {
       collectiveFeeds, loading, favesFeeds, myFeeds,
       sprfvsFeeds, favesAndSprfvsFeeds, userFeeds
@@ -60,7 +60,6 @@ const MzFlashGroup = () => {
 
 
   useEffect(() => {
-    // dispatch(getFavourites());
     dispatch(getFaveAndSprfvsUsers());
     dispatch(getSprfvsUsers(3, 1));
     dispatch(getCollectiveFeeds());
@@ -172,7 +171,6 @@ const MzFlashGroup = () => {
           />
         }
         <UserSection
-          favouriteUsers={favouriteUsers}
           sprfvsUsers={sprfvsUsers}
           faveAndSprfvsUsers={faveAndSprfvsUsers}
           onActiveUser={handleActiveUser}

@@ -197,7 +197,7 @@ const LobbyPosts = ({ posts, users, galleries, sendUser }) => {
           onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          favouriteUsers={users}
+          favUsers={users}
           sendUser={sendUser}
         />
       }

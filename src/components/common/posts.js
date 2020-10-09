@@ -32,12 +32,10 @@ const Post = ({
   const dispatch = useDispatch();
   const {
     postView: { ncomm, sendUser, post },
-    user: { favouriteUsers },
     gallery: { myGalleries },
   } = useSelector(state => state);
 
   useEffect(() => {
-    // dispatch(getFavourites());
     dispatch(getUserArtById(user_art_id));
   }, [dispatch, user_art_id]);
 
@@ -185,7 +183,6 @@ const Post = ({
           onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          favouriteUsers={favouriteUsers}
           sendUser={sendUser}
         />
       }

@@ -28,7 +28,6 @@ const ViewPost = () => {
   const dispatch = useDispatch();
   const { params: { id } } = useRouteMatch();
   const {
-    user: { favouriteUsers },
     postView: { crtiqueStatus, sendUser },
     gallery: { myGalleries },
 
@@ -56,7 +55,6 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getMyGalleries());
-    // dispatch(getFavourites());
     dispatch(getUserArtById(userArtId));
   }, [dispatch, userArtId]);
 
@@ -171,7 +169,6 @@ const ViewPost = () => {
           onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={post?.post}
-          favouriteUsers={favouriteUsers}
           sendUser={sendUser}
         />
       }
