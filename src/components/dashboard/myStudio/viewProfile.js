@@ -1,36 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
-import { updateBio, updateUsername } from '../../../actions/studioActions';
+import { updateBio, updateUsername, updateArt } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
 import ToolTip from '../../common/toolTip/toolTip';
+import InputAutoComplete from "../../common/autoComplete";
+import { artSearch, clearArtSearch } from "../../../actions/exibitionAction";
+import { useSelector } from "react-redux";
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const [bio, setBio] = useState('');
   const [username, setUserName] = useState('');
+  const [artName, setArtName] = useState('');
+  const [artId, setArtId] = useState('');
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (myStudio && myStudio.user.bio) {
-      setBio(bio => bio = myStudio.user.bio);
+      setBio(myStudio.user.bio);
     }
     if (myStudio && myStudio.user.username) {
       setUserName(myStudio.user.username);
     }
-  }, [myStudio]);
+    if (myStudio && myStudio?.user?.art?.name) {
+      setArtName(myStudio.user.art.name);
+    }
+    if (myStudio && myStudio?.user?.art?.id) {
+      setArtId(myStudio.user.art.id);
+    }
+    return () => {
+      dispatch(clearArtSearch());
+    }
+  }, [dispatch, myStudio]);
 
-  const handleSave = () => {
+  const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
+
+  const updateUserName = () => {
+    let object = {
+      username: username
+    }
+    dispatch(updateUsername(object))
+  }
+  const updateUserArt = () => {
+    const data = {
+      art_id: artId
+    }
+    dispatch(updateArt(data));
+  }
+  const changeBio = () => {
     let my_bio = bio.replace(/\n/g, '<br/>');
     let object = {
       bio: my_bio
     }
     dispatch(updateBio(object));
   }
-  const updateUserName = () => {
-    let object = {
-      username: username
-    }
-    dispatch(updateUsername(object))
+  const handleAutoChange = (value) => {
+    dispatch(artSearch(value));
+  }
+  const handleAutoSelect = (option) => {
+    setArtId(option.id);
   }
   return (
     <div className="wrapper">
@@ -68,19 +95,40 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                 />
                 <ToolTip id="editName" />
               </div>
-              {/* {myStudio && <span className="nameof" id="nameof">{myStudio.user.username}</span>} */}
               <br />
-              <span className="artof" id="artof">Cosplay/1213</span>
+            </div>
+            <div className="profileart">
+              <div
+                className="editTool Edit clickable"
+              >
+                <img
+                  src="/assets/images/paintbrush.png"
+                  alt=""
+                  data-for="editArt"
+                  data-tip="edit art"
+                  onClick={updateUserArt}
+                />
+                <ToolTip id="editArt" />
+              </div>
+              <InputAutoComplete
+                options={listCategory}
+                displayProperty="name"
+                placeholder="Choose an art"
+                defaultValue={artName}
+                onChange={handleAutoChange}
+                onSelect={handleAutoSelect}
+              />
             </div>
             <label htmlFor="addbio" className="addbio-input">
               <div
                 className="editTool Edit clickable"
-                onClick={handleSave}>
+              >
                 <img
                   src="/assets/images/paintbrush.png"
                   alt=""
                   data-for="editBio"
                   data-tip="edit bio"
+                  onClick={changeBio}
                 />
                 <ToolTip id="editBio" />
               </div>

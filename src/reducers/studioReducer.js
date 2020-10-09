@@ -15,6 +15,7 @@ import {
   CLEAR_USER_STUDIO,
   UPDATE_USERNAME,
   GET_MY_VAULTS,
+  UPDATE_USER_ART
 } from "../constants/actionTypes";
 import { SPRFVS } from "../constants/privacyTypes";
 
@@ -40,6 +41,20 @@ export default (state = initialState, action) => {
           user: {
             ...state.myStudio.user,
             bio: action.payload
+          }
+        }
+      };
+    case UPDATE_USER_ART:
+      return {
+        ...state,
+        myStudio: {
+          ...state.myStudio,
+          user: {
+            ...state.myStudio.user,
+            art: {
+              id: action.payload[0],
+              name: action.payload[1]
+            }
           }
         }
       };
