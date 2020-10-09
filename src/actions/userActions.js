@@ -1,7 +1,6 @@
 import http from '../services/httpService';
 import { toast } from 'react-toastify';
 import {
-  GET_FAV,
   GET_ALL_USERS,
   GET_USER_ART_NAME,
   GET_FAV_USER,
@@ -20,17 +19,6 @@ import {
   ONLINE_USERS
 } from '../constants/actionTypes';
 
-export const getFavourites = () => dispatch => {
-  http
-    .get('/lobby')
-    .then(res => {
-      dispatch({
-        type: GET_FAV,
-        payload: res.data.data
-      });
-    });
-
-};
 
 export const getAllUsers = query => dispatch => {
   http

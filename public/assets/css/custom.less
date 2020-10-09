@@ -67,15 +67,15 @@ body {
   font-variant: small-caps;
 
   ::-webkit-scrollbar {
-    width: 0px;               /* width of the entire scrollbar */
+    width: 5px;               /* width of the entire scrollbar */
   }
   ::-webkit-scrollbar-track {
     background: black;        /* color of the tracking area */
   }
   ::-webkit-scrollbar-thumb {
-    background-color: black;    /* color of the scroll thumb */
+    background-color: gray;    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 1px solid black;  /* creates padding around scroll thumb */
+    border: 1px solid gray;  /* creates padding around scroll thumb */
   }
 }
 
@@ -840,7 +840,7 @@ input {
 
 // New
 .lobby-page{
-  height: 100vh;
+  height: 80vh;
   width: 95%;
   margin-right: auto;
   margin-left: auto;
@@ -898,13 +898,14 @@ input {
     .my-slider-horizontal {
       display: none;
     }
-    
-
   }
   .section-2{
     width: 51% ;
     padding:10px;
     box-sizing: border-box;
+    max-height: 75vh;
+    overflow-y: auto;
+    margin-top: 61px;
     @media @mobile {
       padding:0px;
     }
@@ -918,7 +919,7 @@ input {
     }
     .box-3 {
       margin-top: 50px;
-      height: 100vh;
+      height: 80vh;
       overflow-y: scroll;
       
       .sub-box {
@@ -5733,6 +5734,7 @@ img {
       margin-top:0px;
       .box-3{
         margin-top:100px !important;
+        max-height: 75vh;
       }
     }
   }

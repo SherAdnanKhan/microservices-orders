@@ -16,7 +16,7 @@ import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
 import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
 import { toast } from 'react-toastify';
-import { getFavourites } from "../actions/userActions";
+// import { getFavourites } from "../actions/userActions";
 
 export const getPost = (post) => dispatch => {
   http
@@ -135,7 +135,7 @@ export const deletePost = post => dispatch => {
     .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
-      dispatch(getFavourites())
+      // dispatch(getFavourites())
     });
 };
 
@@ -219,7 +219,7 @@ export const repost = (postId, gallery) => dispatch => {
 
       if (res.data.success) {
         toast.success(`Post Shared in Gallery Named ${gallery.title}`)
-        dispatch(getFavourites())
+        // dispatch(getFavourites())
       }
       else {
         toast.error("Something went wrong");

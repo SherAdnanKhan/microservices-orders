@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../../actions/studioActions';
 import Gallery from './galleries';
-import { getFavourites } from '../../../actions/userActions';
+// import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getGallery, clearGallery, getMyGalleries, unfavGallery } from "../../../actions/galleryActions";
 import { strokePost, unstrokePost, storeVault, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
@@ -23,8 +23,6 @@ import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
 import UserContext from "../../../context/userContext";
 import { useRouteMatch } from 'react-router-dom';
-
-
 
 const MyStudio = () => {
   const user = useContext(UserContext);
@@ -69,7 +67,7 @@ const MyStudio = () => {
   }, [myGalleries, dispatch])
 
   useEffect(() => {
-    dispatch(getFavourites());
+    // dispatch(getFavourites());
     dispatch(getUserArtById(userArtId));
   }, [dispatch, userArtId]);
 

@@ -14,7 +14,7 @@ import SharePostStrqModal from '../../common/sharePostStrqModal';
 import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
 import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
-import { getFavourites } from '../../../actions/userActions';
+// import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
@@ -56,7 +56,7 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getMyGalleries());
-    dispatch(getFavourites());
+    // dispatch(getFavourites());
     dispatch(getUserArtById(userArtId));
   }, [dispatch, userArtId]);
 

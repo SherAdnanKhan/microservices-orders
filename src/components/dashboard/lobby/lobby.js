@@ -1,6 +1,6 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavourites } from '../../../actions/lobbyActions';
+import { getFavouriteGalleryUsers, getFavouritePosts } from '../../../actions/lobbyActions';
 import { getAllConversations } from "../../../actions/conversationActions";
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';
@@ -33,6 +33,9 @@ const Lobby = () => {
   const [comments, setComments] = useState({})
   const currentUser = useContext(UserContext);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postRef = useRef();
+
   useEffect(() => {
     const totalCount = conversations
       ?.map(conversation => conversation.unread_messages_logs_count)
@@ -42,8 +45,10 @@ const Lobby = () => {
     clearCount(totalCount);
   }, [conversations]);
 
+
   useEffect(() => {
-    dispatch(getFavourites());
+    dispatch(getFavouritePosts());
+    dispatch(getFavouriteGalleryUsers());
     dispatch(getUserArtById(currentUser.art_id));
     dispatch(getCollectiveFeeds());
     dispatch(getAllConversations());
@@ -91,7 +96,6 @@ const Lobby = () => {
     dispatch(createFeed(formData));
   };
 
-
   const handleFeedStroke = (id, user) => {
     const data = {
       feed_id: id
@@ -104,6 +108,23 @@ const Lobby = () => {
       feed_id: id
     };
     dispatch(unstrokeFeed(data, user));
+  };
+
+  const handleScroll = () => {
+    console.log(postRef.current.scrollTop);
+    const scrollTop = postRef.current.scrollTop;
+    const scrollHeight = postRef.current.scrollHeight;
+    const clientHeight = postRef.current.clientHeight;
+
+    if (scrollHeight - clientHeight === scrollTop) {
+      console.log('ellooooo');
+      console.log(favouritePosts);
+
+      if (favouritePosts.next_page_url) {
+        setCurrentPage(currentPage => currentPage + 1);
+        dispatch(getFavouritePosts(currentPage + 1));
+      }
+    }
   };
 
   return (
@@ -131,7 +152,7 @@ const Lobby = () => {
         <div className="col-2 section-1  box-1" id="sec">
           <VerticalSlider>
             {favouriteUsers &&
-              favouriteUsers.map((user, index) => (
+              favouriteUsers?.data.map((user, index) => (
                 <div key={index}>
                   <Link to={`/dashboard/studio/${user.slug}`}>
                     <UserCube user={user} />
@@ -143,7 +164,7 @@ const Lobby = () => {
 
           <HorizontalSlider>
             {favouriteUsers &&
-              favouriteUsers.map((user, index) => (
+              favouriteUsers?.data.map((user, index) => (
                 <div key={index}>
                   <div className="item">
                     <Link to={`/dashboard/studio/${user.slug}`}>
@@ -155,11 +176,14 @@ const Lobby = () => {
             }
           </HorizontalSlider>
         </div>
-        <div className="col-6 section-2 box-2">
+        <div
+          className="col-6 section-2 box-2"
+          onScroll={handleScroll}
+          ref={postRef}>
           <ToolTip id="search" position="bottom" text="search" />
           <div>
             <LobbyPosts
-              posts={favouritePosts}
+              posts={favouritePosts?.data}
               users={favouriteUsers}
               galleries={myGalleries}
               sendUser={sendUser}
