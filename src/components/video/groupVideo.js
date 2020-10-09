@@ -385,7 +385,7 @@ const GroupVideoCall = () => {
     setVideo(!video);
   };
   const navigateToSTRQ = () => {
-    history.push(`/dashboard/chat/${params.room}`)
+    window.open(`/dashboard/chat/${params.room}`);
   }
 
   const handleCameraSwitch = (e) => {

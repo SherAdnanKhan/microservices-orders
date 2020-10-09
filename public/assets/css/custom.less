@@ -4523,11 +4523,13 @@ img {
     opacity: 0;
     width: 0;
     transition: 0.3s all ease-in-out;
-    height: 140vh;
+    height: 0;
     overflow-y: scroll;
     overflow-x: hidden;
     &.show {
       width: 25%;
+      height:70vh;
+      overflow-y: auto;
       opacity: 1;
       border: 1px solid white;
       .post-body {
