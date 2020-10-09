@@ -111,15 +111,11 @@ const Lobby = () => {
   };
 
   const handleScroll = () => {
-    console.log(postRef.current.scrollTop);
     const scrollTop = postRef.current.scrollTop;
     const scrollHeight = postRef.current.scrollHeight;
     const clientHeight = postRef.current.clientHeight;
 
     if (scrollHeight - clientHeight === scrollTop) {
-      console.log('ellooooo');
-      console.log(favouritePosts);
-
       if (favouritePosts.next_page_url) {
         setCurrentPage(currentPage => currentPage + 1);
         dispatch(getFavouritePosts(currentPage + 1));
@@ -184,7 +180,6 @@ const Lobby = () => {
           <div>
             <LobbyPosts
               posts={favouritePosts?.data}
-              users={favouriteUsers?.data}
               galleries={myGalleries}
               sendUser={sendUser}
             />

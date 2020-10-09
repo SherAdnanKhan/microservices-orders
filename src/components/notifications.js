@@ -94,7 +94,6 @@ const Notifications = () => {
       });
 
       socket.on('onlineUsers', data => {
-        console.log(data)
         dispatch(getOnlineUsers(data));
       });
 

@@ -25,8 +25,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_FAV_GALLERY_USERS:
-
-
       return {
         ...state,
         favouriteUsers: {
@@ -37,7 +35,6 @@ export default (state = initialState, action) => {
         }
       }
     case GET_FAV_POSTS:
-      console.log(action.payload)
       return {
         ...state,
         favouritePosts: {
@@ -107,7 +104,6 @@ export default (state = initialState, action) => {
           data: state.favouritePosts?.data?.filter(post => post.gallery_id !== action.payload.gallery.id)
         }
       }
-
     case CHANGE_CRITIQUES_STATUS:
       if (!state.favouritePosts) {
         return state
