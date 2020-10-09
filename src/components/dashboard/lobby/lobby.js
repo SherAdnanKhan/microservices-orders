@@ -13,13 +13,12 @@ import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
-import Loader from "../../common/loader";
 
 const Lobby = () => {
   const dispatch = useDispatch();
   const [unReadMsgCount, setUnreadMsgCount] = useState("0");
   const {
-    lobby: { favouriteUsers, favouritePosts, postLoader },
+    lobby: { favouriteUsers, favouritePosts },
     mzFlash: { collectiveFeeds },
     postView: { sendUser },
     feelColor: { feelColor },
@@ -183,9 +182,6 @@ const Lobby = () => {
               galleries={myGalleries}
               sendUser={sendUser}
             />
-            {postLoader &&
-              <Loader />
-            }
           </div>
         </div>
 
