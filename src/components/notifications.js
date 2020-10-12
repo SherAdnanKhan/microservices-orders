@@ -82,11 +82,12 @@ const Notifications = () => {
           playNotificationSound();
           toast(() => {
             return (
-              <Link
-                to={`/dashboard/chat/${data.message.conversation_id}`}
+              <a
+                href={`/dashboard/chat/${data.message.conversation_id}`}
+                target="_blank"
                 style={{ textDecoration: 'none', color: currentUser.feel.color_code }}>
                 You have new message from {data.message.user.username}
-              </Link>
+              </a>
             )
           });
           dispatch(updateConversationUnreadCount(data.message));
