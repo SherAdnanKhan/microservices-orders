@@ -15,10 +15,16 @@ const Welcome = ({ user }) => {
   const { feelColors } = useSelector(state => state.feelColor);
   const { feelColor } = useSelector(state => state.feelColor);
   const currentUser = getCurrentUser();
-  console.log("current user at welcome screen=", currentUser)
   const { width } = useViewport();
   const breakpoint = 768;
-
+  const toggleScreen = () => {
+    var parent = document.getElementById("colorScreen");
+    if (parent.style.display === "none") {
+      parent.style.display = "flex";
+    } else {
+      parent.style.display = "none";
+    }
+  }
   useEffect(() => {
     if (!feelColors)
       dispatch(getAllFeelColors());
@@ -29,49 +35,53 @@ const Welcome = ({ user }) => {
   };
 
   return (
-    <div className="selectMood">
-      <div className="feelIcon" style={{ backgroundColor: feelColor }}>
+
+    <div className="welcomeScreen">
+      <div className="feelIcon" style={{ backgroundColor: feelColor }} onClick={toggleScreen} id="feelIcon" >
         <img alt="" src="/assets/images/icons/feelicon.png"
           data-for="feelColor"
           data-tip="feel color" />
       </div>
-      {loading && <Spinner />}
-      {width > breakpoint ?
-        <div className="cubecenter">
-          <div className="procu" style={{ marginTop: "-140px" }}>
-            <ProfileCube
-              avatars={currentUser?.avatars}
-              feelColor={currentUser?.feel.color_code}
+      <div className="selectMood" id="colorScreen">
+
+        {loading && <Spinner />}
+        {width > breakpoint ?
+          <div className="cubecenter" >
+            <div className="procu" style={{ marginTop: "-140px" }}>
+              <ProfileCube
+                avatars={currentUser?.avatars}
+                feelColor={currentUser?.feel.color_code}
+              />
+            </div>
+          </div>
+          :
+          <div className="feelColorCube">
+            <UserCube
+              user={currentUser}
             />
           </div>
-        </div>
-        :
-        <div className="feelColorCube">
-          <UserCube
-            user={currentUser}
-          />
-        </div>
-      }
-      <div className="welcomeText">
-        Welcome <strong>{user.username},</strong>
-        <br />
+        }
+        <div className="welcomeText">
+          Welcome <strong>{user.username},</strong>
+          <br />
 	       How do you Feel?
       </div>
-      {
-        feelColors?.map(color => (
-          <div className={color.color}>
-            <Link to="#">
-              <img
-                alt=""
-                src={color.image_path}
-                color={color.color}
-                onClick={() => handleColorChange(color.id)}
-              />
-            </Link>
-          </div>
-        ))
-      }
-    </div >
+        {
+          feelColors?.map(color => (
+            <div className={color.color}>
+              <Link to="#">
+                <img
+                  alt=""
+                  src={color.image_path}
+                  color={color.color}
+                  onClick={() => handleColorChange(color.id)}
+                />
+              </Link>
+            </div>
+          ))
+        }
+      </div >
+    </div>
   );
 };
 

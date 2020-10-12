@@ -55,6 +55,9 @@ const ArtSelection = ({ user }) => {
         className="header"
         style={{ backgroundColor: user.feel.color_code }}
       >
+        <div className="back-btn" id="go-back" onClick={() => history.push("/welcome")}>
+          <i className="fa fa-arrow-left"></i>
+        </div>
         <button
           onClick={() => history.push('/start-favas')}
           style={{ backgroundColor: user.feel.color_code }}
