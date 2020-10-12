@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getAuthToken, getCurrentUser, logout } from '../actions/authActions';
 import { updateFeelColor } from '../actions/colorActions';
@@ -85,6 +84,7 @@ const Notifications = () => {
               <a
                 href={`/dashboard/chat/${data.message.conversation_id}`}
                 target="_blank"
+                rel="noopener noreferrer"
                 style={{ textDecoration: 'none', color: currentUser.feel.color_code }}>
                 You have new message from {data.message.user.username}
               </a>
