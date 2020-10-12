@@ -13,12 +13,13 @@ import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
+import Loader from "../../common/loader";
 
 const Lobby = () => {
   const dispatch = useDispatch();
   const [unReadMsgCount, setUnreadMsgCount] = useState("0");
   const {
-    lobby: { favouriteUsers, favouritePosts },
+    lobby: { favouriteUsers, favouritePosts, postLoader },
     mzFlash: { collectiveFeeds },
     postView: { sendUser },
     feelColor: { feelColor },
@@ -111,10 +112,14 @@ const Lobby = () => {
 
   const handleScroll = () => {
     const scrollTop = postRef.current.scrollTop;
+    console.log("scrool top=", scrollTop);
     const scrollHeight = postRef.current.scrollHeight;
+    console.log("scrool top=", scrollHeight);
     const clientHeight = postRef.current.clientHeight;
+    console.log("scrool top=", clientHeight);
 
     if (scrollHeight - clientHeight === scrollTop) {
+      console.log("condition called")
       if (favouritePosts.next_page_url) {
         setCurrentPage(currentPage => currentPage + 1);
         dispatch(getFavouritePosts(currentPage + 1));
@@ -182,6 +187,9 @@ const Lobby = () => {
               galleries={myGalleries}
               sendUser={sendUser}
             />
+            {postLoader &&
+              <Loader />
+            }
           </div>
         </div>
 
