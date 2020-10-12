@@ -69,7 +69,7 @@ const InputAutoComplete = ({
         ref={ref => optionRef.current = ref}
       >
         {list
-          && list.map((option, index) => (
+          && options && list?.map((option, index) => (
             <div
               className={option === options[highlightedIndex] ? 'highlight' : ''}
               key={index}

@@ -7,12 +7,14 @@ import ToolTip from '../../common/toolTip/toolTip';
 import InputAutoComplete from "../../common/autoComplete";
 import { artSearch, clearArtSearch } from "../../../actions/exibitionAction";
 import { useSelector } from "react-redux";
+import { isEmpty } from '../../../utils/helperFunctions';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const [bio, setBio] = useState('');
   const [username, setUserName] = useState('');
   const [artName, setArtName] = useState('');
   const [artId, setArtId] = useState('');
+  const [error, setError] = useState({ username: "", artName: "", bio: "" });
   const dispatch = useDispatch();
   useEffect(() => {
     if (myStudio && myStudio.user.bio) {
@@ -38,26 +40,62 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     let object = {
       username: username
     }
-    dispatch(updateUsername(object))
+    if (!isEmpty(username)) {
+      setError({ ...error, username: "" })
+      dispatch(updateUsername(object))
+    }
+    else {
+      setError({ ...error, username: "username cannot be empty" })
+    }
   }
   const updateUserArt = () => {
     const data = {
       art_id: artId
     }
-    dispatch(updateArt(data));
+    if (!isEmpty(artId)) {
+      setError({ artName: "" })
+      dispatch(updateArt(data));
+    }
+    else {
+      dispatch(clearArtSearch())
+      setError({ artName: "Art cannot be empty" })
+    }
+
   }
   const changeBio = () => {
     let my_bio = bio.replace(/\n/g, '<br/>');
     let object = {
       bio: my_bio
     }
-    dispatch(updateBio(object));
+    if (!isEmpty(bio)) {
+      setError({ error, bio: "" })
+      dispatch(updateBio(object));
+    }
+    else {
+      setError({ ...error, bio: "bio cannot be empty" })
+    }
+  }
+  const changeHandler = (event) => {
+    if (event.target.name === "bio") {
+      setBio(event.target.value)
+    }
+    else {
+      setUserName(event.target.value)
+    }
+    !isEmpty(event.target.value) &&
+      setError({ ...error, [event.target.name]: "" })
   }
   const handleAutoChange = (value) => {
-    dispatch(artSearch(value));
+    setArtId(value)
+    if (value) {
+      dispatch(artSearch(value));
+      setError({ ...error, artName: "" })
+    }
   }
   const handleAutoSelect = (option) => {
-    setArtId(option.id);
+    if (option.id) {
+      setArtId(option.id);
+    }
   }
   return (
     <div className="wrapper">
@@ -84,7 +122,11 @@ const ViewProfile = ({ myStudio, feelColor }) => {
         <div className="studioDetail">
           <form onSubmit={e => e.preventDefault()}>
             <div className="profilebioname" >
-              <input type="text" name="name" value={username} onChange={(event) => setUserName(event.target.value)} ></input>
+              <input type="text" name="username" value={username} onChange={changeHandler}></input>
+              {
+                error?.username?.length > 0 &&
+                <p>{error?.username}</p>
+              }
               <div className="editTool Edit">
                 <img
                   src="/assets/images/paintbrush.png"
@@ -118,6 +160,10 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                 onChange={handleAutoChange}
                 onSelect={handleAutoSelect}
               />
+              {
+                error?.artName?.length > 0 &&
+                <p>{error?.artName}</p>
+              }
             </div>
             <label htmlFor="addbio" className="addbio-input">
               <div
@@ -139,11 +185,15 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                   cols="20"
                   wrap="hard"
                   type="text"
-                  name="username"
+                  name="bio"
                   id="addbio"
-                  value={bio.replace(/<br\s*\/?>/g, '\n')}
-                  onChange={e => setBio(e.target.value)}
+                  value={bio}
+                  onChange={changeHandler}
                 />
+                {
+                  error?.bio?.length > 0 &&
+                  <p>{error?.bio}</p>
+                }
               </div>
             </label>
             <div className="faved-btn">
