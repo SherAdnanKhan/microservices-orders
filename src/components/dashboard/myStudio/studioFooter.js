@@ -23,7 +23,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
         <div className="screen">
           <div className="post-picture">
             {gallery &&
-              gallery.posts.map((gallery, index) => (
+              gallery?.posts?.map((gallery, index) => (
                 <div key={index}>
                   <LazyLoad>
                     <Link to={`/dashboard/viewpost/${gallery?.slug}`}>
@@ -49,10 +49,9 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                 </div>
               ))}
           </div>
-
           <div className="show-list">
             {gallery &&
-              gallery.posts.map((post, index) => (
+              gallery?.posts?.map((post, index) => (
                 <div className="list-body" key={index}>
                   <div className="s-l-header">
                     <p>{user && user.username}</p>
