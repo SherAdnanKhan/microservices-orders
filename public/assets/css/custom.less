@@ -2018,20 +2018,7 @@ img {
 /* small cube center in header end */
 
 // Ind start
-
-.selectMood {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  background: #00000098;
-  color: #fff;
-
+.welcomeScreen {
   .feelIcon {
     position: absolute;
     right: 45px;
@@ -2043,6 +2030,7 @@ img {
     margin-top: -1px;
     top: 91px;
     border: 2px solid #ffffff61;
+    z-index:11;
     @media @mobile {
       right: 0;
       top: 0;
@@ -2056,159 +2044,172 @@ img {
       width: 100%;
     }
   }
-  
-  .welcomeText {
-    position: absolute;
-    top: 5vh;
-    left: 50%;
-    text-align:center;
-    transform: translate(-50%);
-  }
-
-  .gold {
-    position: absolute;
-    transform: rotate(225deg) translate(@feelDist) rotate(-225deg);
-    text-align: center;
-    @media @landscape {
-    transform: rotate(225deg) translate(@feelDistWide) rotate(-225deg);
-   }
-  }
-  .gray {
-    position: absolute;
-    transform: rotate(315deg) translate(@feelDist) rotate(-315deg);
-   
-    text-align: center;
-   @media @landscape {
-    transform: rotate(315deg) translate(@feelDistWide) rotate(-315deg);
-   }
-  }
-  .orange {
-    position: absolute;
-    transform: rotate(180deg) translate(@feelDist) rotate(-180deg);
-   
-    text-align: center; @media @landscape {
-    transform: rotate(180deg) translate(@feelDistWide) rotate(-180deg);
-   }
-
-  }
-  .limegreen {
-    position: absolute;
-    transform: rotate(0deg) translate(@feelDist) rotate(-0deg);
-   
-    text-align: center; @media @landscape {
-    transform: rotate(0deg) translate(@feelDistWide) rotate(-0deg);
-   }
-
-  }
-  .red {
-    position: absolute;
-    transform: rotate(135deg) translate(@feelDist) rotate(-135deg);
-   
-    text-align: center; @media @landscape {
-    transform: rotate(135deg) translate(@feelDistWide) rotate(-135deg);
-   }
-
-  }
-  .purple {
-    position: absolute;
-    transform: rotate(45deg) translate(@feelDist) rotate(-45deg);
-   
-    text-align: center; @media @landscape {
-    transform: rotate(45deg) translate(@feelDistWide) rotate(-45deg);
-   }
-
-  }
-  .dodgerblue {
-    position: absolute;
-    transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
-    text-align: center;
-    @media @landscape {
-    transform: rotate(90deg) translate(@feelDistWide) rotate(-90deg);
-   }
-  }
-  img {
-	  
-    max-width: 22vw;
-    @media @landscape {
-    max-width:22vh;
+  .selectMood {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background: #00000098;
+    color: #fff;
+    
+    .welcomeText {
+      position: absolute;
+      top: 5vh;
+      left: 50%;
+      text-align:center;
+      transform: translate(-50%);
     }
-    display: block;
-    margin: 0 auto;
-  }
-  .cubecenter {
-    position: absolute;
-    left: 50%;
-    top: calc(50% - 27px);
-    transform: translate(-50%);
-    .procufull {
-      position: relative;
-      width: 50vw;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-justify-content: center;
-      justify-content: center;
-      margin-bottom: 50px;
-      .scenefull {
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        perspective: 400px;
-        .cubefull {
+  
+    .gold {
+      position: absolute;
+      transform: rotate(225deg) translate(@feelDist) rotate(-225deg);
+      text-align: center;
+      @media @landscape {
+      transform: rotate(225deg) translate(@feelDistWide) rotate(-225deg);
+     }
+    }
+    .gray {
+      position: absolute;
+      transform: rotate(315deg) translate(@feelDist) rotate(-315deg);
+     
+      text-align: center;
+     @media @landscape {
+      transform: rotate(315deg) translate(@feelDistWide) rotate(-315deg);
+     }
+    }
+    .orange {
+      position: absolute;
+      transform: rotate(180deg) translate(@feelDist) rotate(-180deg);
+     
+      text-align: center; @media @landscape {
+      transform: rotate(180deg) translate(@feelDistWide) rotate(-180deg);
+     }
+  
+    }
+    .limegreen {
+      position: absolute;
+      transform: rotate(0deg) translate(@feelDist) rotate(-0deg);
+     
+      text-align: center; @media @landscape {
+      transform: rotate(0deg) translate(@feelDistWide) rotate(-0deg);
+     }
+  
+    }
+    .red {
+      position: absolute;
+      transform: rotate(135deg) translate(@feelDist) rotate(-135deg);
+     
+      text-align: center; @media @landscape {
+      transform: rotate(135deg) translate(@feelDistWide) rotate(-135deg);
+     }
+  
+    }
+    .purple {
+      position: absolute;
+      transform: rotate(45deg) translate(@feelDist) rotate(-45deg);
+     
+      text-align: center; @media @landscape {
+      transform: rotate(45deg) translate(@feelDistWide) rotate(-45deg);
+     }
+  
+    }
+    .dodgerblue {
+      position: absolute;
+      transform: rotate(90deg) translate(@feelDist) rotate(-90deg);
+      text-align: center;
+      @media @landscape {
+      transform: rotate(90deg) translate(@feelDistWide) rotate(-90deg);
+     }
+    }
+    img {
+      
+      max-width: 22vw;
+      @media @landscape {
+      max-width:22vh;
+      }
+      display: block;
+      margin: 0 auto;
+    }
+    .cubecenter {
+      position: absolute;
+      left: 50%;
+      top: calc(50% - 27px);
+      transform: translate(-50%);
+      .procufull {
+        position: relative;
+        width: 50vw;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        margin-bottom: 50px;
+        .scenefull {
+          display: inline-block;
           width: 100px;
           height: 100px;
-          position: relative;
-          -webkit-transform-style: preserve-3d;
-          -ms-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-          -webkit-animation-name: cubefull;
-          -webkit-animation-duration: 45s;
-          -webkit-animation-timing-function: linear;
-          -webkit-animation-iteration-count: infinite;
-          -webkit-animation-direction: normal;
-          animation-name: cubefull;
-          animation-duration: 45s;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-          animation-direction: normal;
-          .cube-facefull {
-            width: inherit;
-            height: inherit;
-            position: absolute;
-            overflow: hidden;
-            display: -webkit-flex;
-            display: flex;
-            -webkit-justify-content: center;
-            justify-content: center;
-            opacity: .9;
-            border: 4px solid transparent;
-            transition: .5s;
-            &.bordermenufeel {
+          perspective: 400px;
+          .cubefull {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-animation-name: cubefull;
+            -webkit-animation-duration: 45s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: normal;
+            animation-name: cubefull;
+            animation-duration: 45s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: normal;
+            .cube-facefull {
+              width: inherit;
+              height: inherit;
+              position: absolute;
+              overflow: hidden;
+              display: -webkit-flex;
+              display: flex;
+              -webkit-justify-content: center;
+              justify-content: center;
+              opacity: .9;
+              border: 4px solid transparent;
               transition: .5s;
-              border-color: red;
-            }
-            &.cube-face-frontfull {
-              background-color: black;
-              -webkit-transform: translate3d(0, 0, 53px);
-              -ms-transform: translate3d(0, 0, 53px);
-              transform: translate3d(0, 0, 53px);
-            }
-            &.cube-face-backfull {
-              background-color: black;
-              -webkit-transform: rotatey(180deg) translate3d(0, 0, 53px);
-              -ms-transform: rotatey(180deg) translate3d(0, 0, 53px);
-              transform: rotatey(180deg) translate3d(0, 0, 53px);
-            }
-            &.cube-face-leftfull {
-              background-color: black;
-              -webkit-transform: rotatey(-90deg) translate3d(0, 0, 53px);
-              -ms-transform: rotatey(-90deg) translate3d(0, 0, 53px);
-              transform: rotatey(-90deg) translate3d(0, 0, 53px);
-            }
-            &.cube-face-rightfull {
-              background-color: black;
-              -webkit-transform: rotatey(90deg) translate3d(0, 0, 53px);
-              -ms-transform: rotatey(90deg) translate3d(0, 0, 53px);
-              transform: rotatey(90deg) translate3d(0, 0, 53px);
+              &.bordermenufeel {
+                transition: .5s;
+                border-color: red;
+              }
+              &.cube-face-frontfull {
+                background-color: black;
+                -webkit-transform: translate3d(0, 0, 53px);
+                -ms-transform: translate3d(0, 0, 53px);
+                transform: translate3d(0, 0, 53px);
+              }
+              &.cube-face-backfull {
+                background-color: black;
+                -webkit-transform: rotatey(180deg) translate3d(0, 0, 53px);
+                -ms-transform: rotatey(180deg) translate3d(0, 0, 53px);
+                transform: rotatey(180deg) translate3d(0, 0, 53px);
+              }
+              &.cube-face-leftfull {
+                background-color: black;
+                -webkit-transform: rotatey(-90deg) translate3d(0, 0, 53px);
+                -ms-transform: rotatey(-90deg) translate3d(0, 0, 53px);
+                transform: rotatey(-90deg) translate3d(0, 0, 53px);
+              }
+              &.cube-face-rightfull {
+                background-color: black;
+                -webkit-transform: rotatey(90deg) translate3d(0, 0, 53px);
+                -ms-transform: rotatey(90deg) translate3d(0, 0, 53px);
+                transform: rotatey(90deg) translate3d(0, 0, 53px);
+              }
             }
           }
         }
