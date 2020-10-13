@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import UserContext from "../../context/userContext";
 import { useHistory } from 'react-router-dom';
 
-const ImagePostOption = ({ post, onUnFavGallery, onVault, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
+const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
   const user = useContext(UserContext);
   const loggedInUserId = user.id;
   const history = useHistory();
@@ -19,7 +19,7 @@ const ImagePostOption = ({ post, onUnFavGallery, onVault, onSharePost, onModelDe
               Edit
             </p>
             <p onClick={() => onModelDelete(post, true)}> Delete </p>
-            <p onClick={() => onVault(post)}>Vault </p>
+            <p onClick={() => onAddVault(post)}>Vault </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
             <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
             {post.critiques_status === 0 &&  //if crtiques are on
@@ -36,7 +36,7 @@ const ImagePostOption = ({ post, onUnFavGallery, onVault, onSharePost, onModelDe
             <p onClick={() => onUnFavGallery(post.gallery)}> Unfave Gallery</p>
             <p onClick={() => onRepostModal(true, post)}> Repost </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
-            <p onClick={() => onVault(post)}>Vault</p>
+            <p onClick={() => onAddVault(post)}>Vault</p>
             <p onClick={() => onMzFlashModal(true, post)}>MzFlash </p>
           </>
         }

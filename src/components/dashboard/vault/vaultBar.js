@@ -10,7 +10,7 @@ const VaultBar = ({ feelColor, onBack }) => {
       <div className="heading">
         <p> Vault</p>
       </div>
-      <div className="total-post" style={{ marginLeft: "auto" }}>
+      <div className="total-post">
         <div className="icon-side">
           <>
             <i className="fas fa-square" data-for="fullView" data-tip="full view" />
