@@ -10,12 +10,14 @@ import { useSelector } from "react-redux";
 import { isEmpty } from '../../../utils/helperFunctions';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
+  const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
   const [bio, setBio] = useState('');
   const [username, setUserName] = useState('');
   const [artName, setArtName] = useState('');
   const [artId, setArtId] = useState('');
   const [error, setError] = useState({ username: "", artName: "", bio: "" });
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (myStudio && myStudio.user.bio) {
       setBio(myStudio.user.bio);
@@ -33,8 +35,14 @@ const ViewProfile = ({ myStudio, feelColor }) => {
       dispatch(clearArtSearch());
     }
   }, [dispatch, myStudio]);
-
-  const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
+  useEffect(() => {
+    if (!isEmpty(listCategory) && listCategory.length === 1) {
+      setArtId(listCategory[0].id)
+    }
+    else if (isEmpty(listCategory) && !isEmpty(artName)) {
+      setArtId("");
+    }
+  }, [listCategory])
 
   const updateUserName = () => {
     let object = {
@@ -52,15 +60,16 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     const data = {
       art_id: artId
     }
-    if (!isEmpty(artId)) {
+    if (isEmpty(artName)) {
+      dispatch(clearArtSearch())
+      setError({ artName: "Art cannot be empty" })
+    } else if (!isEmpty(artName) && isEmpty(artId)) {
+      dispatch(clearArtSearch())
+      setError({ artName: "Please select a valid Art Name" });
+    } else if (!isEmpty(artName) && !isEmpty(artId)) {
       setError({ artName: "" })
       dispatch(updateArt(data));
     }
-    else {
-      dispatch(clearArtSearch())
-      setError({ artName: "Art cannot be empty" })
-    }
-
   }
   const changeBio = () => {
     let my_bio = bio.replace(/\n/g, '<br/>');
@@ -86,15 +95,19 @@ const ViewProfile = ({ myStudio, feelColor }) => {
       setError({ ...error, [event.target.name]: "" })
   }
   const handleAutoChange = (value) => {
-    setArtId(value)
+    setArtName(value)
     if (value) {
       dispatch(artSearch(value));
       setError({ ...error, artName: "" })
     }
+    else {
+      setError({ ...error, artName: "please select valid art" })
+    }
   }
   const handleAutoSelect = (option) => {
-    if (option.id) {
+    if (option && option.id) {
       setArtId(option.id);
+      setArtName(option.name);
     }
   }
   return (
@@ -104,6 +117,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
           {myStudio &&
             <div className="procu">
               <div className="editTool Edit">
+
                 <Link to={`/dashboard/my-studio/profile`}>
                   <img
                     src="/assets/images/paintbrush.png"
