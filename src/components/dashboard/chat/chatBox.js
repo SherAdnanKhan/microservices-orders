@@ -25,6 +25,7 @@ import {
   resetConversationCount,
 } from '../../../actions/conversationActions';
 import ToolTip from '../../common/toolTip/toolTip';
+import Draw from './draw';
 
 class ChatBox extends Component {
   state = {
@@ -41,6 +42,7 @@ class ChatBox extends Component {
     showParticipantsModal: false,
     showCallingModal: false,
     width: window.innerWidth,
+    draw: false
   };
 
   preview = createRef();
@@ -106,6 +108,11 @@ class ChatBox extends Component {
           this.setState({ typings: typings.filter(typing => typing.id !== data.user.id) });
         }
       }
+
+    });
+    socket.on('drawOpened', () => {
+      console.log('opened');
+      this.setState({ draw: true })
     });
   }
 
@@ -309,6 +316,10 @@ class ChatBox extends Component {
     this.setState({ showParticipantsModal: false });
   }
 
+  handleCloseDraw = () => {
+    this.setState({ draw: false });
+  }
+
   render() {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
@@ -326,6 +337,7 @@ class ChatBox extends Component {
             onOpenInvitationModel={this.handleOpenInvitationModel}
             onOpenParticipatsModel={this.handleOpenPartcipantsModel}
             onBackPress={this.props.onBackPress}
+            onOpenDraw={() => this.setState({ draw: true })}
           />
 
           <div className="chat-container"
@@ -684,6 +696,14 @@ class ChatBox extends Component {
             onlineUsers={onlineUsers}
             onClose={this.handleCloseParticipantsModal}
             currentUser={currentUser}
+          />
+        }
+
+        {this.state.draw &&
+          <Draw
+            socket={socket}
+            room={conversation?.id}
+            onClose={this.handleCloseDraw}
           />
         }
       </div >

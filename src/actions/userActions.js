@@ -18,6 +18,7 @@ import {
   GET_FAV_AND_SPRFVS_USERS,
   ONLINE_USERS
 } from '../constants/actionTypes';
+import { getCurrentUser } from './authActions';
 
 
 export const getAllUsers = query => dispatch => {
@@ -37,6 +38,8 @@ export const getUserArtById = (id) => dispatch => {
   http
     .get(`/arts/art/${id}`)
     .then(res => {
+      console.log(res.data.data.art);
+      console.log(getCurrentUser());
       dispatch({
         type: GET_USER_ART_NAME,
         payload: res.data.data.art
