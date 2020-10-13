@@ -144,16 +144,58 @@ const MzFlash = () => {
         <div className="fav-bar" style={{ backgroundColor: feelColor.feel.color_code }}>
           <h3>MZ FLASH</h3>
         </div>
-
         {userFeeds &&
           userFeeds.data.map((feed, index) => (
             <div className="box-3" key={index}>
+              {/* Reposted box starts here */}
               <div className="sub-box row">
                 {feed.parent &&
-                  <div className="reposted-text">
-                    {feed.parent.user.username} has reposted this feed
+                  <>
+                    <div className="reposted-text">
+                      {feed.parent.user.username} has reposted this feed
                   </div>
+                    <div>
+                    </div>
+                    <div className="action-cube">
+                      <div>
+                        <Avatar
+                          user={feed.parent.user}
+                        />
+                      </div>
+                    </div>
+                    <span className="date-time"
+                      style={{ float: "right", marginTop: "-38px", marginLeft: "50px" }}
+                    >
+                      {completeFormattedDate(feed.parent.created_at)}
+                    </span>
+                    <div className="time" style={{ float: "right" }}>
+                      {formatTime(feed.parent.created_at)}
+                    </div>
+                    <div className="user-name-parent">
+                      <p className="user-name" style={{ marginLeft: "9px" }}>{feed.parent.user.username}</p>
+                      <p className="submit-text">{feed.feed} </p>
+                      {feed.parent.feed_type === 1 &&
+                        feed.parent.image &&
+                        <img
+                          src={feed.parent.image.path}
+                          alt="Snow"
+                          className="img-css-fave"
+                        />
+                      }
+                      {feed.parent.feed_type === 2 &&
+                        feed.parent.image &&
+                        <div className="video left-space">
+                          <video controls>
+                            <source src={feed.parent.image.path} type="video/mp4" />
+                            <source src={feed.parent.image.path} type="video/ogg" />
+                              Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      }
+                    </div>
+                  </>
                 }
+                {/* my box starts here */}
                 <div className="col-12 mz-flash-flex">
                   <Avatar
                     user={feed.user}
@@ -166,11 +208,11 @@ const MzFlash = () => {
                   {formatTime(feed.created_at)}
                 </div>
                 <div className="col-12">
-                  <span className="usernames">Name:
-                    <Link to={`/dashboard/studio/${feed.user.slug}`} >
+                  <div className="usernames">Name:
+                  <Link to={`/dashboard/studio/${feed.user.slug}`} >
                       {feed.user.username}
                     </Link>
-                  </span>
+                  </div>
                   <p className="submit-text">{feed.feed} </p>
                 </div>
                 <div className="imgvideo-mzflash">
@@ -196,43 +238,8 @@ const MzFlash = () => {
                     </video>
                   }
                 </div>
-                {feed.parent &&
-                  <div className="flex-container-nested">
-                    <div className="action-cube">
-                      <Avatar
-                        user={feed.parent.user}
-                      />
-                      <span className="date-time">
-                        {completeFormattedDate(feed.parent.created_at)}
-                      </span>
-                    </div>
-                    <div className="time">
-                      {formatTime(feed.parent.created_at)}
-                    </div>
-                    <div className="user-name-parent">
-                      <p className="user-name">{feed.parent.user.username}</p>
-                      <p className="submit-text">{feed.feed} </p>
-                      {feed.parent.feed_type === 1 &&
-                        feed.parent.image &&
-                        <img
-                          src={feed.parent.image.path}
-                          alt="Snow"
-                          className="img-css-fave"
-                        />
-                      }
-                      {feed.parent.feed_type === 2 &&
-                        feed.parent.image &&
-                        <div className="video left-space">
-                          <video controls>
-                            <source src={feed.parent.image.path} type="video/mp4" />
-                            <source src={feed.parent.image.path} type="video/ogg" />
-                            Your browser does not support the video tag.
-                          </video>
-                        </div>
-                      }
-                    </div>
-                  </div>
-                }
+                <div className="flex-container-nested">
+                </div>
                 <div className="flex-container">
                   <div className="action">
                     <span className="coment-counter">
