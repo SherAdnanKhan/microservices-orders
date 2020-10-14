@@ -259,7 +259,7 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
               onTurnOffCrtiques={handleTurnOffCrtiquesModal}
               onRepostModal={handleRepostModal}
               onMzFlashModal={handleMzFlashModal}
-              onVault={handleVault} />
+              onAddVault={handleVault} />
           </div>
           <div className={
             activePost.id === post.id

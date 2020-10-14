@@ -23,7 +23,11 @@ const initialState = {
   myStudio: null,
   userStudio: null,
   loading: false,
-  vaultsList: []
+  vaults: {
+    current_page: 0,
+    data: [],
+    next_page_url: null,
+  }
 };
 
 export default (state = initialState, action) => {
@@ -178,7 +182,13 @@ export default (state = initialState, action) => {
     case GET_MY_VAULTS:
       return {
         ...state,
-        vaultsList: action.payload
+        vaults: {
+          current_page: action.payload.vault_posts.current_page,
+          data: action.payload.vault_posts.current_page === 0
+            ? action.payload.vault_posts.data
+            : [...state.vaults.data, ...action.payload.vault_posts.data],
+          next_page_url: action.payload.vault_posts.next_page_url
+        }
       }
     default:
       return state;
