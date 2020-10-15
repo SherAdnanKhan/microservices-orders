@@ -244,7 +244,7 @@ export const shareMzFlash = (post) => dispatch => {
 export const storeVault = (post) => dispatch => {
   const vaultObject = {
     vaultable_id: post.id,
-    vaultable_type: post.post_type
+    vaultable_type: 1
   }
 
   http

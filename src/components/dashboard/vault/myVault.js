@@ -47,11 +47,11 @@ const MyVault = () => {
         <VaultHeader />
         <VaultBar onBack={handleBackPress} feelColor={feelColor} />
         <div className="edit-user-page" >
-          <div className="wrapper">
+          <div className="wrapper" >
             <div className="vault-posts">
               <div className="favas-box">
                 <div className="wrapper">
-                  <div className="screen" ref={postRef} onScroll={handleScroll}  >
+                  <div className="screen" ref={postRef} onScroll={handleScroll}   >
                     <div className="details">
                       <div className="vault-post" >
                         <div className="post-picture">
@@ -59,9 +59,17 @@ const MyVault = () => {
                           {vaults ?
                             vaults?.data?.map((vault, index) =>
                               <div className="gallery-cover" key={index} >
-                                <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
-                                  <img src={vault?.post?.image?.path} alt="" />
-                                </Link>
+                                {vault?.post?.post_type === 2 ?
+                                  <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                    <video controls >
+                                      <source src={vault?.post.image.path} type="video/mp4" />
+                                    </video>
+                                  </Link>
+                                  :
+                                  <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                    <img src={vault?.post?.image?.path} alt="" />
+                                  </Link>
+                                }
                               </div>
                             ) :
                             <PostLoader />
@@ -76,9 +84,17 @@ const MyVault = () => {
                               {vaults?.data?.map((vault, index) =>
                                 <>
                                   <div className="image-style" key={index}>
-                                    <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
-                                      <img src={vault?.post?.image?.path} alt="" />
-                                    </Link>
+                                    {vault?.post?.post_type === 2 ?
+                                      <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                        <video width="320" height="240" controls >
+                                          <source src={vault?.post.image.path} type="video/mp4" />
+                                        </video>
+                                      </Link>
+                                      :
+                                      <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                        <img src={vault?.post?.image?.path} alt="" />
+                                      </Link>
+                                    }
                                   </div>
                                 </>
                               )}
