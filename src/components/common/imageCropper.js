@@ -83,7 +83,6 @@ const ImageCropper = ({
     myImage.src = image;
 
     const rotatedImage = await rotateImage('newFile.jpeg', myImage, degrees);
-    console.log(rotatedImage);
     setImage(URL.createObjectURL(rotatedImage));
 
     onCompleteCrop(rotatedImage);

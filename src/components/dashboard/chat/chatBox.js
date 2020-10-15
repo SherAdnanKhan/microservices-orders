@@ -111,7 +111,6 @@ class ChatBox extends Component {
 
     });
     socket.on('drawOpened', () => {
-      console.log('opened');
       this.setState({ draw: true })
     });
   }

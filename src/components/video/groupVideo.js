@@ -334,7 +334,6 @@ const GroupVideoCall = () => {
           });
 
           socket.on('call-rejoined', data => {
-            console.log(`${data.user.username} is back`);
             updatePeer(data);
           });
 
@@ -343,8 +342,6 @@ const GroupVideoCall = () => {
               user: user,
               room: params.room
             };
-
-            console.log('call reconnected');
             socket.emit('rejoin-call', payload);
           });
         });

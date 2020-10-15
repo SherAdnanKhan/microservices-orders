@@ -49,8 +49,6 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
   };
 
   const handleSave = () => {
-    console.log(croppedImage)
-    console.log(image);
     if (croppedImage) {
       onSave('image', croppedImage)
     } else if (image) {

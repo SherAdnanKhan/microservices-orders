@@ -33,8 +33,8 @@ const MyVault = () => {
     const clientHeight = postRef.current.clientHeight;
     if (scrollHeight - clientHeight === scrollTop) {
       if (vaults.next_page_url && !postLoader) {
-        setCurrentPage(currentPage => currentPage + 1);
         dispatch(getMyVault(currentPage + 1));
+        setCurrentPage(currentPage => currentPage + 1);
       }
     }
   };
