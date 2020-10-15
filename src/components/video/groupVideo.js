@@ -362,6 +362,7 @@ const GroupVideoCall = () => {
   }
 
   const handleShowActions = e => {
+    console.log("handle show is called")
     setShowActions(!showActions);
   };
 
@@ -495,7 +496,7 @@ const GroupVideoCall = () => {
                 autoPlay
               >
               </video>
-              <div className="settings-Icon"><i className="fas fa-ellipsis-h" /></div>
+              <div className="settings-Icon" onTouchStartCapture={handleShowActions} > <i className="fas fa-ellipsis-h" /></div>
             </div>
           </Draggable>
 
@@ -603,7 +604,7 @@ const GroupVideoCall = () => {
           />
         }
       </div>
-    </React.Fragment>
+    </React.Fragment >
   );
 }
 export default GroupVideoCall;
