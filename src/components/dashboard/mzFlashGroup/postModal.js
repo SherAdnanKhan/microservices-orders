@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PostModal = ({ onPostModalClose, imagePath, mediaType }) => {
-  console.log("image path=", imagePath, mediaType)
   return (
     <>
 

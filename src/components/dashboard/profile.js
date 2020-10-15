@@ -40,7 +40,6 @@ const Profile = () => {
   }
 
   const handleChange = ({ target: input }) => {
-    console.log("handler has been called")
     if (input.files[0]) {
       const image = { ...selectedImage };
       image.path = URL.createObjectURL(input.files[0]);

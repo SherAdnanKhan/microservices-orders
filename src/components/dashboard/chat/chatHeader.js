@@ -46,8 +46,6 @@ const ChatHeader = ({
           audioRef.current.pause();
           audioRef.current.currentTime = 0;
         }
-
-        console.log('redirect')
         history.push(`/dashboard/video-call/${data.room}`)
       });
 

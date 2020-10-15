@@ -49,13 +49,11 @@ const MzFlashGroup = () => {
     setShowModel(value);
   };
   const handlePostShowModel = (value, type, image) => {
-    console.log("type=", type, "image=", image)
     if (value === true) {
       setImagepath(image.path);
       setMediaType(type);
     }
     setShowPostModel(value);
-
   };
 
 

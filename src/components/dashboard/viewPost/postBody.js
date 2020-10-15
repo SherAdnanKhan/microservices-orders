@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import ImagePostOption from '../../common/ImagePostOption';
 import ToolTip from '../../common/toolTip/toolTip';
@@ -14,10 +14,7 @@ const PostBody = ({
   const [show, setShow] = useState(false);
   const eventRef = useRef();
 
-  useEffect(() => {
-    if (post)
-      console.log(post);
-  }, [post])
+
   const handleButtonPress = () => {
     eventRef.current = setTimeout(() => {
       setShow(!show);

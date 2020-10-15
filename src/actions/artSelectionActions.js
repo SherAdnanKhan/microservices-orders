@@ -20,8 +20,6 @@ export const newArt = (value, history) => dispatch => {
     http
       .post('/arts', value)
       .then(res => {
-        console.log(res.data.data.art);
-        console.log(value);
         const data = {
           art_id: res.data.data.art.id
         };

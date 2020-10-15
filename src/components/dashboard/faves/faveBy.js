@@ -17,11 +17,9 @@ const FaveBy = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(faveByUsers)
   }, [faveByUsers]);
 
   const handleChange = ({ target: input }) => {
-    console.log(input.value);
     setQuery(input.value);
     dispatch(getFaveByUsers(input.value))
   };

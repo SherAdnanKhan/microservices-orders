@@ -135,7 +135,6 @@ export default (state = initialState, action) => {
         loading: false
       };
     case READ_MESSAGE:
-      console.log(state.conversation);
       return {
         ...state,
         messages: {
