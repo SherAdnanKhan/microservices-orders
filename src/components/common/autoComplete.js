@@ -33,7 +33,9 @@ const InputAutoComplete = ({
   };
 
   const handleSelect = option => {
-    setSelected(option[displayProperty]);
+    if (option) {
+      setSelected(option[displayProperty]);
+    }
     onSelect(option);
     setList(null);
   };
@@ -60,7 +62,8 @@ const InputAutoComplete = ({
 
             }
           } else if (e.keyCode === 13) {
-            handleSelect(options[highlightedIndex]);
+            options &&
+              handleSelect(options[highlightedIndex]);
           }
         }}
       />
