@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
-  onOpenParticipatsModel, currentUser, onBackPress
+  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
@@ -113,6 +113,10 @@ const ChatHeader = ({
     })
   }
 
+  const handleDraw = () => {
+    socket.emit('open draw', { room: conversation?.id })
+    onOpenDraw();
+  }
   return (
     <div
       className='chat-header'
@@ -188,7 +192,11 @@ const ChatHeader = ({
           />
           <ToolTip id="call" />
         </div>
-        <img src="/assets/images/icons/DrawStrq.png" alt="Draw" data-tip="Draw" data-for="draw" />
+        <img
+          src="/assets/images/icons/DrawStrq.png"
+          alt="Draw" data-tip="Draw" data-for="draw"
+          onClick={handleDraw}
+        />
         <ToolTip id="draw" />
       </div>
 
