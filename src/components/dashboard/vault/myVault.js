@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../common/spinner';
@@ -7,47 +7,73 @@ import Footer from '../layout/footer';
 import LeftBorder from '../layout/leftBorder';
 import { getMyVault } from '../../../actions/studioActions';
 import VaultBar from "../vault/vaultBar";
+import VaultHeader from "../vault/vaultHeader";
+import PostLoader from "../../common/loader";
 
 const MyVault = () => {
   const history = useHistory();
+  const postRef = useRef();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getMyVault());
   }, [dispatch]);
+
   const { loading } = useSelector(state => state.loading);
   const { feelColor } = useSelector(state => state.feelColor);
-  const { studio: vaultsList } = useSelector(state => state);
-  console.log("vaultsList=", vaultsList?.vaultsList)
+  const { studio: { vaults }, lobby: { postLoader }, } = useSelector(state => state);
+  const [currentPage, setCurrentPage] = useState(1);
   const handleBackPress = () => {
     history.push('/dashboard/my-studio');
   }
+
+  const handleScroll = () => {
+    const scrollTop = postRef.current.scrollTop;
+    const scrollHeight = postRef.current.scrollHeight;
+    const clientHeight = postRef.current.clientHeight;
+    if (scrollHeight - clientHeight === scrollTop) {
+      if (vaults.next_page_url && !postLoader) {
+        setCurrentPage(currentPage => currentPage + 1);
+        dispatch(getMyVault(currentPage + 1));
+      }
+    }
+  };
   return (
-    <div className={`frameReady ${feelColor}`}>
+    <div className={`frameReady ${feelColor}`} >
       <LeftBorder feelColor={feelColor} />
       <RightBorder feelColor={feelColor} />
       <div className="vault-page">
         {loading && <Spinner />}
+        <VaultHeader />
         <VaultBar onBack={handleBackPress} feelColor={feelColor} />
-        <div className="edit-user-page">
-          <div className="wrapper">
+        <div className="edit-user-page" >
+          <div className="wrapper" >
             <div className="vault-posts">
               <div className="favas-box">
-                <div className="favas-avatar">
-                  <Link to={`/dashboard/studio/sarahsajjad`}  >
-                    {/* <Avatar avatars={gallery?.user?.avatars} feelColor={gallery?.user?.feel.color_code} /> */}
-                  </Link>
-                </div>
                 <div className="wrapper">
-                  <div className="screen">
+                  <div className="screen" ref={postRef} onScroll={handleScroll}   >
                     <div className="details">
-                      <div className="vault-post">
+                      <div className="vault-post" >
                         <div className="post-picture">
                           {/* FOR list VIEW */}
-                          <div className="gallery-cover">
-                            <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                            <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                            <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                          </div>
+                          {vaults ?
+                            vaults?.data?.map((vault, index) =>
+                              <div className="gallery-cover" key={index} >
+                                {vault?.post?.post_type === 2 ?
+                                  <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                    <video controls >
+                                      <source src={vault?.post.image.path} type="video/mp4" />
+                                    </video>
+                                  </Link>
+                                  :
+                                  <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                    <img src={vault?.post?.image?.path} alt="" />
+                                  </Link>
+                                }
+                              </div>
+                            ) :
+                            <PostLoader />
+                          }
                         </div>
                         {/* FOR Grid VIEW */}
                         <div className="show-list">
@@ -55,15 +81,23 @@ const MyVault = () => {
                             to={`/dashboard/studio/sarahsajjad`}
                           >
                             <div className="gallery-cover">
-                              <div className="image-style">
-                                <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                              </div>
-                              <div className="image-style">
-                                <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                              </div>
-                              <div className="image-style">
-                                <img src='https://meuzm-stage.s3.us-west-1.amazonaws.com/posts/dCQATIoJ4B-1594130513.png' alt="" />
-                              </div>
+                              {vaults?.data?.map((vault, index) =>
+                                <>
+                                  <div className="image-style" key={index}>
+                                    {vault?.post?.post_type === 2 ?
+                                      <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                        <video width="320" height="240" controls >
+                                          <source src={vault?.post.image.path} type="video/mp4" />
+                                        </video>
+                                      </Link>
+                                      :
+                                      <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                        <img src={vault?.post?.image?.path} alt="" />
+                                      </Link>
+                                    }
+                                  </div>
+                                </>
+                              )}
                             </div>
                           </Link>
                         </div>

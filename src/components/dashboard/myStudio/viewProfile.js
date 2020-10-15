@@ -42,7 +42,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     else if (isEmpty(listCategory) && !isEmpty(artName)) {
       setArtId("");
     }
-  }, [listCategory])
+  }, [listCategory, artName])
 
   const updateUserName = () => {
     let object = {

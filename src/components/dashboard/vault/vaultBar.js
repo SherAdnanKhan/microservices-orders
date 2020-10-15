@@ -10,13 +10,13 @@ const VaultBar = ({ feelColor, onBack }) => {
       <div className="heading">
         <p> Vault</p>
       </div>
-      <div className="total-post" style={{ marginLeft: "auto" }}>
+      <div className="total-post">
         <div className="icon-side">
           <>
+            <i className="fas fa-th" data-for="gridView" data-tip="grid view" />
+            <ToolTip position="bottom" id="gridView" />
             <i className="fas fa-square" data-for="fullView" data-tip="full view" />
             <ToolTip position="bottom" id="fullView" />
-            <i className="fas fa-th" data-for="partialView" data-tip="partial view" />
-            <ToolTip position="bottom" id="partialView" />
           </>
         </div>
       </div>

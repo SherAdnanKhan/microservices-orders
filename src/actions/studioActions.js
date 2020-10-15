@@ -12,6 +12,8 @@ import {
   CLEAR_USER_STUDIO,
   UPDATE_USERNAME,
   UPDATE_USER_ART,
+  START_POST_LOADER,
+  STOP_POST_LOADER
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -28,15 +30,22 @@ export const getMyStudio = () => dispatch => {
       });
     });
 };
-export const getMyVault = () => dispatch => {
+export const getMyVault = (page = 1) => dispatch => {
+  if (page > 1) {
+    dispatch({ type: START_POST_LOADER });
+  }
   http
-    .get('/vault')
+    .get(`/vault?page=${page}`)
     .then(res => {
+      dispatch({ type: STOP_POST_LOADER });
       dispatch({
         type: GET_MY_VAULTS,
         payload: res.data.data
       });
-    });
+    })
+    .catch(() => {
+      dispatch({ type: STOP_POST_LOADER })
+    })
 };
 
 export const createOrUpdateProfile = (data, history) => () => {

@@ -26,7 +26,7 @@ import LazyLoad from "react-lazyload";
 
 const Post = ({
   gallery, user, activeGallery,
-  galleryPrivacy, onSuperFav, isSprFvs, onFave, onVault
+  galleryPrivacy, onSuperFav, isSprFvs, onFave, onAddVault
 }) => {
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
@@ -274,7 +274,7 @@ const Post = ({
                                   onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                                   onRepostModal={handleRepostModal}
                                   onMzFlashModal={handleMzFlashModal}
-                                  onVault={handleVault} />
+                                  onAddVault={handleVault} />
                               </div>
                               {/* studio post secondary options */}
                               <div
