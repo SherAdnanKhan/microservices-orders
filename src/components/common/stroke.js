@@ -12,7 +12,7 @@ const Stroke = ({ hasStroke, onStroke, onUnstroke, className }) => {
             alt=""
             onClick={onUnstroke}
             data-for="stroke"
-            data-tip="unStroke"
+            data-tip="unstroke"
           />
         ) : (
           <img
