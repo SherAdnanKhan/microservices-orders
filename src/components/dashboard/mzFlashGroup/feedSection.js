@@ -54,7 +54,7 @@ const FeedSection = ({
     let error = '';
 
     if (!data.feed) {
-      error = 'Please enter your feed';
+      error = 'Feed cannot be empty';
     }
     return error;
   };
