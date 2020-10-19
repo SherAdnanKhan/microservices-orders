@@ -6,17 +6,14 @@ import Avatar from '../../common/avatar';
 import { alphabetsWithoutSpecialChars } from "../../../constants/regex";
 const Search = ({ feelColor }) => {
   const [query, setQuery] = useState('');
-  const [error, setError] = useState('');
   const dispatch = useDispatch();
   const { users } = useSelector(state => state.user);
 
   const validate = (value) => {
     if (!alphabetsWithoutSpecialChars.test(value) && value.length > 0) {
-      setError("Special characters are not allowed in search")
       return true;
     }
     else {
-      setError("")
       return false
     }
   }
@@ -47,14 +44,10 @@ const Search = ({ feelColor }) => {
             value={query}
             onChange={handleChange}
             placeholder="Search" />
-          {
-            error.length > 0 &&
-            <span className="error">{error}</span>
-          }
         </div>
       </div>
       <div id="search-result">
-        {users && query.length > 0 && error.length === 0 &&
+        {users && query.length > 0 &&
           users.map((user, index) => (
             <div key={index} className="result-box">
               <div className="profile-pic">
