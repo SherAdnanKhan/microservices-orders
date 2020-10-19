@@ -362,7 +362,6 @@ const GroupVideoCall = () => {
   }
 
   const handleShowActions = e => {
-    console.log("handle show is called")
     setShowActions(!showActions);
   };
 
