@@ -80,7 +80,9 @@ export const updateArt = artId => dispatch => {
     .post(`/arts/user-art-selection`, artId)
     .then(res => {
       toast.success("art updated successfully")
-      localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
+      const user = JSON.parse(localStorage.getItem(userKey));
+      user.art = res?.data?.data?.user?.art;
+      localStorage.setItem(userKey, JSON.stringify(user));
       let id = res.data.data.user.art.id;
       let name = res.data.data.user.art.name;
       localStorage.setItem('art_id', id);
