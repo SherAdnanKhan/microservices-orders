@@ -49,7 +49,7 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
                 src="/assets/images/strokeiconfull.png"
                 alt=""
                 onClick={handleUnStoke}
-                data-tip="unStroke"
+                data-tip="unstroke"
                 data-for="stroke"
               />
 

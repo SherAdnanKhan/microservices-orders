@@ -19,6 +19,7 @@ const FeedSection = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [imageUrl, setImageUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
+  const showError = true;
   const [charCount, setCharCount] = useState(0);
   const [error, setError] = useState('');
   const [data, setData] = useState({
@@ -35,6 +36,7 @@ const FeedSection = ({
       onModelChange(false);
       if (input.files[0]) {
         if (input.name === 'image') {
+          setError("");
           setData({ ...data, image: input.files[0], video: null });
           setImageUrl(URL.createObjectURL(input.files[0]));
           setVideoUrl('');
@@ -104,7 +106,11 @@ const FeedSection = ({
           <i
             className="fa fa-plus"
             aria-hidden="true"
-            onClick={() => onModelChange(true)}
+            onClick={() => {
+              onModelChange(true)
+              setError("")
+            }
+            }
             data-for="addPost"
             data-tip="upload post"
           >
@@ -118,10 +124,16 @@ const FeedSection = ({
             maxLength={200}
             onChange={handleChange}
             error={error}
+            showError={false}
           />
           <br />
           <input className="clickable btn-send" type="submit" defaultValue="Submit" />
         </form>
+        {showError && error && (
+          <div className="error">
+            {error}
+          </div>
+        )}
         <div className="counter"> ({charCount}/200)</div>
         {imageUrl &&
           <div className="image-preview">
