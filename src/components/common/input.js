@@ -17,6 +17,8 @@ const Input = ({
           {...rest}
         />
       </label>
+      {showError && error &&
+        <div className="error">{error}</div>}
     </>
   );
 

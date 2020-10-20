@@ -124,6 +124,7 @@ const FeedSection = ({
             maxLength={200}
             onChange={handleChange}
             error={error}
+            showError={false}
           />
           <br />
           <input className="clickable btn-send" type="submit" defaultValue="Submit" />
