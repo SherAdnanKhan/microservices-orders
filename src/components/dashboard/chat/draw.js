@@ -1,64 +1,72 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Modal from '../../common/modal/modal';
 import ModalBody from '../../common/modal/modalBody';
 import ModalFooter from '../../common/modal/modalFooter';
 import ModalHeader from '../../common/modal/modalHeader';
 import CanvasDraw from "react-canvas-draw";
-// import socket from "../../../services/socketService";
-// import { data } from 'jquery';
-
+import socket from "../../../services/socketService";
+import { PhotoshopPicker } from 'react-color';
 
 const Draw = ({ onClose, room }) => {
-  // const [objects, setObjects] = useState();
-  // const [lineColor, setLineColor] = useState('black');
-  // const [hasRendered, setHasRendered] = useState(false);
-  const [tool, setTool] = useState("Pencil");
+  const [show, setShow] = useState(false);
   const [brushColor, setBrushColor] = useState("#444");
   const canvasRef = useRef();
-  // const drawing = useRef(true);
-  const [saveData] = useState();
-  // const dataRef = useRef(true);
+  const [saveData, setSaveData] = useState('');
 
-  // useEffect(() => {
-  //   if (!hasRendered) {
-  //     socket.on('drawing', payload => {
-  //       console.log(payload);
-  //       setSaveData(data => data = payload.data);
-  //       dataRef.current = false;
-  //     });
+  useEffect(() => {
+    socket.on('drawing', payload => {
+      setSaveData(data => data = payload.data);
+    });
 
-  //     setHasRendered(true);
-  //   }
-
-  // setSaveData(data => data =can.current.getSaveData());
-  // return () => {
-  //   socket.off('drawing');
-  // }
-  // }, [hasRendered, saveData]);
-
-  // const handleChange = canvas => {
-  //   const data = canvas.getSaveData();
-  //   // console.log('handle change',)
-
-  //   const payload = {
-  //     data,
-  //     room: room
-  //   };
-
-  //   if (dataRef.current) {
-  //     // socket.emit("draw", payload);
-  //   } else {
-  //     dataRef.current = true;
-  //   }
-  // }
-
-  const handleToolChange = ({ target: input }) => {
-    if (input.value === 'Eraser') {
-      setBrushColor('#fff');
-    } else {
-      setBrushColor('#444');
+    return () => {
+      socket.off('drawing');
     }
-    setTool(input.value)
+  }, []);
+
+  const sendDrawing = () => {
+    const data = canvasRef.current.getSaveData();
+
+    const payload = {
+      data,
+      room: room
+    };
+
+    socket.emit("draw", payload);
+  }
+
+  const handleMouseUp = () => {
+    sendDrawing();
+  }
+
+  const handleSave = () => {
+    const result = canvasRef.current.canvas.drawing.toDataURL();
+    const image = document.createElement('a');
+
+    image.href = result;
+    image.download = 'image.jpeg';
+    image.click();
+  }
+
+  const handleUndo = () => {
+    canvasRef.current.undo();
+    sendDrawing();
+  }
+
+  const handleClear = () => {
+    canvasRef.current.clear();
+    sendDrawing();
+  }
+
+  const handleChangeComplete = (color) => {
+    setBrushColor(color.hex);
+  };
+
+  const handleBrushColor = () => {
+    setShow(true);
+  }
+
+  const handleShow = () => {
+    setShow(!show);
   }
 
   return (
@@ -66,21 +74,26 @@ const Draw = ({ onClose, room }) => {
       <Modal>
         <ModalHeader onClose={onClose}>
           <div>
-            <label> Tools </label>
-            <select value={tool} onChange={handleToolChange}>
-              <option value="Select"> Select </option>
-              <option value="Pencil"> Pencil </option>
-              <option value="Eraser"> Eraser </option>
-            </select>
+            {show &&
+              <PhotoshopPicker
+                color={brushColor}
+                onChangeComplete={handleChangeComplete}
+                onAccept={handleShow}
+                onCancel={handleShow}
+              />
+            }
+            <button onClick={handleUndo}> Undo </button>
+            <button onClick={handleClear}> Clear </button>
+            <button onClick={handleBrushColor}> brush color </button>
+            <button onClick={handleSave}> Save and Download </button>
           </div>
         </ModalHeader>
         <ModalBody>
-          <div className="panel">
+          <div className="panel" onMouseUp={handleMouseUp}>
             <CanvasDraw
               ref={canvasRef}
               saveData={saveData}
-              // onChange={handleChange}
-              brushRadius={tool === 'Eraser' ? 20 : 2}
+              brushRadius={2}
               brushColor={brushColor}
               catenaryColor="#0a0302"
               gridColor="rgba(150,150,150,0.17)"
@@ -88,14 +101,14 @@ const Draw = ({ onClose, room }) => {
               canvasWidth={'100%'}
               canvasHeight={'100%'}
               immediateLoading={true}
+              backgroundColor="#fff"
             />
           </div>
-
         </ModalBody>
         <ModalFooter>
         </ModalFooter>
       </Modal>
-    </div>
+    </div >
   );
 };
 

@@ -18,7 +18,7 @@ class Socket {
   }
 
   getSocketConection() {
-    return this.getUser() ? io.connect(process.env.REACT_APP_SOCKET_URL, this.config) : null;
+    return this.getUser() ? io.connect(process.env.REACT_APP_SOCKET_URL) : null;
   };
 };
 
