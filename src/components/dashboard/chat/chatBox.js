@@ -686,6 +686,7 @@ class ChatBox extends Component {
             onClose={this.handleCloseInvitationModal}
             participants={conversation?.participants}
             currentUser={currentUser}
+            room={conversation?.id}
           />
         }
 

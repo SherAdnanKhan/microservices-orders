@@ -10,7 +10,8 @@ import {
   READ_MESSAGE,
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
-  RESET_CONVERSATION_COUNT
+  RESET_CONVERSATION_COUNT,
+  INVITE_PEOPLE_IN_CHAT
 } from '../constants/actionTypes';
 import { isNumber } from '../utils/helperFunctions';
 
@@ -155,11 +156,14 @@ export const resetConversationCount = conversation => {
   }
 }
 
-export const createGroupConversation = (data, history) => dispatch => {
+export const createGroupConversation = (data, id) => dispatch => {
   http
-    .post(`/chats/group-chat`, data)
+    .post(`/chats/invite-people/${id}`, data)
     .then(res => {
-      window.location.href = `/dashboard/chat/${res.data.data.conversation.id}`;
+      dispatch({
+        type: INVITE_PEOPLE_IN_CHAT,
+        payload: res?.data?.data?.conversation
+      })
     })
     .catch(err => {
       if (err.response && err.response.data) {
@@ -167,6 +171,5 @@ export const createGroupConversation = (data, history) => dispatch => {
       }
     });
 }
-
 
 export const readAll = data => ({ type: READ_ALL, payload: data });

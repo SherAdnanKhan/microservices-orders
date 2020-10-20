@@ -8,7 +8,8 @@ import {
   READ_MESSAGE,
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
-  RESET_CONVERSATION_COUNT
+  RESET_CONVERSATION_COUNT,
+  INVITE_PEOPLE_IN_CHAT
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -180,6 +181,25 @@ export default (state = initialState, action) => {
           })
         }
       };
+    //if there is no new user added then state will store previous conversation otherwise it will store new conversation
+    case INVITE_PEOPLE_IN_CHAT:
+      const found = state.conversations.some(conversation => conversation.id === action.payload.id);
+
+      if (!found) {
+        return {
+          ...state,
+          conversations: [action.payload, ...state.conversations]
+        }
+      }
+
+      return {
+        ...state,
+        conversations: state.conversations
+          ?.map(conversation => {
+            return conversation.id === action.payload.id ? action.payload : conversation
+          }),
+        conversation: action.payload
+      }
     default:
       return state;
   }

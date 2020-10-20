@@ -7,16 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllUsers } from '../../actions/userActions';
 import Avatar from './avatar';
 import { createGroupConversation } from '../../actions/conversationActions';
-import { useHistory } from 'react-router-dom';
 import socket from '../../services/socketService';
 import { toast } from 'react-toastify';
 
 const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUsers = false }) => {
-  const history = useHistory();
   const { users } = useSelector(state => state.user);
-
   const [selectedUsers, setSelectedUsers] = useState({});
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,18 +35,10 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
   };
 
   const handleSubmit = () => {
-    const selectedIds =
-      [...Object
-        .values(selectedUsers),
-      ...participants
-        ?.filter(participant => participant.id !== currentUser.id)
-        ?.map(participant => participant.id)
-      ];
-
+    const selectedIds = Object.values(selectedUsers);
     const slugs = [...Object.keys(selectedUsers)].map(p => {
       return { slug: p }
     });
-
 
     const data = {
       user_ids: selectedIds
@@ -66,7 +54,8 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
       toast.success('Invitation sent');
       onClose();
     } else {
-      dispatch(createGroupConversation(data, history));
+      dispatch(createGroupConversation(data, room));
+      onClose();
     }
   };
 
