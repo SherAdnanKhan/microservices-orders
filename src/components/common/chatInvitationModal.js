@@ -65,10 +65,12 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
         <ModalHeader onClose={onClose}></ModalHeader>
         <ModalBody>
           <div className="search">
+            <label>search users</label>
             <input
               autoFocus
               type="text"
               onChange={handleSearch}
+              placeholder="search"
             />
           </div>
           <div className="users">
