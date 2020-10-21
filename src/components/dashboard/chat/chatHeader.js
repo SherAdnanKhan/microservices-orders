@@ -22,6 +22,7 @@ const ChatHeader = ({
   const timeout = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
+  const [showActions, setShowActions] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
@@ -123,6 +124,11 @@ const ChatHeader = ({
   const handleReportModal = (status) => {
     setShowReportModal(status)
   }
+
+  const handleShowActions = e => {
+    console.log("show value=", showActions)
+    setShowActions(!showActions);
+  };
   return (
     <div
       className='chat-header'
@@ -133,24 +139,37 @@ const ChatHeader = ({
             : filtered?.feel.color_code
       }}
     >
-      {width <= breakPoint &&
-        <i
-          className="fa fa-arrow-left clickable"
-          onClick={onBackPress}
-        />
-      }
-      {conversation?.participants.length > 2
-        ? (
-          <div onClick={onOpenParticipatsModel}>
-            <MeuzmLogo />
+      {filtered && width <= breakPoint ?  //Mobile View
+        <>
+          <i
+            className="fa fa-arrow-left clickable"
+            onClick={onBackPress}
+          />
+          <div className="add-strq" >
+            <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
+              <OtherUserOptions user={filtered} onReportModal={handleReportModal} />
+            </div>
           </div>
-        ) : (
-          <Link to={`/dashboard/studio/${filtered?.slug}`} >
-            <Avatar
-              user={filtered}
-            />
-          </Link>
-        )
+        </>
+        //Desktop  View
+        :
+        <div className="add-strq">
+          <OtherUserOptions user={filtered} onReportModal={handleReportModal} />
+        </div>
+      }
+      {
+        conversation?.participants.length > 2
+          ? (
+            <div onClick={onOpenParticipatsModel}>
+              <MeuzmLogo />
+            </div>
+          ) : (
+            <Link to={`/dashboard/studio/${filtered?.slug}`} >
+              <Avatar
+                user={filtered}
+              />
+            </Link>
+          )
       }
 
       <div className="user-Status">
@@ -204,22 +223,20 @@ const ChatHeader = ({
           onClick={handleDraw}
         />
         <ToolTip id="draw" />
-        {filtered &&
-          <div className="add-strq">
-            <OtherUserOptions user={filtered} onReportModal={handleReportModal} />
-          </div>
-        }
+
       </div>
-      {showCallingModal &&
+      {
+        showCallingModal &&
         <CallingModal
           onDecline={handleDecline}
           feelColor={feelColor}
         />
       }
-      {showReportModal && filtered &&
+      {
+        showReportModal && filtered &&
         <ReportUserModal user={filtered} onClose={handleReportModal} />
       }
-    </div>
+    </div >
   );
 };
 
