@@ -114,8 +114,8 @@ const Lobby = () => {
     const scrollTop = postRef.current.scrollTop;
     const scrollHeight = postRef.current.scrollHeight;
     const clientHeight = postRef.current.clientHeight;
-    
-    if (scrollHeight - clientHeight === scrollTop) {
+
+    if (scrollHeight - clientHeight === Math.round(scrollTop)) {
       if (favouritePosts.next_page_url && !postLoader) {
         dispatch(getFavouritePosts(currentPage + 1));
         setCurrentPage(currentPage => currentPage + 1);
