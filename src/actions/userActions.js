@@ -190,3 +190,11 @@ export const getOnlineUsers = (users) => {
   };
 };
 
+export const reportUser = (data, username) => dispatch => {
+  http
+    .post('/users/report', data)
+    .then(res => {
+      console.log("response=", res)
+      toast.success(`${username} is reported`)
+    });
+};

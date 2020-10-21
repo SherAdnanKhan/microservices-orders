@@ -8,10 +8,13 @@ import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
 import useViewport from '../../common/useViewport';
 import ToolTip from '../../common/toolTip/toolTip';
 import { useSelector } from "react-redux";
+import OtherUserOptions from './OtherUserOptions';
+import ReportUserModal from './reportUserModal';
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
-  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw
+  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw, user
+
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
@@ -19,6 +22,7 @@ const ChatHeader = ({
   const timeout = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
   const { width } = useViewport();
@@ -115,6 +119,10 @@ const ChatHeader = ({
     socket.emit('open draw', { room: conversation?.id })
     onOpenDraw();
   }
+
+  const handleReportModal = (status) => {
+    setShowReportModal(status)
+  }
   return (
     <div
       className='chat-header'
@@ -196,13 +204,20 @@ const ChatHeader = ({
           onClick={handleDraw}
         />
         <ToolTip id="draw" />
+        {filtered &&
+          <div className="add-strq">
+            <OtherUserOptions user={filtered} onReportModal={handleReportModal} />
+          </div>
+        }
       </div>
-
       {showCallingModal &&
         <CallingModal
           onDecline={handleDecline}
           feelColor={feelColor}
         />
+      }
+      {showReportModal && filtered &&
+        <ReportUserModal user={filtered} onClose={handleReportModal} />
       }
     </div>
   );
