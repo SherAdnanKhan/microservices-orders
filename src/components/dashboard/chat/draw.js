@@ -73,7 +73,7 @@ const Draw = ({ onClose, room }) => {
     <div className='drawModal'>
       <Modal>
         <ModalHeader onClose={onClose}>
-          <div>
+          <div className="drawActions">
             {show &&
               <PhotoshopPicker
                 color={brushColor}
@@ -85,7 +85,7 @@ const Draw = ({ onClose, room }) => {
             <button onClick={handleUndo}> Undo </button>
             <button onClick={handleClear}> Clear </button>
             <button onClick={handleBrushColor}> brush color </button>
-            <button onClick={handleSave}> Save and Download </button>
+            <button onClick={handleSave} className="saveDownload"> Save and Download </button>
           </div>
         </ModalHeader>
         <ModalBody>
