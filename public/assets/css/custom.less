@@ -840,10 +840,14 @@ input {
 
 // New
 .lobby-page{
-  height: 80vh;
+  height: auto;
   width: 95%;
   margin-right: auto;
   margin-left: auto;
+  overflow: hidden;
+  // @media @mobile {
+  //   height: 100vh;
+  // }
 
   video {
     width: 400px;
@@ -906,8 +910,11 @@ input {
     max-height: 75vh;
     overflow-y: auto;
     margin-top: 61px;
+    // height: calc(100vh - 101px);
     @media @mobile {
       padding:0px;
+      overflow-x: hidden;
+      height: calc(100vh - 219px);
     }
   }
   .section-3{
@@ -3566,6 +3573,7 @@ img {
     text-align: center;
     @media @mobile {
       width: 50%;
+      text-align: left;
     }
     p{
       margin: 0;
@@ -5722,7 +5730,7 @@ img {
   .post-page{
     .post-body{
       .right-clicked{
-       height:60vh;
+       height:0vh;
       &.show{
         width:37%;
         .boxes{
@@ -5835,7 +5843,7 @@ img {
     width:100% !important;
   }
   .box-2{
-    margin-top:90px !important;
+    margin-top:15px !important;
   }
   .box-1 {
     text-align: center;

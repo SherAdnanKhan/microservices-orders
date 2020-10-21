@@ -31,4 +31,13 @@
   position: absolute;
   left: 50%;
   z-index: 100;
+  top: 50%;
+  transform: translate(-50% , -50%);
+  /* width: 330px !important; */
+}
+
+@media screen and (max-width:768px) {
+  .photoshop-picker {
+    width: 330px !important;
+  }
 }
