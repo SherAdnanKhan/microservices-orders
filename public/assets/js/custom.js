@@ -340,12 +340,12 @@ $(document)
 // })
 
 $(document).on('click', '.fa-ellipsis-v', function () {
-  $(".add-img-vid-box").toggle();
+  $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
 })
 
 $('body').click(function (event) {
   if (!$(event.target).closest('.add-img-vid-box').length && !$(event.target).is('.add-img-vid-box')) {
-    $(".add-img-vid-box").hide();
+    $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
   }
 });
 

@@ -1,13 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UserContext from "../../context/userContext";
 import { useHistory } from 'react-router-dom';
+import { useRouteMatch } from "react-router-dom";
 
 const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
   const user = useContext(UserContext);
+  const [isViewPostPage, setViewPostPage] = useState(false);
   const loggedInUserId = user.id;
   const history = useHistory();
+  const params = useRouteMatch();
+
+  useEffect(() => {
+    if (params.path === "/dashboard/viewpost/:id") {
+      setViewPostPage(true);
+    }
+  }, [params]);
+
   return (
-    <div className="add-img-vid-box">
+    <div className={isViewPostPage ? "add-img-vid-box-viewpost" : "add-img-vid-box"}>
       <div className="img-option">
         {post?.created_by === loggedInUserId ?
           <>
@@ -28,7 +38,6 @@ const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onMode
             {post.critiques_status === 1 &&   //if crtiques are off
               <p onClick={() => onTurnOffCrtiques(true, post)}>Turn Off critiques </p>
             }
-
           </>
           :
           <>
