@@ -11,9 +11,12 @@ import socket from '../../services/socketService';
 import { toast } from 'react-toastify';
 
 const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUsers = false }) => {
-  const { users } = useSelector(state => state.user);
-  const [selectedUsers, setSelectedUsers] = useState({});
+  const {
+    user: { searchError },
+    user: { users }
+  } = useSelector(state => state);
   const dispatch = useDispatch();
+  const [selectedUsers, setSelectedUsers] = useState({});
 
   useEffect(() => {
     dispatch(getAllUsers(''));
@@ -74,6 +77,9 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
             />
           </div>
           <div className="users">
+            {searchError &&
+              <p>{searchError}</p>
+            }
             {users
               ?.filter(user => currentUser.id !== user.id)
               ?.map((user, index) => (

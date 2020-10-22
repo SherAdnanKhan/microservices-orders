@@ -12,6 +12,8 @@ import {
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
   ONLINE_USERS,
+  SET_SEARCH_ERROR,
+  CLEAR_SEARCH_ERROR
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -23,6 +25,7 @@ const initialState = {
   invitedUsers: null,
   faveAndSprfvsUsers: null,
   onlineUsers: [],
+  searchError: "",
 };
 
 export default (state = initialState, action) => {
@@ -87,6 +90,16 @@ export default (state = initialState, action) => {
         ...state,
         onlineUsers: action.payload
       };
+    case SET_SEARCH_ERROR:
+      return {
+        ...state,
+        searchError: "No result found"
+      };
+    case CLEAR_SEARCH_ERROR:
+      return {
+        ...state,
+        searchError: ""
+      }
     default:
       return state;
   }
