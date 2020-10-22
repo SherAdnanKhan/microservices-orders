@@ -13,10 +13,13 @@ import ChatInvitationModel from '../common/chatInvitationModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getConversation } from '../../actions/conversationActions';
 import ToolTip from '../common/toolTip/toolTip';
+import ReportUserModal from "../dashboard/chat/reportUserModal";
+import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
 
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const [connection, setConnection] = useState('connecting...');
 
   useEffect(() => {
@@ -55,62 +58,61 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
 
   }, [hasListner, peer, user, socketId, onPeerClose, connection]);
 
+  const handleReportModal = (status) => {
+    setShowReportModal(status)
+  }
+
   return (
-    <div
-      key={index}
-      className="item"
-      style={{ borderColor: user.feel.color_code }}
-    >
-      {connection &&
-        <div className="connection">
-          <div className="text">
-            {connection}
+    <>
+      <div>
+        {showReportModal &&
+          <ReportUserModal onClose={handleReportModal} user={user} />
+        }
+      </div>
+      <div
+        key={index}
+        className="item"
+        style={{ borderColor: user.feel.color_code }}
+      >
+        {connection &&
+          <div className="connection">
+            <div className="text">
+              {connection}
+            </div>
           </div>
-        </div>
-      }
-      <div className="add-strq">
-        <div className=" dropdown">
-          <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
-          <div className="dropdown-content">
-            <a href={`/dashboard/studio/${user.slug}`} target="_blank" rel="noopener noreferrer">
-              View galleries
-            </a>
-            <a href={`/dashboard/studio/${user.slug}`} target="_blank" rel="noopener noreferrer">
-              View profile
-            </a>
-            <a href="/dashboard/video-call">Send ticket</a>
-            <a href="/dashboard/video-call">Block</a>
-            <a href="/dashboard/video-call">Mute</a>
-            <a href="/dashboard/video-call">Report</a>
-            <a href="/dashboard/video-call">End chat</a>
-          </div>
-        </div>
-        <div className="video-cube">
-          <Avatar
+        }
+        <div className="add-strq">
+          <OtherUserOptions
+            onReportModal={handleReportModal}
             user={user}
           />
-        </div>
-        <div className="artist-name">
-          {user?.username}
-        </div>
+          <div className="video-cube">
+            <Avatar
+              user={user}
+            />
+          </div>
+          <div className="artist-name">
+            {user?.username}
+          </div>
 
-        <div style={{ marginLeft: "auto" }} >
-          {/* <Link to="/dashboard/video-call/add">
+          <div style={{ marginLeft: "auto" }} >
+            {/* <Link to="/dashboard/video-call/add">
                 <button className="btn-style" >Add Artist</button>
               </Link>
               <Link to="/dashboard/video-call/group">
                 <button className="btn-style" style={{ marginLeft: "12px", marginRight: "12px" }} >Group Video</button>
               </Link> */}
+          </div>
+        </div>
+        <div className="user-video">
+          <video
+            ref={ref}
+            autoPlay
+          >
+          </video>
         </div>
       </div>
-      <div className="user-video">
-        <video
-          ref={ref}
-          autoPlay
-        >
-        </video>
-      </div>
-    </div>
+    </>
   );
 }
 
