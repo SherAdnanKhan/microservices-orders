@@ -12,6 +12,7 @@ import privacyReducer from '../reducers/privacyReducer';
 import mzFlashReducer from '../reducers/mzFlashReducer';
 import colorReducer from '../reducers/colorReducer';
 import lobbyReducer from '../reducers/lobbyReducer';
+import onlineUserReducer from '../reducers/onlineUserReducer';
 
 export default combineReducers({
   error: errorReducer,
@@ -19,6 +20,7 @@ export default combineReducers({
   artSelections: artSelectionReducer,
   exibition: exibitionReducer,
   user: userReducer,
+  onlineUser: onlineUserReducer,
   studio: studioReducer,
   gallery: galleryReducer,
   postView: postReducer,

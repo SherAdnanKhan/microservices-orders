@@ -117,3 +117,9 @@ export const convertHexToRGBA = (hexCode, opacity) => {
 
   return `rgba(${r},${g},${b},${opacity})`;
 };
+
+
+export const hasExtension = url => {
+  const splitted = url.split('.');
+  return splitted[splitted.length - 1] ? true : false;
+};

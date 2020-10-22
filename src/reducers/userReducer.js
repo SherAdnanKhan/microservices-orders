@@ -11,7 +11,6 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
-  ONLINE_USERS,
   SET_SEARCH_ERROR,
   CLEAR_SEARCH_ERROR
 } from "../constants/actionTypes";
@@ -24,7 +23,6 @@ const initialState = {
   userRequests: null,
   invitedUsers: null,
   faveAndSprfvsUsers: null,
-  onlineUsers: [],
   searchError: "",
 };
 
@@ -84,11 +82,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         faveAndSprfvsUsers: action.payload
-      };
-    case ONLINE_USERS:
-      return {
-        ...state,
-        onlineUsers: action.payload
       };
     case SET_SEARCH_ERROR:
       return {
