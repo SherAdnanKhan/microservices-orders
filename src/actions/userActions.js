@@ -192,7 +192,7 @@ export const getFaveAndSprfvsUsers = () => dispatch => {
     });
 };
 
-export const getOnlineUsers = (users) => {
+export const setOnlineUsers = (users) => {
   return {
     type: ONLINE_USERS,
     payload: users

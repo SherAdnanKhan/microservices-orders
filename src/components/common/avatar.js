@@ -2,8 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Avatar = ({ user }) => {
-  const { onlineUsers } = useSelector(state => state.user);
-
+  const { onlineUsers } = useSelector(state => state.onlineUser);
   return (
     <>
       {user?.avatars?.length > 0

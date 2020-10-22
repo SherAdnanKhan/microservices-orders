@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from '../../common/avatar';
 import { formatTime, formatDate, getText, getURL, convertHexToRGBA } from '../../../utils/helperFunctions';
-import SocketContext from '../../../context/socketContext';
 import { getCurrentUser, getAuthToken } from '../../../actions/authActions';
 import socket from '../../../services/socketService';
 import { toast } from 'react-toastify';
@@ -714,11 +713,9 @@ class ChatBox extends Component {
 const mapStateToProps = state => {
   return {
     conversation: state.conversation,
-    onlineUsers: state.user.onlineUsers
+    onlineUsers: state.onlineUser
   }
 };
-
-ChatBox.contextType = SocketContext;
 
 export default connect(
   mapStateToProps, {
