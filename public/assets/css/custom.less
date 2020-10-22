@@ -886,7 +886,56 @@ input {
   }
 }
 
-// New
+//View post page
+  .add-img-vid-box-viewpost{
+    display: flex;
+    display: none;
+    position: absolute;
+    border: 1px solid;
+    border-radius: 4%;
+    top: 19%;
+    left: 6%;
+    background:black;
+    width: 15%;
+    height: auto;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    @media @mobile{
+      left: 21%;
+      width: 41%;
+      top:27%;
+    }
+    .close-add-box{
+      position: absolute;
+      top: 50px;
+      right: 27px;
+      border: 1px solid;
+      border-radius: 100%;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    label{
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      margin: 0 30px;
+      cursor: pointer;
+      
+      img{
+        width: 40px;
+        border: 1px solid;
+        border-radius: 100%;
+        padding: 5px;
+      }
+  
+      input {
+        display: none;
+      }
+    }
+  }
+
+//studio page
 .lobby-page{
   height: auto;
   width: 95%;
@@ -903,9 +952,9 @@ input {
   }
   .add-img-vid-box{
     display: flex;
-    position: fixed;
+    position: absolute;
     border: 1px solid;
-    top: 23%;
+    top: 37%;
     left: 23%;
     background: #000;
     width: 50%;
@@ -1435,6 +1484,7 @@ input {
     }
   }
 }
+//lobby page ends
 
 
 @keyframes shake{
@@ -3155,6 +3205,7 @@ img {
         }
       }
     }
+//my studio and other studio page
     .list-body{
       .image-option-box{
         text-align: center;
@@ -3165,10 +3216,10 @@ img {
        .add-img-vid-box{
          display: flex;
          display: none;
-         position: fixed;
+         position: absolute;
          border: 1px solid;
-         top: 23%;
-         left: 35%;
+         top: 64%;
+         left: 3%;
          background: #000;
          text-align: center;
          border-radius:10px;
@@ -3179,8 +3230,9 @@ img {
          justify-content: center;
          align-items: center;
          @media @mobile{
-           left: 25%;
-           width: 50%;
+           left: 8%;
+           top:65%;
+           width: 45%;
          }
          p{
            cursor: pointer;
@@ -4232,8 +4284,8 @@ img {
     display: flex;
     position: fixed;
     border: 1px solid;
-    top: 23%;
-    left: 23%;
+    top: 33%;
+    left: 28%;
     background: #000;
     width: 50%;
     height: 70%;
@@ -4424,7 +4476,8 @@ img {
 }
 // MZ FLASH END
 
-// Post View START
+
+// Lobby Page START
 .post-page{
  width: 100%;
 //  height: 100vh;
@@ -4439,10 +4492,10 @@ img {
   img{
     width:50px;
   }
-@media @mobile {
-  display: none;
-}
-}
+  @media @mobile {
+    display: none;
+  }
+  }
  
 .image-option-box{
   text-align: center;
@@ -4452,10 +4505,10 @@ img {
  .add-img-vid-box{
    display: flex;
    display: none;
-   position: fixed;
+   position: absolute;
    border: 1px solid;
-   top: 23%;
-   left: 35%;
+   top: 38%;
+   left: 25%;
    background: #000;
    text-align: center;
    border-radius:10px;
@@ -4466,8 +4519,9 @@ img {
    justify-content: center;
    align-items: center;
    @media @mobile{
-     left: 25%;
-     width: 50%;
+     left: 22% !important;
+     width: 38% !important;
+     top:35% !important;
    }
    p{
      cursor: pointer;
@@ -4495,7 +4549,7 @@ img {
        padding: 5px;
      }
    }
- }
+  }
 }
  .ncomm-slider {
     height: 0;
