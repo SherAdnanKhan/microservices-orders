@@ -14,12 +14,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getConversation } from '../../actions/conversationActions';
 import ToolTip from '../common/toolTip/toolTip';
 import ReportUserModal from "../dashboard/chat/reportUserModal";
+import BlockUserModal from "../dashboard/chat/blockUserModal";
 import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
 
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showBlockModal, setShowBlockModal] = useState(false);
   const [connection, setConnection] = useState('connecting...');
 
   useEffect(() => {
@@ -62,11 +64,18 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
     setShowReportModal(status)
   }
 
+  const handleBlockModal = (status) => {
+    setShowBlockModal(status)
+  }
+
   return (
     <>
       <div>
         {showReportModal &&
           <ReportUserModal onClose={handleReportModal} user={user} />
+        }
+        {showBlockModal &&
+          <BlockUserModal onClose={handleBlockModal} user={user} />
         }
       </div>
       <div
@@ -84,6 +93,7 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
         <div className="add-strq">
           <OtherUserOptions
             onReportModal={handleReportModal}
+            onBlockModal={handleBlockModal}
             user={user}
           />
           <div className="video-cube">

@@ -197,3 +197,15 @@ export const reportUser = (data, username) => dispatch => {
       toast.success(`you have successfully reported `)
     });
 };
+
+export const blockUser = (data, username) => dispatch => {
+  http
+    .post('/users/block', data)
+    .then(res => {
+      toast.success(`you have successfully blocked ${username}`)
+    })
+    .catch((error) => {
+      error.response &&
+        toast.error(error.response.data.errors.message)
+    });
+};

@@ -10,6 +10,7 @@ import ToolTip from '../../common/toolTip/toolTip';
 import { useSelector } from "react-redux";
 import OtherUserOptions from './OtherUserOptions';
 import ReportUserModal from './reportUserModal';
+import BlockUserModal from "./blockUserModal";
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
@@ -24,6 +25,7 @@ const ChatHeader = ({
   const [showCallingModal, setShowCallingModal] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showBlockModal, setShowBlockModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
   const { width } = useViewport();
@@ -125,10 +127,14 @@ const ChatHeader = ({
     setShowReportModal(status)
   }
 
+  const handleBlockModal = (status) => {
+    setShowBlockModal(status)
+  }
+
   const handleShowActions = e => {
-    console.log("show value=", showActions)
     setShowActions(!showActions);
   };
+
   return (
     <div
       className='chat-header'
@@ -154,7 +160,7 @@ const ChatHeader = ({
         //Desktop  View
         :
         <div className="add-strq">
-          <OtherUserOptions user={filtered} onReportModal={handleReportModal} />
+          <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} />
         </div>
       }
       {
@@ -235,6 +241,10 @@ const ChatHeader = ({
       {
         showReportModal && filtered &&
         <ReportUserModal user={filtered} onClose={handleReportModal} />
+      }
+      {
+        showBlockModal && filtered &&
+        <BlockUserModal user={filtered} onClose={handleBlockModal} />
       }
     </div >
   );
