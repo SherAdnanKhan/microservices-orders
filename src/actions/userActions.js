@@ -17,22 +17,13 @@ import {
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
   ONLINE_USERS,
-  SET_SEARCH_ERROR,
-  CLEAR_SEARCH_ERROR,
 } from '../constants/actionTypes';
-import { isEmpty } from "../utils/helperFunctions";
 
 
 export const getAllUsers = query => dispatch => {
   http
     .get(`/users/search?name=${query}`)
     .then(res => {
-      if (isEmpty(res.data.data.users)) {
-        dispatch({ type: SET_SEARCH_ERROR })
-      }
-      else {
-        dispatch({ type: CLEAR_SEARCH_ERROR })
-      }
       dispatch({
         type: GET_ALL_USERS,
         payload: res.data.data.users

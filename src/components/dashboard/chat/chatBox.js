@@ -713,7 +713,7 @@ class ChatBox extends Component {
 const mapStateToProps = state => {
   return {
     conversation: state.conversation,
-    onlineUsers: state.onlineUser
+    onlineUsers: state.onlineUser.onlineUsers
   }
 };
 

@@ -1,32 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { BehaviorSubject } from 'rxjs';
-import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { alphabetsWithoutSpecialChars } from '../../constants/regex';
 
-const serachSubject = new BehaviorSubject('');
-const searchQueryChangeObservable = serachSubject.pipe(
-  filter(value => value.length > 0),
-  debounceTime(1000),
-  distinctUntilChanged()
-);
+const LazyInput = ({ id, name, action, type = 'text', ...rest }) => {
+  const [serachSubject] = useState(new BehaviorSubject(''));
+  const [query, setQuery] = useState('');
+  let searchQueryChangeObservable = useRef('');
+  const dispatch = useDispatch();
 
-const useObservable = (observable, callback) => {
   useEffect(() => {
-    const subscription = observable.subscribe(result => {
+    searchQueryChangeObservable.current = serachSubject.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    );
+  }, [serachSubject]);
+
+  useEffect(() => {
+    const subscription = searchQueryChangeObservable.current.subscribe(result => {
       if (alphabetsWithoutSpecialChars.test(result)) {
-        callback(result)
+        dispatch(action(result));
       }
     });
     return () => subscription.unsubscribe();
-  }, [observable, callback])
-}
-
-const LazyInput = ({ id, name, value, onChange, onSearchComplete, type = 'text', ...rest }) => {
-  useObservable(searchQueryChangeObservable, onSearchComplete);
+  }, [searchQueryChangeObservable, action, dispatch]);
 
   const handleChange = ({ target: input }) => {
     serachSubject.next(input.value);
-    onChange(input.value);
+    setQuery(input.value);
   }
 
   return (
@@ -35,7 +37,7 @@ const LazyInput = ({ id, name, value, onChange, onSearchComplete, type = 'text',
         type={type}
         name={name}
         id={id}
-        value={value}
+        value={query}
         onChange={handleChange}
         {...rest}
       />

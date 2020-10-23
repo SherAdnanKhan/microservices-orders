@@ -1,22 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
 import LazyInput from '../../common/lazyInput';
 
 const Search = ({ feelColor }) => {
-  const [query, setQuery] = useState('');
-  const dispatch = useDispatch();
   const { users } = useSelector(state => state.user);
-
-  const handleSearch = useCallback(result => {
-    dispatch(getAllUsers(result));
-  }, [dispatch]);
-
-  const handleChange = query => {
-    setQuery(query);
-  };
 
   return (
     <>
@@ -32,10 +22,8 @@ const Search = ({ feelColor }) => {
           <LazyInput
             type="text"
             id="search-field"
-            value={query}
-            onChange={handleChange}
             placeholder="Search"
-            onSearchComplete={handleSearch}
+            action={getAllUsers}
           />
         </div>
       </div>

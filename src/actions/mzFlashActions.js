@@ -110,7 +110,9 @@ export const createFeedComment = (data, user) => dispatch => {
         type: CREATE_FEED_COMMENT,
         payload: res.data.data.feed_comment
       });
-      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_COMMENT);
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_COMMENT);
+      }
     });
 };
 
@@ -126,7 +128,9 @@ export const strokeFeed = (data, user) => dispatch => {
   http
     .post('/mzflash/feed-stroke', data)
     .then(() => {
-      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_STROKE);
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_STROKE);
+      }
     })
     .catch(() => {
       dispatch({
@@ -147,7 +151,9 @@ export const unstrokeFeed = (data, user) => dispatch => {
   http
     .post('/mzflash/feed-unstroke', data)
     .then(() => {
-      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_UNSTROKE);
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_UNSTROKE);
+      }
     })
     .catch(() => {
       dispatch({

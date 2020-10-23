@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Avatar from '../common/avatar';
 import { getFavouriteGalleryUsers } from "../../actions/lobbyActions";
 import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty } from "../../utils/helperFunctions";
 
 const SharePostStrqModal = ({ onShare, onModalClose, post, sendUser }) => {
 
@@ -11,10 +12,8 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, sendUser }) => {
   } = useSelector(state => state);
 
   useEffect(() => {
-    if (!favouriteUsers) {
-      dispatch(getFavouriteGalleryUsers())
-    }
-  }, [dispatch, favouriteUsers])
+    dispatch(getFavouriteGalleryUsers())
+  }, [dispatch])
 
   return (
     <div className="studio">
@@ -45,7 +44,10 @@ const SharePostStrqModal = ({ onShare, onModalClose, post, sendUser }) => {
             </div>
           ))
           }
-
+          {
+            isEmpty(favouriteUsers.data) &&
+            <p style={{ textAlign: "center" }}>There are no faved users</p>
+          }
         </div>
       </div>
 

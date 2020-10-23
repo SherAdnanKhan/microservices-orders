@@ -5,8 +5,6 @@ export const SIGN_UP = 'SIGN_UP';
 //error
 export const SET_ERROR = 'SET_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
-export const SET_SEARCH_ERROR = "SET_SEARCH_ERROR";
-export const CLEAR_SEARCH_ERROR = "CLEAR_SEARCH_ERROR";
 
 //loading
 export const START_LOADING = 'START_LOADING';

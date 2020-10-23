@@ -10,13 +10,13 @@ import {
   CHANGE_CRITIQUES_STATUS,
   SHARE_POST_STRQ,
   CLEAR_STATUS,
+  DELETE_POST
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
 import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
 import { toast } from 'react-toastify';
-// import { getFavourites } from "../actions/userActions";
 
 export const getPost = (post) => dispatch => {
   http
@@ -50,7 +50,9 @@ export const strokePost = (postId, galleryId, user) => dispatch => {
   http
     .post('/post/stroke', { post_id: postId })
     .then(() => {
-      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_STROKE);
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_STROKE);
+      }
     })
     .catch(() => {
       dispatch({
@@ -79,7 +81,9 @@ export const unstrokePost = (postId, galleryId, user) => dispatch => {
   http
     .post('/post/unstroke', { post_id: postId })
     .then(() => {
-      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_UNSTROKE);
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_UNSTROKE);
+      }
     })
     .catch(() => {
       dispatch({
@@ -103,7 +107,9 @@ export const createComment = (data, postId, galleryId, user) => dispatch => {
         type: ADD_POST_COMMENT,
         payload: { comment: res.data.data.comment, postId, galleryId }
       });
-      socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_COMMENT);
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_COMMENT);
+      }
     });
 };
 
@@ -130,11 +136,17 @@ export const getComments = postId => dispatch => {
       });
     });
 };
+
 export const deletePost = post => dispatch => {
+
   http
     .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
+      dispatch({
+        type: DELETE_POST,
+        payload: post.id
+      })
     });
 };
 

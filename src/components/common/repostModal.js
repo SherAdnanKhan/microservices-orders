@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMyGalleries } from "../../actions/galleryActions";
 
-const RepostModal = ({ onModalClose, post, myGalleries, feelColor, onRepost, onGalleryId, selectedGalleryId }) => {
+
+const RepostModal = ({ onModalClose, post, onRepost, onGalleryId, selectedGalleryId }) => {
+    const dispatch = useDispatch();
+    const { myGalleries } = useSelector(state => state.gallery);
+
+    useEffect(() => {
+        dispatch(getMyGalleries())
+    }, [dispatch]);
+
     return (
         <div className="studio">
             <div className="gallery-model">
