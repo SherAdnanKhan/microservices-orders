@@ -19,6 +19,9 @@ const ImageCropper = ({
     if (imageUrl) {
       setImage(image => image = imageUrl)
     }
+    return () => {
+      setImage('')
+    }
   }, [imageUrl]);
 
   const handleComplete = async (crop) => {
