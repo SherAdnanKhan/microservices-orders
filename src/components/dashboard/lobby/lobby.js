@@ -1,14 +1,11 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavouriteGalleryUsers, getFavouritePosts } from '../../../actions/lobbyActions';
-import { getAllConversations } from "../../../actions/conversationActions";
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';
 import { Link } from "react-router-dom";
-import { getUserArtById } from "../../../actions/userActions";
 import FeedSection from '../mzFlashGroup/feedSection';
 import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
-import { getMyGalleries } from "../../../actions/galleryActions";
 import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
@@ -17,15 +14,12 @@ import Loader from "../../common/loader";
 
 const Lobby = () => {
   const dispatch = useDispatch();
-  const [unReadMsgCount, setUnreadMsgCount] = useState("0");
+  const [unReadMsgCount] = useState("0");
   const {
     lobby: { favouriteUsers, favouritePosts, postLoader },
     mzFlash: { collectiveFeeds },
     postView: { sendUser },
     feelColor: { feelColor },
-    gallery: { myGalleries },
-    conversation: { conversations }
-
   } = useSelector(state => state);
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
@@ -36,32 +30,29 @@ const Lobby = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postRef = useRef();
 
-  useEffect(() => {
-    const totalCount = conversations
-      ?.map(conversation => conversation.unread_messages_logs_count)
-      .filter(messageCount => messageCount !== 0)
-      .length
-    setUnreadMsgCount(count => count = totalCount);
-    clearCount(totalCount);
-  }, [conversations]);
+  // useEffect(() => {
+  //   const totalCount = conversations
+  //     ?.map(conversation => conversation.unread_messages_logs_count)
+  //     .filter(messageCount => messageCount !== 0)
+  //     .length
+  //   setUnreadMsgCount(count => count = totalCount);
+  //   clearCount(totalCount);
+  // }, [conversations]);
 
 
   useEffect(() => {
     dispatch(getFavouritePosts());
     dispatch(getFavouriteGalleryUsers());
-    dispatch(getUserArtById(currentUser.art_id));
     dispatch(getCollectiveFeeds());
-    dispatch(getAllConversations());
-    dispatch(getMyGalleries());
-  }, [dispatch, currentUser]);
+  }, [dispatch]);
 
-  const clearCount = (unReadMsgCount) => {
-    if (unReadMsgCount && unReadMsgCount > 0) {
-      setTimeout(() => {
-        setUnreadMsgCount("0")
-      }, 5000)
-    }
-  };
+  // const clearCount = (unReadMsgCount) => {
+  //   if (unReadMsgCount && unReadMsgCount > 0) {
+  //     setTimeout(() => {
+  //       setUnreadMsgCount("0")
+  //     }, 5000)
+  //   }
+  // };
 
   const handleEnter = (e, feedId, comment) => {
     if (e.keyCode === 13 && comments[comment]) {
@@ -180,7 +171,6 @@ const Lobby = () => {
           <div>
             <LobbyPosts
               posts={favouritePosts?.data}
-              galleries={myGalleries}
               sendUser={sendUser}
             />
             {postLoader &&

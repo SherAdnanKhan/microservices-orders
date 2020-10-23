@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
         ...state,
         gallery: {
           ...state.gallery,
-          posts: state?.gallery?.posts.map(post => {
+          posts: state?.gallery?.posts?.map(post => {
             if (action.payload.postId === post.id) {
               return {
                 ...post,

@@ -98,7 +98,6 @@ const Notifications = () => {
         });
 
         socket.on('onlineUsers', data => {
-          console.log(data);
           if (data !== onlineUsers) {
             dispatch(setOnlineUsers(data));
           }

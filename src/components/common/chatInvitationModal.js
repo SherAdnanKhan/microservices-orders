@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from './modal/modal';
 import ModalBody from './modal/modalBody';
 import ModalFooter from './modal/modalFooter';
@@ -9,24 +9,27 @@ import Avatar from './avatar';
 import { createGroupConversation } from '../../actions/conversationActions';
 import socket from '../../services/socketService';
 import { toast } from 'react-toastify';
+import LazyInput from "../common/lazyInput";
+import { isEmpty } from "../../utils/helperFunctions";
 
 const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUsers = false }) => {
   const {
-    user: { searchError },
     user: { users }
   } = useSelector(state => state);
   const dispatch = useDispatch();
+  const [error, setError] = useState('')
   const [selectedUsers, setSelectedUsers] = useState({});
-
   useEffect(() => {
-    dispatch(getAllUsers(''));
-  }, [dispatch]);
+    if (isEmpty(users)) {
+      setError("No record Found")
+    }
+    else {
+      setError("")
+    }
+  }, [users])
 
-  const handleSearch = ({ target: input }) => {
-    dispatch(getAllUsers(input.value));
-  }
 
-  const handleChange = (user) => {
+  const handleCheck = user => {
     const selected = { ...selectedUsers };
 
     if (selected[user.slug]) {
@@ -69,16 +72,16 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
         <ModalBody>
           <div className="search">
             <label>search users</label>
-            <input
+            <LazyInput
               autoFocus
               type="text"
-              onChange={handleSearch}
               placeholder="search"
+              action={getAllUsers}
             />
           </div>
           <div className="users">
-            {searchError &&
-              <p>{searchError}</p>
+            {error &&
+              <p>{error}</p>
             }
             {users
               ?.filter(user => currentUser.id !== user.id)
@@ -105,7 +108,7 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
                           type="checkbox"
                           value={selectedUsers[user.slug] || ''}
                           checked={selectedUsers[user.slug] || false}
-                          onChange={() => handleChange(user)}
+                          onChange={() => handleCheck(user)}
                         />
                       )
                     }
@@ -128,5 +131,5 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
   );
 };
 
-export default ChatInvitationModel;
+export default React.memo(ChatInvitationModel);
 

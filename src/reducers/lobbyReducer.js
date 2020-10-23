@@ -8,7 +8,9 @@ import {
   GET_FAV_POSTS,
   START_POST_LOADER,
   STOP_POST_LOADER,
+  DELETE_POST
 } from "../constants/actionTypes";
+import { hasExtension } from "../utils/helperFunctions";
 
 const initialState = {
   favouriteUsers: {
@@ -37,12 +39,14 @@ export default (state = initialState, action) => {
         }
       }
     case GET_FAV_POSTS:
+      const filtered = action.payload.data.filter(post => hasExtension(post.image.path))
+
       return {
         ...state,
         favouritePosts: {
           ...state.favouritePosts,
           current_page: action.payload.current_page,
-          data: action.payload.current_page === 1 ? action.payload.data : [...state.favouritePosts.data, ...action.payload.data],
+          data: action.payload.current_page === 1 ? filtered : [...state.favouritePosts.data, ...filtered],
           next_page_url: action.payload.next_page_url
         }
       }
@@ -57,7 +61,7 @@ export default (state = initialState, action) => {
               return {
                 ...post,
                 has_stroke: [1],
-                stroke_users: [...post.stroke_users, { id: 0 }]
+                stroke_users_count: post.stroke_users_count + 1
               }
             }
             return post
@@ -74,7 +78,7 @@ export default (state = initialState, action) => {
               return {
                 ...post,
                 has_stroke: [],
-                stroke_users: post.stroke_users.filter((user, index) => index !== post.stroke_users.length - 1)
+                stroke_users_count: post.stroke_users_count - 1
               }
             }
             return post
@@ -90,7 +94,7 @@ export default (state = initialState, action) => {
             if (post.id === action.payload.postId) {
               return {
                 ...post,
-                comments: [...post.comments, action.payload.comment]
+                comments_count: post.comments_count + 1
               }
             }
             return post
@@ -123,6 +127,14 @@ export default (state = initialState, action) => {
             }
             return post
           })
+        }
+      }
+    case DELETE_POST:
+      return {
+        ...state,
+        favouritePosts: {
+          ...state.favouritePosts,
+          data: state.favouritePosts?.data?.filter(post => post.id !== action.payload)
         }
       }
     case START_POST_LOADER:

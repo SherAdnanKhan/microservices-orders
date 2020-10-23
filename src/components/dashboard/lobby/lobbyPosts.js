@@ -34,7 +34,7 @@ import {
 } from '../../../actions/postAction';
 import ToolTip from '../../common/toolTip/toolTip';
 
-const LobbyPosts = ({ posts, galleries, sendUser }) => {
+const LobbyPosts = ({ posts, sendUser }) => {
   const dispatch = useDispatch();
   const [activePost, setActivePost] = useState('');
   const [showDeleteModel, setShowDeleteModel] = useState(false);
@@ -137,7 +137,7 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
     setCommentModal(true);
   }
 
-  const handleActivePost = (post) => {
+  const handleActivePost = post => {
     if (post.id === activePost.id) {
       setActivePost('');
     } else {
@@ -205,7 +205,6 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
           onRepost={handleRepostLobby}
           onModalClose={handleRepostModal}
           post={activePost}
-          myGalleries={galleries}
           selectedGalleryId={galleryId}
           onGalleryId={getSelectedGalleryId}
         />
@@ -227,8 +226,9 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
           mediaType={mediaType}
         />
       }
-      {posts?.map((post, index) => (
-        <div className="post-page" key={index}>
+
+      {posts?.map(post => (
+        <div className="post-page" key={post.id}>
           <div className="post-head">
             <p className="usernames">
               <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
@@ -271,7 +271,7 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
             <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
             <ToolTip id="vault" position="top" />
           </div>
-          <div className="post-body" onClick={() => handleActivePost(post, index)}>
+          <div className="post-body" onClick={() => handleActivePost(post)}>
             {post.post_type === 2
               ? (
                 <VideoPlayer
@@ -301,7 +301,7 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
                 ? 'lobby-icon lobby-icon-slide'
                 : 'lobby-icon'
             }
-              id={`post${index}`}>
+              id={`post${post.id}`}>
               <div className="action">
                 <div className="strk-btn">
                   <Stroke
@@ -311,7 +311,7 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
                     onUnstroke={() => handleUnstrokePost(post)}
                   />
                   <ToolTip id="stroke" />
-                  <p> strokes {post.stroke_users.length} </p>
+                  <p> strokes {post.stroke_users_count} </p>
                 </div>
               </div>
               <div className="action">
@@ -324,7 +324,7 @@ const LobbyPosts = ({ posts, galleries, sendUser }) => {
                   data-for="comments"
                 />
                 <ToolTip id="comments" position="top" />
-                <p> comments {post.comments.length} </p>
+                <p> comments {post.comments_count} </p>
               </div>
               <div className="action">
                 <img

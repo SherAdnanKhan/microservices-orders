@@ -11,8 +11,6 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
-  SET_SEARCH_ERROR,
-  CLEAR_SEARCH_ERROR
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -83,16 +81,6 @@ export default (state = initialState, action) => {
         ...state,
         faveAndSprfvsUsers: action.payload
       };
-    case SET_SEARCH_ERROR:
-      return {
-        ...state,
-        searchError: "No result found"
-      };
-    case CLEAR_SEARCH_ERROR:
-      return {
-        ...state,
-        searchError: ""
-      }
     default:
       return state;
   }
