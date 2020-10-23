@@ -10,6 +10,8 @@ import ChatInvitationModel from '../../common/chatInvitationModal';
 import ChatHeader from './chatHeader';
 import ParticipantsModel from './participantsModel';
 import MeuzmLogo from '../../common/meuzmLogo';
+import UserCube from '../../common/userCube';
+
 import { ReactTinyLink } from 'react-tiny-link';
 import {
   getConversation,
@@ -364,9 +366,7 @@ class ChatBox extends Component {
                   </>
                 ) : (
                   <>
-                    <Avatar
-                      user={conversation?.participants?.filter(p => p.id !== currentUser.id)[0]}
-                    />
+                    <UserCube user={conversation?.participants?.filter(p => p.id !== currentUser.id)[0]} />
                     <div className="chat-uesr-name">
                       <p>	You are now Strqing with
                         <span>

@@ -33,6 +33,7 @@ import {
   shareMzFlash
 } from '../../../actions/postAction';
 import ToolTip from '../../common/toolTip/toolTip';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const LobbyPosts = ({ posts, sendUser }) => {
   const dispatch = useDispatch();
@@ -278,7 +279,12 @@ const LobbyPosts = ({ posts, sendUser }) => {
                   path={post.image.path}
                 />
               ) : (
-                <img src={post.image.path} alt="" />
+                <LazyLoadImage
+                  alt=""
+                  src={post.image.path}
+                  height={post.image.path.height}
+                  width={post.image.path.width}
+                />
               )
             }
           </div>
