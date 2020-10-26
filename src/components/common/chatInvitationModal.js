@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from './modal/modal';
 import ModalBody from './modal/modalBody';
 import ModalFooter from './modal/modalFooter';
 import ModalHeader from './modal/modalHeader';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllUsers } from '../../actions/userActions';
+import { getAllUsers, clearUsers } from '../../actions/userActions';
 import Avatar from './avatar';
 import { createGroupConversation } from '../../actions/conversationActions';
 import socket from '../../services/socketService';
 import { toast } from 'react-toastify';
 import LazyInput from "../common/lazyInput";
-import { isEmpty } from "../../utils/helperFunctions";
 
 const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUsers = false }) => {
   const {
     user: { users }
   } = useSelector(state => state);
   const dispatch = useDispatch();
-  const [error, setError] = useState('')
   const [selectedUsers, setSelectedUsers] = useState({});
-  useEffect(() => {
-    if (isEmpty(users)) {
-      setError("No record Found")
-    }
-    else {
-      setError("")
-    }
-  }, [users])
 
+  useEffect(() => {
+    return () => {
+      dispatch(clearUsers())
+    }
+  }, [dispatch]);
 
   const handleCheck = user => {
     const selected = { ...selectedUsers };
@@ -76,12 +71,13 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
               autoFocus
               type="text"
               placeholder="search"
+              clearAction={clearUsers}
               action={getAllUsers}
             />
           </div>
           <div className="users">
-            {error &&
-              <p>{error}</p>
+            {users && users.length === 0 &&
+              <p>No Data Found</p>
             }
             {users
               ?.filter(user => currentUser.id !== user.id)

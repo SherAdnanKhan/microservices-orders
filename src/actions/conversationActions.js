@@ -24,7 +24,7 @@ export const getAllConversations = (callback) => dispatch => {
 
       dispatch({
         type: GET_ALL_CONVERSATIONS,
-        payload: res.data.data.conversations
+        payload: res.data.data.conversations.data
       });
     });
 };
