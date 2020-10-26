@@ -33,7 +33,7 @@ const BlockUserModal = ({ onClose, user }) => {
           <MeuzmLogo />
           <form onSubmit={handleSubmit}>
             <div className="block-content">
-              <p>Are you sure you want to block this user?</p>
+              <p>Are you sure you want to block {user.first_name}?</p>
             </div>
             <div className="block-submit" >
               <button onClick={handleSubmit} >Yes</button>

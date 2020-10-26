@@ -27,7 +27,7 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation 
       }
       <div className="setMarginTop" />
       <div className="chatMsgLists">
-        {conversations &&
+        {conversations && conversations.length > 0 &&
           conversations.map((conversation, index) => (
             <div
               className={conversation.id === activeConversation.id ? "singleMsg active" : "singleMsg"}
