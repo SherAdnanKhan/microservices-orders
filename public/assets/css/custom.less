@@ -1609,7 +1609,7 @@ input {
 .result-box{
   width: 85%;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px 0; 
     .profile-pic{
       display: flex;
       align-items: center;
@@ -1622,6 +1622,9 @@ input {
         margin: 0;
       }
     }
+}
+.result-box:nth-last-child(1) {
+  margin-bottom: 30px;
 }
 .other-pic{
   display: flex;
@@ -4843,6 +4846,7 @@ img {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-left: 15px;
       img{
         width: 12%;
         cursor: pointer;
@@ -4853,6 +4857,7 @@ img {
     }
     .post-footer-icons{
       text-align: right;
+      margin-right: 15px;
       .post-non-color-icon{
         width: 12%;
         cursor: pointer;
