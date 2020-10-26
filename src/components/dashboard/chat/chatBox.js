@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import ChatInvitationModel from '../../common/chatInvitationModal';
 import ChatHeader from './chatHeader';
 import ParticipantsModel from './participantsModel';
-import MeuzmLogo from '../../common/meuzmLogo';
 import UserCube from '../../common/userCube';
 import { ReactTinyLink } from 'react-tiny-link';
 import {
@@ -26,6 +25,7 @@ import {
 } from '../../../actions/conversationActions';
 import ToolTip from '../../common/toolTip/toolTip';
 import Draw from './draw';
+import MediumMeuzmLogo from '../../common/mediumMeuzmLogo';
 
 class ChatBox extends Component {
   state = {
@@ -347,7 +347,7 @@ class ChatBox extends Component {
               {conversation?.participants?.length > 2
                 ? (
                   <>
-                    <MeuzmLogo />
+                    <MediumMeuzmLogo />
                     <div className="chat-uesr-name">
                       <p>	You are now Strqing with
                         <span>
