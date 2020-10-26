@@ -36,7 +36,13 @@ export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_USER_ART = 'UPDATE_USER_ART';
 export const GET_ALL_FEELS = 'GET_ALL_FEELS';
 export const GET_FAV_AND_SPRFVS_USERS = 'GET_FAV_AND_SPRFVS_USERS';
+
+
+
+//Online Users
 export const ONLINE_USERS = 'ONLINE_USERS';
+export const ADD_ONLINE_USER = 'ADD_ONLINE_USER';
+export const REMOVE_ONLINE_USER = 'REMOVE_ONLINE_USER';
 
 //Studio
 export const GET_MY_STUDIO = 'GET_MY_STUDIO';

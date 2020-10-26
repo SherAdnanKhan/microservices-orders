@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getAuthToken, getCurrentUser, logout } from '../actions/authActions';
 import { updateFeelColor } from '../actions/colorActions';
 import { updateConversationUnreadCount } from '../actions/conversationActions';
-import { setOnlineUsers } from '../actions/userActions';
+import { addOnlineUser, removeOnlineUser, setOnlineUsers } from '../actions/onlineUserActions';
 import socket from '../services/socketService';
 import { playNotificationSound } from '../utils/helperFunctions';
 import { useWindowUnloadEffect } from './common/useWindowUnloadEffect';
@@ -22,11 +22,11 @@ const currentUser = getCurrentUser();
 
 const Notifications = () => {
   const dispatch = useDispatch();
-  const { onlineUsers } = useSelector(state => state.onlineUser);
   const [hasRendered, setHasRendered] = useState(false);
 
   const cleanupEvents = () => {
-    socket.off('onlineUsers');
+    socket.off('onlineUser');
+    socket.off('offlineUser');
     socket.off('notifyColrChange');
     socket.off('reciveUserNotifications');
     socket.off('notify');
@@ -44,7 +44,9 @@ const Notifications = () => {
   useEffect(() => {
     if (currentUser) {
       if (!hasRendered) {
-        socket.emit('joinUser', currentUser, getAuthToken());
+        socket.emit('joinUser', currentUser, getAuthToken(), users => {
+          dispatch(setOnlineUsers(users));
+        });
 
         socket.on('notifyColrChange', (user) => {
           document.querySelector(`meta[name="theme-color"]`).setAttribute(`content`, user.feel.color_code);
@@ -97,10 +99,12 @@ const Notifications = () => {
           }
         });
 
-        socket.on('onlineUsers', data => {
-          if (data !== onlineUsers) {
-            dispatch(setOnlineUsers(data));
-          }
+        socket.on('onlineUser', user => {
+          dispatch(addOnlineUser(user));
+        });
+
+        socket.on('offlineUser', user => {
+          dispatch(removeOnlineUser(user));
         });
 
         socket.on('logout-called', data => {
@@ -111,12 +115,15 @@ const Notifications = () => {
         })
 
         socket.on('reconnect', () => {
-          socket.emit('joinUser', currentUser, getAuthToken());
+          socket.emit('joinUser', currentUser, getAuthToken(), users => {
+            dispatch(setOnlineUsers(users));
+          });
         })
+
         setHasRendered(true);
       }
     }
-  }, [dispatch, onlineUsers, hasRendered]);
+  }, [dispatch, hasRendered]);
 
   return (
     null
