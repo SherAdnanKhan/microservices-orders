@@ -16,7 +16,6 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
-  ONLINE_USERS,
 } from '../constants/actionTypes';
 
 
@@ -181,13 +180,6 @@ export const getFaveAndSprfvsUsers = () => dispatch => {
         payload: res.data.data.faves
       });
     });
-};
-
-export const setOnlineUsers = (users) => {
-  return {
-    type: ONLINE_USERS,
-    payload: users
-  };
 };
 
 export const reportUser = (data, username) => dispatch => {
