@@ -196,7 +196,13 @@ export default (state = initialState, action) => {
         ...state,
         conversations: state.conversations
           ?.map(conversation => {
-            return conversation.id === action.payload.id ? action.payload : conversation
+            if (conversation.id === action.payload.id) {
+              return {
+                ...conversation,
+                participants: action.payload.participants
+              }
+            }
+            return conversation
           }),
         conversation: action.payload
       }
