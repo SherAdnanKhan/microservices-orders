@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { alphabetsWithoutSpecialChars } from '../../constants/regex';
 
-const LazyInput = ({ id, name, action, type = 'text', ...rest }) => {
+const LazyInput = ({ id, name, action, clearAction, type = 'text', ...rest }) => {
   const [serachSubject] = useState(new BehaviorSubject(''));
   const [query, setQuery] = useState('');
   let searchQueryChangeObservable = useRef('');
@@ -23,10 +23,15 @@ const LazyInput = ({ id, name, action, type = 'text', ...rest }) => {
         dispatch(action(result));
       }
     });
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    }
   }, [searchQueryChangeObservable, action, dispatch]);
 
   const handleChange = ({ target: input }) => {
+    if (input.value.length === 0) {
+      dispatch(clearAction());
+    }
     serachSubject.next(input.value);
     setQuery(input.value);
   }

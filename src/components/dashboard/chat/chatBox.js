@@ -11,7 +11,6 @@ import ChatHeader from './chatHeader';
 import ParticipantsModel from './participantsModel';
 import MeuzmLogo from '../../common/meuzmLogo';
 import UserCube from '../../common/userCube';
-
 import { ReactTinyLink } from 'react-tiny-link';
 import {
   getConversation,

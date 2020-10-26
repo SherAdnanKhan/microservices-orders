@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import Search from './search';
 import { useSelector } from "react-redux";
@@ -7,6 +7,11 @@ import ToolTip from "../../common/toolTip/toolTip";
 const Header = () => {
   const history = useHistory();
   const { feelColor } = useSelector(state => state.feelColor);
+  const [showSearch, setShowSearch] = useState(false);
+
+  const handleToggleSearch = () => {
+    setShowSearch(!showSearch)
+  }
 
   return (
     <>
@@ -53,7 +58,12 @@ const Header = () => {
           </div>
           <div className="search" id="search">
 
-            <img src="/assets/images/icons/searchicon.png" alt="search Icon" data-for="search" data-tip='search' />
+            <img
+              src="/assets/images/icons/searchicon.png"
+              alt="search Icon"
+              data-for="search"
+              data-tip='search'
+              onClick={handleToggleSearch} />
             <ToolTip id="search" position="bottom" />
           </div>
           <div className="right-icon">
@@ -88,8 +98,11 @@ const Header = () => {
         </Link>
         <ToolTip position="left" id="feelColor" />
       </div>
-      <Search feelColor={feelColor} />
-
+      <Search
+        feelColor={feelColor}
+        onToggleSearch={handleToggleSearch}
+        showSearch={showSearch}
+      />
       <hr className="do-not-delete" />
     </>
   );

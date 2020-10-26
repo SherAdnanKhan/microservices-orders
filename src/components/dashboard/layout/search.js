@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
 import LazyInput from '../../common/lazyInput';
 
-const Search = ({ feelColor }) => {
+const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const { users } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const handleUnmount = () => {
+    dispatch(clearUsers())
+    onToggleSearch();
+  }
 
   return (
     <>
@@ -15,19 +21,26 @@ const Search = ({ feelColor }) => {
         id="search-bar"
         style={{ backgroundColor: feelColor }}
       >
-        <div className="back-btn" id="go-back">
-          <i className="fa fa-arrow-left"></i>
+        <div className="back-btn" id="go-back" onClick={handleUnmount}>
+          <i className="fa fa-arrow-left" ></i>
         </div>
-        <div className="search-input" style={{ backgroundColor: feelColor }} >
-          <LazyInput
-            type="text"
-            id="search-field"
-            placeholder="Search"
-            action={getAllUsers}
-          />
-        </div>
+        {showSearch &&
+          <div className="search-input" style={{ backgroundColor: feelColor }}>
+            <LazyInput
+              type="text"
+              id="search-field"
+              placeholder="Search"
+              action={getAllUsers}
+              clearAction={clearUsers}
+
+            />
+          </div>
+        }
       </div>
       <div id="search-result">
+        {users && users.length === 0 &&
+          <p id="search-error">No Data Found</p>
+        }
         {users?.map((user, index) => (
           <div key={index} className="result-box">
             <div className="profile-pic">
@@ -74,7 +87,6 @@ const Search = ({ feelColor }) => {
                 }
               }
               )}
-
             </div>
           </div>
         ))
