@@ -39,9 +39,6 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     if (!isEmpty(listCategory) && listCategory.length === 1) {
       setArtId(listCategory[0].id)
     }
-    else if (isEmpty(listCategory) && !isEmpty(artName)) {
-      setArtId("");
-    }
   }, [listCategory, artName])
 
   const updateUserName = () => {
@@ -63,7 +60,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     if (isEmpty(artName)) {
       dispatch(clearArtSearch())
       setError({ artName: "Art cannot be empty" })
-    } else if (!isEmpty(artName) && isEmpty(artId)) {
+    } else if (listCategory?.length === 0) {
       dispatch(clearArtSearch())
       setError({ artName: "Please select a valid Art Name" });
     } else if (!isEmpty(artName) && !isEmpty(artId)) {
@@ -93,16 +90,6 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     }
     !isEmpty(event.target.value) &&
       setError({ ...error, [event.target.name]: "" })
-  }
-  const handleAutoChange = (value) => {
-    setArtName(value)
-    if (value) {
-      dispatch(artSearch(value));
-      setError({ ...error, artName: "" })
-    }
-    else {
-      setError({ ...error, artName: "please select valid art" })
-    }
   }
   const handleAutoSelect = (option) => {
     if (option && option.id) {
@@ -171,8 +158,11 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                 displayProperty="name"
                 placeholder="Choose an art"
                 defaultValue={artName}
-                onChange={handleAutoChange}
+                action={artSearch}
+                clearAction={clearArtSearch}
                 onSelect={handleAutoSelect}
+                clearArtName={() => setArtName('')}
+                clearError={() => setError({ ...error, artName: "" })}
               />
               {
                 error?.artName?.length > 0 &&
@@ -244,7 +234,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
           </form>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
