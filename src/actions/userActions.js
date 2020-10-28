@@ -189,10 +189,6 @@ export const reportUser = (data, username) => dispatch => {
     .post('/users/report', data)
     .then(res => {
       toast.success(`you have successfully reported `)
-      dispatch({
-        type: BLOCK_USER,
-        payload: res.data.data
-      });
     });
 };
 
@@ -202,7 +198,7 @@ export const blockUser = (data, username) => dispatch => {
     .then(res => {
       toast.success(`you have successfully blocked ${username}`)
       dispatch({
-        type: UNBLOCK_USER,
+        type: BLOCK_USER,
         payload: true
       });
     })
