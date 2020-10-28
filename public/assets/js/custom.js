@@ -155,7 +155,6 @@ $(document).on('click', '.bottom', function (e) {
 
 $(document).on('click', '.result-box', function () {
   // $("#search-bar").hide();
-  console.log("closed")
   $("#search-bar").css("display", "none");
   $("#main-menu").show();
   $(".do-not-delete").show();
@@ -340,7 +339,21 @@ $(document)
 // })
 
 $(document).on('click', '.fa-ellipsis-v', function () {
-  $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
+
+  $(this)
+    .closest('.post-page')
+    .find('.add-img-vid-box')
+    .toggle();
+
+  $(this)
+    .closest('.post-page')
+    .find('.add-img-vid-box-viewpost')
+    .toggle();
+  $(this)
+    .closest('.list-body')
+    .find('.add-img-vid-box')
+    .toggle();
+  // $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
 })
 
 $('body').click(function (event) {
@@ -355,3 +368,22 @@ $(document).mouseup(function (e) {
     container.hide();
   }
 });
+
+$(document)
+  .on('click', '.post-body', function (e) {
+    $('.add-img-vid-box').hide();
+    $(this)
+      .prev('.valut-icon')
+      .toggleClass('show-valut');
+
+    $(this)
+      .siblings('.onearttitle')
+      .find('.lobby-icon')
+      .toggleClass('lobby-icon-slide');
+  })
+  .on('click', '.ncomm-img', function (e) {
+    $(this)
+      .closest(`.post-page`)
+      .find(`.ncomm-slider`)
+      .toggleClass('show')
+  })

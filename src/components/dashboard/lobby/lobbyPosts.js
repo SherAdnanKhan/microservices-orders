@@ -134,7 +134,8 @@ const LobbyPosts = ({ posts, sendUser }) => {
     dispatch(storeVault(post))
   }
 
-  const handleOpenCommentModal = () => {
+  const handleOpenCommentModal = post => {
+    setActivePost(post);
     setCommentModal(true);
   }
 
@@ -227,7 +228,6 @@ const LobbyPosts = ({ posts, sendUser }) => {
           mediaType={mediaType}
         />
       }
-
       {posts?.map(post => (
         <div className="post-page" key={post.id}>
           <div className="post-head">
@@ -250,7 +250,7 @@ const LobbyPosts = ({ posts, sendUser }) => {
           </div>
           <div className="image-option-box">
             <ImagePostOption
-              post={activePost}
+              post={post}
               onUnFavGallery={handleUnfavGallery}
               onSharePost={handleShareModel}
               onReportPost={handleReportModel}
@@ -262,17 +262,13 @@ const LobbyPosts = ({ posts, sendUser }) => {
               onMzFlashModal={handleMzFlashModal}
               onAddVault={handleVault} />
           </div>
-          <div className={
-            activePost.id === post.id
-              ? 'valut-icon show-valut'
-              : 'valut-icon'
-          }>
+          <div className='valut-icon' >
             <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="more" data-for="more" ></i>
             <ToolTip id="more" position="top" />
             <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
             <ToolTip id="vault" position="top" />
           </div>
-          <div className="post-body" onClick={() => handleActivePost(post)}>
+          <div className="post-body">
             {post.post_type === 2
               ? (
                 <VideoPlayer
@@ -289,24 +285,14 @@ const LobbyPosts = ({ posts, sendUser }) => {
             }
           </div>
 
-          <div
-            className={
-              activeNcomm.id === post.id
-                ? 'ncomm-slider show'
-                : 'ncomm-slider'
-            }
-          >
+          <div className="ncomm-slider">
             {ncomm?.data &&
               <ImageVideoSlider ncomm={ncomm} />
             }
           </div>
           <div className="onearttitle">
             <p>{post && post.title}</p>
-            <div className={
-              activePost.id === post.id
-                ? 'lobby-icon lobby-icon-slide'
-                : 'lobby-icon'
-            }
+            <div className="lobby-icon"
               id={`post${post.id}`}>
               <div className="action">
                 <div className="strk-btn">
@@ -325,7 +311,7 @@ const LobbyPosts = ({ posts, sendUser }) => {
                   className="comment-img clickable"
                   alt=""
                   src="/assets/images/crit1.png"
-                  onClick={handleOpenCommentModal}
+                  onClick={() => handleOpenCommentModal(post)}
                   data-tip="comments"
                   data-for="comments"
                 />
@@ -334,7 +320,7 @@ const LobbyPosts = ({ posts, sendUser }) => {
               </div>
               <div className="action">
                 <img
-                  className="comment-img clickable"
+                  className="comment-img ncomm-img clickable"
                   alt=""
                   src="/assets/images/ncommnicon.png"
                   onClick={() => handleNcomm(post)}

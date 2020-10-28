@@ -28,6 +28,7 @@
 
 
 .photoshop-picker {
+  width:  300px !important;
   position: absolute;
   left: 50%;
   z-index: 100;
@@ -36,8 +37,8 @@
   /* width: 330px !important; */
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
   .photoshop-picker {
     width: 330px !important;
   }
-}
+} */

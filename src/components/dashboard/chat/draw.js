@@ -13,7 +13,9 @@ const Draw = ({ onClose, room }) => {
   const canvasRef = useRef();
   const [saveData, setSaveData] = useState('');
 
+
   useEffect(() => {
+
     socket.on('drawing', payload => {
       setSaveData(data => data = payload.data);
     });
@@ -39,7 +41,7 @@ const Draw = ({ onClose, room }) => {
   }
 
   const handleSave = () => {
-    const result = canvasRef.current.canvas.drawing.toDataURL();
+    const result = canvasRef.current.canvas.drawing.toDataURL('');
     const image = document.createElement('a');
 
     image.href = result;
@@ -89,8 +91,17 @@ const Draw = ({ onClose, room }) => {
           </div>
         </ModalHeader>
         <ModalBody>
-          <div className="panel" onMouseUp={handleMouseUp}>
+          <div
+            className="panel"
+            onMouseUp={handleMouseUp}
+            onTouchEnd={handleMouseUp}
+          >
             <CanvasDraw
+              style={{
+                position: 'absolute',
+                left: '0',
+                top: '0'
+              }}
               ref={canvasRef}
               saveData={saveData}
               brushRadius={2}
@@ -98,10 +109,10 @@ const Draw = ({ onClose, room }) => {
               catenaryColor="#0a0302"
               gridColor="rgba(150,150,150,0.17)"
               hideGrid={true}
-              canvasWidth={'100%'}
-              canvasHeight={'100%'}
+              canvasWidth="100%"
+              canvasHeight='100%'
               immediateLoading={true}
-              backgroundColor="#fff"
+              backgroundColor='white'
             />
           </div>
         </ModalBody>
