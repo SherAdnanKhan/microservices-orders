@@ -145,23 +145,25 @@ const ChatHeader = ({
             : filtered?.feel.color_code
       }}
     >
-      {filtered && width <= breakPoint ?  //Mobile View
-        <>
-          <i
-            className="fa fa-arrow-left clickable"
-            onClick={onBackPress}
-          />
-          <div className="add-strq" >
-            <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
-              <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
+      {filtered && width <= breakPoint
+        ? (  //Mobile View
+          <>
+            <i
+              className="fa fa-arrow-left clickable"
+              onClick={onBackPress}
+            />
+            <div className="add-strq" >
+              <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
+                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
+              </div>
             </div>
-          </div>
-        </>
+          </>)
         //Desktop  View
-        :
-        <div className="add-strq">
-          <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
-        </div>
+        : (
+          <div className="add-strq">
+            <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
+          </div>
+        )
       }
       {
         conversation?.participants.length > 2

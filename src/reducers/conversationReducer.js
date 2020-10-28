@@ -218,13 +218,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         is_blocked: action.payload,
-        is_viewable: !action.payload
+        is_viewable: false
       }
     case UNBLOCK_USER:
       return {
         ...state,
         is_blocked: action.payload,
-        is_viewable: !action.payload
+        is_viewable: true
       }
     default:
       return state;

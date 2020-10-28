@@ -559,129 +559,131 @@ class ChatBox extends Component {
             <div ref={ref => this.bottomRef.current = ref}></div>
           </div>
         </>
-        {isViewAble ?
-          <div className="chat-footer" ref={this.footerRef}>
-            {progress > 0 &&
-              <div>
-                <div className='progressBar'>
-                  <span className="text"> {progress}% </span>
-                  <div
-                    className="percent"
-                    style={{
-                      width: `${progress}%`,
-                      backgroundColor: currentUser.feel.color_code
-                    }}
-                  >
+        {isViewAble
+          ? (
+            <div className="chat-footer" ref={this.footerRef}>
+              {progress > 0 &&
+                <div>
+                  <div className='progressBar'>
+                    <span className="text"> {progress}% </span>
+                    <div
+                      className="percent"
+                      style={{
+                        width: `${progress}%`,
+                        backgroundColor: currentUser.feel.color_code
+                      }}
+                    >
+                    </div>
                   </div>
                 </div>
-              </div>
-            }
-            <div className="message-input">
-              <span
-                data-for="uplaodPost"
-                data-tip="upload">
-                <i
-                  className="fa fa-plus add-items-btn"
-                  onClick={() => this.setState({ hidden: true })}
+              }
+              <div className="message-input">
+                <span
+                  data-for="uplaodPost"
+                  data-tip="upload">
+                  <i
+                    className="fa fa-plus add-items-btn"
+                    onClick={() => this.setState({ hidden: true })}
+                  />
+                </span>
+                <ToolTip id="uploadPost" />
+                <input
+                  autoFocus
+                  placeholder="Type a message"
+                  type="text"
+                  name="message"
+                  value={message}
+                  onChange={this.handleChange}
+                  onKeyUp={this.handleEnter}
                 />
-              </span>
-              <ToolTip id="uploadPost" />
-              <input
-                autoFocus
-                placeholder="Type a message"
-                type="text"
-                name="message"
-                value={message}
-                onChange={this.handleChange}
-                onKeyUp={this.handleEnter}
-              />
-              <button
-                onClick={this.handlePost}
-                className='clickable btn-send'
-                style={{ backgroundColor: currentUser.feel.color_code }}
-              >
-                Post
+                <button
+                  onClick={this.handlePost}
+                  className='clickable btn-send'
+                  style={{ backgroundColor: currentUser.feel.color_code }}
+                >
+                  Post
            </button>
-            </div>
-            <div className='typing-text'>
-              {this.state.typings.length > 1 &&
-                <>
-                  {this.state.typings?.map((typing, index) => (
-                    <span key={index}> {typing.username} {index < this.state.typings.length - 1 && 'and'}</span>
-                  ))
-                  }
+              </div>
+              <div className='typing-text'>
+                {this.state.typings.length > 1 &&
+                  <>
+                    {this.state.typings?.map((typing, index) => (
+                      <span key={index}> {typing.username} {index < this.state.typings.length - 1 && 'and'}</span>
+                    ))
+                    }
                 are typing..
               </>
-              }
-              {this.state.typings.length === 1 &&
-                <span> {this.state.typings[0].username} is typing </span>
-              }
-            </div>
-            <div className="preview">
-              {image &&
-                <div className="image-preview">
-                  <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
-                  <img src={image} alt="" />
-                </div>
-              }
-              {video &&
-                <div className="video-preview">
-                  <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
-                  <video controls>
-                    <source src={video} type="video/mp4" />
-                    <source src={video} type="video/ogg" />
+                }
+                {this.state.typings.length === 1 &&
+                  <span> {this.state.typings[0].username} is typing </span>
+                }
+              </div>
+              <div className="preview">
+                {image &&
+                  <div className="image-preview">
+                    <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
+                    <img src={image} alt="" />
+                  </div>
+                }
+                {video &&
+                  <div className="video-preview">
+                    <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
+                    <video controls>
+                      <source src={video} type="video/mp4" />
+                      <source src={video} type="video/ogg" />
                 Your browser does not support the video tag.
               </video>
-                </div>
-              }
-              {document &&
-                <div className="document-preview">
-                  <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
-                  <i className="fas fa-file-alt"></i>
-                  <div> {document.doc_name && document.doc_name}</div>
-                </div>
-              }
-              <div ref={ref => this.preview.current = ref}> </div>
-            </div>
-            {
-              hidden &&
-              <div className="add-img-vid-box">
-                <i
-                  style={{ backgroundColor: currentUser.feel.color_code }}
-                  className="fa fa-times close-add-box"
-                  onClick={() => this.setState({ hidden: false })}
-                />
-                <label>
-                  <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-                  <div className="nag-btn">
-                    Add Image
+                  </div>
+                }
+                {document &&
+                  <div className="document-preview">
+                    <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
+                    <i className="fas fa-file-alt"></i>
+                    <div> {document.doc_name && document.doc_name}</div>
+                  </div>
+                }
+                <div ref={ref => this.preview.current = ref}> </div>
               </div>
-                  <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
-                </label>
-                <label>
-                  <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-                  <div className="nag-btn">
-                    Add Video
-              </div>
-                  <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
-                </label>
-                <label>
-                  <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-                  <div className="nag-btn">
-                    Add Document
-              </div>
-                  <input
-                    type="file"
-                    name="video"
-                    onChange={this.handleUpload}
-                    accept=".pdf,.doc,.docx,.xlsx,.xlsm,.xlsb,.xltx,.csv"
+              {
+                hidden &&
+                <div className="add-img-vid-box">
+                  <i
+                    style={{ backgroundColor: currentUser.feel.color_code }}
+                    className="fa fa-times close-add-box"
+                    onClick={() => this.setState({ hidden: false })}
                   />
-                </label>
+                  <label>
+                    <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+                    <div className="nag-btn">
+                      Add Image
               </div>
-            }
-          </div>
-          :
-          <p style={{ textAlign: "center", marginTop: "4%" }}>You cannot message or video chat with {filtered?.first_name}  {filtered?.last_name} ({filtered?.username}) </p>
+                    <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
+                  </label>
+                  <label>
+                    <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+                    <div className="nag-btn">
+                      Add Video
+              </div>
+                    <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
+                  </label>
+                  <label>
+                    <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
+                    <div className="nag-btn">
+                      Add Document
+              </div>
+                    <input
+                      type="file"
+                      name="video"
+                      onChange={this.handleUpload}
+                      accept=".pdf,.doc,.docx,.xlsx,.xlsm,.xlsb,.xltx,.csv"
+                    />
+                  </label>
+                </div>
+              }
+            </div>
+          ) : (
+            <p className="p-style" >You cannot message or video chat with {filtered?.first_name}  {filtered?.last_name} ({filtered?.username}) </p>
+          )
         }
 
         {this.state.show &&
