@@ -14,7 +14,7 @@ import BlockUserModal from "./blockUserModal";
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
-  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw, user
+  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw, user, isBlocked, isViewAble
 
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
@@ -153,14 +153,14 @@ const ChatHeader = ({
           />
           <div className="add-strq" >
             <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
-              <OtherUserOptions user={filtered} onReportModal={handleReportModal} />
+              <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
             </div>
           </div>
         </>
         //Desktop  View
         :
         <div className="add-strq">
-          <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} />
+          <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
         </div>
       }
       {
@@ -177,7 +177,6 @@ const ChatHeader = ({
             </Link>
           )
       }
-
       <div className="user-Status">
         {conversation?.participants.length > 2
           ? (
@@ -191,46 +190,48 @@ const ChatHeader = ({
               <p>
                 <Link to={`/dashboard/studio/${filtered?.slug}`} >{filtered?.username}</Link>
               </p>
-              <span>
-                {onlineUsers?.some(slug => slug === filtered?.slug)
-                  ? <> Online </>
-                  : <>{filtered?.last_login}</>
-                }
-              </span>
+              {isViewAble &&
+                <span>
+                  {onlineUsers?.some(slug => slug === filtered?.slug)
+                    ? <> Online </>
+                    : <>{filtered?.last_login}</>
+                  }
+                </span>
+              }
             </>
           )
         }
       </div>
-
-      <div className="call-btn">
-        <i
-          className="fas fa-user-plus"
-          aria-hidden="true"
-          onClick={onOpenInvitationModel}
-          data-tip="Invite Others"
-          data-for="invite"
-        />
-        <ToolTip id="invite" />
-
-        <div onClick={handleCall}>
-          <img
-            href="#"
-            src="/assets/images/icons/VidStrq.png"
-            className="call-icon"
-            alt="Video Call"
-            data-for="call"
-            data-tip="call"
+      {isViewAble &&
+        <div className="call-btn">
+          <i
+            className="fas fa-user-plus"
+            aria-hidden="true"
+            onClick={onOpenInvitationModel}
+            data-tip="Invite Others"
+            data-for="invite"
           />
-          <ToolTip id="call" />
-        </div>
-        <img
-          src="/assets/images/icons/DrawStrq.png"
-          alt="Draw" data-tip="Draw" data-for="draw"
-          onClick={handleDraw}
-        />
-        <ToolTip id="draw" />
+          <ToolTip id="invite" />
 
-      </div>
+          <div onClick={handleCall}>
+            <img
+              href="#"
+              src="/assets/images/icons/VidStrq.png"
+              className="call-icon"
+              alt="Video Call"
+              data-for="call"
+              data-tip="call"
+            />
+            <ToolTip id="call" />
+          </div>
+          <img
+            src="/assets/images/icons/DrawStrq.png"
+            alt="Draw" data-tip="Draw" data-for="draw"
+            onClick={handleDraw}
+          />
+          <ToolTip id="draw" />
+        </div>
+      }
       {
         showCallingModal &&
         <CallingModal
@@ -244,7 +245,7 @@ const ChatHeader = ({
       }
       {
         showBlockModal && filtered &&
-        <BlockUserModal user={filtered} onClose={handleBlockModal} />
+        <BlockUserModal user={filtered} onClose={handleBlockModal} isBlocked={isBlocked} />
       }
     </div >
   );

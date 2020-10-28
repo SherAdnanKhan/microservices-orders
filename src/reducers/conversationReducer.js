@@ -9,11 +9,15 @@ import {
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
   RESET_CONVERSATION_COUNT,
-  INVITE_PEOPLE_IN_CHAT
+  INVITE_PEOPLE_IN_CHAT,
+  BLOCK_USER,
+  UNBLOCK_USER
 } from "../constants/actionTypes";
 
 const initialState = {
   conversation: null,
+  is_blocked: null,
+  is_viewable: null,
   user: null,
   messages: {
     current_page: 1,
@@ -35,8 +39,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CONVERSATION:
+
       return {
         ...state,
+        is_blocked: action.payload?.is_blocked,
+        is_viewable: action.payload?.is_viewable,
         conversation: action.payload.conversation,
         messages: {
           ...state.messages,
@@ -63,7 +70,8 @@ export default (state = initialState, action) => {
               ?.some(c => c.id === action.payload.conversation.id)
               ? state.conversations
               : [action.payload.conversation, ...state.conversations]
-            : null
+            : null,
+
       };
     case GET_ALL_CONVERSATIONS:
       return {
@@ -205,6 +213,18 @@ export default (state = initialState, action) => {
             return conversation
           }),
         conversation: action.payload
+      }
+    case BLOCK_USER:
+      return {
+        ...state,
+        is_blocked: action.payload,
+        is_viewable: !action.payload
+      }
+    case UNBLOCK_USER:
+      return {
+        ...state,
+        is_blocked: action.payload,
+        is_viewable: !action.payload
       }
     default:
       return state;

@@ -16,6 +16,8 @@ import {
   USER_REQUESTS,
   INVITED_USERS,
   GET_FAV_AND_SPRFVS_USERS,
+  BLOCK_USER,
+  UNBLOCK_USER,
 } from '../constants/actionTypes';
 
 
@@ -187,6 +189,10 @@ export const reportUser = (data, username) => dispatch => {
     .post('/users/report', data)
     .then(res => {
       toast.success(`you have successfully reported `)
+      dispatch({
+        type: BLOCK_USER,
+        payload: res.data.data
+      });
     });
 };
 
@@ -195,9 +201,21 @@ export const blockUser = (data, username) => dispatch => {
     .post('/users/block', data)
     .then(res => {
       toast.success(`you have successfully blocked ${username}`)
+      dispatch({
+        type: UNBLOCK_USER,
+        payload: true
+      });
     })
-    .catch((error) => {
-      error.response &&
-        toast.error(error.response.data.errors.message)
-    });
+};
+
+export const unBlockUser = (data, username) => dispatch => {
+  http
+    .post('/users/unblock', data)
+    .then(res => {
+      toast.success(`you have successfully unblocked ${username}`)
+      dispatch({
+        type: UNBLOCK_USER,
+        payload: false
+      });
+    })
 };
