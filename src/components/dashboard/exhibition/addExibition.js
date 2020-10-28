@@ -45,10 +45,6 @@ const AddExibit = () => {
     }
   }
 
-  function handleAutoChange(value) {
-    // setArts(value);
-    dispatch(artSearch(value));
-  }
 
   function handleAutoSelect(option) {
     setData({ ...data, art_id: option.id });
@@ -221,8 +217,11 @@ const AddExibit = () => {
                     displayProperty="name"
                     placeholder="Choose an art"
                     defaultValue={post?.post?.art?.name}
-                    onChange={handleAutoChange}
                     onSelect={handleAutoSelect}
+                    action={artSearch}
+                    clearAction={clearArtSearch}
+                    clearError={() => setError('')}
+                    clearArtName={() => setData({ ...data, art_id: null })}
                   />
                   <input
                     className="exibition-title-input"

@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { alphabetsWithoutSpecialChars } from '../../constants/regex';
+import { BehaviorSubject } from 'rxjs';
+import { useDispatch } from "react-redux";
 
 const InputAutoComplete = ({
   options, displayProperty, onChange,
-  onSelect, placeholder, defaultValue
+  onSelect, placeholder, defaultValue, action, clearAction, clearArtName, clearError, ...rest
 }) => {
   const [list, setList] = useState([]);
   const [selected, setSelected] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [scrollHeight, setScrollHeight] = useState(0);
-
+  const [serachSubject] = useState(new BehaviorSubject(''));
+  let searchQueryChangeObservable = useRef('');
+  const dispatch = useDispatch();
   const optionRef = useRef();
 
   useEffect(() => {
@@ -23,13 +29,39 @@ const InputAutoComplete = ({
     }
   }, [defaultValue]);
 
+  useEffect(() => {
+
+    searchQueryChangeObservable.current = serachSubject.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    );
+  }, [serachSubject]);
+
+  useEffect(() => {
+    const subscription = searchQueryChangeObservable.current.subscribe(result => {
+      if (alphabetsWithoutSpecialChars.test(result)) {
+        dispatch(action(result));
+      }
+    });
+    return () => {
+      subscription.unsubscribe();
+    }
+  }, [searchQueryChangeObservable, action, dispatch]);
+
+
   const handleChange = ({ target: input }) => {
+    if (input.value.length === 0) {
+      setList([]);
+      clearArtName();
+    }
+    else {
+      clearError()
+    }
     optionRef.current.scrollTo(0, 0);
     setScrollHeight(0);
-
     setSelected(input.value);
-    onChange(input.value);
-    setHighlightedIndex(0);
+    serachSubject.next(input.value);
+    setHighlightedIndex(0);;
   };
 
   const handleSelect = option => {
@@ -47,6 +79,7 @@ const InputAutoComplete = ({
         placeholder={placeholder}
         value={selected}
         onChange={handleChange}
+        {...rest}
         onKeyDown={e => {
           if (e.keyCode === 40) {
             if (highlightedIndex < list.length - 1) {
