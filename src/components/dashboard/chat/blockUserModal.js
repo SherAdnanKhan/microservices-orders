@@ -31,27 +31,24 @@ const BlockUserModal = ({ onClose, user, isBlocked }) => {
   return (
     <div className="block-user-modal">
       <Modal>
-        <ModalHeader onClose={() => onClose(false)}>
-          Block User
-        </ModalHeader>
-        <ModalBody className="modal-content">
-          <MeuzmLogo />
-          <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <ModalHeader onClose={() => onClose(false)} />
+          <ModalBody className="modal-content">
+            <MeuzmLogo />
             <div className="block-content">
               {isBlocked
-                ? <> Are you sure you want to unblock {user.first_name} </>
-                : <>Are you sure you want to block {user.first_name}</>
+                ? <> Are you sure you want to unblock {user.first_name} ?</>
+                : <>Are you sure you want to block {user.first_name} ?</>
               }
-
             </div>
+          </ModalBody>
+          <ModalFooter>
             <div className="block-submit" >
               <button onClick={handleSubmit} >Yes</button>
               <button onClick={() => onClose(false)}>No</button>
             </div>
-          </form>
-        </ModalBody>
-        <ModalFooter>
-        </ModalFooter>
+          </ModalFooter>
+        </form>
       </Modal>
     </div>
   )

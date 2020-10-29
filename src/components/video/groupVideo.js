@@ -16,13 +16,16 @@ import ToolTip from '../common/toolTip/toolTip';
 import ReportUserModal from "../dashboard/chat/reportUserModal";
 import BlockUserModal from "../dashboard/chat/blockUserModal";
 import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
+import MuteUserModal from "../dashboard/chat/muteUserModal";
 
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
   const [hasListner, setHasListner] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showMuteModal, setShowMuteModal] = useState(false);
   const [showBlockModal, setShowBlockModal] = useState(false);
   const [connection, setConnection] = useState('connecting...');
+  const { conversation: { is_blocked, is_muted } } = useSelector(state => state);
 
   useEffect(() => {
     if (!hasListner) {
@@ -67,15 +70,21 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const handleBlockModal = (status) => {
     setShowBlockModal(status)
   }
+  const handleMuteModal = (status) => {
+    setShowMuteModal(status)
+  }
 
   return (
     <>
       <div>
         {showReportModal &&
-          <ReportUserModal onClose={handleReportModal} user={user} />
+          <ReportUserModal onClose={handleReportModal} user={user} isBlocked={is_blocked} />
         }
         {showBlockModal &&
-          <BlockUserModal onClose={handleBlockModal} user={user} />
+          <BlockUserModal onClose={handleBlockModal} user={user} isBlocked={is_blocked} />
+        }
+        {showMuteModal &&
+          <MuteUserModal onClose={handleMuteModal} user={user} isMuted={is_muted} />
         }
       </div>
       <div
@@ -94,7 +103,11 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
           <OtherUserOptions
             onReportModal={handleReportModal}
             onBlockModal={handleBlockModal}
+            onMuteModal={handleMuteModal}
             user={user}
+            isBlocked={is_blocked}
+            isMuted={is_muted}
+
           />
           <div className="video-cube">
             <Avatar
@@ -145,7 +158,7 @@ const GroupVideoCall = () => {
   const [isSwitching, setIsSwitching] = useState(false);
   const [showInvitationModal, setShowInvitationModal] = useState(false);
 
-  const { conversation } = useSelector(state => state.conversation);
+  const { conversation: { conversation, is_blocked, is_viewable } } = useSelector(state => state);
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {

@@ -1,5 +1,5 @@
 import React from 'react';
-const OtherUserOptions = ({ onReportModal, onBlockModal, user, isBlocked }) => {
+const OtherUserOptions = ({ onReportModal, onBlockModal, onMuteModal, user, isBlocked, isMuted }) => {
   return (
     <div className="add-strq">
       <div className="dropdown">
@@ -13,11 +13,15 @@ const OtherUserOptions = ({ onReportModal, onBlockModal, user, isBlocked }) => {
          </a>
           <a href="/dashboard/video-call">Send ticket</a>
           {isBlocked ?
-            <p onClick={() => onBlockModal(true)}>UnBlock</p>
+            <p onClick={() => onBlockModal(true)}>Unblock</p>
             :
             <p onClick={() => onBlockModal(true)}>Block</p>
           }
-          <a href="/dashboard/video-call">Mute</a>
+          {isMuted ?
+            <p onClick={() => onMuteModal(true)}>Unmute</p>
+            :
+            <p onClick={() => onMuteModal(true)}>mute</p>
+          }
           <p onClick={() => onReportModal(true)}>Report</p>
           <a href="/dashboard/video-call">End chat</a>
         </div>
