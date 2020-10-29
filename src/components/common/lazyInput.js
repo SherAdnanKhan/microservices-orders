@@ -39,6 +39,7 @@ const LazyInput = ({ id, name, action, clearAction, type = 'text', ...rest }) =>
   return (
     <>
       <input
+        autoFocus
         type={type}
         name={name}
         id={id}

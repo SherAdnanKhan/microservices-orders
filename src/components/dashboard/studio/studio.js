@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch, useLocation } from 'react-router-dom';
+import { useRouteMatch, useLocation, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGallery, favGallery, unfavGallery, clearGallery, getMyGalleries } from "../../../actions/galleryActions";
 import { getUserStudio, addToSuperFavs, addToInviteOnly, removeFromInviteOnly, unSuperFav, clearUserStudio } from "../../../actions/studioActions";
@@ -105,7 +105,9 @@ const Studio = () => {
 
   return (
     <div className='studio'>
+
       {loading && <Spinner />}
+
       {showModel &&
         <GalleryModel
           myGalleries={myGalleries}
@@ -131,35 +133,45 @@ const Studio = () => {
         onSuperFavRequested={handleSuperFavRequested}
         onUnSprFavModal={handleUnSprFavModal}
       />
-      <StudioDetail
-        userStudio={userStudio}
-        slug={slug}
-      />
-      <Gallery
-        galleries={userStudio && userStudio.user.galleries}
-        activeGallery={activeGallery}
-        onGalleryChange={handleGalleryChange}
-        color={userStudio && userStudio.user.feel.color}
-      />
-      <PostBar
-        galleries={userStudio && userStudio.user.galleries}
-        activeGallery={activeGallery}
-        gallery={gallery}
-        onFave={handleLike}
-        totalPosts={userStudio && userStudio.user.posts_count}
-        galleryPrivacy={userStudio && userStudio.gallery_privacy}
-        user={userStudio?.user}
-      />
-      <Post
-        activeGallery={activeGallery}
-        gallery={gallery}
-        user={userStudio && userStudio.user}
-        galleryPrivacy={userStudio && userStudio.gallery_privacy}
-        onFave={handleLike}
-        onSuperFav={handleSuperFav}
-        isSprFvs={userStudio && userStudio.is_sprfvs}
-      />
-      <StudioFooter />
+      {userStudio && !userStudio.is_viewable &&
+        <div className="blockMessage" >
+          <p>This content isn't available at the moment</p>
+          <div><Link to="/dashboard/lobby"> Go Back</Link></div>
+        </div>
+      }
+      {userStudio?.is_viewable &&
+        <>
+          <StudioDetail
+            userStudio={userStudio}
+            slug={slug}
+          />
+          <Gallery
+            galleries={userStudio && userStudio.user.galleries}
+            activeGallery={activeGallery}
+            onGalleryChange={handleGalleryChange}
+            color={userStudio && userStudio.user.feel.color}
+          />
+          <PostBar
+            galleries={userStudio && userStudio.user.galleries}
+            activeGallery={activeGallery}
+            gallery={gallery}
+            onFave={handleLike}
+            totalPosts={userStudio && userStudio.user.posts_count}
+            galleryPrivacy={userStudio && userStudio.gallery_privacy}
+            user={userStudio?.user}
+          />
+          <Post
+            activeGallery={activeGallery}
+            gallery={gallery}
+            user={userStudio && userStudio.user}
+            galleryPrivacy={userStudio && userStudio.gallery_privacy}
+            onFave={handleLike}
+            onSuperFav={handleSuperFav}
+            isSprFvs={userStudio && userStudio.is_sprfvs}
+          />
+          <StudioFooter />
+        </>
+      }
     </div>
   );
 };

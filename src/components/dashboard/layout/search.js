@@ -32,7 +32,6 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
               placeholder="Search"
               action={getAllUsers}
               clearAction={clearUsers}
-
             />
           </div>
         }
@@ -46,7 +45,7 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
             <div className="profile-pic">
               <Link
                 to={`/dashboard/studio/${user.slug}`}
-                onClick={clearUsers}
+                onClick={handleUnmount}
               >
                 <Avatar
                   user={user}
