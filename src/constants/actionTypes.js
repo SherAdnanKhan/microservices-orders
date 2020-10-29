@@ -38,6 +38,8 @@ export const GET_ALL_FEELS = 'GET_ALL_FEELS';
 export const GET_FAV_AND_SPRFVS_USERS = 'GET_FAV_AND_SPRFVS_USERS';
 export const BLOCK_USER = 'BLOCK_USER';
 export const UNBLOCK_USER = 'UNBLOCK_USER';
+export const MUTE_USER = 'MUTE_USER';
+export const UNMUTE_USER = 'UNMUTE_USER';
 
 
 

@@ -11,10 +11,12 @@ import { useSelector } from "react-redux";
 import OtherUserOptions from './OtherUserOptions';
 import ReportUserModal from './reportUserModal';
 import BlockUserModal from "./blockUserModal";
+import MuteUserModal from './muteUserModal';
+
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
-  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw, user, isBlocked, isViewAble
+  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw, user, isBlocked, isViewAble, isMuted
 
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
@@ -25,6 +27,7 @@ const ChatHeader = ({
   const [showCallingModal, setShowCallingModal] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showMuteModal, setShowMuteModal] = useState(false);
   const [showBlockModal, setShowBlockModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
@@ -131,6 +134,10 @@ const ChatHeader = ({
     setShowBlockModal(status)
   }
 
+  const handleMuteModal = (status) => {
+    setShowMuteModal(status)
+  }
+
   const handleShowActions = e => {
     setShowActions(!showActions);
   };
@@ -154,14 +161,14 @@ const ChatHeader = ({
             />
             <div className="add-strq" >
               <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
-                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
+                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} />
               </div>
             </div>
           </>)
         //Desktop  View
         : (
           <div className="add-strq">
-            <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} isBlocked={isBlocked} />
+            <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} isMuted={isMuted} />
           </div>
         )
       }
@@ -248,6 +255,10 @@ const ChatHeader = ({
       {
         showBlockModal && filtered &&
         <BlockUserModal user={filtered} onClose={handleBlockModal} isBlocked={isBlocked} />
+      }
+      {
+        showMuteModal && filtered &&
+        <MuteUserModal user={filtered} onClose={handleMuteModal} isMuted={isMuted} />
       }
     </div >
   );

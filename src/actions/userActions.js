@@ -18,6 +18,8 @@ import {
   GET_FAV_AND_SPRFVS_USERS,
   BLOCK_USER,
   UNBLOCK_USER,
+  MUTE_USER,
+  UNMUTE_USER,
 } from '../constants/actionTypes';
 
 
@@ -212,6 +214,29 @@ export const unBlockUser = (data, username) => dispatch => {
       dispatch({
         type: UNBLOCK_USER,
         payload: false
+      });
+    })
+};
+
+export const muteUser = (data, username) => dispatch => {
+  http
+    .post('/users/mute', data)
+    .then(res => {
+      toast.success(`you have successfully muted ${username}`)
+      dispatch({
+        type: MUTE_USER,
+        payload: true
+      });
+    })
+};
+export const unMuteUser = (data, username) => dispatch => {
+  http
+    .post('/users/unmute', data)
+    .then(res => {
+      toast.success(`you have successfully unmuted ${username}`)
+      dispatch({
+        type: UNMUTE_USER,
+        payload: false,
       });
     })
 };

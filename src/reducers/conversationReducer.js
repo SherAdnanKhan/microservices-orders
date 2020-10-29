@@ -11,13 +11,16 @@ import {
   RESET_CONVERSATION_COUNT,
   INVITE_PEOPLE_IN_CHAT,
   BLOCK_USER,
-  UNBLOCK_USER
+  UNBLOCK_USER,
+  MUTE_USER,
+  UNMUTE_USER,
 } from "../constants/actionTypes";
 
 const initialState = {
   conversation: null,
   is_blocked: null,
   is_viewable: null,
+  is_muted: null,
   user: null,
   messages: {
     current_page: 1,
@@ -39,11 +42,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CONVERSATION:
-
       return {
         ...state,
         is_blocked: action.payload?.is_blocked,
         is_viewable: action.payload?.is_viewable,
+        is_muted: action.payload?.is_muted,
         conversation: action.payload.conversation,
         messages: {
           ...state.messages,
@@ -225,6 +228,16 @@ export default (state = initialState, action) => {
         ...state,
         is_blocked: action.payload,
         is_viewable: true
+      }
+    case MUTE_USER:
+      return {
+        ...state,
+        is_muted: action.payload,
+      }
+    case UNMUTE_USER:
+      return {
+        ...state,
+        is_muted: action.payload,
       }
     default:
       return state;

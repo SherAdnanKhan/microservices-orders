@@ -323,7 +323,7 @@ class ChatBox extends Component {
     const currentUser = getCurrentUser();
     const { user, messages, conversation } = this.props.conversation;
     const filtered = conversation?.participants?.filter(p => p.id !== currentUser.id)[0];
-    const { onlineUsers, isBlocked, isViewAble } = this.props;
+    const { onlineUsers, isBlocked, isViewAble, isMuted } = this.props;
 
     return (
       <div className="chat-box">
@@ -338,6 +338,7 @@ class ChatBox extends Component {
             onBackPress={this.props.onBackPress}
             isBlocked={isBlocked}
             isViewAble={isViewAble}
+            isMuted={isMuted}
             onOpenDraw={() => this.setState({ draw: true })}
           />
 
@@ -721,6 +722,7 @@ const mapStateToProps = state => {
     conversation: state.conversation,
     isBlocked: state.conversation.is_blocked,
     isViewAble: state.conversation.is_viewable,
+    isMuted: state.conversation.is_muted,
     onlineUsers: state.onlineUser.onlineUsers
   }
 };
