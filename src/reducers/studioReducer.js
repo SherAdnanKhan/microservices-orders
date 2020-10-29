@@ -15,7 +15,9 @@ import {
   CLEAR_USER_STUDIO,
   UPDATE_USERNAME,
   GET_MY_VAULTS,
-  UPDATE_USER_ART
+  UPDATE_USER_ART,
+  BLOCK_USER,
+  UNBLOCK_USER
 } from "../constants/actionTypes";
 import { SPRFVS } from "../constants/privacyTypes";
 
@@ -188,6 +190,23 @@ export default (state = initialState, action) => {
             ? action.payload.vault_posts.data
             : [...state.vaults.data, ...action.payload.vault_posts.data],
           next_page_url: action.payload.vault_posts.next_page_url
+        }
+      }
+    case BLOCK_USER:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          is_blocked: true
+        }
+      }
+
+    case UNBLOCK_USER:
+      return {
+        ...state,
+        userStudio: {
+          ...state.userStudio,
+          is_blocked: false,
         }
       }
     default:

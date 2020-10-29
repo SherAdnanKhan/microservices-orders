@@ -7,8 +7,6 @@ const Comment = ({ post, onClose }) => {
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
   const { comments } = useSelector(state => state.postView);
-
-
   const bottomRef = useRef();
 
   useEffect(() => {

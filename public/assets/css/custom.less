@@ -121,14 +121,7 @@ input {
   .report-user-modal {
     .myModal {          
       .innerModal {
-        .modalHeader {
-          .btn-close {
-            display: none;
-          }
-          i{
-          margin-left: auto;
-          }
-        }
+        
         .modalBody {
           .modalContent {
             .artcubecase {
@@ -192,11 +185,12 @@ input {
               }
             }
             .block-content{
-              margin-top: 10px;
-              p{
-                width:100%;
-                text-align: center;
-              }
+              text-align: center;
+              // margin-top: 10px;
+              // p{
+              //   width:100%;
+              //   text-align: center;
+              // }
             }
               .block-submit{
                 margin-top: 20px;
@@ -1047,12 +1041,13 @@ input {
     }
   }
   .section-2{
-    width: 51% ;
-    padding:10px;
+    width: 47% ;
+    padding: 4%;
     box-sizing: border-box;
     max-height: 75vh;
     overflow-y: auto;
     margin-top: 61px;
+    overflow-x: hidden;
     // height: calc(100vh - 101px);
     @media @mobile {
       padding:0px;
@@ -2772,9 +2767,14 @@ img {
 //My Studio End
 
 // Studio Start
-
 .studio {
-
+  .blockMessage {
+    margin-top: 21%;
+    text-align:center;
+   a {
+    color: white;
+   }
+  }
   .gallery-model {
     position: fixed;
     left: 25%;
@@ -2910,11 +2910,25 @@ img {
     
     .actions {
       position: absolute;
-      right: 100px;
+      right: 5px;
       top: 20%;
       @media screen and (max-width:550px) {
         right: 5px;
       }
+      button.unblock {
+        position: absolute;
+        right: 10px;
+        top: 3px;
+        background: #ff000000;
+        color: #fff;
+        font-size: 12px;
+        align-content: center;
+        padding: 5px 7px;
+        cursor: pointer;
+        @media @mobile {
+          right: 10px;
+        }
+     }
       // width: 100px;
       // height: 30px;
       .sprvs-empty {
@@ -2925,7 +2939,7 @@ img {
         cursor:pointer;
         font-size: 12px;
         position: absolute;
-        left: -69%;
+        left: -84%;
         top: 30%;
       }
 

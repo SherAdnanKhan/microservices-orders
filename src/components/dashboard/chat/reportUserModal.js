@@ -39,15 +39,12 @@ const ReportUserModal = ({ user, onClose }) => {
   return (
     <div className="report-user-modal">
       <Modal>
-        <ModalHeader className="btn-close">
-          <i
-            className="fas fa-window-close"
-            onClick={() => onClose(false)}>
-          </i>
+        <form onSubmit={handleSubmit}>
+          <ModalHeader onClose={() => onClose(false)}>
+            Report User
         </ModalHeader>
-        <ModalBody className="modal-content">
-          <MeuzmLogo />
-          <form onSubmit={handleSubmit}>
+          <ModalBody className="modal-content">
+            <MeuzmLogo />
             <div className="reason">
               <label>Reported Reason</label>
               <textarea
@@ -66,13 +63,13 @@ const ReportUserModal = ({ user, onClose }) => {
                 </div>
               }
             </div>
+          </ModalBody>
+          <ModalFooter>
             <div className="report-submit" >
               <button>Submit </button>
             </div>
-          </form>
-        </ModalBody>
-        <ModalFooter>
-        </ModalFooter>
+          </ModalFooter>
+        </form>
       </Modal>
     </div>
   )
