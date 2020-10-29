@@ -158,7 +158,7 @@ const GroupVideoCall = () => {
   const [isSwitching, setIsSwitching] = useState(false);
   const [showInvitationModal, setShowInvitationModal] = useState(false);
 
-  const { conversation: { conversation, is_blocked, is_viewable } } = useSelector(state => state);
+  const { conversation: { conversation } } = useSelector(state => state);
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
