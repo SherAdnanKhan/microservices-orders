@@ -23,6 +23,7 @@ import MzFlashModal from "../common/mzFlashModal";
 import ShowMoreText from 'react-show-more-text';
 import ToolTip from './toolTip/toolTip';
 import LazyLoad from "react-lazyload";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Post = ({
   gallery, user, activeGallery,
@@ -236,7 +237,6 @@ const Post = ({
                             </div>
                           ))}
                       </div>
-
                       <div className="show-list">
                         {gallery &&
                           gallery.posts.map((post, index) => (
@@ -254,7 +254,6 @@ const Post = ({
                                 <Avatar
                                   user={user}
                                 />
-
                                 {user && user.art &&
                                   <>
                                     {user.art.parent && user.art.parent.name + '/'}
@@ -313,11 +312,15 @@ const Post = ({
                                         Your browser does not support the video tag.
                                       </video>
                                       </>
-
                                     ) : (
                                       <>
                                         <p id="post-title">{post.title}</p>
-                                        <img src={`${post.image.path}`} alt="" />
+                                        <LazyLoadImage
+                                          alt=""
+                                          src={`${post.image.path}`}
+                                          height={post.image.path.height}
+                                          width={post.image.path.width}
+                                        />
                                       </>
                                     )}
                                 </LazyLoad>

@@ -91,9 +91,15 @@ const Comment = ({ post, onClose }) => {
       <div className="comments-box">
         <div className="comment-bar">
           <div className="commnent-img">
-            {post?.image
-              ? <img src={post.image.path} alt="" />
-              : <img src="/assets/images/gray.png" alt="" />
+            {post?.post_type === 1 ?
+              <img
+                alt=""
+                src={post.image.path}
+              />
+              :
+              <video controls>
+                <source src={post?.image?.path}></source>
+              </video>
             }
             <i className="fa fa-times close-comment" onClick={onClose}></i>
           </div>
