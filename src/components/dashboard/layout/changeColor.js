@@ -26,7 +26,7 @@ const ChangeColor = ({ onColorChange }) => {
             <div className="procu">
               <ProfileCube
                 avatars={currentUser?.avatars}
-                feelColor={currentUser?.feel.color_code}
+                feelColor={currentUser?.feel?.color_code}
               />
             </div>
           ) : (

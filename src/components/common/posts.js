@@ -216,23 +216,23 @@ const Post = ({
                         {gallery
                           && gallery.posts.map((post, index) => (
                             <div key={index} className="">
-                              <Link to={`/dashboard/viewpost/${post.slug}`}>
+                              <Link to={`/dashboard/viewpost/${post?.slug}`}>
                                 {post.post_type === 2
                                   ? (
                                     <>
-                                      <p id="post-title">{post.title}</p>
+                                      <p id="post-title">{post?.title}</p>
                                       <video width="320" height="240" controls>
-                                        <source src={post.image.path} type="video/mp4" />
-                                        <source src={post.image.path} type="video/ogg" />
+                                        <source src={post?.image?.path} type="video/mp4" />
+                                        <source src={post?.image?.path} type="video/ogg" />
                                     Your browser does not support the video tag.
                                     </video>
                                     </>
                                   ) : (
                                     <>
-                                      <p id="post-title">{post.title}</p>
+                                      <p id="post-title">{post?.title}</p>
                                       <LazyLoadImage
                                         alt=""
-                                        src={`${post.image.path}`}
+                                        src={`${post?.image?.path}`}
                                       />
                                     </>
                                   )}
@@ -308,19 +308,19 @@ const Post = ({
                                   {post.post_type === 2
                                     ? (
                                       <>
-                                        <p id="post-title">{post.title}</p>
+                                        <p id="post-title">{post?.title}</p>
                                         <video controls onClick={e => e.preventDefault()}>
-                                          <source src={post.image.path} type="video/mp4" />
-                                          <source src={post.image.path} type="video/ogg" />
+                                          <source src={post?.image?.path} type="video/mp4" />
+                                          <source src={post?.image?.path} type="video/ogg" />
                                         Your browser does not support the video tag.
                                       </video>
                                       </>
                                     ) : (
                                       <>
-                                        <p id="post-title">{post.title}</p>
+                                        <p id="post-title">{post?.title}</p>
                                         <LazyLoadImage
                                           alt=""
-                                          src={`${post.image.path}`}
+                                          src={post?.image?.path}
                                         />
                                       </>
                                     )}
