@@ -177,7 +177,6 @@ class ChatBox extends Component {
           conversation
             ?.participants
             ?.filter(p => p.id !== user.id)
-            ?.map(p => p.slug)
       };
 
       if (message.trim() !== '') {
@@ -657,21 +656,21 @@ class ChatBox extends Component {
                     <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
                     <div className="nag-btn">
                       Add Image
-              </div>
+                    </div>
                     <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
                   </label>
                   <label>
                     <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
                     <div className="nag-btn">
                       Add Video
-              </div>
+                    </div>
                     <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
                   </label>
                   <label>
                     <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
                     <div className="nag-btn">
                       Add Document
-              </div>
+                    </div>
                     <input
                       type="file"
                       name="video"

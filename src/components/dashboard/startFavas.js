@@ -75,15 +75,17 @@ const StartFaves = ({ user }) => {
                     <div className="other-img">
                       {user.galleries[0].posts.map((post, in_key) => (
                         <div key={in_key}>
-                          {post.type === 2 ? (
-                            <video width="180" height="192" controls>
-                              <source src={post.image && post.image.path} type="video/mp4" />
-                              <source src={post.image && post.image.path} type="video/ogg" />
+                          {post.type === 2
+                            ? (
+                              <video width="180" height="192" controls>
+                                <source src={post?.image?.path} type="video/mp4" />
+                                <source src={post?.image?.path} type="video/ogg" />
                               Your browser does not support the video tag.
-                            </video>
-                          ) : (
-                              <img src={`${post.image && post.image.path}`} alt="" />
-                            )}
+                              </video>
+                            ) : (
+                              <img src={`${post?.image?.path}`} alt="" />
+                            )
+                          }
                         </div>
                       ))}
                     </div>

@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
         }
       }
     case GET_FAV_POSTS:
-      const filtered = action.payload.data.filter(post => hasExtension(post.image.path))
+      const filtered = action.payload.data.filter(post => hasExtension(post?.image?.path))
 
       return {
         ...state,

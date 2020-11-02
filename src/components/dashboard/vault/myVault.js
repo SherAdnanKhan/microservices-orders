@@ -62,7 +62,7 @@ const MyVault = () => {
                                 {vault?.post?.post_type === 2 ?
                                   <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
                                     <video controls >
-                                      <source src={vault?.post.image.path} type="video/mp4" />
+                                      <source src={vault?.post?.image?.path} type="video/mp4" />
                                     </video>
                                   </Link>
                                   :
@@ -87,7 +87,7 @@ const MyVault = () => {
                                     {vault?.post?.post_type === 2 ?
                                       <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
                                         <video width="320" height="240" controls >
-                                          <source src={vault?.post.image.path} type="video/mp4" />
+                                          <source src={vault?.post?.image?.path} type="video/mp4" />
                                         </video>
                                       </Link>
                                       :
