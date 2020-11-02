@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
@@ -8,10 +8,17 @@ import LazyInput from '../../common/lazyInput';
 const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const { users } = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleUnmount = () => {
-    dispatch(clearUsers())
+    console.log('unmount')
+    dispatch(clearUsers());
     onToggleSearch();
+  }
+
+  const handleNavigate = user => {
+    handleUnmount();
+    return history.push(`/dashboard/studio/${user.slug}`);
   }
 
   return (
@@ -41,21 +48,18 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
           <p id="search-error">No Data Found</p>
         }
         {users?.map((user, index) => (
-          <div key={index} className="result-box">
+          <div
+            key={index}
+            className="result-box clickable"
+            onClick={() => handleNavigate(user)}
+          >
             <div className="profile-pic">
-              <Link
-                to={`/dashboard/studio/${user.slug}`}
-                onClick={handleUnmount}
-              >
-                <Avatar
-                  user={user}
-                />
-              </Link>
+              <Avatar
+                user={user}
+              />
               <div>
                 <p className="usernames">
-                  <Link to={`/dashboard/studio/${user.slug}`} >
-                    {user.username}
-                  </Link>
+                  {user.username}
                 </p>
                 <p>
                   {user.art &&

@@ -206,7 +206,8 @@ export default (state = initialState, action) => {
         ...state,
         userStudio: {
           ...state.userStudio,
-          is_blocked: false,
+          is_blocked: action.payload.is_blocked,
+          is_viewable: action.payload.is_viewable
         }
       }
     default:

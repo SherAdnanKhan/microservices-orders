@@ -213,7 +213,7 @@ export const unBlockUser = (data, username) => dispatch => {
       toast.success(`you have successfully unblocked ${username}`)
       dispatch({
         type: UNBLOCK_USER,
-        payload: false
+        payload: res.data.data
       });
     })
 };

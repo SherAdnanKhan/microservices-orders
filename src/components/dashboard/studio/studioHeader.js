@@ -28,10 +28,9 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, on
         <ToolTip position="left" id="back" />
       </div>
 
-      {userStudio && <p>{userStudio.user.username}</p>}
+      <p>{userStudio?.user?.username}</p>
 
-
-      <div className="actions">
+      <div className="studio-actions">
         {userStudio && userStudio.is_blocked &&
           <button
             className="unblock"

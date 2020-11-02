@@ -241,26 +241,33 @@ const ChatHeader = ({
           <ToolTip id="draw" />
         </div>
       }
-      {
-        showCallingModal &&
+      {showCallingModal &&
         <CallingModal
           onDecline={handleDecline}
           feelColor={feelColor}
         />
       }
-      {
-        showReportModal && filtered &&
-        <ReportUserModal user={filtered} onClose={handleReportModal} />
+      {showReportModal && filtered &&
+        <ReportUserModal
+          user={filtered}
+          onClose={handleReportModal}
+        />
       }
-      {
-        showBlockModal && filtered &&
-        <BlockUserModal user={filtered} onClose={handleBlockModal} isBlocked={isBlocked} />
+      {showBlockModal && filtered &&
+        <BlockUserModal
+          user={filtered}
+          onClose={handleBlockModal}
+          isBlocked={isBlocked}
+        />
       }
-      {
-        showMuteModal && filtered &&
-        <MuteUserModal user={filtered} onClose={handleMuteModal} isMuted={isMuted} />
+      {showMuteModal && filtered &&
+        <MuteUserModal
+          user={filtered}
+          onClose={handleMuteModal}
+          isMuted={isMuted}
+        />
       }
-    </div >
+    </div>
   );
 };
 

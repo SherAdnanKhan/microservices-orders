@@ -43,10 +43,10 @@ const BlockUserModal = ({ onClose, user, isBlocked }) => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <div className="block-submit" >
-              <button onClick={handleSubmit} >Yes</button>
-              <button onClick={() => onClose(false)}>No</button>
-            </div>
+            {/* <div className="block-submit" > */}
+            <button onClick={handleSubmit} >Yes</button>
+            <button onClick={() => onClose(false)}>No</button>
+            {/* </div> */}
           </ModalFooter>
         </form>
       </Modal>
