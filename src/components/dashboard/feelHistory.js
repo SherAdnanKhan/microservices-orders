@@ -20,8 +20,8 @@ const FeelHistory = () => {
   }
 
   let tablePagination = "";
-  if (feelHistory && feelHistory.user_feel_list) {
-    let pages = Math.ceil(parseInt(feelHistory.user_feel_list.total / parseInt(feelHistory.user_feel_list.per_page)))
+  if (feelHistory && feelHistory?.user_feel_list) {
+    let pages = Math.ceil(parseInt(feelHistory?.user_feel_list?.total / parseInt(feelHistory?.user_feel_list?.per_page)))
     tablePagination = <Pagination pages={pages + 1} page={page} onPageChange={handlePageChange} />
   }
 
@@ -37,9 +37,9 @@ const FeelHistory = () => {
         <tbody>
           {
             feelHistory &&
-            feelHistory.user_feel_list.data.map((feel_history, index) => (
+            feelHistory?.user_feel_list?.data?.map((feel_history, index) => (
               <tr key={index}>
-                <td>{feel_history.feel}</td>
+                <td>{feel_history.feel.color}</td>
                 <td>{formatDateTime(feel_history.created_at)}</td>
               </tr>
             ))
