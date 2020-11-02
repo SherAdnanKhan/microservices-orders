@@ -2,8 +2,9 @@ import React from 'react';
 
 
 const DeleteModal = ({ onDelete, onModalClose, activePost }) => {
-    // const handleDelete = (status, post) => {
-    //     setShowDeleteModel(status);
+    // const dispatch = useDispatch();
+    // const handleDelete = (post) => {
+    //     onModalClose(false);
     //     dispatch(deletePost(post));
     // }
     return (
@@ -18,9 +19,7 @@ const DeleteModal = ({ onDelete, onModalClose, activePost }) => {
                     </div>
                 </div>
             </div>
-
         </div>
-
     );
 };
 
