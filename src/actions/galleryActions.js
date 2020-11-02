@@ -18,6 +18,8 @@ import http from '../services/httpService';
 import { toast } from 'react-toastify';
 
 export const getGallery = slug => dispatch => {
+  dispatch(clearGallery());
+
   http
     .get(`/galleries/${slug}`)
     .then(res => {
