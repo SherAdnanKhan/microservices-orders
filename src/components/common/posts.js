@@ -230,7 +230,10 @@ const Post = ({
                                   ) : (
                                     <>
                                       <p id="post-title">{post.title}</p>
-                                      <img src={`${post.image.path}`} alt="" />
+                                      <LazyLoadImage
+                                        alt=""
+                                        src={`${post.image.path}`}
+                                      />
                                     </>
                                   )}
                               </Link>
@@ -318,8 +321,6 @@ const Post = ({
                                         <LazyLoadImage
                                           alt=""
                                           src={`${post.image.path}`}
-                                          height={post.image.path.height}
-                                          width={post.image.path.width}
                                         />
                                       </>
                                     )}

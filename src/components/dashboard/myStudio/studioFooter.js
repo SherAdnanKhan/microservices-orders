@@ -7,7 +7,7 @@ import Comment from '../../dashboard/viewPost/comments';
 import { Link } from "react-router-dom";
 import ShowMoreText from 'react-show-more-text';
 import ToolTip from "../../common/toolTip/toolTip";
-import { LazyLoad } from "react-lazyload";
+import LazyLoad from "react-lazyload";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
@@ -122,7 +122,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                           <>
                             <p id="post-title">{post.title}</p>
                             <LazyLoadImage
-                              alt=""
+                              alt="image"
                               src={post.image.path}
                             />
                           </>
