@@ -137,12 +137,15 @@ export const getComments = postId => dispatch => {
     });
 };
 
-export const deletePost = post => dispatch => {
+export const deletePost = (post, history) => dispatch => {
 
   http
     .delete(`/post/${post.id}`)
     .then(res => {
       toast.success("Post Deleted Successfully");
+      if (history) {
+        history.push("/dashboard/my-studio")
+      }
       dispatch({
         type: DELETE_POST,
         payload: post.id

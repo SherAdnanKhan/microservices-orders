@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import PostFooter from "./postFooter";
 import ViewPostHead from "./postHead";
@@ -27,6 +27,7 @@ const ViewPost = () => {
   const userArtId = user.art_id;
   const dispatch = useDispatch();
   const { params: { id } } = useRouteMatch();
+  const history = useHistory();
   const {
     postView: { crtiqueStatus, sendUser },
     gallery: { myGalleries },
@@ -69,7 +70,7 @@ const ViewPost = () => {
   };
   const handleDelete = (status, post) => {
     setShowDeleteModel(status);
-    dispatch(deletePost(post));
+    dispatch(deletePost(post, history));
   }
 
   const handleShareModel = (status, post) => {
