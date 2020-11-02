@@ -272,14 +272,12 @@ const LobbyPosts = ({ posts, sendUser }) => {
             {post.post_type === 2
               ? (
                 <VideoPlayer
-                  path={post.image.path}
+                  path={post?.image?.path}
                 />
               ) : (
                 <LazyLoadImage
                   alt=""
-                  src={post.image.path}
-                  height={post.image.path.height}
-                  width={post.image.path.width}
+                  src={post?.image?.path}
                 />
               )
             }

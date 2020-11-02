@@ -94,7 +94,7 @@ const Comment = ({ post, onClose }) => {
             {post?.post_type === 1 ?
               <img
                 alt=""
-                src={post.image.path}
+                src={post?.image?.path}
               />
               :
               <video controls>
