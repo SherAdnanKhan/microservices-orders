@@ -97,7 +97,7 @@ const PostBody = ({
                     <img
                       className="valut-img"
                       alt=""
-                      src={other.image.path}
+                      src={other.image?.path}
                     />
                   }
                   {other.post_type === 2 &&
