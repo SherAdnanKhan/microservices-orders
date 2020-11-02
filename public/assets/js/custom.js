@@ -53,18 +53,19 @@ $(document).on('click', '.passwordEye', async function () {
 
 $(document).on('click', '.feelIcon', async function (e) {
   e.preventDefault();
+  e.stopPropagation();
   $('.colorChangerScreen').show();
 });
 
-$(document).on('click', '.colorChangerScreen img[color]', async function () {
-  const getColor = $(this).attr('color');
-  if (getColor != undefined) {
-    $('.frameReady')
-      .removeClass('gold gray red purple dodgerblue orange limegreen')
-      .addClass(getColor);
-  }
-  $('.colorChangerScreen').hide();
-});
+// $(document).on('click', '.colorChangerScreen img[color]', async function () {
+//   const getColor = $(this).attr('color');
+//   if (getColor != undefined) {
+//     $('.frameReady')
+//       .removeClass('gold gray red purple dodgerblue orange limegreen')
+//       .addClass(getColor);
+//   }
+//   $('.colorChangerScreen').hide();
+// });
 
 // $(document).on('click', '.menuBlock', function () {
 //   const checkNav = $('nav').css('display');
@@ -116,6 +117,8 @@ $(document).click(function () {
   $(".left").removeClass("toggle");
   $(".right").removeClass("toggle");
   $(".bottom").removeClass("toggle");
+
+  $('.colorChangerScreen').hide();
 });
 
 $(document).on('click', '.item-box', function () {

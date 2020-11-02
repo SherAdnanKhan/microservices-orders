@@ -224,10 +224,11 @@ export default (state = initialState, action) => {
         is_viewable: false
       }
     case UNBLOCK_USER:
+      console.log(action.payload);
       return {
         ...state,
-        is_blocked: action.payload,
-        is_viewable: true
+        is_blocked: action.payload.is_blocked,
+        is_viewable: action.payload.is_viewable
       }
     case MUTE_USER:
       return {

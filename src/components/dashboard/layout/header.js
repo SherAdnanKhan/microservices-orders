@@ -10,7 +10,7 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
 
   const handleToggleSearch = () => {
-    setShowSearch(!showSearch)
+    setShowSearch(!showSearch);
   }
 
   return (

@@ -32,7 +32,7 @@ const Studio = () => {
     const { gallery } = queryString.parse(location.search);
 
     if (userStudio && defuaultGallery === false) {
-      const foundGallery = userStudio.user.galleries.find(g => g.id === parseInt(gallery));
+      const foundGallery = userStudio?.user?.galleries?.find(g => g.id === parseInt(gallery));
       if (foundGallery) {
         setActiveGallery(foundGallery);
         setDefuaultGallery(true);
