@@ -115,7 +115,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                         ) : (
                           <>
                             <p id="post-title">{post.title}</p>
-                            <img src={`${post.image.path}`} alt="" />
+                            <img src={`${post.image?.path}`} alt="" />
                           </>
                         )
                       }

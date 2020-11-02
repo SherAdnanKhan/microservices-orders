@@ -229,7 +229,7 @@ const Post = ({
                                   ) : (
                                     <>
                                       <p id="post-title">{post.title}</p>
-                                      <img src={`${post.image.path}`} alt="" />
+                                      <img src={`${post?.image?.path}`} alt="" />
                                     </>
                                   )}
                               </Link>
@@ -317,7 +317,7 @@ const Post = ({
                                     ) : (
                                       <>
                                         <p id="post-title">{post.title}</p>
-                                        <img src={`${post.image.path}`} alt="" />
+                                        <img src={`${post.image?.path}`} alt="" />
                                       </>
                                     )}
                                 </LazyLoad>
