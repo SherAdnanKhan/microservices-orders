@@ -23,6 +23,7 @@ import MzFlashModal from "../common/mzFlashModal";
 import ShowMoreText from 'react-show-more-text';
 import ToolTip from './toolTip/toolTip';
 import LazyLoad from "react-lazyload";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Post = ({
   gallery, user, activeGallery,
@@ -215,28 +216,30 @@ const Post = ({
                         {gallery
                           && gallery.posts.map((post, index) => (
                             <div key={index} className="">
-                              <Link to={`/dashboard/viewpost/${post.slug}`}>
+                              <Link to={`/dashboard/viewpost/${post?.slug}`}>
                                 {post.post_type === 2
                                   ? (
                                     <>
-                                      <p id="post-title">{post.title}</p>
+                                      <p id="post-title">{post?.title}</p>
                                       <video width="320" height="240" controls>
-                                        <source src={post.image.path} type="video/mp4" />
-                                        <source src={post.image.path} type="video/ogg" />
+                                        <source src={post?.image?.path} type="video/mp4" />
+                                        <source src={post?.image?.path} type="video/ogg" />
                                     Your browser does not support the video tag.
                                     </video>
                                     </>
                                   ) : (
                                     <>
-                                      <p id="post-title">{post.title}</p>
-                                      <img src={`${post?.image?.path}`} alt="" />
+                                      <p id="post-title">{post?.title}</p>
+                                      <LazyLoadImage
+                                        alt=""
+                                        src={`${post?.image?.path}`}
+                                      />
                                     </>
                                   )}
                               </Link>
                             </div>
                           ))}
                       </div>
-
                       <div className="show-list">
                         {gallery &&
                           gallery.posts.map((post, index) => (
@@ -254,7 +257,6 @@ const Post = ({
                                 <Avatar
                                   user={user}
                                 />
-
                                 {user && user.art &&
                                   <>
                                     {user.art.parent && user.art.parent.name + '/'}
@@ -306,18 +308,20 @@ const Post = ({
                                   {post.post_type === 2
                                     ? (
                                       <>
-                                        <p id="post-title">{post.title}</p>
+                                        <p id="post-title">{post?.title}</p>
                                         <video controls onClick={e => e.preventDefault()}>
-                                          <source src={post.image.path} type="video/mp4" />
-                                          <source src={post.image.path} type="video/ogg" />
+                                          <source src={post?.image?.path} type="video/mp4" />
+                                          <source src={post?.image?.path} type="video/ogg" />
                                         Your browser does not support the video tag.
                                       </video>
                                       </>
-
                                     ) : (
                                       <>
-                                        <p id="post-title">{post.title}</p>
-                                        <img src={`${post.image?.path}`} alt="" />
+                                        <p id="post-title">{post?.title}</p>
+                                        <LazyLoadImage
+                                          alt=""
+                                          src={post?.image?.path}
+                                        />
                                       </>
                                     )}
                                 </LazyLoad>
