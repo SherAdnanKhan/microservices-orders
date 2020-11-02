@@ -161,7 +161,7 @@ const ChatHeader = ({
             />
             <div className="add-strq" >
               <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
-                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} />
+                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} isMuted={isMuted} />
               </div>
             </div>
           </>)
