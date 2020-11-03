@@ -131,7 +131,9 @@ export default (state = initialState, action) => {
           data: [],
           next_page_url: "",
         },
-        user: null
+        user: null,
+        is_blocked: null,
+        is_viewable: null
       };
     case START_FILE_LOADER:
       return {
