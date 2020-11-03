@@ -1,7 +1,11 @@
 @width0: 100%; // Appears 3 times
 @width1: 50%; // Appears 2 times
 @color0: #dddddd;
-
+body {
+  ::-webkit-scrollbar {
+  display: none;
+  }
+}
 .feel-history-page {
   padding: 50px;
   table {
@@ -50,7 +54,7 @@
     display: inline-flex;
     cursor: pointer;
     @media @mobile {
-      margin: 60px auto 0px auto;
+      margin: 60px auto 10px auto;
       overflow-x: auto;
       width: 100%;
     }
