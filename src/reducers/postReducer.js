@@ -18,7 +18,8 @@ const initialState = {
   ncomm: null,
   comments: [],
   crtiqueStatus: 0,
-  sendUser: false
+  sendUser: false,
+  hasStroke: null,
 };
 
 export default (state = initialState, action) => {

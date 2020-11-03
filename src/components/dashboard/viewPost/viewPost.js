@@ -46,7 +46,6 @@ const ViewPost = () => {
   const {
     postView: { post, comments },
   } = useSelector(state => state);
-
   useEffect(() => {
     dispatch(getPost(id))
     return () => {
@@ -59,11 +58,11 @@ const ViewPost = () => {
     dispatch(getUserArtById(userArtId));
   }, [dispatch, userArtId]);
 
-  const handleUnStoke = () => {
-    dispatch(unstrokePost(post.post.id, post.post.gallery_id, post.post.user))
+  const handleUnStroke = (post) => {
+    dispatch(unstrokePost(post.id, post.gallery_id, post.user))
   }
-  const handleStoke = () => {
-    dispatch(strokePost(post.post.id, post.post.gallery_id, post.post.user));
+  const handleStroke = (post) => {
+    dispatch(strokePost(post.id, post.gallery_id, post.user));
   }
   const handlePostDeleteModel = (value) => {
     setShowDeleteModel(value);
@@ -220,9 +219,10 @@ const ViewPost = () => {
         <PostFooter
           post={post?.post}
           comments={comments}
-          handleStoke={handleStoke}
-          handleUnStoke={handleUnStoke}
+          onStroke={handleStroke}
+          onUnStroke={handleUnStroke}
           updatedCritqueStatus={crtiqueStatus}
+          hasStroke={post?.has_stroke}
         />
       </div>
     </>
