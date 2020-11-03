@@ -46,12 +46,14 @@
   .pagination {
     border-radius:0px;
     float: right;
-    // margin-top: 60px;
-    margin: 60px auto 0px auto;
+    margin-top: 60px;
     display: inline-flex;
     cursor: pointer;
-    overflow-x: auto;
-    width: 100%;
+    @media @mobile {
+      margin: 60px auto 0px auto;
+      overflow-x: auto;
+      width: 100%;
+    }
   }
   .pagination-button {
     width: 10px;
