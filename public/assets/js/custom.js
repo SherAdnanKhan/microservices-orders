@@ -119,6 +119,7 @@ $(document).click(function () {
   $(".bottom").removeClass("toggle");
 
   $('.colorChangerScreen').hide();
+  $('.dropdown-content').hide();
 });
 
 $(document).on('click', '.item-box', function () {
@@ -389,4 +390,9 @@ $(document)
       .closest(`.post-page`)
       .find(`.ncomm-slider`)
       .toggleClass('show')
+  })
+
+  $(document).on('click', '.add-strq .dropdown', function (e) {
+    e.stopPropagation();
+    $('.dropdown-content').toggle();
   })
