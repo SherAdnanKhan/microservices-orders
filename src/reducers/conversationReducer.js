@@ -43,11 +43,13 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CONVERSATION:
+      console.log(action.payload.is_blocked);
       return {
         ...state,
-        is_blocked: action.payload?.is_blocked,
-        is_viewable: action.payload?.is_viewable,
-        is_muted: action.payload?.is_muted,
+        is_blocked: action.payload.is_blocked === undefined ? false : action.payload.is_blocked,
+        is_viewable: action.payload.is_viewable === undefined ? true : action.payload.is_viewable,
+        is_muted: action.payload.is_muted === undefined ? false : action.payload?.is_muted,
+
         conversation: action.payload.conversation,
         messages: {
           ...state.messages,
@@ -193,27 +195,34 @@ export default (state = initialState, action) => {
       };
     //if there is no new user added then state will store previous conversation otherwise it will store new conversation
     case INVITE_PEOPLE_IN_CHAT:
-      const found = state.conversations.some(conversation => conversation.id === action.payload.id);
+      const found = state.conversations.data.some(conversation => conversation.id === action.payload.id);
 
       if (!found) {
         return {
           ...state,
-          conversations: [action.payload, ...state.conversations]
+          conversations: {
+            ...state.conversation,
+            data: [action.payload, ...state.conversations.data]
+          }
         }
       }
 
       return {
         ...state,
-        conversations: state.conversations
-          ?.map(conversation => {
-            if (conversation.id === action.payload.id) {
-              return {
-                ...conversation,
-                participants: action.payload.participants
+        conversations: {
+          ...state.conversations,
+          data: state.conversations
+            .data
+            .map(conversation => {
+              if (conversation.id === action.payload.id) {
+                return {
+                  ...conversation,
+                  participants: action.payload.participants
+                }
               }
-            }
-            return conversation
-          }),
+              return conversation
+            })
+        },
         conversation: action.payload
       }
     case BLOCK_USER:
