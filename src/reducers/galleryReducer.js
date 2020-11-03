@@ -220,7 +220,7 @@ export default (state = initialState, action) => {
         ...state,
         gallery: {
           ...state.gallery,
-          posts: state.gallery.posts.filter(post => post.id !== action.payload)
+          posts: state?.gallery?.posts?.filter(post => post.id !== action.payload)
         }
       }
     default:
