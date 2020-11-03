@@ -6,6 +6,15 @@ import { getFormattedErrors } from '../utils/helperFunctions';
 import { getAuthToken } from '../actions/authActions';
 import { toast } from "react-toastify";
 
+const shouldShowLoader = (url) => {
+  if (url.includes("/chats/user")) {
+    return false
+  }
+  else {
+    return true
+  }
+}
+
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(request => {
@@ -16,7 +25,9 @@ axios.interceptors.request.use(request => {
 
   request.headers.common['Accept'] = 'application/json';
 
-  store.dispatch(startLoading());
+  if (shouldShowLoader(request.url)) {
+    store.dispatch(startLoading());
+  }
   store.dispatch(clearError());
 
   return request;

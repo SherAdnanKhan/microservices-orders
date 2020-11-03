@@ -26,6 +26,7 @@ import {
 import ToolTip from '../../common/toolTip/toolTip';
 import Draw from './draw';
 import MediumMeuzmLogo from '../../common/mediumMeuzmLogo';
+import Loader from '../../common/loader';
 
 class ChatBox extends Component {
   state = {
@@ -152,6 +153,7 @@ class ChatBox extends Component {
 
     window.removeEventListener("resize", this.handleWindowResize)
     this.props.clearConversation();
+    this.setState({ page: 1 })
   }
 
   componentRefreshUser = () => {
@@ -231,12 +233,13 @@ class ChatBox extends Component {
     this.setState({ hidden: false });
 
     if (input.files[0]) {
-      const data = new FormData();
-      data.append('file_upload', input.files[0]);
       const fileSizeMb = this.convertFileSize(input.files[0].size);
       const fileType = input.files[0].type;
       const isErrors = this.validateFile(fileSizeMb, fileType);
-      if (isErrors === false) {
+      const data = new FormData();
+      data.append('file_upload', input.files[0]);
+
+      if (!isErrors) {
         this.props.uploadFile(data,
           progress => {
             this.setState({ progress });
@@ -280,18 +283,15 @@ class ChatBox extends Component {
 
   handleScroll = () => {
     const scrollTop = this.containerRef.current.scrollTop;
-    const { scrollHeight } = this.state;
     const { page } = this.state;
+    const { messages } = this.props.conversation;
+    const element = document.getElementById(messages?.data[0]?.id)
 
     if (scrollTop === 0) {
-      if (!scrollHeight) {
-        this.setState({ scrollHeight: this.containerRef.current.scrollHeight / 2 })
-      }
-
       this.setState({ page: page + 1, }, () => {
         if (this.props.conversation.messages.next_page_url) {
           this.props.getConversation(this.props.activeConversation.id, page + 1, () => {
-            this.containerRef.current.scrollTo(0, this.state.scrollHeight);
+            element.scrollIntoView({ behavior: 'auto' })
           })
         }
       });
@@ -379,11 +379,16 @@ class ChatBox extends Component {
                   </>
                 )
               }
-
+              {this.props.messageLoader &&
+                <Loader />
+              }
             </div>
 
             {messages?.data?.map((data, index) => (
-              <div key={index}>
+              <div
+                key={data.id}
+                id={data.id}
+              >
                 {data.user.id === currentUser.id
                   ? (
                     <div
@@ -722,7 +727,8 @@ const mapStateToProps = state => {
     isBlocked: state.conversation.is_blocked,
     isViewAble: state.conversation.is_viewable,
     isMuted: state.conversation.is_muted,
-    onlineUsers: state.onlineUser.onlineUsers
+    onlineUsers: state.onlineUser.onlineUsers,
+    messageLoader: state.conversation.messageLoader,
   }
 };
 

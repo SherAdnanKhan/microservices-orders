@@ -14,6 +14,10 @@ import {
   UNBLOCK_USER,
   MUTE_USER,
   UNMUTE_USER,
+  START_CONVERSATION_LOADER,
+  STOP_CONVERSATION_LOADER,
+  START_MESSAGE_LOADER,
+  STOP_MESSAGE_LOADER
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -25,18 +29,15 @@ const initialState = {
   messages: {
     current_page: 1,
     data: [],
-    first_page_url: "",
-    from: 0,
-    last_page: 0,
-    last_page_url: "",
     next_page_url: "",
-    path: "",
-    per_page: "10",
-    prev_page_url: null,
-    to: 0,
-    total: 0
   },
-  conversations: null
+  conversations: {
+    current_page: 0,
+    data: [],
+    next_page_url: null
+  },
+  conversationLoader: false,
+  messageLoader: false,
 };
 
 export default (state = initialState, action) => {
@@ -54,32 +55,31 @@ export default (state = initialState, action) => {
           data: state?.messages?.data
             ? [...action.payload.conversation.messages.data.reverse(), ...state.messages.data]
             : [action.payload.conversation.messages.data],
-          first_page_url: action.payload.conversation.messages.first_page_url,
-          from: action.payload.conversation.messages.from,
-          last_page: action.payload.conversation.last_page,
-          last_page_url: action.payload.conversation.last_page_url,
           next_page_url: action.payload.conversation.messages.next_page_url,
-          path: action.payload.conversation.messages.path,
-          per_page: action.payload.conversation.messages.per_page,
-          prev_page_url: action.payload.conversation.messages.prev_page_url,
-          to: action.payload.conversation.messages.to,
-          total: action.payload.conversation.messages.total
+
         },
         user: action.payload.user,
-        conversations:
-          state.conversations
-            ? state
-              ?.conversations
-              ?.some(c => c.id === action.payload.conversation.id)
-              ? state.conversations
-              : [action.payload.conversation, ...state.conversations]
-            : null,
-
+        conversations: {
+          ...state.conversations,
+          data: state
+            .conversations
+            .data
+            .some(c => c.id === action.payload.conversation.id)
+            ? state.conversations.data
+            : [action.payload.conversation, ...state.conversations.data]
+        }
       };
     case GET_ALL_CONVERSATIONS:
       return {
         ...state,
-        conversations: action.payload
+        conversations: {
+          current_page: action.payload.current_page,
+          data: action.payload.current_page === 1
+            ? action.payload.data
+            : [...state.conversations.data, ...action.payload.data],
+          // data: action.payload.data,
+          next_page_url: action.payload.next_page_url
+        }
       };
     case UPDATE_CONVERSATION:
       return {
@@ -92,29 +92,35 @@ export default (state = initialState, action) => {
     case UPDATE_CONVERSATION_UNREAD_COUNT:
       return {
         ...state,
-        conversations: state?.conversations?.map(conversation => {
-          if (conversation.id === action.payload.conversation_id) {
-            return {
-              ...conversation,
-              unread_messages_logs_count: conversation.unread_messages_logs_count + 1,
-              last_message: action.payload
+        conversations: {
+          ...state.conversations,
+          data: state.conversations.data?.map(conversation => {
+            if (conversation.id === action.payload.conversation_id) {
+              return {
+                ...conversation,
+                unread_messages_logs_count: conversation.unread_messages_logs_count + 1,
+                last_message: action.payload
+              }
             }
-          }
-          return conversation
-        })
+            return conversation
+          })
+        }
       };
     case RESET_CONVERSATION_COUNT:
       return {
         ...state,
-        conversations: state?.conversations?.map(conversation => {
-          if (conversation.id === action.payload.id) {
-            return {
-              ...conversation,
-              unread_messages_logs_count: 0,
+        conversations: {
+          ...state.conversations,
+          data: state.conversations.data.map(conversation => {
+            if (conversation.id === action.payload.id) {
+              return {
+                ...conversation,
+                unread_messages_logs_count: 0,
+              }
             }
-          }
-          return conversation
-        })
+            return conversation
+          })
+        }
       };
     case CLEAR_CONVERSATION:
       return {
@@ -123,16 +129,7 @@ export default (state = initialState, action) => {
         messages: {
           current_page: 1,
           data: [],
-          first_page_url: "",
-          from: 0,
-          last_page: 0,
-          last_page_url: "",
           next_page_url: "",
-          path: "",
-          per_page: "10",
-          prev_page_url: null,
-          to: 0,
-          total: 0
         },
         user: null
       };
@@ -224,7 +221,6 @@ export default (state = initialState, action) => {
         is_viewable: false
       }
     case UNBLOCK_USER:
-      console.log(action.payload);
       return {
         ...state,
         is_blocked: action.payload.is_blocked,
@@ -239,6 +235,26 @@ export default (state = initialState, action) => {
       return {
         ...state,
         is_muted: action.payload,
+      }
+    case START_CONVERSATION_LOADER:
+      return {
+        ...state,
+        conversationLoader: true
+      }
+    case STOP_CONVERSATION_LOADER:
+      return {
+        ...state,
+        conversationLoader: false
+      }
+    case START_MESSAGE_LOADER:
+      return {
+        ...state,
+        messageLoader: true
+      }
+    case STOP_MESSAGE_LOADER:
+      return {
+        ...state,
+        messageLoader: false
       }
     default:
       return state;
