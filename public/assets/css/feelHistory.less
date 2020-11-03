@@ -3,6 +3,9 @@
 @color0: #dddddd;
 
 .feel-history-page {
+    ::-webkit-scrollbar {
+      display: none;
+    }
   padding: 50px;
   table {
     width: 100%;
@@ -49,6 +52,11 @@
     margin-top: 60px;
     display: inline-flex;
     cursor: pointer;
+    @media @mobile {
+      margin: 60px auto 10px auto;
+      overflow-x: auto;
+      width: 100%;
+    }
   }
   .pagination-button {
     width: 10px;
