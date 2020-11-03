@@ -3,8 +3,10 @@ import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
 import MeuzmLogo from '../common/meuzmLogo';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Loader from '../common/loader';
 
-const Conversation = ({ onActiveConversation, conversations, activeConversation }) => {
+const Conversation = ({ onActiveConversation, conversations, activeConversation, onCallNextPage, currentPage, conversationLoader, nextPageUrl }) => {
   const currentUser = useContext(UserContext);
 
   const getDateOrTime = date => {
@@ -17,6 +19,10 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation 
     return formatDate(date);
   }
 
+  const fetchData = () => {
+    onCallNextPage();
+    console.log('fething');
+  }
   return (
     <div className="conversationContainer">
       {(!conversations || conversations.length === 0) &&
@@ -27,108 +33,121 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation 
       }
       <div className="setMarginTop" />
       <div className="chatMsgLists">
-        {conversations && conversations.length > 0 &&
-          conversations.map((conversation, index) => (
-            <div
-              className={conversation.id === activeConversation.id ? "singleMsg active" : "singleMsg"}
-              key={index}
-              onClick={() => onActiveConversation(conversation)}
-            >
-              {conversation.unread_messages_logs_count > 0 &&
-                <>
-                  {conversation.participants.length > 2
-                    ? (
-                      <span
-                        className='notify'
-                        style={{ borderColor: 'white' }}
-                      >
-                        {conversation.unread_messages_logs_count}
-                      </span>
-                    ) : (
-                      <span
-                        className='notify'
-                        style={{
-                          borderColor:
-                            conversation.participants[0].id !== currentUser.id
-                              ? conversation.participants[0].feel.color_code
-                              : conversation.participants[1].feel.color_code
-                        }}
-                      >
-                        {conversation.unread_messages_logs_count}
-                      </span>
-                    )
-                  }
-                </>
-              }
-              {conversation.participants.length > 0 &&
-                <>
-                  {conversation.participants.length > 2
-                    ? (
-                      <MeuzmLogo />
-                    ) : (
-                      <>
-                        {conversation.participants[0].id !== currentUser.id &&
-                          <Avatar
-                            user={conversation.participants[0]}
-                          />
-                        }
-                        {conversation.participants[1].id !== currentUser.id &&
-                          <Avatar
-                            user={conversation.participants[1]}
-                          />
-                        }
-                      </>
-                    )
-                  }
-                </>
-              }
-              <div className="msg">
+        <InfiniteScroll
+          dataLength={conversations?.length} //This is important field to render the next data
+          next={nextPageUrl && fetchData}
+          hasMore={true}
+          height="90vh"
+          loader={
+            <>
+              {currentPage !== 1 && conversationLoader && <Loader />}
+            </>
+          }
+        >
+          {conversations && conversations.length > 0 &&
+            conversations.map((conversation, index) => (
+              <div
+                className={conversation.id === activeConversation.id ? "singleMsg active" : "singleMsg"}
+                key={index}
+                onClick={() => onActiveConversation(conversation)}
+              >
+                {conversation.unread_messages_logs_count > 0 &&
+                  <>
+                    {conversation.participants.length > 2
+                      ? (
+                        <span
+                          className='notify'
+                          style={{ borderColor: 'white' }}
+                        >
+                          {conversation.unread_messages_logs_count}
+                        </span>
+                      ) : (
+                        <span
+                          className='notify'
+                          style={{
+                            borderColor:
+                              conversation.participants[0].id !== currentUser.id
+                                ? conversation.participants[0].feel.color_code
+                                : conversation.participants[1].feel.color_code
+                          }}
+                        >
+                          {conversation.unread_messages_logs_count}
+                        </span>
+                      )
+                    }
+                  </>
+                }
                 {conversation.participants.length > 0 &&
                   <>
                     {conversation.participants.length > 2
                       ? (
-                        <>
-                          <div className="name">
-                            {conversation?.participants?.filter(p => p.id !== currentUser.id)[0].username + ', '}
-                            {conversation?.participants?.filter(p => p.id !== currentUser.id)[1].username}
-                            {conversation?.participants.filter(p => p.id !== currentUser.id).length > 2 &&
-                              <>
-                                {` and ${conversation?.participants.length - 3}`} participants
-                              </>
-                            }
-                            {/* Total participants {conversation?.participants.length} */}
-                          </div>
-                        </>
-                      )
-                      : (
+                        <MeuzmLogo />
+                      ) : (
                         <>
                           {conversation.participants[0].id !== currentUser.id &&
-                            <div className="name"> {conversation.participants[0].username} </div>
+                            <Avatar
+                              user={conversation.participants[0]}
+                            />
                           }
                           {conversation.participants[1].id !== currentUser.id &&
-                            <div className="name"> {conversation.participants[1].username} </div>
+                            <Avatar
+                              user={conversation.participants[1]}
+                            />
                           }
                         </>
                       )
                     }
                   </>
                 }
-                {conversation.last_message &&
-                  <>
-                    {conversation.last_message.message}
-                  </>
-                }
+                <div className="msg">
+                  {conversation.participants.length > 0 &&
+                    <>
+                      {conversation.participants.length > 2
+                        ? (
+                          <>
+                            <div className="name">
+                              {conversation?.participants?.filter(p => p.id !== currentUser.id)[0].username + ', '}
+                              {conversation?.participants?.filter(p => p.id !== currentUser.id)[1].username}
+                              {conversation?.participants.filter(p => p.id !== currentUser.id).length > 2 &&
+                                <>
+                                  {` and ${conversation?.participants.length - 3}`} participants
+                              </>
+                              }
+                              {/* Total participants {conversation?.participants.length} */}
+                            </div>
+                          </>
+                        )
+                        : (
+                          <>
+                            {conversation.participants[0].id !== currentUser.id &&
+                              <div className="name"> {conversation.participants[0].username} </div>
+                            }
+                            {conversation.participants[1].id !== currentUser.id &&
+                              <div className="name"> {conversation.participants[1].username} </div>
+                            }
+                          </>
+                        )
+                      }
+                    </>
+                  }
+                  {conversation.last_message &&
+                    <>
+                      {conversation.last_message.message}
+                    </>
+                  }
+                </div>
+                <div className="dateTime">
+                  {conversation.last_message &&
+                    <>
+                      {getDateOrTime(conversation.last_message.created_at)}
+                    </>
+                  }
+                </div>
               </div>
-              <div className="dateTime">
-                {conversation.last_message &&
-                  <>
-                    {getDateOrTime(conversation.last_message.created_at)}
-                  </>
-                }
-              </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </InfiniteScroll>
+
 
       </div>
     </div >

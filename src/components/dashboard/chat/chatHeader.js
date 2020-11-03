@@ -25,7 +25,7 @@ const ChatHeader = ({
   const timeout = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
-  const [showActions, setShowActions] = useState(false);
+  // const [showActions, setShowActions] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showMuteModal, setShowMuteModal] = useState(false);
   const [showBlockModal, setShowBlockModal] = useState(false);
@@ -138,9 +138,6 @@ const ChatHeader = ({
     setShowMuteModal(status)
   }
 
-  const handleShowActions = e => {
-    setShowActions(!showActions);
-  };
 
   return (
     <div
@@ -152,25 +149,13 @@ const ChatHeader = ({
             : filtered?.feel.color_code
       }}
     >
-      {filtered && width <= breakPoint
-        ? (  //Mobile View
-          <>
-            <i
-              className="fa fa-arrow-left clickable"
-              onClick={onBackPress}
-            />
-            <div className="add-strq" >
-              <div className={showActions ? "main show-actions" : "main"} onClick={handleShowActions} >
-                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} isMuted={isMuted} />
-              </div>
-            </div>
-          </>)
-        //Desktop  View
-        : (
-          <div className="add-strq">
-            <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} isMuted={isMuted} />
-          </div>
-        )
+      {filtered && width <= breakPoint &&
+        <>
+          <i
+            className="fa fa-arrow-left clickable"
+            onClick={onBackPress}
+          />
+        </>
       }
       {
         conversation?.participants.length > 2
@@ -179,11 +164,16 @@ const ChatHeader = ({
               <MeuzmLogo />
             </div>
           ) : (
-            <Link to={`/dashboard/studio/${filtered?.slug}`} >
-              <Avatar
-                user={filtered}
-              />
-            </Link>
+            <>
+              <div className="add-strq">
+                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} isMuted={isMuted} />
+              </div>
+              <Link to={`/dashboard/studio/${filtered?.slug}`} >
+                <Avatar
+                  user={filtered}
+                />
+              </Link>
+            </>
           )
       }
       <div className="user-Status">

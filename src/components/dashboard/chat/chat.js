@@ -56,15 +56,17 @@ const Chat = () => {
     setActiveConversation(conversation)
   }
 
-  const handleScroll = () => {
+  const handleCallNextPage = () => {
     const scrollTop = conversationRef.current.scrollTop;
     const scrollHeight = conversationRef.current.scrollHeight;
     const clientHeight = conversationRef.current.clientHeight;
+    dispatch(getAllConversations(currentPage + 1));
+    setCurrentPage(currentPage => currentPage + 1);
 
     if (scrollHeight - clientHeight === Math.round(scrollTop)) {
+
       if (conversations.next_page_url) {
-        dispatch(getAllConversations(currentPage + 1));
-        setCurrentPage(currentPage => currentPage + 1);
+
       }
     }
   };
@@ -78,24 +80,32 @@ const Chat = () => {
             {!activeConversation &&
               <div
                 className="conversation"
-                onScroll={handleScroll}
+                // onScroll={handleScroll}
                 ref={conversationRef}>
 
                 <Conversation
                   conversations={conversations?.data}
                   onActiveConversation={handleActiveConversation}
                   activeConversation={activeConversation}
+                  onCallNextPage={handleCallNextPage}
+                  currentPage={currentPage}
+                  conversationLoader={conversationLoader}
+                  nextPageUrl={conversations?.next_page_url}
                 />
                 {conversationLoader && <Loader />}
               </div>
             }
           </>
         ) : (
-          <div className="conversation" onScroll={handleScroll} ref={conversationRef}>
+          <div className="conversation" ref={conversationRef}>
             <Conversation
               conversations={conversations?.data}
               onActiveConversation={handleActiveConversation}
               activeConversation={activeConversation}
+              onCallNextPage={handleCallNextPage}
+              currentPage={currentPage}
+              conversationLoader={conversationLoader}
+              nextPageUrl={conversations?.next_page_url}
             />
             {conversationLoader && <Loader />}
           </div>
