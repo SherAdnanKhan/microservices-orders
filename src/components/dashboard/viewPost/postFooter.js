@@ -5,8 +5,9 @@ import ShowMoreText from 'react-show-more-text';
 import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
 import ToolTip from "../../common/toolTip/toolTip";
+import Stroke from "../../common/stroke";
 
-const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
+const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const {
@@ -42,28 +43,13 @@ const PostFooter = ({ post, comments, handleStoke, handleUnStoke }) => {
 
       <div className="post-footer-bar">
         <div className="poster-footer-stokes-btn">
-          {post && post.has_stroke
-            ? (
-              <img
-                className="post-color-icon"        //stock icon full
-                src="/assets/images/strokeiconfull.png"
-                alt=""
-                onClick={handleUnStoke}
-                data-tip="unstroke"
-                data-for="stroke"
-              />
+          <Stroke
+            hasStroke={hasStroke}
+            className="strk-img"
+            onStroke={() => onStroke(post)}
+            onUnstroke={() => onUnStroke(post)}
+          />
 
-            ) : (
-              <img
-                className="post-non-color-icon"
-                src="/assets/images/strokeiconem.png"
-                alt=""
-                onClick={handleStoke}
-                data-tip="Stroke"
-                data-for="stroke"
-              />
-            )
-          }
           <ToolTip id="stroke" />
           <p>strokes {post && post?.stroke_users_count}</p>
         </div>
