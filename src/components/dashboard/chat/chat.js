@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Conversation from '../conversation';
 import ChatBox from './chatBox';
 import { isChrome } from '../../../utils/helperFunctions';
@@ -7,16 +7,18 @@ import { clearConversation, getAllConversations, getConversation } from '../../.
 import Spinner from '../../common/spinner';
 import useViewport from '../../common/useViewport';
 import { useRouteMatch } from 'react-router-dom';
+import Loader from "../../common/loader";
 
 const Chat = () => {
   const dispatch = useDispatch();
   const { params } = useRouteMatch();
-  const { conversation } = useSelector(state => state.conversation);
   const { width } = useViewport();
   const breakPoint = 768;
+  const conversationRef = useRef();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const {
-    conversation: { conversations },
+    conversation: { conversations, conversation, conversationLoader },
     loading: { loading }
   } = useSelector(state => state);
 
@@ -54,29 +56,48 @@ const Chat = () => {
     setActiveConversation(conversation)
   }
 
+  const handleScroll = () => {
+    const scrollTop = conversationRef.current.scrollTop;
+    const scrollHeight = conversationRef.current.scrollHeight;
+    const clientHeight = conversationRef.current.clientHeight;
+
+    if (scrollHeight - clientHeight === Math.round(scrollTop)) {
+      if (conversations.next_page_url) {
+        dispatch(getAllConversations(currentPage + 1));
+        setCurrentPage(currentPage => currentPage + 1);
+      }
+    }
+  };
+
   return (
     <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
-      {loading && <Spinner />}
+      {loading && currentPage === 1 && <Spinner />}
       {width <= breakPoint
         ? (
           <>
             {!activeConversation &&
-              <div className="conversation">
+              <div
+                className="conversation"
+                onScroll={handleScroll}
+                ref={conversationRef}>
+
                 <Conversation
-                  conversations={conversations}
+                  conversations={conversations?.data}
                   onActiveConversation={handleActiveConversation}
                   activeConversation={activeConversation}
                 />
+                {conversationLoader && <Loader />}
               </div>
             }
           </>
         ) : (
-          <div className="conversation">
+          <div className="conversation" onScroll={handleScroll} ref={conversationRef}>
             <Conversation
-              conversations={conversations}
+              conversations={conversations?.data}
               onActiveConversation={handleActiveConversation}
               activeConversation={activeConversation}
             />
+            {conversationLoader && <Loader />}
           </div>
         )
       }

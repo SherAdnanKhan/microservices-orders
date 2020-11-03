@@ -11,25 +11,37 @@ import {
   READ_ALL,
   UPDATE_CONVERSATION_UNREAD_COUNT,
   RESET_CONVERSATION_COUNT,
-  INVITE_PEOPLE_IN_CHAT
+  INVITE_PEOPLE_IN_CHAT,
+  START_CONVERSATION_LOADER,
+  STOP_CONVERSATION_LOADER,
+  START_MESSAGE_LOADER,
+  STOP_MESSAGE_LOADER,
 } from '../constants/actionTypes';
 import { isNumber } from '../utils/helperFunctions';
 
-export const getAllConversations = (callback) => dispatch => {
+export const getAllConversations = (page = 1) => dispatch => {
+  if (page > 1) {
+    dispatch({ type: START_CONVERSATION_LOADER });
+  }
   http
-    .get('/chats')
+    .get(`/chats?page=${page}`)
     .then(res => {
-      localStorage.setItem('conversations', JSON.stringify(res.data.data.conversations));
-      callback && callback(res.data.data.conversations);
-
+      dispatch({ type: STOP_CONVERSATION_LOADER });
       dispatch({
         type: GET_ALL_CONVERSATIONS,
-        payload: res.data.data.conversations.data
+        payload: res.data.data.conversations
       });
-    });
+    })
+    .catch(() => {
+      dispatch({ type: STOP_CONVERSATION_LOADER })
+    })
 };
 
 export const getConversation = (idOrSlug, page = 1, callback) => dispatch => {
+  if (page > 1) {
+    dispatch({ type: START_MESSAGE_LOADER });
+  }
+
   const url = isNumber(idOrSlug)
     ? `/chats/user/${idOrSlug}/id?page=${page}`
     : `/chats/user/${idOrSlug}?page=${page}`;
@@ -37,12 +49,16 @@ export const getConversation = (idOrSlug, page = 1, callback) => dispatch => {
   http
     .get(url)
     .then(res => {
+      dispatch({ type: STOP_MESSAGE_LOADER });
       dispatch({
         type: GET_CONVERSATION,
         payload: res.data.data
       });
       callback && callback()
-    });
+    })
+    .catch(() => {
+      dispatch({ type: STOP_MESSAGE_LOADER })
+    })
 };
 
 export const updateConversation = data => dispatch => {
