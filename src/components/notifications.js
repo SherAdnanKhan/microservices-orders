@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getAuthToken, getCurrentUser, logout } from '../actions/authActions';
 import { updateFeelColor } from '../actions/colorActions';
@@ -22,7 +22,13 @@ const currentUser = getCurrentUser();
 
 const Notifications = () => {
   const dispatch = useDispatch();
+  const { conversation } = useSelector(state => state.conversation);
   const [hasRendered, setHasRendered] = useState(false);
+  const conversationRef = useRef();
+
+  useEffect(() => {
+    conversationRef.current = conversation;
+  }, [conversation]);
 
   const cleanupEvents = () => {
     socket.off('onlineUser');
@@ -80,9 +86,7 @@ const Notifications = () => {
         });
 
         socket.on('notify', data => {
-          const activeConversation = JSON.parse(localStorage.getItem('activeConversation'));
-
-          if (activeConversation !== data.message.conversation_id) {
+          if (conversationRef.current?.id !== data.message.conversation_id) {
             playNotificationSound();
             toast(() => {
               return (
@@ -123,7 +127,7 @@ const Notifications = () => {
         setHasRendered(true);
       }
     }
-  }, [dispatch, hasRendered]);
+  }, [dispatch, hasRendered, conversation]);
 
   return (
     null
