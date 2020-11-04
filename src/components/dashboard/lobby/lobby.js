@@ -10,7 +10,6 @@ import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
-import Loader from "../../common/loader";
 
 const Lobby = () => {
   const dispatch = useDispatch();
@@ -101,17 +100,9 @@ const Lobby = () => {
     dispatch(unstrokeFeed(data, user));
   };
 
-  const handleScroll = () => {
-    const scrollTop = postRef.current.scrollTop;
-    const scrollHeight = postRef.current.scrollHeight;
-    const clientHeight = postRef.current.clientHeight;
-
-    if (scrollHeight - clientHeight === Math.round(scrollTop)) {
-      if (favouritePosts.next_page_url && !postLoader) {
-        dispatch(getFavouritePosts(currentPage + 1));
-        setCurrentPage(currentPage => currentPage + 1);
-      }
-    }
+  const handleCallNextPage = () => {
+    dispatch(getFavouritePosts(currentPage + 1));
+    setCurrentPage(currentPage => currentPage + 1);
   };
 
   return (
@@ -165,21 +156,22 @@ const Lobby = () => {
         </div>
         <div
           className="col-6 section-2 box-2"
-          onScroll={handleScroll}
-          ref={postRef}>
+          ref={postRef}
+        >
           <ToolTip id="search" position="bottom" text="search" />
           <div>
             <LobbyPosts
               posts={favouritePosts?.data}
               sendUser={sendUser}
+              onCallNextPage={handleCallNextPage}
+              currentPage={currentPage}
+              postLoader={postLoader}
+              nextPageUrl={favouritePosts?.next_page_url}
             />
-            {postLoader &&
-              <Loader />
-            }
           </div>
         </div>
 
-        <div className="section-3 box-3 col4">
+        <div className="section-3 box-3 col-4">
           <FeedSection
             collectiveFeeds={collectiveFeeds}
             currentUser={currentUser}

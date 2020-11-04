@@ -84,7 +84,7 @@ const ImageVideoSlider = ({ ncomm }) => {
                 />
               }
               {post.post_type === 2 &&
-                <video controls>
+                <video>
                   <source src={post?.image?.path} type="video/mp4" />
                   <source src={post?.image?.path} type="video/ogg" />
                     Your browser does not support the video tag.

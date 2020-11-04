@@ -21,7 +21,6 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation,
 
   const fetchData = () => {
     onCallNextPage();
-    console.log('fething');
   }
   return (
     <div className="conversationContainer">
@@ -35,8 +34,8 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation,
       <div className="chatMsgLists">
         <InfiniteScroll
           dataLength={conversations?.length} //This is important field to render the next data
-          next={nextPageUrl && fetchData}
-          hasMore={true}
+          next={fetchData}
+          hasMore={nextPageUrl ? true : false}
           height="90vh"
           loader={
             <>
