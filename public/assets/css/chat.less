@@ -669,6 +669,49 @@
           .outgoing {
             float: right;
             max-width: 100%;
+            .messageDots {
+              text-align: end;
+              position: relative;
+            }
+            // &:hover {
+            //   .messageDots {
+            //     display: block;
+            //   }
+            // }
+            .dropdown {
+
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                color: white;
+                min-width: 112px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                margin-left: -10px;
+                top: 19px;
+                right: 0;
+                p{
+                  padding: 9px 16px;
+                  margin: 0;
+                }
+                @media @mobile {
+                  margin-left: -32px;
+                }
+
+                p {
+                  text-align: center;
+                  cursor: pointer;
+                }
+                a {
+                  color: black;
+                  padding: 9px 16px;
+                  text-decoration: none;
+                  display: block;
+                  text-align: center;
+                }
+              }
+            }
+            
     
             .send-icon {
               text-align: right;

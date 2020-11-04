@@ -17,7 +17,8 @@ import {
   START_CONVERSATION_LOADER,
   STOP_CONVERSATION_LOADER,
   START_MESSAGE_LOADER,
-  STOP_MESSAGE_LOADER
+  STOP_MESSAGE_LOADER,
+  DELETE_MESSAGE
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -266,6 +267,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         messageLoader: false
+      }
+    case DELETE_MESSAGE:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          data: state.messages.data.filter(message => message.id !== action.payload)
+        }
       }
     default:
       return state;

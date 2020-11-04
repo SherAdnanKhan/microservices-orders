@@ -16,6 +16,7 @@ import {
   STOP_CONVERSATION_LOADER,
   START_MESSAGE_LOADER,
   STOP_MESSAGE_LOADER,
+  DELETE_MESSAGE
 } from '../constants/actionTypes';
 import { isNumber } from '../utils/helperFunctions';
 
@@ -188,4 +189,19 @@ export const createGroupConversation = (data, id) => dispatch => {
     });
 }
 
+export const deleteMessage = id => dispatch => {
+  http
+    .delete(`/chats/message/${id}`)
+    .then(() => {
+      dispatch({
+        type: DELETE_MESSAGE,
+        payload: id
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        toast(err.response.data.errors.error)
+      }
+    });
+}
 export const readAll = data => ({ type: READ_ALL, payload: data });
