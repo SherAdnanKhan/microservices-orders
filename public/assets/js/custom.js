@@ -392,7 +392,12 @@ $(document)
       .toggleClass('show')
   })
 
-  $(document).on('click', '.add-strq .dropdown', function (e) {
-    e.stopPropagation();
-    $('.dropdown-content').toggle();
-  })
+$(document).on('click', '.add-strq .dropdown', function (e) {
+  e.stopPropagation();
+  $(this).find('.dropdown-content').toggle()
+})
+
+$(document).on('click', '.messageDots', function (e) {
+  e.stopPropagation();
+  $(this).find('.dropdown-content').toggle()
+})

@@ -1,8 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Avatar from '../../common/avatar';
-import { formatTime, formatDate, getText, getURL, convertHexToRGBA } from '../../../utils/helperFunctions';
 import { getCurrentUser, getAuthToken } from '../../../actions/authActions';
 import socket from '../../../services/socketService';
 import { toast } from 'react-toastify';
@@ -10,7 +8,16 @@ import ChatInvitationModel from '../../common/chatInvitationModal';
 import ChatHeader from './chatHeader';
 import ParticipantsModel from './participantsModel';
 import UserCube from '../../common/userCube';
-import { ReactTinyLink } from 'react-tiny-link';
+import Draw from './draw';
+import MediumMeuzmLogo from '../../common/mediumMeuzmLogo';
+import Loader from '../../common/loader';
+import OutgoingMessage from './outgoingMessage';
+import IncomingMessage from './incomingMessage';
+import ProgressBar from '../../common/progressBar';
+import ChatInput from './chatInput';
+import WhoIsTyping from './whoIsTyping';
+import FilePreview from './filePreview';
+import FileUploadModal from './fileUploadModal';
 import {
   getConversation,
   updateConversation,
@@ -22,11 +29,8 @@ import {
   readAll,
   changeReadMessageStatus,
   resetConversationCount,
+  deleteMessage
 } from '../../../actions/conversationActions';
-import ToolTip from '../../common/toolTip/toolTip';
-import Draw from './draw';
-import MediumMeuzmLogo from '../../common/mediumMeuzmLogo';
-import Loader from '../../common/loader';
 
 class ChatBox extends Component {
   state = {
@@ -34,7 +38,7 @@ class ChatBox extends Component {
     video: '',
     document: '',
     message: '',
-    hidden: false,
+    hidden: true,
     progress: 0,
     page: 1,
     scrollHeight: '',
@@ -142,7 +146,6 @@ class ChatBox extends Component {
 
   componentCleanup = () => {
     const { conversation } = this.props.conversation;
-    localStorage.removeItem('activeConversation');
     conversation && socket.emit('leave', { room: conversation.id });
     socket.off('recieveMessage');
     socket.off('onRead');
@@ -206,21 +209,22 @@ class ChatBox extends Component {
   handlePost = e => {
     this.sendMessage(e);
   }
+
   convertFileSize = (sizeBytes) => {
     const fileSizeKb = sizeBytes / 1000;
     const fileSizeMb = fileSizeKb / 1000;
+
     return fileSizeMb
   }
 
   validateFile = (size, type) => {
     let error;
+
     if (type === "video/mp4" && size > 51.2) {
       error = "Video size must be 50MB long";
-    }
-    else if ((type === "image/png" || type === "image/jpeg" || type === "image/png") && size > 25.6) {
+    } else if ((type === "image/png" || type === "image/jpeg" || type === "image/png") && size > 25.6) {
       error = "Image size must be 25MB long"
-    }
-    else if (type === "application/document" && size > 51.2) {
+    } else if (type === "application/document" && size > 51.2) {
       error = "Document size must be 25MB long"
     }
     return error ? error : false
@@ -228,13 +232,14 @@ class ChatBox extends Component {
 
 
   handleUpload = ({ target: input }) => {
-    this.setState({ hidden: false });
+    this.setState({ hidden: true });
 
     if (input.files[0]) {
       const fileSizeMb = this.convertFileSize(input.files[0].size);
       const fileType = input.files[0].type;
       const isErrors = this.validateFile(fileSizeMb, fileType);
       const data = new FormData();
+
       data.append('file_upload', input.files[0]);
 
       if (!isErrors) {
@@ -315,6 +320,19 @@ class ChatBox extends Component {
   handleCloseDraw = () => {
     this.setState({ draw: false });
   }
+
+  handleOpenUploadModal = () => {
+    this.setState({ hidden: false })
+  }
+
+  handleCloseUploadModal = () => {
+    this.setState({ hidden: true })
+  }
+
+  handleDeleteMessage = id => {
+    this.props.deleteMessage(id);
+  }
+
   render() {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
@@ -389,171 +407,18 @@ class ChatBox extends Component {
               >
                 {data.user.id === currentUser.id
                   ? (
-                    <div
-                      className="message-row group"
-                    >
-                      <div className='outgoing'>
-                        <div className="user-message">
-                          {conversation?.participants.length === 2 &&
-                            <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
-                              {data.messages_logs.length > 0
-                                ? data.messages_logs[0].status === 1
-                                  ? <img alt="" src={`/assets/images/${data.messages_logs[0].feel.color}.png`} />
-                                  : <img alt="" src="/assets/images/avatarblack.png" />
-                                : <img src="/assets/images/avatarblack.png" alt="" />
-                              }
-                            </div>
-                          }
-                          <div className="text"
-                            style={{
-                              backgroundColor: convertHexToRGBA(data.feel.color_code, .6),
-                              borderColor: data.feel.color_code,
-                              boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
-                            }}
-                          >
-                            {getText(data.message) && getText(data.message)}
-                            {getURL(data.message) &&
-                              <ReactTinyLink
-                                cardSize="small"
-                                showGraphic={true}
-                                maxLine={2}
-                                minLine={1}
-                                url={getURL(data.message)}
-                              // defaultMedia={data.message}
-                              />
-                            }
-
-                            {data.type === 1 &&
-                              <div className="msgImg">
-                                <a href={data.url} target="_blank" rel="noopener noreferrer">
-                                  <img
-                                    src={data.url}
-                                    alt=""
-                                  />
-                                </a>
-                              </div>
-                            }
-                            {data.type === 2 &&
-                              <div className="msgVideo">
-                                <video width="320" height="240" controls>
-                                  <source src={data.url} type="video/mp4" />
-                                  <source src={data.url} type="video/ogg" />
-                                  <source src={data.url} type="video/mov" />
-                                  <source src={data.url} type="video/mpeg" />
-                                    Your browser does not support the video tag.
-                                </video>
-                              </div>
-                            }
-                            {data.type === 3 &&
-                              <div className="msgDocument">
-                                <i className="fas fa-file-alt"></i>
-                                <a
-                                  href={data.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  style={{ textDecoration: 'none' }}
-                                >
-                                  Document
-                                    </a>
-                              </div>
-                            }
-                          </div>
-                        </div>
-                        {conversation?.participants.length > 2 &&
-                          <div className={index === messages.data.length - 1 ? 'send-icon high' : 'send-icon'}>
-                            {data?.messages_logs?.map(log => (
-                              <>
-                                {log.status === 1 &&
-                                  <img alt=""
-                                    src={`/assets/images/${log.feel.color}.png`}
-                                  />
-                                }
-                              </>
-                            ))}
-                          </div>
-                        }
-                        {data.created_at &&
-                          <p className='time'>
-                            {data.created_at === 'now'
-                              ? 'now'
-                              : `${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`
-                            }
-                          </p>
-                        }
-                      </div>
-                    </div>
+                    <OutgoingMessage
+                      data={data}
+                      conversation={conversation}
+                      index={index}
+                      messagesLength={messages?.data?.length}
+                      onDeleteMessage={this.handleDeleteMessage}
+                      feelColor={currentUser?.feel?.color_code}
+                    />
                   ) : (
-                    <div className="message-row group">
-                      <div className='incoming'>
-                        <div className="user-message">
-                          <Avatar
-                            user={data.user}
-                          />
-                          <div
-                            className='text'
-                            style={{
-                              backgroundColor: convertHexToRGBA(data.feel.color_code, 0.3),
-                              borderColor: data.feel.color_code,
-                              boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
-                            }}
-                          >
-
-                            {getText(data.message) && getText(data.message)}
-                            {getURL(data.message) &&
-                              <ReactTinyLink
-                                cardSize="small"
-                                showGraphic={true}
-                                maxLine={2}
-                                minLine={1}
-                                url={getURL(data.message)}
-                              // defaultMedia={data.message}
-                              />
-                            }
-
-                            {data.type === 1 &&
-                              <div className="msgImg">
-                                <a href={data.url} target="_blank" rel="noopener noreferrer">
-                                  <img
-                                    src={data.url}
-                                    alt=""
-                                  />
-                                </a>
-                              </div>
-                            }
-                            {data.type === 2 &&
-                              <div className="msgVideo">
-                                <video width="320" height="240" controls>
-                                  <source src={data.url} type="video/mp4" />
-                                  <source src={data.url} type="video/ogg" />
-                                  <source src={data.url} type="video/mov" />
-                                  <source src={data.url} type="video/mpeg" />
-                                      Your browser does not support the video tag.
-                                    </video>
-                              </div>
-                            }
-                            {data.type === 3 &&
-                              <div className="msgDocument">
-                                <i className="fas fa-file-alt"></i>
-                                <a
-                                  href={data.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  style={{ textDecoration: 'none' }}
-                                >
-                                  Document
-                                    </a>
-                              </div>
-                            }
-                          </div>
-                        </div>
-                        {data.created_at &&
-                          <p className='time'>
-                            {`${formatDate(data.created_at)} AT ${formatTime(data.created_at)}`}
-                          </p>
-                        }
-                      </div>
-
-                    </div>
+                    <IncomingMessage
+                      data={data}
+                    />
                   )
                 }
               </div>
@@ -562,132 +427,50 @@ class ChatBox extends Component {
             <div ref={ref => this.bottomRef.current = ref}></div>
           </div>
         </>
+
         {isViewAble !== null &&
           <>
             {isViewAble
               ? (
                 <div className="chat-footer" ref={this.footerRef}>
                   {progress > 0 &&
-                    <div>
-                      <div className='progressBar'>
-                        <span className="text"> {progress}% </span>
-                        <div
-                          className="percent"
-                          style={{
-                            width: `${progress}%`,
-                            backgroundColor: currentUser.feel.color_code
-                          }}
-                        >
-                        </div>
-                      </div>
-                    </div>
-                  }
-                  <div className="message-input">
-                    <span
-                      data-for="uplaodPost"
-                      data-tip="upload">
-                      <i
-                        className="fa fa-plus add-items-btn"
-                        onClick={() => this.setState({ hidden: true })}
-                      />
-                    </span>
-                    <ToolTip id="uploadPost" />
-                    <input
-                      autoFocus
-                      placeholder="Type a message"
-                      type="text"
-                      name="message"
-                      value={message}
-                      onChange={this.handleChange}
-                      onKeyUp={this.handleEnter}
+                    <ProgressBar
+                      progress={progress}
+                      feelColor={currentUser.feel.color_code}
                     />
-                    <button
-                      onClick={this.handlePost}
-                      className='clickable btn-send'
-                      style={{ backgroundColor: currentUser.feel.color_code }}
-                    >
-                      Post
-                    </button>
-                  </div>
-                  <div className='typing-text'>
-                    {this.state.typings.length > 1 &&
-                      <>
-                        {this.state.typings?.map((typing, index) => (
-                          <span key={index}> {typing.username} {index < this.state.typings.length - 1 && 'and'}</span>
-                        ))
-                        }
-                         are typing..
-                      </>
-                    }
-                    {this.state.typings.length === 1 &&
-                      <span> {this.state.typings[0].username} is typing </span>
-                    }
-                  </div>
-                  <div className="preview">
-                    {image &&
-                      <div className="image-preview">
-                        <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
-                        <img src={image} alt="" />
-                      </div>
-                    }
-                    {video &&
-                      <div className="video-preview">
-                        <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
-                        <video controls>
-                          <source src={video} type="video/mp4" />
-                          <source src={video} type="video/ogg" />
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
-                    }
-                    {document &&
-                      <div className="document-preview">
-                        <i className="fas fa-trash" onClick={this.handleDeletePreview}></i>
-                        <i className="fas fa-file-alt"></i>
-                        <div> {document.doc_name && document.doc_name}</div>
-                      </div>
-                    }
-                    <div ref={ref => this.preview.current = ref}> </div>
-                  </div>
-                  {
-                    hidden &&
-                    <div className="add-img-vid-box">
-                      <i
-                        style={{ backgroundColor: currentUser.feel.color_code }}
-                        className="fa fa-times close-add-box"
-                        onClick={() => this.setState({ hidden: false })}
-                      />
-                      <label>
-                        <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-                        <div className="nag-btn">
-                          Add Image
-                        </div>
-                        <input type="file" name="image" onChange={this.handleUpload} accept="image/*" />
-                      </label>
-                      <label>
-                        <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-                        <div className="nag-btn">
-                          Add Video
-                        </div>
-                        <input type="file" name="video" onChange={this.handleUpload} accept=".mp4" />
-                      </label>
-                      <label>
-                        <img alt="" src="/assets/images/plus.png" style={{ backgroundColor: currentUser.feel.color_code }} />
-                        <div className="nag-btn">
-                          Add Document
-                        </div>
-                        <input
-                          type="file"
-                          name="video"
-                          onChange={this.handleUpload}
-                          accept=".pdf,.doc,.docx,.xlsx,.xlsm,.xlsb,.xltx,.csv"
-                        />
-                      </label>
-                    </div>
+                  }
+                  <ChatInput
+                    message={message}
+                    onChange={this.handleChange}
+                    onEnter={this.handleEnter}
+                    onPost={this.handlePost}
+                    feelColor={currentUser.feel.color_code}
+                    onOpenUploadModal={this.handleOpenUploadModal}
+                  />
+
+                  <WhoIsTyping
+                    typingUsers={this.state.typings}
+                  />
+
+                  <FilePreview
+                    previewRef={this.preview}
+                    image={image}
+                    video={video}
+                    document={document}
+                    onDeletePreview={this.handleDeletePreview}
+                  />
+                  {!hidden &&
+                    <FileUploadModal
+                      feelColor={currentUser.feel.color_code}
+                      onChange={this.handleUpload}
+                      onClose={this.handleCloseUploadModal}
+                    />
                   }
                 </div>
               ) : (
-                <p className="p-style" >You cannot message or video chat with {filtered?.first_name}  {filtered?.last_name} ({filtered?.username}) </p>
+                <p className="p-style">
+                  You cannot message or video chat with {filtered?.first_name}  {filtered?.last_name} ({filtered?.username})
+                </p>
               )
             }
           </>
@@ -718,7 +501,7 @@ class ChatBox extends Component {
             onClose={this.handleCloseDraw}
           />
         }
-      </div >
+      </div>
     );
   }
 };
@@ -745,5 +528,6 @@ export default connect(
   readMessage,
   readAll,
   changeReadMessageStatus,
-  resetConversationCount
+  resetConversationCount,
+  deleteMessage
 })(withRouter(ChatBox));
