@@ -35,6 +35,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
       dispatch(clearArtSearch());
     }
   }, [dispatch, myStudio]);
+
   useEffect(() => {
     if (!isEmpty(listCategory) && listCategory.length === 1) {
       setArtId(listCategory[0].id)
@@ -53,6 +54,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
       setError({ ...error, username: "username cannot be empty" })
     }
   }
+
   const updateUserArt = () => {
     const data = {
       art_id: artId
@@ -191,7 +193,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                   type="text"
                   name="bio"
                   id="addbio"
-                  value={bio}
+                  value={bio.replace(/<br\/>/g, '')}
                   onChange={changeHandler}
                 />
                 {
