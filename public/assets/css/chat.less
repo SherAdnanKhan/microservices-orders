@@ -53,8 +53,54 @@
           position: relative;
           padding-top: 9px;
           transition: all 0.5s;
+          display: flex;
           cursor: pointer;
-
+        .date-action {
+          display: flex;
+          width: 100%;
+          margin-left:  43%;
+          @media @mobile {
+            margin-left:  22%;
+          }
+          .messageDots {
+            text-align: end;
+            position: relative;
+            @media @mobile {
+              margin-right: 16%;
+            }
+          }     
+          .dropdown {
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              color: white;
+              min-width: 112px;
+              box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+              z-index: 1;
+              margin-left: -10px;
+              top: 16px;
+              right: 0;
+              p{
+                padding: 9px 16px;
+                margin: 0;
+              }
+              @media @mobile {
+                margin-left: -32px;
+              }
+              p {
+                text-align: center;
+                cursor: pointer;
+              }
+              a {
+                color: black;
+                padding: 9px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: center;
+              }
+            }
+          }
+        }
           &.active {
             background-color: #393838;
           }
@@ -130,7 +176,9 @@
             text-align: right;
             vertical-align: top;
             display: inline-block;
-            padding-top: 6px;
+            padding-top: 0px;
+            margin-right: 16%;
+            white-space: nowrap;
           }
         }
       }
@@ -673,13 +721,7 @@
               text-align: end;
               position: relative;
             }
-            // &:hover {
-            //   .messageDots {
-            //     display: block;
-            //   }
-            // }
             .dropdown {
-
               .dropdown-content {
                 display: none;
                 position: absolute;
@@ -711,8 +753,6 @@
                 }
               }
             }
-            
-    
             .send-icon {
               text-align: right;
               margin-top: 10px;

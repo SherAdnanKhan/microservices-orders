@@ -16,7 +16,8 @@ import {
   STOP_CONVERSATION_LOADER,
   START_MESSAGE_LOADER,
   STOP_MESSAGE_LOADER,
-  DELETE_MESSAGE
+  DELETE_MESSAGE,
+  DELETE_CONVERSATION,
 } from '../constants/actionTypes';
 import { isNumber } from '../utils/helperFunctions';
 
@@ -204,4 +205,23 @@ export const deleteMessage = id => dispatch => {
       }
     });
 }
+
+export const deleteConversation = id => dispatch => {
+
+  http
+    .delete(`/chats/${id}`)
+    .then(() => {
+      toast.success("Conversation deleted successfully")
+      dispatch({
+        type: DELETE_CONVERSATION,
+        payload: id
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        toast(err.response.data.errors.error)
+      }
+    });
+}
+
 export const readAll = data => ({ type: READ_ALL, payload: data });

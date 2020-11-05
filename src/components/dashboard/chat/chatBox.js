@@ -338,7 +338,7 @@ class ChatBox extends Component {
     const currentUser = getCurrentUser();
     const { user, messages, conversation } = this.props.conversation;
     const filtered = conversation?.participants?.filter(p => p.id !== currentUser.id)[0];
-    const { onlineUsers, isBlocked, isViewAble, isMuted } = this.props;
+    const { onlineUsers, isBlocked, isViewAble, isAllowed, isMuted } = this.props;
 
     return (
       <div className="chat-box">
@@ -430,9 +430,9 @@ class ChatBox extends Component {
 
         {isViewAble !== null &&
           <>
-            {isViewAble
+            {isViewAble && isAllowed
               ? (
-                <div className="chat-footer" ref={this.footerRef}>
+                <div className="chat-footer" ref={this.footerRef} >
                   {progress > 0 &&
                     <ProgressBar
                       progress={progress}
@@ -512,6 +512,7 @@ const mapStateToProps = state => {
     isBlocked: state.conversation.is_blocked,
     isViewAble: state.conversation.is_viewable,
     isMuted: state.conversation.is_muted,
+    isAllowed: state.conversation.is_allowed,
     onlineUsers: state.onlineUser.onlineUsers,
     messageLoader: state.conversation.messageLoader,
   }

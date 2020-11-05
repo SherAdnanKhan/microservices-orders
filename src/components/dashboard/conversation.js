@@ -5,8 +5,10 @@ import { formatTime, formatDate } from '../../utils/helperFunctions';
 import MeuzmLogo from '../common/meuzmLogo';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from '../common/loader';
+import ConversationOptions from './chat/conversationOptions';
 
-const Conversation = ({ onActiveConversation, conversations, activeConversation, onCallNextPage, currentPage, conversationLoader, nextPageUrl }) => {
+
+const Conversation = ({ onActiveConversation, conversations, feelColor, onDeleteConversation, activeConversation, onCallNextPage, currentPage, conversationLoader, nextPageUrl }) => {
   const currentUser = useContext(UserContext);
 
   const getDateOrTime = date => {
@@ -22,6 +24,8 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation,
   const fetchData = () => {
     onCallNextPage();
   }
+
+
   return (
     <div className="conversationContainer">
       {(!conversations || conversations.length === 0) &&
@@ -135,12 +139,27 @@ const Conversation = ({ onActiveConversation, conversations, activeConversation,
                     </>
                   }
                 </div>
-                <div className="dateTime">
-                  {conversation.last_message &&
-                    <>
-                      {getDateOrTime(conversation.last_message.created_at)}
-                    </>
-                  }
+                <div className="date-action">
+                  <div className="dateTime">
+                    {conversation.last_message &&
+                      <>
+                        {getDateOrTime(conversation.last_message.created_at)}
+                      </>
+                    }
+                  </div>
+                  <div className="messageDots clickable">
+                    <i class="fa fa-ellipsis-v" aria-hidden="true" onClick={(event) => event.stopPropagation()}></i>
+                    <ConversationOptions
+                      onDeleteConversation={(e) => {
+                        e.stopPropagation();
+                        onDeleteConversation(conversation.id)
+                        if (activeConversation.id === conversation.id) {
+                          onActiveConversation('')
+                        }
+                      }}
+                      feelColor={feelColor}
+                    />
+                  </div>
                 </div>
               </div>
             ))
