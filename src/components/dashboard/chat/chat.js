@@ -3,7 +3,7 @@ import Conversation from '../conversation';
 import ChatBox from './chatBox';
 import { isChrome } from '../../../utils/helperFunctions';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearConversation, getAllConversations, getConversation } from '../../../actions/conversationActions';
+import { clearConversation, getAllConversations, getConversation, deleteConversation } from '../../../actions/conversationActions';
 import Spinner from '../../common/spinner';
 import useViewport from '../../common/useViewport';
 import { useRouteMatch } from 'react-router-dom';
@@ -19,7 +19,8 @@ const Chat = () => {
 
   const {
     conversation: { conversations, conversation, conversationLoader },
-    loading: { loading }
+    loading: { loading },
+    feelColor: { feelColor }
   } = useSelector(state => state);
 
   const [activeConversation, setActiveConversation] = useState("");
@@ -70,6 +71,9 @@ const Chat = () => {
       }
     }
   };
+  const handleDeleteConversation = (id) => {
+    dispatch(deleteConversation(id));
+  }
 
   return (
     <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
@@ -91,6 +95,8 @@ const Chat = () => {
                   currentPage={currentPage}
                   conversationLoader={conversationLoader}
                   nextPageUrl={conversations?.next_page_url}
+                  onDeleteConversation={handleDeleteConversation}
+                  feelColor={feelColor}
                 />
                 {conversationLoader && <Loader />}
               </div>
@@ -106,6 +112,8 @@ const Chat = () => {
               currentPage={currentPage}
               conversationLoader={conversationLoader}
               nextPageUrl={conversations?.next_page_url}
+              onDeleteConversation={handleDeleteConversation}
+              feelColor={feelColor}
             />
             {conversationLoader && <Loader />}
           </div>

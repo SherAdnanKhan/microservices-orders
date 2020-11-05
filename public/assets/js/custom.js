@@ -401,3 +401,8 @@ $(document).on('click', '.messageDots', function (e) {
   e.stopPropagation();
   $(this).find('.dropdown-content').toggle()
 })
+
+$(document).on('click', '.dateTime .messageDots', function (e) {
+  e.stopPropagation();
+  $(this).find('.dropdown-content').toggle()
+})

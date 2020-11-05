@@ -18,7 +18,8 @@ import {
   STOP_CONVERSATION_LOADER,
   START_MESSAGE_LOADER,
   STOP_MESSAGE_LOADER,
-  DELETE_MESSAGE
+  DELETE_MESSAGE,
+  DELETE_CONVERSATION
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   is_blocked: null,
   is_viewable: null,
   is_muted: null,
+  is_allowed: null,
   user: null,
   messages: {
     current_page: 1,
@@ -44,12 +46,12 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CONVERSATION:
-      console.log(action.payload.is_blocked);
       return {
         ...state,
         is_blocked: action.payload.is_blocked === undefined ? false : action.payload.is_blocked,
         is_viewable: action.payload.is_viewable === undefined ? true : action.payload.is_viewable,
         is_muted: action.payload.is_muted === undefined ? false : action.payload?.is_muted,
+        is_allowed: action.payload.strq_privacy === undefined ? true : action.payload.strq_privacy.is_allowed,
 
         conversation: action.payload.conversation,
         messages: {
@@ -148,6 +150,15 @@ export default (state = initialState, action) => {
         ...state,
         loading: false
       };
+    case DELETE_CONVERSATION:
+      return {
+        ...state,
+        conversations: {
+          ...state.conversations,
+          data: state.conversations.data.filter(conversation => conversation.id !== action.payload)
+        },
+        conversation: state?.conversation?.id === action.payload ? null : state.conversation
+      }
     case READ_MESSAGE:
       return {
         ...state,
