@@ -31,16 +31,35 @@
            }
     }
     td {
+      padding: 2px;
       border: 0.5px solid white;
-      padding: 15px;
       box-sizing: border-box;
+      height: 55px;
+      width: 50%;
+      .history-td-div {
+        display: none;
+        .icon-history-feel {
+          height: 55px;
+        }
+        p {
+          font-size: 18px;
+          font-weight: 500;
+        }
+      }
     }
     tbody {
       tr {
         &:hover {
           td {
-            background-color: rgb(217, 218, 216);
-            color: black;
+            .history-td-div {
+              display: inline-flex;
+              img {
+                margin-right: 10px;
+              }
+              .icon-history-feel {
+                height: 55px;
+              }
+            }
           }
         }
       }

@@ -30,7 +30,7 @@ const FeelHistory = () => {
       <table>
         <thead>
           <tr>
-            <th>Feel Color</th>
+            <th>Feel</th>
             <th>Updated At</th>
           </tr>
         </thead>
@@ -39,7 +39,7 @@ const FeelHistory = () => {
             feelHistory &&
             feelHistory?.user_feel_list?.data?.map((feel_history, index) => (
               <tr key={index}>
-                <td>{feel_history.feel.color}</td>
+                <td style={{ backgroundColor: feel_history.feel.color_code }}><div className="history-td-div"> <img className="icon-history-feel" alt="" src={feel_history.feel.image_path} /> <p>{feel_history.feel.description}</p> </div></td>
                 <td>{formatDateTime(feel_history.created_at)}</td>
               </tr>
             ))
