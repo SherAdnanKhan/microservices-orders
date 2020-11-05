@@ -19,7 +19,7 @@ import {
   BLOCK_USER,
   UNBLOCK_USER
 } from "../constants/actionTypes";
-import { SPRFVS } from "../constants/privacyTypes";
+import { FAVES } from "../constants/privacyTypes";
 
 const initialState = {
   myStudio: null,
@@ -109,7 +109,8 @@ export default (state = initialState, action) => {
         userStudio: {
           ...state.userStudio,
           gallery_privacy: state.userStudio.gallery_privacy.map(gallery => {
-            if (gallery.gallery_id === action.payload.gallery.id) {
+            if (gallery.gallery_id === action.payload.gallery.id
+              && action.payload.gallery.privacy?.privacy_type_id === FAVES) {
               return {
                 ...gallery,
                 is_allowed: 1
@@ -129,7 +130,7 @@ export default (state = initialState, action) => {
           ...state.userStudio,
           gallery_privacy: state.userStudio.gallery_privacy.map(gallery => {
             if (gallery.gallery_id === action.payload.gallery.id
-              && action.payload.gallery.privacy?.privacy_type_id !== SPRFVS) {
+              && action.payload.gallery.privacy?.privacy_type_id === FAVES) {
               return {
                 ...gallery,
                 is_allowed: 0
