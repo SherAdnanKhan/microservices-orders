@@ -10,16 +10,16 @@ import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
-
 const Lobby = () => {
   const dispatch = useDispatch();
   const [unReadMsgCount] = useState("0");
   const {
     lobby: { favouriteUsers, favouritePosts, postLoader },
-    mzFlash: { collectiveFeeds },
+    mzFlash: { collectiveFeeds, loading },
     postView: { sendUser },
     feelColor: { feelColor },
   } = useSelector(state => state);
+
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
 
@@ -100,8 +100,13 @@ const Lobby = () => {
     dispatch(unstrokeFeed(data, user));
   };
 
-  const handleCallNextPage = () => {
+  const handleNextPosts = () => {
     dispatch(getFavouritePosts(currentPage + 1));
+    setCurrentPage(currentPage => currentPage + 1);
+  };
+
+  const handleNextFeeds = () => {
+    dispatch(getCollectiveFeeds(currentPage + 1));
     setCurrentPage(currentPage => currentPage + 1);
   };
 
@@ -163,7 +168,7 @@ const Lobby = () => {
             <LobbyPosts
               posts={favouritePosts?.data}
               sendUser={sendUser}
-              onCallNextPage={handleCallNextPage}
+              onCallNextPosts={handleNextPosts}
               currentPage={currentPage}
               postLoader={postLoader}
               nextPageUrl={favouritePosts?.next_page_url}
@@ -183,6 +188,10 @@ const Lobby = () => {
             onRepost={handleRepost}
             onStroke={handleFeedStroke}
             onUnstroke={handleFeedUnstroke}
+            onCallNextFeeds={handleNextFeeds}
+            currentPage={currentPage}
+            feedLoader={loading}
+            nextPageUrl={collectiveFeeds?.next_page_url}
           />
         </div>
         <div className="assist">

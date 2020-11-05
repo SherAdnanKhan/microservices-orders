@@ -27,6 +27,7 @@ const MzFlashGroup = () => {
   const [activeUserList, setActiveUserList] = useState(2);
   const [activeUser, setActiveUser] = useState('');
   const [activeFeedComment, setActiveFeedComment] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [comments, setComments] = useState({})
   const [imagePath, setImagepath] = useState("");
   const [mediaType, setMediaType] = useState("");
@@ -157,9 +158,15 @@ const MzFlashGroup = () => {
     }
   };
 
+  const handleNextFeeds = () => {
+    dispatch(getCollectiveFeeds(currentPage + 1));
+    setCurrentPage(currentPage => currentPage + 1);
+  };
+
+
   return (
     <section className="mz-flash-group">
-      {loading && <Spinner />}
+      {loading && currentPage === 1 && <Spinner />}
       <div className="row">
         {showPostModel &&
           <PostModal
@@ -194,22 +201,29 @@ const MzFlashGroup = () => {
           onUnstroke={handleFeedUnstroke}
           onPostModal={handlePostShowModel}
         />
-        <FeedSection
-          collectiveFeeds={collectiveFeeds}
-          onModelChange={value => setShowModel(value)}
-          showModel={showModel}
-          currentUser={currentUser}
-          activeFeedComment={activeFeedComment}
-          onActiveFeedComment={handleActiveFeedComment}
-          onCommentChange={handleCommentChange}
-          comments={comments}
-          onPostComment={handleEnter}
-          onRepost={handleRepost}
-          onStroke={handleFeedStroke}
-          onUnstroke={handleFeedUnstroke}
-          onModelOpen={handleShowModel}
-          onPostModal={handlePostShowModel}
-        />
+        <div>
+
+          <FeedSection
+            collectiveFeeds={collectiveFeeds}
+            onModelChange={value => setShowModel(value)}
+            showModel={showModel}
+            currentUser={currentUser}
+            activeFeedComment={activeFeedComment}
+            onActiveFeedComment={handleActiveFeedComment}
+            onCommentChange={handleCommentChange}
+            comments={comments}
+            onPostComment={handleEnter}
+            onRepost={handleRepost}
+            onStroke={handleFeedStroke}
+            onUnstroke={handleFeedUnstroke}
+            onModelOpen={handleShowModel}
+            onPostModal={handlePostShowModel}
+            onCallNextFeeds={handleNextFeeds}
+            currentPage={currentPage}
+            feedLoader={loading}
+            nextPageUrl={collectiveFeeds?.next_page_url}
+          />
+        </div>
       </div>
     </section >
   );

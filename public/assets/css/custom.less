@@ -956,9 +956,8 @@ input {
     top: 10%;
     right: 16px;
     width: 32%;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: 89vh;
+    overflow: hidden;
     
     @media screen and (max-width: 856px) {
       display: none;
@@ -979,16 +978,17 @@ input {
     .box-3 {
 
       margin-top: unset;
-      height: 80vh;
-      overflow-y: scroll;
+      overflow: hidden;
       
       .sub-box {
         width: 98%;
         margin-right: auto;
         margin-left: auto;
-        border: 2px solid#C3C3C3;
-        // margin-top: 30px;
         position: relative;
+        border-left: unset;
+        border-right: unset;
+        border-top: unset;
+        border-bottom: 4px solid #C3C3C3;
         .cube-fave{
           display: flex;
           justify-content: space-between;
