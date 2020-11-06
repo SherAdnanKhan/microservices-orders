@@ -230,13 +230,16 @@ const FeedSection = ({
                 }
                 {feed.feed_type === 2 &&
                   feed.image &&
-                  <Link target="_blank" to={{ pathName: `/dashboard/post/${feed.user.slug}?video=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
-                    <video >
+                  <>
+                    <Link target="_blank" to={`/dashboard/post/${feed.user.slug}?video=${feed.image.path}`}>
+                      Created by: {feed.user.slug}
+                    </Link>
+                    <video controls style={{ height: "87%" }}>
                       <source src={feed.image.path} type="video/mp4" />
                       <source src={feed.image.path} type="video/ogg" />
                     Your browser does not support the video tag.
                   </video>
-                  </Link>
+                  </>
 
                 }
               </div>
