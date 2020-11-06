@@ -84,7 +84,6 @@ const Chat = () => {
             {!activeConversation &&
               <div
                 className="conversation"
-                // onScroll={handleScroll}
                 ref={conversationRef}>
 
                 <Conversation

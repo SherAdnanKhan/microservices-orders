@@ -56,14 +56,16 @@ const Header = () => {
             />
             <ToolTip id="addExhibit" position="bottom" />
           </div>
-          <div className="search" id="search">
-
+          <div
+            className="search"
+            id="search"
+            onClick={handleToggleSearch} >
             <img
               src="/assets/images/icons/searchicon.png"
               alt="search Icon"
               data-for="search"
               data-tip='search'
-              onClick={handleToggleSearch} />
+            />
             <ToolTip id="search" position="bottom" />
           </div>
           <div className="right-icon">
