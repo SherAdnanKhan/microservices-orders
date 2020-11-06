@@ -12,6 +12,7 @@ const RightBorder = () => {
       style={{ backgroundColor: feelColor }}
     >
       <img
+        className="strq-img"
         alt=""
         src="/assets/images/strqicon.png"
         onClick={() => history.push('/dashboard/chat')}
@@ -20,6 +21,7 @@ const RightBorder = () => {
       />
       <ToolTip position="left" id="chat" />
       <img
+        className="mzflash-img"
         alt=""
         src="/assets/images/mzflash.png"
         onClick={() => history.push('/dashboard/mz-flash-group')}

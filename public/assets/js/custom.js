@@ -406,3 +406,11 @@ $(document).on('click', '.dateTime .messageDots', function (e) {
   e.stopPropagation();
   $(this).find('.dropdown-content').toggle()
 })
+
+$(document)
+  .on('click', '.lobby-img, .mystudio-img, .add-img, .mzflash-img, .strq-img', function (e) {
+    e.stopPropagation();
+
+    $(".left").removeClass("toggle");
+    $(".right").removeClass("toggle");
+  })

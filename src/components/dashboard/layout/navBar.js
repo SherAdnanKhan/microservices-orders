@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { getAuthToken, getCurrentUser, logout } from '../../../actions/authActions';
 import Search from './search';
@@ -11,6 +11,11 @@ const NavBar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { feelColor } = useSelector(state => state.feelColor);
+  const [showSearch, setShowSearch] = useState(false);
+
+  const handleToggleSearch = () => {
+    setShowSearch(!showSearch);
+  }
 
   const handleColorChange = color => {
     dispatch(changeFeelColor(color));
@@ -37,7 +42,11 @@ const NavBar = () => {
               <i className="fas fa-arrow-left" />
             </span>
           </div>
-          <div className="search" id="search">
+          <div
+            className="search"
+            id="search"
+            onClick={handleToggleSearch}
+          >
             <img src="/assets/images/icons/searchicon.png" alt="search Icon" />
           </div>
         </div>
@@ -51,7 +60,10 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <Search feelColor={feelColor} />
+      <Search
+        feelColor={feelColor}
+        showSearch={showSearch}
+        onToggleSearch={handleToggleSearch} />
       <ChangeColor onColorChange={handleColorChange} />
       <hr className="do-not-delete" />
 
