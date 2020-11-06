@@ -11,7 +11,6 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const history = useHistory();
 
   const handleUnmount = () => {
-    console.log('unmount')
     dispatch(clearUsers());
     onToggleSearch();
   }
