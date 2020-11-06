@@ -10,6 +10,7 @@ import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
+
 const Lobby = () => {
   const dispatch = useDispatch();
   const [unReadMsgCount] = useState("0");
@@ -26,7 +27,8 @@ const Lobby = () => {
   const [comments, setComments] = useState({})
   const currentUser = useContext(UserContext);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLobbyPage, setCurrentLobbyPage] = useState(1);
+  const [currentFeedPage, setCurrentFeedPage] = useState(1);
   const postRef = useRef();
 
   // useEffect(() => {
@@ -101,13 +103,13 @@ const Lobby = () => {
   };
 
   const handleNextPosts = () => {
-    dispatch(getFavouritePosts(currentPage + 1));
-    setCurrentPage(currentPage => currentPage + 1);
+    dispatch(getFavouritePosts(currentLobbyPage + 1));
+    setCurrentLobbyPage(currentLobbyPage => currentLobbyPage + 1);
   };
 
   const handleNextFeeds = () => {
-    dispatch(getCollectiveFeeds(currentPage + 1));
-    setCurrentPage(currentPage => currentPage + 1);
+    dispatch(getCollectiveFeeds(currentFeedPage + 1));
+    setCurrentFeedPage(currentFeedPage => currentFeedPage + 1);
   };
 
   return (
@@ -169,7 +171,7 @@ const Lobby = () => {
               posts={favouritePosts?.data}
               sendUser={sendUser}
               onCallNextPosts={handleNextPosts}
-              currentPage={currentPage}
+              currentPage={currentLobbyPage}
               postLoader={postLoader}
               nextPageUrl={favouritePosts?.next_page_url}
             />
@@ -189,7 +191,7 @@ const Lobby = () => {
             onStroke={handleFeedStroke}
             onUnstroke={handleFeedUnstroke}
             onCallNextFeeds={handleNextFeeds}
-            currentPage={currentPage}
+            currentPage={currentFeedPage}
             feedLoader={loading}
             nextPageUrl={collectiveFeeds?.next_page_url}
           />
