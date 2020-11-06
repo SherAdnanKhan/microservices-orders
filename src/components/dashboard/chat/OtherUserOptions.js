@@ -11,7 +11,7 @@ const OtherUserOptions = ({ onReportModal, onBlockModal, onMuteModal, user, isBl
           <a href={`/dashboard/studio/${user?.slug}`} target="_blank" rel="noopener noreferrer">
             View profile
          </a>
-          <a href="/dashboard/video-call">Send ticket</a>
+          <p>Send ticket</p>
           {isBlocked ?
             <p onClick={() => onBlockModal(true)}>Unblock</p>
             :
@@ -20,10 +20,10 @@ const OtherUserOptions = ({ onReportModal, onBlockModal, onMuteModal, user, isBl
           {isMuted ?
             <p onClick={() => onMuteModal(true)}>Unmute</p>
             :
-            <p onClick={() => onMuteModal(true)}>mute</p>
+            <p onClick={() => onMuteModal(true)}>Mute</p>
           }
           <p onClick={() => onReportModal(true)}>Report</p>
-          <a href="/dashboard/video-call">End chat</a>
+          <p>End call</p>
         </div>
       </div>
     </div>
