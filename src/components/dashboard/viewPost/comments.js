@@ -11,6 +11,7 @@ const Comment = ({ post, onClose }) => {
 
   useEffect(() => {
     if (post) {
+      console.log(post);
       dispatch(getComments(post.id))
     }
   }, [post, dispatch]);
@@ -91,12 +92,17 @@ const Comment = ({ post, onClose }) => {
       <div className="comments-box">
         <div className="comment-bar">
           <div className="commnent-img">
-            {post?.post_type === 1 ?
-              <img
-                alt=""
-                src={post?.image?.path}
-              />
-              :
+            {(post?.post_type === 1 || post?.post_type === 0) &&
+              <>
+                {post?.image?.path &&
+                  <img
+                    alt=""
+                    src={post?.image?.path}
+                  />
+                }
+              </>
+            }
+            {post?.post_type === 2 &&
               <video controls>
                 <source src={post?.image?.path}></source>
               </video>

@@ -33,4 +33,4 @@ const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUpload
   );
 };
 
-export default ChatInput;
+export default React.memo(ChatInput);

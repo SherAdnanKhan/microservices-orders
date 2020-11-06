@@ -9,6 +9,8 @@ import { completeFormattedDate, formatTime } from '../../../utils/helperFunction
 import ToolTip from "../../common/toolTip/toolTip";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from "../../common/loader";
+import { fileUpload } from '../../../actions/genericActions';
+import ProgressBar from '../../common/progressBar';
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
@@ -25,27 +27,42 @@ const FeedSection = ({
   const [error, setError] = useState('');
   const [data, setData] = useState({
     feed: '',
-    video: null,
-    image: null
+    doc_name: '',
+    doc_path: '',
+    doc_type: ''
   });
-  const { feelColor } = useSelector(state => state.feelColor);
 
+  const [progress, setProgress] = useState(0);
+  const { feelColor } = useSelector(state => state.feelColor);
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'file') {
+      const fileData = new FormData();
+      fileData.append('file_upload', input.files[0]);
+
+      dispatch(
+        fileUpload(fileData,
+          updatedProgress => {
+            setProgress(updatedProgress)
+          },
+          result => {
+            setProgress(0);
+            if (result.doc_type === 'image') {
+              setImageUrl(result.path);
+              setVideoUrl('');
+            } else {
+              setImageUrl('');
+              setVideoUrl(result.path);
+            }
+            setData({ ...data, doc_name: result.doc_name, doc_path: result.path, doc_type: result.doc_type });
+          },
+          err => {
+            setProgress(0)
+          }
+        )
+      );
       onModelChange(false);
-      if (input.files[0]) {
-        if (input.name === 'image') {
-          setError("");
-          setData({ ...data, image: input.files[0], video: null });
-          setImageUrl(URL.createObjectURL(input.files[0]));
-          setVideoUrl('');
-        } else if (input.name === 'video') {
-          setData({ ...data, video: input.files[0], image: null });
-          setVideoUrl(URL.createObjectURL(input.files[0]));
-          setImageUrl('');
-        }
-      }
+
     } else {
       setData({ ...data, [input.name]: input.value });
       setCharCount(input.value.length);
@@ -63,18 +80,11 @@ const FeedSection = ({
 
   const handleSubmit = e => {
     e.preventDefault();
-
     const error = validate();
-    const formData = new FormData();
 
     if (!error) {
-      for (let key in data) {
-        if (data[key]) {
-          formData.append(key, data[key]);
-        }
-      }
-      dispatch(createFeed(formData));
-      setData({ ...data, image: null, video: null, feed: '' });
+      dispatch(createFeed(data));
+      setData({ ...data, feed: '', doc_name: '', doc_path: '', doc_type: '' });
       setImageUrl('');
       setVideoUrl('');
       setCharCount(0);
@@ -82,12 +92,9 @@ const FeedSection = ({
     setError(error);
   };
 
-
-
   const fetchData = () => {
     onCallNextFeeds();
   }
-
 
   return (
     <InfiniteScroll
@@ -110,11 +117,7 @@ const FeedSection = ({
             <i
               className="fa fa-plus"
               aria-hidden="true"
-              onClick={() => {
-                onModelChange(true)
-                setError("")
-              }
-              }
+              onClick={() => onModelChange(true)}
               data-for="addPost"
               data-tip="upload post"
             >
@@ -133,6 +136,12 @@ const FeedSection = ({
             <br />
             <input className="clickable btn-send" type="submit" defaultValue="Submit" />
           </form>
+          {progress > 0 &&
+            <ProgressBar
+              progress={progress}
+              feelColor={feelColor}
+            />
+          }
           {showError && error && (
             <div className="error">
               {error}
