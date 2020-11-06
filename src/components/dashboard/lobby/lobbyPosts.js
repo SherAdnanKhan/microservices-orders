@@ -37,7 +37,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from "../../common/loader";
 
-const LobbyPosts = ({ posts, sendUser, onCallNextPage, currentPage, postLoader, nextPageUrl }) => {
+const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader, nextPageUrl }) => {
   const dispatch = useDispatch();
   const [activePost, setActivePost] = useState('');
   const [showDeleteModel, setShowDeleteModel] = useState(false);
@@ -171,7 +171,7 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPage, currentPage, postLoader, 
     handleActivePost("")
   }
   const fetchData = () => {
-    onCallNextPage();
+    onCallNextPosts();
   }
 
   return (

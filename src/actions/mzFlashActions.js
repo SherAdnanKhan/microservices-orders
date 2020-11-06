@@ -11,7 +11,7 @@ import {
   GET_COLLECTIVE_FEEDS,
   CREATE_FEED_COMMENT,
   STROKE_FEED,
-  UNSTROKE_FEED
+  UNSTROKE_FEED,
 } from '../constants/actionTypes';
 import { getCurrentUser } from './authActions';
 import socket from '../services/socketService';
@@ -46,14 +46,21 @@ export const getMyFeeds = () => dispatch => {
 };
 
 export const getCollectiveFeeds = (page = 1) => dispatch => {
+  if (page > 1) {
+    dispatch({ type: START_FEEDS_LOADER });
+  }
   http
     .get(`/mzflash/user/collective-feed?page=${page}`)
     .then(res => {
+      dispatch({ type: STOP_FEEDS_LOADER });
       dispatch({
         type: GET_COLLECTIVE_FEEDS,
         payload: res.data.data.user_faves_feeds
       });
-    });
+    })
+    .catch(() => {
+      dispatch({ type: STOP_FEEDS_LOADER })
+    })
 };
 
 export const getUserFeeds = slug => dispatch => {

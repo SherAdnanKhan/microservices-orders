@@ -194,6 +194,7 @@ export const deleteMessage = id => dispatch => {
   http
     .delete(`/chats/message/${id}`)
     .then(() => {
+      toast.success("Message deleted successfully")
       dispatch({
         type: DELETE_MESSAGE,
         payload: id

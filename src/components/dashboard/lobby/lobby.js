@@ -16,17 +16,19 @@ const Lobby = () => {
   const [unReadMsgCount] = useState("0");
   const {
     lobby: { favouriteUsers, favouritePosts, postLoader },
-    mzFlash: { collectiveFeeds },
+    mzFlash: { collectiveFeeds, loading },
     postView: { sendUser },
     feelColor: { feelColor },
   } = useSelector(state => state);
+
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
 
   const [comments, setComments] = useState({})
   const currentUser = useContext(UserContext);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLobbyPage, setCurrentLobbyPage] = useState(1);
+  const [currentFeedPage, setCurrentFeedPage] = useState(1);
   const postRef = useRef();
 
   // useEffect(() => {
@@ -100,9 +102,14 @@ const Lobby = () => {
     dispatch(unstrokeFeed(data, user));
   };
 
-  const handleCallNextPage = () => {
-    dispatch(getFavouritePosts(currentPage + 1));
-    setCurrentPage(currentPage => currentPage + 1);
+  const handleNextPosts = () => {
+    dispatch(getFavouritePosts(currentLobbyPage + 1));
+    setCurrentLobbyPage(currentLobbyPage => currentLobbyPage + 1);
+  };
+
+  const handleNextFeeds = () => {
+    dispatch(getCollectiveFeeds(currentFeedPage + 1));
+    setCurrentFeedPage(currentFeedPage => currentFeedPage + 1);
   };
 
   return (
@@ -163,8 +170,8 @@ const Lobby = () => {
             <LobbyPosts
               posts={favouritePosts?.data}
               sendUser={sendUser}
-              onCallNextPage={handleCallNextPage}
-              currentPage={currentPage}
+              onCallNextPosts={handleNextPosts}
+              currentPage={currentLobbyPage}
               postLoader={postLoader}
               nextPageUrl={favouritePosts?.next_page_url}
             />
@@ -183,6 +190,10 @@ const Lobby = () => {
             onRepost={handleRepost}
             onStroke={handleFeedStroke}
             onUnstroke={handleFeedUnstroke}
+            onCallNextFeeds={handleNextFeeds}
+            currentPage={currentFeedPage}
+            feedLoader={loading}
+            nextPageUrl={collectiveFeeds?.next_page_url}
           />
         </div>
         <div className="assist">
