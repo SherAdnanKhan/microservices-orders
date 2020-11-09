@@ -5,18 +5,45 @@ const WhoIsTyping = ({ typingUsers }) => {
     <div className='typing-text'>
       {typingUsers.length > 1 &&
         <>
-          {typingUsers?.map((typing, index) => (
-            <span key={index}>
-              {typing.username}
-              {index < this.state.typings.length - 1 && 'and'}
-            </span>
-          ))
-          }
-         are typing..
+          <div className="bubbleText">
+            {typingUsers?.map((typing, index) => (
+              <span className="bubbleTextSpan" key={index}>
+                {typing.username}
+                {index < this.state.typings.length - 1 && 'and'}
+              </span>
+            ))
+            }
+            are typing
+          </div>
+          <div class="bubbleDots">
+            <div class="loadingDot loadingDot--1">
+            </div>
+
+            <div class="loadingDot loadingDot--2">
+            </div>
+
+            <div class="loadingDot loadingDot--3">
+            </div>
+          </div>
         </>
       }
       {typingUsers.length === 1 &&
-        <span> {typingUsers[0].username} is typing </span>
+        <>
+        <div className="bubbleText">
+          <span className="bubbleTextSpan"> {typingUsers[0].username} is typing </span>
+        </div>
+
+        <div class="bubbleDots">
+          <div class="loadingDot loadingDot--1">
+          </div>
+
+          <div class="loadingDot loadingDot--2">
+          </div>
+
+          <div class="loadingDot loadingDot--3">
+          </div>
+        </div>
+        </>
       }
     </div>
   );

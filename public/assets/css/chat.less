@@ -882,6 +882,52 @@
           width: 90%;
           margin: 0 auto;
           padding-bottom: 5px;
+          display: flex;
+          .bubbleText {
+            max-width: 50%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+          .bubbleDots {
+            background: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            margin-left: 15px;
+            .loadingDot {
+              width: 12px;
+              height: 12px;
+              background: white;
+              margin: 6px;
+              animation: 1s infinite alternate anim-loadingDot;
+              animation-timing-function: ease-in-out;
+              border-radius: 999px;
+            }
+            .loadingDot--2 {
+              animation-delay: .12s;
+            }
+            
+            .loadingDot--3 {
+              animation-delay: .24s;
+            }
+            /* keyframes for loading dot */
+            @keyframes anim-loadingDot {
+              0% {
+                  transform: scale( 1 );
+                  background: rgba(71, 71, 71, 0.575);
+              }
+              50% {
+                transform: scale( .9 );
+                background: #888888;
+              }
+              100% {
+                  transform: scale( .9 );
+                  background: #fafafa;
+              }
+            }
+          }
         }
       
         .message-input{
