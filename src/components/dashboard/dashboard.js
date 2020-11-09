@@ -8,7 +8,6 @@ import NavBar from './layout/navBar';
 import AddExibit from './exhibition/addExibition';
 import AddVideoArtist from '../video/addVideoArtist';
 import GroupVideoCall from "../video/groupVideo";
-import PostView from "../common/postView";
 import MyVault from './vault/myVault';
 
 const Dashboard = ({ user }) => {
@@ -26,7 +25,6 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/my-studio/gallery-followers/:slug" component={Main} />
         <Route exact path="/dashboard/my-studio/sprfvs/:slug" component={Main} />
         <Route exact path="/dashboard/my-studio" component={Main} />
-        <Route exact path="/dashboard/post/:slug" component={PostView} />
         <Route exact path="/dashboard/studio/gallery-followers/:slug" component={Main} />
         <Route exact path="/dashboard/studio/fave-galleries/:id" component={Main} />
         <Route exact path="/dashboard/studio/sprfvs/:slug" component={Main} />
