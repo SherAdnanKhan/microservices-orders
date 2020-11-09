@@ -343,7 +343,6 @@ $(document)
 // })
 
 $(document).on('click', '.fa-ellipsis-v', function () {
-
   $(this)
     .closest('.post-page')
     .find('.add-img-vid-box')
@@ -357,14 +356,44 @@ $(document).on('click', '.fa-ellipsis-v', function () {
     .closest('.list-body')
     .find('.add-img-vid-box')
     .toggle();
+
+  if ($(this)
+    .closest('.post-page')
+    .find('.add-img-vid-box').css('display') === "block") {
+    console.log("hide scroller")
+    $("body").css("overflow", "hidden");
+  }
+  else if ($(this)
+    .closest('.list-body')
+    .find('.add-img-vid-box')
+    .css('display') === "block") {
+    $("body").css("overflow", "hidden");
+    $(".screen").css("overflow", "hidden");
+  }
+  else if ($(this)
+    .closest('.post-page')
+    .find('.add-img-vid-box-viewpost')
+    .css('display') === "block") {
+    $("body").css("overflow", "hidden");
+
+  }
+  else {
+    console.log("show scroller")
+    $("body").css("overflow-y", "auto");
+    $(".screen").css("overflow-y", "auto");
+  }
   // $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
 })
 
-$('body').click(function (event) {
-  if (!$(event.target).closest('.add-img-vid-box').length && !$(event.target).is('.add-img-vid-box')) {
-    $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
-  }
-});
+// $('body').click(function (event) {
+//   if (!$(event.target).closest('.add-img-vid-box').length && !$(event.target).is('.add-img-vid-box')) {
+//     console.log("close")
+//     $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
+//   }
+//   else {
+//     console.log("open")
+//   }
+// }
 
 $(document).mouseup(function (e) {
   const container = $(`.colorChangerScreen`);

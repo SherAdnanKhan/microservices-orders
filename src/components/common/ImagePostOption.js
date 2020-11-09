@@ -31,6 +31,8 @@ const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onMode
             <p onClick={() => onModelDelete(post, true)}> Delete </p>
             <p onClick={() => onAddVault(post)}>Vault </p>
             <p onClick={() => onSharePost(true, post)}> Share </p>
+            <p onClick={() => onMzFlashModal(true, post)}>MzFlash </p>
+            <p onClick={() => onRepostModal(true, post)}> Repost </p>
             <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
             {post.critiques_status === 0 &&  //if crtiques are on
               <p onClick={() => onTurnOffCrtiques(true, post)}>Turn On critiques </p>
@@ -42,11 +44,11 @@ const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onMode
           :
           <>
             <p onClick={() => onReportPost(true, post)}>Report </p>
-            <p onClick={() => onUnFavGallery(post.gallery)}> Unfave Gallery</p>
             <p onClick={() => onRepostModal(true, post)}> Repost </p>
-            <p onClick={() => onSharePost(true, post)}> Share </p>
             <p onClick={() => onAddVault(post)}>Vault</p>
             <p onClick={() => onMzFlashModal(true, post)}>MzFlash </p>
+            <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
+            <p onClick={() => onUnFavGallery(post.gallery)}> Unfave Gallery</p>
           </>
         }
       </div>

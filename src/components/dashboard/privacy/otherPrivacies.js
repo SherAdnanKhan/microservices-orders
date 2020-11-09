@@ -32,10 +32,10 @@ const OtherPrivacy = ({
                 {other.id === 1 && <img src="/assets/images/strqicon.png" alt="" />}
                 {other.id === 2 && <img src="/assets/images/mzflash.png" alt="" />}
                 {other.id === 3 && <img src="/assets/images/crit1.png" alt="" />}
-                {other.id === 4 && <img src="/assets/images/faving.png" alt="" />}
+                {other.id === 4 && <img src="/assets/images/fave_icon.png" alt="" />}
                 {other.id === 5 && <img src="/assets/images/favers.png" alt="" />}
-                {other.id === 6 && <img src="/assets/images/favers.png" alt="" />}
-                {other.id === 7 && <img src="/assets/images/favers.png" alt="" />}
+                {other.id === 6 && <img src="/assets/images/avataricon.png" alt="" />}
+                {other.id === 7 && <img src="/assets/images/avataricon.png" alt="" />}
                 <label htmlFor="">{other.name}</label>
                 <div className="lock-bar" onClick={() => onActiveOtherPage(other.id)}>
                   {(!other.privacy || other.privacy.privacy_type_id === 1) &&
