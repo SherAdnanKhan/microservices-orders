@@ -342,7 +342,8 @@ $(document)
 //   });
 // })
 
-$(document).on('click', '.fa-ellipsis-v', function () {
+$(document).on('click', '.fa-ellipsis-v', function (e) {
+  e.stopPropagation()
   $(this)
     .closest('.post-page')
     .find('.add-img-vid-box')
@@ -360,7 +361,6 @@ $(document).on('click', '.fa-ellipsis-v', function () {
   if ($(this)
     .closest('.post-page')
     .find('.add-img-vid-box').css('display') === "block") {
-    console.log("hide scroller")
     $("body").css("overflow", "hidden");
   }
   else if ($(this)
@@ -385,15 +385,13 @@ $(document).on('click', '.fa-ellipsis-v', function () {
   // $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
 })
 
-// $('body').click(function (event) {
-//   if (!$(event.target).closest('.add-img-vid-box').length && !$(event.target).is('.add-img-vid-box')) {
-//     console.log("close")
-//     $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
-//   }
-//   else {
-//     console.log("open")
-//   }
-// }
+$('body').click(function (event) {
+  if (!$(event.target).closest('.add-img-vid-box').length && !$(event.target).is('.add-img-vid-box')) {
+    $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
+    $("body").css("overflow-y", "auto");
+    $(".screen").css("overflow-y", "auto");
+  }
+});
 
 $(document).mouseup(function (e) {
   const container = $(`.colorChangerScreen`);

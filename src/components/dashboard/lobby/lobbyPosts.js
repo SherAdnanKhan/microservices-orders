@@ -65,9 +65,10 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
     setShowPostModel(value);
   };
 
-  const handlePostDeleteModel = (value, post) => {
-    setShowDeleteModel(value);
+  const handlePostDeleteModel = (post) => {
+    setShowDeleteModel(post);
   };
+
   const handleDelete = (status, post) => {
     setShowDeleteModel(status);
     dispatch(deletePost(post));
@@ -96,7 +97,7 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
 
   const onStrqShare = (post, userId) => {
     dispatch(sharePostOnStrq(post, userId))
-    dispatch(clearStatus())
+    dispatch(clearStatus());
   }
 
   const handleTurnOffCrtiquesModal = (value) => {
@@ -106,7 +107,8 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
   const handleTurnOnOffCrtique = (modalStatus, post, status) => {
     setshowModalTurnOffCritque(modalStatus);
     dispatch(changeCritqueStatus(post, status));
-    handleActivePost('');
+
+    setActivePost('');
   }
 
   const handleMzFlashModal = (status) => {
@@ -135,8 +137,7 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
     dispatch(storeVault(post))
   }
 
-  const handleOpenCommentModal = post => {
-    setActivePost(post);
+  const handleOpenCommentModal = () => {
     setCommentModal(true);
   }
 
@@ -225,7 +226,10 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
         />
       }
       {showMzFlashModal &&
-        <MzFlashModal onModalClose={handleMzFlashModal} post={activePost} onConfirm={handleMzFlash} />
+        <MzFlashModal
+          onModalClose={handleMzFlashModal}
+          post={activePost}
+          onConfirm={handleMzFlash} />
       }
       {showPostModel &&
         <PostModal
@@ -261,7 +265,7 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
             </div>
             <div className="image-option-box">
               <ImagePostOption
-                post={post}
+                post={activePost}
                 onUnFavGallery={handleUnfavGallery}
                 onSharePost={handleShareModel}
                 onReportPost={handleReportModel}
@@ -273,13 +277,21 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
                 onMzFlashModal={handleMzFlashModal}
                 onAddVault={handleVault} />
             </div>
-            <div className='valut-icon' >
+            <div className={
+              activePost.id === post.id
+                ? "valut-icon show-valut"
+                : "valut-icon"
+            }
+            >
               <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="more" data-for="more" ></i>
               <ToolTip id="more" position="top" />
               <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
               <ToolTip id="vault" position="top" />
             </div>
-            <div className="post-body">
+            <div
+              className="post-body"
+              onClick={() => handleActivePost(post)}
+            >
               {post.post_type === 2
                 ? (
                   <VideoPlayer
@@ -293,14 +305,24 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
                 )
               }
             </div>
-            <div className="ncomm-slider">
+
+            <div className={
+              activeNcomm.id === post.id
+                ? "ncomm-slider show"
+                : "ncomm-slider"
+            }>
               {ncomm?.data &&
                 <ImageVideoSlider ncomm={ncomm} />
               }
             </div>
             <div className="onearttitle">
               <p>{post && post.title}</p>
-              <div className="lobby-icon"
+
+              <div className={
+                activePost.id === post.id
+                  ? "lobby-icon lobby-icon-slide"
+                  : "lobby-icon"
+              }
                 id={`post${post.id}`}>
                 <div className="action">
                   <div className="strk-btn">
