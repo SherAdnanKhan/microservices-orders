@@ -18,14 +18,10 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
                     return ''
                   }
                 }}
-
                 key={index}
                 className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                 onClick={() => onGalleryChange(gallery)}>
-                {gallery.image
-                  ? <img src={gallery.image.path} alt="" />
-                  : <img src={`/assets/images/${color}.png`} alt="" />
-                }
+                <img src={gallery.image && gallery.image ? gallery.image.path : '/assets/images/icons/galleryCover.png'} alt="image" />
               </div>
             ))}
           </div>
