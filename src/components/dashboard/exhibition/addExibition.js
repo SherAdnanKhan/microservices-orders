@@ -32,8 +32,9 @@ const AddExibit = () => {
     title: "",
     description: "",
     gallery_id: 0,
-    image: null,
-    video: null,
+    doc_type: '',
+    doc_name: '',
+    doc_path: '',
     art_id: null
   });
 
@@ -64,7 +65,7 @@ const AddExibit = () => {
       return "Please select a Gallery.";
     }
 
-    if (!data.image && !data.video) {
+    if (!data.doc_path) {
       return "Please choose a file.";
     }
 
@@ -78,18 +79,22 @@ const AddExibit = () => {
   const Submit = (e) => {
     e.preventDefault();
     const error = hasErrors();
+
     if (!error) {
-      const formData = new FormData();
-      for (let key in data) {
-        if (key === 'image' || key === 'video') {
-          if (data[key]) {
-            formData.append(key, data[key]);
-          }
-        } else {
-          if (key !== 'id') {
-            formData.append(key, data[key]);
-          }
-        }
+      const formData = {
+        title: data.title,
+        description: data.description,
+        gallery_id: data.gallery_id,
+        art_id: data.art_id,
+        doc_path: data.doc_path,
+      }
+
+      if (data.doc_name) {
+        formData.doc_name = data.doc_name;
+      }
+
+      if (data.doc_type) {
+        formData.doc_type = data.doc_type
       }
 
       if (data.id) {
@@ -118,7 +123,9 @@ const AddExibit = () => {
     if (params.post) {
       dispatch(getPost(params.post));
     }
+
     dispatch(getMyGalleries());
+
     return () => {
       dispatch(clearPost());
     }
@@ -141,25 +148,26 @@ const AddExibit = () => {
           id: post?.post?.id,
           title: post?.post?.title,
           description: post?.post?.description,
-          art_id: post?.post?.art_id
+          art_id: post?.post?.art_id,
+          doc_path: post?.post?.image?.path || ''
         }
       });
       setShowModel(false);
     }
   }, [post, dispatch]);
 
-  const handleSave = (name, file) => {
+  const handleSave = (file) => {
     setShowModel(false);
 
-    if (name === 'image' || name === 'document') {
-      setImage(file);
-      setData({ ...data, image: file, video: null });
+    if (file.doc_type === 'image') {
+      setImage(file.path);
       setVideo(null);
     } else {
-      setVideo(file);
-      setData({ ...data, video: file, image: null });
+      setVideo(file.path);
       setImage(null);
     }
+
+    setData({ ...data, doc_name: file.doc_name, doc_path: file.path, doc_type: file.doc_type });
   };
 
 
@@ -170,6 +178,7 @@ const AddExibit = () => {
           onSave={handleSave}
           selectedImage={image}
           selectedVideo={video}
+          feelColor={feelColor}
         />
       }
       {!showModel &&

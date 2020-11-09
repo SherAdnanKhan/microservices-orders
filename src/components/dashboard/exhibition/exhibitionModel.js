@@ -7,7 +7,7 @@ import { fileUpload } from '../../../actions/genericActions';
 import { useDispatch } from 'react-redux';
 import ProgressBar from '../../common/progressBar';
 
-const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
+const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) => {
   const [croppedImage, setCroppedImage] = useState(null);
   const [video, setVideo] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
@@ -59,9 +59,7 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
 
     if (croppedImage) {
       fileData.append('file_upload', croppedImage);
-      console.log(croppedImage)
     } else if (image) {
-      console.log(croppedImage)
       fileData.append('file_upload', image);
     } else if (video) {
       fileData.append('file_upload', video);
@@ -74,33 +72,13 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
         },
         result => {
           setProgress(0);
-          onSave(result.doc_type, result.path)
-          // if (result.doc_type === 'image') {
-          //   setImageUrl(result.path);
-          //   setVideoUrl('');
-          //   setToggle(true);
-          //   setIsValid(true);
-          // } else {
-          //   setImageUrl('');
-          //   setVideoUrl(result.path);
-          //   setIsValid(true);
-          //   setToggle(true);
-          // }
-          // setData({ ...data, doc_name: result.doc_name, doc_path: result.path, doc_type: result.doc_type });
+          onSave(result);
         },
         err => {
           setProgress(0)
         }
       )
     );
-
-    // if (croppedImage) {
-    //   onSave('image', croppedImage)
-    // } else if (image) {
-    //   onSave('image', image);
-    // } else if (video) {
-    //   onSave('video', video);
-    // }
   };
 
   useEffect(() => {
@@ -194,7 +172,7 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
           {progress > 0 &&
             <ProgressBar
               progress={progress}
-              feelColor={'red'}
+              feelColor={feelColor}
             />
           }
           <button
