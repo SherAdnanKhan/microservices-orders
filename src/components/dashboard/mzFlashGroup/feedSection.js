@@ -218,29 +218,26 @@ const FeedSection = ({
               <div className="imgvideo-mzflash">
                 {feed.feed_type === 1 &&
                   feed.image &&
-                  <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                  <a href={feed.image.path} target="_blank" rel="noopener noreferrer">
                     <img
-                      src={feed.image.path}
-                      alt="Snow"
-                      className="img-css"
-                    // onClick={() => onPostModal(true, feed.feed_type, feed.image)}
+                      src={feed?.image?.path}
+                      alt=""
                     />
-                  </Link>
-
+                  </a>
                 }
                 {feed.feed_type === 2 &&
                   feed.image &&
                   <>
-                    <Link target="_blank" to={`/dashboard/post/${feed.user.slug}?video=${feed.image.path}`}>
-                      Created by: {feed.user.slug}
-                    </Link>
-                    <video controls style={{ height: "87%" }}>
-                      <source src={feed.image.path} type="video/mp4" />
-                      <source src={feed.image.path} type="video/ogg" />
-                    Your browser does not support the video tag.
-                  </video>
+                    <a href={feed.image.path} target="_blank" rel="noopener noreferrer">
+                      Created By: {feed.user.slug}
+                    </a>
+                    <video
+                      style={{ width: "220px", height: "103px" }}
+                      controls
+                      src={feed?.image?.path}
+                      alt=""
+                    />
                   </>
-
                 }
               </div>
               {
