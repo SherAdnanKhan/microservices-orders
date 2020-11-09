@@ -35,7 +35,6 @@ import {
 import ToolTip from '../../common/toolTip/toolTip';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Loader from "../../common/loader";
 
 const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader, nextPageUrl }) => {
   const dispatch = useDispatch();
@@ -174,6 +173,8 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
     onCallNextPosts();
   }
 
+
+
   return (
     <>
       {showDeleteModel &&
@@ -237,11 +238,6 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
         dataLength={posts?.length}
         next={fetchData}
         hasMore={nextPageUrl ? true : false}
-        loader={
-          <>
-            {currentPage !== 1 && postLoader && <Loader />}
-          </>
-        }
       >
         {posts?.map(post => (
           <div className="post-page" key={post.id}>
@@ -297,7 +293,6 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
                 )
               }
             </div>
-
             <div className="ncomm-slider">
               {ncomm?.data &&
                 <ImageVideoSlider ncomm={ncomm} />

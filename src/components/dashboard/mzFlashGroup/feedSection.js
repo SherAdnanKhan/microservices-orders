@@ -8,7 +8,6 @@ import Stroke from '../../common/stroke';
 import { completeFormattedDate, formatTime } from '../../../utils/helperFunctions';
 import ToolTip from "../../common/toolTip/toolTip";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Loader from "../../common/loader";
 import { fileUpload } from '../../../actions/genericActions';
 import ProgressBar from '../../common/progressBar';
 
@@ -103,11 +102,6 @@ const FeedSection = ({
       height="85vh"
       style={{ border: "2px solid #C3C3C3" }}
       hasMore={nextPageUrl ? true : false}
-      loader={
-        <>
-          {currentPage !== 1 && feedLoader && <Loader />}
-        </>
-      }
     >
       <div
         className="col-4 box-3"

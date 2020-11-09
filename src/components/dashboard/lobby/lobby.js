@@ -10,6 +10,7 @@ import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
+import Spinner from '../../common/spinner';
 
 const Lobby = () => {
   const dispatch = useDispatch();
@@ -114,6 +115,7 @@ const Lobby = () => {
 
   return (
     <div className="lobby-page">
+      {(postLoader || loading) && currentLobbyPage !== 1 && <Spinner />}
       {unReadMsgCount > "0" &&
         <div
           className="popUpChatMsg"
