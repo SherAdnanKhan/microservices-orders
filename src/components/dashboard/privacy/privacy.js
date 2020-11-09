@@ -16,6 +16,7 @@ const Privacy = () => {
     userOtherPages,
     loading
   } = useSelector(state => state.privacies);
+
   useEffect(() => {
     dispatch(getPrivacies());
   }, [dispatch]);
@@ -27,6 +28,7 @@ const Privacy = () => {
   const handleOtherPrivacyChange = privacy => {
     dispatch(changeOtherPrivacy(privacy));
   };
+
   return (
     <div className="privacy">
       {loading && <Spinner />}

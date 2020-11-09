@@ -63,8 +63,7 @@ const GalleryPrivacy = ({
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
                               style={
-                                !gallery.privacy ||
-                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
+                                gallery?.privacy?.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -75,8 +74,7 @@ const GalleryPrivacy = ({
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
                               style={
-                                !gallery.privacy ||
-                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
+                                gallery?.privacy?.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -87,8 +85,7 @@ const GalleryPrivacy = ({
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
                               style={
-                                !gallery.privacy ||
-                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
+                                gallery?.privacy?.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
@@ -99,8 +96,7 @@ const GalleryPrivacy = ({
                             <button
                               onClick={() => handlePrivacy('gallery', gallery.id, type.id)}
                               style={
-                                !gallery.privacy ||
-                                  gallery.privacy.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
+                                gallery?.privacy?.privacy_type_id === type.id ? { backgroundColor: feelColor } : { backgroundColor: '#000' }
                               }
                             >
                               {type.name}
