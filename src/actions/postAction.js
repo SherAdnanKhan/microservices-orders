@@ -186,15 +186,13 @@ export const changeCritqueStatus = (post, status) => dispatch => {
           toast.success(`You have Successfully Turn On Critiques on ${post.title}`)
 
         }
-
         dispatch({
           type: CHANGE_CRITIQUES_STATUS,
           payload: res.data.data.post
         });
       }
-      else {
-        toast.error("Something went wrong")
-      }
+    }).catch(() => {
+      toast.error("Something went wrong")
     });
 };
 export const sharePostOnStrq = (post, sentId) => dispatch => {
