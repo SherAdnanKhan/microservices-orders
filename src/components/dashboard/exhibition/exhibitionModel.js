@@ -3,6 +3,9 @@ import ImageCropper from '../../common/imageCropper';
 import { isEmpty } from '../../../utils/helperFunctions';
 import { useHistory } from 'react-router-dom';
 import UserContext from "../../../context/userContext";
+import { fileUpload } from '../../../actions/genericActions';
+import { useDispatch } from 'react-redux';
+import ProgressBar from '../../common/progressBar';
 
 const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
   const [croppedImage, setCroppedImage] = useState(null);
@@ -12,8 +15,11 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [toggle, setToggle] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   const user = useContext(UserContext);
 
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleCompleteCrop = blob => {
@@ -49,13 +55,52 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
   };
 
   const handleSave = () => {
+    const fileData = new FormData();
+
     if (croppedImage) {
-      onSave('image', croppedImage)
+      fileData.append('file_upload', croppedImage);
+      console.log(croppedImage)
     } else if (image) {
-      onSave('image', image);
+      console.log(croppedImage)
+      fileData.append('file_upload', image);
     } else if (video) {
-      onSave('video', video);
+      fileData.append('file_upload', video);
     }
+
+    dispatch(
+      fileUpload(fileData,
+        updatedProgress => {
+          setProgress(updatedProgress)
+        },
+        result => {
+          setProgress(0);
+          onSave(result.doc_type, result.path)
+          // if (result.doc_type === 'image') {
+          //   setImageUrl(result.path);
+          //   setVideoUrl('');
+          //   setToggle(true);
+          //   setIsValid(true);
+          // } else {
+          //   setImageUrl('');
+          //   setVideoUrl(result.path);
+          //   setIsValid(true);
+          //   setToggle(true);
+          // }
+          // setData({ ...data, doc_name: result.doc_name, doc_path: result.path, doc_type: result.doc_type });
+        },
+        err => {
+          setProgress(0)
+        }
+      )
+    );
+
+    // if (croppedImage) {
+    //   onSave('image', croppedImage)
+    // } else if (image) {
+    //   onSave('image', image);
+    // } else if (video) {
+    //   onSave('video', video);
+    // }
   };
 
   useEffect(() => {
@@ -146,6 +191,12 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo }) => {
           </div>
         </div>
         <div className="actions" >
+          {progress > 0 &&
+            <ProgressBar
+              progress={progress}
+              feelColor={'red'}
+            />
+          }
           <button
             onClick={handleSave}
             className={isValid ? 'clickable' : 'btn-disable'}

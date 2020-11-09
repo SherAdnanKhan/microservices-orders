@@ -149,17 +149,19 @@ const AddExibit = () => {
   }, [post, dispatch]);
 
   const handleSave = (name, file) => {
-    if (name === 'image') {
-      setImage(URL.createObjectURL(file));
+    setShowModel(false);
+
+    if (name === 'image' || name === 'document') {
+      setImage(file);
       setData({ ...data, image: file, video: null });
       setVideo(null);
     } else {
-      setVideo(URL.createObjectURL(file));
+      setVideo(file);
       setData({ ...data, video: file, image: null });
       setImage(null);
     }
-    setShowModel(false);
   };
+
 
   return (
     <div>
