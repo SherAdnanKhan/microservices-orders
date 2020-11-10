@@ -37,19 +37,21 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
         </span>
       </div>
       <p className="submit-text">{feed.feed} </p>
-      <div className="imgvideo-mzflash">
-        {feed.feed_type === 1 &&
-          feed.image &&
+      {feed.feed_type === 1 &&
+        feed.image &&
+        <div className="imgvideo-mzflash">
           <a href={feed.image.path} target="_blank" rel="noopener noreferrer">
             <img
               src={feed?.image?.path}
               alt=""
             />
           </a>
-        }
-        {feed.feed_type === 2 &&
-          feed.image &&
-          <>
+        </div>
+      }
+      {feed.feed_type === 2 &&
+        feed.image &&
+        <>
+          <div className="imgvideo-mzflash">
             <a href={feed.image.path} target="_blank" rel="noopener noreferrer">
               Created By: {feed.user.slug}
             </a>
@@ -59,9 +61,10 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
               src={feed?.image?.path}
               alt=""
             />
-          </>
-        }
-      </div>
+          </div>
+        </>
+      }
+
       {
         feed.parent &&
         <div className="flex-container-nested">
@@ -86,7 +89,7 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
             </p>
           </div>
           <p className="submit-text">{feed.parent.feed} </p>
-          <div className="imgvideo-mzflash">
+          <div className="imgvideo-mzflash-nested">
             {feed.parent.feed_type === 1 &&
               feed.parent.image &&
               <img
@@ -95,18 +98,18 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
                 className="img-css"
               />
             }
-          </div>
-
-          {feed.parent.feed_type === 2 &&
-            feed.parent.image &&
-            <div className="video left-space">
+            {feed.parent.feed_type === 2 &&
+              feed.parent.image &&
+              // <div className="video left-space">
               <video controls>
                 <source src={feed.parent.image.path} type="video/mp4" />
                 <source src={feed.parent.image.path} type="video/ogg" />
                   Your browser does not support the video tag.
               </video>
-            </div>
-          }
+              // </div>
+            }
+          </div>
+
         </div>
       }
       < div className="flex-container" >
