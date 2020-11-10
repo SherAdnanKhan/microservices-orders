@@ -89,7 +89,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                     }
                   >
                     <div style={{ marginRight: "auto", paddingLeft: "15px", paddingTop: "20px" }}>
-                      <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="More" data-for="more" ></i>
+                      <i className="fa fa-ellipsis-v postOptions" aria-hidden="true" data-tip="More" data-for="more" ></i>
                       <ToolTip position="top" id="more" />
                     </div>
                     <img

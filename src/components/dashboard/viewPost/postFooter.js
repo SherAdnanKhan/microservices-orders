@@ -7,12 +7,13 @@ import { completeFormattedDate } from "../../../utils/helperFunctions";
 import ToolTip from "../../common/toolTip/toolTip";
 import Stroke from "../../common/stroke";
 
-const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke }) => {
+const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowedCritiques }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const {
     postView: { ncomm },
   } = useSelector(state => state);
+
   const handleNcomm = post => {
     if (hasNcomm) {
       setHasNcomm(false);
@@ -22,15 +23,17 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke }) => {
       dispatch(getNcomm(post?.slug));
     }
   };
+
   useEffect(() => {
     return () => {
       dispatch(clearNcomm());
     }
   }, [dispatch]);
 
-  const hasAllowedCritiques = () => {
-    return post && post?.other_privacy?.is_allowed ? true : false;
-  };
+  // const hasAllowedCritiques = () => {
+  //   console.log(post)
+  //   return post && post?.other_privacy?.is_allowed ? true : false;
+  // };
 
   return (
     <div className="post-footer">
@@ -53,7 +56,7 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke }) => {
           <ToolTip id="stroke" />
           <p>strokes {post && post?.stroke_users_count}</p>
         </div>
-        {hasAllowedCritiques() &&
+        {isAllowedCritiques === 1 &&
           <div className="post-footer-icons">
             <img
               className="post-non-color-icon open-commet clickable"

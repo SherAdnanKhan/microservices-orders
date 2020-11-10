@@ -47,7 +47,7 @@ const PostBody = ({
       </div>
       <div className="valut-icon show-valut">
         <i
-          className="fa fa-ellipsis-v"
+          className="fa fa-ellipsis-v postOptions"
           aria-hidden="true"
           data-for="more"
           data-tip="more"

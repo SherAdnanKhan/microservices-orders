@@ -283,7 +283,7 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
                 : "valut-icon"
             }
             >
-              <i className="fa fa-ellipsis-v" aria-hidden="true" data-tip="more" data-for="more" ></i>
+              <i className="fa fa-ellipsis-v postOptions" aria-hidden="true" data-tip="more" data-for="more" ></i>
               <ToolTip id="more" position="top" />
               <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
               <ToolTip id="vault" position="top" />

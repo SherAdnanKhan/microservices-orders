@@ -191,7 +191,8 @@ export const changeCritqueStatus = (post, status) => dispatch => {
           payload: res.data.data.post
         });
       }
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err)
       toast.error("Something went wrong")
     });
 };

@@ -218,6 +218,7 @@ const ViewPost = () => {
         />
         <PostFooter
           post={post?.post}
+          isAllowedCritiques={post?.other_privacy?.is_allowed}
           comments={comments}
           onStroke={handleStroke}
           onUnStroke={handleUnStroke}
