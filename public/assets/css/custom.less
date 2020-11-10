@@ -111,6 +111,7 @@ input {
   flex-wrap: wrap;
   display: block;
   overflow: auto;
+  overflow-x: hidden;
   @media @mobile {
   // width:100vw;
   }
@@ -3205,7 +3206,7 @@ img {
     margin-top:10px;
     // justify-content: space-evenly;
     div{
-      width: 32vw;
+      width: 31vw;
       height: 32vw;
       margin: 0px 0px;
       padding: 1px;
@@ -4637,6 +4638,9 @@ img {
       width: 100%;
       margin: 10px auto;
       text-align: center;
+      @media @mobile {
+        width: 90%;
+      }
       .slick-slider {
       // height: 100px !important;
       .slick-prev, .slick-next {
@@ -4976,6 +4980,9 @@ img {
           padding: 10px;
           display: flex;
           justify-content: space-around;
+          @media @mobile {
+            flex-wrap: wrap;
+          }
           button{
             cursor: pointer;
             outline: none;
@@ -4985,6 +4992,10 @@ img {
             padding: 9px;
             border-radius: 50px;
             position: relative;
+            @media @mobile {
+              width: 160px;
+              margin-bottom: 10px;
+            }
             i{
               position: absolute;
               right: 10px;
