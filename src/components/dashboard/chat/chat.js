@@ -8,6 +8,7 @@ import Spinner from '../../common/spinner';
 import useViewport from '../../common/useViewport';
 import { useRouteMatch } from 'react-router-dom';
 import Loader from "../../common/loader";
+import ConfirmationModal from "./confirmationModal";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,8 @@ const Chat = () => {
   const breakPoint = 768;
   const conversationRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedConversationId, setSelectedConversationId] = useState("")
   const {
     conversation: { conversations, conversation, conversationLoader },
     loading: { loading },
@@ -58,26 +60,33 @@ const Chat = () => {
   }
 
   const handleCallNextPage = () => {
-    const scrollTop = conversationRef.current.scrollTop;
-    const scrollHeight = conversationRef.current.scrollHeight;
-    const clientHeight = conversationRef.current.clientHeight;
     dispatch(getAllConversations(currentPage + 1));
     setCurrentPage(currentPage => currentPage + 1);
-
-    if (scrollHeight - clientHeight === Math.round(scrollTop)) {
-
-      if (conversations.next_page_url) {
-
-      }
-    }
   };
-  const handleDeleteConversation = (id) => {
-    dispatch(deleteConversation(id));
+
+  const handleDeleteModal = (status, id) => {
+    setSelectedConversationId(id)
+    setShowDeleteModal(status)
   }
+
+  const handleDeleteConversation = () => {
+    dispatch(deleteConversation(selectedConversationId));
+    setShowDeleteModal(false)
+    if (selectedConversationId) {
+      setActiveConversation('')
+    }
+  }
+
 
   return (
     <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
       {loading && currentPage === 1 && <Spinner />}
+      {showDeleteModal &&
+        <ConfirmationModal
+          message="Are you sure you want to delete conversation?"
+          onCancel={handleDeleteModal}
+          onConfirm={() => handleDeleteConversation()}
+        />}
       {width <= breakPoint
         ? (
           <>
@@ -96,6 +105,7 @@ const Chat = () => {
                   nextPageUrl={conversations?.next_page_url}
                   onDeleteConversation={handleDeleteConversation}
                   feelColor={feelColor}
+                  toggleDeleteModal={handleDeleteModal}
                 />
                 {conversationLoader && <Loader />}
               </div>
@@ -113,6 +123,7 @@ const Chat = () => {
               nextPageUrl={conversations?.next_page_url}
               onDeleteConversation={handleDeleteConversation}
               feelColor={feelColor}
+              toggleDeleteModal={handleDeleteModal}
             />
             {conversationLoader && <Loader />}
           </div>

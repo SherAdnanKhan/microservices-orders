@@ -378,7 +378,6 @@ $(document).on('click', '.postOptions', function (e) {
 
   }
   else {
-    console.log("show scroller")
     $("body").css("overflow-y", "auto");
     $(".screen").css("overflow-y", "auto");
   }
@@ -425,16 +424,10 @@ $(document).on('click', '.add-strq .dropdown', function (e) {
 })
 
 $(document).on('click', '.messageDots .fa-ellipsis-v', function (e) {
-  console.log('message dots')
   e.stopPropagation();
   $(this).closest(`.messageDots`).find('.dropdown-content').toggle()
 })
 
-$(document).on('click', '.dateTime .messageDots', function (e) {
-  console.log('clicked')
-  e.stopPropagation();
-  $(this).find('.dropdown-content').toggle()
-})
 
 $(document)
   .on('click', '.lobby-img, .mystudio-img, .add-img, .mzflash-img, .strq-img', function (e) {

@@ -337,6 +337,7 @@ class ChatBox extends Component {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
     const { user, messages, conversation } = this.props.conversation;
+    console.log("conversation=", conversation)
     const filtered = conversation?.participants?.filter(p => p.id !== currentUser.id)[0];
     const { onlineUsers, isBlocked, isViewAble, isAllowed, isMuted } = this.props;
 
@@ -366,32 +367,36 @@ class ChatBox extends Component {
                 ? (
                   <>
                     <MediumMeuzmLogo />
-                    <div className="chat-uesr-name">
-                      <p>	You are now Strqing with
-                        <span>
-                          &nbsp;
-                          {conversation?.participants?.filter(p => p.id !== currentUser.id)[0].username + ', '}
-                          {conversation?.participants?.filter(p => p.id !== currentUser.id)[1].username}
-                          {conversation?.participants.filter(p => p.id !== currentUser.id).length > 2 &&
-                            <>
-                              {` and ${conversation?.participants.length - 3}`} participants
-                              </>
-                          }
-                        </span>
-                      </p>
-                    </div>
+                    {conversation &&
+                      <div className="chat-uesr-name">
+                        <p>	You are now Strqing with
+                            <span>
+                            &nbsp;
+                                       {conversation?.participants?.filter(p => p.id !== currentUser.id)[0].username + ', '}
+                            {conversation?.participants?.filter(p => p.id !== currentUser.id)[1].username}
+                            {conversation?.participants.filter(p => p.id !== currentUser.id).length > 2 &&
+                              <>
+                                {` and ${conversation?.participants.length - 3}`} participants
+                            </>
+                            }
+                          </span>
+                        </p>
+                      </div>
+                    }
                   </>
                 ) : (
                   <>
                     <UserCube user={conversation?.participants?.filter(p => p.id !== currentUser.id)[0]} />
-                    <div className="chat-uesr-name">
-                      <p>	You are now Strqing with
+                    {conversation &&
+                      <div className="chat-uesr-name">
+                        <p>	You are now Strqing with
                         <span>
-                          &nbsp;
+                            &nbsp;
                           {conversation?.participants?.filter(p => p.id !== currentUser.id)[0]?.username}
-                        </span>
-                      </p>
-                    </div>
+                          </span>
+                        </p>
+                      </div>
+                    }
                   </>
                 )
               }
