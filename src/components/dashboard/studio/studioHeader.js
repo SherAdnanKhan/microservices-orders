@@ -1,14 +1,34 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ToolTip from "../../common/toolTip/toolTip";
-import BlockUserModal from '../chat/blockUserModal';
+import ConfirmationModal from '../chat/confirmationModal';
+import { blockUser, unBlockUser } from "../../../actions/userActions";
+import { useDispatch } from "react-redux";
 
 const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, onSuperFavRequested }) => {
   const history = useHistory();
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
 
   const handleShow = () => {
     setShow(!show);
+  }
+
+  const handleBlockUser = (userStudio) => {
+    const user = userStudio?.user;
+    if (userStudio?.is_blocked) {
+      const data = {
+        unblock_user_id: user.id
+      }
+      dispatch(unBlockUser(data, user.username))
+    }
+    else {
+      const data = {
+        block_user_id: user.id
+      }
+      dispatch(blockUser(data, user.username))
+    }
+    setShow(false);
   }
 
   return (
@@ -17,10 +37,14 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, on
       style={{ backgroundColor: userStudio?.user?.feel?.color_code }}
     >
       {show &&
-        <BlockUserModal
-          onClose={handleShow}
+        <ConfirmationModal
+          onCancel={handleShow}
           isBlocked={userStudio.is_blocked}
           user={userStudio.user}
+          message={userStudio.is_blocked ?
+            `Are you sure you want to unblock ${userStudio.user.username}?`
+            : `Are you sure you want to block ${userStudio.user.username}?`}
+          onConfirm={() => handleBlockUser(userStudio)}
         />
       }
       <div className="back-icon">

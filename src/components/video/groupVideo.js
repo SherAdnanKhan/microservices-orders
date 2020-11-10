@@ -14,12 +14,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getConversation } from '../../actions/conversationActions';
 import ToolTip from '../common/toolTip/toolTip';
 import ReportUserModal from "../dashboard/chat/reportUserModal";
-import BlockUserModal from "../dashboard/chat/blockUserModal";
 import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
-import MuteUserModal from "../dashboard/chat/muteUserModal";
+import ConfirmationModal from "../dashboard/chat/confirmationModal";
+import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
+
+
 
 const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const ref = useRef();
+  const dispatch = useDispatch();
   const [hasListner, setHasListner] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showMuteModal, setShowMuteModal] = useState(false);
@@ -70,21 +73,67 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
   const handleBlockModal = (status) => {
     setShowBlockModal(status)
   }
+
   const handleMuteModal = (status) => {
     setShowMuteModal(status)
+  }
+
+  const handleMuteUser = (user) => {
+    if (is_muted) {
+      const data = {
+        unmute_user_id: user.id
+      }
+      dispatch(unMuteUser(data, user.username))
+    }
+    else {
+      const data = {
+        mute_user_id: user.id
+      }
+      dispatch(muteUser(data, user.username))
+    }
+    setShowMuteModal(false);
+  }
+
+  const handleBlockUser = (user) => {
+    if (is_blocked) {
+      const data = {
+        unblock_user_id: user.id
+      }
+      dispatch(unBlockUser(data, user.username))
+    }
+    else {
+      const data = {
+        block_user_id: user.id
+      }
+      dispatch(blockUser(data, user.username))
+    }
+    setShowBlockModal(false);
   }
 
   return (
     <>
       <div>
         {showReportModal &&
-          <ReportUserModal onClose={handleReportModal} user={user} isBlocked={is_blocked} />
+          <ReportUserModal onClose={handleReportModal} user={user} is_blocked={is_blocked} />
         }
-        {showBlockModal &&
-          <BlockUserModal onClose={handleBlockModal} user={user} isBlocked={is_blocked} />
+        {showBlockModal && user &&
+          <ConfirmationModal
+            message={is_blocked ?
+              `Are you sure you want to unblock ${user.username}`
+              : `Are you sure you want to block ${user.username}`}
+            onCancel={handleBlockModal}
+            onConfirm={() => handleBlockUser(user)}
+          />
         }
-        {showMuteModal &&
-          <MuteUserModal onClose={handleMuteModal} user={user} isMuted={is_muted} />
+        {showMuteModal && user &&
+          <ConfirmationModal
+            message={is_muted ?
+              `Are you sure you want to unmute ${user.username}` :
+              `Are you sure you want to mute ${user.username}`
+            }
+            onCancel={handleMuteModal}
+            onConfirm={() => handleMuteUser(user)}
+          />
         }
       </div>
       <div

@@ -8,13 +8,12 @@ import Loader from '../common/loader';
 import ConversationOptions from './chat/conversationOptions';
 
 
-const Conversation = ({ onActiveConversation, conversations, feelColor, onDeleteConversation, activeConversation, onCallNextPage, currentPage, conversationLoader, nextPageUrl }) => {
+const Conversation = ({ onActiveConversation, toggleDeleteModal, conversations, feelColor, onDeleteConversation, activeConversation, onCallNextPage, currentPage, conversationLoader, nextPageUrl }) => {
   const currentUser = useContext(UserContext);
 
   const getDateOrTime = date => {
     const current = new Date();
     const incoming = new Date(date);
-
     if (current.getDate() === incoming.getDate()) {
       return formatTime(date);
     }
@@ -148,15 +147,16 @@ const Conversation = ({ onActiveConversation, conversations, feelColor, onDelete
                     }
                   </div>
                   <div className="messageDots clickable">
-                    <i class="fa fa-ellipsis-v" aria-hidden="true" onClick={(event) => event.stopPropagation()}></i>
+                    <i class="fa fa-ellipsis-v"
+                      aria-hidden="true"
+                      onClick={(event) => event.stopPropagation()}
+                    ></i>
                     <ConversationOptions
-                      onDeleteConversation={(e) => {
+                      toggleDeleteModal={(e) => {
+                        toggleDeleteModal(true, conversation.id);
                         e.stopPropagation();
-                        onDeleteConversation(conversation.id)
-                        if (activeConversation.id === conversation.id) {
-                          onActiveConversation('')
-                        }
-                      }}
+                      }
+                      }
                       feelColor={feelColor}
                     />
                   </div>

@@ -10,8 +10,11 @@ import ToolTip from '../../common/toolTip/toolTip';
 import { useSelector } from "react-redux";
 import OtherUserOptions from './OtherUserOptions';
 import ReportUserModal from './reportUserModal';
-import BlockUserModal from "./blockUserModal";
-import MuteUserModal from './muteUserModal';
+import ConfirmationModal from './confirmationModal'
+import { muteUser, blockUser, unMuteUser, unBlockUser } from "./../../../actions/userActions";
+import { useDispatch } from "react-redux"
+
+
 
 
 const ChatHeader = ({
@@ -34,6 +37,7 @@ const ChatHeader = ({
   const { width } = useViewport();
   const breakPoint = 768;
   const { feelColor } = useSelector(state => state.feelColor)
+  const dispatch = useDispatch();
 
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
@@ -138,6 +142,37 @@ const ChatHeader = ({
     setShowMuteModal(status)
   }
 
+  const handleMuteUser = (user) => {
+    if (isMuted) {
+      const data = {
+        unmute_user_id: user.id
+      }
+      dispatch(unMuteUser(data, user.username))
+    }
+    else {
+      const data = {
+        mute_user_id: user.id
+      }
+      dispatch(muteUser(data, user.username))
+    }
+    setShowMuteModal(false);
+  }
+
+  const handleBlockUser = (user) => {
+    if (isBlocked) {
+      const data = {
+        unblock_user_id: user.id
+      }
+      dispatch(unBlockUser(data, user.username))
+    }
+    else {
+      const data = {
+        block_user_id: user.id
+      }
+      dispatch(blockUser(data, user.username))
+    }
+    setShowBlockModal(false);
+  }
 
   return (
     <div
@@ -244,17 +279,22 @@ const ChatHeader = ({
         />
       }
       {showBlockModal && filtered &&
-        <BlockUserModal
-          user={filtered}
-          onClose={handleBlockModal}
-          isBlocked={isBlocked}
+        <ConfirmationModal
+          message={isBlocked ?
+            `Are you sure you want to unblock ${filtered.username}?`
+            : `Are you sure you want to block ${filtered.username}?`}
+          onCancel={handleBlockModal}
+          onConfirm={() => handleBlockUser(filtered)}
         />
       }
       {showMuteModal && filtered &&
-        <MuteUserModal
-          user={filtered}
-          onClose={handleMuteModal}
-          isMuted={isMuted}
+        <ConfirmationModal
+          message={isMuted ?
+            `Are you sure you want to unmute ${filtered.username}?` :
+            `Are you sure you want to mute ${filtered.username}?`
+          }
+          onCancel={handleMuteModal}
+          onConfirm={() => handleMuteUser(filtered)}
         />
       }
     </div>
