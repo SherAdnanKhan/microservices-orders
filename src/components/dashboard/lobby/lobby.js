@@ -11,6 +11,7 @@ import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
 import Spinner from '../../common/spinner';
+import useViewport from '../../common/useViewport';
 
 const Lobby = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ const Lobby = () => {
     postView: { sendUser },
     feelColor: { feelColor },
   } = useSelector(state => state);
-
+  const breakpoint = 856;
+  const { width } = useViewport();
 
   const [activeFeedComment, setActiveFeedComment] = useState(0);
 
@@ -137,31 +139,36 @@ const Lobby = () => {
 
       <div className="row">
         <div className="col-2 section-1  box-1" id="sec">
-          <VerticalSlider>
-            {favouriteUsers &&
-              favouriteUsers?.data.map((user, index) => (
-                <div key={index}>
-                  <Link to={`/dashboard/studio/${user.slug}`}>
-                    <UserCube user={user} />
-                  </Link>
-                </div>
-              ))
-            }
-          </VerticalSlider>
+          {width > breakpoint
+            ? (
+              <VerticalSlider>
+                {favouriteUsers &&
+                  favouriteUsers?.data.map((user, index) => (
+                    <div key={index}>
+                      <Link to={`/dashboard/studio/${user.slug}`}>
+                        <UserCube user={user} />
+                      </Link>
+                    </div>
+                  ))
+                }
+              </VerticalSlider>
+            ) : (
+              <HorizontalSlider>
+                {favouriteUsers &&
+                  favouriteUsers?.data.map((user, index) => (
+                    <div key={index}>
+                      <div className="item">
+                        <Link to={`/dashboard/studio/${user.slug}`}>
+                          <UserCube user={user} />
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                }
+              </HorizontalSlider>
+            )
+          }
 
-          <HorizontalSlider>
-            {favouriteUsers &&
-              favouriteUsers?.data.map((user, index) => (
-                <div key={index}>
-                  <div className="item">
-                    <Link to={`/dashboard/studio/${user.slug}`}>
-                      <UserCube user={user} />
-                    </Link>
-                  </div>
-                </div>
-              ))
-            }
-          </HorizontalSlider>
         </div>
         <div
           className="col-6 section-2 box-2"

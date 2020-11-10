@@ -7,7 +7,6 @@ import Spinner from '../../common/spinner';
 import UserSection from './userSection';
 import FaveSection from './faveSection';
 import FeedSection from './feedSection';
-import $ from 'jquery';
 
 import {
   getCollectiveFeeds,
@@ -24,7 +23,7 @@ import {
 
 const MzFlashGroup = () => {
   const [activeTab, setActiveTab] = useState(4);
-  const [activeUserList, setActiveUserList] = useState(2);
+  const [activeUserList, setActiveUserList] = useState(4);
   const [activeUser, setActiveUser] = useState('');
   const [activeFeedComment, setActiveFeedComment] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,7 +56,6 @@ const MzFlashGroup = () => {
     setShowPostModel(value);
   };
 
-
   useEffect(() => {
     dispatch(getFaveAndSprfvsUsers());
     dispatch(getSprfvsUsers(3, 1));
@@ -67,29 +65,6 @@ const MzFlashGroup = () => {
     dispatch(getMyFavesFeeds());
     dispatch(getMySprfvsAndFavesFeeds());
   }, [dispatch]);
-
-  useEffect(() => {
-
-    const handleResize = () => {
-      if (window.matchMedia('(min-width: 769px)').matches) {
-        $('.my-slider-horizontal').hide();
-      }
-
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        if (activeTab === 2) {
-          $('.my-slider-horizontal').show();
-        } else {
-          $('.my-slider-horizontal').hide();
-        }
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-  });
 
   const handleEnter = (e, feedId, comment, user) => {
     if (e.keyCode === 13 && comments[comment]) {
@@ -143,26 +118,16 @@ const MzFlashGroup = () => {
     dispatch(getUserFeeds(user.slug));
   };
 
-  const handleTabChange = async tab => {
-    await setActiveTab(tab);
-    await setActiveUser('');
-    await setActiveUserList(tab);
-
-
-    if (window.matchMedia('(max-width: 856px)').matches) {
-      if (tab === 2) {
-        $('.my-slider-horizontal').show();
-      } else {
-        $('.my-slider-horizontal').hide();
-      }
-    }
+  const handleTabChange = tab => {
+    setActiveTab(tab);
+    setActiveUser('');
+    setActiveUserList(tab);
   };
 
   const handleNextFeeds = () => {
     dispatch(getCollectiveFeeds(currentPage + 1));
     setCurrentPage(currentPage => currentPage + 1);
   };
-
 
   return (
     <section className="mz-flash-group">
