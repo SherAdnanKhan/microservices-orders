@@ -287,7 +287,7 @@ const Post = ({
                                 }
                               >
                                 <div style={{ marginRight: "auto", paddingLeft: "15px", paddingTop: "20px" }}>
-                                  <i className="fa fa-ellipsis-v" aria-hidden="true" data-for="more" data-tip="more" ></i>
+                                  <i className="fa fa-ellipsis-v postOptions" aria-hidden="true" data-for="more" data-tip="more" ></i>
                                   <ToolTip position="bottom" id="more" />
                                 </div>
                                 <img
