@@ -12,13 +12,14 @@ const ImageVideoSlider = ({ ncomm }) => {
     arrows: true,
     dots: false,
     infinite: false,
-    speed: 500,
+    speed: 300,
     slidesToShow: 4,
     slidesToScroll: 4,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
+          speed: 300,
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: false,
@@ -28,6 +29,7 @@ const ImageVideoSlider = ({ ncomm }) => {
       {
         breakpoint: 600,
         settings: {
+          speed: 200,
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2
@@ -36,6 +38,7 @@ const ImageVideoSlider = ({ ncomm }) => {
       {
         breakpoint: 480,
         settings: {
+          speed: 200,
           slidesToShow: 1,
           slidesToScroll: 1
         }

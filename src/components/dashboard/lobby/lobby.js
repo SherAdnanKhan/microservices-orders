@@ -19,7 +19,6 @@ const Lobby = () => {
   const {
     lobby: { favouriteUsers, favouritePosts, postLoader },
     mzFlash: { collectiveFeeds, loading },
-    postView: { sendUser },
     feelColor: { feelColor },
   } = useSelector(state => state);
   const breakpoint = 856;
@@ -178,7 +177,6 @@ const Lobby = () => {
           <div>
             <LobbyPosts
               posts={favouritePosts?.data}
-              sendUser={sendUser}
               onCallNextPosts={handleNextPosts}
               currentPage={currentLobbyPage}
               postLoader={postLoader}

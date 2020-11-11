@@ -7,7 +7,7 @@ import Stroke from './stroke';
 import { getUserArtById } from '../../actions/userActions';
 import {
   strokePost, storeVault, unstrokePost, getNcomm, clearNcomm, deletePost, reportPost,
-  changeCritqueStatus, sharePostOnStrq, clearStatus, repost, shareMzFlash
+  changeCritqueStatus, repost, shareMzFlash
 } from '../../actions/postAction';
 import { unfavGallery, getMyGalleries } from "../../actions/galleryActions";
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ const Post = ({
   const user_art_id = JSON.parse(localStorage.getItem('user'))?.art_id
   const dispatch = useDispatch();
   const {
-    postView: { ncomm, sendUser, post },
+    postView: { ncomm, post },
     gallery: { myGalleries },
   } = useSelector(state => state);
 
@@ -117,10 +117,6 @@ const Post = ({
     setshowModelStrqShare(status);
   }
 
-  const onStrqShare = (post, userId) => {
-    dispatch(sharePostOnStrq(post, userId))
-    dispatch(clearStatus())
-  }
   const handleTurnOffCrtiquesModal = (value) => {
     setshowModalTurnOffCritque(value);
   }
@@ -181,10 +177,8 @@ const Post = ({
       }
       {showModelStrqShare &&
         <SharePostStrqModal
-          onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          sendUser={sendUser}
         />
       }
       {showModalRepost &&
@@ -271,7 +265,6 @@ const Post = ({
                                   onSharePost={handleShareModel}
                                   onReportPost={handleReportModel}
                                   onModelDelete={handlePostDeleteModel}
-                                  onStrqShare={onStrqShare}
                                   onShareStrqModel={handleStrqShareModel}
                                   onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                                   onRepostModal={handleRepostModal}

@@ -5,7 +5,7 @@ import Gallery from './galleries';
 // import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
 import { getGallery, clearGallery, getMyGalleries, unfavGallery } from "../../../actions/galleryActions";
-import { strokePost, unstrokePost, storeVault, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash } from '../../../actions/postAction';
+import { strokePost, unstrokePost, storeVault, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, repost, shareMzFlash } from '../../../actions/postAction';
 import StudioHeader from './studioHeader';
 import EditProfile from './editProfile';
 import ViewProfile from './viewProfile';
@@ -47,7 +47,7 @@ const MyStudio = () => {
     studio: { myStudio },
     gallery: { gallery, myGalleries },
     feelColor: { feelColor },
-    postView: { sendUser, ncomm }
+    postView: { ncomm }
   } = useSelector(state => state);
 
   const dispatch = useDispatch();
@@ -124,10 +124,6 @@ const MyStudio = () => {
     setshowModelStrqShare(status);
   }
 
-  const onStrqShare = (post, userId) => {
-
-    dispatch(sharePostOnStrq(post, userId));
-  }
   const handleTurnOffCrtiquesModal = (value) => {
     setshowModalTurnOffCritque(value);
   }
@@ -201,10 +197,8 @@ const MyStudio = () => {
       }
       {showModelStrqShare &&
         <SharePostStrqModal
-          onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          sendUser={sendUser}
         />
       }
       {showModalRepost &&
@@ -269,7 +263,6 @@ const MyStudio = () => {
           onSharePost={handleShareModel}
           onReportPost={handleReportModel}
           onShareStrqModel={handleStrqShareModel}
-          onStrqShare={onStrqShare}
           onTurnOffCrtiques={handleTurnOffCrtiquesModal}
           onRepostModal={handleRepostModal}
           onMzFlashModal={handleMzFlashModal}

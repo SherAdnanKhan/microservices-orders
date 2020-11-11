@@ -8,7 +8,7 @@ import ToolTip from '../../common/toolTip/toolTip';
 const PostBody = ({
   post, updatedCritqueStatus, onAddVault, onActivePost,
   onUnFavGallery, onReportPost, onModelDelete,
-  onSharePost, onShareStrqModel, onStrqShare,
+  onSharePost, onShareStrqModel,
   onTurnOffCrtiques, onRepostModal,
   onMzFlashModal,
 }) => {
@@ -36,7 +36,6 @@ const PostBody = ({
             onSharePost={onSharePost}
             onReportPost={onReportPost}
             onModelDelete={onModelDelete}
-            onStrqShare={onStrqShare}
             onShareStrqModel={onShareStrqModel}
             onTurnOffCrtiques={onTurnOffCrtiques}
             updatedCritqueStatus={updatedCritqueStatus}
