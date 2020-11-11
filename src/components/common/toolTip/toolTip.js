@@ -8,7 +8,7 @@ const ToolTip = ({ position, id }) => {
   return (
     !isMobile() &&
     <Tooltip
-      backgroundColor={convertHexToRGBA(feelColor, 0.5)}
+      backgroundColor={feelColor ? convertHexToRGBA(feelColor, 0.5) : convertHexToRGBA('#49C1D9', 0.5)}
       textColor="white"
       className="tooltip-style"
       place={position} id={id}>

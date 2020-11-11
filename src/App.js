@@ -17,6 +17,7 @@ import store from './store';
 import { updateFeelColor } from './actions/colorActions';
 import Call from './components/call';
 import Notifications from './components/notifications';
+import ViewPost from './components/dashboard/viewPost/viewPost';
 
 const currentUser = getCurrentUser();
 
@@ -48,6 +49,7 @@ function App() {
         <Route exact path='/login' component={LoginForm} />
         <Route exact path='/forgot' component={ForgotPasswordForm} />
         <Route exact path='/register' component={RegisterForm} />
+        <Route exact path="/dashboard/viewpost/:id" component={ViewPost} />
         <ProtectedRoute exact path="/welcome" component={Welcome} />
         <ProtectedRoute exact path="/artselection" component={ArtSelection} />
         <ProtectedRoute exact path="/start-favas" component={StartFaves} />

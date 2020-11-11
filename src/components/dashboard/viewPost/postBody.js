@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
+import { getCurrentUser } from '../../../actions/authActions';
 import ImagePostOption from '../../common/ImagePostOption';
 import ToolTip from '../../common/toolTip/toolTip';
 
@@ -45,24 +46,26 @@ const PostBody = ({
           />
         }
       </div>
-      <div className="valut-icon show-valut">
-        <i
-          className="fa fa-ellipsis-v postOptions"
-          aria-hidden="true"
-          data-for="more"
-          data-tip="more"
-        ></i>
-        <ToolTip id="more" />
-        <img
-          className="valut-img"
-          alt=""
-          src="/assets/images/vaulticon.png"
-          data-for="vault"
-          data-tip="vault"
-          onClick={() => onAddVault(post?.post)}
-        />
-        <ToolTip id="vault" />
-      </div>
+      {getCurrentUser() &&
+        <div className="valut-icon show-valut">
+          <i
+            className="fa fa-ellipsis-v postOptions"
+            aria-hidden="true"
+            data-for="more"
+            data-tip="more"
+          ></i>
+          <ToolTip id="more" />
+          <img
+            className="valut-img"
+            alt=""
+            src="/assets/images/vaulticon.png"
+            data-for="vault"
+            data-tip="vault"
+            onClick={() => onAddVault(post?.post)}
+          />
+          <ToolTip id="vault" />
+        </div>
+      }
       <div className="post-body">
         {post &&
           <div className="image-div"
@@ -112,7 +115,6 @@ const PostBody = ({
             ))
           }
         </div>
-
       </div>
       <div className="galleryPeek"
       >
@@ -120,7 +122,7 @@ const PostBody = ({
           className="galleryPeek_img"
           src="/assets/images/gallerypeek.png"
           alt=""
-          onClick={() => setShow(!show)}
+          onClick={() => { setShow(!show) }}
           data-for="galleryPeak"
           data-tip="gallery peak"
         />

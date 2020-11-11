@@ -6,21 +6,31 @@ import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
 import ToolTip from "../../common/toolTip/toolTip";
 import Stroke from "../../common/stroke";
+import Comment from "../viewPost/comments";
+import { getCurrentUser } from "../../../actions/authActions";
+import { useHistory } from "react-router-dom";
 
 const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowedCritiques }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
+  const history = useHistory();
+  const [showCommentModal, setShowCommentModal] = useState(false);
   const {
     postView: { ncomm },
   } = useSelector(state => state);
 
   const handleNcomm = post => {
-    if (hasNcomm) {
-      setHasNcomm(false);
-      dispatch(clearNcomm());
-    } else {
-      setHasNcomm(true);
-      dispatch(getNcomm(post?.slug));
+    if (!getCurrentUser()) {
+      history.push("/login")
+    }
+    else {
+      if (hasNcomm) {
+        setHasNcomm(false);
+        dispatch(clearNcomm());
+      } else {
+        setHasNcomm(true);
+        dispatch(getNcomm(post?.slug));
+      }
     }
   };
 
@@ -30,13 +40,24 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
     }
   }, [dispatch]);
 
-  // const hasAllowedCritiques = () => {
-  //   console.log(post)
-  //   return post && post?.other_privacy?.is_allowed ? true : false;
-  // };
+  const handleOpenCommentModal = () => {
+    if (!getCurrentUser()) {
+      history.push("/login")
+    }
+    else {
+      setShowCommentModal(true);
+    }
+  }
 
   return (
     <div className="post-footer">
+      {
+        showCommentModal &&
+        <Comment
+          post={post}
+          onClose={() => setShowCommentModal(false)}
+        />
+      }
 
       <ImageVideoSlider ncomm={ncomm} />
 
@@ -64,20 +85,22 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
               alt=""
               data-for="comments"
               data-tip="comments"
+              onClick={() => handleOpenCommentModal(post)}
             />
             <ToolTip id="comments" />
             <p> comments {comments.length} </p>
           </div>
         }
-        <div className="post-footer-icons action-w">
+        <div
+          className="post-footer-icons action-w"
+          data-for="ncomm"
+          data-tip="ncomm">
           {post &&
             <img
               className="post-non-color-icon clickable"
               src="/assets/images/ncommnicon.png"
               onClick={() => handleNcomm(post)}
               alt=""
-              data-for="ncomm"
-              data-tip="ncomm"
             />
           }
           <ToolTip id="ncomm" />
