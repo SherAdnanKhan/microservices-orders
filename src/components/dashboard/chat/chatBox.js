@@ -123,7 +123,7 @@ class ChatBox extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.state.width > this.breakPoint) {
       if (this.props.activeConversation !== prevProps.activeConversation) {
-        this.componentCleanup();
+        this.componentWillUnmount();
         this.componentDidMount();
       }
     }
@@ -343,19 +343,21 @@ class ChatBox extends Component {
     return (
       <div className="chat-box">
         <>
-          <ChatHeader
-            currentUser={currentUser}
-            user={user}
-            conversation={conversation}
-            onlineUsers={onlineUsers}
-            onOpenInvitationModel={this.handleOpenInvitationModel}
-            onOpenParticipatsModel={this.handleOpenPartcipantsModel}
-            onBackPress={this.props.onBackPress}
-            isBlocked={isBlocked}
-            isViewAble={isViewAble}
-            isMuted={isMuted}
-            onOpenDraw={() => this.setState({ draw: true })}
-          />
+          {conversation &&
+            <ChatHeader
+              currentUser={currentUser}
+              user={user}
+              conversation={conversation}
+              onlineUsers={onlineUsers}
+              onOpenInvitationModel={this.handleOpenInvitationModel}
+              onOpenParticipatsModel={this.handleOpenPartcipantsModel}
+              onBackPress={this.props.onBackPress}
+              isBlocked={isBlocked}
+              isViewAble={isViewAble}
+              isMuted={isMuted}
+              onOpenDraw={() => this.setState({ draw: true })}
+            />
+          }
 
           <div className="chat-container"
             ref={ref => this.containerRef.current = ref}

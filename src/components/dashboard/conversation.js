@@ -147,7 +147,7 @@ const Conversation = ({ onActiveConversation, toggleDeleteModal, conversations, 
                     }
                   </div>
                   <div className="messageDots clickable">
-                    <i class="fa fa-ellipsis-v"
+                    <i className="fa fa-ellipsis-v"
                       aria-hidden="true"
                       onClick={(event) => event.stopPropagation()}
                     ></i>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { convertHexToRGBA, formatDate, formatTime, getText, getURL } from '../../../utils/helperFunctions';
-import { ReactTinyLink } from 'react-tiny-link';
+import { convertHexToRGBA, formatDate, formatTime } from '../../../utils/helperFunctions';
+// import { ReactTinyLink } from 'react-tiny-link';
 import MessageOptions from './messageOptions';
 
 const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMessage, feelColor }) => {
@@ -11,7 +11,7 @@ const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMe
 
       <div className='outgoing'>
         <div className="messageDots clickable">
-          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+          <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
           <MessageOptions
             onDeleteMessage={() => onDeleteMessage(data.id)}
             feelColor={feelColor}
@@ -35,8 +35,9 @@ const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMe
               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
             }}
           >
-            {getText(data.message) && getText(data.message)}
-            {getURL(data.message) &&
+            {data.message}
+            {/* {getText(data.message) && getText(data.message)} */}
+            {/* {getURL(data.message) &&
               <ReactTinyLink
                 cardSize="small"
                 showGraphic={true}
@@ -45,7 +46,7 @@ const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMe
                 url={getURL(data.message)}
               // defaultMedia={data.message}
               />
-            }
+            } */}
 
             {data.type === 1 &&
               <div className="msgImg">

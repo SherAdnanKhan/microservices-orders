@@ -1,6 +1,6 @@
 import React from 'react';
-import { convertHexToRGBA, formatDate, formatTime, getText, getURL } from '../../../utils/helperFunctions';
-import { ReactTinyLink } from 'react-tiny-link';
+import { convertHexToRGBA, formatDate, formatTime } from '../../../utils/helperFunctions';
+// import { ReactTinyLink } from 'react-tiny-link';
 import Avatar from '../../common/avatar';
 
 const IncomingMessage = ({ data }) => {
@@ -19,18 +19,18 @@ const IncomingMessage = ({ data }) => {
               boxShadow: `1px 1px 10px ${data.feel.color_code}, -1px -1px 10px ${data.feel.color_code}`
             }}
           >
-
-            {getText(data.message) && getText(data.message)}
-            {getURL(data.message) &&
+            {data.message}
+            {/* {getText(data.message) && getText(data.message)} */}
+            {/* {getURL(data.message) &&
               <ReactTinyLink
                 cardSize="small"
                 showGraphic={true}
                 maxLine={2}
                 minLine={1}
                 url={getURL(data.message)}
-              // defaultMedia={data.message}
+             
               />
-            }
+            } */}
 
             {data.type === 1 &&
               <div className="msgImg">
