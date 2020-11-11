@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import Main from './Main';
-
 import Profile from './profile';
 import NavBar from './layout/navBar';
 import AddExibit from './exhibition/addExibition';
@@ -33,7 +32,6 @@ const Dashboard = ({ user }) => {
         <Route exact path="/dashboard/studio/fave-by" component={Main} />
         <Route exact path="/dashboard/mz-flash/:slug" component={Main} />
         <Route exact path="/dashboard/mz-flash-group" component={Main} />
-        <Route exact path="/dashboard/viewpost/:id" component={Main} />
         <Route exact path="/dashboard/privacy" component={Main} />
         <Route exact path="/dashboard/chat/:slug?" component={Main} />
         <Route exact path="/dashboard/video-call/:room" component={GroupVideoCall} />

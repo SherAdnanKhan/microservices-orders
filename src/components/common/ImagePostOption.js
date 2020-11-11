@@ -6,7 +6,7 @@ import { useRouteMatch } from "react-router-dom";
 const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
   const user = useContext(UserContext);
   const [isViewPostPage, setViewPostPage] = useState(false);
-  const loggedInUserId = user.id;
+  const loggedInUserId = user?.id;
   const history = useHistory();
   const params = useRouteMatch();
 

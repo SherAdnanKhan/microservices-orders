@@ -19,12 +19,13 @@ import { getUserArtById } from "../../../actions/userActions";
 import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
 import { deletePost, reportPost, storeVault, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash, clearPost } from '../../../actions/postAction';
+import { getCurrentUser } from '../../../actions/authActions';
 
 
 const ViewPost = () => {
   const user = useContext(UserContext);
-  const loggedInUserId = user.id;
-  const userArtId = user.art_id;
+  const loggedInUserId = user?.id;
+  const userArtId = user?.art_id;
   const dispatch = useDispatch();
   const { params: { id } } = useRouteMatch();
   const history = useHistory();
@@ -59,11 +60,24 @@ const ViewPost = () => {
   }, [dispatch, userArtId]);
 
   const handleUnStroke = (post) => {
-    dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+    if (!getCurrentUser()) {
+      history.push("/login")
+    }
+    else {
+      dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+    }
+
   }
+
   const handleStroke = (post) => {
-    dispatch(strokePost(post.id, post.gallery_id, post.user));
+    if (!getCurrentUser()) {
+      history.push("/login")
+    }
+    else {
+      dispatch(strokePost(post.id, post.gallery_id, post.user));
+    }
   }
+
   const handlePostDeleteModel = (value) => {
     setShowDeleteModel(value);
   };
@@ -98,31 +112,39 @@ const ViewPost = () => {
 
     dispatch(sharePostOnStrq(post, userId));
   }
+
   const handleTurnOffCrtiquesModal = (value) => {
     setshowModalTurnOffCritque(value);
   }
+
   const handleTurnOnOffCrtique = (modalStatus, post, status) => {
     setshowModalTurnOffCritque(modalStatus);
     dispatch(changeCritqueStatus(post, status));
     // handleActivePost('');
   }
+
   const handleMzFlashModal = (status) => {
     setShowMzFlashModal(status);
   }
+
   const handleMzFlash = (status, post) => {
     setShowMzFlashModal(status);
     dispatch(shareMzFlash(post));
   }
+
   const handleRepostLobby = (status, post, gallery) => {
     dispatch(repost(post.id, gallery))
     setShowModalRepost(status);
   }
+
   const handleRepostModal = (status,) => {
     setShowModalRepost(status);
   }
+
   const getSelectedGalleryId = (gallery) => {
     setGalleryId(gallery);
   }
+
   const handleActivePost = post => {
     if (post.id === activePost.id) {
       setActivePost('');
@@ -130,8 +152,14 @@ const ViewPost = () => {
       setActivePost(post);
     }
   }
+
   const handleVault = (post) => {
-    dispatch(storeVault(post));
+    if (!getCurrentUser()) {
+      history.push("/login")
+    }
+    else {
+      dispatch(storeVault(post));
+    }
   }
 
   return (
