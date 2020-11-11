@@ -76,10 +76,24 @@ const FeedSection = ({
 
   const handleSubmit = e => {
     e.preventDefault();
+    let object;
     const error = validate();
+    if (data.doc_name === "" && data.doc_path === "" && data.doc_type === "") {
+      object = {
+        feed: data.feed
+      }
+    }
+    else {
+      object = {
+        feed: data.feed,
+        doc_name: data.doc_name,
+        doc_path: data.doc_path,
+        doc_type: data.doc_type
+      }
+    }
 
     if (!error) {
-      dispatch(createFeed(data));
+      dispatch(createFeed(object));
       setData({ ...data, feed: '', doc_name: '', doc_path: '', doc_type: '' });
       setImageUrl('');
       setVideoUrl('');
