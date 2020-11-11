@@ -82,7 +82,7 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
             {users
               ?.filter(user => currentUser.id !== user.id)
               ?.map((user, index) => (
-                <div className="row" key={index}>
+                <div className="row" key={user.id}>
                   <div className="user">
                     <Avatar
                       user={user}

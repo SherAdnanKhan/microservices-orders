@@ -28,31 +28,44 @@ const ChatHeader = ({
   const timeout = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
-  // const [showActions, setShowActions] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showMuteModal, setShowMuteModal] = useState(false);
   const [showBlockModal, setShowBlockModal] = useState(false);
+  const [hasMeeting, sethasMeeting] = useState(null);
+
   const allParticipants = useRef([]);
   const audioRef = useRef();
+
   const { width } = useViewport();
   const breakPoint = 768;
+
   const { feelColor } = useSelector(state => state.feelColor)
   const dispatch = useDispatch();
 
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
+    socket.off('onMeetingEnded')
     clearTimeout(timeout);
   }, true);
 
-
   useEffect(() => {
     if (conversation?.participants) {
-      allParticipants.current = conversation?.participants;;
+      allParticipants.current = conversation?.participants;
+    }
+
+    if (conversation) {
+      socket.emit('onMeetingStatus', conversation.id, meetingStatus => {
+        console.log(`status: ${meetingStatus}`)
+        sethasMeeting(meetingStatus);
+      });
     }
   }, [conversation]);
 
   useEffect(() => {
     if (!hasRendered) {
+      socket.on('onMeetingEnded', () => {
+        sethasMeeting(false);
+      })
       socket.on('call-accepted', data => {
         clearTimeout(timeout.current);
 
@@ -174,6 +187,10 @@ const ChatHeader = ({
     setShowBlockModal(false);
   }
 
+  const handleJoinMeeting = () => {
+    history.push(`/dashboard/video-call/${conversation.id}`);
+  }
+
   return (
     <div
       className='chat-header'
@@ -201,7 +218,14 @@ const ChatHeader = ({
           ) : (
             <>
               <div className="add-strq">
-                <OtherUserOptions user={filtered} onReportModal={handleReportModal} onBlockModal={handleBlockModal} onMuteModal={handleMuteModal} isBlocked={isBlocked} isMuted={isMuted} />
+                <OtherUserOptions
+                  user={filtered}
+                  onReportModal={handleReportModal}
+                  onBlockModal={handleBlockModal}
+                  onMuteModal={handleMuteModal}
+                  isBlocked={isBlocked}
+                  isMuted={isMuted}
+                />
               </div>
               <Link to={`/dashboard/studio/${filtered?.slug}`} >
                 <Avatar
@@ -247,17 +271,32 @@ const ChatHeader = ({
           />
           <ToolTip id="invite" />
 
-          <div onClick={handleCall}>
-            <img
-              href="#"
-              src="/assets/images/icons/VidStrq.png"
-              className="call-icon"
-              alt="Video Call"
-              data-for="call"
-              data-tip="call"
-            />
-            <ToolTip id="call" />
-          </div>
+          {hasMeeting === false &&
+            <div onClick={handleCall}>
+              <img
+                href="#"
+                src="/assets/images/icons/VidStrq.png"
+                className="call-icon"
+                alt="Video Call"
+                data-for="call"
+                data-tip="call"
+              />
+              <ToolTip id="call" />
+            </div>
+          }
+
+          {hasMeeting === true &&
+            <div>
+              <button
+                data-for="Join Call"
+                data-tip="Join Call"
+                onClick={handleJoinMeeting}
+              >
+                Join
+              </button>
+              <ToolTip id="Join Call" />
+            </div>
+          }
           <img
             src="/assets/images/icons/DrawStrq.png"
             alt="Draw" data-tip="Draw" data-for="draw"
