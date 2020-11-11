@@ -10,7 +10,8 @@ import {
   CHANGE_CRITIQUES_STATUS,
   SHARE_POST_STRQ,
   CLEAR_STATUS,
-  DELETE_POST
+  DELETE_POST,
+  CHANGE_STATUS,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import socket from '../services/socketService';
@@ -192,14 +193,18 @@ export const changeCritqueStatus = (post, status) => dispatch => {
         });
       }
     }).catch((err) => {
-      console.log(err)
       toast.error("Something went wrong")
     });
 };
-export const sharePostOnStrq = (post, sentId) => dispatch => {
+
+export const sharePostOnStrq = (post, userId) => dispatch => {
   const postObject = {
-    send_to: sentId
+    send_to: userId
   }
+  dispatch({
+    type: SHARE_POST_STRQ,
+    payload: userId
+  });
 
   http
     .post(`/post/share/${post.id}`, postObject)
@@ -207,8 +212,8 @@ export const sharePostOnStrq = (post, sentId) => dispatch => {
       if (res.data.success) {
         toast.success(`post shared successfully`)
         dispatch({
-          type: SHARE_POST_STRQ,
-          payload: { userId: sentId, sendStatus: true }
+          type: CHANGE_STATUS,
+          payload: userId
         });
       }
       else {

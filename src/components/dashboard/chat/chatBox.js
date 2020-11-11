@@ -337,7 +337,6 @@ class ChatBox extends Component {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
     const { user, messages, conversation } = this.props.conversation;
-    console.log("conversation=", conversation)
     const filtered = conversation?.participants?.filter(p => p.id !== currentUser.id)[0];
     const { onlineUsers, isBlocked, isViewAble, isAllowed, isMuted } = this.props;
 

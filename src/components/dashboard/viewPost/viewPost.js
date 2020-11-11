@@ -18,9 +18,8 @@ import MzFlashModal from "../../common/mzFlashModal";
 import { getUserArtById } from "../../../actions/userActions";
 import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
-import { deletePost, reportPost, storeVault, changeCritqueStatus, sharePostOnStrq, repost, shareMzFlash, clearPost } from '../../../actions/postAction';
+import { deletePost, reportPost, storeVault, changeCritqueStatus, repost, shareMzFlash, clearPost } from '../../../actions/postAction';
 import { getCurrentUser } from '../../../actions/authActions';
-
 
 const ViewPost = () => {
   const user = useContext(UserContext);
@@ -30,7 +29,7 @@ const ViewPost = () => {
   const { params: { id } } = useRouteMatch();
   const history = useHistory();
   const {
-    postView: { crtiqueStatus, sendUser },
+    postView: { crtiqueStatus },
     gallery: { myGalleries },
 
   } = useSelector(state => state);
@@ -106,11 +105,6 @@ const ViewPost = () => {
 
   const handleStrqShareModel = (status, post) => {
     setshowModelStrqShare(status);
-  }
-
-  const onStrqShare = (post, userId) => {
-
-    dispatch(sharePostOnStrq(post, userId));
   }
 
   const handleTurnOffCrtiquesModal = (value) => {
@@ -194,10 +188,8 @@ const ViewPost = () => {
       }
       {showModelStrqShare &&
         <SharePostStrqModal
-          onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={post?.post}
-          sendUser={sendUser}
         />
       }
       {showModalRepost &&
@@ -237,7 +229,6 @@ const ViewPost = () => {
           onSharePost={handleShareModel}
           onReportPost={handleReportModel}
           onShareStrqModel={handleStrqShareModel}
-          onStrqShare={onStrqShare}
           onTurnOffCrtiques={handleTurnOffCrtiquesModal}
           updatedCritqueStatus={crtiqueStatus}
           onRepostModal={handleRepostModal}

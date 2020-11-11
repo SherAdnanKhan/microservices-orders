@@ -11,6 +11,7 @@ import {
   CHANGE_CRITIQUES_STATUS,
   SHARE_POST_STRQ,
   CLEAR_STATUS,
+  CHANGE_STATUS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -18,8 +19,8 @@ const initialState = {
   ncomm: null,
   comments: [],
   crtiqueStatus: 0,
-  sendUser: false,
   hasStroke: null,
+  sentUsers: {}
 };
 
 export default (state = initialState, action) => {
@@ -106,12 +107,18 @@ export default (state = initialState, action) => {
     case SHARE_POST_STRQ:
       return {
         ...state,
-        sendUser: action.payload
+        sentUsers: { ...state.sentUsers, [action.payload]: true }
+      };
+
+    case CHANGE_STATUS:
+      return {
+        ...state,
+        sentUsers: { ...state.sentUsers, [action.payload]: false }
       };
     case CLEAR_STATUS:
       return {
         ...state,
-        sendUser: null
+        sentUsers: {}
       };
     default:
       return state;

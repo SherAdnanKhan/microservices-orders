@@ -11,7 +11,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StudioFooter = ({ gallery, user, activePost, handleActivePost,
   activeGallery, onUnFavGallery, onReportPost, onModelDelete, onSharePost,
-  onShareStrqModel, onStrqShare, onTurnOffCrtiques, onRepostModal, onMzFlashModal,
+  onShareStrqModel, onTurnOffCrtiques, onRepostModal, onMzFlashModal,
   onNcomm, onStroke, onUnStroke, activeNcomm, ncomm, onAddVault
 }) => {
 
@@ -74,7 +74,6 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                       onSharePost={onSharePost}
                       onReportPost={onReportPost}
                       onModelDelete={onModelDelete}
-                      onStrqShare={onStrqShare}
                       onShareStrqModel={onShareStrqModel}
                       onTurnOffCrtiques={onTurnOffCrtiques}
                       onRepostModal={onRepostModal}

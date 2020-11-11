@@ -27,8 +27,6 @@ import {
   deletePost,
   reportPost,
   changeCritqueStatus,
-  sharePostOnStrq,
-  clearStatus,
   repost,
   shareMzFlash
 } from '../../../actions/postAction';
@@ -36,7 +34,7 @@ import ToolTip from '../../common/toolTip/toolTip';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader, nextPageUrl }) => {
+const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageUrl }) => {
   const dispatch = useDispatch();
   const [activePost, setActivePost] = useState('');
   const [showDeleteModel, setShowDeleteModel] = useState(false);
@@ -95,10 +93,7 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
     setshowModelStrqShare(status);
   }
 
-  const onStrqShare = (post, userId) => {
-    dispatch(sharePostOnStrq(post, userId))
-    dispatch(clearStatus());
-  }
+
 
   const handleTurnOffCrtiquesModal = (value) => {
     setshowModalTurnOffCritque(value);
@@ -203,10 +198,8 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
       }
       {showModelStrqShare &&
         <SharePostStrqModal
-          onShare={onStrqShare}
           onModalClose={handleStrqShareModel}
           post={activePost}
-          sendUser={sendUser}
         />
       }
       {showModalRepost &&
@@ -270,7 +263,6 @@ const LobbyPosts = ({ posts, sendUser, onCallNextPosts, currentPage, postLoader,
                 onSharePost={handleShareModel}
                 onReportPost={handleReportModel}
                 onModelDelete={handlePostDeleteModel}
-                onStrqShare={onStrqShare}
                 onShareStrqModel={handleStrqShareModel}
                 onTurnOffCrtiques={handleTurnOffCrtiquesModal}
                 onRepostModal={handleRepostModal}
