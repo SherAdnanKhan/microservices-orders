@@ -7,6 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { fileUpload } from '../../../actions/genericActions';
 import ProgressBar from '../../common/progressBar';
 import Feed from './feed';
+import { toast } from "react-toastify";
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
@@ -31,33 +32,56 @@ const FeedSection = ({
   const [progress, setProgress] = useState(0);
   const { feelColor } = useSelector(state => state.feelColor);
 
+  const convertFileSize = (sizeBytes) => {
+    const fileSizeKb = sizeBytes / 1000;
+    const fileSizeMb = fileSizeKb / 1000;
+    return fileSizeMb
+  }
+
+  const validateFile = (size, type) => {
+    let error;
+    if (type === "video/mp4" && size > 5) {
+      error = "Video size must be 5MB long";
+    } else if ((type === "image/png" || type === "image/jpeg" || type === "image/jpg") && size > 2) {
+      error = "Image size must be 2MB long"
+    }
+    return error ? error : false
+  }
+
   const handleChange = ({ target: input }) => {
     if (input.type === 'file') {
+      const fileSizeMb = convertFileSize(input.files[0].size);
+      const fileType = input.files[0].type;
+      const isErrors = validateFile(fileSizeMb, fileType);
       const fileData = new FormData();
       fileData.append('file_upload', input.files[0]);
-
-      dispatch(
-        fileUpload(fileData,
-          updatedProgress => {
-            setProgress(updatedProgress)
-          },
-          result => {
-            setProgress(0);
-            if (result.doc_type === 'image') {
-              setImageUrl(result.path);
-              setVideoUrl('');
-            } else {
-              setImageUrl('');
-              setVideoUrl(result.path);
+      if (!isErrors) {
+        dispatch(
+          fileUpload(fileData,
+            updatedProgress => {
+              setProgress(updatedProgress)
+            },
+            result => {
+              setProgress(0);
+              if (result.doc_type === 'image') {
+                setImageUrl(result.path);
+                setVideoUrl('');
+              } else {
+                setImageUrl('');
+                setVideoUrl(result.path);
+              }
+              setData({ ...data, doc_name: result.doc_name, doc_path: result.path, doc_type: result.doc_type });
+            },
+            err => {
+              setProgress(0)
             }
-            setData({ ...data, doc_name: result.doc_name, doc_path: result.path, doc_type: result.doc_type });
-          },
-          err => {
-            setProgress(0)
-          }
-        )
-      );
-      onModelChange(false);
+          )
+        );
+        onModelChange(false);
+      }
+      else {
+        toast.error(isErrors)
+      }
 
     } else {
       setData({ ...data, [input.name]: input.value });

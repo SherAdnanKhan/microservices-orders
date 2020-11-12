@@ -6,6 +6,7 @@ import UserContext from "../../../context/userContext";
 import { fileUpload } from '../../../actions/genericActions';
 import { useDispatch } from 'react-redux';
 import ProgressBar from '../../common/progressBar';
+import { toast } from 'react-toastify';
 
 const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) => {
   const [croppedImage, setCroppedImage] = useState(null);
@@ -35,28 +36,51 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) =>
     setCroppedImage('');
   };
 
+  const convertFileSize = (sizeBytes) => {
+    const fileSizeKb = sizeBytes / 1000;
+    const fileSizeMb = fileSizeKb / 1000;
+    return fileSizeMb
+  }
+
+  const validateFile = (size, type) => {
+    let error;
+    if (type === "video/mp4" && size > 5) {
+      error = "Video size must be 5MB long";
+    } else if ((type === "image/png" || type === "image/jpeg" || type === "image/jpg") && size > 2) {
+      error = "Image size must be 2MB long"
+    }
+    return error ? error : false
+  }
+
   const handleChange = ({ target: input }) => {
-    if (input.name === 'image' && input.files[0]) {
-      setImage(input.files[0]);
-      setImageUrl(URL.createObjectURL(input.files[0]));
-      setToggle(true);
-      setVideo(null);
-      setVideoUrl(null);
-      setIsValid(true);
-    } else if (input.name === 'video' && input.files[0]) {
-      setVideo(input.files[0]);
-      setVideoUrl(URL.createObjectURL(input.files[0]))
-      setImage(null);
-      setImageUrl(null);
-      setToggle(false);
-      setIsValid(true);
-      setCroppedImage(null);
+    const fileSizeMb = convertFileSize(input.files[0].size);
+    const fileType = input.files[0].type;
+    let isErrors = validateFile(fileSizeMb, fileType);
+    if (!isErrors) {
+      if (input.name === 'image' && input.files[0]) {
+        setImage(input.files[0]);
+        setImageUrl(URL.createObjectURL(input.files[0]));
+        setToggle(true);
+        setVideo(null);
+        setVideoUrl(null);
+        setIsValid(true);
+      } else if (input.name === 'video' && input.files[0]) {
+        setVideo(input.files[0]);
+        setVideoUrl(URL.createObjectURL(input.files[0]))
+        setImage(null);
+        setImageUrl(null);
+        setToggle(false);
+        setIsValid(true);
+        setCroppedImage(null);
+      }
+    }
+    else {
+      toast.error(isErrors)
     }
   };
 
   const handleSave = () => {
     const fileData = new FormData();
-
     if (croppedImage) {
       fileData.append('file_upload', croppedImage);
     } else if (image) {
@@ -64,7 +88,6 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) =>
     } else if (video) {
       fileData.append('file_upload', video);
     }
-
     dispatch(
       fileUpload(fileData,
         updatedProgress => {
