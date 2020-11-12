@@ -11,7 +11,6 @@ const Comment = ({ post, onClose }) => {
 
   useEffect(() => {
     if (post) {
-      console.log(post);
       dispatch(getComments(post.id))
     }
   }, [post, dispatch]);

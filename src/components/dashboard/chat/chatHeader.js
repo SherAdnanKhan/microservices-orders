@@ -55,7 +55,6 @@ const ChatHeader = ({
 
     if (conversation) {
       socket.emit('onMeetingStatus', conversation.id, meetingStatus => {
-        console.log(`status: ${meetingStatus}`)
         sethasMeeting(meetingStatus);
       });
     }
