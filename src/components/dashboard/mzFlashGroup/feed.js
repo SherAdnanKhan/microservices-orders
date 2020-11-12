@@ -56,7 +56,7 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
               Created By: {feed.user.slug}
             </a>
             <video
-              style={{ width: "220px", height: "103px" }}
+              style={{ width: "220px", height: "96px" }}
               controls
               src={feed?.image?.path}
               alt=""
