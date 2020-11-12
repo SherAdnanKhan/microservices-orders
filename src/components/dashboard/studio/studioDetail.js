@@ -9,7 +9,7 @@ const StudioDetail = ({ userStudio, slug }) => {
 
   const hasAllowedStro = slug => {
     if (userStudio) {
-      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Stro');
+      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Strq');
       return (found && found.is_allowed === 1)
         ? history.push(`/dashboard/chat/${slug}`)
         : toast('You are not allowed to view this');

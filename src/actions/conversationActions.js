@@ -190,7 +190,7 @@ export const createGroupConversation = (data, id) => dispatch => {
     });
 }
 
-export const deleteMessage = id => dispatch => {
+export const deleteMessage = (id, success) => dispatch => {
   http
     .delete(`/chats/message/${id}`)
     .then(() => {
@@ -198,17 +198,24 @@ export const deleteMessage = id => dispatch => {
       dispatch({
         type: DELETE_MESSAGE,
         payload: id
-      })
+      });
+      success && success();
     })
     .catch(err => {
       if (err.response && err.response.data) {
         toast(err.response.data.errors.error)
       }
     });
-}
+};
+
+export const deleteMessageState = id => dispatch => {
+  dispatch({
+    type: DELETE_MESSAGE,
+    payload: id
+  });
+};
 
 export const deleteConversation = id => dispatch => {
-
   http
     .delete(`/chats/${id}`)
     .then(() => {

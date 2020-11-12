@@ -29,7 +29,8 @@ import {
   readAll,
   changeReadMessageStatus,
   resetConversationCount,
-  deleteMessage
+  deleteMessage,
+  deleteMessageState
 } from '../../../actions/conversationActions';
 
 class ChatBox extends Component {
@@ -70,12 +71,6 @@ class ChatBox extends Component {
       await this.props.updateConversation(data.message);
       this.bottomRef.current.scrollIntoView({ behavior: 'auto' });
 
-      // if (data.message.created_by === this.props.conversation.user.id) {
-      //   if (data.message.feel.color !== this.props.conversation.user.feel.color) {
-      //     this.componentRefreshUser();
-      //   }
-      // }
-
       if (data.message.user.id !== currentUser.id) {
         const user = {
           user_id: currentUser.id
@@ -87,6 +82,10 @@ class ChatBox extends Component {
         this.setState({ typings: this.state.typings.filter(typing => typing.id !== data.message.user.id) });
       }
     });
+
+    socket.on('deleteMessage', id => {
+      this.props.deleteMessageState(id);
+    })
 
     socket.on('read', (data) => {
       if (data.reader.id !== currentUser.id) {
@@ -330,7 +329,10 @@ class ChatBox extends Component {
   }
 
   handleDeleteMessage = id => {
-    this.props.deleteMessage(id);
+    const { conversation } = this.props.conversation;
+    this.props.deleteMessage(id, () => {
+      socket.emit('onDeleteMessage', { room: conversation.id, id });
+    });
   }
 
   render() {
@@ -536,5 +538,6 @@ export default connect(
   readAll,
   changeReadMessageStatus,
   resetConversationCount,
-  deleteMessage
+  deleteMessage,
+  deleteMessageState
 })(withRouter(ChatBox));
