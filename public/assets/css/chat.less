@@ -28,6 +28,29 @@
     }
     .conversationContainer {
       box-sizing: border-box;
+      .searchField {
+        border-bottom: 1px solid #9999;
+        margin-bottom: 10px;
+        padding: 15px;
+        position: relative;
+        input.search {
+          width: 100%;
+          height: 50px;
+          background-color: rgba(0, 0, 0, 0.2);
+          font-size: 14px;
+          border-radius: 20px;
+          padding: 10px;
+          color: #fff;
+          border: 1px solid #9999;
+        }
+        i.fas.fa-search {
+          position: absolute;
+          top: 30px;
+          right: 7%;
+          font-size: 20px;
+          color: #9999;
+        }
+      }
     
       .logo {
         text-align: center;
@@ -650,7 +673,7 @@
 
               .msgImg img {
                 width: 215px !important;
-                height: 250px;
+                height: 230px;
                 max-height:350px;
                 margin-bottom: 12px;
                 border-radius: 5px;
