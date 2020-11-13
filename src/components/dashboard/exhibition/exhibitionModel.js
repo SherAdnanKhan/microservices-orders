@@ -7,6 +7,8 @@ import { fileUpload } from '../../../actions/genericActions';
 import { useDispatch } from 'react-redux';
 import ProgressBar from '../../common/progressBar';
 import { toast } from 'react-toastify';
+import { IMAGE_UPLOAD_SIZE_ERROR, VIDEO_UPLOAD_SIZE_ERROR } from '../../../constants/errors';
+
 
 const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) => {
   const [croppedImage, setCroppedImage] = useState(null);
@@ -45,19 +47,20 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) =>
   const validateFile = (size, type) => {
     let error;
     if (type === "video/mp4" && size > 5) {
-      error = "Video size must be 5MB long";
+      error = VIDEO_UPLOAD_SIZE_ERROR;
     } else if ((type === "image/png" || type === "image/jpeg" || type === "image/jpg") && size > 2) {
-      error = "Image size must be 2MB long"
+      error = IMAGE_UPLOAD_SIZE_ERROR;
     }
     return error ? error : false
   }
 
   const handleChange = ({ target: input }) => {
-    const fileSizeMb = convertFileSize(input.files[0].size);
-    const fileType = input.files[0].type;
+    const fileSizeMb = convertFileSize(input?.files[0]?.size);
+    const fileType = input?.files[0]?.type;
     let isErrors = validateFile(fileSizeMb, fileType);
     if (!isErrors) {
       if (input.name === 'image' && input.files[0]) {
+        setToggle(false)
         setImage(input.files[0]);
         setImageUrl(URL.createObjectURL(input.files[0]));
         setToggle(true);
@@ -65,6 +68,7 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) =>
         setVideoUrl(null);
         setIsValid(true);
       } else if (input.name === 'video' && input.files[0]) {
+        setToggle(false)
         setVideo(input.files[0]);
         setVideoUrl(URL.createObjectURL(input.files[0]))
         setImage(null);
@@ -75,6 +79,7 @@ const ExhibitionModel = ({ onSave, selectedImage, selectedVideo, feelColor }) =>
       }
     }
     else {
+      setToggle(false)
       toast.error(isErrors)
     }
   };

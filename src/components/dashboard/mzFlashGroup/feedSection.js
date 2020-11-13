@@ -8,6 +8,7 @@ import { fileUpload } from '../../../actions/genericActions';
 import ProgressBar from '../../common/progressBar';
 import Feed from './feed';
 import { toast } from "react-toastify";
+import { IMAGE_UPLOAD_SIZE_ERROR, VIDEO_UPLOAD_SIZE_ERROR } from '../../../constants/errors';
 
 const FeedSection = ({
   collectiveFeeds, onModelChange, showModel,
@@ -41,9 +42,9 @@ const FeedSection = ({
   const validateFile = (size, type) => {
     let error;
     if (type === "video/mp4" && size > 5) {
-      error = "Video size must be 5MB long";
+      error = VIDEO_UPLOAD_SIZE_ERROR;
     } else if ((type === "image/png" || type === "image/jpeg" || type === "image/jpg") && size > 2) {
-      error = "Image size must be 2MB long"
+      error = IMAGE_UPLOAD_SIZE_ERROR;
     }
     return error ? error : false
   }
@@ -77,9 +78,10 @@ const FeedSection = ({
             }
           )
         );
-        onModelChange(false);
+        onModelChange(false)
       }
       else {
+        onModelChange(false);
         toast.error(isErrors)
       }
 
@@ -192,7 +194,7 @@ const FeedSection = ({
             </div>
           }
           {showModel &&
-            <div className="add-img-vid-box">
+            <div className="add-media-box">
               <i
                 style={{ backgroundColor: feelColor }}
                 className="fa fa-times close-add-box"

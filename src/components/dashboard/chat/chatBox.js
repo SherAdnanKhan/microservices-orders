@@ -32,6 +32,7 @@ import {
   deleteMessage,
   deleteMessageState
 } from '../../../actions/conversationActions';
+import { IMAGE_UPLOAD_SIZE_ERROR, VIDEO_UPLOAD_SIZE_ERROR, DOCUMENT_UPLOAD_SIZE_ERROR } from "../../../constants/errors";
 
 class ChatBox extends Component {
   state = {
@@ -220,11 +221,11 @@ class ChatBox extends Component {
     let error;
 
     if (type === "video/mp4" && size > 5) {
-      error = "Video size must be 5MB long";
+      error = VIDEO_UPLOAD_SIZE_ERROR;
     } else if ((type === "image/png" || type === "image/jpeg" || type === "image/png") && size > 2) {
-      error = "Image size must be 2 MB long"
+      error = IMAGE_UPLOAD_SIZE_ERROR;
     } else if (type === "application/document" && size > 10) {
-      error = "Document size must be 10MB long"
+      error = DOCUMENT_UPLOAD_SIZE_ERROR;
     }
     return error ? error : false
   }
