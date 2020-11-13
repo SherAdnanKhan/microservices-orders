@@ -43,15 +43,10 @@ const InputAutoComplete = ({
     onChange(input.value);
     if (input.value.length === 0) {
       setList([]);
-      // clearArtName();
     }
-    // else {
-    //   clearError();
-    // }
 
     optionRef.current.scrollTo(0, 0);
     setScrollHeight(0);
-    // setSelected(input.value);
 
     serachSubject.next(input.value);
     setHighlightedIndex(0);;
@@ -59,7 +54,6 @@ const InputAutoComplete = ({
 
   const handleSelect = option => {
     if (option) {
-      // setSelected(option[displayProperty]);
       onSelect(option);
     }
     setList([]);
