@@ -33,6 +33,7 @@ import {
   deleteMessageState
 } from '../../../actions/conversationActions';
 import { IMAGE_UPLOAD_SIZE_ERROR, VIDEO_UPLOAD_SIZE_ERROR, DOCUMENT_UPLOAD_SIZE_ERROR } from "../../../constants/errors";
+const urlMetadata = require('url-metadata');
 
 class ChatBox extends Component {
   state = {
@@ -169,6 +170,14 @@ class ChatBox extends Component {
     const { image, video, message, document } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
+
+    urlMetadata(message).then(
+      function (metadata) { // success handler
+        console.log(metadata)
+      },
+      function (error) { // failure handler
+        console.log(error)
+      });
 
     if (conversation) {
       let data = {
