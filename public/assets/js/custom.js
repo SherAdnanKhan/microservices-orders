@@ -123,7 +123,6 @@ $(document).click(function () {
 
   $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
   $("body").css("overflow-y", "auto");
-  $(".screen").css("overflow-y", "auto")
 });
 
 $(document).on('click', '.item-box', function () {

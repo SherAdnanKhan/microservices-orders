@@ -272,10 +272,9 @@ export const storeVault = (post) => dispatch => {
       if (res.data.success) {
         toast.success(`post ${post.title} saved in vault`)
       }
-      else {
-        toast.warning("Something went wrong")
-      }
-    });
+
+    })
+    .catch(error => toast.error(error.response.data.errors.message))
 };
 
 
