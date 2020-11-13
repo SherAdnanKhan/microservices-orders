@@ -219,21 +219,19 @@ class ChatBox extends Component {
   validateFile = (size, type) => {
     let error;
 
-    if (type === "video/mp4" && size > 51.2) {
-      error = "Video size must be 50MB long";
-    } else if ((type === "image/png" || type === "image/jpeg" || type === "image/png") && size > 25.6) {
-      error = "Image size must be 25MB long"
-    } else if (type === "application/document" && size > 51.2) {
-      error = "Document size must be 25MB long"
+    if (type === "video/mp4" && size > 5) {
+      error = "Video size must be 5MB long";
+    } else if ((type === "image/png" || type === "image/jpeg" || type === "image/png") && size > 2) {
+      error = "Image size must be 2 MB long"
+    } else if (type === "application/document" && size > 10) {
+      error = "Document size must be 10MB long"
     }
     return error ? error : false
   }
 
-
   handleUpload = ({ target: input }) => {
-    this.setState({ hidden: true });
-
     if (input.files[0]) {
+      this.setState({ hidden: true });
       const fileSizeMb = this.convertFileSize(input.files[0].size);
       const fileType = input.files[0].type;
       const isErrors = this.validateFile(fileSizeMb, fileType);
@@ -259,6 +257,7 @@ class ChatBox extends Component {
           })
       }
       else {
+        this.setState({ hidden: true });
         toast.error(isErrors)
       }
     }
@@ -266,7 +265,6 @@ class ChatBox extends Component {
 
   handleChange = ({ target: input }) => {
     this.setState({ message: input.value });
-
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 

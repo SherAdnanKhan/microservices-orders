@@ -2,7 +2,7 @@ import React from 'react';
 
 const FileUploadModal = ({ feelColor, onClose, onChange }) => {
   return (
-    <div className="add-img-vid-box">
+    <div className="add-img-vid-doc-box">
       <i
         style={{ backgroundColor: feelColor }}
         className="fa fa-times close-add-box"
