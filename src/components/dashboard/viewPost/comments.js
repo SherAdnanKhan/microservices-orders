@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getComments, createComment } from '../../../actions/postAction';
 import Avatar from '../../common/avatar';
 
-const Comment = ({ post, onClose }) => {
+const Comment = ({ post, onClose, isAllowedCritiques }) => {
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
   const { comments } = useSelector(state => state.postView);
@@ -126,7 +126,7 @@ const Comment = ({ post, onClose }) => {
             }
             <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
-          {post?.critiques_status === 1 &&
+          {post?.critiques_status === 1 || isAllowedCritiques === 1 ?
             <div className="text-area">
               <div className="msg-input">
                 <textarea
@@ -138,6 +138,10 @@ const Comment = ({ post, onClose }) => {
               <button onClick={handleSubmit} className="clickable">
                 <img src="/assets/images/crit1.png" alt="" />
               </button>
+            </div>
+            :
+            <div className="comment-error">
+              <p>Comments are disabled for this post.</p>
             </div>
           }
         </div>

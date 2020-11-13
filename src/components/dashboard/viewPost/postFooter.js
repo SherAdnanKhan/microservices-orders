@@ -41,12 +41,7 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
   }, [dispatch]);
 
   const handleOpenCommentModal = () => {
-    if (!getCurrentUser()) {
-      history.push("/login")
-    }
-    else {
-      setShowCommentModal(true);
-    }
+    setShowCommentModal(true);
   }
 
   return (
@@ -55,6 +50,7 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
         showCommentModal &&
         <Comment
           post={post}
+          isAllowedCritiques
           onClose={() => setShowCommentModal(false)}
         />
       }
@@ -77,20 +73,18 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
           <ToolTip id="stroke" />
           <p>strokes {post && post?.stroke_users_count}</p>
         </div>
-        {isAllowedCritiques === 1 &&
-          <div className="post-footer-icons">
-            <img
-              className="post-non-color-icon open-commet clickable"
-              src="/assets/images/crit1.png"
-              alt=""
-              data-for="comments"
-              data-tip="comments"
-              onClick={() => handleOpenCommentModal(post)}
-            />
-            <ToolTip id="comments" />
-            <p> comments {comments.length} </p>
-          </div>
-        }
+        <div className="post-footer-icons">
+          <img
+            className="post-non-color-icon open-commet clickable"
+            src="/assets/images/crit1.png"
+            alt=""
+            data-for="comments"
+            data-tip="comments"
+            onClick={() => handleOpenCommentModal(post)}
+          />
+          <ToolTip id="comments" />
+          <p> comments {comments.length} </p>
+        </div>
         <div
           className="post-footer-icons action-w"
           data-for="ncomm"
