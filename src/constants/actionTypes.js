@@ -15,7 +15,9 @@ export const GET_ART = 'GET_ART';
 
 // Art Search
 export const ART_SEARCH = 'ART_SEARCH';
+export const CHILD_ART_SEARCH = 'CHILD_ART_SEARCH';
 export const CLEAR_ART = 'CLEAR_ART';
+export const CLEAR_CHILD_ART = 'CLEAR_CHILD_ART';
 
 // ART SELECT
 export const SELECT_USER = "SELECT_USER";

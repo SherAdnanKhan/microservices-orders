@@ -105,6 +105,7 @@ const Draw = ({ onClose, room }) => {
               ref={canvasRef}
               saveData={saveData}
               brushRadius={2}
+              lazyRadius={0}
               brushColor={brushColor}
               catenaryColor="#0a0302"
               gridColor="rgba(150,150,150,0.17)"
