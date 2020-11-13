@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { artSearch, artPost, updatePost, clearArtSearch } from "../../../actions/exibitionAction"
+import { artSearch, artPost, updatePost, clearArtSearch, searchChildArt, clearChildArt } from "../../../actions/exibitionAction"
 import InputAutoComplete from "../../common/autoComplete";
 import { useHistory, useLocation } from "react-router-dom";
 import Spinner from "../../common/spinner";
@@ -9,6 +9,7 @@ import ExhibitionModel from "./exhibitionModel";
 import queryString from 'query-string';
 import { getPost, clearPost } from "../../../actions/postAction";
 import { useWindowUnloadEffect } from "../../common/useWindowUnloadEffect";
+
 const AddExibit = () => {
   const location = useLocation();
   const history = useHistory();
@@ -17,6 +18,8 @@ const AddExibit = () => {
   const { feelColor } = useSelector(state => state.feelColor);
 
   const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
+  const { childArts } = useSelector(state => state.exibition);
+
   const { loading } = useSelector(state => state.loading);
   const {
     gallery: { myGalleries },
@@ -27,7 +30,8 @@ const AddExibit = () => {
   const [showModel, setShowModel] = useState(params.post ? false : true);
   const [error, setError] = useState('');
   const [image, setImage] = useState('');
-  const [video, setVideo] = useState('')
+  const [video, setVideo] = useState('');
+
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -35,8 +39,13 @@ const AddExibit = () => {
     doc_type: '',
     doc_name: '',
     doc_path: '',
-    art_id: null
+    art_id: '',
+    childArtId: ''
   });
+
+  const [parentArtName, setParentArtName] = useState('');
+  const [childArtName, setChildArtName] = useState('');
+  const [hasChildren, setHasChildren] = useState(false);
 
   const handleChange = ({ target: input }) => {
     if (input.type === 'radio') {
@@ -47,12 +56,15 @@ const AddExibit = () => {
   }
 
 
-  function handleAutoSelect(option) {
-    setData({ ...data, art_id: option.id });
-    // setArts(option.name)
-  }
-
   const hasErrors = () => {
+    if (!data.art_id) {
+      return "Please choose an art.";
+    }
+
+    if (data.art_id && hasChildren && !data.childArtId) {
+      return "Please choose sub art.";
+    }
+
     if (!data.title) {
       return "Please enter title.";
     }
@@ -68,11 +80,6 @@ const AddExibit = () => {
     if (!data.doc_path) {
       return "Please choose a file.";
     }
-
-    if (!data.art_id) {
-      return "Please choose an art.";
-    }
-
     return false;
   }
 
@@ -85,7 +92,7 @@ const AddExibit = () => {
         title: data.title,
         description: data.description,
         gallery_id: data.gallery_id,
-        art_id: data.art_id,
+        art_id: data.childArtId ? data.childArtId : data.art_id,
         doc_path: data.doc_path,
       }
 
@@ -108,6 +115,7 @@ const AddExibit = () => {
 
   useWindowUnloadEffect(() => {
     dispatch(clearArtSearch());
+    dispatch(clearChildArt());
   }, true);
 
   useEffect(() => {
@@ -148,10 +156,19 @@ const AddExibit = () => {
           id: post?.post?.id,
           title: post?.post?.title,
           description: post?.post?.description,
-          art_id: post?.post?.art_id,
+          art_id: post?.post?.art?.parent?.id || post?.post?.art?.id,
+          childArtId: post?.post?.art?.id || '',
           doc_path: post?.post?.image?.path || ''
         }
       });
+
+      if (post?.post?.art?.parent) {
+        setParentArtName(post.post.art.parent.name);
+        setChildArtName(post.post.art.name)
+        setHasChildren(true);
+      } else {
+        setParentArtName(post?.post?.art?.name);
+      }
       setShowModel(false);
     }
   }, [post, dispatch]);
@@ -170,6 +187,38 @@ const AddExibit = () => {
     setData({ ...data, doc_name: file.doc_name, doc_path: file.path, doc_type: file.doc_type });
   };
 
+  const handleSearchEnd = useCallback(result => {
+    dispatch(artSearch(result));
+  }, [dispatch]);
+
+  const handleParentChange = value => {
+    setParentArtName(value);
+    setData({ ...data, art_id: '', childArtId: '' });
+    setChildArtName('');
+    setHasChildren(false);
+  };
+
+  const handleChildSearchEnd = useCallback(result => {
+    dispatch(searchChildArt(data.art_id, result));
+  }, [dispatch, data.art_id]);
+
+  const handleChildChange = value => {
+    setChildArtName(value);
+    setData({ ...data, childArtId: '' });
+  };
+
+  function handleParentArtSelect(option) {
+    setHasChildren(option?.children_count > 0 ? true : false);
+    setData({ ...data, art_id: option.id });
+    setParentArtName(option.name);
+
+    dispatch(searchChildArt(option.id));
+  }
+
+  function handleChildArtSelect(option) {
+    setChildArtName(option.name);
+    setData({ ...data, childArtId: option.id });
+  }
 
   return (
     <div>
@@ -227,13 +276,22 @@ const AddExibit = () => {
                     options={listCategory}
                     displayProperty="name"
                     placeholder="Choose an art"
-                    defaultValue={post?.post?.art?.name}
-                    onSelect={handleAutoSelect}
-                    action={artSearch}
-                    clearAction={clearArtSearch}
-                    clearError={() => setError('')}
-                    clearArtName={() => setData({ ...data, art_id: null })}
+                    defaultValue={parentArtName}
+                    onChange={handleParentChange}
+                    onSearchEnd={handleSearchEnd}
+                    onSelect={handleParentArtSelect}
                   />
+                  {hasChildren &&
+                    <InputAutoComplete
+                      options={childArts}
+                      displayProperty="name"
+                      placeholder="Choose sub art"
+                      defaultValue={childArtName}
+                      onChange={handleChildChange}
+                      onSearchEnd={handleChildSearchEnd}
+                      onSelect={handleChildArtSelect}
+                    />
+                  }
                   <input
                     className="exibition-title-input"
                     type="text"

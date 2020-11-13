@@ -83,12 +83,11 @@ export const updateArt = artId => dispatch => {
       const user = JSON.parse(localStorage.getItem(userKey));
       user.art = res?.data?.data?.user?.art;
       localStorage.setItem(userKey, JSON.stringify(user));
-      let id = res.data.data.user.art.id;
-      let name = res.data.data.user.art.name;
+      let id = res?.data?.data?.user?.art?.id;
       localStorage.setItem('art_id', id);
       dispatch({
         type: UPDATE_USER_ART,
-        payload: [id, name]
+        payload: res?.data?.data?.user?.art
       })
     })
     .catch(err => {

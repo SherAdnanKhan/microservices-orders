@@ -1,21 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import { updateBio, updateUsername, updateArt } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
 import ToolTip from '../../common/toolTip/toolTip';
 import InputAutoComplete from "../../common/autoComplete";
-import { artSearch, clearArtSearch } from "../../../actions/exibitionAction";
+import { artSearch, clearArtSearch, searchChildArt } from "../../../actions/exibitionAction";
 import { useSelector } from "react-redux";
 import { isEmpty } from '../../../utils/helperFunctions';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
+  const { childArts } = useSelector(state => state.exibition);
+
   const [bio, setBio] = useState('');
   const [username, setUserName] = useState('');
-  const [artName, setArtName] = useState('');
+
   const [artId, setArtId] = useState('');
+  const [childArtId, setChildArtId] = useState('');
   const [error, setError] = useState({ username: "", artName: "", bio: "" });
+
+  const [parentArtName, setParentArtName] = useState('');
+  const [childArtName, setChildArtName] = useState('');
+  const [hasChildren, setHasChildren] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,22 +33,25 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     if (myStudio && myStudio.user.username) {
       setUserName(myStudio.user.username);
     }
-    if (myStudio && myStudio?.user?.art?.name) {
-      setArtName(myStudio.user.art.name);
-    }
-    if (myStudio && myStudio?.user?.art?.id) {
-      setArtId(myStudio.user.art.id);
+    if (myStudio && myStudio?.user?.art) {
+
+      if (myStudio?.user?.art?.parent) {
+        setParentArtName(myStudio?.user?.art?.parent.name);
+        setArtId(myStudio?.user?.art?.parent?.id);
+        setChildArtId(myStudio?.user?.art?.id)
+        setChildArtName(myStudio?.user?.art?.name);
+        setHasChildren(true);
+
+      } else {
+        setParentArtName(myStudio?.user?.art?.name)
+        setArtId(myStudio?.user?.art?.id);
+      }
     }
     return () => {
       dispatch(clearArtSearch());
     }
   }, [dispatch, myStudio]);
 
-  useEffect(() => {
-    if (!isEmpty(listCategory) && listCategory.length === 1) {
-      setArtId(listCategory[0].id)
-    }
-  }, [listCategory, artName])
 
   const updateUserName = () => {
     let object = {
@@ -57,17 +68,16 @@ const ViewProfile = ({ myStudio, feelColor }) => {
 
   const updateUserArt = () => {
     const data = {
-      art_id: artId
-    }
-    if (isEmpty(artName)) {
-      dispatch(clearArtSearch())
+      art_id: childArtId ? childArtId : artId
+    };
+
+    if (!artId) {
       setError({ artName: "Art cannot be empty" })
-    } else if (listCategory?.length === 0) {
-      dispatch(clearArtSearch())
-      setError({ artName: "Please select a valid Art Name" });
-    } else if (!isEmpty(artName) && !isEmpty(artId)) {
-      setError({ artName: "" })
+    } else if (artId && hasChildren && !childArtId) {
+      setError({ artName: "Sub art cannot be empty" });
+    } else {
       dispatch(updateArt(data));
+      setError({ artName: "" })
     }
   }
   const changeBio = () => {
@@ -83,6 +93,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
       setError({ ...error, bio: "bio cannot be empty" })
     }
   }
+
   const changeHandler = (event) => {
     if (event.target.name === "bio") {
       setBio(event.target.value)
@@ -93,12 +104,49 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     !isEmpty(event.target.value) &&
       setError({ ...error, [event.target.name]: "" })
   }
-  const handleAutoSelect = (option) => {
-    if (option && option.id) {
-      setArtId(option.id);
-      setArtName(option.name);
-    }
+
+
+  const handleSearchEnd = useCallback(result => {
+    dispatch(artSearch(result));
+  }, [dispatch]);
+
+  const handleParentChange = value => {
+    setParentArtName(value);
+    setChildArtName('');
+    setArtId('');
+    setChildArtId('');
+    setHasChildren(false);
+  };
+
+
+  const handleChildSearchEnd = useCallback(result => {
+    console.log(artId);
+    dispatch(searchChildArt(artId, result));
+  }, [dispatch, artId]);
+
+  const handleChildChange = value => {
+    setChildArtName(value);
+    setChildArtId('');
+  };
+
+  function handleParentArtSelect(option) {
+    setHasChildren(option?.children_count > 0 ? true : false);
+    setArtId(option.id);
+    setParentArtName(option.name);
+
+    dispatch(searchChildArt(option.id));
   }
+
+  function handleChildArtSelect(option) {
+    setChildArtName(option.name);
+    setChildArtId(option.id)
+  }
+  // const handleAutoSelect = (option) => {
+  //   if (option && option.id) {
+  //     setArtId(option.id);
+  //     setArtName(option.name);
+  //   }
+  // }
   return (
     <div className="wrapper">
       <div className="edit-studioScreen">
@@ -155,20 +203,33 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                 />
                 <ToolTip id="editArt" />
               </div>
+              {error.artName &&
+                <p
+                  style={{ marginBottom: '5px' }}
+                >
+                  {error?.artName}
+                </p>
+              }
               <InputAutoComplete
                 options={listCategory}
                 displayProperty="name"
                 placeholder="Choose an art"
-                defaultValue={artName}
-                action={artSearch}
-                clearAction={clearArtSearch}
-                onSelect={handleAutoSelect}
-                clearArtName={() => setArtName('')}
-                clearError={() => setError({ ...error, artName: "" })}
+                defaultValue={parentArtName}
+                onChange={handleParentChange}
+                onSearchEnd={handleSearchEnd}
+                onSelect={handleParentArtSelect}
               />
-              {
-                error?.artName?.length > 0 &&
-                <p>{error?.artName}</p>
+
+              {hasChildren &&
+                <InputAutoComplete
+                  options={childArts}
+                  displayProperty="name"
+                  placeholder="Choose sub art"
+                  defaultValue={childArtName}
+                  onChange={handleChildChange}
+                  onSearchEnd={handleChildSearchEnd}
+                  onSelect={handleChildArtSelect}
+                />
               }
             </div>
             <label htmlFor="addbio" className="addbio-input">

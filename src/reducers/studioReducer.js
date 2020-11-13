@@ -57,10 +57,7 @@ export default (state = initialState, action) => {
           ...state.myStudio,
           user: {
             ...state.myStudio.user,
-            art: {
-              id: action.payload[0],
-              name: action.payload[1]
-            }
+            art: action.payload
           }
         }
       };

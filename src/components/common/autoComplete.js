@@ -2,35 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { alphabetsWithoutSpecialChars } from '../../constants/regex';
 import { BehaviorSubject } from 'rxjs';
-import { useDispatch } from "react-redux";
 
 const InputAutoComplete = ({
-  options, displayProperty, onChange,
-  onSelect, placeholder, defaultValue, action, clearAction, clearArtName, clearError, ...rest
+  options, displayProperty, onChange, onSearchEnd,
+  onSelect, placeholder, defaultValue, ...rest
 }) => {
   const [list, setList] = useState([]);
-  const [selected, setSelected] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [scrollHeight, setScrollHeight] = useState(0);
   const [serachSubject] = useState(new BehaviorSubject(''));
   let searchQueryChangeObservable = useRef('');
-  const dispatch = useDispatch();
   const optionRef = useRef();
 
   useEffect(() => {
     if (options) {
-      setList(options);
+      setList(options || []);
     }
   }, [options]);
 
-  useEffect(() => {
-    if (defaultValue) {
-      setSelected(selected => selected = defaultValue);
-    }
-  }, [defaultValue]);
 
   useEffect(() => {
-
     searchQueryChangeObservable.current = serachSubject.pipe(
       debounceTime(500),
       distinctUntilChanged()
@@ -40,36 +31,38 @@ const InputAutoComplete = ({
   useEffect(() => {
     const subscription = searchQueryChangeObservable.current.subscribe(result => {
       if (alphabetsWithoutSpecialChars.test(result)) {
-        dispatch(action(result));
+        onSearchEnd(result);
       }
     });
     return () => {
       subscription.unsubscribe();
     }
-  }, [searchQueryChangeObservable, action, dispatch]);
-
+  }, [searchQueryChangeObservable, onSearchEnd]);
 
   const handleChange = ({ target: input }) => {
+    onChange(input.value);
     if (input.value.length === 0) {
       setList([]);
-      clearArtName();
+      // clearArtName();
     }
-    else {
-      clearError()
-    }
+    // else {
+    //   clearError();
+    // }
+
     optionRef.current.scrollTo(0, 0);
     setScrollHeight(0);
-    setSelected(input.value);
+    // setSelected(input.value);
+
     serachSubject.next(input.value);
     setHighlightedIndex(0);;
   };
 
   const handleSelect = option => {
     if (option) {
-      setSelected(option[displayProperty]);
+      // setSelected(option[displayProperty]);
+      onSelect(option);
     }
-    onSelect(option);
-    setList(null);
+    setList([]);
   };
 
   return (
@@ -77,24 +70,26 @@ const InputAutoComplete = ({
       <input
         type="text"
         placeholder={placeholder}
-        value={selected}
+        value={defaultValue}
         onChange={handleChange}
         {...rest}
         onKeyDown={e => {
-          if (e.keyCode === 40) {
+          e.stopPropagation();
+          if (e.keyCode === 40 && list) {
+
             if (highlightedIndex < list.length - 1) {
               setHighlightedIndex(highlightedIndex => highlightedIndex + 1);
               setScrollHeight(scrollHeight => scrollHeight + 40);
               optionRef.current.scrollTo(0, scrollHeight + 40);
             }
-          } else if (e.keyCode === 38) {
-            if (highlightedIndex > 0) {
+          } else if (e.keyCode === 38 && list) {
+            if (list && highlightedIndex > 0) {
               setHighlightedIndex(highlightedIndex => highlightedIndex - 1);
               setScrollHeight(scrollHeight => scrollHeight - 40);
               optionRef.current.scrollTo(0, scrollHeight - 40);
 
             }
-          } else if (e.keyCode === 13) {
+          } else if (e.keyCode === 13 && list) {
             options &&
               handleSelect(options[highlightedIndex]);
           }
