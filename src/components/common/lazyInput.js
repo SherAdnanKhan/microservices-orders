@@ -13,7 +13,7 @@ const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, type = '
       debounceTime(time),
       distinctUntilChanged()
     );
-  }, [searchSubject]);
+  }, [searchSubject, time]);
 
   useEffect(() => {
     const subscription = searchQueryChangeObservable.current.subscribe(result => {
