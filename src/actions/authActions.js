@@ -22,7 +22,7 @@ export const login = credentials => dispatch => {
     .then(res => {
       dispatch(getAllConversations());
       setCurrentUser(res.data.data);
-      window.location.href = '/dashboard';
+      window.location.href = '/lobby';
     });
 };
 

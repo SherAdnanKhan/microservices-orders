@@ -14,13 +14,13 @@ const VideoCall = () => {
             <div className=" dropdown">
               <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
               <div className="dropdown-content">
-                <a href="/dashboard/video-call">View galleries</a>
-                <a href="/dashboard/video-call">View profile</a>
-                <a href="/dashboard/video-call">Send ticket</a>
-                <a href="/dashboard/video-call">Block</a>
-                <a href="/dashboard/video-call">Mute</a>
-                <a href="/dashboard/video-call">Report</a>
-                <a href="/dashboard/video-call">End chat</a>
+                <a href="/video-call">View galleries</a>
+                <a href="/video-call">View profile</a>
+                <a href="/video-call">Send ticket</a>
+                <a href="/video-call">Block</a>
+                <a href="/video-call">Mute</a>
+                <a href="/video-call">Report</a>
+                <a href="/video-call">End chat</a>
               </div>
             </div>
             <div className="video-cube">
@@ -29,10 +29,10 @@ const VideoCall = () => {
               salwa
             </div>
             <div style={{ marginLeft: "auto" }} >
-              {/* <Link to="/dashboard/video-call/add">
+              {/* <Link to="/video-call/add">
                 <button className="btn-style" >Add Artist</button>
               </Link>
-              <Link to="/dashboard/video-call/group">
+              <Link to="/video-call/group">
                 <button className="btn-style" style={{ marginLeft: "12px", marginRight: "12px" }} >Group Video</button>
               </Link> */}
 

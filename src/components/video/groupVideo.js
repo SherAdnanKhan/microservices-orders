@@ -168,10 +168,10 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
           </div>
 
           <div style={{ marginLeft: "auto" }} >
-            {/* <Link to="/dashboard/video-call/add">
+            {/* <Link to="/video-call/add">
                 <button className="btn-style" >Add Artist</button>
               </Link>
-              <Link to="/dashboard/video-call/group">
+              <Link to="/video-call/group">
                 <button className="btn-style" style={{ marginLeft: "12px", marginRight: "12px" }} >Group Video</button>
               </Link> */}
           </div>
@@ -347,7 +347,7 @@ const GroupVideoCall = () => {
 
           socket.emit('joinVideo', { room: params.room, user }, (message) => {
             toast.error(message);
-            history.push('/dashboard/chat');
+            history.push('/chat');
           });
 
           socket.on('userList', users => {
@@ -456,7 +456,7 @@ const GroupVideoCall = () => {
     setVideo(!video);
   };
   const navigateToSTRQ = () => {
-    window.open(`/dashboard/chat/${params.room}`);
+    window.open(`/chat/${params.room}`);
   }
 
   const handleCameraSwitch = (e) => {

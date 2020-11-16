@@ -210,7 +210,7 @@ const Post = ({
                         {gallery
                           && gallery.posts.map((post, index) => (
                             <div key={index} className="">
-                              <Link to={`/dashboard/viewpost/${post?.slug}`}>
+                              <Link to={`/viewpost/${post?.slug}`}>
                                 {post.post_type === 2
                                   ? (
                                     <>
@@ -242,7 +242,7 @@ const Post = ({
                                 <p>
                                   {
                                     user &&
-                                    <Link to={`/dashboard/studio/${user.slug}`} >
+                                    <Link to={`/studio/${user.slug}`} >
                                       {user.username}
                                     </Link>
                                   }

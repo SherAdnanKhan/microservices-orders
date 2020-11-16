@@ -170,7 +170,7 @@ const Tutorial = ({ user }) => {
             <div className="tabs9">
               <button
                 className="clickable"
-                onClick={() => history.push('/dashboard')}
+                onClick={() => history.push('/lobby')}
                 style={{ backgroundColor: user.feel.color_code }}
               >
                 Enjoy Meuzm

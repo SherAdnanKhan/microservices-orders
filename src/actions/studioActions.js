@@ -56,7 +56,7 @@ export const createOrUpdateProfile = (data, history) => () => {
       user.avatars = res.data.data.avatars;
       localStorage.setItem(userKey, JSON.stringify(user));
 
-      window.location.href = `/dashboard/my-studio/profile/`;
+      window.location.href = `/my-studio/profile/`;
     });
 };
 
@@ -193,6 +193,6 @@ export const deleteProfileImage = (id, history, slug) => () => {
 
       user.avatars = user.avatars.filter(avatar => avatar.id !== id);
       localStorage.setItem(userKey, JSON.stringify(user));
-      window.location.href = `/dashboard/my-studio/profile/`;
+      window.location.href = `/my-studio/profile`;
     });
 };

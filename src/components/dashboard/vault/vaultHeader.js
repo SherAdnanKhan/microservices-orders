@@ -20,7 +20,7 @@ const VaultHeader = () => {
             <img className="valut-img" alt="" src="/assets/images/logowhite.png" />
           </div> */}
           <div className="burgerMenu">
-            <span className="menuBlock" onClick={() => history.push('/dashboard/settings')}>
+            <span className="menuBlock" onClick={() => history.push('/settings')}>
               <i className="fas fa-ellipsis-v"
                 data-for="menu"
                 data-tip="menu settings" />

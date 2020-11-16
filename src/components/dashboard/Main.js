@@ -1,72 +1,28 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import Header from './layout/header';
 import LeftBorder from './layout/leftBorder';
 import RightBorder from './layout/rightBorder';
-import { useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ChangeColor from './layout/changeColor';
 import { useDispatch } from 'react-redux';
 import { changeFeelColor } from '../../actions/colorActions';
+import Lobby from './lobby/lobby';
+import ChangePassword from './settings/changePassword';
+import Faving from './faves/faving';
+import FaveBy from './faves/faveBy';
+import SprfvsUser from './faves/sprfvsUsers';
+import FaveGalleries from './faves/faveGalleries';
+import GalleryFollowers from './faves/galleryFollowers';
+import MyStudio from './myStudio/myStudio';
+import Studio from './studio/studio';
+import MzFlash from './mzFlash';
+import MzFlashGroup from './mzFlashGroup/mzFlashGroup';
+import Privacy from './privacy/privacy';
+import Chat from './chat/chat';
+import FeelHistory from './feelHistory';
 
 const Main = () => {
-  const location = useLocation();
-  const split = location.pathname.split('/');
-
   const dispatch = useDispatch();
-
-  const Component = lazy(() => {
-    switch (split[2]) {
-      case 'lobby':
-        return import('./lobby/lobby');
-      case 'my-studio':
-        return split[3] === 'profile'
-          ? import('./profile')
-          : split[3] === 'fave'
-            ? import('./faves/faving')
-            : split[3] === 'fave-by'
-              ? import('./faves/faveBy')
-              : split[3] === 'sprfvs'
-                ? import('./faves/sprfvsUsers')
-                : split[3] === 'fave-galleries'
-                  ? import('./faves/faveGalleries')
-                  : split[3] === 'gallery-followers'
-                    ? import('./faves/galleryFollowers')
-                    : import('./myStudio/myStudio')
-      case 'change-password':
-        return import('./settings/changePassword');
-      case 'fave':
-        return import('./faves/faving');
-      case 'fave-by':
-        return import('./faves/faveBy');
-      case 'studio':
-        return split[3] === 'fave'
-          ? import('./faves/faving')
-          : split[3] === 'fave-by'
-            ? import('./faves/faveBy')
-            : split[3] === 'sprfvs'
-              ? import('./faves/sprfvsUsers')
-              : split[3] === 'fave-galleries'
-                ? import('./faves/faveGalleries')
-                : split[3] === 'gallery-followers'
-                  ? import('./faves/galleryFollowers')
-                  : import('./studio/studio')
-      case 'mz-flash':
-        return import('./mzFlash');
-      case 'mz-flash-group':
-        return import('./mzFlashGroup/mzFlashGroup');
-      case 'viewpost':
-        return import('./viewPost/viewPost');
-      case 'privacy':
-        return import('./privacy/privacy');
-      case 'chat':
-        return import('./chat/chat');
-      case 'settings':
-        return import('./layout/navBar');
-      case 'feel-history':
-        return import('./feelHistory');
-      default:
-        return import('./lobby/lobby');
-    }
-  });
 
   const handleColorChange = colorId => {
     dispatch(changeFeelColor(colorId));
@@ -78,9 +34,30 @@ const Main = () => {
       <ChangeColor onColorChange={handleColorChange} />
       <LeftBorder />
       <RightBorder />
-      <Suspense fallback={<div></div>}>
-        <Component />
-      </Suspense>
+      <Switch>
+        <Route exact path="/lobby" component={Lobby} />
+        <Route exact path="/change-password" component={ChangePassword} />
+
+        <Route exact path="/my-studio/fave-galleries/:id" component={FaveGalleries} />
+        <Route exact path="/my-studio/gallery-followers/:slug" component={GalleryFollowers} />
+        <Route exact path="/my-studio/sprfvs/:slug" component={SprfvsUser} />
+        <Route exact path="/my-studio/fave" component={Faving} />
+        <Route exact path="/my-studio/fave-by" component={FaveBy} />
+        <Route exact path="/my-studio" component={MyStudio} />
+
+        <Route exact path="/studio/gallery-followers/:slug" component={GalleryFollowers} />
+        <Route exact path="/studio/fave-galleries/:id" component={FaveGalleries} />
+        <Route exact path="/studio/sprfvs/:slug" component={SprfvsUser} />
+        <Route exact path="/studio/fave" component={Main} />
+        <Route exact path="/studio/fave-by" component={Main} />
+        <Route exact path="/studio/:slug" component={Studio} />
+
+        <Route exact path="/mz-flash/:slug" component={MzFlash} />
+        <Route exact path="/mz-flash-group" component={MzFlashGroup} />
+        <Route exact path="/privacy" component={Privacy} />
+        <Route exact path="/chat/:slug?" component={Chat} />
+        <Route exact path="/feel-history" component={FeelHistory} />
+      </Switch>
     </div>
   )
 }

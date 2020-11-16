@@ -15,7 +15,7 @@ const LeftBorder = () => {
         className="lobby-img"
         alt=""
         src="/assets/images/lobbyicon.png"
-        onClick={() => history.push('/dashboard/lobby')}
+        onClick={() => history.push('/lobby')}
         data-tip="lobby"
       />
       <ToolTip position="right" />
@@ -23,7 +23,7 @@ const LeftBorder = () => {
         className="mystudio-img"
         alt=""
         src="/assets/images/newstudioicon.png"
-        onClick={() => history.push('/dashboard/my-studio')}
+        onClick={() => history.push('/my-studio')}
         data-tip="my studio"
       />
       <ToolTip id="my" position="right" />
@@ -31,7 +31,7 @@ const LeftBorder = () => {
         className="add-img"
         alt=""
         src="/assets/images/add.png"
-        onClick={() => history.push('/dashboard/exhibition')}
+        onClick={() => history.push('/exhibition')}
         data-tip="add exhibit"
       />
       <ToolTip position="right" />

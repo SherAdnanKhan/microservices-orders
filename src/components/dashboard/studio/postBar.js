@@ -49,7 +49,7 @@ const PostBar = ({
           && gallery &&
           <>
             <span
-              onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}
+              onClick={() => history.push(`/studio/gallery-followers/${activeGallery.slug}`)}
               data-for="favedUsersList"
               data-tip="faved users">Faved({gallery && gallery.faved_users.length})
             </span>

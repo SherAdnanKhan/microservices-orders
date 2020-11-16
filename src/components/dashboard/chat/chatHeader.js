@@ -72,7 +72,7 @@ const ChatHeader = ({
           audioRef.current.pause();
           audioRef.current.currentTime = 0;
         }
-        history.push(`/dashboard/video-call/${data.room}`)
+        history.push(`/video-call/${data.room}`)
       });
 
       socket.on('call-rejected', data => {
@@ -187,7 +187,7 @@ const ChatHeader = ({
   }
 
   const handleJoinMeeting = () => {
-    history.push(`/dashboard/video-call/${conversation.id}`);
+    history.push(`/video-call/${conversation.id}`);
   }
 
   return (
@@ -226,7 +226,7 @@ const ChatHeader = ({
                   isMuted={isMuted}
                 />
               </div>
-              <Link to={`/dashboard/studio/${filtered?.slug}`} >
+              <Link to={`/studio/${filtered?.slug}`} >
                 <Avatar
                   user={filtered}
                 />
@@ -245,7 +245,7 @@ const ChatHeader = ({
           ) : (
             <>
               <p>
-                <Link to={`/dashboard/studio/${filtered?.slug}`} >{filtered?.username}</Link>
+                <Link to={`/studio/${filtered?.slug}`} >{filtered?.username}</Link>
               </p>
               {isViewAble &&
                 <span>

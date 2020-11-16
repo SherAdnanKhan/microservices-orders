@@ -33,14 +33,14 @@ const EditProfile = ({ myStudio, feelColor }) => {
               <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
             </label>
             <div className="faved-btn">
-              {/* <Link to='/dashboard/my-studio/fave-by'>
+              {/* <Link to='/my-studio/fave-by'>
                 <div className="faved-by-btn">
                   <img src="/assets/images/favers.png" alt="" />
                   Faved by
               </div>
                 {myStudio && <span>{myStudio.fav_by_count}</span>}
               </Link> */}
-              <Link to={`/dashboard/my-studio/fave-galleries/${myStudio?.user?.id}`}>
+              <Link to={`/my-studio/fave-galleries/${myStudio?.user?.id}`}>
                 <div
                   className="faved-by-btn"
                   style={{ backgroundColor: feelColor }}
@@ -55,7 +55,7 @@ const EditProfile = ({ myStudio, feelColor }) => {
                   <ToolTip id="favedGalleries" />
                 </div>
               </Link>
-              {/* <Link to="/dashboard/my-studio/fave">
+              {/* <Link to="/my-studio/fave">
                 <div className="faved-by-btn">
                   <img src="/assets/images/faving.png" alt="" />
                   Faved

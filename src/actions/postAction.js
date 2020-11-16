@@ -145,7 +145,7 @@ export const deletePost = (post, history) => dispatch => {
     .then(res => {
       toast.success("Post Deleted Successfully");
       if (history) {
-        history.push("/dashboard/my-studio")
+        history.push("/my-studio")
       }
       dispatch({
         type: DELETE_POST,

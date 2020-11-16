@@ -34,7 +34,7 @@ export const newArt = (value, history) => dispatch => {
               type: SELECT_USER,
               payload: [id, name]
             });
-            history.push('/dashboard/start-favas');
+            history.push('/start-favas');
           });
       });
   }

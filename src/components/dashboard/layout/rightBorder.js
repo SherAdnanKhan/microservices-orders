@@ -15,7 +15,7 @@ const RightBorder = () => {
         className="strq-img"
         alt=""
         src="/assets/images/strqicon.png"
-        onClick={() => history.push('/dashboard/chat')}
+        onClick={() => history.push('/chat')}
         data-tip="strq"
         data-for="chat"
       />
@@ -24,7 +24,7 @@ const RightBorder = () => {
         className="mzflash-img"
         alt=""
         src="/assets/images/mzflash.png"
-        onClick={() => history.push('/dashboard/mz-flash-group')}
+        onClick={() => history.push('/mz-flash-group')}
         data-tip="mz-flash"
         data-for="mzflash"
       />

@@ -13,7 +13,7 @@ const StudioHeader = ({ myStudio, feelColor }) => {
       <div className="back-icon">
         <i
           className="fa fa-arrow-left clickable"
-          onClick={() => history.push('/dashboard/lobby')}
+          onClick={() => history.push('/lobby')}
           data-tip="back"
           data-for="back"
         />
@@ -25,7 +25,7 @@ const StudioHeader = ({ myStudio, feelColor }) => {
           src='/assets/images/sprfvs_full.png'
           alt=""
           className="clickable"
-          onClick={() => history.push(`/dashboard/my-studio/sprfvs/${myStudio.user.slug}`)}
+          onClick={() => history.push(`/my-studio/sprfvs/${myStudio.user.slug}`)}
           data-tip="Sprfvs list"
           data-for="mySprfvs"
 

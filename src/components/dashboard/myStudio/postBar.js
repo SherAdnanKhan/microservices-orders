@@ -33,7 +33,7 @@ const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) =>
         {activeGallery &&
           <>
             <span
-              onClick={() => history.push(`/dashboard/studio/gallery-followers/${activeGallery.slug}`)}
+              onClick={() => history.push(`/studio/gallery-followers/${activeGallery.slug}`)}
               data-for="faved"
               data-tip="Faved Users" >
               Faved
@@ -43,7 +43,7 @@ const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) =>
             <img
               src="/assets/images/add.png"
               className="clickable"
-              onClick={() => history.push(`/dashboard/exhibition?gallery=${activeGallery.id}`)}
+              onClick={() => history.push(`/exhibition?gallery=${activeGallery.id}`)}
               alt=""
               data-for="addExhibitionMy"
               data-tip="Add Exhibition"

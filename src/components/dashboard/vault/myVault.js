@@ -24,7 +24,7 @@ const MyVault = () => {
   const { studio: { vaults } } = useSelector(state => state);
   const [currentPage, setCurrentPage] = useState(1);
   const handleBackPress = () => {
-    history.push('/dashboard/my-studio');
+    history.push('/my-studio');
   }
 
   const fetchNextVaults = () => {
@@ -60,13 +60,13 @@ const MyVault = () => {
                               vaults?.data?.map((vault, index) =>
                                 <div className="gallery-cover" key={index} >
                                   {vault?.post?.post_type === 2 ?
-                                    <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                    <Link to={`/studio/${vault?.post?.user?.slug}`}>
                                       <video controls >
                                         <source src={vault?.post?.image?.path} type="video/mp4" />
                                       </video>
                                     </Link>
                                     :
-                                    <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                    <Link to={`/studio/${vault?.post?.user?.slug}`}>
                                       <img src={vault?.post?.image?.path} alt="" />
                                     </Link>
                                   }
@@ -79,7 +79,7 @@ const MyVault = () => {
                         {/* FOR Grid VIEW */}
                         <div className="show-list">
                           <Link
-                            to={`/dashboard/studio/sarahsajjad`}
+                            to={`/studio/sarahsajjad`}
                           >
                             <InfiniteScroll
                               dataLength={vaults?.data}
@@ -91,13 +91,13 @@ const MyVault = () => {
                                   <>
                                     <div className="image-style" key={index}>
                                       {vault?.post?.post_type === 2 ?
-                                        <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                        <Link to={`/studio/${vault?.post?.user?.slug}`}>
                                           <video width="320" height="240" controls >
                                             <source src={vault?.post?.image?.path} type="video/mp4" />
                                           </video>
                                         </Link>
                                         :
-                                        <Link to={`/dashboard/studio/${vault?.post?.user?.slug}`}>
+                                        <Link to={`/studio/${vault?.post?.user?.slug}`}>
                                           <img src={vault?.post?.image?.path} alt="" />
                                         </Link>
                                       }

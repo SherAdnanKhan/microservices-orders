@@ -18,7 +18,7 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
 
   const handleNavigate = user => {
     handleUnmount();
-    return history.push(`/dashboard/studio/${user.slug}`);
+    return history.push(`/studio/${user.slug}`);
   }
 
   const handleSearchComplete = useCallback(result => {

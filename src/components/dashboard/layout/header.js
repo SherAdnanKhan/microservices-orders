@@ -25,7 +25,7 @@ const Header = () => {
             <img className="valut-img" alt="" src="/assets/images/logowhite.png" />
           </div>
           <div className="burgerMenu">
-            <span className="menuBlock" onClick={() => history.push('/dashboard/settings')}>
+            <span className="menuBlock" onClick={() => history.push('/settings')}>
               <i className="fas fa-ellipsis-v"
                 data-for="menu"
                 data-tip="menu settings" />
@@ -35,14 +35,14 @@ const Header = () => {
           <div className="left-icon">
             <img className="valut-img"
               alt="" src="/assets/images/lobbyicon.png"
-              onClick={() => history.push('/dashboard/lobby')}
+              onClick={() => history.push('/lobby')}
               data-for="lobby-header"
               data-tip="lobby"
             />
             <ToolTip id="lobby-header" position="bottom" />
             <img className="valut-img"
               alt="" src="/assets/images/newstudioicon.png"
-              onClick={() => history.push('/dashboard/my-studio')}
+              onClick={() => history.push('/my-studio')}
               data-tip="my studio"
               data-for="myStudio"
             />
@@ -50,7 +50,7 @@ const Header = () => {
             <img className="valut-img"
               alt=""
               src="/assets/images/add.png"
-              onClick={() => history.push('/dashboard/exhibition')}
+              onClick={() => history.push('/exhibition')}
               data-for="addExhibit"
               data-tip="add exhibit"
             />
@@ -72,7 +72,7 @@ const Header = () => {
             <img className="valut-img"
               alt=""
               src="/assets/images/strqicon.png"
-              onClick={() => history.push('/dashboard/chat')}
+              onClick={() => history.push('/chat')}
               data-for="Chat"
               data-tip="strq"
             />
@@ -80,7 +80,7 @@ const Header = () => {
             <img className="valut-img"
               alt=""
               src="/assets/images/mzflash.png"
-              onClick={() => history.push('/dashboard/mz-flash-group')}
+              onClick={() => history.push('/mz-flash-group')}
               data-for="mzflash-top"
               data-tip="mz flash"
             />

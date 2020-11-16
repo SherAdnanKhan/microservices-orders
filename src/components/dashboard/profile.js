@@ -77,7 +77,7 @@ const Profile = () => {
 
   const handleBackPress = () => {
     setToggle(false);
-    history.push('/dashboard/my-studio');
+    history.push('/my-studio');
   }
 
   const handleSkip = value => {
@@ -196,7 +196,7 @@ const Profile = () => {
               <p>Select a profile picture change</p>
 
               <button
-                onClick={() => history.push('/dashboard/my-studio')}
+                onClick={() => history.push('/my-studio')}
                 style={{ backgroundColor: feelColor }}
               >
                 <i className="fa fa-check" />
