@@ -240,11 +240,11 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
           <div className="post-page" key={post.id}>
             <div className="post-head">
               <p className="usernames">
-                <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
+                <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
                   {post.user.username}
                 </Link>
               </p>
-              <Link to={`/dashboard/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
+              <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
                 <Avatar
                   user={post.user}
                 />

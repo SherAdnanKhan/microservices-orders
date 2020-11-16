@@ -5,10 +5,10 @@ const OtherUserOptions = ({ onReportModal, onBlockModal, onMuteModal, user, isBl
       <div className="dropdown">
         <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
         <div className="dropdown-content">
-          <a href={`/dashboard/studio/${user?.slug}`} target="_blank" rel="noopener noreferrer">
+          <a href={`/studio/${user?.slug}`} target="_blank" rel="noopener noreferrer">
             View galleries
          </a>
-          <a href={`/dashboard/studio/${user?.slug}`} target="_blank" rel="noopener noreferrer">
+          <a href={`/studio/${user?.slug}`} target="_blank" rel="noopener noreferrer">
             View profile
          </a>
           <p>Send ticket</p>

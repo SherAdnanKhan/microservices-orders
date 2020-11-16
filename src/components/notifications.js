@@ -91,7 +91,7 @@ const Notifications = () => {
             toast(() => {
               return (
                 <a
-                  href={`/dashboard/chat/${data.message.conversation_id}`}
+                  href={`/chat/${data.message.conversation_id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ textDecoration: 'none', color: currentUser.feel.color_code }}>

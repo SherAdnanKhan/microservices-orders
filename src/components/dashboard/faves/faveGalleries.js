@@ -49,7 +49,7 @@ const FaveGalleries = () => {
             userFavGalleries.fav_galleries.map((gallery, index) => (
               <div className="favas-box" key={index}>
                 <div className="favas-avatar">
-                  <Link to={`/dashboard/studio/${gallery.user.slug}`}  >
+                  <Link to={`/studio/${gallery.user.slug}`}>
                     <Avatar
                       user={gallery?.user}
                     />
@@ -67,12 +67,12 @@ const FaveGalleries = () => {
                     }
                   </p> */}
                   <Link
-                    to={`/dashboard/studio/${gallery?.user?.slug}/?gallery=${gallery?.id}`}
+                    to={`/studio/${gallery?.user?.slug}/?gallery=${gallery?.id}`}
                   >
                     {gallery?.title}
                   </Link>
                   <Link
-                    to={`/dashboard/studio/${gallery?.user?.slug}/?gallery=${gallery?.id}`}
+                    to={`/studio/${gallery?.user?.slug}/?gallery=${gallery?.id}`}
                   >
                     <div className="gallery-cover">
                       <img src={gallery?.image?.path} alt="" />

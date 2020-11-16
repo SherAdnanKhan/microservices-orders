@@ -171,7 +171,7 @@ class ChatBox extends Component {
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 
-    urlMetadata(message).then(
+    urlMetadata(message,).then(
       function (metadata) { // success handler
         console.log(metadata)
       },

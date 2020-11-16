@@ -11,7 +11,7 @@ const StudioDetail = ({ userStudio, slug }) => {
     if (userStudio) {
       const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Strq');
       return (found && found.is_allowed === 1)
-        ? history.push(`/dashboard/chat/${slug}`)
+        ? history.push(`/chat/${slug}`)
         : toast('You are not allowed to view this');
     }
   };
@@ -20,7 +20,7 @@ const StudioDetail = ({ userStudio, slug }) => {
     if (userStudio) {
       const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Mzflash');
       return (found && found.is_allowed === 1)
-        ? history.push(`/dashboard/mz-flash/${slug}`)
+        ? history.push(`/mz-flash/${slug}`)
         : toast('You are not allowed to view this');
     }
   };
@@ -37,7 +37,7 @@ const StudioDetail = ({ userStudio, slug }) => {
   //   if (userStudio) {
   //     const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faves');
   //     return (found && found.is_allowed === 1)
-  //       ? history.push('/dashboard/studio/fave')
+  //       ? history.push('/studio/fave')
   //       : toast('You are not allowed to view this');
   //   }
   // };
@@ -46,7 +46,7 @@ const StudioDetail = ({ userStudio, slug }) => {
   //   if (userStudio) {
   //     const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Faved By');
   //     return (found && found.is_allowed === 1)
-  //       ? history.push('/dashboard/studio/fave-by')
+  //       ? history.push('/studio/fave-by')
   //       : toast('You are not allowed to view this');
   //   }
   // };
@@ -115,7 +115,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                 </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link> */}
-                <Link to={`/dashboard/studio/fave-galleries/${userStudio?.user?.id}`}>
+                <Link to={`/studio/fave-galleries/${userStudio?.user?.id}`}>
                   <div
                     className="faved-by-btn"
                     style={{ backgroundColor: userStudio?.user.feel.color_code }}

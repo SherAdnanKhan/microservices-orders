@@ -62,7 +62,7 @@ const SprfvsUser = () => {
   return (
     <div className="favas">
       {loading && <Spinner />}
-      {split[2] === 'my-studio' &&
+      {split[1] === 'my-studio' &&
         <FavTabs
           tabs={tabs}
           activeTab={activeTab}

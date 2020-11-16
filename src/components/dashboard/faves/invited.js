@@ -10,7 +10,7 @@ const Invited = ({ invitedUsers }) => {
           invitedUsers.map((user, index) => (
             <div className="favas-box" key={index}>
               <div className="favas-avatar">
-                <Link to={`/dashboard/studio/${user.slug}`}  >
+                <Link to={`/studio/${user.slug}`}  >
                   <Avatar
                     user={user}
                   />

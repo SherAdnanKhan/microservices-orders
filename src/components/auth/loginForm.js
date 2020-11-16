@@ -40,7 +40,7 @@ const LoginForm = () => {
 
   return (
     <>
-      {getCurrentUser() && <Redirect to="/dashboard/lobby" />}
+      {getCurrentUser() && <Redirect to="/lobby" />}
       {loading && <Spinner />}
       <div className="wrapper">
         <div className="loginScreen">

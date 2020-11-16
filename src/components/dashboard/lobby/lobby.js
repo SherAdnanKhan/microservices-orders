@@ -122,7 +122,7 @@ const Lobby = () => {
           className="popUpChatMsg"
           style={{ backgroundColor: feelColor }}
         >
-          <Link to="/dashboard/chat">
+          <Link to="/chat">
             <img src="/assets/images/strqicon.png" alt="" />
           </Link>
           <div className="noticeicons" >
@@ -144,7 +144,7 @@ const Lobby = () => {
                 {favouriteUsers &&
                   favouriteUsers?.data.map((user, index) => (
                     <div key={index}>
-                      <Link to={`/dashboard/studio/${user.slug}`}>
+                      <Link to={`/studio/${user.slug}`}>
                         <UserCube user={user} />
                       </Link>
                     </div>
@@ -157,7 +157,7 @@ const Lobby = () => {
                   favouriteUsers?.data.map((user, index) => (
                     <div key={index}>
                       <div className="item">
-                        <Link to={`/dashboard/studio/${user.slug}`}>
+                        <Link to={`/studio/${user.slug}`}>
                           <UserCube user={user} />
                         </Link>
                       </div>

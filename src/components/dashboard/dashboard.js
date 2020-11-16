@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import Main from './Main';
 import Profile from './profile';
@@ -13,33 +13,32 @@ const Dashboard = ({ user }) => {
   return (
     <UserContext.Provider value={user}>
       <Switch>
-        <Route exact path="/dashboard/change-password" component={Main} />
-        <Route exact path="/dashboard/lobby" component={Main} />
-        <Route exact path="/dashboard/exhibition" component={AddExibit} />
-        <Route exact path="/dashboard/my-studio/profile/" component={Profile} />
-        <Route exact path="/dashboard/my-studio/vault/" component={MyVault} />
-        <Route exact path="/dashboard/my-studio/fave" component={Main} />
-        <Route exact path="/dashboard/my-studio/fave-by" component={Main} />
-        <Route exact path="/dashboard/my-studio/fave-galleries/:id" component={Main} />
-        <Route exact path="/dashboard/my-studio/gallery-followers/:slug" component={Main} />
-        <Route exact path="/dashboard/my-studio/sprfvs/:slug" component={Main} />
-        <Route exact path="/dashboard/my-studio" component={Main} />
-        <Route exact path="/dashboard/studio/gallery-followers/:slug" component={Main} />
-        <Route exact path="/dashboard/studio/fave-galleries/:id" component={Main} />
-        <Route exact path="/dashboard/studio/sprfvs/:slug" component={Main} />
-        <Route exact path="/dashboard/studio/:slug" component={Main} />
-        <Route exact path="/dashboard/studio/fave" component={Main} />
-        <Route exact path="/dashboard/studio/fave-by" component={Main} />
-        <Route exact path="/dashboard/mz-flash/:slug" component={Main} />
-        <Route exact path="/dashboard/mz-flash-group" component={Main} />
-        <Route exact path="/dashboard/privacy" component={Main} />
-        <Route exact path="/dashboard/chat/:slug?" component={Main} />
-        <Route exact path="/dashboard/video-call/:room" component={GroupVideoCall} />
-        <Route exact path="/dashboard/video-call/add" component={AddVideoArtist} />
-        <Route exact path="/dashboard/group-chat" component={Main} />
-        <Route exact path="/dashboard/settings" component={NavBar} />
-        <Route exact path="/dashboard/feel-history" component={Main} />
-        <Redirect exact from="/dashboard" to="/dashboard/lobby" />
+        <Route exact path="/change-password" component={Main} />
+        <Route exact path="/lobby" component={Main} />
+        <Route exact path="/exhibition" component={AddExibit} />
+        <Route exact path="/my-studio/profile/" component={Profile} />
+        <Route exact path="/my-studio/vault/" component={MyVault} />
+        <Route exact path="/my-studio/fave" component={Main} />
+        <Route exact path="/my-studio/fave-by" component={Main} />
+        <Route exact path="/my-studio/fave-galleries/:id" component={Main} />
+        <Route exact path="/my-studio/gallery-followers/:slug" component={Main} />
+        <Route exact path="/my-studio/sprfvs/:slug" component={Main} />
+        <Route exact path="/my-studio" component={Main} />
+        <Route exact path="/studio/gallery-followers/:slug" component={Main} />
+        <Route exact path="/studio/fave-galleries/:id" component={Main} />
+        <Route exact path="/studio/sprfvs/:slug" component={Main} />
+        <Route exact path="/studio/:slug" component={Main} />
+        <Route exact path="/studio/fave" component={Main} />
+        <Route exact path="/studio/fave-by" component={Main} />
+        <Route exact path="/mz-flash/:slug" component={Main} />
+        <Route exact path="/mz-flash-group" component={Main} />
+        <Route exact path="/privacy" component={Main} />
+        <Route exact path="/chat/:slug?" component={Main} />
+        <Route exact path="/video-call/:room" component={GroupVideoCall} />
+        <Route exact path="/video-call/add" component={AddVideoArtist} />
+        <Route exact path="/group-chat" component={Main} />
+        <Route exact path="/settings" component={NavBar} />
+        <Route exact path="/feel-history" component={Main} />
       </Switch>
     </UserContext.Provider>
 

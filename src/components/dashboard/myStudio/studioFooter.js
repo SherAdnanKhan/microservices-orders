@@ -26,7 +26,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
               gallery?.posts?.map((gallery, index) => (
                 <div key={index}>
 
-                  <Link to={`/dashboard/viewpost/${gallery?.slug}`}>
+                  <Link to={`/viewpost/${gallery?.slug}`}>
                     {gallery.post_type === 2
                       ? (
                         <>

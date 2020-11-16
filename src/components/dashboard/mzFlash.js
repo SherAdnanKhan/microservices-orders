@@ -209,7 +209,7 @@ const MzFlash = () => {
                 </div>
                 <div className="col-12">
                   <div className="usernames">Name:
-                  <Link to={`/dashboard/studio/${feed.user.slug}`} >
+                  <Link to={`/studio/${feed.user.slug}`} >
                       {feed.user.username}
                     </Link>
                   </div>
@@ -218,7 +218,7 @@ const MzFlash = () => {
                 <div className="imgvideo-mzflash">
                   {feed.feed_type === 1 &&
                     feed.image &&
-                    <Link target="_blank" to={{ pathname: `/dashboard/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
+                    <Link target="_blank" to={{ pathname: `/post/${feed.user.slug}?image=${feed.image.path}`, query: { postUrl: feed.image.path, postType: feed.feed_type } }}>
                       <img
                         src={feed.image.path}
                         alt="Snow"

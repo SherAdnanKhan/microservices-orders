@@ -11,7 +11,7 @@ import {
 } from "react-share"
 
 const SharePostModal = ({ onModalClose, post }) => {
-  const url = "https://staging.meuzm.com/dashboard/viewpost/" + post.slug;
+  const url = "https://staging.meuzm.com/viewpost/" + post.slug;
   return (
     <div className="studio">
       <div className="gallery-model">

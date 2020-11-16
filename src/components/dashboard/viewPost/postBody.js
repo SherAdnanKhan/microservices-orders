@@ -94,7 +94,7 @@ const PostBody = ({
           {post && post.other_posts &&
             post.other_posts.map((other, index) => (
               <div className="boxes img-align" key={index}>
-                <Link to={`/dashboard/viewpost/${other.slug}`}>
+                <Link to={`/viewpost/${other.slug}`}>
                   {other.post_type <= 1 &&
                     <img
                       className="valut-img"

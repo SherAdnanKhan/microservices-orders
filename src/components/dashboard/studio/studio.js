@@ -136,7 +136,7 @@ const Studio = () => {
       {userStudio && !userStudio.is_viewable &&
         <div className="blockMessage" >
           <p>This content isn't available at the moment</p>
-          <div><Link to="/dashboard/lobby"> Go Back</Link></div>
+          <div><Link to="/lobby"> Go Back</Link></div>
         </div>
       }
       {userStudio?.is_viewable &&

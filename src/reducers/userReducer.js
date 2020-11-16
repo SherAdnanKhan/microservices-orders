@@ -71,7 +71,12 @@ export default (state = initialState, action) => {
         ...state,
         invitedUsers: action.payload
       };
-    case REQUEST_APPROVED || REQUEST_REJECTED:
+    case REQUEST_APPROVED:
+      return {
+        ...state,
+        userRequests: state.userRequests.filter(user => user.id !== action.payload.user_id)
+      };
+    case REQUEST_REJECTED:
       return {
         ...state,
         userRequests: state.userRequests.filter(user => user.id !== action.payload.user_id)

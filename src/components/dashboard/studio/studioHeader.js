@@ -48,7 +48,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, on
         />
       }
       <div className="back-icon">
-        <i className="fa fa-arrow-left clickable" onClick={() => history.push('/dashboard/lobby')} data-for="back" data-tip="back" />
+        <i className="fa fa-arrow-left clickable" onClick={() => history.push('/lobby')} data-for="back" data-tip="back" />
         <ToolTip position="left" id="back" />
       </div>
 
@@ -67,7 +67,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, on
           <>
             <span
               className="sprfav"
-              onClick={() => history.push(`/dashboard/studio/sprfvs/${userStudio.user.slug}`)}
+              onClick={() => history.push(`/studio/sprfvs/${userStudio.user.slug}`)}
               data-tip="sprfvs list"
               data-for="sprfvsList"
             >

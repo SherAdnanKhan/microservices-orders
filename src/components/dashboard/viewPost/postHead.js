@@ -10,7 +10,7 @@ const PostHead = ({ post, userId }) => {
         <div className="post-heder-inner">
           {<p>{post.user.username}</p>}
           {userId === post.user.id &&
-            <Link to="/dashboard/my-studio" >
+            <Link to="/my-studio" >
               <Avatar
                 user={post.user}
               />
@@ -18,7 +18,7 @@ const PostHead = ({ post, userId }) => {
           }
 
           {userId !== post.user.id &&
-            <Link to={`/dashboard/studio/${post.user.slug}`} >
+            <Link to={`/studio/${post.user.slug}`} >
               <Avatar
                 user={post.user}
               />

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 const Home = () => (
   <>
-    {getCurrentUser() && <Redirect to="/dashboard/lobby" />}
+    {getCurrentUser() && <Redirect to="/lobby" />}
     <div className="wrapper">
       <div className="home">
         <div className="animatedLogo">

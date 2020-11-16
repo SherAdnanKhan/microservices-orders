@@ -17,7 +17,7 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
         </div>
       }
       <div className="col-12 cube-top">
-        <Link to={`/dashboard/studio/${feed.user.slug}`}>
+        <Link to={`/studio/${feed.user.slug}`}>
           <Avatar
             user={feed.user}
           />
@@ -31,7 +31,7 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
       </div>
       <div className="col-12">
         <span className="usernames">
-          <Link to={`/dashboard/studio/${feed.user.slug}`}>
+          <Link to={`/studio/${feed.user.slug}`}>
             {feed.user.username}
           </Link>
         </span>
@@ -69,7 +69,7 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
         feed.parent &&
         <div className="flex-container-nested">
           <div className="action-cube">
-            <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+            <Link to={`/studio/${feed.parent.user.slug}`}>
               <Avatar
                 user={feed.parent.user}
               />
@@ -83,7 +83,7 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
           </div>
           <div className="user-name-parent">
             <p className="user-name usernames">
-              <Link to={`/dashboard/studio/${feed.parent.user.slug}`}>
+              <Link to={`/studio/${feed.parent.user.slug}`}>
                 {feed.parent.user.username}
               </Link>
             </p>

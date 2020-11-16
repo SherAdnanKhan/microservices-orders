@@ -11,7 +11,7 @@ const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onMode
   const params = useRouteMatch();
 
   useEffect(() => {
-    if (params.path === "/dashboard/viewpost/:id") {
+    if (params.path === "/viewpost/:id") {
       setViewPostPage(true);
     }
   }, [params]);
@@ -23,7 +23,7 @@ const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onMode
           <>
             <p
               onClick={
-                () => history.push(`/dashboard/exhibition?gallery=${post.gallery_id}&post=${post.slug}`)
+                () => history.push(`/exhibition?gallery=${post.gallery_id}&post=${post.slug}`)
               }
             >
               Edit

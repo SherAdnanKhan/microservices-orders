@@ -62,7 +62,7 @@ const Call = () => {
       audioRef.current.currentTime = 0;
     }
 
-    history.push(`/dashboard/video-call/${incomingPayload.room}`);
+    history.push(`/video-call/${incomingPayload.room}`);
   };
 
   const handleRejectCall = () => {

@@ -70,19 +70,19 @@ const NavBar = () => {
       <nav style={{ backgroundColor: feelColor }}>
         <ul className="dropdownM">
           <li>
-            <Link to="/dashboard/my-studio">My Studio</Link>
+            <Link to="/my-studio">My Studio</Link>
           </li>
           <li>
-            <Link to="/dashboard/my-studio/profile">My Profile</Link>
+            <Link to="/my-studio/profile">My Profile</Link>
           </li>
           <li>
-            <Link to="/dashboard/my-studio/vault">My Vault</Link>
+            <Link to="/my-studio/vault">My Vault</Link>
           </li>
           <li>
-            <Link to="/dashboard/change-password">Change Password</Link>
+            <Link to="/change-password">Change Password</Link>
           </li>
           <li>
-            <a href="/dashboard/privacy">Privacy</a>
+            <a href="/privacy">Privacy</a>
           </li>
           <li>
             <a href="#__security">Security</a>
@@ -91,7 +91,7 @@ const NavBar = () => {
             <a href="#__tickets">Tickets</a>
           </li>
           <li>
-            <a href="/dashboard/feel-history">Feel History</a>
+            <a href="/feel-history">Feel History</a>
           </li>
           <li>
             <a href="#__vault">Vault</a>
