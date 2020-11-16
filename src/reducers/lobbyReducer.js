@@ -10,7 +10,6 @@ import {
   STOP_POST_LOADER,
   DELETE_POST
 } from "../constants/actionTypes";
-import { hasExtension } from "../utils/helperFunctions";
 
 const initialState = {
   favouriteUsers: {
@@ -39,14 +38,12 @@ export default (state = initialState, action) => {
         }
       }
     case GET_FAV_POSTS:
-      const filtered = action.payload.data.filter(post => hasExtension(post?.image?.path))
-
       return {
         ...state,
         favouritePosts: {
           ...state.favouritePosts,
           current_page: action.payload.current_page,
-          data: action.payload.current_page === 1 ? filtered : [...state.favouritePosts.data, ...filtered],
+          data: action.payload.current_page === 1 ? action.payload.data : [...state.favouritePosts.data, ...action.payload.data],
           next_page_url: action.payload.next_page_url
         }
       }

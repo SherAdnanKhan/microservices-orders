@@ -55,6 +55,7 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
     postView: { ncomm }
   } = useSelector(state => state);
 
+
   const handlePostShowModel = (value, type, image) => {
     if (value === true) {
       setImagepath(image.path);
