@@ -460,7 +460,7 @@ class ChatBox extends Component {
                     onChange={this.handleChange}
                     onEnter={this.handleEnter}
                     onPost={this.handlePost}
-                    feelColor={currentUser.feel.color_code}
+                    feelColor={this?.props?.feelColor}
                     onOpenUploadModal={this.handleOpenUploadModal}
                   />
 
@@ -531,6 +531,7 @@ const mapStateToProps = state => {
     isAllowed: state.conversation.is_allowed,
     onlineUsers: state.onlineUser.onlineUsers,
     messageLoader: state.conversation.messageLoader,
+    feelColor: state.feelColor.feelColor
   }
 };
 
