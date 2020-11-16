@@ -7,15 +7,6 @@ import ToolTip from "../../common/toolTip/toolTip";
 const StudioDetail = ({ userStudio, slug }) => {
   const history = useHistory();
 
-  const hasAllowedStro = slug => {
-    if (userStudio) {
-      const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Strq');
-      return (found && found.is_allowed === 1)
-        ? history.push(`/chat/${slug}`)
-        : toast('You are not allowed to view this');
-    }
-  };
-
   const hasAllowedMzflash = slug => {
     if (userStudio) {
       const found = userStudio.other_privacy.find(privacy => privacy.privacy_page === 'Mzflash');
@@ -95,14 +86,15 @@ const StudioDetail = ({ userStudio, slug }) => {
               }
               <div className="stuion-faved-btn">
                 <div>
-                  <img
-                    className="clickable"
-                    src="/assets/images/strqicon.png" alt=""
-                    onClick={() => hasAllowedStro(userStudio && userStudio.user.slug)}
-                    style={{ backgroundColor: userStudio?.user.feel.color_code }}
-                    data-for="chatUser"
-                    data-tip="strq"
-                  />
+                  <Link to={`/chat/${slug}`}>
+                    <img
+                      className="clickable"
+                      src="/assets/images/strqicon.png" alt=""
+                      style={{ backgroundColor: userStudio?.user.feel.color_code }}
+                      data-for="chatUser"
+                      data-tip="strq"
+                    />
+                  </Link>
                   <ToolTip position="bottom" id="chatUser" />
                 </div>
                 {/* <Link to="#" onClick={e => {
