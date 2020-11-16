@@ -126,7 +126,7 @@ const Comment = ({ post, onClose, isAllowedCritiques }) => {
             }
             <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
-          {post?.critiques_status === 1 || isAllowedCritiques === 1 ?
+          {post?.critiques_status === 1 && isAllowedCritiques === 1 ?
             <div className="text-area">
               <div className="msg-input">
                 <textarea
