@@ -5,7 +5,7 @@ import { updateBio, updateUsername, updateArt } from '../../../actions/studioAct
 import { useDispatch } from 'react-redux';
 import ToolTip from '../../common/toolTip/toolTip';
 import InputAutoComplete from "../../common/autoComplete";
-import { artSearch, clearArtSearch, searchChildArt } from "../../../actions/exibitionAction";
+import { artSearch, clearArtSearch, clearChildArt, searchChildArt } from "../../../actions/exibitionAction";
 import { useSelector } from "react-redux";
 import { isEmpty } from '../../../utils/helperFunctions';
 
@@ -49,6 +49,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     }
     return () => {
       dispatch(clearArtSearch());
+      dispatch(clearChildArt());
     }
   }, [dispatch, myStudio]);
 
@@ -80,6 +81,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
       setError({ artName: "" })
     }
   }
+
   const changeBio = () => {
     let my_bio = bio.replace(/\n/g, '<br/>');
     let object = {
