@@ -94,9 +94,6 @@ const NavBar = () => {
             <a href="/feel-history">Feel History</a>
           </li>
           <li>
-            <a href="#__vault">Vault</a>
-          </li>
-          <li>
             <a href="#__help">Help</a>
           </li>
           <li>
