@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Modal from './modal/modal';
 import ModalBody from './modal/modalBody';
 import ModalFooter from './modal/modalFooter';
@@ -17,6 +17,7 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
   } = useSelector(state => state);
   const dispatch = useDispatch();
   const [selectedUsers, setSelectedUsers] = useState({});
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     return () => {
@@ -60,6 +61,18 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
     }
   };
 
+  const handleSearchComplete = useCallback(result => {
+    dispatch(getAllUsers(result));
+  }, [dispatch]);
+
+
+  const handleChange = (data) => {
+    if (data?.length === 0) {
+      dispatch(clearUsers());
+    }
+    setQuery(data);
+  }
+
   return (
     <div className="invitationModal">
       <Modal>
@@ -71,8 +84,10 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
               autoFocus
               type="text"
               placeholder="search"
-              clearAction={clearUsers}
-              action={getAllUsers}
+              onSearchComplete={handleSearchComplete}
+              time={500}
+              onChange={handleChange}
+              value={query}
             />
           </div>
           <div className="users">

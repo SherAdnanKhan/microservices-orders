@@ -1,39 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { alphabetsWithoutSpecialChars } from '../../constants/regex';
 
-const LazyInput = ({ id, name, action, clearAction, type = 'text', ...rest }) => {
-  const [serachSubject] = useState(new BehaviorSubject(''));
-  const [query, setQuery] = useState('');
+const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, type = 'text', ...rest }) => {
+
+  const [searchSubject] = useState(new BehaviorSubject(''));
   let searchQueryChangeObservable = useRef('');
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    searchQueryChangeObservable.current = serachSubject.pipe(
-      debounceTime(500),
+    searchQueryChangeObservable.current = searchSubject.pipe(
+      debounceTime(time),
       distinctUntilChanged()
     );
-  }, [serachSubject]);
+  }, [searchSubject]);
 
   useEffect(() => {
     const subscription = searchQueryChangeObservable.current.subscribe(result => {
       if (alphabetsWithoutSpecialChars.test(result)) {
-        dispatch(action(result));
+        onSearchComplete(result);
       }
     });
     return () => {
       subscription.unsubscribe();
     }
-  }, [searchQueryChangeObservable, action, dispatch]);
+  }, [searchQueryChangeObservable, onSearchComplete]);
 
   const handleChange = ({ target: input }) => {
-    if (input.value.length === 0) {
-      dispatch(clearAction());
-    }
-    serachSubject.next(input.value);
-    setQuery(input.value);
+    searchSubject.next(input.value);
+    onChange(input.value)
   }
 
   return (
@@ -43,7 +38,7 @@ const LazyInput = ({ id, name, action, clearAction, type = 'text', ...rest }) =>
         type={type}
         name={name}
         id={id}
-        value={query}
+        value={value}
         onChange={handleChange}
         {...rest}
       />

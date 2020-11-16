@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
@@ -7,6 +7,7 @@ import LazyInput from '../../common/lazyInput';
 
 const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const { users } = useSelector(state => state.user);
+  const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -18,6 +19,17 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const handleNavigate = user => {
     handleUnmount();
     return history.push(`/dashboard/studio/${user.slug}`);
+  }
+
+  const handleSearchComplete = useCallback(result => {
+    dispatch(getAllUsers(result));
+  }, [dispatch]);
+
+  const handleChange = (data) => {
+    if (data?.length === 0) {
+      dispatch(clearUsers());
+    }
+    setQuery(data);
   }
 
   return (
@@ -36,8 +48,10 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
               type="text"
               id="search-field"
               placeholder="Search"
-              action={getAllUsers}
-              clearAction={clearUsers}
+              onSearchComplete={handleSearchComplete}
+              time={500}
+              value={query}
+              onChange={handleChange}
             />
           </div>
         }
