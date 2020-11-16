@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { alphabetsWithoutSpecialChars } from '../../constants/regex';
 
 const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, type = 'text', ...rest }) => {
-
   const [searchSubject] = useState(new BehaviorSubject(''));
   let searchQueryChangeObservable = useRef('');
 
@@ -17,10 +15,9 @@ const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, type = '
 
   useEffect(() => {
     const subscription = searchQueryChangeObservable.current.subscribe(result => {
-      if (alphabetsWithoutSpecialChars.test(result)) {
-        onSearchComplete(result);
-      }
+      onSearchComplete(result);
     });
+
     return () => {
       subscription.unsubscribe();
     }
@@ -28,7 +25,7 @@ const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, type = '
 
   const handleChange = ({ target: input }) => {
     searchSubject.next(input.value);
-    onChange(input.value)
+    onChange(input.value);
   }
 
   return (

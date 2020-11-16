@@ -1,7 +1,8 @@
 import React from 'react';
+import LazyInput from '../../common/lazyInput';
 import ToolTip from '../../common/toolTip/toolTip';
 
-const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUploadModal }) => {
+const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUploadModal, onTypingComplete }) => {
   return (
     <div className="message-input">
       <span
@@ -13,7 +14,19 @@ const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUpload
         />
       </span>
       <ToolTip id="uploadPost" />
-      <input
+      <LazyInput
+        autoFocus
+        id="chat-field"
+        type="text"
+        placeholder="Type a message"
+        name="message"
+        value={message}
+        onChange={onChange}
+        onKeyUp={onEnter}
+        onSearchComplete={onTypingComplete}
+        time={1000}
+      />
+      {/* <input
         autoFocus
         placeholder="Type a message"
         type="text"
@@ -21,7 +34,7 @@ const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUpload
         value={message}
         onChange={onChange}
         onKeyUp={onEnter}
-      />
+      /> */}
       {message.length > 0 &&
         <button
           onClick={onPost}

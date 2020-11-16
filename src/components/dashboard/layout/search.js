@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, clearUsers } from '../../../actions/userActions';
 import Avatar from '../../common/avatar';
 import LazyInput from '../../common/lazyInput';
+import { alphabetsWithoutSpecialChars } from '../../../constants/regex';
 
 const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const { users } = useSelector(state => state.user);
@@ -22,14 +23,19 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   }
 
   const handleSearchComplete = useCallback(result => {
-    dispatch(getAllUsers(result));
+    if (result && result.length > 0 && alphabetsWithoutSpecialChars.test(result)) {
+      dispatch(getAllUsers(result));
+    }
   }, [dispatch]);
 
   const handleChange = (data) => {
     if (data?.length === 0) {
       dispatch(clearUsers());
     }
-    setQuery(data);
+
+    if (data?.length === 0 || alphabetsWithoutSpecialChars.test(data)) {
+      setQuery(data);
+    }
   }
 
   return (

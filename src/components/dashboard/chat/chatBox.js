@@ -102,20 +102,19 @@ class ChatBox extends Component {
     });
 
     socket.on('typing', (data) => {
-      if (data.user.id !== currentUser.id) {
-        const typings = [...this.state.typings];
+      const typings = [...this.state.typings];
 
-        if (data.message) {
-          if (!typings.some(typing => typing.id === data.user.id)) {
-
-            this.setState({ typings: [data.user, ...typings] });
-          }
-        } else {
-          this.setState({ typings: typings.filter(typing => typing.id !== data.user.id) });
-        }
+      if (!typings.some(typing => typing.id === data.user.id)) {
+        this.setState({ typings: [data.user, ...typings] });
       }
 
     });
+
+    socket.on('typingStopped', (data) => {
+      const typings = [...this.state.typings];
+      this.setState({ typings: typings.filter(typing => typing.id !== data.user.id) });
+    });
+
     socket.on('drawOpened', () => {
       this.setState({ draw: true })
     });
@@ -151,11 +150,12 @@ class ChatBox extends Component {
     socket.off('recieveMessage');
     socket.off('onRead');
     socket.off('onReadAll');
-    socket.off('typing')
+    socket.off('typing');
+    this.stopeTyping();
 
     window.removeEventListener("resize", this.handleWindowResize)
     this.props.clearConversation();
-    this.setState({ page: 1 })
+    this.setState({ page: 1, message: '' });
   }
 
   componentRefreshUser = () => {
@@ -273,18 +273,22 @@ class ChatBox extends Component {
     }
   }
 
-  handleChange = ({ target: input }) => {
-    this.setState({ message: input.value });
+  handleChange = value => {
+    this.setState({ message: value });
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 
     const data = {
       conversation_id: conversation?.id,
-      message: input.value,
+      message: value,
       user
     };
 
-    socket.emit('onType', data);
+    if (value.length > 0) {
+      socket.emit('onType', data);
+    } else {
+      socket.emit('stopTyping', data);
+    }
   }
 
   handleDeletePreview = () => {
@@ -341,6 +345,30 @@ class ChatBox extends Component {
     this.props.deleteMessage(id, () => {
       socket.emit('onDeleteMessage', { room: conversation.id, id });
     });
+  }
+
+  stopeTyping = () => {
+    const { conversation } = this.props.conversation;
+    const user = getCurrentUser();
+
+    const data = {
+      conversation_id: conversation?.id,
+      user
+    };
+
+    socket.emit('stopTyping', data);
+  }
+
+  handleTypingComplete = () => {
+    const { conversation } = this.props.conversation;
+    const user = getCurrentUser();
+
+    const data = {
+      conversation_id: conversation?.id,
+      user
+    };
+
+    socket.emit('stopTyping', data);
   }
 
   render() {
@@ -462,6 +490,7 @@ class ChatBox extends Component {
                     onPost={this.handlePost}
                     feelColor={this?.props?.feelColor}
                     onOpenUploadModal={this.handleOpenUploadModal}
+                    onTypingComplete={this.handleTypingComplete}
                   />
 
                   <WhoIsTyping
