@@ -496,10 +496,6 @@ class ChatBox extends Component {
                     feelColor={this?.props?.feelColor}
                     onOpenUploadModal={this.handleOpenUploadModal}
                     onTypingComplete={this.handleTypingComplete}
-                    hideModal={this.state.hidden}
-                    selectedImage={this.state.image}
-                    selectedVideo={this.state.video}
-                    selectedDocument={this.state.document}
                     showPostButton={this.state.showPostButton}
                   />
 
