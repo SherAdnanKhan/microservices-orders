@@ -39,18 +39,18 @@ export const clearPost = () => {
 export const strokePost = (postId, galleryId, user) => dispatch => {
   const currentUser = getCurrentUser();
 
-  dispatch({
-    type: STROKE_POST,
-    payload: {
-      postId: postId,
-      galleryId: galleryId,
-      value: true
-    }
-  });
-
   http
     .post('/post/stroke', { post_id: postId })
     .then(() => {
+      dispatch({
+        type: STROKE_POST,
+        payload: {
+          postId: postId,
+          galleryId: galleryId,
+          value: true
+        }
+      });
+
       if (currentUser.id !== user.id) {
         socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_STROKE);
       }
@@ -70,18 +70,18 @@ export const strokePost = (postId, galleryId, user) => dispatch => {
 export const unstrokePost = (postId, galleryId, user) => dispatch => {
   const currentUser = getCurrentUser();
 
-  dispatch({
-    type: UNSTROKE_POST,
-    payload: {
-      postId: postId,
-      galleryId: galleryId,
-      value: false
-    }
-  });
-
   http
     .post('/post/unstroke', { post_id: postId })
     .then(() => {
+      dispatch({
+        type: UNSTROKE_POST,
+        payload: {
+          postId: postId,
+          galleryId: galleryId,
+          value: false
+        }
+      });
+
       if (currentUser.id !== user.id) {
         socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, POST_UNSTROKE);
       }
