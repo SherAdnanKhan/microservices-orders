@@ -28,8 +28,8 @@ const Conversation = ({ onActiveConversation, toggleDeleteModal, conversations, 
   return (
     <div className="conversationContainer">
       <div className="searchField">
-        <input type="search" className="search" placeholder="Search" autocomplete="on"></input>
-        <i class="fas fa-search"></i>
+        <input type="search" className="search" placeholder="Search" autoComplete="on"></input>
+        <i className="fas fa-search"></i>
       </div>
       {(!conversations || conversations.length === 0) &&
         <div className="logo">

@@ -33,7 +33,7 @@ import {
   deleteMessageState
 } from '../../../actions/conversationActions';
 import { IMAGE_UPLOAD_SIZE_ERROR, VIDEO_UPLOAD_SIZE_ERROR, DOCUMENT_UPLOAD_SIZE_ERROR } from "../../../constants/errors";
-const urlMetadata = require('url-metadata');
+
 
 class ChatBox extends Component {
   state = {
@@ -47,6 +47,7 @@ class ChatBox extends Component {
     scrollHeight: '',
     typings: [],
     show: false,
+    showPostButton: false,
     showParticipantsModal: false,
     showCallingModal: false,
     width: window.innerWidth,
@@ -171,13 +172,13 @@ class ChatBox extends Component {
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 
-    urlMetadata(message,).then(
-      function (metadata) { // success handler
-        console.log(metadata)
-      },
-      function (error) { // failure handler
-        console.log(error)
-      });
+    // urlMetadata(message,).then(
+    //   // function (metadata) { // success handler
+    //   //   console.log(metadata)
+    //   // },
+    //   // function (error) { // failure handler
+    //   //   console.log(error)
+    //   // });
 
     if (conversation) {
       let data = {
@@ -195,7 +196,7 @@ class ChatBox extends Component {
         data.message = message;
       }
 
-      this.setState({ message: '', image: '', video: '', document: '' });
+      this.setState({ message: '', image: '', video: '', document: '', showPostButton: false });
 
       if (data.message || data.url) {
         if (socket.connected) {
@@ -241,6 +242,7 @@ class ChatBox extends Component {
 
   handleUpload = ({ target: input }) => {
     if (input.files[0]) {
+
       this.setState({ hidden: true });
       const fileSizeMb = this.convertFileSize(input.files[0].size);
       const fileType = input.files[0].type;
@@ -260,6 +262,7 @@ class ChatBox extends Component {
             } else {
               this.setState({ [result.doc_type]: result.path, progress: 0 });
             }
+            this.setState({ showPostButton: true })
             this.preview.current.scrollIntoView({ behavior: 'auto' });
           },
           err => {
@@ -285,8 +288,10 @@ class ChatBox extends Component {
     };
 
     if (value.length > 0) {
+      this.setState({ showPostButton: true })
       socket.emit('onType', data);
     } else {
+      this.setState({ showPostButton: false })
       socket.emit('stopTyping', data);
     }
   }
@@ -491,6 +496,7 @@ class ChatBox extends Component {
                     feelColor={this?.props?.feelColor}
                     onOpenUploadModal={this.handleOpenUploadModal}
                     onTypingComplete={this.handleTypingComplete}
+                    showPostButton={this.state.showPostButton}
                   />
 
                   <WhoIsTyping
