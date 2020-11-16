@@ -2,7 +2,7 @@ import React from 'react';
 import LazyInput from '../../common/lazyInput';
 import ToolTip from '../../common/toolTip/toolTip';
 
-const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUploadModal, onTypingComplete }) => {
+const ChatInput = ({ message, showPostButton, onChange, onEnter, onPost, feelColor, onOpenUploadModal, onTypingComplete }) => {
   return (
     <div className="message-input">
       <span
@@ -35,7 +35,7 @@ const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUpload
         onChange={onChange}
         onKeyUp={onEnter}
       /> */}
-      {message.length > 0 &&
+      {showPostButton &&
         <button
           onClick={onPost}
           className='clickable btn-send'
@@ -44,7 +44,7 @@ const ChatInput = ({ message, onChange, onEnter, onPost, feelColor, onOpenUpload
           Post
       </button>
       }
-      {message.length === 0 &&
+      {!showPostButton &&
         <div className='clickable btn-feel-color feelIcon'
           style={{ backgroundColor: feelColor, textAlign: "center" }}
         >
