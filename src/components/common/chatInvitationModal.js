@@ -10,6 +10,7 @@ import { createGroupConversation } from '../../actions/conversationActions';
 import socket from '../../services/socketService';
 import { toast } from 'react-toastify';
 import LazyInput from "../common/lazyInput";
+import { alphabetsWithoutSpecialChars } from '../../constants/regex';
 
 const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUsers = false }) => {
   const {
@@ -62,7 +63,9 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
   };
 
   const handleSearchComplete = useCallback(result => {
-    dispatch(getAllUsers(result));
+    if (result && result.length > 0 && alphabetsWithoutSpecialChars.test(result)) {
+      dispatch(getAllUsers(result));
+    }
   }, [dispatch]);
 
 
@@ -70,7 +73,10 @@ const ChatInvitationModel = ({ onClose, participants, currentUser, room, callUse
     if (data?.length === 0) {
       dispatch(clearUsers());
     }
-    setQuery(data);
+
+    if (data?.length === 0 || alphabetsWithoutSpecialChars.test(data)) {
+      setQuery(data);
+    }
   }
 
   return (
