@@ -12,7 +12,8 @@ import {
   START_GALLERY_LOADER,
   STOP_GALLERY_LOADER,
   UPDATE_GALLERY,
-  REMOVE_GALLERY_IMAGE
+  REMOVE_GALLERY_IMAGE,
+  DELETE_GALLERY,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { toast } from 'react-toastify';
@@ -183,11 +184,31 @@ export const unfavRecommendedGallery = data => dispatch => {
 
   http
     .post('/galleries/unfav', { gallery_id: data.gallery.id })
-    .then()
+    .then(res => {
+      toast.success("Gallery Unfave Successfully");
+    })
     .catch(() => {
       dispatch({
         type: FAV_RECOMMEND_GALLERY,
         payload: data
       });
     });
+};
+
+export const deleteGallery = gallery => dispatch => {
+  console.log("id=", gallery.id)
+  dispatch({
+    type: DELETE_GALLERY,
+    payload: gallery.id
+  });
+  // http
+  //   .delete(`gallery/${gallery.id}`)
+  //   .then(res => {
+  //     toast.success("Gallery deleted successfully");
+  //     dispatch({
+  //       type: DELETE_GALLERY,
+  //       payload: gallery.id
+  //     });
+  //   })
+  //   .catch((error) => toast.error(error.response.data.errors.message));
 };

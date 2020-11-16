@@ -4,7 +4,7 @@ import { getMyStudio } from '../../../actions/studioActions';
 import Gallery from './galleries';
 // import { getFavourites } from '../../../actions/userActions';
 import { getUserArtById } from "../../../actions/userActions";
-import { getGallery, clearGallery, getMyGalleries, unfavGallery } from "../../../actions/galleryActions";
+import { getGallery, clearGallery, getMyGalleries, unfavGallery, deleteGallery } from "../../../actions/galleryActions";
 import { strokePost, unstrokePost, storeVault, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, repost, shareMzFlash } from '../../../actions/postAction';
 import StudioHeader from './studioHeader';
 import EditProfile from './editProfile';
@@ -23,6 +23,7 @@ import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
 import UserContext from "../../../context/userContext";
 import { useRouteMatch } from 'react-router-dom';
+import ConfirmationModal from '../chat/confirmationModal';
 
 const MyStudio = () => {
   const user = useContext(UserContext);
@@ -34,6 +35,7 @@ const MyStudio = () => {
   const [activePost, setActivePost] = useState({});
   const [showModelShare, setShowModelShare] = useState(false);
   const [showModelReport, setShowModelReport] = useState(false);
+  const [showDeleteGalleryModal, setshowDeleteGalleryModal] = useState(false);
   const [showModelStrqShare, setshowModelStrqShare] = useState(false);
   const [showModalTurnOffCritque, setshowModalTurnOffCritque] = useState(false);
   const [showModalRepost, setShowModalRepost] = useState(false);
@@ -171,6 +173,16 @@ const MyStudio = () => {
     handleActivePost('');
   }
 
+  const toggleDeleteGalleryModal = (value, gallery) => {
+    setshowDeleteGalleryModal(value)
+    setSelectedGallery(gallery)
+  }
+
+  const handleDeleteGallery = () => {
+    dispatch(deleteGallery(selectedGallery));
+    setshowDeleteGalleryModal(false)
+  }
+
   return (
     <>
       {showDeleteModel &&
@@ -179,6 +191,13 @@ const MyStudio = () => {
           onModalClose={handlePostDeleteModel}
           activePost={activePost}
           onSharePost={handleShareModel}
+        />
+      }
+      {showDeleteGalleryModal &&
+        <ConfirmationModal
+          message="Are you sure you want to delete this gallery"
+          onCancel={toggleDeleteGalleryModal}
+          onConfirm={() => handleDeleteGallery()}
         />
       }
       {showModelShare &&
@@ -244,6 +263,7 @@ const MyStudio = () => {
           activeGallery={activeGallery}
           onGalleryChange={handleGalleryChange}
           onModelOpen={handleModelOpen}
+          onShowModal={toggleDeleteGalleryModal}
         />
         <PostBar
           myStudio={myStudio}

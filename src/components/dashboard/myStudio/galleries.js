@@ -1,23 +1,29 @@
 import React from 'react';
 import ToolTip from '../../common/toolTip/toolTip';
 
-const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onModelOpen }) => {
+const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal, onModelOpen }) => {
   return (
     <div className="wrapper">
       {edit && galleries &&
-        <div className="screen">
-          <div className="scr-inner">
-            {galleries.map((gallery, index) => (
-              <div
-                key={index}
-                className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
-                onClick={() => onGalleryChange(gallery)}>
-                <img
-                  src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
-                  alt=""
-                />
-              </div>
-            ))}
+        <div className="galleries" style={{ overflowX: "scroll" }}>
+          <div className="screen">
+            <div className="scr-inner">
+              {galleries.map((gallery, index) => (
+                <div
+                  key={index}
+                  className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
+                  onClick={() => onGalleryChange(gallery)}>
+                  <i class="fas fa-trash" onClick={(event) => {
+                    onShowModal(true, gallery);
+                    event.stopPropagation();
+                  }}></i>
+                  <img
+                    src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
+                    alt=""
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       }

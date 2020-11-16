@@ -17,7 +17,7 @@ import {
   GET_USER_FAV_GALLERIES,
   ADD_POST_COMMENT,
   CHANGE_CRITIQUES_STATUS,
-  DELETE_POST
+  DELETE_POST, DELETE_GALLERY
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -222,6 +222,11 @@ export default (state = initialState, action) => {
           ...state.gallery,
           posts: state?.gallery?.posts?.filter(post => post.id !== action.payload)
         }
+      }
+    case DELETE_GALLERY:
+      return {
+        ...state,
+        myGalleries: state.myGalleries.filter(gallery => gallery.id !== action.payload)
       }
     default:
       return state;
