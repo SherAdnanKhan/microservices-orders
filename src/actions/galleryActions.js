@@ -196,7 +196,6 @@ export const unfavRecommendedGallery = data => dispatch => {
 };
 
 export const deleteGallery = gallery => dispatch => {
-  console.log("id=", gallery.id)
   dispatch({
     type: DELETE_GALLERY,
     payload: gallery.id

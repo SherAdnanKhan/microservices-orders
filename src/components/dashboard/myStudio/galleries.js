@@ -13,7 +13,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal,
                   key={index}
                   className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                   onClick={() => onGalleryChange(gallery)}>
-                  <i class="fas fa-trash" onClick={(event) => {
+                  <i className="fas fa-trash" onClick={(event) => {
                     onShowModal(true, gallery);
                     event.stopPropagation();
                   }}></i>

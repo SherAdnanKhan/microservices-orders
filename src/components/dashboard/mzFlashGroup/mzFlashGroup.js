@@ -100,7 +100,6 @@ const MzFlashGroup = () => {
   };
 
   const handleFeedStroke = feed => {
-    console.log('stroke: ', feed.has_stroke_count);
     if (feed.has_stroke_count === 0) {
       const data = {
         feed_id: feed.id
@@ -110,7 +109,6 @@ const MzFlashGroup = () => {
   };
 
   const handleFeedUnstroke = feed => {
-    console.log('unstroke: ', feed.has_stroke_count);
     if (feed.has_stroke_count === 1) {
       const data = {
         feed_id: feed.id
