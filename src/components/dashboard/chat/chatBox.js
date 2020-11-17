@@ -152,11 +152,12 @@ class ChatBox extends Component {
     socket.off('onRead');
     socket.off('onReadAll');
     socket.off('typing');
+    socket.off('typingStopped');
     this.stopeTyping();
 
     window.removeEventListener("resize", this.handleWindowResize)
     this.props.clearConversation();
-    this.setState({ page: 1, message: '' });
+    this.setState({ page: 1, message: '', typings: [] });
   }
 
   componentRefreshUser = () => {
@@ -497,6 +498,9 @@ class ChatBox extends Component {
                     onOpenUploadModal={this.handleOpenUploadModal}
                     onTypingComplete={this.handleTypingComplete}
                     showPostButton={this.state.showPostButton}
+                    image={image}
+                    video={video}
+                    document={document}
                   />
 
                   <WhoIsTyping

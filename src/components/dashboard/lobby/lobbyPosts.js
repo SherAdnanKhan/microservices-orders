@@ -156,11 +156,15 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
   };
 
   const handleUnstrokePost = (post) => {
-    dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+    if (post.has_stroke.length > 0) {
+      dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+    }
   }
 
   const handleStrokePost = (post) => {
-    dispatch(strokePost(post.id, post.gallery_id, post.user));
+    if (post.has_stroke.length === 0) {
+      dispatch(strokePost(post.id, post.gallery_id, post.user));
+    }
   }
   const addVault = (post) => {
     dispatch(storeVault(post))

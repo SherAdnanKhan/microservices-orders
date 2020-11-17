@@ -63,9 +63,10 @@ const ViewPost = () => {
       history.push("/login")
     }
     else {
-      dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+      if (post.has_stroke.length > 0) {
+        dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+      }
     }
-
   }
 
   const handleStroke = (post) => {
@@ -73,7 +74,9 @@ const ViewPost = () => {
       history.push("/login")
     }
     else {
-      dispatch(strokePost(post.id, post.gallery_id, post.user));
+      if (post.has_stroke.length === 0) {
+        dispatch(strokePost(post.id, post.gallery_id, post.user));
+      }
     }
   }
 

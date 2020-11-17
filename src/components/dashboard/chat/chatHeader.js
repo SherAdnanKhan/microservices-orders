@@ -19,8 +19,8 @@ import { useDispatch } from "react-redux"
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
-  onOpenParticipatsModel, currentUser, onBackPress, onOpenDraw, user, isBlocked, isViewAble, isMuted
-
+  onOpenParticipatsModel, currentUser, onBackPress,
+  onOpenDraw, user, isBlocked, isViewAble, isMuted
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
@@ -45,6 +45,7 @@ const ChatHeader = ({
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
     socket.off('onMeetingEnded')
+    socket.off('call-rejected')
     clearTimeout(timeout);
   }, true);
 

@@ -56,7 +56,7 @@ export const getConversation = (idOrSlug, page = 1, callback) => dispatch => {
         type: GET_CONVERSATION,
         payload: res.data.data
       });
-      callback && callback()
+      callback && callback(res.data?.data?.conversation)
     })
     .catch(() => {
       dispatch({ type: STOP_MESSAGE_LOADER })
