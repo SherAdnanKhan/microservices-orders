@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Search from './search';
 import { useSelector } from "react-redux";
 import ToolTip from "../../common/toolTip/toolTip";
@@ -8,6 +8,8 @@ const Header = () => {
   const history = useHistory();
   const { feelColor } = useSelector(state => state.feelColor);
   const [showSearch, setShowSearch] = useState(false);
+  const location = useLocation();
+  const url = location?.pathname?.split('/')[1];
 
   const handleToggleSearch = () => {
     setShowSearch(!showSearch);
@@ -87,18 +89,22 @@ const Header = () => {
             <ToolTip id="mzflash-top" position="bottom" />
           </div>
         </div>
-        <Link
-          to=""
-          className="feelIcon"
-          style={{
-            backgroundColor: feelColor
-          }}
-        >
-          <img alt="" src="/assets/images/icons/feelicon.png"
-            data-for="feelColor"
-            data-tip="feel color" />
-        </Link>
-        <ToolTip position="left" id="feelColor" />
+        {url !== "chat" &&
+          <>
+            <Link
+              to=""
+              className="feelIcon"
+              style={{
+                backgroundColor: feelColor
+              }}
+            >
+              <img alt="" src="/assets/images/icons/feelicon.png"
+                data-for="feelColor"
+                data-tip="feel color" />
+            </Link>
+            <ToolTip position="left" id="feelColor" />
+          </>
+        }
       </div>
       <Search
         feelColor={feelColor}
