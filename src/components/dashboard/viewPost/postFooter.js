@@ -50,7 +50,6 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
         showCommentModal &&
         <Comment
           post={post}
-          isAllowedCritiques
           onClose={() => setShowCommentModal(false)}
         />
       }

@@ -25,7 +25,7 @@ const StudioHeader = ({ myStudio, feelColor }) => {
           src='/assets/images/sprfvs_full.png'
           alt=""
           className="clickable"
-          onClick={() => history.push(`/my-studio/sprfvs/${myStudio.user.slug}`)}
+          onClick={() => history.push(`/my-studio/sprfvs/${myStudio?.user?.slug}`)}
           data-tip="Sprfvs list"
           data-for="mySprfvs"
 

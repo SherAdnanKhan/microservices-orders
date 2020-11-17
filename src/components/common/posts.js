@@ -348,20 +348,19 @@ const Post = ({
                                 </div>
 
                                 <div className="action">
-                                  {post?.critiques_status === 1 &&
-                                    <>
-                                      <img
-                                        className="comment-img clickable"
-                                        alt=""
-                                        src="/assets/images/crit1.png"
-                                        data-for="comments"
-                                        data-tip="comments"
-                                        onClick={() => setCommentModal(true)}
-                                      />
-                                      <ToolTip id="comments" position="bottom" />
-                                      <p> comments {post.comments.length}</p>
-                                    </>
-                                  }
+                                  {/* privacy check needs to apply On comment Input field rather than comment image */}
+                                  <>
+                                    <img
+                                      className="comment-img clickable"
+                                      alt=""
+                                      src="/assets/images/crit1.png"
+                                      data-for="comments"
+                                      data-tip="comments"
+                                      onClick={() => setCommentModal(true)}
+                                    />
+                                    <ToolTip id="comments" position="bottom" />
+                                    <p> comments {post.comments.length}</p>
+                                  </>
                                 </div>
 
                                 <div className="action">
