@@ -5914,9 +5914,17 @@ img {
       @media (min-width: 857px)and(max-width:1200px)  {
         font-size:12px;
       }
+      @media @mobile {
+        width: 13%;
+        padding: 6px 10px;
+      }
       img{
         height: 27px;
          width: 55px;
+         @media @mobile {
+           width: 42px;
+           height: 23px;
+         }
       }
     }
   }
