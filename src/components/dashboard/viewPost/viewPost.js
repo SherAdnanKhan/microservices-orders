@@ -161,6 +161,7 @@ const ViewPost = () => {
       {commentModal &&
         <Comment
           post={post?.post}
+          isAllowedCritiques={post?.post?.other_privacy?.is_allowed ? 1 : 0}
           onClose={() => setCommentModal(false)}
         />
       }

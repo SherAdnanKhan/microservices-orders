@@ -127,7 +127,7 @@ const Comment = ({ post, onClose, isAllowedCritiques }) => {
             }
             <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
-          {(getCurrentUser() ? post?.critiques_status === 1 : post?.critiques_status === 1 && isAllowedCritiques === 1) ?
+          {((getCurrentUser()?.id === post?.created_by) || (post?.critiques_status === 1 && isAllowedCritiques === 1)) ?
             <div className="text-area">
               <div className="msg-input">
                 <textarea
