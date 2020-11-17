@@ -17,7 +17,8 @@ import {
   GET_MY_VAULTS,
   UPDATE_USER_ART,
   BLOCK_USER,
-  UNBLOCK_USER
+  UNBLOCK_USER,
+  CLEAR_MY_VAULTS,
 } from "../constants/actionTypes";
 import { FAVES } from "../constants/privacyTypes";
 
@@ -188,6 +189,15 @@ export default (state = initialState, action) => {
             ? action.payload.vault_posts.data
             : [...state.vaults.data, ...action.payload.vault_posts.data],
           next_page_url: action.payload.vault_posts.next_page_url
+        }
+      }
+    case CLEAR_MY_VAULTS:
+      return {
+        ...state,
+        vaults: {
+          current_page: "",
+          data: [],
+          next_page_url: null
         }
       }
     case BLOCK_USER:

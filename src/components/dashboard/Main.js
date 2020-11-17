@@ -20,6 +20,7 @@ import MzFlashGroup from './mzFlashGroup/mzFlashGroup';
 import Privacy from './privacy/privacy';
 import Chat from './chat/chat';
 import FeelHistory from './feelHistory';
+import MyVault from './vault/myVault';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const Main = () => {
         <Route exact path="/privacy" component={Privacy} />
         <Route exact path="/chat/:slug?" component={Chat} />
         <Route exact path="/feel-history" component={FeelHistory} />
+        <Route exact path="/my-vaults" component={MyVault} />
       </Switch>
     </div>
   )
