@@ -394,7 +394,6 @@ const Post = ({
                         {commentModal &&
                           <Comment
                             post={activePost}
-                            isAllowedCritiques={activePost?.other_privacy?.is_allowed ? 1 : 0}
                             onClose={() => setCommentModal(false)}
                           />
                         }

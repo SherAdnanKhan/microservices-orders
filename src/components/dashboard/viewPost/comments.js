@@ -4,11 +4,12 @@ import { getComments, createComment } from '../../../actions/postAction';
 import Avatar from '../../common/avatar';
 import { getCurrentUser } from "../../../actions/authActions";
 
-const Comment = ({ post, onClose, isAllowedCritiques }) => {
+const Comment = ({ post, onClose }) => {
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
   const { comments } = useSelector(state => state.postView);
   const bottomRef = useRef();
+  const isAllowedCritiques = post?.other_privacy?.is_allowed ? 1 : 0;
 
   useEffect(() => {
     if (post) {

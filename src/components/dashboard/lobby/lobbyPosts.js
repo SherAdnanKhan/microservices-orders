@@ -388,7 +388,6 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
       {commentModal &&
         <Comment
           post={activePost}
-          isAllowedCritiques={activePost?.other_privacy?.is_allowed ? 1 : 1}
           onClose={() => setCommentModal(false)}
         />
       }
