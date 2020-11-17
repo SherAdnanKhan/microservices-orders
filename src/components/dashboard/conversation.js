@@ -53,6 +53,7 @@ const Conversation = ({
   }, [dispatch]);
 
   const handleSelect = option => {
+    dispatch(clearUsers());
     setUsername(option.username)
     onUserSelect(option.slug)
   };
@@ -71,6 +72,11 @@ const Conversation = ({
           onSearchEnd={handleSearchEnd}
           onSelect={handleSelect}
         />
+        {username && users?.length === 0 &&
+          <div style={{ textAlign: 'center' }}>
+            no data found
+          </div>
+        }
       </div>
       {(!conversations || conversations.length === 0) &&
         <div className="logo">

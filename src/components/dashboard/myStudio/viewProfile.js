@@ -122,7 +122,6 @@ const ViewProfile = ({ myStudio, feelColor }) => {
 
 
   const handleChildSearchEnd = useCallback(result => {
-    console.log(artId);
     dispatch(searchChildArt(artId, result));
   }, [dispatch, artId]);
 

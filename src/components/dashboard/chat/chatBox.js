@@ -135,6 +135,7 @@ class ChatBox extends Component {
 
     if (currentConversation && currentConversation !== previos) {
       if (previos?.id !== currentConversation.id) {
+        this.setState({ page: 1, message: '', typings: [] });
         this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
         socket.emit('join', { room: currentConversation.id, user: currentUser }, () => {
           socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, getAuthToken(), () => {
@@ -279,6 +280,7 @@ class ChatBox extends Component {
 
   handleChange = value => {
     this.setState({ message: value });
+    const { image, video, document } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 
@@ -292,7 +294,9 @@ class ChatBox extends Component {
       this.setState({ showPostButton: true })
       socket.emit('onType', data);
     } else {
-      this.setState({ showPostButton: false })
+      if (!image && !document && !video) {
+        this.setState({ showPostButton: false })
+      }
       socket.emit('stopTyping', data);
     }
   }

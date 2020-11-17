@@ -173,9 +173,6 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
   const fetchData = () => {
     onCallNextPosts();
   }
-  console.log("post=", activePost)
-
-
 
   return (
     <>

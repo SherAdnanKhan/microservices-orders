@@ -252,7 +252,12 @@ const MyStudio = () => {
             gallery={selectedGallery}
           />
         }
-        <StudioHeader myStudio={myStudio && myStudio} feelColor={feelColor} />
+        <StudioHeader
+          myStudio={myStudio && myStudio}
+          feelColor={feelColor}
+          edit={edit}
+          onEdit={handleEdit}
+        />
         {edit
           ? <EditProfile myStudio={myStudio} feelColor={feelColor} />
           : <ViewProfile myStudio={myStudio} feelColor={feelColor} />

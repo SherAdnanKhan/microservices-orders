@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import ToolTip from "../../common/toolTip/toolTip";
 
-const StudioHeader = ({ myStudio, feelColor }) => {
+const StudioHeader = ({ myStudio, feelColor, onEdit, edit }) => {
   const history = useHistory();
 
   return (
@@ -13,7 +13,9 @@ const StudioHeader = ({ myStudio, feelColor }) => {
       <div className="back-icon">
         <i
           className="fa fa-arrow-left clickable"
-          onClick={() => history.push('/lobby')}
+          onClick={() => {
+            !edit ? onEdit() : history.push('/lobby')
+          }}
           data-tip="back"
           data-for="back"
         />
