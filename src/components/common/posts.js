@@ -81,11 +81,15 @@ const Post = ({
   };
 
   const handleStroke = post => {
-    dispatch(strokePost(post.id, post.gallery_id, post.user));
+    if (post.has_stroke.length === 0) {
+      dispatch(strokePost(post.id, post.gallery_id, post.user));
+    }
   };
 
   const handleUnstroke = post => {
-    dispatch(unstrokePost(post.id, post.gallery_id, post.user));
+    if (post.has_stroke.length > 0) {
+      dispatch(unstrokePost(post.id, post.gallery_id, post.user));
+    }
   };
 
   const handlePostDeleteModel = (value) => {

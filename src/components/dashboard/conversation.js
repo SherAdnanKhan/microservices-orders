@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import UserContext from '../../context/userContext';
 import Avatar from '../common/avatar';
 import { formatTime, formatDate } from '../../utils/helperFunctions';
@@ -6,14 +6,32 @@ import MeuzmLogo from '../common/meuzmLogo';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from '../common/loader';
 import ConversationOptions from './chat/conversationOptions';
+import InputAutoComplete from '../common/autoComplete';
+import { getAllUsers, clearUsers } from '../../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 
 
-const Conversation = ({ onActiveConversation, toggleDeleteModal, conversations, feelColor, onDeleteConversation, activeConversation, onCallNextPage, currentPage, conversationLoader, nextPageUrl }) => {
+const Conversation = ({
+  onActiveConversation, toggleDeleteModal, conversations,
+  feelColor, onDeleteConversation, activeConversation,
+  onCallNextPage, currentPage, conversationLoader, nextPageUrl,
+  onUserSelect
+}) => {
   const currentUser = useContext(UserContext);
+  const [username, setUsername] = useState('');
+
+  const { users } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  useWindowUnloadEffect(() => {
+    dispatch(clearUsers());
+  }, true);
 
   const getDateOrTime = date => {
     const current = new Date();
     const incoming = new Date(date);
+
     if (current.getDate() === incoming.getDate()) {
       return formatTime(date);
     }
@@ -24,12 +42,35 @@ const Conversation = ({ onActiveConversation, toggleDeleteModal, conversations, 
     onCallNextPage();
   }
 
+  const handleChange = value => {
+    setUsername(value);
+  }
+
+  const handleSearchEnd = useCallback(result => {
+    if (result) {
+      dispatch(getAllUsers(result));
+    }
+  }, [dispatch]);
+
+  const handleSelect = option => {
+    setUsername(option.username)
+    onUserSelect(option.slug)
+  };
 
   return (
     <div className="conversationContainer">
       <div className="searchField">
-        <input type="search" className="search" placeholder="Search" autoComplete="on"></input>
-        <i className="fas fa-search"></i>
+        <InputAutoComplete
+          className="search"
+          type="search"
+          options={users}
+          displayProperty="username"
+          placeholder="Search"
+          defaultValue={username}
+          onChange={handleChange}
+          onSearchEnd={handleSearchEnd}
+          onSelect={handleSelect}
+        />
       </div>
       {(!conversations || conversations.length === 0) &&
         <div className="logo">

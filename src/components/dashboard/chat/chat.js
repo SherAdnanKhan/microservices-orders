@@ -42,7 +42,7 @@ const Chat = () => {
         }
       }
     }
-  }, [params, conversation, hasConversation, dispatch]);
+  }, [conversation, dispatch, hasConversation, params]);
 
   const handleBackPress = () => {
     setActiveConversation('');
@@ -77,6 +77,11 @@ const Chat = () => {
     }
   }
 
+  const handleUserSelect = slug => {
+    dispatch(getConversation(slug, 1, con => {
+      setActiveConversation(con)
+    }));
+  }
 
   return (
     <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
@@ -86,7 +91,8 @@ const Chat = () => {
           message="Are you sure you want to delete conversation?"
           onCancel={handleDeleteModal}
           onConfirm={() => handleDeleteConversation()}
-        />}
+        />
+      }
       {width <= breakPoint
         ? (
           <>
@@ -94,7 +100,6 @@ const Chat = () => {
               <div
                 className="conversation"
                 ref={conversationRef}>
-
                 <Conversation
                   conversations={conversations?.data}
                   onActiveConversation={handleActiveConversation}
@@ -106,6 +111,7 @@ const Chat = () => {
                   onDeleteConversation={handleDeleteConversation}
                   feelColor={feelColor}
                   toggleDeleteModal={handleDeleteModal}
+                  onUserSelect={handleUserSelect}
                 />
                 {conversationLoader && <Loader />}
               </div>
@@ -124,6 +130,7 @@ const Chat = () => {
               onDeleteConversation={handleDeleteConversation}
               feelColor={feelColor}
               toggleDeleteModal={handleDeleteModal}
+              onUserSelect={handleUserSelect}
             />
             {conversationLoader && <Loader />}
           </div>

@@ -48,6 +48,7 @@ const MzFlashGroup = () => {
   const handleShowModel = value => {
     setShowModel(value);
   };
+
   const handlePostShowModel = (value, type, image) => {
     if (value === true) {
       setImagepath(image.path);
@@ -98,18 +99,24 @@ const MzFlashGroup = () => {
     dispatch(createFeed(formData));
   };
 
-  const handleFeedStroke = (id, user) => {
-    const data = {
-      feed_id: id
-    };
-    dispatch(strokeFeed(data, user));
+  const handleFeedStroke = feed => {
+    console.log('stroke: ', feed.has_stroke_count);
+    if (feed.has_stroke_count === 0) {
+      const data = {
+        feed_id: feed.id
+      };
+      dispatch(strokeFeed(data, feed.user));
+    }
   };
 
-  const handleFeedUnstroke = (id, user) => {
-    const data = {
-      feed_id: id
-    };
-    dispatch(unstrokeFeed(data, user));
+  const handleFeedUnstroke = feed => {
+    console.log('unstroke: ', feed.has_stroke_count);
+    if (feed.has_stroke_count === 1) {
+      const data = {
+        feed_id: feed.id
+      };
+      dispatch(unstrokeFeed(data, feed.user));
+    }
   };
 
   const handleActiveUser = user => {

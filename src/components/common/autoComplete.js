@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 const InputAutoComplete = ({
   options, displayProperty, onChange, onSearchEnd,
-  onSelect, placeholder, defaultValue, ...rest
+  onSelect, placeholder, defaultValue, type = 'text', ...rest
 }) => {
   const [list, setList] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
@@ -62,7 +62,7 @@ const InputAutoComplete = ({
   return (
     <div className="autocomplete">
       <input
-        type="text"
+        type={type}
         placeholder={placeholder}
         value={defaultValue}
         onChange={handleChange}

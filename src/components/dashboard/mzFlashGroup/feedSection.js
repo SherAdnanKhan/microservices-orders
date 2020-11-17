@@ -227,8 +227,8 @@ const FeedSection = ({
           <Feed
             key={feed.id}
             feed={feed}
-            onStroke={() => onStroke(feed.id, feed.user)}
-            onUnstroke={() => onUnstroke(feed.id, feed.user)}
+            onStroke={() => onStroke(feed)}
+            onUnstroke={() => onUnstroke(feed)}
             activeFeedComment={activeFeedComment}
             onActiveFeedComment={e => onActiveFeedComment(e, feed.id)}
             onRepost={e => onRepost(e, feed)}

@@ -18,8 +18,12 @@ const CallingModal = ({ onDecline, feelColor }) => {
           </div>
         </ModalBody>
         <ModalFooter>
-          <div className="end-call" onClick={onDecline} style={{ backgroundColor: convertHexToRGBA(feelColor, 0.5) }}>
-            <i class="fas fa-times"></i>
+          <div
+            className="end-call"
+            onClick={onDecline}
+            style={{ backgroundColor: convertHexToRGBA(feelColor, 0.5) }}
+          >
+            <i className="fas fa-times"></i>
           </div>
         </ModalFooter>
       </Modal>
