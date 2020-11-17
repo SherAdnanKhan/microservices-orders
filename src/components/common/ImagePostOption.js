@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
-import UserContext from "../../context/userContext";
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useRouteMatch } from "react-router-dom";
+import { getCurrentUser } from "../../actions/authActions";
 
 const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onModelDelete, onReportPost, onShareStrqModel, onTurnOffCrtiques, updatedCritqueStatus, onRepostModal, onMzFlashModal, }) => {
-  const user = useContext(UserContext);
+  const user = getCurrentUser();
   const [isViewPostPage, setViewPostPage] = useState(false);
   const loggedInUserId = user?.id;
   const history = useHistory();

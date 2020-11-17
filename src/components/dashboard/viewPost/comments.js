@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getComments, createComment } from '../../../actions/postAction';
 import Avatar from '../../common/avatar';
+import { getCurrentUser } from "../../../actions/authActions";
 
 const Comment = ({ post, onClose, isAllowedCritiques }) => {
   const [comment, setComment] = useState('');
@@ -126,7 +127,7 @@ const Comment = ({ post, onClose, isAllowedCritiques }) => {
             }
             <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
-          {post?.critiques_status === 1 && isAllowedCritiques === 1 ?
+          {(getCurrentUser() ? post?.critiques_status === 1 : post?.critiques_status === 1 && isAllowedCritiques === 1) ?
             <div className="text-area">
               <div className="msg-input">
                 <textarea

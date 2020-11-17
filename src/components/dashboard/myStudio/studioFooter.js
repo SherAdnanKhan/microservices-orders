@@ -191,6 +191,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
             {commentModal &&
               <Comment
                 post={activePost}
+                isAllowedCritiques={1}
                 onClose={() => setCommentModal(false)} />
             }
           </div>
