@@ -42,7 +42,7 @@ const MyVault = () => {
           <div className="wrapper" >
             <div className="vault-posts">
               <div className="favas-box">
-                <div className="wrapper">
+                <div className="vault-wrapper" >
                   <div className="screen">
                     <div className="details">
                       <div className="vault-post" >
@@ -54,27 +54,28 @@ const MyVault = () => {
                             next={fetchNextVaults}
                             hasMore={vaults?.next_page_url ? true : false}
                           >
-                            {vaults ?
-                              vaults?.data?.map((vault, index) =>
-                                <div className="gallery-cover" key={index} >
-                                  {vault?.post?.post_type === 2 ?
-                                    <Link to={`/studio/${vault?.post?.user?.slug}`}>
-                                      {
-                                        <video controls >
-                                          <source src={vault?.post?.image?.path} type="video/mp4" />
-                                        </video>
+                            <div className="gallery-cover" >
+                              {vaults?.data?.map((vault, index) =>
+                                <>
+                                  {
+                                    vault?.post &&
+                                    <div className="image-style" key={index}>
+                                      {vault?.post?.post_type === 2 ?
+                                        <Link to={`/studio/${vault?.post?.user?.slug}`}>
+                                          <video width="320" height="240" controls >
+                                            <source src={vault?.post?.image?.path} type="video/mp4" />
+                                          </video>
+                                        </Link>
+                                        :
+                                        <Link to={`/studio/${vault?.post?.user?.slug}`}>
+                                          <img src={vault?.post?.image?.path} alt="" />
+                                        </Link>
                                       }
-
-                                    </Link>
-                                    :
-                                    <Link to={`/studio/${vault?.post?.user?.slug}`}>
-                                      <img src={vault?.post?.image?.path} alt="" />
-                                    </Link>
+                                    </div>
                                   }
-                                </div>
-                              ) :
-                              <PostLoader />
-                            }
+                                </>
+                              )}
+                            </div>
                           </InfiniteScroll>
                         </div>
                         {/* FOR Grid VIEW */}
@@ -90,8 +91,7 @@ const MyVault = () => {
                               <div className="gallery-cover" >
                                 {vaults?.data?.map((vault, index) =>
                                   <>
-                                    {
-                                      vault?.post &&
+                                    {vault?.post &&
                                       <div className="image-style" key={index}>
                                         {vault?.post?.post_type === 2 ?
                                           <Link to={`/studio/${vault?.post?.user?.slug}`}>
