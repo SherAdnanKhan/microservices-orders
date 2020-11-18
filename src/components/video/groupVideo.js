@@ -20,7 +20,7 @@ import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/user
 
 
 
-const Video = ({ peer, user, index, socketId, onPeerClose }) => {
+const Video = ({ peer, user, socketId, onPeerClose }) => {
   const ref = useRef();
   const dispatch = useDispatch();
   const [hasListner, setHasListner] = useState(false);
@@ -137,9 +137,8 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
         }
       </div>
       <div
-        key={index}
         className="item"
-        style={{ borderColor: user.feel.color_code }}
+        style={{ borderColor: user?.feel?.color_code }}
       >
         {connection &&
           <div className="connection">
@@ -156,7 +155,6 @@ const Video = ({ peer, user, index, socketId, onPeerClose }) => {
             user={user}
             isBlocked={is_blocked}
             isMuted={is_muted}
-
           />
           <div className="video-cube">
             <Avatar
@@ -198,7 +196,6 @@ const GroupVideoCall = () => {
   const peersRef = useRef([]);
 
   const [peers, setPeers] = useState([]);
-  const [totalPeers, setTotalPeers] = useState(0);
   const [showActions, setShowActions] = useState(false);
   const [hasRendered, setHasRendered] = useState(false);
   const [facingMode, setFacingMode] = useState('user');
@@ -220,10 +217,8 @@ const GroupVideoCall = () => {
       localVideo.current.srcObject = null;
     }
 
-    peersRef.current.forEach((peer) => {
-      if (peer) {
-        peer.peer.destroy();
-      }
+    peersRef.current.forEach(peerObject => {
+      peerObject.peer.destroy();
     });
 
     peersRef.current = [];
@@ -280,28 +275,21 @@ const GroupVideoCall = () => {
       };
 
       const removePeer = (user) => {
-        let filtered = peersRef.current.map(peer => {
-          if (peer?.user?.id === user.id) {
-            peer.peer.destroy();
-            return null
-          }
-          return peer
-        });
+        let filtered = peersRef.current.filter(peerObject => peerObject.user.id !== user.id)
 
         peersRef.current = filtered;
-
         setPeers(filtered);
-        setTotalPeers(filtered.filter(peer => peer !== null).length);
       };
 
       const updatePeer = (data) => {
         peersRef
           .current
-          .map(peer => {
-            return (peer && peer.user.id === data.user.id)
-              ? { ...peer, socketId: data.socketId }
-              : peer;
+          .map(peerObject => {
+            return peerObject.user.id === data.user.id
+              ? { ...peerObject, socketId: data.socketId }
+              : peerObject;
           })
+
         setPeers(peersRef.current);
       };
 
@@ -326,7 +314,12 @@ const GroupVideoCall = () => {
         });
 
         peer.on('signal', signal => {
-          socket.emit('call-user', { signal, sender: user, userToCall: data.socketId, senderSocket: socket.id });
+          socket.emit('call-user', {
+            signal,
+            sender: user,
+            userToCall: data.socketId,
+            senderSocket: socket.id
+          });
         });
         return peer;
       };
@@ -355,43 +348,39 @@ const GroupVideoCall = () => {
 
             users.forEach((user) => {
               const peer = createNewPeer(user, stream);
-
-              peersRef.current.push({
+              const peerObject = {
                 user: user.user,
                 socketId: user.socketId,
                 peer
-              });
+              };
 
-              myPeers.push({
-                user: user.user,
-                socketId: user.socketId,
-                peer
-              });
+              peersRef.current.push(peerObject);
+              myPeers.push(peerObject);
             });
 
-            setTotalPeers(myPeers.length);
             setPeers(myPeers);
           });
 
           socket.on('call-made', (data) => {
-            const peer = addPeer(data, stream)
-
-            peersRef.current.push({
+            const peer = addPeer(data, stream);
+            const peerObject = {
               user: data.sender,
               socketId: data.senderSocket,
               peer
-            });
+            }
 
-            setTotalPeers(peersRef.current.filter(peer => peer !== null).length);
-            setPeers(peersRef.current);
+            console.log(peersRef.current)
+
+            setPeers(peers => peers = [...peersRef.current, peerObject]);
+            peersRef.current.push(peerObject);
           });
 
           socket.on("answer-made", data => {
-            const item = peersRef.current.find(p => p.socketId === data.from);
+            const peerObject = peersRef.current.find(p => p.socketId === data.from);
 
-            if (item) {
+            if (peerObject) {
               try {
-                item.peer.signal(data.signal)
+                peerObject.peer.signal(data.signal)
               } catch (ex) {
                 const filtered = peersRef.current.filter(p => p.socketId !== data.from);
                 setPeers(filtered);
@@ -455,6 +444,7 @@ const GroupVideoCall = () => {
     localVideo.current.srcObject.getVideoTracks()[0].enabled = !localVideo.current.srcObject.getVideoTracks()[0].enabled;
     setVideo(!video);
   };
+
   const navigateToSTRQ = () => {
     window.open(`/chat/${params.room}`);
   }
@@ -478,16 +468,14 @@ const GroupVideoCall = () => {
           },
         })
         .then(stream => {
-          peersRef.current.forEach((peer) => {
-            if (peer) {
-              peer
-                .peer
-                .replaceTrack(
-                  peer.peer.streams[0].getVideoTracks()[0],
-                  stream.getVideoTracks()[0],
-                  peer.peer.streams[0]
-                )
-            }
+          peersRef.current.forEach((peerObject) => {
+            peerObject
+              .peer
+              .replaceTrack(
+                peerObject.peer.streams[0].getVideoTracks()[0],
+                stream.getVideoTracks()[0],
+                peerObject.peer.streams[0]
+              )
           });
 
           localVideo
@@ -519,18 +507,13 @@ const GroupVideoCall = () => {
   };
 
   const handlePeerClose = (user) => {
-    let filtered = peersRef.current.map(peer => {
-      if (peer?.user?.id === user.id) {
-        peer.peer.destroy();
-        return null
-      }
-      return peer;
-    });
+    console.log(user)
+    if (user) {
+      let filtered = peersRef.current.filter(peer => peer.user.id !== user.id);
 
-    peersRef.current = filtered;
-
-    setPeers(filtered);
-    setTotalPeers(filtered.filter(peer => peer !== null).length);
+      peersRef.current = filtered;
+      setPeers(filtered);
+    }
   };
 
   const handleEndCall = () => {
@@ -551,11 +534,7 @@ const GroupVideoCall = () => {
         className={showActions ? "main show-actions" : "main"}
         onClick={handleShowActions}
       >
-        {/* <div className="draw-Icon"><img src="/assets/images/icons/DrawStrq.png" alt="Draw" /></div>
-        <div className="video-Icon"><img href="#" src="/assets/images/icons/VidStrq.png" alt="Video Call" /></div>
-        <div className="screen-Maximize"><i className="fas fa-expand" /></div> */}
         <div className="video-container">
-
           <Draggable bounds="parent">
             <div
               className="own-Video"
@@ -573,20 +552,15 @@ const GroupVideoCall = () => {
             </div>
           </Draggable>
 
-          <div className={`item-List item${totalPeers}`}>
-            {peers.map((peer, index) => (
-              <>
-                {peer
-                  ? <Video
-                    index={index}
-                    peer={peer.peer}
-                    user={peer.user}
-                    socketId={peer.socketId}
-                    onPeerClose={handlePeerClose}
-                  />
-                  : ""
-                }
-              </>
+          <div className={`item-List item${peers.length}`}>
+            {peers.map((peerObject) => (
+              <Video
+                key={peerObject.user.id}
+                peer={peerObject.peer}
+                user={peerObject.user}
+                socketId={peerObject.socketId}
+                onPeerClose={handlePeerClose}
+              />
             ))}
             <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
               {microPhone
