@@ -5,7 +5,6 @@ import Spinner from '../../common/spinner';
 import Footer from '../layout/footer';
 import { clearVaults, getMyVault } from '../../../actions/studioActions';
 import VaultBar from "../vault/vaultBar";
-import PostLoader from "../../common/loader";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
