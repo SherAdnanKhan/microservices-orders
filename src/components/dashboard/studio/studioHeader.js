@@ -48,7 +48,7 @@ const StudioHeader = ({ userStudio, onModelOpen, onSuperFav, onUnSprFavModal, on
         />
       }
       <div className="back-icon">
-        <i className="fa fa-arrow-left clickable" onClick={() => history.push('/lobby')} data-for="back" data-tip="back" />
+        <i className="fa fa-arrow-left clickable" onClick={() => history.goBack()} data-for="back" data-tip="back" />
         <ToolTip position="left" id="back" />
       </div>
 
