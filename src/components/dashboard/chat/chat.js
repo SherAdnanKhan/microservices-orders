@@ -79,7 +79,8 @@ const Chat = () => {
 
   const handleUserSelect = slug => {
     dispatch(getConversation(slug, 1, con => {
-      setActiveConversation(con)
+      setActiveConversation(con);
+      dispatch(clearConversation());
     }));
   }
 

@@ -45,6 +45,7 @@ const ImagePostOption = ({ post, onUnFavGallery, onAddVault, onSharePost, onMode
           <>
             <p onClick={() => onReportPost(true, post)}>Report </p>
             <p onClick={() => onRepostModal(true, post)}> Repost </p>
+            <p onClick={() => onSharePost(true, post)}> Share </p>
             <p onClick={() => onAddVault(post)}>Vault</p>
             <p onClick={() => onMzFlashModal(true, post)}>MzFlash </p>
             <p onClick={() => onShareStrqModel(true, post)}>Share On STRQ</p>
