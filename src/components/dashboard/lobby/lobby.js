@@ -1,23 +1,35 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavouriteGalleryUsers, getFavouritePosts } from '../../../actions/lobbyActions';
 import UserCube from '../../common/userCube';
 import LobbyPosts from './lobbyPosts';
 import { Link } from "react-router-dom";
 import FeedSection from '../mzFlashGroup/feedSection';
-import { getCollectiveFeeds, createFeedComment, createFeed, strokeFeed, unstrokeFeed } from '../../../actions/mzFlashActions';
 import UserContext from '../../../context/userContext';
 import VerticalSlider from '../../common/verticalSlider';
 import HorizontalSlider from '../../common/horizontalSlider';
 import ToolTip from "../../common/toolTip/toolTip";
 import Spinner from '../../common/spinner';
 import useViewport from '../../common/useViewport';
+import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
+import {
+  getFavouriteGalleryUsers,
+  getFavouritePosts,
+  getUnreadConversations,
+  clearUnreadConversations
+} from '../../../actions/lobbyActions';
+import {
+  getCollectiveFeeds,
+  createFeedComment,
+  createFeed,
+  strokeFeed,
+  unstrokeFeed
+} from '../../../actions/mzFlashActions';
 
 const Lobby = () => {
   const dispatch = useDispatch();
-  const [unReadMsgCount] = useState("0");
+  const [unReadMsgCount, setUnreadMsgCount] = useState(0);
   const {
-    lobby: { favouriteUsers, favouritePosts, postLoader },
+    lobby: { favouriteUsers, favouritePosts, postLoader, unreadConversations },
     mzFlash: { collectiveFeeds, loading },
     feelColor: { feelColor },
   } = useSelector(state => state);
@@ -33,29 +45,29 @@ const Lobby = () => {
   const [currentFeedPage, setCurrentFeedPage] = useState(1);
   const postRef = useRef();
 
-  // useEffect(() => {
-  //   const totalCount = conversations
-  //     ?.map(conversation => conversation.unread_messages_logs_count)
-  //     .filter(messageCount => messageCount !== 0)
-  //     .length
-  //   setUnreadMsgCount(count => count = totalCount);
-  //   clearCount(totalCount);
-  // }, [conversations]);
+  useWindowUnloadEffect(() => {
+    dispatch(clearUnreadConversations())
+  }, true);
 
+  useEffect(() => {
+    setUnreadMsgCount(count => count = unreadConversations.length);
+    clearCount(unreadConversations.length);
+  }, [unreadConversations]);
 
   useEffect(() => {
     dispatch(getFavouritePosts());
     dispatch(getFavouriteGalleryUsers());
     dispatch(getCollectiveFeeds());
+    dispatch(getUnreadConversations());
   }, [dispatch]);
 
-  // const clearCount = (unReadMsgCount) => {
-  //   if (unReadMsgCount && unReadMsgCount > 0) {
-  //     setTimeout(() => {
-  //       setUnreadMsgCount("0")
-  //     }, 5000)
-  //   }
-  // };
+  const clearCount = (unReadMsgCount) => {
+    if (unReadMsgCount && unReadMsgCount > 0) {
+      setTimeout(() => {
+        setUnreadMsgCount(0);
+      }, 5000)
+    }
+  };
 
   const handleEnter = (e, feedId, comment) => {
     if (e.keyCode === 13 && comments[comment]) {

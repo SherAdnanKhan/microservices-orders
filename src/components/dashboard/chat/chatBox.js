@@ -135,6 +135,7 @@ class ChatBox extends Component {
 
     if (currentConversation && currentConversation !== previos) {
       if (previos?.id !== currentConversation.id) {
+        console.log('in there')
         this.setState({ page: 1, message: '', typings: [] });
         this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
         socket.emit('join', { room: currentConversation.id, user: currentUser }, () => {

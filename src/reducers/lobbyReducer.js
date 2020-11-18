@@ -8,7 +8,10 @@ import {
   GET_FAV_POSTS,
   START_POST_LOADER,
   STOP_POST_LOADER,
-  DELETE_POST
+  DELETE_POST,
+  UNREAD_CONVERSATIONS,
+  UPDATE_UNREAD_CONVERSATIONS,
+  CLEAR_UNREAD_CONVERSATIONS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -22,6 +25,7 @@ const initialState = {
     data: [],
     next_page_url: null
   },
+  unreadConversations: [],
   postLoader: false,
 };
 
@@ -143,6 +147,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         postLoader: false
+      }
+    case UNREAD_CONVERSATIONS:
+      return {
+        ...state,
+        unreadConversations: action.payload
+      }
+    case UPDATE_UNREAD_CONVERSATIONS:
+      if (state.unreadConversations.some(conversation => conversation === action.payload)) {
+        return state;
+      }
+      return {
+        ...state,
+        unreadConversations: [...state.unreadConversations, action.payload]
+      }
+    case CLEAR_UNREAD_CONVERSATIONS:
+      return {
+        ...state,
+        unreadConversations: []
       }
     default:
       return state;

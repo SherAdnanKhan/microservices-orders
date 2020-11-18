@@ -17,6 +17,7 @@ import {
   POST_STROKE,
   POST_UNSTROKE
 } from '../constants/keys';
+import { updateUnreadConversations } from '../actions/lobbyActions';
 
 const currentUser = getCurrentUser();
 
@@ -100,6 +101,7 @@ const Notifications = () => {
               )
             });
             dispatch(updateConversationUnreadCount(data.message));
+            dispatch(updateUnreadConversations(data.message.conversation_id));
           }
         });
 

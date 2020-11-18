@@ -22,28 +22,26 @@ const SharePostModal = ({ onModalClose, post }) => {
             <FacebookShareButton
               url={url}
               hashtag={post.title}>
-              <FacebookIcon logoFillColor="white" />
+              <FacebookIcon logofillcolor="white" />
             </FacebookShareButton>
             <TwitterShareButton
               url={url}
               hashtag={post.title}>
-              <TwitterIcon logoFillColor="white" />
+              <TwitterIcon logofillcolor="white" />
             </TwitterShareButton>
             <WhatsappShareButton
               url={url}
               hashtag={post.title}>
-              <WhatsappIcon logoFillColor="white" />
+              <WhatsappIcon logofillcolor="white" />
             </WhatsappShareButton>
             <LinkedinShareButton
               url={url}>
-              <LinkedinIcon logoFillColor="white" />
+              <LinkedinIcon logofillcolor="white" />
             </LinkedinShareButton>
-          </div >
-        </div >
-      </div >
-
-    </div >
-
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
