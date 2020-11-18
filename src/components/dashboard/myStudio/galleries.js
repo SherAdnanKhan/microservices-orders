@@ -13,12 +13,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal,
                   key={index}
                   className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                   onClick={() => onGalleryChange(gallery)}>
-                  <div className="delete-tool">
-                    <i className="fas fa-trash-alt" onClick={(event) => {
-                      onShowModal(true, gallery);
-                      event.stopPropagation();
-                    }}></i>
-                  </div>
+
                   <img
                     src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
                     alt=""
@@ -34,6 +29,16 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal,
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
               <div key={index} className={`item-box item-box-${index + 1}`}>
+                <div className="delete-tool">
+                  <i className="fas fa-trash-alt" onClick={(event) => {
+                    onShowModal(true, gallery);
+                    event.stopPropagation();
+                  }}
+                    data-for="deleteGallery"
+                    data-tip="delete gallery"
+                  ></i>
+                  <ToolTip id="deleteGallery" />
+                </div>
                 <div className="editTool Edit">
                   <img
                     src="/assets/images/paintbrush.png"
