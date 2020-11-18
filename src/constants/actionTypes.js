@@ -65,6 +65,7 @@ export const STOP_STUDIO_LOADER = 'STOP_STUDIO_LOADER';
 
 //Vault
 export const GET_MY_VAULTS = 'GET_MY_VAULTS';
+export const CLEAR_MY_VAULTS = 'CLEAR_MY_VAULTS';
 
 // Gallery
 export const GET_GALLERY = "GET_GALLERY";

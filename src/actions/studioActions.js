@@ -13,7 +13,8 @@ import {
   UPDATE_USERNAME,
   UPDATE_USER_ART,
   START_POST_LOADER,
-  STOP_POST_LOADER
+  STOP_POST_LOADER,
+  CLEAR_MY_VAULTS,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -46,6 +47,11 @@ export const getMyVault = (page = 1) => dispatch => {
     .catch(() => {
       dispatch({ type: STOP_POST_LOADER })
     })
+};
+export const clearVaults = () => dispatch => {
+  dispatch({
+    type: CLEAR_MY_VAULTS,
+  });
 };
 
 export const createOrUpdateProfile = (data, history) => () => {

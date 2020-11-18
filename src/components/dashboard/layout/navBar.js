@@ -76,7 +76,7 @@ const NavBar = () => {
             <Link to="/my-studio/profile">My Profile</Link>
           </li>
           <li>
-            <Link to="/my-studio/vault">My Vault</Link>
+            <Link to="/my-vaults">My Vault</Link>
           </li>
           <li>
             <Link to="/change-password">Change Password</Link>

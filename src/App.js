@@ -20,7 +20,6 @@ import ViewPost from './components/dashboard/viewPost/viewPost';
 import Main from './components/dashboard/Main';
 import AddExibit from './components/dashboard/exhibition/addExibition';
 import Profile from './components/dashboard/profile';
-import MyVault from './components/dashboard/vault/myVault';
 import NavBar from './components/dashboard/layout/navBar';
 import GroupVideoCall from './components/video/groupVideo';
 import AddVideoArtist from './components/video/addVideoArtist';
@@ -65,7 +64,7 @@ function App() {
         <ProtectedRoute exact path="/lobby" component={Main} />
         <ProtectedRoute exact path="/exhibition" component={AddExibit} />
         <ProtectedRoute exact path="/my-studio/profile/" component={Profile} />
-        <ProtectedRoute exact path="/my-studio/vault/" component={MyVault} />
+        <ProtectedRoute exact path="/my-vaults" component={Main} />
 
         <ProtectedRoute exact path="/my-studio/fave" component={Main} />
         <ProtectedRoute exact path="/my-studio/fave-by" component={Main} />
