@@ -196,10 +196,6 @@ export const unfavRecommendedGallery = data => dispatch => {
 };
 
 export const deleteGallery = gallery => dispatch => {
-  dispatch({
-    type: DELETE_GALLERY,
-    payload: gallery.id
-  });
   http
     .delete(`galleries/${gallery.id}`)
     .then(res => {
