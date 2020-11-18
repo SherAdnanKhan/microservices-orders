@@ -200,14 +200,14 @@ export const deleteGallery = gallery => dispatch => {
     type: DELETE_GALLERY,
     payload: gallery.id
   });
-  // http
-  //   .delete(`gallery/${gallery.id}`)
-  //   .then(res => {
-  //     toast.success("Gallery deleted successfully");
-  //     dispatch({
-  //       type: DELETE_GALLERY,
-  //       payload: gallery.id
-  //     });
-  //   })
-  //   .catch((error) => toast.error(error.response.data.errors.message));
+  http
+    .delete(`galleries/${gallery.id}`)
+    .then(res => {
+      toast.success("Gallery deleted successfully");
+      dispatch({
+        type: DELETE_GALLERY,
+        payload: gallery.id
+      });
+    })
+    .catch((error) => toast.error(error?.response?.data?.errors?.message));
 };

@@ -3187,14 +3187,15 @@ img {
       overflow: hidden;
       width: 23.4vw;
       height: 23.8vw;
+
       @media @mobile{
         width: 22.8vw;
         height: 23vw;
       }
       i{
         float:right;
-        padding-top: 3%;
-        padding-right: 3%;
+        padding-top: 30%;
+        padding-right: 22%;
       }
       // flex-basis: 25%;
       // border: 1px solid rgba(61,61,61,.7);
@@ -3682,6 +3683,21 @@ img {
         width: 19.4vw;
         height: 23vw;
       }
+      .delete-tool {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.1);
+        top: -5px;
+        right: -5px;
+        z-index: 5;
+        padding: 5px;
+        @media @mobile {
+          width: 25px;
+          height: 25px;
+        }
+      }
       // flex-basis: 24%;
       // border: 1px solid rgba(61, 61, 61, 0.7);
       // opacity: 0.6;
@@ -3717,15 +3733,21 @@ img {
   }
 }
 .editTool {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   position: absolute;
   border-radius: 50%;
   background: rgba(0,0,0,.3);
-  top: -10px;
-  right: -5px;
+  top: 23px;
+  right: -3px;
   z-index: 5;
   padding: 5px;
+  @media @mobile {
+    width: 22px;
+    height: 22px;
+    top: 24px;
+    right: 0px;
+  }
   img {
     height: 100%;
     background: none !important;

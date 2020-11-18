@@ -3,9 +3,9 @@ import ToolTip from '../../common/toolTip/toolTip';
 
 const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal, onModelOpen }) => {
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ overflowX: "scroll" }}>
       {edit && galleries &&
-        <div className="galleries" style={{ overflowX: "scroll" }}>
+        <div className="galleries">
           <div className="screen">
             <div className="scr-inner">
               {galleries.map((gallery, index) => (
@@ -13,10 +13,7 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal,
                   key={index}
                   className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                   onClick={() => onGalleryChange(gallery)}>
-                  <i className="fas fa-trash" onClick={(event) => {
-                    onShowModal(true, gallery);
-                    event.stopPropagation();
-                  }}></i>
+
                   <img
                     src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
                     alt=""
@@ -32,6 +29,16 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal,
           <div className="scr-inner">
             {galleries.map((gallery, index) => (
               <div key={index} className={`item-box item-box-${index + 1}`}>
+                <div className="delete-tool">
+                  <i className="fas fa-trash-alt" onClick={(event) => {
+                    onShowModal(true, gallery);
+                    event.stopPropagation();
+                  }}
+                    data-for="deleteGallery"
+                    data-tip="delete gallery"
+                  ></i>
+                  <ToolTip id="deleteGallery" />
+                </div>
                 <div className="editTool Edit">
                   <img
                     src="/assets/images/paintbrush.png"
