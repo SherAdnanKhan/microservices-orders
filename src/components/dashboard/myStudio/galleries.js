@@ -3,9 +3,9 @@ import ToolTip from '../../common/toolTip/toolTip';
 
 const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal, onModelOpen }) => {
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ overflowX: "scroll" }}>
       {edit && galleries &&
-        <div className="galleries" style={{ overflowX: "scroll" }}>
+        <div className="galleries">
           <div className="screen">
             <div className="scr-inner">
               {galleries.map((gallery, index) => (
@@ -13,10 +13,12 @@ const Gallery = ({ galleries, edit, onGalleryChange, activeGallery, onShowModal,
                   key={index}
                   className={`item-box item-box-${index + 1} ${activeGallery === gallery ? "zoom-in" : ""}`}
                   onClick={() => onGalleryChange(gallery)}>
-                  <i className="fas fa-trash" onClick={(event) => {
-                    onShowModal(true, gallery);
-                    event.stopPropagation();
-                  }}></i>
+                  <div className="delete-tool">
+                    <i className="fas fa-trash-alt" onClick={(event) => {
+                      onShowModal(true, gallery);
+                      event.stopPropagation();
+                    }}></i>
+                  </div>
                   <img
                     src={gallery?.image ? gallery?.image?.path : '/assets/images/icons/galleryCover.png'}
                     alt=""
