@@ -102,18 +102,22 @@ const Lobby = () => {
     dispatch(createFeed(formData));
   };
 
-  const handleFeedStroke = (id, user) => {
-    const data = {
-      feed_id: id
-    };
-    dispatch(strokeFeed(data, user));
+  const handleFeedStroke = feed => {
+    if (feed.has_stroke_count === 0) {
+      const data = {
+        feed_id: feed.id
+      };
+      dispatch(strokeFeed(data, feed.user));
+    }
   };
 
-  const handleFeedUnstroke = (id, user) => {
-    const data = {
-      feed_id: id
-    };
-    dispatch(unstrokeFeed(data, user));
+  const handleFeedUnstroke = feed => {
+    if (feed.has_stroke_count === 1) {
+      const data = {
+        feed_id: feed.id
+      };
+      dispatch(unstrokeFeed(data, feed.user));
+    }
   };
 
   const handleNextPosts = () => {
