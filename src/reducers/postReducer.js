@@ -1,4 +1,5 @@
 import {
+
   GET_POST,
   STROKE_POST,
   UNSTROKE_POST,
@@ -18,6 +19,7 @@ const initialState = {
   post: null,
   ncomm: null,
   comments: [],
+  otherPrivacy: null,
   crtiqueStatus: 0,
   hasStroke: null,
   sentUsers: {}
@@ -63,12 +65,20 @@ export default (state = initialState, action) => {
     case ADD_POST_COMMENT:
       return {
         ...state,
+        post: {
+          ...state?.post,
+          post: {
+            ...state?.post?.post,
+            comments_count: state?.post?.post?.comments_count + 1
+          }
+        },
         comments: [...state.comments, action.payload.comment]
       };
     case GET_COMMENTS:
       return {
         ...state,
-        comments: action.payload
+        comments: action.payload.comments,
+        otherPrivacy: action.payload.other_privacy
       };
     case GET_NCOMM:
       return {

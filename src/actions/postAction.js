@@ -134,7 +134,7 @@ export const getComments = postId => dispatch => {
     .then(res => {
       dispatch({
         type: GET_COMMENTS,
-        payload: res.data.data.comments
+        payload: res.data.data
       });
     });
 };

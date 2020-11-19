@@ -156,13 +156,13 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
   };
 
   const handleUnstrokePost = (post) => {
-    if (post.has_stroke.length > 0) {
+    if (post.has_stroke_count === 1) {
       dispatch(unstrokePost(post.id, post.gallery_id, post.user))
     }
   }
 
   const handleStrokePost = (post) => {
-    if (post.has_stroke.length === 0) {
+    if (post.has_stroke_count === 0) {
       dispatch(strokePost(post.id, post.gallery_id, post.user));
     }
   }
@@ -322,7 +322,7 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                 <div className="action">
                   <div className="strk-btn">
                     <Stroke
-                      hasStroke={post.has_stroke.length}
+                      hasStroke={post.has_stroke_count}
                       className="strk-img"
                       onStroke={() => handleStrokePost(post)}
                       onUnstroke={() => handleUnstrokePost(post)}

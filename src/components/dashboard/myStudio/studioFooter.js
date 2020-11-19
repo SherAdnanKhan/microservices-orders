@@ -141,7 +141,7 @@ const StudioFooter = ({ gallery, user, activePost, handleActivePost,
                     <div className="strk-btn">
                       <Stroke
                         className="strk-img"
-                        hasStroke={post.has_stroke.length}
+                        hasStroke={post.has_stroke_count}
                         onStroke={() => onStroke(post)}
                         onUnstroke={() => onUnStroke(post)}
                       />
