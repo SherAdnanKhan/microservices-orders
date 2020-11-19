@@ -81,13 +81,13 @@ const Post = ({
   };
 
   const handleStroke = post => {
-    if (post.has_stroke.length === 0) {
+    if (post.has_stroke_count === 0) {
       dispatch(strokePost(post.id, post.gallery_id, post.user));
     }
   };
 
   const handleUnstroke = post => {
-    if (post.has_stroke.length > 0) {
+    if (post.has_stroke_count === 1) {
       dispatch(unstrokePost(post.id, post.gallery_id, post.user));
     }
   };
@@ -343,7 +343,7 @@ const Post = ({
                                 <div className="strk-btn">
                                   <Stroke
                                     className="strk-img"
-                                    hasStroke={post.has_stroke.length}
+                                    hasStroke={post.has_stroke_count}
                                     onStroke={() => handleStroke(post)}
                                     onUnstroke={() => handleUnstroke(post)}
                                   />

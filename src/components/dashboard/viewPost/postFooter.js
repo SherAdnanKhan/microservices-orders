@@ -10,7 +10,7 @@ import Comment from "../viewPost/comments";
 import { getCurrentUser } from "../../../actions/authActions";
 import { useHistory } from "react-router-dom";
 
-const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowedCritiques }) => {
+const PostFooter = ({ post, onStroke, onUnStroke }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const history = useHistory();
@@ -29,7 +29,7 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
         dispatch(clearNcomm());
       } else {
         setHasNcomm(true);
-        dispatch(getNcomm(post?.slug));
+        dispatch(getNcomm(post?.post.slug));
       }
     }
   };
@@ -46,31 +46,28 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
 
   return (
     <div className="post-footer">
-      {
-        showCommentModal &&
+      {showCommentModal &&
         <Comment
-          post={post}
+          post={post?.post}
           onClose={() => setShowCommentModal(false)}
         />
       }
 
       <ImageVideoSlider ncomm={ncomm} />
 
-      {post && post.post && post.post.title &&
-        <h3 className="post-title">{post.post.title}</h3>
-      }
+      <h3 className="post-title">{post?.post?.title}</h3>
 
       <div className="post-footer-bar">
         <div className="poster-footer-stokes-btn">
           <Stroke
-            hasStroke={hasStroke}
+            hasStroke={post?.has_stroke}
             className="strk-img"
             onStroke={() => onStroke(post)}
             onUnstroke={() => onUnStroke(post)}
           />
 
           <ToolTip id="stroke" />
-          <p>strokes {post && post?.stroke_users_count}</p>
+          <p>strokes {post?.post?.stroke_users_count}</p>
         </div>
         <div className="post-footer-icons">
           <img
@@ -82,7 +79,7 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
             onClick={() => handleOpenCommentModal(post)}
           />
           <ToolTip id="comments" />
-          <p> comments {comments.length} </p>
+          <p> comments {post?.post?.comments_count} </p>
         </div>
         <div
           className="post-footer-icons action-w"
@@ -108,7 +105,7 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
             expanded={false}
             width={600}
           >
-            {post?.description}
+            {post?.post?.description}
           </ShowMoreText>
         }
       </div>
@@ -119,10 +116,10 @@ const PostFooter = ({ post, comments, onStroke, onUnStroke, hasStroke, isAllowed
             width: '80%',
             marginTop: '20px',
             textAlign: 'left',
-            color: post.user.feel.color_code
+            color: post?.post?.user?.feel?.color_code
           }}
         >
-          {completeFormattedDate(post.created_at)}
+          {completeFormattedDate(post?.post?.created_at)}
         </div>
       }
     </div>

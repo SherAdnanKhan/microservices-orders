@@ -14,8 +14,6 @@ import SharePostStrqModal from '../../common/sharePostStrqModal';
 import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
 import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
-// import { getFavourites } from '../../../actions/userActions';
-import { getUserArtById } from "../../../actions/userActions";
 import { getPost, strokePost, unstrokePost } from "../../../actions/postAction";
 import { unfavGallery, getMyGalleries } from "../../../actions/galleryActions";
 import { deletePost, reportPost, storeVault, changeCritqueStatus, repost, shareMzFlash, clearPost } from '../../../actions/postAction';
@@ -24,7 +22,6 @@ import { getCurrentUser } from '../../../actions/authActions';
 const ViewPost = () => {
   const user = useContext(UserContext);
   const loggedInUserId = user?.id;
-  const userArtId = user?.art_id;
   const dispatch = useDispatch();
   const { params: { id } } = useRouteMatch();
   const history = useHistory();
@@ -55,16 +52,15 @@ const ViewPost = () => {
 
   useEffect(() => {
     dispatch(getMyGalleries());
-    dispatch(getUserArtById(userArtId));
-  }, [dispatch, userArtId]);
+  }, [dispatch]);
 
   const handleUnStroke = (post) => {
     if (!getCurrentUser()) {
       history.push("/login")
     }
     else {
-      if (post.has_stroke.length > 0) {
-        dispatch(unstrokePost(post.id, post.gallery_id, post.user))
+      if (post.has_stroke) {
+        dispatch(unstrokePost(post?.post?.id, post?.post?.gallery_id, post?.post?.user))
       }
     }
   }
@@ -74,8 +70,9 @@ const ViewPost = () => {
       history.push("/login")
     }
     else {
-      if (post.has_stroke.length === 0) {
-        dispatch(strokePost(post.id, post.gallery_id, post.user));
+      console.log(post)
+      if (!post.has_stroke) {
+        dispatch(strokePost(post.post.id, post.post.gallery_id, post.post.user));
       }
     }
   }
@@ -239,13 +236,12 @@ const ViewPost = () => {
           onAddVault={handleVault}
         />
         <PostFooter
-          post={post?.post}
+          post={post}
           isAllowedCritiques={post?.other_privacy?.is_allowed ? 1 : 0}
           comments={comments}
           onStroke={handleStroke}
           onUnStroke={handleUnStroke}
           updatedCritqueStatus={crtiqueStatus}
-          hasStroke={post?.has_stroke}
         />
       </div>
     </>

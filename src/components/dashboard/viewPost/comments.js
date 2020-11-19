@@ -7,9 +7,8 @@ import { getCurrentUser } from "../../../actions/authActions";
 const Comment = ({ post, onClose }) => {
   const [comment, setComment] = useState('');
   const dispatch = useDispatch();
-  const { comments } = useSelector(state => state.postView);
+  const { comments, otherPrivacy } = useSelector(state => state.postView);
   const bottomRef = useRef();
-  const isAllowedCritiques = post?.other_privacy?.is_allowed ? 1 : 0;
 
   useEffect(() => {
     if (post) {
@@ -128,23 +127,27 @@ const Comment = ({ post, onClose }) => {
             }
             <div className="botton" ref={ref => bottomRef.current = ref}></div>
           </div>
-          {((getCurrentUser()?.id === post?.created_by) || (post?.critiques_status === 1 && isAllowedCritiques === 1)) ?
-            <div className="text-area">
-              <div className="msg-input">
-                <textarea
-                  placeholder=" Add a critique..."
-                  value={comment}
-                  onChange={e => setComment(e.target.value)}
-                />
-              </div>
-              <button onClick={handleSubmit} className="clickable">
-                <img src="/assets/images/crit1.png" alt="" />
-              </button>
-            </div>
-            :
-            <div className="comment-error">
-              <p>Comments are disabled for this post.</p>
-            </div>
+          {otherPrivacy &&
+            <>
+              {((getCurrentUser()?.id === post?.created_by) || (post?.critiques_status === 1 && otherPrivacy?.is_allowed === 1)) ?
+                <div className="text-area">
+                  <div className="msg-input">
+                    <textarea
+                      placeholder=" Add a critique..."
+                      value={comment}
+                      onChange={e => setComment(e.target.value)}
+                    />
+                  </div>
+                  <button onClick={handleSubmit} className="clickable">
+                    <img src="/assets/images/crit1.png" alt="" />
+                  </button>
+                </div>
+                :
+                <div className="comment-error">
+                  <p>Comments are disabled for this post.</p>
+                </div>
+              }
+            </>
           }
         </div>
       </div>
