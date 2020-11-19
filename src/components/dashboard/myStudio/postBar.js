@@ -24,7 +24,8 @@ const PostBar = ({ myStudio, activeGallery, gallery, totalPosts, feelColor }) =>
         {activeGallery &&
           <>
             <p>{activeGallery.title}</p>
-            <p>Exhibits Faved by: {gallery?.faved_users.length}</p>
+            <p>Exhibits : {gallery?.posts?.length} </p>
+            <p>Faved by : {gallery?.faved_users.length}</p>
           </>
         }
       </div>

@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyStudio } from '../../../actions/studioActions';
 import Gallery from './galleries';
-// import { getFavourites } from '../../../actions/userActions';
-import { getUserArtById } from "../../../actions/userActions";
 import { getGallery, clearGallery, getMyGalleries, unfavGallery, deleteGallery } from "../../../actions/galleryActions";
 import { strokePost, unstrokePost, storeVault, getNcomm, clearNcomm, deletePost, reportPost, changeCritqueStatus, repost, shareMzFlash } from '../../../actions/postAction';
 import StudioHeader from './studioHeader';
@@ -21,13 +19,10 @@ import SharePostStrqModal from '../../common/sharePostStrqModal';
 import TurnOffCrtiqueModal from "../../common/turnOffCritqueModal";
 import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
-import UserContext from "../../../context/userContext";
 import { useRouteMatch } from 'react-router-dom';
 import ConfirmationModal from '../chat/confirmationModal';
 
 const MyStudio = () => {
-  const user = useContext(UserContext);
-  const userArtId = user.art_id;
   const [show, setShow] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState('');
   const [edit, setEdit] = useState(true);
@@ -66,10 +61,6 @@ const MyStudio = () => {
       dispatch(clearGallery());
     }
   }, [myGalleries, dispatch])
-
-  useEffect(() => {
-    dispatch(getUserArtById(userArtId));
-  }, [dispatch, userArtId]);
 
   const handleGalleryChange = gallery => {
     dispatch(getGallery(gallery.slug));
