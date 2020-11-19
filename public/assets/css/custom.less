@@ -3723,7 +3723,7 @@ img {
    }
   .clickable {
     width:23.8vw;
-    height:23vw;
+    height:23.8vw;
     background: rgba(61,61,61,.3);
     display: flex ;
     justify-content: center;
@@ -4933,7 +4933,10 @@ img {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-left: 15px;
+      margin-left: 6%;
+      @media @mobile {
+        margin-left: 15px;
+      }
       img{
         width: 12%;
         cursor: pointer;
@@ -5330,6 +5333,7 @@ img {
   .gallery-title {
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .error {
@@ -5373,7 +5377,7 @@ img {
     border: 2px solid #444;
     background: black;
     @media @mobile {
-      height: 59%;
+      height: 85%;
       width:80%;
     }
     form{
