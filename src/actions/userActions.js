@@ -42,7 +42,7 @@ export const getUserArtById = (id) => dispatch => {
     .then(res => {
       dispatch({
         type: GET_USER_ART_NAME,
-        payload: res.data.data.art
+        payload: res?.data?.data?.art
       });
     });
 };
