@@ -70,7 +70,6 @@ const ViewPost = () => {
       history.push("/login")
     }
     else {
-      console.log(post)
       if (!post.has_stroke) {
         dispatch(strokePost(post.post.id, post.post.gallery_id, post.post.user));
       }

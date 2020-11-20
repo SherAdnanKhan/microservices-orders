@@ -33,6 +33,7 @@ import {
   deleteMessageState
 } from '../../../actions/conversationActions';
 import { IMAGE_UPLOAD_SIZE_ERROR, VIDEO_UPLOAD_SIZE_ERROR, DOCUMENT_UPLOAD_SIZE_ERROR } from "../../../constants/errors";
+import { getText, getURL } from '../../../utils/helperFunctions';
 
 
 class ChatBox extends Component {
@@ -187,12 +188,24 @@ class ChatBox extends Component {
       };
 
       if (message.trim() !== '') {
-        data.message = message;
+        const url = getURL(message);
+        const text = getText(message);
+
+        if (text) {
+          data.message = text
+        } else {
+          if (!url) {
+            data.message = message;
+          }
+        }
+
+        if (url) {
+          data.web_url = url;
+        }
       }
 
       this.setState({ message: '', image: '', video: '', document: '', showPostButton: false });
-
-      if (data.message || data.url) {
+      if (data.message || data.url || data.web_url) {
         if (socket.connected) {
           socket.emit('sendMessage', data, getAuthToken(), message => {
             toast.error(message);

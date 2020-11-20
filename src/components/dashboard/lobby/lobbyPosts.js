@@ -234,158 +234,160 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
           mediaType={mediaType}
         />
       }
-      <InfiniteScroll
-        dataLength={posts?.length}
-        next={fetchData}
-        hasMore={nextPageUrl ? true : false}
-      >
-        {posts?.map(post => (
-          <div className="post-page" key={post.id}>
-            <div className="post-head">
-              <p className="usernames">
+      {posts &&
+        <InfiniteScroll
+          dataLength={posts?.length}
+          next={fetchData}
+          hasMore={nextPageUrl ? true : false}
+        >
+          {posts?.map(post => (
+            <div className="post-page" key={post.id}>
+              <div className="post-head">
+                <p className="usernames">
+                  <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
+                    {post.user.username}
+                  </Link>
+                </p>
                 <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
-                  {post.user.username}
+                  <Avatar
+                    user={post.user}
+                  />
                 </Link>
-              </p>
-              <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
-                <Avatar
-                  user={post.user}
-                />
-              </Link>
-              {post.user.art &&
-                <>
-                  {post.user.art.parent && post.user.art.parent.name + '/'}
-                  {post.user.art.name && post.user.art.name}
-                </>
-              }
-            </div>
-            <div className="image-option-box">
-              <ImagePostOption
-                post={activePost}
-                onUnFavGallery={handleUnfavGallery}
-                onSharePost={handleShareModel}
-                onReportPost={handleReportModel}
-                onModelDelete={handlePostDeleteModel}
-                onShareStrqModel={handleStrqShareModel}
-                onTurnOffCrtiques={handleTurnOffCrtiquesModal}
-                onRepostModal={handleRepostModal}
-                onMzFlashModal={handleMzFlashModal}
-                onAddVault={handleVault} />
-            </div>
-            <div className={
-              activePost.id === post.id
-                ? "valut-icon show-valut"
-                : "valut-icon"
-            }
-            >
-              <i className="fa fa-ellipsis-v postOptions" aria-hidden="true" data-tip="more" data-for="more" ></i>
-              <ToolTip id="more" position="top" />
-              <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
-              <ToolTip id="vault" position="top" />
-            </div>
-            <div
-              className="post-body"
-              onClick={() => handleActivePost(post)}
-            >
-              {post.post_type === 2
-                ? (
-                  <VideoPlayer
-                    path={post?.image?.path}
-                  />
-                ) : (
-                  <LazyLoadImage
-                    alt=""
-                    src={post?.image?.path}
-                  />
-                )
-              }
-            </div>
-
-            <div className={
-              activeNcomm.id === post.id
-                ? "ncomm-slider show"
-                : "ncomm-slider"
-            }>
-              {ncomm?.data &&
-                <ImageVideoSlider ncomm={ncomm} />
-              }
-            </div>
-            <div className="onearttitle">
-              <p>{post && post.title}</p>
-
-              <div className={
-                activePost.id === post.id
-                  ? "lobby-icon lobby-icon-slide"
-                  : "lobby-icon"
-              }
-                id={`post${post.id}`}>
-                <div className="action">
-                  <div className="strk-btn">
-                    <Stroke
-                      hasStroke={post.has_stroke_count}
-                      className="strk-img"
-                      onStroke={() => handleStrokePost(post)}
-                      onUnstroke={() => handleUnstrokePost(post)}
-                    />
-                    <ToolTip id="stroke" />
-                    <p> strokes {post.stroke_users_count} </p>
-                  </div>
-                </div>
-                <div className="action">
-                  <img
-                    className="comment-img clickable"
-                    alt=""
-                    src="/assets/images/crit1.png"
-                    onClick={() => handleOpenCommentModal(post)}
-                    data-tip="comments"
-                    data-for="comments"
-                  />
-                  <ToolTip id="comments" position="top" />
-                  <p> comments {post.comments_count} </p>
-                </div>
-                <div className="action">
-                  <img
-                    className="comment-img ncomm-img clickable"
-                    alt=""
-                    src="/assets/images/ncommnicon.png"
-                    onClick={() => handleNcomm(post)}
-                    data-for="ncomm"
-                    data-tip="ncomm"
-                  />
-                  <ToolTip id="ncomm" position="top" />
-                </div>
-              </div>
-              <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
-                {post &&
-                  <ShowMoreText
-                    lines={2}
-                    more="View more"
-                    less="View less"
-                    expanded={false}
-                    width={600}
-                  >
-                    {post?.description}
-                  </ShowMoreText>
+                {post.user.art &&
+                  <>
+                    {post.user.art.parent && post.user.art.parent.name + '/'}
+                    {post.user.art.name && post.user.art.name}
+                  </>
                 }
               </div>
+              <div className="image-option-box">
+                <ImagePostOption
+                  post={activePost}
+                  onUnFavGallery={handleUnfavGallery}
+                  onSharePost={handleShareModel}
+                  onReportPost={handleReportModel}
+                  onModelDelete={handlePostDeleteModel}
+                  onShareStrqModel={handleStrqShareModel}
+                  onTurnOffCrtiques={handleTurnOffCrtiquesModal}
+                  onRepostModal={handleRepostModal}
+                  onMzFlashModal={handleMzFlashModal}
+                  onAddVault={handleVault} />
+              </div>
               <div className={
                 activePost.id === post.id
-                  ? 'lobby-icon time-div lobby-icon-slide'
-                  : 'lobby-icon time-div'
+                  ? "valut-icon show-valut"
+                  : "valut-icon"
+              }
+              >
+                <i className="fa fa-ellipsis-v postOptions" aria-hidden="true" data-tip="more" data-for="more" ></i>
+                <ToolTip id="more" position="top" />
+                <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
+                <ToolTip id="vault" position="top" />
+              </div>
+              <div
+                className="post-body"
+                onClick={() => handleActivePost(post)}
+              >
+                {post.post_type === 2
+                  ? (
+                    <VideoPlayer
+                      path={post?.image?.path}
+                    />
+                  ) : (
+                    <LazyLoadImage
+                      alt=""
+                      src={post?.image?.path}
+                    />
+                  )
+                }
+              </div>
+
+              <div className={
+                activeNcomm.id === post.id
+                  ? "ncomm-slider show"
+                  : "ncomm-slider"
               }>
-                <div className=" time-row">
-                  <p
-                    className='lobby-post-time'
-                    style={{ color: post.user.feel.color_code }}
-                  >
-                    {completeFormattedDate(post.created_at)}
-                  </p>
+                {ncomm?.data &&
+                  <ImageVideoSlider ncomm={ncomm} />
+                }
+              </div>
+              <div className="onearttitle">
+                <p>{post && post.title}</p>
+
+                <div className={
+                  activePost.id === post.id
+                    ? "lobby-icon lobby-icon-slide"
+                    : "lobby-icon"
+                }
+                  id={`post${post.id}`}>
+                  <div className="action">
+                    <div className="strk-btn">
+                      <Stroke
+                        hasStroke={post.has_stroke_count}
+                        className="strk-img"
+                        onStroke={() => handleStrokePost(post)}
+                        onUnstroke={() => handleUnstrokePost(post)}
+                      />
+                      <ToolTip id="stroke" />
+                      <p> strokes {post.stroke_users_count} </p>
+                    </div>
+                  </div>
+                  <div className="action">
+                    <img
+                      className="comment-img clickable"
+                      alt=""
+                      src="/assets/images/crit1.png"
+                      onClick={() => handleOpenCommentModal(post)}
+                      data-tip="comments"
+                      data-for="comments"
+                    />
+                    <ToolTip id="comments" position="top" />
+                    <p> comments {post.comments_count} </p>
+                  </div>
+                  <div className="action">
+                    <img
+                      className="comment-img ncomm-img clickable"
+                      alt=""
+                      src="/assets/images/ncommnicon.png"
+                      onClick={() => handleNcomm(post)}
+                      data-for="ncomm"
+                      data-tip="ncomm"
+                    />
+                    <ToolTip id="ncomm" position="top" />
+                  </div>
+                </div>
+                <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
+                  {post &&
+                    <ShowMoreText
+                      lines={2}
+                      more="View more"
+                      less="View less"
+                      expanded={false}
+                      width={600}
+                    >
+                      {post?.description}
+                    </ShowMoreText>
+                  }
+                </div>
+                <div className={
+                  activePost.id === post.id
+                    ? 'lobby-icon time-div lobby-icon-slide'
+                    : 'lobby-icon time-div'
+                }>
+                  <div className=" time-row">
+                    <p
+                      className='lobby-post-time'
+                      style={{ color: post.user.feel.color_code }}
+                    >
+                      {completeFormattedDate(post.created_at)}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </InfiniteScroll>
+          ))}
+        </InfiniteScroll>
+      }
       {commentModal &&
         <Comment
           post={activePost}

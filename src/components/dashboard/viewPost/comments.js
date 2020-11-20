@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getComments, createComment } from '../../../actions/postAction';
+import { getComments, createComment, clearComments } from '../../../actions/postAction';
 import Avatar from '../../common/avatar';
 import { getCurrentUser } from "../../../actions/authActions";
 
@@ -13,6 +13,9 @@ const Comment = ({ post, onClose }) => {
   useEffect(() => {
     if (post) {
       dispatch(getComments(post.id))
+    }
+    return () => {
+      dispatch(clearComments());
     }
   }, [post, dispatch]);
 

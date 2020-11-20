@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import Avatar from '../common/avatar';
 import { getFavouriteGalleryUsers } from "../../actions/lobbyActions";
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from "../../utils/helperFunctions";
+import { convertHexToRGBA, isEmpty } from "../../utils/helperFunctions";
 import { clearStatus, sharePostOnStrq } from '../../actions/postAction';
 import Loader from './loader';
 import { useWindowUnloadEffect } from './useWindowUnloadEffect';
 
 const SharePostStrqModal = ({ onModalClose, post }) => {
+  const { feelColor } = useSelector(state => state.feelColor);
+
   const {
     postView: { sentUsers },
   } = useSelector(state => state);
@@ -50,6 +52,12 @@ const SharePostStrqModal = ({ onModalClose, post }) => {
                   <button className="button"
                     disabled={sentUsers[user.id] === undefined ? false : true}
                     onClick={() => handleStrqShare(post, user.id)}
+                    style={{
+                      backgroundColor: sentUsers[user.id] === undefined
+                        ? feelColor
+                        : convertHexToRGBA(feelColor, 0.5)
+                    }}
+
                   >
                     {sentUsers[user.id] === true &&
                       <Loader />

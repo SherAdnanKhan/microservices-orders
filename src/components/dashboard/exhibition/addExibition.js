@@ -9,6 +9,7 @@ import ExhibitionModel from "./exhibitionModel";
 import queryString from 'query-string';
 import { getPost, clearPost } from "../../../actions/postAction";
 import { useWindowUnloadEffect } from "../../common/useWindowUnloadEffect";
+import ScrollTop from "../../common/scrollTop";
 
 const AddExibit = () => {
   const location = useLocation();
@@ -141,13 +142,15 @@ const AddExibit = () => {
 
   useEffect(() => {
     if (post) {
-      const splittedPath = post?.post?.image?.path.split('.');
-      const fileType = splittedPath[splittedPath.length - 1];
+      if (post?.post?.image) {
+        const splittedPath = post?.post?.image?.path?.split('.');
+        const fileType = splittedPath[splittedPath.length - 1];
 
-      if (fileType === 'mp4') {
-        setVideo(post?.post?.image.path);
-      } else {
-        setImage(post?.post?.image.path);
+        if (fileType === 'mp4') {
+          setVideo(post?.post?.image.path);
+        } else {
+          setImage(post?.post?.image.path);
+        }
       }
 
       setData(data => {
@@ -221,146 +224,146 @@ const AddExibit = () => {
   }
 
   return (
-    <div>
-      {showModel &&
-        <ExhibitionModel
-          onSave={handleSave}
-          selectedImage={image}
-          selectedVideo={video}
-          feelColor={feelColor}
-        />
-      }
-      {!showModel &&
-        <div className={`frameReady ${feelColor}`}>
-          {loading && <Spinner />}
-          <>
-            <div
-              className="exibition-page-header"
-              style={{ backgroundColor: feelColor }}
-            >
-              <span className="exibition-exit-icon">
-                <i className="fas fa-arrow-left clickable" onClick={() => setShowModel(true)}></i>
-              </span>
-              <span className="exibition-header-name">Exhibit Your Art</span>
-            </div>
-            <br />
-            <br />
-            <form className="exibition-page-form" onSubmit={Submit}>
-              <div className="exibition-top-textboxes">
-                <div className="exbition-img" style={{ textAlign: "center" }}>
-                  <label
-                    htmlFor="image"
-                    className="exibition-input clickable"
-                    onClick={() => setShowModel(true)}
-                  >
-                    <div className="exhibit-imgVid-container">
-                      {video &&
-                        <video width="320" height="240" controls>
-                          <source src={video} type="video/mp4" />
-                          <source src={video} type="video/ogg" />
+    <ScrollTop>
+      <div>
+        {showModel &&
+          <ExhibitionModel
+            onSave={handleSave}
+            selectedImage={image}
+            selectedVideo={video}
+            feelColor={feelColor}
+          />
+        }
+        {!showModel &&
+          <div className={`frameReady ${feelColor}`}>
+            {loading && <Spinner />}
+            <>
+              <div
+                className="exibition-page-header"
+                style={{ backgroundColor: feelColor }}
+              >
+                <span className="exibition-exit-icon">
+                  <i className="fas fa-arrow-left clickable" onClick={() => setShowModel(true)}></i>
+                </span>
+                <span className="exibition-header-name">Exhibit Your Art</span>
+              </div>
+              <br />
+              <br />
+              <form className="exibition-page-form" onSubmit={Submit}>
+                <div className="exibition-top-textboxes">
+                  <div className="exbition-img" style={{ textAlign: "center" }}>
+                    <label
+                      htmlFor="image"
+                      className="exibition-input clickable"
+                      onClick={() => setShowModel(true)}
+                    >
+                      <div className="exhibit-imgVid-container">
+                        {video &&
+                          <video width="320" height="240" controls>
+                            <source src={video} type="video/mp4" />
+                            <source src={video} type="video/ogg" />
                         Your browser does not support the video tag.
                       </video>
-                      }
-                      {image &&
-                        <img
-                          id="preview"
-                          src={image ? image : '/assets/images/input-image.png'}
-                          alt="dummy"
-                        />
-                      }
-                    </div>
-                  </label>
-                </div>
-                <div className="exibition-form-input">
-                  <InputAutoComplete
-                    options={listCategory}
-                    displayProperty="name"
-                    placeholder="Choose an art"
-                    defaultValue={parentArtName}
-                    onChange={handleParentChange}
-                    onSearchEnd={handleSearchEnd}
-                    onSelect={handleParentArtSelect}
-                  />
-                  {hasChildren &&
-                    <InputAutoComplete
-                      options={childArts}
-                      displayProperty="name"
-                      placeholder="Choose sub art"
-                      defaultValue={childArtName}
-                      onChange={handleChildChange}
-                      onSearchEnd={handleChildSearchEnd}
-                      onSelect={handleChildArtSelect}
-                    />
-                  }
-                  <input
-                    className="exibition-title-input"
-                    type="text"
-                    placeholder="Give this art a title.."
-                    name="title" value={data.title}
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  <textarea
-                    className="exibition-description-input"
-                    placeholder="Tell us something about this work..."
-                    name="description"
-                    value={data.description}
-                    onChange={handleChange}
-                    autoComplete="off">
-                  </textarea>
-                </div>
-              </div>
-
-              <div className="exibition-gallery-header">
-                <p> Choose Gallery</p>
-              </div>
-              <div className="exibition-gallery-utilties">
-                {myGalleries &&
-                  myGalleries.map((val, index) => (
-                    <label
-                      key={index}
-                      className="exibition-gallery-item clickable"
-                      style={{ backgroundColor: feelColor }}
-                    >
-                      <input
-                        type="radio"
-                        name="gallery_id"
-                        id={val.id}
-                        value={val.id}
-                        checked={data.gallery_id === val.id ? true : false}
-                        onChange={handleChange}
-                      />
-                      <span> {val.title} </span>
+                        }
+                        {image &&
+                          <img
+                            id="preview"
+                            src={image ? image : '/assets/images/input-image.png'}
+                            alt="dummy"
+                          />
+                        }
+                      </div>
                     </label>
-                  ))
-                }
-              </div>
-              {error &&
-                <div className='error' style={{ color: feelColor }}>
-                  <div className="message"> {error} </div>
+                  </div>
+                  <div className="exibition-form-input">
+                    <InputAutoComplete
+                      options={listCategory}
+                      displayProperty="name"
+                      placeholder="Choose an art"
+                      defaultValue={parentArtName}
+                      onChange={handleParentChange}
+                      onSearchEnd={handleSearchEnd}
+                      onSelect={handleParentArtSelect}
+                    />
+                    {hasChildren &&
+                      <InputAutoComplete
+                        options={childArts}
+                        displayProperty="name"
+                        placeholder="Choose sub art"
+                        defaultValue={childArtName}
+                        onChange={handleChildChange}
+                        onSearchEnd={handleChildSearchEnd}
+                        onSelect={handleChildArtSelect}
+                      />
+                    }
+                    <input
+                      className="exibition-title-input"
+                      type="text"
+                      placeholder="Give this art a title.."
+                      name="title" value={data.title}
+                      onChange={handleChange}
+                      autoComplete="off"
+                    />
+                    <textarea
+                      className="exibition-description-input"
+                      placeholder="Tell us something about this work..."
+                      name="description"
+                      value={data.description}
+                      onChange={handleChange}
+                      autoComplete="off">
+                    </textarea>
+                  </div>
                 </div>
-              }
-              {/* <p style={{ color: "red", fontSize: "18px" }} >{error}</p> */}
-              <div className="exibition-button-div" id="submit">
-                <button
-                  className="exibition-button"
-                  type="submit"
-                  id="addex"
-                  style={{ backgroundColor: feelColor }}
-                >
-                  Exhibit 》
+
+                <div className="exibition-gallery-header">
+                  <p> Choose Gallery</p>
+                </div>
+                <div className="exibition-gallery-utilties">
+                  {myGalleries &&
+                    myGalleries.map((val, index) => (
+                      <label
+                        key={index}
+                        className="exibition-gallery-item clickable"
+                        style={{ backgroundColor: feelColor }}
+                      >
+                        <input
+                          type="radio"
+                          name="gallery_id"
+                          id={val.id}
+                          value={val.id}
+                          checked={data.gallery_id === val.id ? true : false}
+                          onChange={handleChange}
+                        />
+                        <span> {val.title} </span>
+                      </label>
+                    ))
+                  }
+                </div>
+                {error &&
+                  <div className='error' style={{ color: feelColor }}>
+                    <div className="message"> {error} </div>
+                  </div>
+                }
+                {/* <p style={{ color: "red", fontSize: "18px" }} >{error}</p> */}
+                <div className="exibition-button-div" id="submit">
+                  <button
+                    className="exibition-button"
+                    type="submit"
+                    id="addex"
+                    style={{ backgroundColor: feelColor }}
+                  >
+                    Exhibit 》
                 </button>
-              </div>
-            </form>
-            <footer className="exibtion-footer">
-              <p>Meuzm</p>
-            </footer>
-          </>
-        </div >
-      }
-
-    </div>
-
+                </div>
+              </form>
+              <footer className="exibtion-footer">
+                <p>Meuzm</p>
+              </footer>
+            </>
+          </div>
+        }
+      </div>
+    </ScrollTop>
   );
 };
 

@@ -4,7 +4,7 @@ const Gallery = ({ galleries, onGalleryChange, activeGallery, color }) => {
   const [focused, setFocused] = useState(true);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ overflowX: 'auto' }}>
       {galleries &&
         <div className="screen">
           <div className="scr-inner">

@@ -1,5 +1,4 @@
 import {
-
   GET_POST,
   STROKE_POST,
   UNSTROKE_POST,
@@ -12,7 +11,8 @@ import {
   CHANGE_CRITIQUES_STATUS,
   SHARE_POST_STRQ,
   CLEAR_STATUS,
-  CHANGE_STATUS
+  CHANGE_STATUS,
+  CLEAR_COMMENTS,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -89,6 +89,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ncomm: null
+      };
+    case CLEAR_COMMENTS:
+      return {
+        ...state,
+        comments: [],
+        otherPrivacy: null
       };
     case DELETE_POST:
       return {
