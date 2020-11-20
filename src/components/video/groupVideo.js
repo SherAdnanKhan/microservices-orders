@@ -369,8 +369,6 @@ const GroupVideoCall = () => {
               peer
             }
 
-            console.log(peersRef.current)
-
             setPeers(peers => peers = [...peersRef.current, peerObject]);
             peersRef.current.push(peerObject);
           });
@@ -507,7 +505,6 @@ const GroupVideoCall = () => {
   };
 
   const handlePeerClose = (user) => {
-    console.log(user)
     if (user) {
       let filtered = peersRef.current.filter(peer => peer.user.id !== user.id);
 

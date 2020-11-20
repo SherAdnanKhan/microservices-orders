@@ -19,7 +19,6 @@ export const login = credentials => dispatch => {
   http
     .post('/auth/login', credentials)
     .then(res => {
-      console.log(res)
       setCurrentUser(res.data.data);
       window.location.href = '/lobby';
     });

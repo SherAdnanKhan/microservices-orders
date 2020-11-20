@@ -8,10 +8,11 @@ import { toast } from "react-toastify";
 
 const shouldShowLoader = (url) => {
   if (url.includes("/chats/user")) {
-    return false
-  }
-  else {
-    return true
+    return false;
+  } else if (url.includes('metas')) {
+    return false;
+  } else {
+    return true;
   }
 }
 

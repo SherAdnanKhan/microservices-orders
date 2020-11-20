@@ -12,6 +12,7 @@ import {
   CLEAR_STATUS,
   DELETE_POST,
   CHANGE_STATUS,
+  CLEAR_COMMENTS
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import socket from '../services/socketService';
@@ -127,6 +128,12 @@ export const reportPost = (postId) => dispatch => {
       toast.success("Post Reported Successfully");
     });
 }
+
+export const clearComments = () => {
+  return {
+    type: CLEAR_COMMENTS
+  }
+};
 
 export const getComments = postId => dispatch => {
   http
@@ -277,5 +284,6 @@ export const storeVault = (post) => dispatch => {
     })
     .catch(error => toast.error(error.response.data.errors.message))
 };
+
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { convertHexToRGBA, formatDate, formatTime } from '../../../utils/helperFunctions';
-// import { ReactTinyLink } from 'react-tiny-link';
+import LinkPreview from '../../common/linkPreview';
 import MessageOptions from './messageOptions';
 
 const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMessage, feelColor }) => {
@@ -36,18 +36,11 @@ const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMe
             }}
           >
             {data.message}
-            {/* {getText(data.message) && getText(data.message)} */}
-            {/* {getURL(data.message) &&
-              <ReactTinyLink
-                cardSize="small"
-                showGraphic={true}
-                maxLine={2}
-                minLine={1}
-                url={getURL(data.message)}
-              // defaultMedia={data.message}
+            {data.web_url &&
+              <LinkPreview
+                url={data.web_url}
               />
-            } */}
-
+            }
             {data.type === 1 &&
               <div className="msgImg">
                 <a href={data.url} target="_blank" rel="noopener noreferrer">

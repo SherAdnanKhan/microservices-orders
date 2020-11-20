@@ -1,7 +1,7 @@
 import React from 'react';
 import { convertHexToRGBA, formatDate, formatTime } from '../../../utils/helperFunctions';
-// import { ReactTinyLink } from 'react-tiny-link';
 import Avatar from '../../common/avatar';
+import LinkPreview from '../../common/linkPreview';
 
 const IncomingMessage = ({ data }) => {
   return (
@@ -20,17 +20,11 @@ const IncomingMessage = ({ data }) => {
             }}
           >
             {data.message}
-            {/* {getText(data.message) && getText(data.message)} */}
-            {/* {getURL(data.message) &&
-              <ReactTinyLink
-                cardSize="small"
-                showGraphic={true}
-                maxLine={2}
-                minLine={1}
-                url={getURL(data.message)}
-             
+            {data.web_url &&
+              <LinkPreview
+                url={data.web_url}
               />
-            } */}
+            }
 
             {data.type === 1 &&
               <div className="msgImg">

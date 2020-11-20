@@ -203,8 +203,8 @@ const UserCube = ({ user }) => {
           {user?.art
             && (
               <>
-                {`${user?.art?.parent?.name}/`}
-                {user?.art?.name}
+                <p> {user?.art?.parent?.name} </p>
+                <p> {user?.art?.name} </p>
               </>
             )}
         </div>
