@@ -15,6 +15,7 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
   const handleUnmount = () => {
     dispatch(clearUsers());
     onToggleSearch();
+    setQuery('');
   }
 
   const handleNavigate = user => {
