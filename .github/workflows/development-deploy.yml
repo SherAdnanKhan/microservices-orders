@@ -41,6 +41,7 @@ jobs:
       run: |
         rm .env .env.production .env.development
         mv .env.staging .env
+        ls
         npm run build      
 
     - name: Deploy to S3
