@@ -8,6 +8,7 @@ const InputAutoComplete = ({
   onSelect, placeholder, defaultValue, type = 'text', ...rest
 }) => {
   const [list, setList] = useState([]);
+  const [input, setInput] = useState('');
   const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [scrollHeight, setScrollHeight] = useState(0);
   const [serachSubject] = useState(new BehaviorSubject(''));
@@ -40,6 +41,7 @@ const InputAutoComplete = ({
   }, [searchQueryChangeObservable, onSearchEnd]);
 
   const handleChange = ({ target: input }) => {
+    setInput(input.value);
     onChange(input.value);
     if (input.value.length === 0) {
       setList([]);
@@ -93,7 +95,7 @@ const InputAutoComplete = ({
         className="suggestions"
         ref={ref => optionRef.current = ref}
       >
-        {list
+        {input.length > 0 && list
           && options && list?.map((option, index) => (
             <div
               className={option === options[highlightedIndex] ? 'highlight' : ''}

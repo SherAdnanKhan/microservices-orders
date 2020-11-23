@@ -67,7 +67,7 @@ const Search = ({ feelColor, onToggleSearch, showSearch }) => {
         {users && users.length === 0 &&
           <p id="search-error">No Data Found</p>
         }
-        {users?.map((user, index) => (
+        {query.length > 0 && users?.map((user, index) => (
           <div
             key={index}
             className="result-box clickable"
