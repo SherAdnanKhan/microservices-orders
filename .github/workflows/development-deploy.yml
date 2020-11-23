@@ -39,11 +39,7 @@ jobs:
         npm install
     - name: Staging Build
       run: |
-        rm .env .env.production .env.development
-        mv .env.staging .env
-        ls
-        npm run build      
-
+        npm run build:stage
     - name: Deploy to S3
       uses: jakejarvis/s3-sync-action@master
       with:
