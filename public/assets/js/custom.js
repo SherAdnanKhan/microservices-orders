@@ -143,6 +143,23 @@ $(document).on('click', '.left', function (e) {
   e.stopPropagation();
 });
 
+$(document).on('click', '.invisible-left', function (e) {
+  $(".left").css("opacity", "1");
+  $('.left').addClass('toggle')
+  $('.right').removeClass('toggle')
+  $('.bottom').removeClass('toggle')
+
+  e.stopPropagation();
+});
+
+$(document).on('click', '.invisible-right', function (e) {
+  $(".right").css("opacity", "1");
+  $('.right').addClass('toggle')
+  $('.left').removeClass('toggle')
+  $('.bottom').removeClass('toggle')
+  e.stopPropagation();
+});
+
 $(document).on('click', '.right', function (e) {
   $(".right").css("opacity", "1");
   $('.right').addClass('toggle')

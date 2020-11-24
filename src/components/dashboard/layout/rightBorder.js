@@ -7,10 +7,11 @@ const RightBorder = () => {
   const history = useHistory();
   const { feelColor } = useSelector(state => state.feelColor);
   return (
-    <div
+    <div className="invisible-right">
+      <div
       className="right right-border"
       style={{ backgroundColor: feelColor }}
-    >
+      >
       <img
         className="strq-img"
         alt=""
@@ -29,6 +30,7 @@ const RightBorder = () => {
         data-for="mzflash"
       />
       <ToolTip position="left" id="mzflash" />
+      </div>
     </div>
   );
 };
