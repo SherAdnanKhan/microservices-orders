@@ -9,6 +9,7 @@ import useViewport from '../../common/useViewport';
 import { useRouteMatch } from 'react-router-dom';
 import Loader from "../../common/loader";
 import ConfirmationModal from "./confirmationModal";
+import ChatShortCut from "../chat/chatShortcut";
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -137,11 +138,13 @@ const Chat = () => {
           </div>
         )
       }
+      {/* Mobile View */}
       {width <= breakPoint
         ? (
           <>
             {activeConversation &&
               <div className="chat-Block">
+                <ChatShortCut onActiveConversation={handleActiveConversation} />
                 <ChatBox
                   activeConversation={activeConversation}
                   onBackPress={handleBackPress}
@@ -150,6 +153,7 @@ const Chat = () => {
             }
           </>
         ) : (
+          // Desktop View
           <div className="chat-Block">
             {activeConversation &&
               <ChatBox

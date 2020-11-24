@@ -123,12 +123,12 @@ class ChatBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.state.width > this.breakPoint) {
-      if (this.props.activeConversation !== prevProps.activeConversation) {
-        this.componentWillUnmount();
-        this.componentDidMount();
-      }
+    // if (this.state.width > this.breakPoint) {
+    if (this.props.activeConversation !== prevProps.activeConversation) {
+      this.componentWillUnmount();
+      this.componentDidMount();
     }
+    // }
 
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
