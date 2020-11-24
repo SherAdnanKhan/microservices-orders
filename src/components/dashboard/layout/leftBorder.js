@@ -7,10 +7,12 @@ const LeftBorder = () => {
   const history = useHistory();
   const { feelColor } = useSelector(state => state.feelColor);
   return (
-    <div
+    <div className="invisible-left">
+      <div
       className="left"
       style={{ backgroundColor: feelColor }}
-    >
+      >
+      
       <img
         className="lobby-img"
         alt=""
@@ -35,7 +37,9 @@ const LeftBorder = () => {
         data-tip="add exhibit"
       />
       <ToolTip position="right" />
+      </div>
     </div>
+    
   );
 };
 
