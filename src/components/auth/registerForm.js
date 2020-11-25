@@ -29,10 +29,12 @@ const RegisterForm = () => {
     first_name: '',
     last_name: '',
     username: '',
+    dateOfBirth: "",
     email: '',
     password: '',
     confirm_password: '',
     avatar: null,
+    agreement: false,
   });
 
   // this hook will
@@ -51,7 +53,7 @@ const RegisterForm = () => {
 
     if (localStorage.step) {
       const previousStep = JSON.parse(localStorage.getItem('step'));
-      previousStep === 7 ? setStep(previousStep - 1) : setStep(previousStep);
+      previousStep === 9 ? setStep(previousStep - 1) : setStep(previousStep);
     } else {
       setStep(1);
     }
@@ -104,6 +106,11 @@ const RegisterForm = () => {
         }
         break;
       case 3:
+        if (!data.dateOfBirth) {
+          errors.dateOfBirth = 'Please select date of birth';
+        }
+        break;
+      case 4:
         if (!data.username) {
           errors.username = 'Please fillout your Artist name.';
         }
@@ -114,23 +121,28 @@ const RegisterForm = () => {
           errors.username = 'Artist name must be atleast 8 characters long';
         }
         break;
-      case 4:
+      case 5:
         if (!data.email) {
           errors.email = 'Please fillout your Email.';
         } else if (!emailWithDomains.test(data.email)) {
           errors.email = 'Not valid Email.';
         }
         break;
-      case 5:
+      case 6:
         if (data.password.length < 8) {
           errors.password = 'Password must have at least eight characters';
         } else if (data.password !== data.confirm_password) {
           errors.confirm_password = 'Password and confirm password do not match.';
         }
         break;
-      case 6:
+      case 7:
         if (!data.avatar) {
           errors.avatar = 'please add a profile pic';
+        }
+        break;
+      case 8:
+        if (!data.agreement) {
+          errors.agreement = 'Please select terms and conditions to proceed';
         }
         break;
       default:
@@ -144,11 +156,16 @@ const RegisterForm = () => {
     if (input.type === 'file' && input.files[0]) {
       setData({ ...data, [input.name]: input.files[0] });
       setErrors({ ...errors, avatar: '' });
-
       setImage(URL.createObjectURL(input.files[0]));
       setToggle(true);
 
     } else {
+      if (input.type === "checkbox") {
+        if (input.checked) {
+          setErrors({ ...errors, agreement: '' });
+        }
+        setData({ ...data, [input.name]: input.checked });
+      }
       setData({ ...data, [input.name]: input.value });
     }
   };
@@ -163,8 +180,7 @@ const RegisterForm = () => {
 
   const handleNextPress = () => {
     const errors = validate();
-
-    if (!errors && step < 7) {
+    if (!errors && step < 9) {
       setStep(step => step + 1);
     }
     setErrors(errors || {});
@@ -180,7 +196,6 @@ const RegisterForm = () => {
     for (let key in data) {
       formData.append(key, data[key]);
     }
-
     dispatch(register(formData));
   };
 
@@ -256,6 +271,20 @@ const RegisterForm = () => {
               && (
                 <div className="animated fullWidth" step={3}>
                   <Input
+                    name="dateOfBirth"
+                    type="date"
+                    className="dateOfBirth"
+                    label="Select date of birth"
+                    value={data.dateOfBirth}
+                    onChange={handleChange}
+                    error={errors.dateOfBirth}
+                  />
+                </div>
+              )}
+            {step === 4
+              && (
+                <div className="animated fullWidth" step={3}>
+                  <Input
                     name="username"
                     id="username"
                     label="Select an Artistname"
@@ -265,7 +294,7 @@ const RegisterForm = () => {
                   />
                 </div>
               )}
-            {step === 4
+            {step === 5
               && (
                 <div className="animated fullWidth" step={4}>
                   <Input
@@ -278,7 +307,7 @@ const RegisterForm = () => {
                   />
                 </div>
               )}
-            {step === 5
+            {step === 6
               && (
                 <div className="animated fullWidth" step={5}>
                   <Input
@@ -301,7 +330,7 @@ const RegisterForm = () => {
                   />
                 </div>
               )}
-            {step === 6
+            {step === 7
               && (
                 <div className="animated fullWidth" step={6}>
                   <ImageCropper
@@ -329,9 +358,29 @@ const RegisterForm = () => {
                   </Input>
                 </div>
               )}
-            {step === 7
+            {step === 8
               && (
-                <div className="animated fullWidth" step={7}>
+                <div className="agreement-box" step={8} >
+                  <Input
+                    name="agreement"
+                    value={data.agreement}
+                    type="checkbox"
+                    onChange={handleChange}
+                  />
+                  <a className="agreement"
+                    href="/agreement"
+                    target="_blank"
+                    rel="noopener noreferrer" >
+                    I agree to the muezm website and services agreement.
+                  </a>
+                  <div className="error">
+                    {errors.agreement}
+                  </div>
+                </div>
+              )}
+            {step === 9
+              && (
+                <div className="animated fullWidth" step={9}>
                   <div className="action">
                     <button
                       className="btn"
@@ -372,7 +421,7 @@ const RegisterForm = () => {
                 </div>
               )}
           </form>
-          {step < 7
+          {step < 9
             && (
               <div className="action">
                 <button

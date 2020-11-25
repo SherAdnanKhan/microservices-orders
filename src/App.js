@@ -23,6 +23,7 @@ import Profile from './components/dashboard/profile';
 import NavBar from './components/dashboard/layout/navBar';
 import GroupVideoCall from './components/video/groupVideo';
 import AddVideoArtist from './components/video/addVideoArtist';
+import Agreement from './components/auth/agreement';
 
 const currentUser = getCurrentUser();
 
@@ -55,6 +56,7 @@ function App() {
         <Route exact path='/login' component={LoginForm} />
         <Route exact path='/forgot' component={ForgotPasswordForm} />
         <Route exact path='/register' component={RegisterForm} />
+        <Route exact path='/agreement' component={Agreement} />
         <Route exact path="/viewpost/:id" component={ViewPost} />
         <ProtectedRoute exact path="/welcome" component={Welcome} />
         <ProtectedRoute exact path="/artselection" component={ArtSelection} />
