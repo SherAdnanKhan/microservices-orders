@@ -35,7 +35,7 @@ export const artPost = (data, history) => () => {
   http
     .post('/posts', data, {})
     .then(() => {
-      history.push('/my-studio');
+      history.push('/lobby');
     });
 };
 
@@ -43,6 +43,6 @@ export const updatePost = (data, postId, history) => () => {
   http
     .post(`/post/update/${postId}`, data, {})
     .then(() => {
-      history.push('/my-studio');
+      history.push('/lobby');
     });
 };
