@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register, getCurrentUser } from '../../actions/authActions';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 import ImageCropper from '../common/imageCropper';
-import { isEmpty } from '../../utils/helperFunctions';
+import { isEmpty, completeDate } from '../../utils/helperFunctions';
 import { alphabets, alphabetsWithoutSpecialChars } from "../../constants/regex";
+
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -281,6 +282,7 @@ const RegisterForm = () => {
                     value={data.dateOfBirth}
                     onChange={handleChange}
                     error={errors.dateOfBirth}
+                    max={completeDate(new Date())}
                   />
                 </div>
               )}
