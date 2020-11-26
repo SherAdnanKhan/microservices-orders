@@ -100,8 +100,14 @@ const PostFooter = ({ post, onStroke, onUnStroke }) => {
         {post &&
           <ShowMoreText
             lines={2}
-            more="View more"
-            less="View less"
+            more={<a style={{
+              color: post?.post?.user?.feel?.color_code
+            }} href="/"> View more </a>
+            }
+            less={<a style={{
+              color: post?.post?.user?.feel?.color_code
+            }} href="/"> View less </a>
+            }
             expanded={false}
             width={600}
           >

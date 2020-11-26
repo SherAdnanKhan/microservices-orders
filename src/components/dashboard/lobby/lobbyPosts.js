@@ -141,9 +141,6 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
       setActivePost('');
     } else {
       setActivePost(post);
-      const element = document.getElementById(`post-desc-${post.id}`);
-      const link = element.querySelector('a');
-      link.style.color = post?.user?.feel?.color_code;
     };
   }
 
@@ -357,24 +354,26 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                     />
                     <ToolTip id="ncomm" position="top" />
                   </div>
-                  <div>
-                  </div>
                 </div>
                 <div className={
                   activePost.id === post.id
                     ? "lobby-icon lobby-icon-slide"
                     : "lobby-icon"
-                }
-                  id={`post${post.id}`}>
+                }>
                   <div
                     className='post-description'
-                    id={`post-desc-${post.id}`}
                     style={{ width: '100%', textAlign: 'center' }}>
                     {post &&
                       <ShowMoreText
                         lines={2}
-                        more="View more"
-                        less="View less"
+                        more={<a style={{
+                          color: post?.user?.feel?.color_code
+                        }} href="/"> View more </a>
+                        }
+                        less={<a style={{
+                          color: post?.user?.feel?.color_code
+                        }} href="/"> View less </a>
+                        }
                         expanded={false}
                         width={600}
                       >
@@ -399,8 +398,9 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                 </div>
               </div>
             </div>
-          ))}
-        </InfiniteScroll>
+          ))
+          }
+        </InfiniteScroll >
       }
       {
         commentModal &&
