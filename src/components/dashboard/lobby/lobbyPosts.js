@@ -55,7 +55,6 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
     postView: { ncomm }
   } = useSelector(state => state);
 
-
   const handlePostShowModel = (value, type, image) => {
     if (value === true) {
       setImagepath(image.path);
@@ -142,8 +141,11 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
       setActivePost('');
     } else {
       setActivePost(post);
-    }
-  };
+      const element = document.getElementById(`post-desc-${post.id}`);
+      const link = element.querySelector('a');
+      link.style.color = post?.user?.feel?.color_code;
+    };
+  }
 
   const handleNcomm = post => {
     dispatch(clearNcomm());
@@ -355,19 +357,31 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                     />
                     <ToolTip id="ncomm" position="top" />
                   </div>
+                  <div>
+                  </div>
                 </div>
-                <div className='post-description' style={{ width: '100%', textAlign: 'center' }}>
-                  {post &&
-                    <ShowMoreText
-                      lines={2}
-                      more="View more"
-                      less="View less"
-                      expanded={false}
-                      width={600}
-                    >
-                      {post?.description}
-                    </ShowMoreText>
-                  }
+                <div className={
+                  activePost.id === post.id
+                    ? "lobby-icon lobby-icon-slide"
+                    : "lobby-icon"
+                }
+                  id={`post${post.id}`}>
+                  <div
+                    className='post-description'
+                    id={`post-desc-${post.id}`}
+                    style={{ width: '100%', textAlign: 'center' }}>
+                    {post &&
+                      <ShowMoreText
+                        lines={2}
+                        more="View more"
+                        less="View less"
+                        expanded={false}
+                        width={600}
+                      >
+                        {post?.description}
+                      </ShowMoreText>
+                    }
+                  </div>
                 </div>
                 <div className={
                   activePost.id === post.id
@@ -388,7 +402,8 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
           ))}
         </InfiniteScroll>
       }
-      {commentModal &&
+      {
+        commentModal &&
         <Comment
           post={activePost}
           onClose={() => setCommentModal(false)}
