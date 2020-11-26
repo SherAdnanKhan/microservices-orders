@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register, getCurrentUser } from '../../actions/authActions';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
 import ImageCropper from '../common/imageCropper';
-import { isEmpty } from '../../utils/helperFunctions';
+import { isEmpty, completeDate } from '../../utils/helperFunctions';
 import { alphabets, alphabetsWithoutSpecialChars } from "../../constants/regex";
+
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -42,8 +43,10 @@ const RegisterForm = () => {
   // can easily save our form data in a localstorage
 
   useWindowUnloadEffect(() => {
-    localStorage.setItem('step', JSON.stringify(step));
-    localStorage.setItem('data', JSON.stringify({ ...data, avatar: null }));
+    if (step > 1 && !isEmpty(data)) {
+      localStorage.setItem('step', JSON.stringify(step));
+      localStorage.setItem('data', JSON.stringify({ ...data, avatar: null }));
+    }
   }, true);
 
   useEffect(() => {
@@ -141,7 +144,7 @@ const RegisterForm = () => {
         }
         break;
       case 8:
-        if (!data.agreement) {
+        if (!JSON.parse(data.agreement)) {
           errors.agreement = 'Please select terms and conditions to proceed';
         }
         break;
@@ -165,8 +168,9 @@ const RegisterForm = () => {
           setErrors({ ...errors, agreement: '' });
         }
         setData({ ...data, [input.name]: input.checked });
+      } else {
+        setData({ ...data, [input.name]: input.value });
       }
-      setData({ ...data, [input.name]: input.value });
     }
   };
 
@@ -278,6 +282,7 @@ const RegisterForm = () => {
                     value={data.dateOfBirth}
                     onChange={handleChange}
                     error={errors.dateOfBirth}
+                    max={completeDate(new Date())}
                   />
                 </div>
               )}
@@ -363,6 +368,7 @@ const RegisterForm = () => {
                 <div className="agreement-box" step={8} >
                   <Input
                     name="agreement"
+                    checked={data.agreement}
                     value={data.agreement}
                     type="checkbox"
                     onChange={handleChange}
