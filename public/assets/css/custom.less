@@ -944,6 +944,11 @@ input {
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
+    @media @mobile {
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    }
 
     @media screen and (max-width: 856px) {
       position: unset;
