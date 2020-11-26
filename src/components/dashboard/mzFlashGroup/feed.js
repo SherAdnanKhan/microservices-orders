@@ -92,24 +92,28 @@ const Feed = ({ feed, onStroke, onUnstroke, activeFeedComment, onActiveFeedComme
           <div className="imgvideo-mzflash-nested">
             {feed.parent.feed_type === 1 &&
               feed.parent.image &&
-              <img
-                src={feed.parent.image.path}
-                alt="Snow"
-                className="img-css"
-              />
+              <a href={feed.parent.image.path} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={feed.parent.image.path}
+                  alt="Snow"
+                  className="img-css"
+                />
+              </a>
             }
             {feed.parent.feed_type === 2 &&
               feed.parent.image &&
-              // <div className="video left-space">
-              <video controls>
-                <source src={feed.parent.image.path} type="video/mp4" />
-                <source src={feed.parent.image.path} type="video/ogg" />
+              <>
+                <a href={feed.parent.image.path} target="_blank" rel="noopener noreferrer">
+                  created by : {feed.user.slug}
+                </a>
+                <video controls>
+                  <source src={feed.parent.image.path} type="video/mp4" />
+                  <source src={feed.parent.image.path} type="video/ogg" />
                   Your browser does not support the video tag.
               </video>
-              // </div>
+              </>
             }
           </div>
-
         </div>
       }
       < div className="flex-container" >
