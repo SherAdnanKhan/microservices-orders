@@ -42,8 +42,10 @@ const RegisterForm = () => {
   // can easily save our form data in a localstorage
 
   useWindowUnloadEffect(() => {
-    localStorage.setItem('step', JSON.stringify(step));
-    localStorage.setItem('data', JSON.stringify({ ...data, avatar: null }));
+    if (step > 1 && !isEmpty(data)) {
+      localStorage.setItem('step', JSON.stringify(step));
+      localStorage.setItem('data', JSON.stringify({ ...data, avatar: null }));
+    }
   }, true);
 
   useEffect(() => {
@@ -141,7 +143,7 @@ const RegisterForm = () => {
         }
         break;
       case 8:
-        if (!data.agreement) {
+        if (!JSON.parse(data.agreement)) {
           errors.agreement = 'Please select terms and conditions to proceed';
         }
         break;
@@ -165,8 +167,9 @@ const RegisterForm = () => {
           setErrors({ ...errors, agreement: '' });
         }
         setData({ ...data, [input.name]: input.checked });
+      } else {
+        setData({ ...data, [input.name]: input.value });
       }
-      setData({ ...data, [input.name]: input.value });
     }
   };
 
@@ -363,6 +366,7 @@ const RegisterForm = () => {
                 <div className="agreement-box" step={8} >
                   <Input
                     name="agreement"
+                    checked={data.agreement}
                     value={data.agreement}
                     type="checkbox"
                     onChange={handleChange}
