@@ -39,10 +39,11 @@ export const artPost = (data, history) => () => {
     .post('/posts', data, {})
     .then((res) => {
       const payload = {
-        recivers: res?.data?.data?.faved_users_slug,
+        recievers: res?.data?.data?.faved_users_slug,
         sender: getCurrentUser()
       }
 
+      console.log(payload)
       socket.emit('faveExhibitNotifications', payload, POST_CREATED);
       history.push('/lobby');
     });
