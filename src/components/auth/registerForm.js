@@ -67,6 +67,7 @@ const RegisterForm = () => {
 
   const validate = () => {
     const errors = {};
+    let ageError;
 
     switch (step) {
       case 2:
@@ -112,6 +113,12 @@ const RegisterForm = () => {
         if (!data.dateOfBirth) {
           errors.dateOfBirth = 'Please select date of birth';
         }
+        else {
+          ageError = validateAge(data.dateOfBirth);
+          if (ageError) {
+            errors.dateOfBirth = 'Age must be atleast 13 years or greater'
+          }
+        }
         break;
       case 4:
         if (!data.username) {
@@ -155,6 +162,15 @@ const RegisterForm = () => {
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
+  const validateAge = (date) => {
+    var today = new Date();
+    var birthDate = new Date(date);
+    var currentAge = today.getFullYear() - birthDate.getFullYear();
+    if (currentAge < 13) {
+      return true
+    }
+  }
+
   const handleChange = ({ target: input }) => {
     if (input.type === 'file' && input.files[0]) {
       setData({ ...data, [input.name]: input.files[0] });
@@ -169,6 +185,15 @@ const RegisterForm = () => {
         }
         setData({ ...data, [input.name]: input.checked });
       } else {
+        if (input.type === "date") {
+          const isErrors = validateAge(input.value);
+          if (isErrors) {
+            setErrors({ ...errors, dateOfBirth: "Age must be atleast 13 years or greater" })
+          }
+          else {
+            setErrors({ ...errors, dateOfBirth: "" })
+          }
+        }
         setData({ ...data, [input.name]: input.value });
       }
     }
