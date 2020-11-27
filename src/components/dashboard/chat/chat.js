@@ -10,6 +10,8 @@ import { useRouteMatch } from 'react-router-dom';
 import Loader from "../../common/loader";
 import ConfirmationModal from "./confirmationModal";
 import ChatShortCut from "../chat/chatShortcut";
+import LeftBorder from '../layout/leftBorder';
+import RightBorder from '../layout/rightBorder';
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -86,84 +88,88 @@ const Chat = () => {
   }
 
   return (
-    <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
-      {loading && currentPage === 1 && <Spinner />}
-      {showDeleteModal &&
-        <ConfirmationModal
-          message="Are you sure you want to delete conversation?"
-          onCancel={handleDeleteModal}
-          onConfirm={() => handleDeleteConversation()}
-        />
-      }
-      {width <= breakPoint
-        ? (
-          <>
-            {!activeConversation &&
-              <div
-                className="conversation"
-                ref={conversationRef}>
-                <Conversation
-                  conversations={conversations?.data}
-                  onActiveConversation={handleActiveConversation}
-                  activeConversation={activeConversation}
-                  onCallNextPage={handleCallNextPage}
-                  currentPage={currentPage}
-                  conversationLoader={conversationLoader}
-                  nextPageUrl={conversations?.next_page_url}
-                  onDeleteConversation={handleDeleteConversation}
-                  feelColor={feelColor}
-                  toggleDeleteModal={handleDeleteModal}
-                  onUserSelect={handleUserSelect}
-                />
-                {conversationLoader && <Loader />}
-              </div>
-            }
-          </>
-        ) : (
-          <div className="conversation" ref={conversationRef}>
-            <Conversation
-              conversations={conversations?.data}
-              onActiveConversation={handleActiveConversation}
-              activeConversation={activeConversation}
-              onCallNextPage={handleCallNextPage}
-              currentPage={currentPage}
-              conversationLoader={conversationLoader}
-              nextPageUrl={conversations?.next_page_url}
-              onDeleteConversation={handleDeleteConversation}
-              feelColor={feelColor}
-              toggleDeleteModal={handleDeleteModal}
-              onUserSelect={handleUserSelect}
-            />
-            {conversationLoader && <Loader />}
-          </div>
-        )
-      }
-      {/* Mobile View */}
-      {width <= breakPoint
-        ? (
-          <>
-            {activeConversation &&
-              <div className="chat-Block">
-                <ChatShortCut onActiveConversation={handleActiveConversation} />
+    <div className={`frameReady ${feelColor}`}>
+      <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
+        <LeftBorder />
+        <RightBorder />
+        {loading && currentPage === 1 && <Spinner />}
+        {showDeleteModal &&
+          <ConfirmationModal
+            message="Are you sure you want to delete conversation?"
+            onCancel={handleDeleteModal}
+            onConfirm={() => handleDeleteConversation()}
+          />
+        }
+        {width <= breakPoint
+          ? (
+            <>
+              {!activeConversation &&
+                <div
+                  className="conversation"
+                  ref={conversationRef}>
+                  <Conversation
+                    conversations={conversations?.data}
+                    onActiveConversation={handleActiveConversation}
+                    activeConversation={activeConversation}
+                    onCallNextPage={handleCallNextPage}
+                    currentPage={currentPage}
+                    conversationLoader={conversationLoader}
+                    nextPageUrl={conversations?.next_page_url}
+                    onDeleteConversation={handleDeleteConversation}
+                    feelColor={feelColor}
+                    toggleDeleteModal={handleDeleteModal}
+                    onUserSelect={handleUserSelect}
+                  />
+                  {conversationLoader && <Loader />}
+                </div>
+              }
+            </>
+          ) : (
+            <div className="conversation" ref={conversationRef}>
+              <Conversation
+                conversations={conversations?.data}
+                onActiveConversation={handleActiveConversation}
+                activeConversation={activeConversation}
+                onCallNextPage={handleCallNextPage}
+                currentPage={currentPage}
+                conversationLoader={conversationLoader}
+                nextPageUrl={conversations?.next_page_url}
+                onDeleteConversation={handleDeleteConversation}
+                feelColor={feelColor}
+                toggleDeleteModal={handleDeleteModal}
+                onUserSelect={handleUserSelect}
+              />
+              {conversationLoader && <Loader />}
+            </div>
+          )
+        }
+        {/* Mobile View */}
+        {width <= breakPoint
+          ? (
+            <>
+              {activeConversation &&
+                <div className="chat-Block">
+                  <ChatShortCut onActiveConversation={handleActiveConversation} />
+                  <ChatBox
+                    activeConversation={activeConversation}
+                    onBackPress={handleBackPress}
+                  />
+                </div>
+              }
+            </>
+          ) : (
+            // Desktop View
+            <div className="chat-Block">
+              {activeConversation &&
                 <ChatBox
                   activeConversation={activeConversation}
-                  onBackPress={handleBackPress}
+                // onBackPress={handleBackPress}
                 />
-              </div>
-            }
-          </>
-        ) : (
-          // Desktop View
-          <div className="chat-Block">
-            {activeConversation &&
-              <ChatBox
-                activeConversation={activeConversation}
-              // onBackPress={handleBackPress}
-              />
-            }
-          </div>
-        )
-      }
+              }
+            </div>
+          )
+        }
+      </div>
     </div>
 
   );
