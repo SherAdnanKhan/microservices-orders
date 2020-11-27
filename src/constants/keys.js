@@ -10,3 +10,5 @@ export const FEED_UNSTROKE = 4;
 
 export const POST_STROKE = 5;
 export const POST_UNSTROKE = 6;
+
+export const POST_CREATED = 7;

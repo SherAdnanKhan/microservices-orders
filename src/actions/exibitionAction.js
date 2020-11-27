@@ -1,5 +1,8 @@
 import http from '../services/httpService';
 import { ART_SEARCH, CHILD_ART_SEARCH, CLEAR_ART, CLEAR_CHILD_ART } from '../constants/actionTypes';
+import socket from '../services/socketService';
+import { getCurrentUser } from './authActions';
+import { POST_CREATED } from '../constants/keys';
 
 export const artSearch = (art) => dispatch => {
   http
@@ -34,7 +37,13 @@ export const clearChildArt = () => {
 export const artPost = (data, history) => () => {
   http
     .post('/posts', data, {})
-    .then(() => {
+    .then((res) => {
+      const payload = {
+        recivers: res?.data?.data?.faved_users_slug,
+        sender: getCurrentUser()
+      }
+
+      socket.emit('faveExhibitNotifications', payload, POST_CREATED);
       history.push('/lobby');
     });
 };
