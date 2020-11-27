@@ -403,13 +403,6 @@ $(document).on('click', '.postOptions', function (e) {
   // $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
 })
 
-$(document).on('click', '.chatOptions', function (e) {
-  e.stopPropagation();
-  $(this)
-    .closest('.chat-Block')
-    .find('.chatShortcut')
-    .toggle();
-})
 
 // $('body').click(function (event) {
 //   // event.stopPropagation();
