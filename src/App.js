@@ -24,6 +24,7 @@ import NavBar from './components/dashboard/layout/navBar';
 import GroupVideoCall from './components/video/groupVideo';
 import AddVideoArtist from './components/video/addVideoArtist';
 import Agreement from './components/auth/agreement';
+import Chat from "./components/dashboard/chat/chat";
 
 const currentUser = getCurrentUser();
 
@@ -58,6 +59,7 @@ function App() {
         <Route exact path='/register' component={RegisterForm} />
         <Route exact path='/agreement' component={Agreement} />
         <Route exact path="/viewpost/:id" component={ViewPost} />
+        <ProtectedRoute exact path="/chat/:slug?" component={Chat} />
         <ProtectedRoute exact path="/welcome" component={Welcome} />
         <ProtectedRoute exact path="/artselection" component={ArtSelection} />
         <ProtectedRoute exact path="/start-favas" component={StartFaves} />

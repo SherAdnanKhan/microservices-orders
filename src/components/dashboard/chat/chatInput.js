@@ -30,6 +30,7 @@ const ChatInput = ({
         onKeyUp={onEnter}
         onSearchComplete={onTypingComplete}
         time={1000}
+        autoComplete="off"
       />
 
       {showPostButton &&
