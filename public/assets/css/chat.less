@@ -253,14 +253,21 @@
       margin-top: 15px;
       margin-left: 7px;
     }
-    
-    // .chat-box {
+    .chatUsers{
+      @media @mobile {
+        ::-webkit-scrollbar {
+          display: none !important;
+        }
+      }
       .chatOptions {
         display:none;
         @media @mobile {
           display: flex;
           justify-content: center;
           font-size: 27px;
+          // ::-webkit-scrollbar {
+          //   display: none;
+          // }
         }
       }
       .chatShortcut {
@@ -269,6 +276,8 @@
           overflow-x: auto;
           margin-top: 10px;
           margin-bottom: 5px;
+          height: auto;
+          
         }
         .list-container {
           width: 100%;
@@ -300,6 +309,11 @@
           }
         }
        }
+    }
+    
+    // .chat-box {
+  
+
       .p-style {
         text-align: center;
         margin-top: 4%;

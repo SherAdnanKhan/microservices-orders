@@ -18,7 +18,6 @@ const Chat = () => {
   const { params } = useRouteMatch();
   const { width } = useViewport();
   const breakPoint = 768;
-  const conversationRef = useRef();
   const [currentPage, setCurrentPage] = useState(1);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedConversationId, setSelectedConversationId] = useState("")
@@ -30,6 +29,10 @@ const Chat = () => {
 
   const [activeConversation, setActiveConversation] = useState("");
   const [hasConversation, setHasConversation] = useState(false);
+
+  const conversationRef = useRef();
+
+
 
   useEffect(() => {
     dispatch(getAllConversations());
