@@ -15,7 +15,8 @@ import {
   FEED_STROKE,
   FEED_UNSTROKE,
   POST_STROKE,
-  POST_UNSTROKE
+  POST_UNSTROKE,
+  POST_CREATED
 } from '../constants/keys';
 import { updateUnreadConversations } from '../actions/lobbyActions';
 
@@ -80,6 +81,9 @@ const Notifications = () => {
               break;
             case POST_UNSTROKE:
               toast(`${data.sender.username} disliked your post`);
+              break;
+            case POST_CREATED:
+              toast(`${data.sender.username} added a new exhibit`);
               break;
             default:
               break;
