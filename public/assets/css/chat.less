@@ -3,7 +3,7 @@
   margin: 1% auto 0 auto;
   overflow: hidden;
   width:95%;
-  
+
   @media @mobile {
     flex-direction: column;
   }
@@ -12,6 +12,19 @@
   //   margin-top: 60px;
   // }
   
+      textarea { 
+        display: block;
+        box-sizing: padding-box;
+        width:100%;
+        padding: 10px;
+        overflow:hidden;
+        color:white;
+        resize: none;
+        background: black;
+        border-radius: 7px;
+        max-height: 71px;
+      }
+
   .user-image {
     width: 10%;
   }
@@ -1089,6 +1102,9 @@
         }
       }
       .chat-footer {
+        ::-webkit-scrollbar {
+          display: none !important;
+        }
         .typing-text {
           width: 90%;
           margin: 0 auto;
