@@ -25,6 +25,7 @@ import GroupVideoCall from './components/video/groupVideo';
 import AddVideoArtist from './components/video/addVideoArtist';
 import Agreement from './components/auth/agreement';
 import Chat from "./components/dashboard/chat/chat";
+import Login from "./components/auth/loginForm";
 
 const currentUser = getCurrentUser();
 
@@ -94,8 +95,8 @@ function App() {
         <ProtectedRoute exact path="/group-chat" component={Main} />
         <ProtectedRoute exact path="/settings" component={NavBar} />
         <ProtectedRoute exact path="/feel-history" component={Main} />
-        <Route exact path='/home' component={Home} />
-        <Redirect exact from='/' to='/home' />
+        <Route exact path='/login' component={Login} />
+        <Redirect exact from='/' to='/login' />
       </Switch>
       <Notifications />
       <Call />
