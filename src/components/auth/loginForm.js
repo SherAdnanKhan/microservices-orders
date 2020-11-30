@@ -56,7 +56,22 @@ const LoginForm = () => {
                 </div>
               </div>
             </div>
+            <div className="loginMessage">
+              <p>
+                Welcome to Meuzm, where you will have the opportunity to 
+                discover your many Arts and be able to nurture and 
+                share them with the world.
+              </p>
+              <p>
+                Be one of the first to explore the Beta version of Meuzm,
+                where your feedback will allow us to sculpt and refine 
+                the quality of your experience. Please share your likes
+                and dislikes, as well as recommendations to improve our 
+                site. Your feedback is highly valued.
+              </p>
+            </div>
           </div>
+          
           {/* <h2>LOGIN</h2> */}
           <div className="login-border">
 
