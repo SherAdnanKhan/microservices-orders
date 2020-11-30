@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import LoginForm from './components/auth/loginForm';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import RegisterForm from './components/auth/registerForm';
-import Home from './components/home';
 import ForgotPasswordForm from './components/auth/forgotPasswordForm';
 import ProtectedRoute from './components/common/protectedRoute';
 import ArtSelection from "./components/artSelection";
