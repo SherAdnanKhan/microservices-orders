@@ -11,13 +11,16 @@ import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed }
 import Spinner from "../common/spinner";
 import { completeFormattedDate, formatTime } from "../../utils/helperFunctions";
 import PostModal from "../../components/dashboard/mzFlashGroup/postModal";
-
+import useViewPort from "../common/useViewport";
+import UserCube from "../common/userCube";
 const MzFlash = () => {
   const [comments, setComments] = useState({});
   const [activeComments, setActiveComments] = useState('');
   const [imagePath, setImagepath] = useState("");
   const [showPostModel, setShowPostModel] = useState(false);
   const [mediaType, setMediaType] = useState("");
+  const { width } = useViewPort();
+  const breakpoint = 768;
 
   const dispatch = useDispatch();
   const {
@@ -117,13 +120,21 @@ const MzFlash = () => {
             </div>
           }
           <div className="fav-cub">
-            {userStudio &&
-              <div className="procu">
-                <ProfileCube
-                  avatars={userStudio?.user?.avatars}
-                  feelColor={userStudio?.user?.feel?.color_code}
-                />
-              </div>
+            {userStudio && width > breakpoint
+              ? (
+                <div className="procu">
+                  <ProfileCube
+                    avatars={userStudio?.user?.avatars}
+                    feelColor={userStudio?.user?.feel?.color_code}
+                  />
+                </div>
+              ) : (
+                <div className="feelColorCube">
+                  <UserCube
+                    user={userStudio?.user}
+                  />
+                </div>
+              )
             }
           </div>
           <div className="fav-btn-div">
