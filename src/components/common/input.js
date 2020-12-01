@@ -1,8 +1,17 @@
 import React from 'react';
 
 const Input = ({
-  id, name, label, error, showError = true, children, type = 'text', ...rest
-}) => (
+  id, name, label, error, showError = true, children, onEnter, type = 'text', ...rest
+}) => {
+  const handleKeyUp = e => {
+    e.preventDefault();
+
+    if (e.keyCode === 13) {
+      onEnter && onEnter();
+    }
+  }
+
+  return (
     <>
       <label htmlFor={id}>
         <span className="labelText">
@@ -13,6 +22,7 @@ const Input = ({
           type={type}
           name={name}
           id={id}
+          onKeyUp={handleKeyUp}
           className={error && 'is-invalid'}
           {...rest}
         />
@@ -21,5 +31,6 @@ const Input = ({
         <div className="error">{error}</div>}
     </>
   );
+}
 
 export default Input;
