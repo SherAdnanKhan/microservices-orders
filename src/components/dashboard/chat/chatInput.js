@@ -31,6 +31,7 @@ const ChatInput = ({
         onSearchComplete={onTypingComplete}
         time={1000}
         autoComplete="off"
+        showInput={false}
       />
 
       {showPostButton &&
