@@ -1,0 +1,114 @@
+.wrapperOtp {
+  display: grid;
+  place-items: center;
+  height: 96vh;
+  width: 100%;
+  .verifyBox {
+    position: relative;
+    background: #332E2E;
+    padding: 3% 0%;
+    width: 50%;
+    border-radius: 9px;
+    @media screen and (max-width: 1024px) {
+      width: 65%;
+    }
+    @media @mobile {
+      width: 60%;
+      padding: 10% 0%;
+    }
+    @media screen and (max-width: 550px) {
+      width: 90%;
+    }
+    .logo {
+        max-width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        img {
+            width: 26%;
+        }
+    }
+    .verificationInfo {
+      width: 50%;
+      margin: 0 auto;
+      text-align: center;
+      h1 {
+        @media @mobile {
+          text-align: center;
+        }
+      }
+      @media @mobile {
+        width:85%;
+        text-align: unset;
+      }
+      a {
+        color: orchid;
+      }
+    }
+    .verficationOtp {
+      margin: 0 auto;
+      max-width: 50%;
+      @media @mobile {
+        max-width: 90%;
+      }
+      .otpField {
+        position: relative;
+        .passwordEye {
+          cursor: pointer;
+          i {
+            position: absolute;
+            left: 60%;
+            top: 25%;
+            @media @mobile {
+              left: 61%;
+            }
+          }
+        }
+        
+        .otp {
+          height: 34px;
+          padding: 10px;
+          box-sizing: border-box;
+          border-radius: 7px;
+          border: 1px solid #999999;
+          background: transparent;
+          color: #fff;
+          width: 70%;
+          // .label{
+          //   width: 100%;
+          //   text-align: left;
+          //   display: inline-block;
+          //   margin-bottom: 15px;
+          //   &[for="password"] {
+          //     position: relative;
+          //   }
+          //   .passwordEye {
+          //     position: absolute;
+          //     z-index: 1;
+          //     right: 15px;
+          //     top: 40px;
+          //     color: #ffffff;
+          //     cursor: pointer;
+          //   }
+          // } 
+        }
+        button {
+          height: 34px;
+          background: transparent;
+          color: #fff;
+          border: 1px solid #999999;
+          border-radius: 50px;
+          width: 20%;
+          margin-left: 15px;
+          cursor: pointer;
+          &.disable {
+            background: transparent;
+          }
+          &.enable {
+            background:gray;
+          }
+        }
+      }
+    }
+  }
+}
+

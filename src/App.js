@@ -25,6 +25,7 @@ import AddVideoArtist from './components/video/addVideoArtist';
 import Agreement from './components/auth/agreement';
 import Chat from "./components/dashboard/chat/chat";
 import Login from "./components/auth/loginForm";
+import Verification from './components/auth/verification';
 
 const currentUser = getCurrentUser();
 
@@ -95,6 +96,7 @@ function App() {
         <ProtectedRoute exact path="/settings" component={NavBar} />
         <ProtectedRoute exact path="/feel-history" component={Main} />
         <Route exact path='/login' component={Login} />
+        <Route exact path="/verification" component={Verification} />
         <Redirect exact from='/' to='/login' />
       </Switch>
       <Notifications />
