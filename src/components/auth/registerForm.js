@@ -213,6 +213,7 @@ const RegisterForm = () => {
   };
 
   const handleNextPress = () => {
+    console.log("next press is called")
     const errors = validate();
     if (!errors && step < 9) {
       setStep(step => step + 1);
@@ -282,6 +283,7 @@ const RegisterForm = () => {
                     onChange={handleChange}
                     error={errors.first_name}
                     showError={false}
+                    onEnter={handleNextPress}
                   />
                   <Input
                     name="last_name"
@@ -291,6 +293,7 @@ const RegisterForm = () => {
                     onChange={handleChange}
                     error={errors.last_name}
                     showError={false}
+                    onEnter={handleNextPress}
                   />
                   {errors.name && (
                     <div className="error">
@@ -313,6 +316,7 @@ const RegisterForm = () => {
                     onChange={handleChange}
                     error={errors.dateOfBirth}
                     max={completeDate(new Date())}
+                    onEnter={handleNextPress}
                   />
                 </div>
               )}
@@ -326,6 +330,7 @@ const RegisterForm = () => {
                     value={data.username}
                     onChange={handleChange}
                     error={errors.username}
+                    onEnter={handleNextPress}
                   />
                 </div>
               )}
@@ -339,6 +344,7 @@ const RegisterForm = () => {
                     value={data.email}
                     onChange={handleChange}
                     error={errors.email}
+                    onEnter={handleNextPress}
                   />
                 </div>
               )}
@@ -353,6 +359,7 @@ const RegisterForm = () => {
                     value={data.password}
                     onChange={handleChange}
                     error={errors.password}
+                    onEnter={handleNextPress}
                   />
                   <Input
                     type="password"
@@ -362,6 +369,7 @@ const RegisterForm = () => {
                     value={data.confirm_password}
                     onChange={handleChange}
                     error={errors.confirm_password}
+                    onEnter={handleNextPress}
                   />
                 </div>
               )}
@@ -383,6 +391,7 @@ const RegisterForm = () => {
                     accept=".png, .jpg, .jpeg"
                     onChange={handleChange}
                     error={errors.avatar}
+                    onEnter={handleNextPress}
                   >
                     <h3>Click avatar to add your own profile pic</h3>
                     <label htmlFor="avatar" className={errors.avatar ? 'avatar clickable is-invalid' : 'avatar clickable'}>
@@ -402,6 +411,7 @@ const RegisterForm = () => {
                     value={data.agreement}
                     type="checkbox"
                     onChange={handleChange}
+                    onEnter={handleNextPress}
                   />
                   <a className="agreement"
                     href="/agreement"
