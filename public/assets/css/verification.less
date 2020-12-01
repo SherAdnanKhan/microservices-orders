@@ -1,0 +1,61 @@
+.wrapperOtp {
+  display: grid;
+  place-items: center;
+  height: 96vh;
+  width: 100%;
+  .verifyBox {
+    position: relative;
+    background: #332E2E;
+    padding: 3% 0%;
+    width: 50%;
+    border-radius: 9px;
+    @media @mobile {
+      width: 90%;
+      padding: 10% 0%;
+    }
+    .logo {
+        max-width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        img {
+            width: 26%;
+        }
+    }
+    .verficationOtp {
+      margin: 0 auto;
+      max-width: 50%;
+      @media @mobile {
+        max-width: 90%;
+      }
+      .otpField {
+        .otp {
+          height: 34px;
+          padding: 10px;
+          box-sizing: border-box;
+          border-radius: 7px;
+          border: 1px solid #999999;
+          background: transparent;
+          color: #fff;
+          width: 70%;
+        }
+        button {
+          height: 34px;
+          background: transparent;
+          color: #fff;
+          border: 1px solid #999999;
+          border-radius: 50px;
+          width: 20%;
+          margin-left: 15px;
+          cursor: pointer;
+          &.disable {
+            background: transparent;
+          }
+          &.enable {
+            background:gray;
+          }
+        }
+      }
+    }
+  }
+}
+

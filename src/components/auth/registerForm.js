@@ -10,7 +10,6 @@ import ImageCropper from '../common/imageCropper';
 import { isEmpty, completeDate } from '../../utils/helperFunctions';
 import { alphabets, alphabetsWithoutSpecialChars } from "../../constants/regex";
 
-
 const RegisterForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -134,7 +133,8 @@ const RegisterForm = () => {
       case 5:
         if (!data.email) {
           errors.email = 'Please fillout your Email.';
-        } else if (!emailWithDomains.test(data.email)) {
+        }
+        else if (!emailWithDomains.test(data.email)) {
           errors.email = 'Not valid Email.';
         }
         break;
@@ -194,7 +194,12 @@ const RegisterForm = () => {
             setErrors({ ...errors, dateOfBirth: "" })
           }
         }
-        setData({ ...data, [input.name]: input.value });
+        if (input.name === "email") {
+          setData({ ...data, [input.name]: input.value.trim(" ") });
+        }
+        else {
+          setData({ ...data, [input.name]: input.value });
+        }
       }
     }
   };
