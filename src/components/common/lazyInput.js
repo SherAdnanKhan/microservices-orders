@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -7,10 +7,22 @@ const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, showInpu
   let searchQueryChangeObservable = useRef('');
 
   const textarea = document.querySelector(".autoExpand");
+  const resizeTextArea = useCallback(() => {
+    if (textarea) {
+      textarea.style.height = "";
+      if (textarea.scrollHeight > 82) {
+        textarea.style.overflowY = 'scroll';
+        textarea.style.height = textarea.scrollHeight + "px";
+      }
+      else {
+        textarea.style.height = Math.min(textarea.scrollHeight - 20, 300) + "px";
+      }
+    }
+  }, [textarea])
 
   useEffect(() => {
     resizeTextArea();
-  }, [value])
+  }, [value, resizeTextArea])
 
   useEffect(() => {
     searchQueryChangeObservable.current = searchSubject.pipe(
@@ -34,19 +46,7 @@ const LazyInput = ({ id, name, time, value, onSearchComplete, onChange, showInpu
     onChange(input.value);
   }
 
-  const resizeTextArea = () => {
 
-    if (textarea) {
-      textarea.style.height = "";
-      if (textarea.scrollHeight > 82) {
-        textarea.style.overflowY = 'scroll';
-        textarea.style.height = textarea.scrollHeight + "px";
-      }
-      else {
-        textarea.style.height = Math.min(textarea.scrollHeight - 20, 300) + "px";
-      }
-    }
-  }
 
   return (
     <>
