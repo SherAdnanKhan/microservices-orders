@@ -28,56 +28,62 @@ const UserSection = ({
         ? (
           <>
             {activeUserList === 1 &&
-              <VerticalSlider>
-                {sprfvsUsers &&
-                  sprfvsUsers.map((user, index) => (
-                    <div
-                      className={index === 0 ? 'item active' : 'item'}
-                      key={index}
-                      onClick={() => onActiveUser(user)}
-                    >
-                      <div className="cube">
-                        <UserCube user={user} />
+              <div style={{ overflowY: 'auto', height: '40vh' }}>
+                <VerticalSlider>
+                  {sprfvsUsers &&
+                    sprfvsUsers.map((user, index) => (
+                      <div
+                        className={index === 0 ? 'item active' : 'item'}
+                        key={index}
+                        onClick={() => onActiveUser(user)}
+                      >
+                        <div className="cube">
+                          <UserCube user={user} />
+                        </div>
                       </div>
-                    </div>
-                  ))
-                }
-              </VerticalSlider>
+                    ))
+                  }
+                </VerticalSlider>
+              </div>
             }
             {(activeUserList === 2 || activeUserList === 4) &&
-              <VerticalSlider>
-                {favouriteUsers &&
-                  favouriteUsers.data.map((user, index) => (
-                    <div
-                      className={index === 0 ? 'item active' : 'item'}
-                      key={index}
-                      onClick={() => onActiveUser(user)}
-                    >
-                      <div className="cube">
-                        <UserCube user={user} />
+              <div style={{ overflowY: 'auto', height: '40vh' }}>
+                <VerticalSlider>
+                  {favouriteUsers &&
+                    favouriteUsers.data.map((user, index) => (
+                      <div
+                        className={index === 0 ? 'item active' : 'item'}
+                        key={index}
+                        onClick={() => onActiveUser(user)}
+                      >
+                        <div className="cube">
+                          <UserCube user={user} />
+                        </div>
                       </div>
-                    </div>
-                  ))
-                }
-              </VerticalSlider>
+                    ))
+                  }
+                </VerticalSlider>
+              </div>
             }
 
             {activeUserList === 3 &&
-              <VerticalSlider>
-                {faveAndSprfvsUsers &&
-                  faveAndSprfvsUsers.map((user, index) => (
-                    <div
-                      className={index === 0 ? 'item active' : 'item'}
-                      key={index}
-                      onClick={() => onActiveUser(user)}
-                    >
-                      <div className="cube">
-                        <UserCube user={user} />
+              <div style={{ overflowY: 'auto', height: '40vh' }}>
+                <VerticalSlider>
+                  {faveAndSprfvsUsers &&
+                    faveAndSprfvsUsers.map((user, index) => (
+                      <div
+                        className={index === 0 ? 'item active' : 'item'}
+                        key={index}
+                        onClick={() => onActiveUser(user)}
+                      >
+                        <div className="cube">
+                          <UserCube user={user} />
+                        </div>
                       </div>
-                    </div>
-                  ))
-                }
-              </VerticalSlider>
+                    ))
+                  }
+                </VerticalSlider>
+              </div>
             }
           </>
         ) : (
@@ -98,40 +104,43 @@ const UserSection = ({
               </HorizontalSlider>
             } */}
             {activeUserList === 2 &&
-              <HorizontalSlider>
-                {favouriteUsers &&
-                  favouriteUsers.data.map((user, index) => (
-                    <div
-                      className="item"
-                      key={index}
-                      onClick={() => onActiveUser(user)}
-                    >
-                      <UserCube user={user} />
-                    </div>
-                  ))
-                }
-              </HorizontalSlider>
+              <div style={{ overflowX: 'auto' }}>
+                <HorizontalSlider>
+                  {favouriteUsers &&
+                    favouriteUsers.data.map((user, index) => (
+                      <div
+                        className="item"
+                        key={index}
+                        onClick={() => onActiveUser(user)}
+                      >
+                        <UserCube user={user} />
+                      </div>
+                    ))
+                  }
+                </HorizontalSlider>
+              </div>
             }
 
             {activeUserList === 3 &&
-              <HorizontalSlider>
-                {faveAndSprfvsUsers &&
-                  faveAndSprfvsUsers.map((user, index) => (
-                    <div
-                      className="item"
-                      key={index}
-                      onClick={() => onActiveUser(user)}
-                    >
-                      <UserCube user={user} />
-                    </div>
-                  ))
-                }
-              </HorizontalSlider>
+              <div style={{ overflowX: 'auto' }}>
+                <HorizontalSlider>
+                  {faveAndSprfvsUsers &&
+                    faveAndSprfvsUsers.map((user, index) => (
+                      <div
+                        className="item"
+                        key={index}
+                        onClick={() => onActiveUser(user)}
+                      >
+                        <UserCube user={user} />
+                      </div>
+                    ))
+                  }
+                </HorizontalSlider>
+              </div>
             }
           </>
         )
       }
-
     </div>
   );
 };

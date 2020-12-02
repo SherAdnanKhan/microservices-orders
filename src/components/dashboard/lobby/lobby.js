@@ -11,6 +11,9 @@ import ToolTip from "../../common/toolTip/toolTip";
 import Spinner from '../../common/spinner';
 import useViewport from '../../common/useViewport';
 import { useWindowUnloadEffect } from '../../common/useWindowUnloadEffect';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import HorizontalInfiniteScroller from '../../common/horizontalInfiniteScroller';
+
 import {
   getFavouriteGalleryUsers,
   getFavouritePosts,
@@ -43,6 +46,7 @@ const Lobby = () => {
 
   const [currentLobbyPage, setCurrentLobbyPage] = useState(1);
   const [currentFeedPage, setCurrentFeedPage] = useState(1);
+  const [currentFavUsersPage, setCurrentFavUsersPage] = useState(1);
   const postRef = useRef();
 
   useWindowUnloadEffect(() => {
@@ -130,6 +134,11 @@ const Lobby = () => {
     setCurrentFeedPage(currentFeedPage => currentFeedPage + 1);
   };
 
+  const fetchNextFavUsers = () => {
+    dispatch(getFavouriteGalleryUsers(currentFavUsersPage + 1));
+    setCurrentFavUsersPage(currentFavUsersPage => currentFavUsersPage + 1);
+  }
+
   return (
     <div className="lobby-page">
       {(postLoader || loading) && currentLobbyPage !== 1 && <Spinner />}
@@ -156,31 +165,48 @@ const Lobby = () => {
         <div className="col-2 section-1  box-1" id="sec">
           {width > breakpoint
             ? (
-              <VerticalSlider>
-                {favouriteUsers &&
-                  favouriteUsers?.data.map((user, index) => (
-                    <div key={index}>
-                      <Link to={`/studio/${user.slug}`}>
-                        <UserCube user={user} />
-                      </Link>
-                    </div>
-                  ))
-                }
-              </VerticalSlider>
-            ) : (
-              <HorizontalSlider>
-                {favouriteUsers &&
-                  favouriteUsers?.data.map((user, index) => (
-                    <div key={index}>
-                      <div className="item">
+              <InfiniteScroll
+                dataLength={favouriteUsers?.data?.length}
+                next={fetchNextFavUsers}
+                hasMore={favouriteUsers?.next_page_url ? true : false}
+                height="60vh"
+              >
+                <VerticalSlider>
+                  {favouriteUsers &&
+                    favouriteUsers?.data.map((user, index) => (
+                      <div key={index}>
                         <Link to={`/studio/${user.slug}`}>
                           <UserCube user={user} />
                         </Link>
                       </div>
-                    </div>
-                  ))
-                }
-              </HorizontalSlider>
+                    ))
+                  }
+                </VerticalSlider>
+              </InfiniteScroll>
+            ) : (
+              <HorizontalInfiniteScroller
+                dataLength={favouriteUsers?.data?.length}
+                onNextPage={fetchNextFavUsers}
+                hasMore={favouriteUsers?.next_page_url ? true : false}
+              >
+                <HorizontalSlider
+                  dataLength={favouriteUsers?.data?.length}
+                  onNextPage={fetchNextFavUsers}
+                  hasMore={favouriteUsers?.next_page_url ? true : false}
+                >
+                  {favouriteUsers &&
+                    favouriteUsers?.data.map((user, index) => (
+                      <div key={index}>
+                        <div className="item">
+                          <Link to={`/studio/${user.slug}`}>
+                            <UserCube user={user} />
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  }
+                </HorizontalSlider>
+              </HorizontalInfiniteScroller>
             )
           }
 

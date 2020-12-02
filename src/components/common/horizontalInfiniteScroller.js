@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 const HorizontalInfiniteScroller = ({ dataLength, onNextPage, hasMore, children }) => {
   const [shouldCallNext, setShouldCallNext] = useState(false);
   const scrollRef = useRef();
-  console.log("hasmore=", hasMore)
 
   useEffect(() => {
     if (dataLength)
@@ -16,7 +15,7 @@ const HorizontalInfiniteScroller = ({ dataLength, onNextPage, hasMore, children 
     const clientWidth = scrollRef.current.clientWidth
     const percentage = (scrollLeft / (scrollWidth - clientWidth)) * 100;
 
-    if (percentage > 80 && shouldCallNext && hasMore) {
+    if (percentage > 70 && shouldCallNext && hasMore) {
       onNextPage();
       setShouldCallNext(false);
     }

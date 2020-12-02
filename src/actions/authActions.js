@@ -2,6 +2,7 @@ import http from '../services/httpService';
 import { userKey, tokenKey } from '../constants/keys';
 import { isEmpty } from '../utils/helperFunctions';
 import socket from '../services/socketService';
+import { toast } from 'react-toastify';
 
 export const register = credentials => () => {
   http
@@ -63,3 +64,27 @@ export const logout = () => {
   localStorage.clear();
   window.location.href = '/login';
 };
+
+export const resendVerificationCode = dispatch => () => {
+  http
+    .get('/auth/resend-verify-code')
+    .then(res => {
+      toast.success('Verification code sent successfully.');
+    })
+    .catch(err => {
+      if (err.response.status === 404 || err.response.status === 400) {
+        toast.error(err.response.data?.errors?.error);
+        dispatch(logout());
+      }
+    });
+}
+
+export const verifyEmail = data => () => {
+  http
+    .post('/auth/verify', data)
+    .then(res => {
+      localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
+      toast.success('Email verified successfully.');
+      window.location.href = '/lobby';
+    })
+}

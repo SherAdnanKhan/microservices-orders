@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Input = ({
-  id, name, label, error, showError = true, children, onEnter, type = 'text', ...rest
+  id, name, label, error, showError = true, children, onEnter, type = 'text', childPosition = 'up', ...rest
 }) => {
   const handleKeyUp = e => {
     e.preventDefault();
@@ -17,7 +17,11 @@ const Input = ({
         <span className="labelText">
           {label}
         </span>
-        {children && children}
+        {childPosition === 'up' &&
+          <>
+            {children && children}
+          </>
+        }
         <input
           type={type}
           name={name}
@@ -27,6 +31,11 @@ const Input = ({
           {...rest}
         />
       </label>
+      {childPosition === 'down' &&
+        <>
+          {children && children}
+        </>
+      }
       {showError && error &&
         <div className="error">{error}</div>}
     </>

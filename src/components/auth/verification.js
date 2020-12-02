@@ -1,22 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { getCurrentUser } from '../../actions/authActions';
+import { getCurrentUser, resendVerificationCode, verifyEmail } from '../../actions/authActions';
 import Input from '../common/input';
-
+import Spinner from '../common/spinner';
 
 const Verification = () => {
   const currentUser = getCurrentUser();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const [code, setCode] = useState('');
+  const [codeError, setCodeError] = useState('');
+  const {
+    loading: { loading },
+    error: { error }
+  } = useSelector(state => state);
 
   useEffect(() => {
     if (currentUser.email_verified_at) {
-      history.goBack();
+      return history.goBack();
     }
   }, [history, currentUser]);
 
-  return (
+  const handleResendCode = e => {
+    e.preventDefault();
+    dispatch(resendVerificationCode());
+    console.log('resend');
+  }
 
+  const handleVerifyCode = () => {
+    if (!code) {
+      setCodeError('Please enter verification code.')
+    } else if (code.length < 5) {
+      setCodeError('Verification code should be max 5 characters.')
+    } else {
+      setCode('');
+      const data = {
+        verification_code: code
+      }
+      dispatch(verifyEmail(data))
+    }
+  }
+
+  return (
     <div className="wrapperOtp">
+      {loading && <Spinner />}
       <div className="verifyBox">
         <div className="logo">
           <div className="animatedLogo">
@@ -42,7 +70,7 @@ const Verification = () => {
         </div>
         <div className="verificationInfo">
           <h1> Welcome {currentUser.username}</h1>
-          <p>Please enter the verfication code we sent to {currentUser.email} <Link> Resend code </Link></p>
+          <p>Please enter the verfication code we sent to {currentUser.email} <Link onClick={handleResendCode}> Resend code </Link></p>
         </div>
         <div className="verficationOtp" >
           <div className="otpField">
@@ -51,8 +79,18 @@ const Verification = () => {
               className="otp"
               placeholder="xxxxx"
               maxLength="5"
-            />
-            <button type="button" disable className="disable">Verify</button>
+              error={error?.message || codeError}
+              childPosition="down"
+              onChange={e => setCode(e.target.value)}
+            >
+              <button
+                type="button"
+                onClick={handleVerifyCode}
+                className="disable"
+              >
+                Verify
+              </button>
+            </Input>
           </div>
         </div>
       </div>
