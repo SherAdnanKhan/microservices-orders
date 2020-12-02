@@ -7,15 +7,20 @@ const ProtectedRoute = ({
   path, component: Component, render, ...rest
 }) => {
   const user = getCurrentUser();
-
   return (
     <UserContext.Provider value={user}>
       <Route
         path={path}
         {...rest}
-        render={props => (!getCurrentUser()
-          ? <Redirect to="/login" /> : Component
-            ? <Component {...props} user={getCurrentUser()} /> : render(props))}
+        render={props => (
+          !user
+            ? <Redirect to="/login" />
+            : !user.email_verified_at
+              ? <Redirect to="/verification" />
+              : Component
+                ? <Component {...props} user={getCurrentUser()} />
+                : render(props)
+        )}
       />
     </UserContext.Provider>
   );

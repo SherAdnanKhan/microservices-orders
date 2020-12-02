@@ -9,9 +9,9 @@ import {
 } from "../constants/actionTypes";
 import http from '../services/httpService';
 
-export const getFavouriteGalleryUsers = () => dispatch => {
+export const getFavouriteGalleryUsers = (page = 1) => dispatch => {
   http
-    .get('/lobby/faved-users')
+    .get(`/lobby/faved-users?page=${page}`)
     .then(res => {
       dispatch({
         type: GET_FAV_GALLERY_USERS,
