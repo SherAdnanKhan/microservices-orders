@@ -29,12 +29,12 @@ const RegisterForm = () => {
     first_name: '',
     last_name: '',
     username: '',
-    date_of_birth: "",
+    dob: "",
     email: '',
     password: '',
     confirm_password: '',
     avatar: null,
-    agreement: false,
+    agreement: 0,
   });
 
   // this hook will
@@ -50,7 +50,8 @@ const RegisterForm = () => {
 
   useEffect(() => {
     if (localStorage.data) {
-      setData(JSON.parse(localStorage.getItem('data')));
+      const _data = JSON.parse(localStorage.getItem('data'));
+      setData(_data);
     }
 
     if (localStorage.step) {
@@ -59,9 +60,6 @@ const RegisterForm = () => {
     } else {
       setStep(1);
     }
-    return () => {
-      localStorage.removeItem('data')
-    };
   }, []);
 
   const validate = () => {
@@ -109,13 +107,13 @@ const RegisterForm = () => {
         }
         break;
       case 3:
-        if (!data.date_of_birth) {
-          errors.date_of_birth = 'Please select date of birth';
+        if (!data.dob) {
+          errors.dob = 'Please select date of birth';
         }
         else {
-          ageError = validateAge(data.date_of_birth);
+          ageError = validateAge(data.dob);
           if (ageError) {
-            errors.date_of_birth = 'Age must be atleast 13 years or greater'
+            errors.dob = 'Age must be atleast 13 years or greater'
           }
         }
         break;
@@ -151,7 +149,7 @@ const RegisterForm = () => {
         }
         break;
       case 8:
-        if (!JSON.parse(data.agreement)) {
+        if (!data.agreement) {
           errors.agreement = 'Please select terms and conditions to proceed';
         }
         break;
@@ -183,15 +181,15 @@ const RegisterForm = () => {
         if (input.checked) {
           setErrors({ ...errors, agreement: '' });
         }
-        setData({ ...data, [input.name]: input.checked });
+        setData({ ...data, [input.name]: input.checked ? 1 : 0 });
       } else {
         if (input.type === "date") {
           const isErrors = validateAge(input.value);
           if (isErrors) {
-            setErrors({ ...errors, date_of_birth: "Age must be atleast 13 years or greater" })
+            setErrors({ ...errors, dob: "Age must be atleast 13 years or greater" })
           }
           else {
-            setErrors({ ...errors, date_of_birth: "" })
+            setErrors({ ...errors, dob: "" })
           }
         }
         if (input.name === "email") {
@@ -223,6 +221,8 @@ const RegisterForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    e.stopPropagation();
+    console.log('submitting..')
     const formData = new FormData();
 
     if (!isEmpty(croppedImage)) {
@@ -231,7 +231,9 @@ const RegisterForm = () => {
     for (let key in data) {
       formData.append(key, data[key]);
     }
+    setData({});
     dispatch(register(formData));
+
   };
 
   const handleCompleteCrop = blob => {
@@ -258,7 +260,7 @@ const RegisterForm = () => {
           </span>
         </div>
         <div className="wrapper registerationScreen">
-          <form className="view" onSubmit={handleSubmit}>
+          <form className="view">
             {step === 1
               && (
                 <div className="animated" step={1} active="true">
@@ -308,13 +310,13 @@ const RegisterForm = () => {
               && (
                 <div className="animated fullWidth" step={3}>
                   <Input
-                    name="date_of_birth"
+                    name="dob"
                     type="date"
-                    className="date_of_birth"
+                    className="dob"
                     label="Select date of birth"
-                    value={data.date_of_birth}
+                    value={data.dob}
                     onChange={handleChange}
-                    error={errors.date_of_birth}
+                    error={errors.dob}
                     max={completeDate(new Date())}
                     onEnter={handleNextPress}
                   />
@@ -322,7 +324,7 @@ const RegisterForm = () => {
               )}
             {step === 4
               && (
-                <div className="animated fullWidth" step={3}>
+                <div className="animated fullWidth" step={4}>
                   <Input
                     name="username"
                     id="username"
@@ -336,7 +338,7 @@ const RegisterForm = () => {
               )}
             {step === 5
               && (
-                <div className="animated fullWidth" step={4}>
+                <div className="animated fullWidth" step={5}>
                   <Input
                     name="email"
                     id="email"
@@ -350,7 +352,7 @@ const RegisterForm = () => {
               )}
             {step === 6
               && (
-                <div className="animated fullWidth" step={5}>
+                <div className="animated fullWidth" step={6}>
                   <Input
                     type="password"
                     name="password"
@@ -375,7 +377,7 @@ const RegisterForm = () => {
               )}
             {step === 7
               && (
-                <div className="animated fullWidth" step={6}>
+                <div className="animated fullWidth" step={7}>
                   <ImageCropper
                     imageUrl={image}
                     toggle={toggle}
@@ -430,6 +432,7 @@ const RegisterForm = () => {
                   <div className="action">
                     <button
                       className="btn"
+                      onClick={handleSubmit}
                     >
                       Create Studio
                     </button>

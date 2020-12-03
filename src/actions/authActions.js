@@ -12,7 +12,7 @@ export const register = credentials => () => {
       localStorage.removeItem('data');
 
       setCurrentUser(res.data.data);
-      window.location.href = '/welcome';
+      window.location.href = '/verification';
     });
 };
 
@@ -21,7 +21,12 @@ export const login = credentials => dispatch => {
     .post('/auth/login', credentials)
     .then(res => {
       setCurrentUser(res.data.data);
-      window.location.href = '/lobby';
+
+      if (res?.data?.data?.user?.email_verified_at) {
+        window.location.href = '/lobby';
+      } else {
+        window.location.href = '/verification';
+      }
     });
 };
 
@@ -85,6 +90,6 @@ export const verifyEmail = data => () => {
     .then(res => {
       localStorage.setItem(userKey, JSON.stringify(res.data.data.user));
       toast.success('Email verified successfully.');
-      window.location.href = '/lobby';
+      window.location.href = '/welcome';
     })
 }

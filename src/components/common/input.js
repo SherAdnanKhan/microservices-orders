@@ -5,6 +5,7 @@ const Input = ({
 }) => {
   const handleKeyUp = e => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (e.keyCode === 13) {
       onEnter && onEnter();

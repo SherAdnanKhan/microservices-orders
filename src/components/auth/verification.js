@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { getCurrentUser, resendVerificationCode, verifyEmail } from '../../actions/authActions';
+import { getCurrentUser, logout, resendVerificationCode, verifyEmail } from '../../actions/authActions';
 import Input from '../common/input';
 import Spinner from '../common/spinner';
 
@@ -16,10 +16,13 @@ const Verification = () => {
     error: { error }
   } = useSelector(state => state);
 
+  const handleLogin = () => {
+    dispatch(logout());
+  }
+
   useEffect(() => {
-    if (currentUser.email_verified_at) {
-      return history.goBack();
-    }
+    if (!currentUser) return history.push('/login');
+    else if (currentUser.email_verified_at) return history.goBack();
   }, [history, currentUser]);
 
   const handleResendCode = e => {
@@ -69,8 +72,8 @@ const Verification = () => {
           {/* <img src="/assets/images/logoIconGold.png" alt="" /> */}
         </div>
         <div className="verificationInfo">
-          <h1> Welcome {currentUser.username}</h1>
-          <p>Please enter the verfication code we sent to {currentUser.email} <Link onClick={handleResendCode}> Resend code </Link></p>
+          <h1> Welcome {currentUser?.username}</h1>
+          <p>Please enter the verfication code we sent to {currentUser?.email} <Link onClick={handleResendCode}> Resend code </Link></p>
         </div>
         <div className="verficationOtp" >
           <div className="otpField">
@@ -91,6 +94,9 @@ const Verification = () => {
                 Verify
               </button>
             </Input>
+          </div>
+          <div className="loginLink">
+            <Link onClick={handleLogin}> Login </Link>
           </div>
         </div>
       </div>
