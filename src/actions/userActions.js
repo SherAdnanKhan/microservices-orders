@@ -240,3 +240,11 @@ export const unMuteUser = (data, username) => dispatch => {
       });
     })
 };
+export const sendFeedback = (data) => dispatch => {
+  http
+    .post('feedback', data)
+    .then(res => {
+      toast.success(`Feedback has been successfully sent`)
+    })
+    .catch(error => toast.error(error.response.data.errors.message))
+};

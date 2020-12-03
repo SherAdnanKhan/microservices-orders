@@ -3,25 +3,32 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import Search from './search';
 import { useSelector } from "react-redux";
 import ToolTip from "../../common/toolTip/toolTip";
+import FeedBackModal from '../../common/feedbackModal.js';
 
 const Header = () => {
   const history = useHistory();
   const { feelColor } = useSelector(state => state.feelColor);
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, setShowSearch] = useState(true);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const location = useLocation();
   const url = location?.pathname?.split('/')[1];
 
   const handleToggleSearch = () => {
     setShowSearch(!showSearch);
   }
-
+  const toggleFeedbackModal=(value)=>{
+    setShowFeedbackModal(value);
+  }
   return (
     <>
+    {showFeedbackModal &&
+    <FeedBackModal onCancel={toggleFeedbackModal} />
+    }
       <div
         className="top"
         id="main-menu"
         style={{ backgroundColor: feelColor }}
-      >
+      > 
         <div className="contentFit d-flex">
           <div className="logo-icon">
             <img className="valut-img" alt="" src="/assets/images/logowhite.png" />
@@ -70,7 +77,12 @@ const Header = () => {
             />
             <ToolTip id="search" position="bottom" />
           </div>
-          <div className="right-icon">
+          <div className="feedback-section">
+          <button onClick={()=>toggleFeedbackModal(true)} > 
+              Give Feedback
+            </button>
+          </div>
+          <div className="right-icon">          
             <img className="valut-img"
               alt=""
               src="/assets/images/strqicon.png"
@@ -117,3 +129,4 @@ const Header = () => {
 };
 
 export default Header;
+
