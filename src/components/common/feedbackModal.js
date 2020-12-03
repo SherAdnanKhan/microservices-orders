@@ -8,7 +8,8 @@ import ModalHeader from './modal/modalHeader';
 import { useDispatch } from "react-redux";
 import { fileUpload } from "../../actions/genericActions";
 import Input from './input';
-import { isEmpty } from 'rxjs/operators';
+import { sendFeedback } from "../../actions/userActions";
+import { isEmpty } from "../../utils/helperFunctions"
 
 const FeedBackModal = ({ onCancel }) => {
   const [feedback, setFeedback] = useState('');
@@ -75,15 +76,18 @@ const FeedBackModal = ({ onCancel }) => {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     const _errors = validate();
-
     if (isEmpty(_errors)) {
+      let data = {
+        feedback: feedback,
+        image_path: imageUrl
+      }
+      dispatch(sendFeedback(data))
       onCancel(false)
     }
-    else {
-      setErrors(_errors)
-    }
+    setErrors(_errors)
   }
 
   const handleStopLoading = () => {
@@ -145,8 +149,9 @@ const FeedBackModal = ({ onCancel }) => {
           </div>
         </ModalBody>
         <ModalFooter>
-          <button style={{ backgroundColor: user.feel.color_code }}
-            onClick={() => handleSubmit()} >Send</button>
+          <button
+            style={{ backgroundColor: user.feel.color_code }}
+            onClick={handleSubmit} >Send</button>
         </ModalFooter>
       </Modal>
     </div>
