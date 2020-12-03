@@ -8,7 +8,7 @@ import ModalHeader from './modal/modalHeader';
 import { useDispatch } from "react-redux";
 import { fileUpload } from "../../actions/genericActions";
 import Input from './input';
-
+import { isEmpty } from 'rxjs/operators';
 
 const FeedBackModal = ({ onCancel }) => {
   const [feedback, setFeedback] = useState('');
@@ -20,7 +20,6 @@ const FeedBackModal = ({ onCancel }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(errors)
   }, [errors]);
 
   const validate = () => {
@@ -79,11 +78,12 @@ const FeedBackModal = ({ onCancel }) => {
   const handleSubmit = () => {
     const _errors = validate();
 
-    if (!errors) {
-      console.log("no  errors")
-      // onCancel(false)
+    if (isEmpty(_errors)) {
+      onCancel(false)
     }
-    setErrors(_errors)
+    else {
+      setErrors(_errors)
+    }
   }
 
   const handleStopLoading = () => {
