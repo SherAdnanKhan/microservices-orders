@@ -29,7 +29,7 @@ const RegisterForm = () => {
     first_name: '',
     last_name: '',
     username: '',
-    dateOfBirth: "",
+    date_of_birth: "",
     email: '',
     password: '',
     confirm_password: '',
@@ -109,13 +109,13 @@ const RegisterForm = () => {
         }
         break;
       case 3:
-        if (!data.dateOfBirth) {
-          errors.dateOfBirth = 'Please select date of birth';
+        if (!data.date_of_birth) {
+          errors.date_of_birth = 'Please select date of birth';
         }
         else {
-          ageError = validateAge(data.dateOfBirth);
+          ageError = validateAge(data.date_of_birth);
           if (ageError) {
-            errors.dateOfBirth = 'Age must be atleast 13 years or greater'
+            errors.date_of_birth = 'Age must be atleast 13 years or greater'
           }
         }
         break;
@@ -188,10 +188,10 @@ const RegisterForm = () => {
         if (input.type === "date") {
           const isErrors = validateAge(input.value);
           if (isErrors) {
-            setErrors({ ...errors, dateOfBirth: "Age must be atleast 13 years or greater" })
+            setErrors({ ...errors, date_of_birth: "Age must be atleast 13 years or greater" })
           }
           else {
-            setErrors({ ...errors, dateOfBirth: "" })
+            setErrors({ ...errors, date_of_birth: "" })
           }
         }
         if (input.name === "email") {
@@ -308,13 +308,13 @@ const RegisterForm = () => {
               && (
                 <div className="animated fullWidth" step={3}>
                   <Input
-                    name="dateOfBirth"
+                    name="date_of_birth"
                     type="date"
-                    className="dateOfBirth"
+                    className="date_of_birth"
                     label="Select date of birth"
-                    value={data.dateOfBirth}
+                    value={data.date_of_birth}
                     onChange={handleChange}
-                    error={errors.dateOfBirth}
+                    error={errors.date_of_birth}
                     max={completeDate(new Date())}
                     onEnter={handleNextPress}
                   />

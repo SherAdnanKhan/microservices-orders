@@ -150,6 +150,106 @@ input {
       }
     }
   }
+  .feedback-modal {
+    .myModal {          
+      .innerModal {
+        .modalBody {
+          .modalContent {
+            .title {
+              text-align: center;
+            }
+            .cube-section{
+              text-align: center;
+            }
+            .cuna {
+              display:none;
+            }
+            .avatar {
+              border: 1px solid #ffffff;
+              max-width: 200px;
+              height: 200px;
+              border-radius: 5px;
+              margin: 20px auto;
+              overflow: hidden;
+              display: block;
+              @media @mobile {
+                max-width: 150px;
+                height: 150px;
+              }
+
+              .imagePreview {
+                position: relative;
+                max-width: 200px;
+                height: 200px;
+                .trashSection {
+                  width: 25px;
+                  height: 25px;
+                  position: absolute;
+                  border-radius: 50%;
+                  background: rgba(0,0,0,.3);
+                  top: 2px;
+                  right: 2px;
+                  z-index: 5;
+                  padding: 5px;
+                  
+                  i {
+                    position: absolute;
+                    right: 11px;
+                    top: 8px;
+                  }
+                }
+                
+                svg {
+                  position: absolute;
+                  left: 0;
+                  right: 0;
+                  top: 0;
+                  bottom: 0;
+                  margin: auto !important;
+                  z-index: 5;
+                }
+              }
+              img {
+                height: 200px;
+                max-width: 205px;
+                @media @mobile {
+                  height: inherit;
+                  max-width: inherit;
+                }
+              }
+            }
+            input[type="file"] {
+              display: none;
+            }
+             
+            .feedbackDescription {
+              margin-top: 15px;
+                .error {
+                  color: orchid;
+                  text-align: center;
+                  padding: 10px;
+                }
+              textarea { 
+                display: block;
+                box-sizing: border-box;
+                width:100%;
+                padding: 10px;
+                overflow:hidden;
+                color:white;
+                resize: none;
+                background: black;
+                border-radius: 7px;
+                max-height: 250px;
+                @media @mobile {
+                  max-height: 80px;
+                }
+              }  
+            } 
+          }
+        }
+      }
+    }
+  }
   .ringing-modal {
     .myModal {          
       .innerModal {
@@ -1237,7 +1337,22 @@ input {
   height: auto;
   // overflow-x: hidden;
   // overflow-y: auto;
-  position: relative;  
+  position: relative;
+  .feedback-section {
+    @media @mobile {
+      margin-right: 14%;
+    }
+    button{
+      cursor: pointer;
+      padding: 9px;
+      border-radius: 12px;
+      white-space: nowrap;
+      @media @mobile {
+        font-size: 10px;
+        padding: 9px 4px;
+      }
+    }
+  }  
  
   .top {
     position: fixed;
