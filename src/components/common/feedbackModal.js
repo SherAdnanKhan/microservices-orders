@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 import { fileUpload } from "../../actions/genericActions";
 import Input from './input';
 import { sendFeedback } from "../../actions/userActions";
-import { isEmpty } from "../../utils/helperFunctions"
+import { isEmpty, isValidFileSize } from "../../utils/helperFunctions"
+import { IMAGE_UPLOAD_SIZE_ERROR } from '../../constants/errors';
 
 const FeedBackModal = ({ onCancel }) => {
   const [feedback, setFeedback] = useState('');
@@ -46,27 +47,32 @@ const FeedBackModal = ({ onCancel }) => {
     if (input.type === 'file' && input.files[0]) {
       const fileData = new FormData();
       fileData.append('file_upload', input.files[0]);
-
-      dispatch(
-        fileUpload(fileData,
-          updatedProgress => {
-            setProgress(updatedProgress)
-          },
-          result => {
-            setProgress(0);
-            if (result.doc_type === 'image') {
-              setImageUrl(result.path);
-              setImageLoading(true);
-              setErrors({ ...errors, imageUrl: '' });
-            } else {
-              setImageUrl('')
+      const isValid = isValidFileSize(input.files[0].size, 2);
+      console.log("file valid", isValid)
+      setErrors({ ...errors, imageUrl: isValid ? errors.imageUrl : IMAGE_UPLOAD_SIZE_ERROR })
+      if (isValid) {
+        dispatch(
+          fileUpload(fileData,
+            updatedProgress => {
+              setProgress(updatedProgress)
+            },
+            result => {
+              setProgress(0);
+              if (result.doc_type === 'image') {
+                setImageUrl(result.path);
+                setImageLoading(true);
+                setErrors({ ...errors, imageUrl: '' });
+              } else {
+                setImageUrl('')
+              }
+            },
+            err => {
+              setProgress(0)
             }
-          },
-          err => {
-            setProgress(0)
-          }
-        )
-      );
+          )
+        );
+      }
+
     }
     else {
       if (input.value.length > 0) {

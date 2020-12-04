@@ -25,15 +25,22 @@ export const convertDateIntoAge = (date) => {
   var currentAge = today.getFullYear() - birthDate.getFullYear();
   return currentAge
 }
-export const isValidFileSize = (file, requiredSize) => {
-  const fileSizeKb = file.size / 1000;
+
+export const validateAge = (date) => {
+  var today = new Date();
+  var birthDate = new Date(date);
+  var currentAge = today.getFullYear() - birthDate.getFullYear();
+  console.log("current age=", currentAge)
+  return currentAge > 13 ? true : false;
+}
+
+export const isValidFileSize = (size, requiredSize) => {
+
+  const fileSizeKb = size / 1000;
   const fileSizeMb = fileSizeKb / 1000;
-  if (fileSizeMb > requiredSize) {
-    return true
-  }
-  else {
-    return false
-  }
+  console.log("size in MB=", fileSizeMb)
+
+  return fileSizeMb > requiredSize ? false : true;
 }
 
 export const formatTime = dateTime => {

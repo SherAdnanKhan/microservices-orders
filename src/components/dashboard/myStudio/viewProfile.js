@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
-import { updateBio, updateUsername, updateArt } from '../../../actions/studioActions';
+import { updateBio, updateUsername, updateArt, updateBirthDate } from '../../../actions/studioActions';
 import { useDispatch } from 'react-redux';
 import ToolTip from '../../common/toolTip/toolTip';
 import InputAutoComplete from "../../common/autoComplete";
 import { artSearch, clearArtSearch, clearChildArt, searchChildArt } from "../../../actions/exibitionAction";
 import { useSelector } from "react-redux";
-import { isEmpty } from '../../../utils/helperFunctions';
+import { completeDate, isEmpty, validateAge } from '../../../utils/helperFunctions';
+import Input from '../../common/input';
 
 const ViewProfile = ({ myStudio, feelColor }) => {
   const listCategory = useSelector(({ exibition }) => exibition?.ListOfArts?.data?.arts);
@@ -15,16 +16,19 @@ const ViewProfile = ({ myStudio, feelColor }) => {
 
   const [bio, setBio] = useState('');
   const [username, setUserName] = useState('');
+  const [dob, setDob] = useState('');
 
   const [artId, setArtId] = useState('');
   const [childArtId, setChildArtId] = useState('');
-  const [error, setError] = useState({ username: "", artName: "", bio: "" });
+  const [error, setError] = useState({ username: "", artName: "", bio: "", dob: "" });
 
   const [parentArtName, setParentArtName] = useState('');
   const [childArtName, setChildArtName] = useState('');
   const [hasChildren, setHasChildren] = useState(false);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+  }, [error])
 
   useEffect(() => {
     if (myStudio && myStudio.user.bio) {
@@ -32,6 +36,9 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     }
     if (myStudio && myStudio.user.username) {
       setUserName(myStudio.user.username);
+    }
+    if (myStudio && myStudio.user.dob) {
+      setDob(myStudio.user.dob);
     }
     if (myStudio && myStudio?.user?.art) {
 
@@ -64,6 +71,18 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     }
     else {
       setError({ ...error, username: "username cannot be empty" })
+    }
+  }
+  const updateDateOfBirth = () => {
+    let object = {
+      dob: dob
+    }
+    if (!isEmpty(dob)) {
+      setError({ ...error, username: "" })
+      dispatch(updateBirthDate(object))
+    }
+    else {
+      setError({ ...error, dob: "date of birth cannot be empty" })
     }
   }
 
@@ -100,10 +119,20 @@ const ViewProfile = ({ myStudio, feelColor }) => {
     if (event.target.name === "bio") {
       setBio(event.target.value)
     }
+    else if (event.target.name === "dob") {
+      const isValid = validateAge(event.target.value)
+      if (isValid) {
+        setDob(event.target.value)
+        setError({ ...error, dob: "" })
+      }
+      else {
+        setError({ ...error, dob: "Age must be 13 years or greater" })
+      }
+    }
     else {
       setUserName(event.target.value)
     }
-    !isEmpty(event.target.value) &&
+    !isEmpty(event.target.value) && !event.target.name === "dob" &&
       setError({ ...error, [event.target.name]: "" })
   }
 
@@ -174,11 +203,20 @@ const ViewProfile = ({ myStudio, feelColor }) => {
         <div className="studioDetail">
           <form onSubmit={e => e.preventDefault()}>
             <div className="profilebioname" >
-              <input type="text" name="username" value={username} onChange={changeHandler}></input>
+
+              <Input
+                type="text"
+                name="username"
+                value={username}
+                onChange={changeHandler}
+                error={error?.username}
+              />
+              {/* 
+  
               {
                 error?.username?.length > 0 &&
                 <p>{error?.username}</p>
-              }
+              } */}
               <div className="editTool Edit">
                 <img
                   src="/assets/images/paintbrush.png"
@@ -189,7 +227,34 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                 />
                 <ToolTip id="editName" />
               </div>
-              <br />
+              {/* <br /> */}
+            </div>
+            <div className="user-age" >
+
+              <Input
+                name="dob"
+                type="date"
+                className="dob"
+                label="Select date of birth"
+                value={dob}
+                onChange={changeHandler}
+                error={error.dob}
+                max={completeDate(new Date())}
+              />
+              <div className="editTool Edit">
+                <img
+                  src="/assets/images/paintbrush.png"
+                  alt=""
+                  data-for="editDob"
+                  data-tip="edit date of birth"
+                  onClick={updateDateOfBirth}
+                />
+                <ToolTip id="editDob" />
+              </div>
+              {/* {
+                error.dob &&
+                <p>{error.dob}</p>
+              } */}
             </div>
             <div className="profileart">
               <div
@@ -263,6 +328,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
                   <p>{error?.bio}</p>
                 }
               </div>
+
             </label>
             <div className="faved-btn">
               {/* <Link to="#">

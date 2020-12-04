@@ -19,6 +19,7 @@ import {
   BLOCK_USER,
   UNBLOCK_USER,
   CLEAR_MY_VAULTS,
+  UPDATE_DATE_OF_BIRTH,
 } from "../constants/actionTypes";
 import { FAVES } from "../constants/privacyTypes";
 
@@ -70,6 +71,17 @@ export default (state = initialState, action) => {
           user: {
             ...state.myStudio.user,
             username: action.payload
+          }
+        }
+      };
+    case UPDATE_DATE_OF_BIRTH:
+      return {
+        ...state,
+        myStudio: {
+          ...state.myStudio,
+          user: {
+            ...state.myStudio.user,
+            dob: action.payload
           }
         }
       };
