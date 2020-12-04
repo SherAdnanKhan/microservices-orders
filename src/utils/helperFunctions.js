@@ -19,6 +19,13 @@ export const getFormattedErrors = error => {
   return errors;
 };
 
+export const convertDateIntoAge = (date) => {
+  var today = new Date();
+  var birthDate = new Date(date);
+  var currentAge = today.getFullYear() - birthDate.getFullYear();
+  return currentAge
+}
+
 export const formatTime = dateTime => {
   const time = moment(dateTime).format('hh:mm A');
   return time;
