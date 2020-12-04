@@ -12,6 +12,9 @@ import ConfirmationModal from "./confirmationModal";
 import ChatShortCut from "../chat/chatShortcut";
 import LeftBorder from '../layout/leftBorder';
 import RightBorder from '../layout/rightBorder';
+import { changeFeelColor } from '../../../actions/colorActions';
+import ChangeColor from '../layout/changeColor';
+
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -31,8 +34,6 @@ const Chat = () => {
   const [hasConversation, setHasConversation] = useState(false);
 
   const conversationRef = useRef();
-
-
 
   useEffect(() => {
     dispatch(getAllConversations());
@@ -90,11 +91,16 @@ const Chat = () => {
     }));
   }
 
+  const handleColorChange = colorId => {
+    dispatch(changeFeelColor(colorId));
+  };
+
   return (
     <div className={`frameReady ${feelColor}`}>
       <div className={!isChrome() ? "chat-Row safari" : "chat-Row"}>
         <LeftBorder />
         <RightBorder />
+        <ChangeColor onColorChange={handleColorChange} />
         {loading && currentPage === 1 && <Spinner />}
         {showDeleteModal &&
           <ConfirmationModal
