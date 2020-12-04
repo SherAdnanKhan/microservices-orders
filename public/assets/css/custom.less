@@ -66,7 +66,9 @@ body {
   font-family: @fontFamily;
   font-size: @defaultFontSize;
   font-variant: small-caps;
-
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
   ::-webkit-scrollbar {
     width: 5px;               /* width of the entire scrollbar */
   }
@@ -754,10 +756,7 @@ input {
         //   margin-right: auto;
         //   display: block;
         // }
-        .dob {
-          background: #fff !important;
-          color: #000 !important;
-        }
+
         input {
           width: calc(100% - 22px);
           border-radius: 5px;
@@ -3709,8 +3708,8 @@ img {
     margin-top: 10px;
     width: 100%;
     .profileart{
-      width: 70%;
-      margin-left:11%;
+      width: 75%;
+      margin-left:9%;
       background: #2d2d2d;
       border-radius: 5px;
       position: relative;
@@ -3758,11 +3757,12 @@ img {
       width: 84%;
       text-align: center;
       display: block;
-      margin: 0 auto 15px;
+      // margin: 0 auto 15px;
       background: #2d2d2d;
-      padding:15px ;
+      // padding:15px ;
       border-radius: 5px;
       position: relative;
+      
       textarea {    
         width:90%;
         max-width:90%;	
@@ -3775,7 +3775,6 @@ img {
         border-radius: 5px;
         border: 1px solid gray;
         margin:auto;
-  
       }
     }
     .faved-btn {
@@ -3932,7 +3931,7 @@ img {
   position: absolute;
   border-radius: 50%;
   background: rgba(0,0,0,.3);
-  top: 23px;
+  top: 10%;
   right: -3px;
   z-index: 5;
   padding: 5px;
@@ -3989,7 +3988,7 @@ img {
   }
 }
 .profilebioname{
-    width: 70%;
+    width: 75%;
     margin: 50px auto 0;
     background: #2d2d2d;
     border-radius: 5px;
@@ -4009,6 +4008,40 @@ img {
       font-size: 12px;
       margin-bottom:-15px ;
     }
+}
+.user-age{
+  width: 75%;
+  margin: 10px auto 0;
+  background: #2d2d2d;
+  border-radius: 5px;
+  position: relative;
+  padding: 10px;
+  margin-bottom: 9px;
+  @media @mobile {
+    margin-top: 35px;
+  }
+  label {
+    // padding: 15px 15px 0 15px !important;
+    input{
+      background-color: black;
+      color:white;
+      margin-right: 13px;
+      height:28px;
+    }
+  }
+
+  // .error{
+  //   margin-top: -24px;
+  // }
+
+  p{
+    font-size: 12px;
+    margin-bottom:-15px ;
+  }
+}
+
+.addbio-input {
+  padding: 15px;
 }
 .tooltip-style{
   font-size: 16px !important;

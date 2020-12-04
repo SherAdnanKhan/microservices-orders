@@ -15,6 +15,7 @@ import {
   START_POST_LOADER,
   STOP_POST_LOADER,
   CLEAR_MY_VAULTS,
+  UPDATE_DATE_OF_BIRTH,
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
@@ -101,11 +102,12 @@ export const updateArt = artId => dispatch => {
         toast.error(`Something failed while updating user art`);
     });
 }
+
 export const updateUsername = username => dispatch => {
   http
     .put(`/users/user-name`, username)
     .then(() => {
-      toast('Username saved successfully');
+      toast.success('Username saved successfully');
       dispatch({
         type: UPDATE_USERNAME,
         payload: username.username
@@ -114,6 +116,23 @@ export const updateUsername = username => dispatch => {
     .catch(err => {
       err.response &&
         toast.error(`Something failed while updating username`);
+    });
+};
+
+export const updateBirthDate = data => dispatch => {
+  console.log("DATA=", data)
+  http
+    .put(`users/user-dob`, data)
+    .then(() => {
+      toast('Date of birth updated successfully');
+      dispatch({
+        type: UPDATE_DATE_OF_BIRTH,
+        payload: data.dob
+      });
+    })
+    .catch(err => {
+      err.response &&
+        toast.error(`Something failed while updating date of birth`);
     });
 };
 
