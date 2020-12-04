@@ -19,6 +19,17 @@ export const getFormattedErrors = error => {
   return errors;
 };
 
+export const isValidFileSize = (file, requiredSize) => {
+  const fileSizeKb = file.size / 1000;
+  const fileSizeMb = fileSizeKb / 1000;
+  if (fileSizeMb > requiredSize) {
+    return true
+  }
+  else {
+    return false
+  }
+}
+
 export const formatTime = dateTime => {
   const time = moment(dateTime).format('hh:mm A');
   return time;
