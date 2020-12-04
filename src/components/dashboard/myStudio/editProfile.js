@@ -38,7 +38,11 @@ const EditProfile = ({ myStudio, feelColor }) => {
             {myStudio?.user?.dob &&
               <label htmlFor="add-dob" className="add-dob-input">
                 <span className="labelText"></span>
-                <div> Age: {myStudio && convertDateIntoAge(myStudio.user.dob)} </div>
+                <div>
+                  <p className="dob">Date of birth: {myStudio.user.dob}</p>
+                  <p className="age">Age: {myStudio && convertDateIntoAge(myStudio.user.dob)}
+                  </p>
+                </div>
               </label>
             }
             <div className="faved-btn">
