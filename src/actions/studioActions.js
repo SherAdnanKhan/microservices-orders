@@ -124,7 +124,7 @@ export const updateBirthDate = data => dispatch => {
   http
     .put(`users/user-dob`, data)
     .then(() => {
-      toast('Date of birth updated successfully');
+      toast.success('Date of birth updated successfully');
       dispatch({
         type: UPDATE_DATE_OF_BIRTH,
         payload: data.dob

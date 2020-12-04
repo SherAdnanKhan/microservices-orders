@@ -271,7 +271,7 @@ const ViewProfile = ({ myStudio, feelColor }) => {
               </div>
               {error.artName &&
                 <p
-                  style={{ marginBottom: '5px' }}
+                  className="error"
                 >
                   {error?.artName}
                 </p>
