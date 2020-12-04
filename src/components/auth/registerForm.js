@@ -251,7 +251,7 @@ const RegisterForm = () => {
 
   return (
     <>
-      {getCurrentUser() && <Redirect to="/home" />}
+      {getCurrentUser() && <Redirect to="/" />}
       {loading && <Spinner />}
       <div>
         <div className="return" onClick={handleBackPress}>
