@@ -8,7 +8,7 @@ import FeedBackModal from '../../common/feedbackModal.js';
 const Header = () => {
   const history = useHistory();
   const { feelColor } = useSelector(state => state.feelColor);
-  const [showSearch, setShowSearch] = useState(true);
+  const [showSearch, setShowSearch] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const location = useLocation();
   const url = location?.pathname?.split('/')[1];
@@ -16,19 +16,19 @@ const Header = () => {
   const handleToggleSearch = () => {
     setShowSearch(!showSearch);
   }
-  const toggleFeedbackModal=(value)=>{
+  const toggleFeedbackModal = (value) => {
     setShowFeedbackModal(value);
   }
   return (
     <>
-    {showFeedbackModal &&
-    <FeedBackModal onCancel={toggleFeedbackModal} />
-    }
+      {showFeedbackModal &&
+        <FeedBackModal onCancel={toggleFeedbackModal} />
+      }
       <div
         className="top"
         id="main-menu"
         style={{ backgroundColor: feelColor }}
-      > 
+      >
         <div className="contentFit d-flex">
           <div className="logo-icon">
             <img className="valut-img" alt="" src="/assets/images/logowhite.png" />
@@ -78,11 +78,11 @@ const Header = () => {
             <ToolTip id="search" position="bottom" />
           </div>
           <div className="feedback-section">
-          <button onClick={()=>toggleFeedbackModal(true)} > 
+            <button onClick={() => toggleFeedbackModal(true)} >
               Give Feedback
             </button>
           </div>
-          <div className="right-icon">          
+          <div className="right-icon">
             <img className="valut-img"
               alt=""
               src="/assets/images/strqicon.png"
