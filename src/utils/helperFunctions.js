@@ -19,6 +19,12 @@ export const getFormattedErrors = error => {
   return errors;
 };
 
+export const convertDateIntoAge = (date) => {
+  var today = new Date();
+  var birthDate = new Date(date);
+  var currentAge = today.getFullYear() - birthDate.getFullYear();
+  return currentAge
+}
 export const isValidFileSize = (file, requiredSize) => {
   const fileSizeKb = file.size / 1000;
   const fileSizeMb = fileSizeKb / 1000;

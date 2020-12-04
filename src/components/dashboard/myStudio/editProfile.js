@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import ToolTip from "../../common/toolTip/toolTip";
+import { convertDateIntoAge } from "../../../utils/helperFunctions"
 
 const EditProfile = ({ myStudio, feelColor }) => {
   return (
@@ -28,10 +29,22 @@ const EditProfile = ({ myStudio, feelColor }) => {
             </div>
           }
           <form>
-            <label htmlFor="addbio" className="addbio-input">
-              <span className="labelText"></span>
-              <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
-            </label>
+            {myStudio?.user?.bio &&
+              <label htmlFor="addbio" className="addbio-input">
+                <span className="labelText"></span>
+                <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
+              </label>
+            }
+            {myStudio?.user?.dob &&
+              <label htmlFor="add-dob" className="add-dob-input">
+                <span className="labelText"></span>
+                <div>
+                  <p className="dob">Date of birth: {myStudio.user.dob}</p>
+                  <p className="age">Age: {myStudio && convertDateIntoAge(myStudio.user.dob)}
+                  </p>
+                </div>
+              </label>
+            }
             <div className="faved-btn">
               {/* <Link to='/my-studio/fave-by'>
                 <div className="faved-by-btn">
