@@ -48,7 +48,7 @@ const FeedBackModal = ({ onCancel }) => {
       const fileData = new FormData();
       fileData.append('file_upload', input.files[0]);
       const isValid = isValidFileSize(input.files[0].size, 2);
-      console.log("file valid", isValid)
+
       setErrors({ ...errors, imageUrl: isValid ? errors.imageUrl : IMAGE_UPLOAD_SIZE_ERROR })
       if (isValid) {
         dispatch(

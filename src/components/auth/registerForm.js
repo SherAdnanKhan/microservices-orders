@@ -211,7 +211,6 @@ const RegisterForm = () => {
   };
 
   const handleNextPress = () => {
-    console.log("next press is called")
     const errors = validate();
     if (!errors && step < 9) {
       setStep(step => step + 1);
@@ -222,7 +221,7 @@ const RegisterForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('submitting..')
+
     const formData = new FormData();
 
     if (!isEmpty(croppedImage)) {

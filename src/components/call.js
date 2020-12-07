@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import RingingModal from './dashboard/chat/ringingModal';
 import socket from '../services/socketService';
 import { getCurrentUser } from '../actions/authActions';
-// import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useWindowUnloadEffect } from './common/useWindowUnloadEffect';
 import { useSelector } from "react-redux";
@@ -30,7 +29,6 @@ const Call = () => {
       });
 
       socket.on('call-declined', data => {
-
         if (audioRef.current) {
           audioRef.current.pause();
           audioRef.current.currentTime = 0;

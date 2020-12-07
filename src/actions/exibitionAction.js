@@ -43,7 +43,6 @@ export const artPost = (data, history) => () => {
         sender: getCurrentUser()
       }
 
-      console.log(payload)
       socket.emit('faveExhibitNotifications', payload, POST_CREATED);
       history.push('/lobby');
     });

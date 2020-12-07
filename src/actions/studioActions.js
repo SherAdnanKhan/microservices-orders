@@ -120,7 +120,6 @@ export const updateUsername = username => dispatch => {
 };
 
 export const updateBirthDate = data => dispatch => {
-  console.log("DATA=", data)
   http
     .put(`users/user-dob`, data)
     .then(() => {
