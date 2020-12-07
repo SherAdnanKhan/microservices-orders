@@ -561,13 +561,23 @@
         .calling-modal {
           .myModal {          
             .innerModal {
+              height: 51%;
+              @media @mobile {
+                height: unset;
+              }
               .modalHeader {
+                border: unset;
                 .btn-close {
                   display: none;
                 }
               }
               .modalBody {
+                border: unset;
+                height: 60%;
                 .modalContent {
+                  .group-users {
+                    text-align: center;
+                  }
                   .artcubecase {
                     width: 100%;
                     margin: 24px 0px;

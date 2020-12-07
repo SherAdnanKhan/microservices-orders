@@ -3,18 +3,17 @@ import Modal from '../../common/modal/modal';
 import ModalBody from '../../common/modal/modalBody';
 import ModalHeader from '../../common/modal/modalHeader';
 import ModalFooter from '../../common/modal/modalFooter';
-import Avatar from '../../common/avatar';
 import { convertHexToRGBA } from '../../../utils/helperFunctions';
 
 const RingingModal = ({ onAcceptCall, onRejectCall, payload, feelColor }) => {
   return (
     <div className="ringing-modal">
-      <Modal>
+      <Modal avatar={payload?.caller?.avatars[0].path}>
         <ModalHeader></ModalHeader>
         <ModalBody>
-          <Avatar
+          {/* <Avatar
             user={payload?.caller}
-          />
+          /> */}
           <div className="caller-name">
             {payload?.caller?.username}
           </div>

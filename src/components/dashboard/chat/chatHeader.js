@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import MeuzmLogo from '../../common/meuzmLogo';
 import Avatar from '../../common/avatar';
@@ -15,8 +15,6 @@ import { muteUser, blockUser, unMuteUser, unBlockUser } from "./../../../actions
 import { useDispatch } from "react-redux"
 
 
-
-
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
   onOpenParticipatsModel, currentUser, onBackPress,
@@ -25,14 +23,14 @@ const ChatHeader = ({
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
   const rejectedUsers = useRef([]);
-  const timeout = useRef();
+  const interval = useRef();
   const [hasRendered, setHasRendered] = useState(false);
   const [showCallingModal, setShowCallingModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [showMuteModal, setShowMuteModal] = useState(false);
   const [showBlockModal, setShowBlockModal] = useState(false);
   const [hasMeeting, sethasMeeting] = useState(null);
-
+  const [countUp, setCountUp] = useState(0);
   const allParticipants = useRef([]);
   const audioRef = useRef();
 
@@ -42,12 +40,37 @@ const ChatHeader = ({
   const { feelColor } = useSelector(state => state.feelColor)
   const dispatch = useDispatch();
 
+  const handleDecline = useCallback(() => {
+    clearInterval(interval.current);
+    setShowCallingModal(false);
+    setCountUp(countUp => countUp = 0);
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    socket.emit('decline-call', {
+      caller: currentUser,
+      room: conversation?.id,
+      participants: conversation
+        ?.participants
+        ?.filter(p => p.id !== currentUser.id || [])
+    })
+  }, [conversation, currentUser]);
+
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
     socket.off('onMeetingEnded')
     socket.off('call-rejected')
-    clearTimeout(timeout);
+    clearInterval(interval);
   }, true);
+
+  useEffect(() => {
+    if (countUp === 30) {
+      handleDecline();
+    }
+  }, [countUp, handleDecline]);
 
   useEffect(() => {
     if (conversation?.participants) {
@@ -67,7 +90,7 @@ const ChatHeader = ({
         sethasMeeting(false);
       })
       socket.on('call-accepted', data => {
-        clearTimeout(timeout.current);
+        clearInterval(interval.current);
 
         if (audioRef.current) {
           audioRef.current.pause();
@@ -87,7 +110,7 @@ const ChatHeader = ({
             audioRef.current.currentTime = 0;
           }
           setShowCallingModal(showCallingModal => showCallingModal = false);
-          clearTimeout(timeout.current);
+          clearInterval(interval.current);
         }
       });
       setHasRendered(true);
@@ -113,30 +136,13 @@ const ChatHeader = ({
         ?.filter(p => p.id !== currentUser.id) || []
     });
 
-    timeout.current = setTimeout(() => {
-      if (!showCallingModal) {
-        handleDecline();
-      }
-    }, 30000);
+    interval.current = setInterval(() => {
+      // if (!showCallingModal) {
+      //   handleDecline();
+      // }
+      setCountUp(countUp => countUp + 1);
+    }, 1000);
   };
-
-  const handleDecline = () => {
-    clearTimeout(timeout.current);
-    setShowCallingModal(false);
-
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-
-    socket.emit('decline-call', {
-      caller: currentUser,
-      room: conversation?.id,
-      participants: conversation
-        ?.participants
-        ?.filter(p => p.id !== currentUser.id || [])
-    })
-  }
 
   const handleDraw = () => {
     socket.emit('open draw', { room: conversation?.id })
@@ -309,6 +315,8 @@ const ChatHeader = ({
         <CallingModal
           onDecline={handleDecline}
           feelColor={feelColor}
+          participants={conversation?.participants}
+          currentUser={currentUser}
         />
       }
       {showReportModal && filtered &&

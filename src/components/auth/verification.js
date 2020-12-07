@@ -28,7 +28,6 @@ const Verification = () => {
   const handleResendCode = e => {
     e.preventDefault();
     dispatch(resendVerificationCode());
-    console.log('resend');
   }
 
   const handleVerifyCode = () => {

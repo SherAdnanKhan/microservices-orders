@@ -37,7 +37,6 @@ const ChatShortCut = ({ onActiveConversation }) => {
     setShowShortcut(!showShortcut)
   }
   const fetchNextConversations = () => {
-    console.log("next feeds")
     dispatch(getAllConversations(currentShortcutPage + 1));
     setCurrentShortcutPage(currentShortcutPage => currentShortcutPage + 1);
   }
