@@ -444,6 +444,16 @@ $(document).on('click', '.add-strq .dropdown', function (e) {
   $(this).find('.dropdown-content').toggle()
 })
 
+$(document).on('click', '.notification', function (e) {
+  e.stopPropagation();
+  $(this).find('.dropdown-content').toggle()
+})
+
+// $(document).on('click', '.notificationAlert', function (e) {
+//   e.stopPropagation();
+//   $(this).find('.unreadDot').hide();
+// })
+
 $(document).on('click', '.messageDots .fa-ellipsis-v', function (e) {
   e.stopPropagation();
   $(this).closest(`.messageDots`).find('.dropdown-content').toggle()

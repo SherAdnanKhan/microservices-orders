@@ -4,6 +4,7 @@ import Search from './search';
 import { useSelector } from "react-redux";
 import ToolTip from "../../common/toolTip/toolTip";
 import FeedBackModal from '../../common/feedbackModal.js';
+import Notification from "../layout/notification";
 
 const Header = () => {
   const history = useHistory();
@@ -77,6 +78,12 @@ const Header = () => {
             />
             <ToolTip id="search" position="bottom" />
           </div>
+          {/* <div className="notification">
+            <i className="fa fa-bell" aria-hidden="true" />
+            <div className="dropdown-content" style={{display: 'block'}}>
+              gahsdgsahjd  
+            </div>
+          </div> */}
           <div className="feedback-section">
             <button onClick={() => toggleFeedbackModal(true)} >
               Give Feedback
@@ -99,7 +106,9 @@ const Header = () => {
               data-tip="mz flash"
             />
             <ToolTip id="mzflash-top" position="bottom" />
-          </div>
+            </div>
+            <Notification feelColor={feelColor}/>
+
         </div>
         {url !== "chat" &&
           <>
