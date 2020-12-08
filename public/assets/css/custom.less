@@ -1356,6 +1356,7 @@ input {
   .notification {
     position: relative;
     margin-right: 10%;
+    cursor:pointer;
     @media screen and (max-width:767px) {
       margin-right: 20%;
     }
@@ -1396,11 +1397,21 @@ input {
       color: #000;
       box-sizing: border-box;
       right: 10%;
-      height: 72vh;
+      height: 87vh;
       overflow-y: auto;
+      border-radius: 9px;
       @media screen and (max-width:767px) {
         min-width: 315px;
-        left: -231px;
+        left: -250px;
+        height: auto;
+      }
+      @media all and (device-width: 411px) and (device-height: 823px) {
+        left: -286px;
+        width: 360px;
+      }
+      @media all and (device-width: 411px) and (device-height: 731px) {
+        left: -280px;
+        width: 350px;
       }
       .header {
         height: 50px;
@@ -1424,15 +1435,12 @@ input {
         }
         &.read {
           background: #fff;
-          // &.unRead {
-          //   display: none;
-          // }
+          &.unReadDot {
+            display: none;
+          }
         }
-        // &.unRead {
-        //   background: #e5e5f9;
-        // }
         &:hover {
-          background: #e8e8ee ;
+          // background: #e8e8ee ;
           cursor: pointer;
         }
         .image {

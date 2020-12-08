@@ -106,9 +106,8 @@ const Header = () => {
               data-tip="mz flash"
             />
             <ToolTip id="mzflash-top" position="bottom" />
-            </div>
-            <Notification feelColor={feelColor}/>
-
+          </div>
+          <Notification feelColor={feelColor} />
         </div>
         {url !== "chat" &&
           <>
