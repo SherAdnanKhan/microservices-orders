@@ -216,7 +216,7 @@ let position = $(window).scrollTop();
 $(window).scroll(function () {
   const scroll = $(window).scrollTop();
   if (scroll > position) {
-    $(".frameReady .top").css({ 'opacity': '0.5' });
+    // $(".frameReady .top").css({ 'opacity': '0.8' });
     $(".frameReady .popUpChatMsg").css({ 'opacity': '0.5' });
     $(".frameReady .bottom").css({ 'opacity': '0.5' });
     $(".frameReady .left").css({ 'opacity': '0.5' });
@@ -449,10 +449,6 @@ $(document).on('click', '.notification', function (e) {
   $(this).find('.dropdown-content').toggle()
 })
 
-// $(document).on('click', '.notificationAlert', function (e) {
-//   e.stopPropagation();
-//   $(this).find('.unreadDot').hide();
-// })
 
 $(document).on('click', '.messageDots .fa-ellipsis-v', function (e) {
   e.stopPropagation();
