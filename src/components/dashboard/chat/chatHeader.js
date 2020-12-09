@@ -13,12 +13,12 @@ import ReportUserModal from './reportUserModal';
 import ConfirmationModal from './confirmationModal'
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "./../../../actions/userActions";
 import { useDispatch } from "react-redux"
-
+import NoAnswerModal from './noAnswerModal';
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
   onOpenParticipatsModel, currentUser, onBackPress,
-  onOpenDraw, user, isBlocked, isViewAble, isMuted
+  onOpenDraw, user, isBlocked, isViewAble, isMuted, onLeaveMessage
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
@@ -31,6 +31,7 @@ const ChatHeader = ({
   const [showBlockModal, setShowBlockModal] = useState(false);
   const [hasMeeting, sethasMeeting] = useState(null);
   const [countUp, setCountUp] = useState(0);
+  const [noAnswerModal, setNoAnswerModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
 
@@ -67,8 +68,9 @@ const ChatHeader = ({
   }, true);
 
   useEffect(() => {
-    if (countUp === 30) {
+    if (countUp === 15) {
       handleDecline();
+      setNoAnswerModal(noAnswerModal => noAnswerModal = true);
     }
   }, [countUp, handleDecline]);
 
@@ -119,6 +121,8 @@ const ChatHeader = ({
 
   const handleCall = async () => {
     rejectedUsers.current = [];
+
+    noAnswerModal && setNoAnswerModal(false);
     setShowCallingModal(true);
 
     audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
@@ -137,9 +141,6 @@ const ChatHeader = ({
     });
 
     interval.current = setInterval(() => {
-      // if (!showCallingModal) {
-      //   handleDecline();
-      // }
       setCountUp(countUp => countUp + 1);
     }, 1000);
   };
@@ -193,8 +194,17 @@ const ChatHeader = ({
     setShowBlockModal(false);
   }
 
+  const handleChangeNoAnswerModal = () => {
+    setNoAnswerModal(false);
+  }
+
   const handleJoinMeeting = () => {
     history.push(`/video-call/${conversation.id}`);
+  }
+
+  const handleLeaveMessage = message => {
+    onLeaveMessage(message);
+    setNoAnswerModal(false);
   }
 
   return (
@@ -342,6 +352,15 @@ const ChatHeader = ({
           }
           onCancel={handleMuteModal}
           onConfirm={() => handleMuteUser(filtered)}
+        />
+      }
+
+      {noAnswerModal &&
+        <NoAnswerModal
+          onClose={handleChangeNoAnswerModal}
+          feelColor={feelColor}
+          onLeaveMessage={handleLeaveMessage}
+          onCallMade={handleCall}
         />
       }
     </div>

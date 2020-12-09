@@ -7,7 +7,6 @@ async function loader(option) {
   }
 }
 
-
 async function requireOnce(file, functionName, args) {
   await $.getScript(file);
   const getRes = await window[functionName](args);
@@ -18,26 +17,6 @@ $(document).on('click', '.passwordEye', async function () {
   await requireOnce(`${PATH}showHidePassword.js`, 'showHidePassword', this);
 });
 
-// $(document).on('click', '.registerationScreen button.btn', async function (e) {
-//   e.preventDefault();
-//   await requireOnce(`${PATH}registerationSteps.js`, 'validateAndGo', this);
-// });
-
-// $(document).on('change', '#avatar', async function () {
-//   await requireOnce(`${PATH}readFile.js`, 'readURL', this);
-// });
-
-// $(document).on('click', '.return', async function () {
-//   let currentStep = await getCurrentStepNo();
-//   backStepIs = currentStep * 1 - 1;
-//   if (backStepIs > 0) {
-//     $('.return').attr('current-step', backStepIs);
-//     $('.registerationScreen div[step]').removeAttr('active');
-//     $(`.registerationScreen div[step="${backStepIs}"]`).attr('active', 'true');
-//   }
-//   console.log('currentStep', currentStep);
-// });
-
 $(document).ready(function () {
   $('.view').keydown(function (event) {
     if (event.keyCode == 13) {
@@ -47,36 +26,14 @@ $(document).ready(function () {
   });
 });
 
-// async function getCurrentStepNo() {
-//   return $('.registerationScreen div[active="true"]').attr('step');
-// }
 
 $(document).on('click', '.feelIcon', async function (e) {
   e.preventDefault();
   e.stopPropagation();
-  $('.colorChangerScreen').show();
+
+  $('.dropdown-content').hide();
+  $('.colorChangerScreen').toggle();
 });
-
-// $(document).on('click', '.colorChangerScreen img[color]', async function () {
-//   const getColor = $(this).attr('color');
-//   if (getColor != undefined) {
-//     $('.frameReady')
-//       .removeClass('gold gray red purple dodgerblue orange limegreen')
-//       .addClass(getColor);
-//   }
-//   $('.colorChangerScreen').hide();
-// });
-
-// $(document).on('click', '.menuBlock', function () {
-//   const checkNav = $('nav').css('display');
-//   if (checkNav == 'none') {
-//     $('nav').show();
-//     $(this).find('.fas').removeClass('fa-arrow-left fa-ellipsis-v').addClass('fa-arrow-left');
-//   } else {
-//     $('nav').hide();
-//     $(this).find('.fas').removeClass('fa-arrow-left fa-ellipsis-v').addClass('fa-ellipsis-v');
-//   }
-// });
 
 $(document).on('click', 'nav a ', function () {
   $('nav').hide();
@@ -123,6 +80,7 @@ $(document).click(function () {
 
   $(".add-img-vid-box, .add-img-vid-box-viewpost").hide();
   $("body").css("overflow-y", "auto");
+
 });
 
 $(document).on('click', '.item-box', function () {
@@ -199,17 +157,10 @@ $(document).on('click', '.fa-th', function () {
   $(".gallery-cover").css({ 'display': 'block' })
 });
 
-// $(document).on('click', '.open-commet', function () {
-//   $(".comments-box").show();
-// });
-
-// $(document).on('click', '.close-comment', function () {
-//   $(".comments-box").hide();
-// });
-//for input
 $(document).on('input', '#addbio', function () {
   this.style.width = this.value.length + "ch";
 });
+
 //use for opacity
 let position = $(window).scrollTop();
 
@@ -238,52 +189,6 @@ $(window).scroll(function () {
   }
   position = scroll;
 });
-
-//image preview js
-
-// var modal = document.getElementById("myModal-img");
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-// var img = document.getElementById("myImg");
-// var modalImg = document.getElementById("img01");
-// img.onclick = function () {
-//   modal.style.display = "block";
-//   modalImg.src = this.src;
-//   captionText.innerHTML = this.alt;
-// }
-
-// Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function () {
-//   modal.style.display = "none";
-// }
-
-// $(document).on('click', '.post-body', function () {
-//   $(this).next().find('.lobby-icon').toggleClass("lobby-icon-slide");
-//   $(this).prev().toggleClass("lobby-icon-slide");
-// });
-
-
-// $(document).on('click', '.list-body', function () {
-//   $(this).find('.lobby-icon').toggleClass("lobby-icon-slide");
-//   $(this).prev().toggleClass("lobby-icon-slide");
-// });
-
-
-// $(document).on('click', '.action-w', function () {
-//   if ($(this).parents('.post-footer').find('.duplicate-img').length <= 0) {
-//     let src = $(this).parents('.post-footer').prev().find('img').attr('src');
-//     $(this).parents('.post-footer').find('.post-title').after(`
-//     <div class="duplicate-img">
-//     <img src="${src}"/>
-//     </div>
-//     `);
-//   } else {
-//     $(this).parents('.post-footer').find('.duplicate-img').remove();
-//   }
-// });
 
 $(document)
   .on('click', '.controls .arrow-up', function () {
@@ -332,36 +237,6 @@ $(document)
     }
   });
 
-// (function () {
-
-// how many milliseconds is a long press?
-// var longpress = 2000;
-// holds the start time
-// var start;
-
-// $(document).on('mousedown', ".post-body > img", function (e) {
-//   start = new Date().getTime();
-// });
-
-// $(document).on('mouseleave', ".post-body > img", function (e) {
-//   start = 0;
-// });
-
-// $(document).on('mouseup', ".post-body > img", function (e) {
-//   if (new Date().getTime() >= (start + longpress)) {
-//     $(this).parent().find('.right-clicked').show();
-//   }
-// });
-
-// }());
-// $(document).on('click', '.action-w', function () {
-//   $('.my-slider').css({
-//     'height': '150px',
-//     'color': 'white',
-//     'font-size': '44px'
-//   });
-// })
-
 $(document).on('click', '.postOptions', function (e) {
   e.stopPropagation();
   $(this)
@@ -400,7 +275,6 @@ $(document).on('click', '.postOptions', function (e) {
     $("body").css("overflow-y", "auto");
     $(".screen").css("overflow-y", "auto");
   }
-  // $(".add-img-vid-box, .add-img-vid-box-viewpost").toggle();
 })
 
 
@@ -413,12 +287,12 @@ $(document).on('click', '.postOptions', function (e) {
 //   }
 // });
 
-$(document).mouseup(function (e) {
-  const container = $(`.colorChangerScreen`);
-  if (!container.is(e.target) && container.has(e.target).length === 0) {
-    container.hide();
-  }
-});
+// $(document).mouseup(function (e) {
+//   const container = $(`.colorChangerScreen`);
+//   if (!container.is(e.target) && container.has(e.target).length === 0) {
+//     container.hide();
+//   }
+// });
 
 // $(document)
 //   .on('click', '.post-body', function (e) {
@@ -445,8 +319,9 @@ $(document).on('click', '.add-strq .dropdown', function (e) {
 })
 
 $(document).on('click', '.notification', function (e) {
+  e.preventDefault();
   e.stopPropagation();
-  $(this).find('.dropdown-content').toggle()
+  $(this).find('.dropdown-content').toggle();
 })
 
 

@@ -123,12 +123,10 @@ class ChatBox extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // if (this.state.width > this.breakPoint) {
     if (this.props.activeConversation !== prevProps.activeConversation) {
       this.componentWillUnmount();
       this.componentDidMount();
     }
-    // }
 
     const { conversation: currentConversation } = this.props.conversation;
     const { conversation: previos } = prevProps.conversation;
@@ -137,7 +135,7 @@ class ChatBox extends Component {
     if (currentConversation && currentConversation !== previos) {
       if (previos?.id !== currentConversation.id) {
         this.setState({ page: 1, message: '', typings: [] });
-        this.bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        this.bottomRef.current && this.bottomRef.current.scrollIntoView({ behavior: 'auto' });
         socket.emit('join', { room: currentConversation.id, user: currentUser }, () => {
           socket.emit('onReadAll', { room: currentConversation.id, user: currentUser }, getAuthToken(), () => {
             this.props.resetConversationCount(currentConversation);
@@ -386,6 +384,10 @@ class ChatBox extends Component {
     socket.emit('stopTyping', data);
   }
 
+  handleLeaveMessage = message => {
+    this.setState({ message }, () => this.sendMessage());
+  };
+
   render() {
     const { message, image, hidden, video, document, progress } = this.state;
     const currentUser = getCurrentUser();
@@ -409,6 +411,7 @@ class ChatBox extends Component {
               isViewAble={isViewAble}
               isMuted={isMuted}
               onOpenDraw={() => this.setState({ draw: true })}
+              onLeaveMessage={this.handleLeaveMessage}
             />
           }
 
@@ -480,10 +483,10 @@ class ChatBox extends Component {
                     />
                   )
                 }
+                <div ref={ref => this.bottomRef.current = ref}></div>
               </div>
             ))
             }
-            <div ref={ref => this.bottomRef.current = ref}></div>
           </div>
         </>
 

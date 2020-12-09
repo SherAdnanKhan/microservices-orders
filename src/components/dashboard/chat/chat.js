@@ -85,9 +85,9 @@ const Chat = () => {
   }
 
   const handleUserSelect = slug => {
-    dispatch(getConversation(slug, 1, con => {
+    dispatch(getConversation(slug, 1, async con => {
+      await dispatch(clearConversation());
       setActiveConversation(con);
-      dispatch(clearConversation());
     }));
   }
 
