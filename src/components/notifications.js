@@ -8,6 +8,7 @@ import { addOnlineUser, removeOnlineUser, setOnlineUsers } from '../actions/onli
 import socket from '../services/socketService';
 import { playNotificationSound } from '../utils/helperFunctions';
 import { useWindowUnloadEffect } from './common/useWindowUnloadEffect';
+import { Slide } from 'react-toastify';
 import {
   userKey,
   POST_COMMENT,
@@ -124,7 +125,29 @@ const Notifications = () => {
           }
         })
 
+        socket.on('disconnect', () => {
+          toast.error(
+            'You are now disconnected.',
+            {
+              position: 'top-center',
+              transition: Slide,
+              closeButton: false,
+              autoClose: true,
+            }
+          );
+        });
+
         socket.on('reconnect', () => {
+          toast.success(
+            'You are now connected.',
+            {
+              position: 'top-center',
+              transition: Slide,
+              closeButton: false,
+              autoClose: true
+            }
+          );
+
           socket.emit('joinUser', currentUser, getAuthToken(), users => {
             dispatch(setOnlineUsers(users));
           });
