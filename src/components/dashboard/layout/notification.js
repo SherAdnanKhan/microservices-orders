@@ -122,11 +122,11 @@ const Notification = ({ feelColor }) => {
             <button
               className="confirm"
               style={{ background: convertHexToRGBA(feelColor, 1) }}
-            >Confirm</button>
+            >Approve</button>
             <button
               className="delete"
               style={{ background: convertHexToRGBA(feelColor, 0.7) }}
-            >Delete</button>
+            >Reject</button>
           </div>
         </div>
 
