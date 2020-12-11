@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { convertHexToRGBA } from "../../../utils/helperFunctions";
 import ToolTip from "react-tooltip";
-import { getAllNotifications, getNotificationCount, readNotification, resetNotificationCount } from "../../../actions/notificationsActions";
+import { getAllNotifications, getNotificationCount, readNotification } from "../../../actions/notificationsActions";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../../actions/authActions";
 import InfiniteScroll from 'react-infinite-scroll-component';

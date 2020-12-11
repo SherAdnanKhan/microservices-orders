@@ -144,7 +144,7 @@ const Post = ({
     setShowModalRepost(status);
   }
   const handleRepost = (status, post, gallery) => {
-    dispatch(repost(post.id, gallery))
+    dispatch(repost(post, gallery))
     setShowModalRepost(status);
   }
   const handleVault = (post) => {

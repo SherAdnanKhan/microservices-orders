@@ -88,7 +88,7 @@ const Notifications = () => {
               toast(`${data.sender.username} added a new exhibit`);
               break;
             case POST_REPOSTED:
-              toast(`${data.sender.username} reposted your post`);
+              toast.success(`${data.sender.username} reposted your post`);
               dispatch(updateNotificationUnreadCount());
               break;
             default:
