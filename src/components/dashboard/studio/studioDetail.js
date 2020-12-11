@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import { toast } from 'react-toastify';
 import ToolTip from "../../common/toolTip/toolTip";
+import { convertDateIntoAge } from '../../../utils/helperFunctions';
 
 const StudioDetail = ({ userStudio, slug }) => {
   const history = useHistory();
@@ -81,6 +82,16 @@ const StudioDetail = ({ userStudio, slug }) => {
                     value={userStudio && userStudio.user.bio ? userStudio.user.bio : ''}
                     disabled
                   >  {userStudio && userStudio.user.bio ? userStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''}
+                  </div>
+                </label>
+              }
+              {userStudio?.user?.dob &&
+                <label htmlFor="add-dob" className="add-dob-input">
+                  <span className="labelText"></span>
+                  <div>
+                    <p className="dob">Date of birth: {userStudio.user.dob}</p>
+                    <p className="age">Age: {userStudio && convertDateIntoAge(userStudio.user.dob)}
+                    </p>
                   </div>
                 </label>
               }
