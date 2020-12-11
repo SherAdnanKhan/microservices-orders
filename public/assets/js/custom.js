@@ -319,7 +319,6 @@ $(document).on('click', '.add-strq .dropdown', function (e) {
 })
 
 $(document).on('click', '.notification', function (e) {
-  e.preventDefault();
   e.stopPropagation();
   $(this).find('.dropdown-content').toggle();
 })

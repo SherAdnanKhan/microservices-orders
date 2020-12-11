@@ -17,7 +17,12 @@ import {
 import http from '../services/httpService';
 import socket from '../services/socketService';
 import { getCurrentUser } from './authActions';
-import { POST_COMMENT, POST_STROKE, POST_UNSTROKE } from '../constants/keys';
+import {
+  POST_COMMENT,
+  POST_REPOSTED,
+  POST_STROKE,
+  POST_UNSTROKE
+} from '../constants/keys';
 import { toast } from 'react-toastify';
 
 export const getPost = (post) => dispatch => {
@@ -234,18 +239,21 @@ export const clearStatus = () => {
     type: CLEAR_STATUS,
   };
 };
-export const repost = (postId, gallery) => dispatch => {
+export const repost = (post, gallery) => dispatch => {
   const repostObject = {
     gallery_id: gallery.id,
-    post_id: postId
-  }
+    post_id: post?.id
+  };
+
   http
     .post(`/post/repost`, repostObject)
     .then(res => {
-
       if (res.data.success) {
-        toast.success(`Post Shared in Gallery Named ${gallery.title}`)
-        // dispatch(getFavourites())
+        toast.success(`Post Shared in Gallery Named ${gallery.title}`);
+        const currentUser = getCurrentUser();
+        if (currentUser.id !== post?.user.id) {
+          socket.emit('onUserNotifications', { sender: currentUser, reciever: post?.user }, POST_REPOSTED);
+        }
       }
       else {
         toast.error("Something went wrong");

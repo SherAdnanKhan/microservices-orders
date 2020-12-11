@@ -16,9 +16,11 @@ import {
   FEED_UNSTROKE,
   POST_STROKE,
   POST_UNSTROKE,
-  POST_CREATED
+  POST_CREATED,
+  POST_REPOSTED,
 } from '../constants/keys';
 import { updateUnreadConversations } from '../actions/lobbyActions';
+import { updateNotificationUnreadCount } from '../actions/notificationsActions';
 
 const currentUser = getCurrentUser();
 
@@ -84,6 +86,10 @@ const Notifications = () => {
               break;
             case POST_CREATED:
               toast(`${data.sender.username} added a new exhibit`);
+              break;
+            case POST_REPOSTED:
+              toast(`${data.sender.username} reposted your post`);
+              dispatch(updateNotificationUnreadCount());
               break;
             default:
               break;
