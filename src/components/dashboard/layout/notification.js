@@ -16,7 +16,7 @@ const Notification = ({ feelColor }) => {
 
   useEffect(() => {
     dispatch(getNotificationCount)
-  }, [dispatch, notificationLoader, currentNotificationPage])
+  }, [dispatch])
 
   const handleNotifications = () => {
     // dispatch(resetNotificationCount());
