@@ -132,8 +132,8 @@ const MyStudio = () => {
     setShowMzFlashModal(status);
     dispatch(shareMzFlash(post));
   }
-  const handleRepostLobby = (status, post, gallery) => {
-    dispatch(repost(post.id, gallery))
+  const handleRepost = (status, post, gallery) => {
+    dispatch(repost(post, gallery))
     setShowModalRepost(status);
   }
   const handleRepostModal = (status,) => {
@@ -217,7 +217,7 @@ const MyStudio = () => {
       }
       {showModalRepost &&
         <RepostModal
-          onRepost={handleRepostLobby}
+          onRepost={handleRepost}
           onModalClose={handleRepostModal}
           post={activePost}
           myGalleries={myGalleries}
