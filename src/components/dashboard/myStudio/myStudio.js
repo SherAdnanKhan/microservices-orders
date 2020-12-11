@@ -136,7 +136,7 @@ const MyStudio = () => {
     dispatch(repost(post, gallery))
     setShowModalRepost(status);
   }
-  const handleRepostModal = (status,) => {
+  const handleRepostModal = (status) => {
     setShowModalRepost(status);
   }
   const getSelectedGalleryId = (gallery) => {

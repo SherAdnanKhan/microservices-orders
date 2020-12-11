@@ -107,7 +107,6 @@ export const unstrokePost = (postId, galleryId, user) => dispatch => {
 
 export const createComment = (data, postId, galleryId, user) => dispatch => {
   const currentUser = getCurrentUser();
-
   http
     .post('/comments', data)
     .then(res => {
@@ -184,6 +183,7 @@ export const clearNcomm = () => {
     type: CLEAR_NCOMM,
   };
 };
+
 export const changeCritqueStatus = (post, status) => dispatch => {
   const postObject = {
     critiques_status: status
