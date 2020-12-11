@@ -124,7 +124,7 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
   }
 
   const handleRepostLobby = (status, post, gallery) => {
-    dispatch(repost(post.id, gallery))
+    dispatch(repost(post, gallery))
     setShowModalRepost(status);
   }
 
@@ -366,13 +366,19 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                     {post &&
                       <ShowMoreText
                         lines={2}
-                        more={<a style={{
-                          color: post?.user?.feel?.color_code
-                        }} href="/"> View more </a>
+                        more={
+                          <div>
+                            <a style={{
+                              color: post?.user?.feel?.color_code
+                            }} href="/"> View more </a>
+                          </div>
                         }
-                        less={<a style={{
-                          color: post?.user?.feel?.color_code
-                        }} href="/"> View less </a>
+                        less={
+                          <div>
+                            <a style={{
+                              color: post?.user?.feel?.color_code
+                            }} href="/"> View less </a>
+                          </div>
                         }
                         expanded={false}
                         width={600}

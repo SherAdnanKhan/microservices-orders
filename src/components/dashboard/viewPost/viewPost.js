@@ -125,8 +125,8 @@ const ViewPost = () => {
     dispatch(shareMzFlash(post));
   }
 
-  const handleRepostLobby = (status, post, gallery) => {
-    dispatch(repost(post.id, gallery))
+  const handleRepost = (status, post, gallery) => {
+    dispatch(repost(post, gallery))
     setShowModalRepost(status);
   }
 
@@ -193,7 +193,7 @@ const ViewPost = () => {
       }
       {showModalRepost &&
         <RepostModal
-          onRepost={handleRepostLobby}
+          onRepost={handleRepost}
           onModalClose={handleRepostModal}
           post={post?.post}
           myGalleries={myGalleries}

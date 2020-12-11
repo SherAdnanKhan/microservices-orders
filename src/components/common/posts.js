@@ -143,8 +143,8 @@ const Post = ({
   const handleRepostModal = (status) => {
     setShowModalRepost(status);
   }
-  const handleRepostLobby = (status, post, gallery) => {
-    dispatch(repost(post.id, gallery))
+  const handleRepost = (status, post, gallery) => {
+    dispatch(repost(post, gallery))
     setShowModalRepost(status);
   }
   const handleVault = (post) => {
@@ -187,7 +187,7 @@ const Post = ({
       }
       {showModalRepost &&
         <RepostModal
-          onRepost={handleRepostLobby}
+          onRepost={handleRepost}
           onModalClose={handleRepostModal}
           post={activePost}
           myGalleries={myGalleries}

@@ -1445,6 +1445,9 @@ input {
       }
     }
     .dropdown-content {
+      ::-webkit-scrollbar-track {
+        background: #f2f3f5;
+      }
       display: none;
       min-width: 400px;
       background: #fff;
@@ -1483,58 +1486,63 @@ input {
           color: #FFFFFF;
         }
       }
-      .notificationAlert {
-        display: flex;
-        padding: 20px;
-        position: relative;
-        border-bottom: 1px solid #999999;
-        @media @mobile {
-          padding: 10px 20px;
-        }
-        &.read {
-          background: #fff;
-          &.unReadDot {
-            display: none;
+      a{
+        text-decoration: none;
+        color:black;
+        .notificationAlert {
+          display: flex;
+          padding: 20px;
+          position: relative;
+          border-bottom: 1px solid #999999;
+          @media @mobile {
+            padding: 10px 20px;
           }
-        }
-        &:hover {
-          // background: #e8e8ee ;
-          cursor: pointer;
-        }
-        .image {
-          img {
-            width: 60px;
+          &.read {
+            background: #fff;
+            &.unReadDot {
+              display: none;
+            }
+          }
+          &:hover {
+            // background: #e8e8ee ;
+            cursor: pointer;
+          }
+          .image {
+            img {
+              width: 60px;
+              border-radius: 50px;
+              background: red;
+            }
+          }
+          .notificationContent {
+            padding-left: 15px;
+            h4 {
+              margin: 0;
+              font-size: 18px;
+              @media @mobile {
+              font-size: 16px;
+              }
+            }
+            p {
+              margin: 0;
+              font-size: 16px;
+              @media @mobile {
+                font-size: 14px;
+              }
+            }
+          }
+          .unreadDot {
+            background: #1876f2;
+            width: 10px;
+            height: 10px;
             border-radius: 50px;
-            background: red;
+            position: absolute;
+            right: 7px;
+            top: 41px;
           }
-        }
-        .notificationContent {
-          padding-left: 15px;
-          h4 {
-            margin: 0;
-            font-size: 18px;
-            @media @mobile {
-            font-size: 16px;
-            }
-          }
-          p {
-            margin: 0;
-            font-size: 16px;
-            @media @mobile {
-              font-size: 14px;
-            }
-          }
-        }
-        .unreadDot {
-          background: #1876f2;
-          width: 10px;
-          height: 10px;
-          border-radius: 50px;
-          position: absolute;
-          right: 7px;
-          top: 41px;
         }
       }
+ 
       .sprfvs {
         padding: 20px;
         .sprfvsSection{

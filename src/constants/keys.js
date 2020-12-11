@@ -12,3 +12,4 @@ export const POST_STROKE = 5;
 export const POST_UNSTROKE = 6;
 
 export const POST_CREATED = 7;
+export const POST_REPOSTED = 8;
