@@ -72,9 +72,9 @@ export const playNotificationSound = async () => {
 
 export const getText = (text) => {
   if (!text) return null;
-
+  // if space comes in string replace it with next line
   const splitted = text
-    .replace(/\s+/g, ' ')
+    .replace(/<br\s*\/?>/g, '\n')
     .trim('')
     .split(' ');
 
