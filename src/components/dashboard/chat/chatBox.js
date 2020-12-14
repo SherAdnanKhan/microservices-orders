@@ -215,11 +215,6 @@ class ChatBox extends Component {
     }
   }
 
-  handleEnter = e => {
-    if (e.keyCode === 13) {
-      this.sendMessage(e);
-    }
-  };
 
   handlePost = e => {
     this.sendMessage(e);
@@ -504,7 +499,6 @@ class ChatBox extends Component {
                   <ChatInput
                     message={message}
                     onChange={this.handleChange}
-                    onEnter={this.handleEnter}
                     onPost={this.handlePost}
                     feelColor={this?.props?.feelColor}
                     onOpenUploadModal={this.handleOpenUploadModal}

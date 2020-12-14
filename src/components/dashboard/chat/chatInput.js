@@ -3,8 +3,7 @@ import LazyInput from '../../common/lazyInput';
 import ToolTip from '../../common/toolTip/toolTip';
 
 const ChatInput = ({
-  message, showPostButton, onChange,
-  onEnter, onPost, feelColor,
+  message, showPostButton, onChange, onPost, feelColor,
   onOpenUploadModal, onTypingComplete,
   image, video, document
 }) => {
@@ -27,7 +26,6 @@ const ChatInput = ({
         name="message"
         value={message}
         onChange={onChange}
-        onKeyUp={onEnter}
         onSearchComplete={onTypingComplete}
         time={1000}
         autoComplete="off"
