@@ -288,15 +288,12 @@ const ChatHeader = ({
           <ToolTip id="invite" />
 
           {hasMeeting === false &&
-            <div onClick={handleCall}>
-              <img
-                href="#"
-                src="/assets/images/icons/VidStrq.png"
-                className="call-icon"
-                alt="Video Call"
-                data-for="call"
-                data-tip="call"
-              />
+            <div onClick={handleCall}
+              style={{ marginLeft: "-20px" }}
+            >
+              <i
+                className="fas fa-video"
+                data-for="call" data-tip="call"></i>
               <ToolTip id="call" />
             </div>
           }
