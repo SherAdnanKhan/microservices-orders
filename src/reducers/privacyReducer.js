@@ -4,8 +4,6 @@ import {
   CHANGE_OTHER_PRIVACY,
   START_PRIVACY_LOADING,
   STOP_PRIVACY_LOADING,
-  REQUEST_APPROVED,
-  REQUEST_REJECTED,
   SPRFVS_USERS,
   USER_REQUESTS,
   INVITED_USERS
@@ -68,11 +66,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         invitedUsers: action.payload
-      };
-    case REQUEST_APPROVED || REQUEST_REJECTED:
-      return {
-        ...state,
-        userRequests: state.userRequests.filter(user => user.id !== action.payload.user_id)
       };
     default:
       return state;

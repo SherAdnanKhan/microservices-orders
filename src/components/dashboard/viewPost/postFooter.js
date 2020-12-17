@@ -6,15 +6,13 @@ import ImageVideoSlider from "../../common/imageVideoSlider";
 import { completeFormattedDate } from "../../../utils/helperFunctions";
 import ToolTip from "../../common/toolTip/toolTip";
 import Stroke from "../../common/stroke";
-import Comment from "../viewPost/comments";
 import { getCurrentUser } from "../../../actions/authActions";
 import { useHistory } from "react-router-dom";
 
-const PostFooter = ({ post, onStroke, onUnStroke }) => {
+const PostFooter = ({ post, onStroke, onUnStroke, onOpenCommentModal }) => {
   const dispatch = useDispatch();
   const [hasNcomm, setHasNcomm] = useState(false);
   const history = useHistory();
-  const [showCommentModal, setShowCommentModal] = useState(false);
   const {
     postView: { ncomm },
   } = useSelector(state => state);
@@ -40,19 +38,8 @@ const PostFooter = ({ post, onStroke, onUnStroke }) => {
     }
   }, [dispatch]);
 
-  const handleOpenCommentModal = () => {
-    setShowCommentModal(true);
-  }
-
   return (
     <div className="post-footer">
-      {showCommentModal &&
-        <Comment
-          post={post?.post}
-          onClose={() => setShowCommentModal(false)}
-        />
-      }
-
       <ImageVideoSlider ncomm={ncomm} />
 
       <h3 className="post-title">{post?.post?.title}</h3>
@@ -76,7 +63,7 @@ const PostFooter = ({ post, onStroke, onUnStroke }) => {
             alt=""
             data-for="comments"
             data-tip="comments"
-            onClick={() => handleOpenCommentModal(post)}
+            onClick={onOpenCommentModal}
           />
           <ToolTip id="comments" />
           <p> comments {post?.post?.comments_count} </p>

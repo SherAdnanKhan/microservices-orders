@@ -6,7 +6,7 @@ import ToolTip from '../../common/toolTip/toolTip';
 
 
 const PostBody = ({
-  post, updatedCritqueStatus, onAddVault, onActivePost,
+  post, updatedCritqueStatus, onAddVault,
   onUnFavGallery, onReportPost, onModelDelete,
   onSharePost, onShareStrqModel,
   onTurnOffCrtiques, onRepostModal,
@@ -70,7 +70,7 @@ const PostBody = ({
           <div className="image-div"
             onTouchStart={handleButtonPress}
             onTouchEnd={handleButtonRelease}
-            onActivePost={onActivePost}
+          // onActivePost={onActivePost}
           >
             {post?.post?.post_type === 2
               ? (

@@ -223,7 +223,6 @@ export const sharePostOnStrq = (post, userId) => dispatch => {
     .post(`/post/share/${post.id}`, postObject)
     .then(res => {
       if (res.data.success) {
-        toast.success(`post shared successfully`)
         dispatch({
           type: CHANGE_STATUS,
           payload: userId
@@ -234,6 +233,7 @@ export const sharePostOnStrq = (post, userId) => dispatch => {
       }
     });
 };
+
 export const clearStatus = () => {
   return {
     type: CLEAR_STATUS,

@@ -37,8 +37,8 @@ const SprfvsUser = () => {
     dispatch(getSprfvsUsers(3, 1, slug));
   }, [dispatch, slug]);
 
-  const handleApprovedRequest = (request) => {
-    dispatch(approveRequest(request));
+  const handleApprovedRequest = (request, user) => {
+    dispatch(approveRequest(request, user));
   };
 
   const handleRejectedRequest = (request) => {

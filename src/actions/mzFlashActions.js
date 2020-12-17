@@ -15,7 +15,7 @@ import {
 } from '../constants/actionTypes';
 import { getCurrentUser } from './authActions';
 import socket from '../services/socketService';
-import { FEED_STROKE, FEED_UNSTROKE, FEED_COMMENT } from '../constants/keys';
+import { FEED_STROKE, FEED_UNSTROKE, FEED_COMMENT, FEED_REPOSTED } from '../constants/keys';
 
 export const createFeed = data => dispatch => {
   dispatch({ type: START_FEEDS_LOADER });
@@ -23,6 +23,29 @@ export const createFeed = data => dispatch => {
   http
     .post('/mzflash', data)
     .then(res => {
+      dispatch({
+        type: CREATE_FEED,
+        payload: res.data.data.feed
+      });
+      dispatch({ type: STOP_FEEDS_LOADER });
+    })
+    .catch(() => {
+      dispatch({ type: STOP_FEEDS_LOADER });
+    });
+};
+
+export const repostFeed = (data, user) => dispatch => {
+  dispatch({ type: START_FEEDS_LOADER });
+
+  http
+    .post('/mzflash', data)
+    .then(res => {
+      const currentUser = getCurrentUser();
+
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, FEED_REPOSTED);
+      }
+
       dispatch({
         type: CREATE_FEED,
         payload: res.data.data.feed

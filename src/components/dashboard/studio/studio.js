@@ -59,16 +59,15 @@ const Studio = () => {
   const handleLike = () => {
     return gallery.has_faved
       ? dispatch(unfavGallery(activeGallery))
-      : dispatch(favGallery(activeGallery));
+      : dispatch(favGallery(activeGallery, userStudio?.user));
   };
 
   const handleSuperFav = () => {
     const privacy = {
       privacy_type_id: 3,
-      user_id: userStudio && userStudio.user.id
+      user_id: userStudio?.user?.id
     };
-
-    dispatch(addToSuperFavs(privacy));
+    dispatch(addToSuperFavs(privacy, userStudio?.user));
   };
 
   const handleShowModel = value => {
@@ -90,6 +89,7 @@ const Studio = () => {
     else
       dispatch(removeFromInviteOnly(privacy));
   };
+
   const handleUnSprFav = (status) => {
     const privacy = {
       privacy_type_id: 4,
@@ -105,9 +105,7 @@ const Studio = () => {
 
   return (
     <div className='studio'>
-
       {loading && <Spinner />}
-
       {showModel &&
         <GalleryModel
           myGalleries={myGalleries}
@@ -116,7 +114,6 @@ const Studio = () => {
           galleryInvitedList={userStudio && userStudio.gallery_invited_list}
           user={userStudio && userStudio.user}
         />
-
       }
       {showUnsprfvsModal &&
         <UnSuperFvtModal

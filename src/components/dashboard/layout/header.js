@@ -4,7 +4,7 @@ import Search from './search';
 import { useSelector } from "react-redux";
 import ToolTip from "../../common/toolTip/toolTip";
 import FeedBackModal from '../../common/feedbackModal.js';
-import Notification from "../layout/notification";
+import Notification from "../layout/notification/notification";
 
 const Header = () => {
   const history = useHistory();

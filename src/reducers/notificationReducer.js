@@ -1,5 +1,4 @@
 import {
-
   START_NOTIFICATION_LOADER,
   STOP_NOTIFICATION_LOADER,
   GET_ALL_NOTIFICATIONS,
@@ -7,6 +6,8 @@ import {
   RESET_UNREAD_NOTIFICATION_COUNT,
   GET_NOTIFCATION_COUNT,
   READ_NOTIFICATION,
+  STOP_NOTIFICATION_LOADERS,
+  START_NOTIFICATION_LOADERS
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
     next_page_url: null
   },
   notificationLoader: false,
-  notificationCount: 0
+  notificationCount: 0,
+  loaders: {}
 };
 
 export default (state = initialState, action) => {
@@ -42,7 +44,7 @@ export default (state = initialState, action) => {
         notifications: {
           ...state.notifications,
           data: state.notifications.data?.map(notification => {
-            if (notification.id === action.payload.id) {
+            if (notification.id === action.payload) {
               return {
                 ...notification,
                 status: 1,
@@ -50,7 +52,8 @@ export default (state = initialState, action) => {
             }
             return notification
           })
-        }
+        },
+        notificationCount: state.notificationCount === 0 ? 0 : state.notificationCount - 1
       };
     case START_NOTIFICATION_LOADER:
       return {
@@ -76,6 +79,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         notificationCount: 0
+      }
+    case STOP_NOTIFICATION_LOADERS:
+      return {
+        ...state,
+        loaders: { ...state.loaders, [action.payload]: false }
+      }
+    case START_NOTIFICATION_LOADERS:
+      return {
+        ...state,
+        loaders: { ...state.loaders, [action.payload]: false }
       }
     default:
       return state;

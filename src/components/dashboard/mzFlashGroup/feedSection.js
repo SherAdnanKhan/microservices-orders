@@ -133,7 +133,7 @@ const FeedSection = ({
   }
 
   return (
-    collectiveFeeds.data.length > 0 &&
+    // collectiveFeeds.data.length > 0 &&
     <InfiniteScroll
       dataLength={collectiveFeeds?.data?.length}
       next={fetchData}

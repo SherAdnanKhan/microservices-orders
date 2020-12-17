@@ -100,6 +100,7 @@ function App() {
         <Redirect exact from='/' to='/login' />
       </Switch>
       <Notifications />
+
       <Call />
     </div>
   );
