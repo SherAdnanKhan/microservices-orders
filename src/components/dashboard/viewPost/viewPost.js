@@ -41,10 +41,12 @@ const ViewPost = () => {
   const [showMzFlashModal, setShowMzFlashModal] = useState(false);
   const [showDeleteModel, setShowDeleteModel] = useState(false);
   const {
-    postView: { post, comments },
+    postView: { post },
   } = useSelector(state => state);
+
   useEffect(() => {
-    dispatch(getPost(id))
+    dispatch(getPost(id));
+
     return () => {
       dispatch(clearPost())
     };
@@ -138,11 +140,10 @@ const ViewPost = () => {
     setGalleryId(gallery);
   }
 
-  const handleActivePost = post => {
-    if (post.id === activePost.id) {
-      setActivePost('');
-    } else {
-      setActivePost(post);
+  const handleOpenCommentModal = () => {
+    if (post?.post) {
+      setActivePost(post?.post);
+      setCommentModal(true);
     }
   }
 
@@ -159,7 +160,7 @@ const ViewPost = () => {
     <>
       {commentModal &&
         <Comment
-          post={post?.post}
+          post={activePost}
           onClose={() => setCommentModal(false)}
         />
       }
@@ -221,7 +222,7 @@ const ViewPost = () => {
         />
         <ViewPostBody
           post={post}
-          onActivePost={handleActivePost}
+          // onActivePost={handleActivePost}
           onUnFavGallery={handleUnfavGallery}
           activePost={activePost}
           onModelDelete={handlePostDeleteModel}
@@ -237,10 +238,11 @@ const ViewPost = () => {
         <PostFooter
           post={post}
           isAllowedCritiques={post?.other_privacy?.is_allowed ? 1 : 0}
-          comments={comments}
+          // comments={comments}
           onStroke={handleStroke}
           onUnStroke={handleUnStroke}
           updatedCritqueStatus={crtiqueStatus}
+          onOpenCommentModal={handleOpenCommentModal}
         />
       </div>
     </>

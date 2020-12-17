@@ -408,8 +408,7 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
           }
         </InfiniteScroll >
       }
-      {
-        commentModal &&
+      {commentModal &&
         <Comment
           post={activePost}
           onClose={() => setCommentModal(false)}

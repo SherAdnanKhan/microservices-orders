@@ -33,7 +33,7 @@ const Request = ({ userRequests, onApprovedRequest, onRejectedRequest }) => {
               <div className="actions">
                 <button
                   style={{ backgroundColor: user.feel.color_code }}
-                  onClick={() => onApprovedRequest({ privacy_type_id: 3, user_id: user.id })}
+                  onClick={() => onApprovedRequest({ privacy_type_id: 3, user_id: user.id }, user)}
                 >
                   Approve
                 </button>

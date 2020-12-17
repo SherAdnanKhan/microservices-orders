@@ -18,6 +18,10 @@ import {
   POST_UNSTROKE,
   POST_CREATED,
   POST_REPOSTED,
+  SPRFVS_REQUESTED,
+  FEED_REPOSTED,
+  GALLERY_FAVED,
+  SPRFVS_APPROVED
 } from '../constants/keys';
 import { updateUnreadConversations } from '../actions/lobbyActions';
 import { updateNotificationUnreadCount } from '../actions/notificationsActions';
@@ -67,19 +71,12 @@ const Notifications = () => {
         socket.on('reciveUserNotifications', (data, type) => {
           switch (type) {
             case POST_COMMENT:
-              toast(`${data.sender.username} has commented on your post`);
-              break;
-            case FEED_COMMENT:
-              toast(`${data.sender.username} has commented on your feed`);
-              break;
-            case FEED_STROKE:
-              toast(`${data.sender.username} liked your feed`);
-              break;
-            case FEED_UNSTROKE:
-              toast(`${data.sender.username} disliked your feed`);
+              toast(`${data.sender.username} commented on your post`);
+              dispatch(updateNotificationUnreadCount());
               break;
             case POST_STROKE:
               toast(`${data.sender.username} liked your post`);
+              dispatch(updateNotificationUnreadCount());
               break;
             case POST_UNSTROKE:
               toast(`${data.sender.username} disliked your post`);
@@ -89,6 +86,33 @@ const Notifications = () => {
               break;
             case POST_REPOSTED:
               toast.success(`${data.sender.username} reposted your exhibit`);
+              dispatch(updateNotificationUnreadCount());
+              break;
+            case FEED_COMMENT:
+              toast(`${data.sender.username} commented on your feed`);
+              dispatch(updateNotificationUnreadCount());
+              break;
+            case FEED_STROKE:
+              toast(`${data.sender.username} liked your feed`);
+              dispatch(updateNotificationUnreadCount());
+              break;
+            case FEED_UNSTROKE:
+              toast(`${data.sender.username} disliked your feed`);
+              break;
+            case FEED_REPOSTED:
+              toast(`${data.sender.username} reposted your feed`);
+              dispatch(updateNotificationUnreadCount());
+              break;
+            case SPRFVS_REQUESTED:
+              toast.success(`${data.sender.username} sent you SPRFVS request`);
+              dispatch(updateNotificationUnreadCount());
+              break;
+            case SPRFVS_APPROVED:
+              toast.success(`${data.sender.username} approved your SPRFVS request`);
+              dispatch(updateNotificationUnreadCount());
+              break;
+            case GALLERY_FAVED:
+              toast.success(`${data.sender.username} faved your gallery`);
               dispatch(updateNotificationUnreadCount());
               break;
             default:

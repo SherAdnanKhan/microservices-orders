@@ -15,10 +15,10 @@ import {
   getMySprfvsFeeds,
   getMySprfvsAndFavesFeeds,
   createFeedComment,
-  createFeed,
   strokeFeed,
   unstrokeFeed,
-  getUserFeeds
+  getUserFeeds,
+  repostFeed
 } from '../../../actions/mzFlashActions';
 
 const MzFlashGroup = () => {
@@ -92,11 +92,10 @@ const MzFlashGroup = () => {
 
   const handleRepost = (e, feed) => {
     e.preventDefault();
-
     const formData = {};
     formData.feed_id = feed.id;
 
-    dispatch(createFeed(formData));
+    dispatch(repostFeed(formData, feed.user));
   };
 
   const handleFeedStroke = feed => {
@@ -172,7 +171,6 @@ const MzFlashGroup = () => {
           onPostModal={handlePostShowModel}
         />
         <div>
-
           <FeedSection
             collectiveFeeds={collectiveFeeds}
             onModelChange={value => setShowModel(value)}

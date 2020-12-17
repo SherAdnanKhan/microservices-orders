@@ -17,6 +17,10 @@ import {
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { toast } from 'react-toastify';
+import { getCurrentUser } from './authActions';
+import socket from '../services/socketService';
+import { GALLERY_FAVED } from '../constants/keys';
+
 
 export const getGallery = slug => dispatch => {
   dispatch(clearGallery());
@@ -111,7 +115,7 @@ export const removeGalleryImage = (id, callback) => dispatch => {
     });
 };
 
-export const favGallery = gallery => dispatch => {
+export const favGallery = (gallery, user) => dispatch => {
   dispatch({
     type: FAV_GALLERY,
     payload: { gallery, hasFaved: true }
@@ -120,6 +124,11 @@ export const favGallery = gallery => dispatch => {
   http
     .post('/galleries/fav', { gallery_id: gallery.id })
     .then(() => {
+      const currentUser = getCurrentUser();
+
+      if (currentUser.id !== user.id) {
+        socket.emit('onUserNotifications', { sender: currentUser, reciever: user }, GALLERY_FAVED);
+      }
       toast.success("Gallery Fave Successfully");
     })
     .catch(() => {

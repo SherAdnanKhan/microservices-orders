@@ -19,8 +19,9 @@ import {
 } from '../constants/actionTypes';
 import http from '../services/httpService';
 import { getCurrentUser } from './authActions';
-import { userKey } from '../constants/keys';
+import { SPRFVS_REQUESTED, userKey } from '../constants/keys';
 import { toast } from 'react-toastify';
+import socket from '../services/socketService';
 
 export const getMyStudio = () => dispatch => {
   http
@@ -150,7 +151,7 @@ export const clearUserStudio = () => {
   return { type: CLEAR_USER_STUDIO };
 }
 
-export const addToSuperFavs = privacy => dispatch => {
+export const addToSuperFavs = (privacy, user) => dispatch => {
   http
     .post('/user/privacy/sprfvs', privacy)
     .then(() => {
@@ -159,8 +160,17 @@ export const addToSuperFavs = privacy => dispatch => {
         type: ADD_TO_SPRFVS,
         payload: 2
       });
+
+      const currentUser = getCurrentUser();
+
+      if (currentUser.id !== user.id) {
+        socket.emit(
+          'onUserNotifications',
+          { sender: currentUser, reciever: user }, SPRFVS_REQUESTED);
+      }
     });
 };
+
 export const unSuperFav = privacy => dispatch => {
   http
     .post('/user/privacy/unsprfvs', privacy)

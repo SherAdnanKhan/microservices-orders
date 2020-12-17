@@ -323,6 +323,10 @@ $(document).on('click', '.notification', function (e) {
   $(this).find('.dropdown-content').toggle();
 })
 
+$(document).on('click', '.notification .dropdown-content', function (e) {
+  e.stopPropagation();
+})
+
 
 $(document).on('click', '.messageDots .fa-ellipsis-v', function (e) {
   e.stopPropagation();
