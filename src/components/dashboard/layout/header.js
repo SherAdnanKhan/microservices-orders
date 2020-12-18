@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Search from './search';
 import { useSelector } from "react-redux";
 import ToolTip from "../../common/toolTip/toolTip";
 import FeedBackModal from '../../common/feedbackModal.js';
 import Notification from "../layout/notification/notification";
+import Draggable from 'react-draggable';
 
 const Header = () => {
   const history = useHistory();
@@ -110,20 +111,29 @@ const Header = () => {
           <Notification feelColor={feelColor} />
         </div>
         {url !== "chat" &&
-          <>
-            <Link
-              to=""
+          <Draggable>
+            <div
+              onClick={e => e.preventDefault()}
               className="feelIcon"
               style={{
                 backgroundColor: feelColor
               }}
             >
+              {/* <Link
+                to=""
+                onClick={e => e.preventDefault()}
+                className="feelIcon"
+                style={{
+                  backgroundColor: feelColor
+                }}
+              > */}
               <img alt="" src="/assets/images/icons/feelicon.png"
                 data-for="feelColor"
                 data-tip="feel color" />
-            </Link>
-            <ToolTip position="left" id="feelColor" />
-          </>
+              {/* </Link> */}
+              <ToolTip position="left" id="feelColor" />
+            </div>
+          </Draggable>
         }
       </div>
       <Search

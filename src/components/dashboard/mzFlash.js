@@ -7,7 +7,7 @@ import Avatar from "../common/avatar";
 import { favUser, unfavUser } from "../../actions/userActions";
 import { useRouteMatch } from 'react-router-dom';
 import { getUserStudio } from "../../actions/studioActions";
-import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, createFeed } from "../../actions/mzFlashActions";
+import { getUserFeeds, unstrokeFeed, strokeFeed, createFeedComment, repostFeed } from "../../actions/mzFlashActions";
 import Spinner from "../common/spinner";
 import { completeFormattedDate, formatTime } from "../../utils/helperFunctions";
 import PostModal from "../../components/dashboard/mzFlashGroup/postModal";
@@ -85,7 +85,7 @@ const MzFlash = () => {
 
     const formData = {};
     formData.feed_id = feed.id;
-    dispatch(createFeed(formData));
+    dispatch(repostFeed(formData, feed.user));
   };
 
   useEffect(() => {
