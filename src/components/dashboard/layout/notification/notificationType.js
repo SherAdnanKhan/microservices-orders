@@ -26,6 +26,8 @@ const NotificationType = ({
         return `${notification?.sender?.username} reposted your feed.`;
       case "STROKE FEED":
         return `${notification?.sender?.username} stroked your feed.`;
+      case "COMMENT FEED":
+        return `${notification?.sender?.username} commented on your feed.`;
       case "STROKE EXHIBIT":
         return `${notification?.sender?.username} stroked your exhibit`;
       default:

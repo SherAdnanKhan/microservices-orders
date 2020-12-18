@@ -29,14 +29,15 @@ export const resetNotificationCount = notification => {
   }
 }
 
-export const readNotification = id => dispatch => {
+export const readNotification = (id, link, history) => dispatch => {
   http
     .get(`notification/read/${id}`)
     .then(res => {
       dispatch({
         type: READ_NOTIFICATION,
         payload: id
-      })
+      });
+      link && history.push(link);
     })
     .catch(error => toast.error(error.response.data.errors.message))
 }

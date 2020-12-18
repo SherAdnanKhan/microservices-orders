@@ -18,8 +18,6 @@ import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
 import ConfirmationModal from "../dashboard/chat/confirmationModal";
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
 
-
-
 const Video = ({ peer, user, socketId, onPeerClose }) => {
   const ref = useRef();
   const dispatch = useDispatch();

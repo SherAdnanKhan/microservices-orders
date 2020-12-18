@@ -15,7 +15,12 @@ import {
 } from '../constants/actionTypes';
 import { getCurrentUser } from './authActions';
 import socket from '../services/socketService';
-import { FEED_STROKE, FEED_UNSTROKE, FEED_COMMENT, FEED_REPOSTED } from '../constants/keys';
+import {
+  FEED_STROKE,
+  FEED_UNSTROKE,
+  FEED_COMMENT,
+  FEED_REPOSTED
+} from '../constants/keys';
 
 export const createFeed = data => dispatch => {
   dispatch({ type: START_FEEDS_LOADER });
