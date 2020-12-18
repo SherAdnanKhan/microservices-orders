@@ -30,7 +30,11 @@ const Notification = ({ feelColor }) => {
   }
 
   const handleReadNotification = (notification, link) => {
-    !notification.status && dispatch(readNotification(notification?.id, link, history));
+    if (!notification.status) {
+      dispatch(readNotification(notification?.id, link, history));
+    } else {
+      link && history.push(link);
+    }
   }
 
   const fetchNextNotifications = () => {
