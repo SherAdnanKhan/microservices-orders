@@ -27,7 +27,7 @@ $(document).ready(function () {
 });
 
 
-$(document).on('dblclick', '.feelIcon', async function (e) {
+$(document).on('click', '.feelIcon', async function (e) {
   e.preventDefault();
   e.stopPropagation();
 
