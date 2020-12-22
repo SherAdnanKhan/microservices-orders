@@ -464,7 +464,8 @@ class ChatBox extends Component {
               >
                 {data.user.id === currentUser.id
                   ? (
-                    <OutgoingMessage
+                    data.type !== 4 &&
+                    < OutgoingMessage
                       data={data}
                       conversation={conversation}
                       index={index}

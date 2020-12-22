@@ -50,7 +50,8 @@ const Call = () => {
     const payload = {
       user: currentUser,
       callerSocket: incomingPayload.socketId,
-      room: incomingPayload.room
+      room: incomingPayload.room,
+      messageId: incomingPayload.messageId
     }
 
     socket.emit('accept-call', payload);
@@ -67,7 +68,8 @@ const Call = () => {
     const payload = {
       user: currentUser,
       callerSocket: incomingPayload.socketId,
-      room: incomingPayload.room
+      room: incomingPayload.room,
+      messageId: incomingPayload.messageId
     }
 
     if (audioRef.current) {
