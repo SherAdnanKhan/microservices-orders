@@ -21,6 +21,7 @@ import Privacy from './privacy/privacy';
 import Chat from './chat/chat';
 import FeelHistory from './feelHistory';
 import MyVault from './vault/myVault';
+import Footer from './layout/footer';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Main = () => {
       <ChangeColor onColorChange={handleColorChange} />
       <LeftBorder />
       <RightBorder />
+      <Footer />
       <Switch>
         <Route exact path="/lobby" component={Lobby} />
         <Route exact path="/change-password" component={ChangePassword} />
