@@ -142,13 +142,13 @@ const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
         className="grid-item"
         style={{ borderColor: user?.feel?.color_code }}
       >
-        {connection &&
+        {/* {connection &&
           <div className="connection">
             <div className="text">
               {connection}
             </div>
           </div>
-        }
+        } */}
         <div className="add-strq">
           <OtherUserOptions
             onReportModal={handleReportModal}

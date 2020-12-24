@@ -218,7 +218,7 @@ const ChatHeader = ({
   }
 
   const handleJoinMeeting = () => {
-    history.push(`/video-call/${conversation.id}`);
+    dispatch(startMeeting(conversation?.id))
   }
 
   const handleLeaveMessage = message => {
