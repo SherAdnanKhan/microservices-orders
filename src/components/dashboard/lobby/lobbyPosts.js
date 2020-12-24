@@ -246,6 +246,10 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                   <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
                     {post.user.username}
                   </Link>
+                  <p>
+                    {post.user.art.parent && post.user.art.parent.name + '/'}
+                    {post.user.art.name && post.user.art.name}
+                  </p>
                 </p>
                 <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
                   <Avatar
@@ -254,10 +258,22 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                 </Link>
                 {post.user.art &&
                   <>
-                    {post.user.art.parent && post.user.art.parent.name + '/'}
-                    {post.user.art.name && post.user.art.name}
+                    {/* {post.user.art.parent && post.user.art.parent.name + '/'}
+                    {post.user.art.name && post.user.art.name} */}
                   </>
                 }
+                <div className={
+                  activePost.id === post.id
+                    ? "valut-icon show-valut"
+                    : "valut-icon"
+                }
+                >
+
+                  <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
+                  <ToolTip id="vault" position="top" />
+                  <i className="fa fa-ellipsis-v postOptions" aria-hidden="true" data-tip="more" data-for="more" ></i>
+                  <ToolTip id="more" position="top" />
+                </div>
               </div>
               <div className="image-option-box">
                 <ImagePostOption
@@ -272,7 +288,7 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                   onMzFlashModal={handleMzFlashModal}
                   onAddVault={handleVault} />
               </div>
-              <div className={
+              {/* <div className={
                 activePost.id === post.id
                   ? "valut-icon show-valut"
                   : "valut-icon"
@@ -282,7 +298,7 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
                 <ToolTip id="more" position="top" />
                 <img className="valut-img" alt="" src="/assets/images/vaulticon.png" data-tip="vault" data-for="vault" onClick={() => addVault(post)} />
                 <ToolTip id="vault" position="top" />
-              </div>
+              </div> */}
               <div
                 className="post-body"
                 onClick={() => handleActivePost(post)}

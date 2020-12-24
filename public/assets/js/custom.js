@@ -69,11 +69,11 @@ $(document).click(function () {
 
   $(".left").css("opacity", opacity);
   $(".right").css("opacity", opacity);
-  $(".bottom").css("opacity", opacity);
+  // $(".bottom").css("opacity", opacity);
 
   $(".left").removeClass("toggle");
   $(".right").removeClass("toggle");
-  $(".bottom").removeClass("toggle");
+  // $(".bottom").removeClass("toggle");
 
   $('.colorChangerScreen').hide();
   $('.dropdown-content').hide();
@@ -96,7 +96,7 @@ $(document).on('click', '.left', function (e) {
   $(".left").css("opacity", "1");
   $('.left').addClass('toggle')
   $('.right').removeClass('toggle')
-  $('.bottom').removeClass('toggle')
+  // $('.bottom').removeClass('toggle')
 
   e.stopPropagation();
 });
@@ -105,7 +105,7 @@ $(document).on('click', '.invisible-left', function (e) {
   $(".left").css("opacity", "1");
   $('.left').addClass('toggle')
   $('.right').removeClass('toggle')
-  $('.bottom').removeClass('toggle')
+  // $('.bottom').removeClass('toggle')
 
   e.stopPropagation();
 });
@@ -114,7 +114,7 @@ $(document).on('click', '.invisible-right', function (e) {
   $(".right").css("opacity", "1");
   $('.right').addClass('toggle')
   $('.left').removeClass('toggle')
-  $('.bottom').removeClass('toggle')
+  // $('.bottom').removeClass('toggle')
   e.stopPropagation();
 });
 
@@ -122,13 +122,13 @@ $(document).on('click', '.right', function (e) {
   $(".right").css("opacity", "1");
   $('.right').addClass('toggle')
   $('.left').removeClass('toggle')
-  $('.bottom').removeClass('toggle')
+  // $('.bottom').removeClass('toggle')
   e.stopPropagation();
 });
 
 $(document).on('click', '.bottom', function (e) {
-  $(".bottom").css("opacity", "1");
-  $('.bottom').addClass('toggle')
+  // $(".bottom").css("opacity", "1");
+  // $('.bottom').addClass('toggle')
   $('.right').removeClass('toggle')
   $('.left').removeClass('toggle')
 
@@ -184,7 +184,7 @@ $(window).scroll(function () {
 
       $(".left").removeClass("toggle");
       $(".right").removeClass("toggle");
-      $(".bottom").removeClass("toggle");
+      // $(".bottom").removeClass("toggle");
     }
   }
   position = scroll;
