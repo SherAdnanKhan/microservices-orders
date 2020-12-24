@@ -55,6 +55,42 @@ const StudioDetail = ({ userStudio, slug }) => {
               </div>
             }
 
+            {/* Fave Action Starts Here */}
+            <div className="faves-action">
+              <div className="sprfvs-section">
+                <div className="sprfvs-image">
+                  <img src="/assets/images/sprfvs_full.png" alt="Sprfvs here" />
+                  <span>SPRFVS</span>
+                </div>
+                <div className="sprfvs-users">16</div>
+              </div>
+
+              <div className="sprfvs-section">
+                <div className="sprfvs-image">
+                  <img src="/assets/images/fave_icon.png" className="fave" alt="faves here" />
+                  <span>FAVES</span>
+                </div>
+                <div className="sprfvs-users">326k</div>
+              </div>
+
+              <div className="sprfvs-section">
+                <div className="sprfvs-image">
+                  <img src="/assets/images/fave_icon.png" className="fave" alt="faving here" />
+                  <span>FAVING</span>
+                </div>
+                <div className="sprfvs-users">46</div>
+              </div>
+
+              <div className="sprfvs-section">
+                <div className="sprfvs-image">
+                  {/* <img src="/assets/images/sprfvs_empty.png" alt="Sprfvs here" /> */}
+                  <span>POST</span>
+                </div>
+                <div className="sprfvs-users">1679</div>
+              </div>
+            </div>
+            {/* Fave Action Starts Here */}
+
           </div>
           <div className="studioDetail">
             {userStudio &&
@@ -69,6 +105,8 @@ const StudioDetail = ({ userStudio, slug }) => {
                     </>
                   }
                 </span>
+                <div className="dob-studio">DOB: 1193-05-27</div>
+                <div className="dob-studio">Age: 27</div>
               </div>
             }
             <form onSubmit={e => e.preventDefault()}>
