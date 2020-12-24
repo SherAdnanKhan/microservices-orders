@@ -244,19 +244,19 @@ const LobbyPosts = ({ posts, onCallNextPosts, currentPage, postLoader, nextPageU
               <div className="post-head">
                 <p className="usernames">
                   <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
-                    {post.user.username}
+                    {post?.user?.username}
                   </Link>
                   <p>
-                    {post.user.art.parent && post.user.art.parent.name + '/'}
-                    {post.user.art.name && post.user.art.name}
+                    {post?.user?.art?.parent && post?.user?.art?.parent?.name + '/'}
+                    {post?.user?.art?.name && post?.user?.art?.name}
                   </p>
                 </p>
-                <Link to={`/studio/${post.user.slug}?gallery=${post.gallery_id}`}>
+                <Link to={`/studio/${post?.user?.slug}?gallery=${post?.gallery_id}`}>
                   <Avatar
                     user={post.user}
                   />
                 </Link>
-                {post.user.art &&
+                {post?.user?.art &&
                   <>
                     {/* {post.user.art.parent && post.user.art.parent.name + '/'}
                     {post.user.art.name && post.user.art.name} */}
