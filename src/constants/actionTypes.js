@@ -175,3 +175,9 @@ export const UNSTROKE_FEED = 'UNSTROKE_FEED';
 //color
 export const CHANGE_COLOR = 'CHANGE_COLOR';
 export const GET_ALL_FEEL_COLORS = 'GET_ALL_FEEL_COLORS';
+
+
+//meeting
+export const START_MEETING = 'START_MEETING';
+export const END_MEETING = 'END_MEETING';
+

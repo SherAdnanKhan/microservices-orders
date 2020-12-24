@@ -14,6 +14,7 @@ import ConfirmationModal from './confirmationModal'
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "./../../../actions/userActions";
 import { useDispatch } from "react-redux"
 import NoAnswerModal from './noAnswerModal';
+import { endMeeting, startMeeting } from '../../../actions/meetingActions';
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
@@ -38,12 +39,29 @@ const ChatHeader = ({
   const { width } = useViewport();
   const breakPoint = 768;
 
+  const { meeting } = useSelector(state => state.meeting);
   const { feelColor } = useSelector(state => state.feelColor)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!meeting) {
+      clearInterval(interval.current);
+
+      // dispatch(endMeeting());
+      setCountUp(countUp => countUp = 0);
+
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }, [meeting]);
 
   const handleDecline = useCallback(() => {
     clearInterval(interval.current);
     setShowCallingModal(false);
+
+    dispatch(endMeeting());
     setCountUp(countUp => countUp = 0);
 
     if (audioRef.current) {
@@ -58,7 +76,7 @@ const ChatHeader = ({
         ?.participants
         ?.filter(p => p.id !== currentUser.id || [])
     })
-  }, [conversation, currentUser]);
+  }, [conversation, currentUser, dispatch]);
 
   useWindowUnloadEffect(() => {
     socket.off('call-accepted');
@@ -98,7 +116,7 @@ const ChatHeader = ({
           audioRef.current.pause();
           audioRef.current.currentTime = 0;
         }
-        history.push(`/video-call/${data.room}`)
+        // history.push(`/video-call/${data.room}`)
       });
 
       socket.on('call-rejected', data => {
@@ -111,21 +129,22 @@ const ChatHeader = ({
             audioRef.current.pause();
             audioRef.current.currentTime = 0;
           }
+          dispatch(endMeeting());
           setShowCallingModal(showCallingModal => showCallingModal = false);
           clearInterval(interval.current);
         }
       });
       setHasRendered(true);
     }
-  }, [history, hasRendered, conversation]);
+  }, [history, hasRendered, conversation, dispatch]);
 
   const handleCall = async () => {
     rejectedUsers.current = [];
-
     noAnswerModal && setNoAnswerModal(false);
-    setShowCallingModal(true);
 
     audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
+
+    dispatch(startMeeting(conversation?.id))
 
     try {
       await audioRef.current.play();

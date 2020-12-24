@@ -14,6 +14,7 @@ import colorReducer from '../reducers/colorReducer';
 import lobbyReducer from '../reducers/lobbyReducer';
 import onlineUserReducer from '../reducers/onlineUserReducer';
 import notificationReducer from "../reducers/notificationReducer";
+import meetingReducer from '../reducers/meetingReducer';
 
 export default combineReducers({
   error: errorReducer,
@@ -30,5 +31,6 @@ export default combineReducers({
   mzFlash: mzFlashReducer,
   feelColor: colorReducer,
   lobby: lobbyReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  meeting: meetingReducer
 });

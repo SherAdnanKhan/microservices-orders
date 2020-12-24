@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import socket from '../../services/socketService';
 import Peer from 'simple-peer';
 import { useWindowUnloadEffect } from '../common/useWindowUnloadEffect';
@@ -17,8 +17,11 @@ import ReportUserModal from "../dashboard/chat/reportUserModal";
 import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
 import ConfirmationModal from "../dashboard/chat/confirmationModal";
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
+import { endMeeting } from '../../actions/meetingActions';
+// import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import useViewport from '../common/useViewport';
 
-const Video = ({ peer, user, socketId, onPeerClose }) => {
+const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
   const ref = useRef();
   const dispatch = useDispatch();
   const [hasListner, setHasListner] = useState(false);
@@ -41,6 +44,7 @@ const Video = ({ peer, user, socketId, onPeerClose }) => {
             setConnection('');
             break;
           case 'connecting':
+            onConnect();
             setConnection('connecting...');
             break;
           case 'disconnected':
@@ -62,7 +66,7 @@ const Video = ({ peer, user, socketId, onPeerClose }) => {
       setHasListner(listner => listner = true);
     }
 
-  }, [hasListner, peer, user, socketId, onPeerClose, connection]);
+  }, [hasListner, peer, user, socketId, onPeerClose, connection, onConnect]);
 
   const handleReportModal = (status) => {
     setShowReportModal(status)
@@ -110,32 +114,32 @@ const Video = ({ peer, user, socketId, onPeerClose }) => {
 
   return (
     <>
-      <div>
-        {showReportModal &&
-          <ReportUserModal onClose={handleReportModal} user={user} is_blocked={is_blocked} />
-        }
-        {showBlockModal && user &&
-          <ConfirmationModal
-            message={is_blocked ?
-              `Are you sure you want to unblock ${user.username}`
-              : `Are you sure you want to block ${user.username}`}
-            onCancel={handleBlockModal}
-            onConfirm={() => handleBlockUser(user)}
-          />
-        }
-        {showMuteModal && user &&
-          <ConfirmationModal
-            message={is_muted ?
-              `Are you sure you want to unmute ${user.username}` :
-              `Are you sure you want to mute ${user.username}`
-            }
-            onCancel={handleMuteModal}
-            onConfirm={() => handleMuteUser(user)}
-          />
-        }
-      </div>
+
+      {showReportModal &&
+        <ReportUserModal onClose={handleReportModal} user={user} is_blocked={is_blocked} />
+      }
+      {showBlockModal && user &&
+        <ConfirmationModal
+          message={is_blocked ?
+            `Are you sure you want to unblock ${user.username}`
+            : `Are you sure you want to block ${user.username}`}
+          onCancel={handleBlockModal}
+          onConfirm={() => handleBlockUser(user)}
+        />
+      }
+      {showMuteModal && user &&
+        <ConfirmationModal
+          message={is_muted ?
+            `Are you sure you want to unmute ${user.username}` :
+            `Are you sure you want to mute ${user.username}`
+          }
+          onCancel={handleMuteModal}
+          onConfirm={() => handleMuteUser(user)}
+        />
+      }
+
       <div
-        className="item"
+        className="grid-item"
         style={{ borderColor: user?.feel?.color_code }}
       >
         {connection &&
@@ -163,30 +167,22 @@ const Video = ({ peer, user, socketId, onPeerClose }) => {
             {user?.username}
           </div>
 
-          <div style={{ marginLeft: "auto" }} >
-            {/* <Link to="/video-call/add">
-                <button className="btn-style" >Add Artist</button>
-              </Link>
-              <Link to="/video-call/group">
-                <button className="btn-style" style={{ marginLeft: "12px", marginRight: "12px" }} >Group Video</button>
-              </Link> */}
-          </div>
+
         </div>
-        <div className="user-video">
-          <video
-            ref={ref}
-            autoPlay
-          >
-          </video>
-        </div>
+        {/* <div className="user-video"> */}
+        <video
+          autoPlay
+          ref={ref}
+        >
+        </video>
+        {/* </div> */}
       </div>
     </>
   );
 }
 
-const GroupVideoCall = () => {
+const GroupVideoCall = ({ room }) => {
   const user = getCurrentUser();
-  const { params } = useRouteMatch();
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -201,13 +197,17 @@ const GroupVideoCall = () => {
   const [video, setVideo] = useState(true);
   const [isSwitching, setIsSwitching] = useState(false);
   const [showInvitationModal, setShowInvitationModal] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const { width } = useViewport();
+  const breakpoint = 768;
 
   const { conversation: { conversation } } = useSelector(state => state);
 
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
-      room: params.room,
-      user: user
+      room: room,
+      user: user,
+      participants: conversation?.participants
     });
 
     if (localVideo?.current?.srcObject) {
@@ -232,8 +232,8 @@ const GroupVideoCall = () => {
   }, true);
 
   useEffect(() => {
-    dispatch(getConversation(params.room));
-  }, [dispatch, params]);
+    dispatch(getConversation(room));
+  }, [dispatch, room]);
 
   useEffect(() => {
     if (!hasRendered) {
@@ -335,8 +335,7 @@ const GroupVideoCall = () => {
         })
         .then(stream => {
           localVideo.current.srcObject = stream;
-
-          socket.emit('joinVideo', { room: params.room, user }, (message) => {
+          socket.emit('joinVideo', { room, user }, (message) => {
             toast.error(message);
             history.push('/chat');
           });
@@ -399,14 +398,14 @@ const GroupVideoCall = () => {
           socket.on('reconnect', () => {
             const payload = {
               user: user,
-              room: params.room
+              room: room
             };
             socket.emit('rejoin-call', payload);
           });
         });
       setHasRendered(true);
     }
-  }, [peers, hasRendered, params, user, history]);
+  }, [peers, hasRendered, room, user, history]);
 
   const handleFullScreen = () => {
     if (localVideo.current.requestFullscreen) {
@@ -431,7 +430,7 @@ const GroupVideoCall = () => {
       ? `${user.username} has muted his microphone`
       : `${user.username} has unmuted his microphone`;
 
-    socket.emit('on-toggle-microphone', { room: params.room, message });
+    socket.emit('on-toggle-microphone', { room: room, message });
 
     setMicroPhone(!microPhone);
   };
@@ -442,7 +441,7 @@ const GroupVideoCall = () => {
   };
 
   const navigateToSTRQ = () => {
-    window.open(`/chat/${params.room}`);
+    window.open(`/chat/${room}`);
   }
 
   const handleCameraSwitch = (e) => {
@@ -512,7 +511,7 @@ const GroupVideoCall = () => {
   };
 
   const handleEndCall = () => {
-    history.goBack();
+    dispatch(endMeeting());
   }
 
   const handleCloseInvitationModal = () => {
@@ -523,6 +522,38 @@ const GroupVideoCall = () => {
     setShowInvitationModal(true);
   };
 
+  const calculateColumns = length => {
+
+    if (length > 2 && length < 5) {
+      return 2;
+    }
+    else if (length >= 5 && length <= 9) {
+      // if (width < breakpoint) {
+      // return 2;
+      // }
+      return 3;
+    } else if (length > 9 && length <= 15) {
+      if (width < breakpoint) {
+        return 3;
+      }
+      return 4;
+    } else if (length > 15) {
+      if (width < breakpoint) {
+        // return 5;
+        return Math.round(length / 5);
+      }
+      return Math.round(length / 4);
+    } else {
+      return length;
+    }
+  }
+
+  const handleConnect = () => {
+    if (!isConnected) {
+      setIsConnected(true);
+    }
+  }
+
   return (
     <React.Fragment>
       <div
@@ -530,24 +561,118 @@ const GroupVideoCall = () => {
         onClick={handleShowActions}
       >
         <div className="video-container">
-          <Draggable bounds="parent">
-            <div
-              className="own-Video"
-              style={{ border: `9px solid ${user?.feel.color_code}` }}>
-              <video
-                muted
-                ref={localVideo}
-                onDoubleClick={handleFullScreen}
-                onClick={(e) => e.stopPropagation()}
-                poster="/assets/images/avataricon.png"
-                autoPlay
-              >
-              </video>
-              <div className="settings-Icon" onTouchStartCapture={handleShowActions} > <i className="fas fa-ellipsis-h" /></div>
-            </div>
-          </Draggable>
+          <div
+            className="grid-container"
+            style={{
+              gridTemplateColumns: `repeat(${calculateColumns(peers.length)}, minmax(0, 1fr))`
+            }}
+          >
+            <Draggable bounds="parent">
+              <div
+                className={isConnected ? "own-Video connected" : "own-Video"}
+                style={{ border: `5px solid ${user?.feel.color_code}` }}>
+                <video
+                  muted
+                  ref={localVideo}
+                  onDoubleClick={handleFullScreen}
+                  // onClick={(e) => e.stopPropagation()}
+                  poster="/assets/images/avataricon.png"
+                  autoPlay
+                >
+                </video>
+                {/* <div className="settings-Icon" onTouchStartCapture={handleShowActions} > <i className="fas fa-ellipsis-h" /></div> */}
+              </div>
+            </Draggable>
+            {peers.map((peerObject) => (
+              <Video
+                key={peerObject.user.id}
+                peer={peerObject.peer}
+                user={peerObject.user}
+                socketId={peerObject.socketId}
+                onPeerClose={handlePeerClose}
+                onConnect={handleConnect}
+              />
+            ))}
+          </div>
+          <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
+            {microPhone
+              ?
+              <>
+                <i
+                  className="fa fa-microphone"
+                  aria-hidden="true"
+                  data-for="mic"
+                  data-tip="Mic"
+                  onClick={handleToggleMicroPhone}
+                />
+                <ToolTip id="mic" />
+              </>
+              :
+              <>
+                <i
+                  className="fa fa-microphone-slash"
+                  aria-hidden="true"
+                  onClick={handleToggleMicroPhone}
+                  data-for="mic"
+                  data-tip="Mic"
+                />
+                <ToolTip id="mic" />
+              </>
+            }
+            <i
+              className="fa fa-retweet"
+              aria-hidden="true"
+              onClick={handleCameraSwitch}
+              data-for="switchCamera"
+              data-tip="switch camera" />
+            <ToolTip id="switchCamera" />
+            {video
+              ?
+              <>
+                <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} data-for="camera" data-tip="Camera" />
+                <ToolTip id="camera" />
+              </>
+              :
+              <>
+                <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" data-for="camera" data-tip="camera" />
+                <ToolTip id="camera" />
+              </>
+            }
 
-          <div className={`item-List item${peers.length}`}>
+          </div>
+          <div className="call-Actions2">
+            <img
+              className="valut-img"
+              alt="strq"
+              src="/assets/images/strqicon.png"
+              onClick={navigateToSTRQ}
+              data-for="chat"
+              data-tip="strq" />
+            <ToolTip id="chat" />
+            <img
+              src="/assets/images/icons/DrawStrq.png"
+              alt="Draw"
+              data-for="chat" data-tip="draw"
+            ></img>
+            <ToolTip id="draw strq" />
+            <i
+              className="fas fa-user-plus"
+              aria-hidden="true"
+              onClick={handleOpenInvitationModal}
+              data-for="inviteUser"
+              data-tip="invite users"
+            />
+            <ToolTip id="inviteUser" />
+            <i
+              className="far fa-times-circle"
+              onClick={handleEndCall}
+              data-for="endCall"
+              data-tip="end call"
+            />
+            <ToolTip id="endCall" />
+          </div>
+
+          {/* <div className={`item-List item1`}>
             {peers.map((peerObject) => (
               <Video
                 key={peerObject.user.id}
@@ -634,14 +759,14 @@ const GroupVideoCall = () => {
               />
               <ToolTip id="endCall" />
             </div>
-          </div>
+          </div> */}
         </div>
         {showInvitationModal &&
           <ChatInvitationModel
             onClose={handleCloseInvitationModal}
             participants={conversation?.participants}
             currentUser={user}
-            room={params.room}
+            room={room}
             callUsers={true}
           />
         }

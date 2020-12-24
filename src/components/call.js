@@ -2,14 +2,14 @@ import React, { useEffect, useState, useRef } from 'react';
 import RingingModal from './dashboard/chat/ringingModal';
 import socket from '../services/socketService';
 import { getCurrentUser } from '../actions/authActions';
-import { useHistory } from 'react-router-dom';
 import { useWindowUnloadEffect } from './common/useWindowUnloadEffect';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { startMeeting } from '../actions/meetingActions';
 
 const currentUser = getCurrentUser();
 
 const Call = () => {
-  const history = useHistory();
+  const dispatch = useDispatch();
 
   const [showRingingModal, setShowRingingModal] = useState(false);
   const [incomingPayload, setIncomingPayload] = useState({});
@@ -61,7 +61,8 @@ const Call = () => {
       audioRef.current.currentTime = 0;
     }
 
-    history.push(`/video-call/${incomingPayload.room}`);
+    dispatch(startMeeting(incomingPayload.room));
+    // history.push(`/video-call/${incomingPayload.room}`);
   };
 
   const handleRejectCall = () => {
