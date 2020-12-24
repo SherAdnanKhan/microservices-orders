@@ -104,7 +104,10 @@ export default (state = initialState, action) => {
               return {
                 ...conversation,
                 unread_messages_logs_count: conversation.unread_messages_logs_count + 1,
-                last_message: action.payload
+                conversation_log: {
+                  ...conversation.conversation_logs,
+                  message: action.payload
+                }
               }
             }
             return conversation

@@ -184,11 +184,10 @@ const Conversation = ({
                       }
                     </>
                   }
-                  {conversation.last_message &&
-                    <>
-                      {conversation.last_message.message}
-                    </>
-                  }
+                  <>
+                    {conversation?.conversation_log?.message?.message}
+                  </>
+
                 </div>
                 <div className="date-action">
                   <div className="dateTime">

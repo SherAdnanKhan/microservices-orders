@@ -26,6 +26,7 @@ import Agreement from './components/auth/agreement';
 import Chat from "./components/dashboard/chat/chat";
 import Login from "./components/auth/loginForm";
 import Verification from './components/auth/verification';
+import Meeting from './components/meeting';
 
 const currentUser = getCurrentUser();
 
@@ -100,7 +101,7 @@ function App() {
         <Redirect exact from='/' to='/login' />
       </Switch>
       <Notifications />
-
+      <Meeting />
       <Call />
     </div>
   );
