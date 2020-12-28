@@ -20,9 +20,10 @@ const Conversation = ({
 }) => {
   const currentUser = useContext(UserContext);
   const [username, setUsername] = useState('');
-
   const { users } = useSelector(state => state.user);
   const dispatch = useDispatch();
+
+  const filteredUsers = users?.filter(user => user.id !== currentUser.id) || null;
 
   useWindowUnloadEffect(() => {
     dispatch(clearUsers());
@@ -64,7 +65,7 @@ const Conversation = ({
         <InputAutoComplete
           className="search"
           type="search"
-          options={users}
+          options={filteredUsers}
           displayProperty="username"
           placeholder="Search"
           defaultValue={username}
@@ -72,7 +73,7 @@ const Conversation = ({
           onSearchEnd={handleSearchEnd}
           onSelect={handleSelect}
         />
-        {username && users?.length === 0 &&
+        {username && filteredUsers?.length === 0 &&
           <div style={{ textAlign: 'center' }}>
             no data found
           </div>

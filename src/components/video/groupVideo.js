@@ -11,14 +11,13 @@ import { toast } from 'react-toastify';
 import { isMobile } from '../../utils/helperFunctions';
 import ChatInvitationModel from '../common/chatInvitationModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { getConversation } from '../../actions/conversationActions';
+// import { getConversation } from '../../actions/conversationActions';
 import ToolTip from '../common/toolTip/toolTip';
 import ReportUserModal from "../dashboard/chat/reportUserModal";
 import OtherUserOptions from "../dashboard/chat/OtherUserOptions";
 import ConfirmationModal from "../dashboard/chat/confirmationModal";
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
 import { endMeeting } from '../../actions/meetingActions';
-// import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import useViewport from '../common/useViewport';
 
 const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
@@ -250,9 +249,9 @@ const GroupVideoCall = ({ room }) => {
     socket.off('reconnect');
   }, true);
 
-  useEffect(() => {
-    dispatch(getConversation(room));
-  }, [dispatch, room]);
+  // useEffect(() => {
+  //   dispatch(getConversation(room));
+  // }, [dispatch, room]);
 
   useEffect(() => {
     if (!hasRendered) {

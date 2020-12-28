@@ -69,6 +69,7 @@ class ChatBox extends Component {
     window.addEventListener("resize", this.handleWindowResize);
 
     const currentUser = getCurrentUser();
+    console.log('did mount called')
     this.props.getConversation(this.props.activeConversation.id);
 
     socket.on('recieveMessage', async (data) => {
@@ -160,9 +161,9 @@ class ChatBox extends Component {
     this.setState({ page: 1, message: '', typings: [] });
   }
 
-  componentRefreshUser = () => {
-    this.props.getConversation(this.props.match.params.slug);
-  }
+  // componentRefreshUser = () => {
+  //   this.props.getConversation(this.props.match.params.slug);
+  // }
 
   componentWillUnmount() {
     this.componentCleanup();
@@ -312,6 +313,7 @@ class ChatBox extends Component {
     if (scrollTop === 0) {
       this.setState({ page: page + 1, }, () => {
         if (this.props.conversation.messages.next_page_url) {
+          console.log('scroll')
           this.props.getConversation(this.props.activeConversation.id, page + 1, () => {
             element.scrollIntoView({ behavior: 'auto' })
           })

@@ -37,6 +37,7 @@ const RegisterForm = () => {
     agreement: 0,
   });
 
+  const [showSubmitButton, setShowSubmitButton] = useState(true);
   // this hook will
   // call when we reload our page so that we
   // can easily save our form data in a localstorage
@@ -222,6 +223,8 @@ const RegisterForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
+    setShowSubmitButton(false);
+
     const formData = new FormData();
 
     if (!isEmpty(croppedImage)) {
@@ -230,8 +233,13 @@ const RegisterForm = () => {
     for (let key in data) {
       formData.append(key, data[key]);
     }
+
     setData({});
-    dispatch(register(formData));
+    setCroppedImage('');
+
+    dispatch(register(formData, () => {
+      setShowSubmitButton(true);
+    }));
 
   };
 
@@ -431,6 +439,7 @@ const RegisterForm = () => {
                   <div className="action">
                     <button
                       className="btn"
+                      disabled={!showSubmitButton}
                       onClick={handleSubmit}
                     >
                       Create Studio
