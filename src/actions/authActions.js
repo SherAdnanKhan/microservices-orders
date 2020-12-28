@@ -4,15 +4,18 @@ import { isEmpty } from '../utils/helperFunctions';
 import socket from '../services/socketService';
 import { toast } from 'react-toastify';
 
-export const register = credentials => () => {
+export const register = (credentials, callback) => () => {
   http
     .post('/auth/register', credentials, {})
     .then(res => {
       localStorage.removeItem('step');
       localStorage.removeItem('data');
-
       setCurrentUser(res.data.data);
+      callback && callback();
+
       window.location.href = '/verification';
+    }).catch(() => {
+      callback && callback();
     });
 };
 
