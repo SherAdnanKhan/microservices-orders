@@ -418,7 +418,7 @@ const GroupVideoCall = ({ room }) => {
         });
       setHasRendered(true);
     }
-  }, [peers, hasRendered, room, user, history]);
+  }, [peers, hasRendered, room, user, history, mobileConstraints, desktopConstraints]);
 
   const handleFullScreen = () => {
     if (localVideo.current.requestFullscreen) {
