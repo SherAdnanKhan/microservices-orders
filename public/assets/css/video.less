@@ -652,12 +652,15 @@
           height: 106px;
           bottom: 19%;
           z-index: 800;
-        }
-        @media @mobile {
-          border-radius: 6px;
-          right: 12px;
-          width: 33%;
-          height: 21%;
+          
+          @media @mobile {
+            border-radius: 6px;
+            // right: 12px;
+            left: 60%;
+            top: 60%;
+            width: 33%;
+            height: 21%;
+          }
         }
         video {
          width: 100%;
@@ -668,7 +671,7 @@
         
       }
       .grid-item {
-        background-color: rgba(255, 255, 255, 0.8);
+        // background-color: rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(0, 0, 0, 0.8);
         padding: 0px;
         font-size: 30px;
@@ -748,6 +751,8 @@
           object-fit: cover;
           height: 100%;
           width: 100%;
+
+          // @media @mobile {}
         }
       }
     }
