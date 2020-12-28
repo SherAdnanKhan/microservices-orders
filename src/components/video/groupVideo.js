@@ -203,6 +203,25 @@ const GroupVideoCall = ({ room }) => {
 
   const { conversation: { conversation } } = useSelector(state => state);
 
+
+  const mobileConstraints = {
+    video: {
+      width: 480,
+      height: 320
+    },
+    audio: true
+  };
+
+  const desktopConstraints = {
+    video: {
+      width: { min: 640, ideal: 1920 },
+      height: { min: 400, ideal: 1080 },
+      aspectRatio: { ideal: 1.7777777778 },
+      facingMode: 'user',
+    },
+    audio: true
+  };
+
   useWindowUnloadEffect(() => {
     socket.emit('leave-call', {
       room: room,
@@ -322,17 +341,11 @@ const GroupVideoCall = ({ room }) => {
         return peer;
       };
 
+      const constraints = isMobile() ? mobileConstraints : desktopConstraints;
+
       navigator
         .mediaDevices
-        .getUserMedia({
-          video: {
-            width: { min: 640, ideal: 1920 },
-            height: { min: 400, ideal: 1080 },
-            aspectRatio: { ideal: 1.7777777778 },
-            facingMode: 'user',
-          },
-          audio: true
-        })
+        .getUserMedia(constraints)
         .then(stream => {
           localVideo.current.srcObject = stream;
           socket.emit('joinVideo', { room, user }, (message) => {
@@ -405,7 +418,7 @@ const GroupVideoCall = ({ room }) => {
         });
       setHasRendered(true);
     }
-  }, [peers, hasRendered, room, user, history]);
+  }, [peers, hasRendered, room, user, history, mobileConstraints, desktopConstraints]);
 
   const handleFullScreen = () => {
     if (localVideo.current.requestFullscreen) {
