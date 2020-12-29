@@ -1584,12 +1584,14 @@ input {
  
       .sprfvs {
         padding: 20px;
+        border-bottom: 1px solid #999999;
         .sprfvsSection{
           display: flex;
           position: relative;
           .image {
             img {
               width: 60px;
+              height: 60px;
               border-radius: 50px;
             }
           }
@@ -2558,6 +2560,14 @@ img {
 .artof {
   font-weight: 100;
   font-size: 14px;
+}
+.dob-studio {
+  display: none;
+  @media @mobile {
+    display: block;
+    font-weight: 100;
+    font-size: 14px;
+  }
 }
 
 .exhibitartname {
@@ -3556,6 +3566,45 @@ img {
       @media @mobile {
         width: 100%;
       }
+      .procu {
+        @media @mobile {
+          margin: unset;
+        }
+      }
+      // Fave Action Starts Here
+      .faves-action {
+        display: none;
+        @media @mobile {
+          display: block;
+          width: 110px;
+        }
+        .sprfvs-section {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 15px;
+          .sprfvs-image {
+            display: flex;
+            flex-direction: column;
+            img {
+              width: 40px;
+              padding: 5px;
+              &.fave {
+                width: 30px;
+              }
+            }
+            span {
+              font-size: 16px;
+            }
+          }
+          .sprfvs-users {
+            display: flex;
+            align-items: flex-end;
+            padding-left: 10px;
+          }
+        }
+      }
+      // Fave Action Ends Here
+
       img {
           width: 10%;
           // background-color: red;
@@ -3590,6 +3639,15 @@ img {
         text-align: center;
         display: flex;
         margin: 0 auto 25px;
+        @media @mobile {
+          width: 100%;
+          padding: 0;
+        }
+        &.add-dob-input {
+          @media @mobile {
+            display: none;
+          }
+        }
         div {
           width: 100%;
           background: black;
@@ -4364,7 +4422,12 @@ img {
     padding: 10px;
     margin-bottom: 9px;
     @media @mobile {
-      margin-top: 35px;
+      margin-top: 0px;
+      width: 100%;
+      margin: unset;
+      background: unset;
+      text-align: start;
+      padding-left: 10%;
     }
     input{
       background-color: black;
