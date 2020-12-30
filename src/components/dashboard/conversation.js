@@ -59,6 +59,10 @@ const Conversation = ({
     onUserSelect(option.slug)
   };
 
+  // const renderLastMessage = lastMessage => {
+
+  // }
+
   return (
     <div className="conversationContainer">
       <div className="searchField">
@@ -186,7 +190,7 @@ const Conversation = ({
                     </>
                   }
                   <>
-                    {conversation?.conversation_log?.message?.message}
+                    {conversation?.last_message?.message}
                   </>
 
                 </div>

@@ -3639,6 +3639,9 @@ img {
     form {
       margin-top: 10px;
       width: 100%;
+      @media @mobile {
+        margin-top: 0;
+      }
       label {
         width: 70%;
         text-align: center;
@@ -3650,8 +3653,20 @@ img {
         }
         &.add-dob-input {
           @media @mobile {
-            display: none;
+            display: block;
+
+            div {
+            border: unset;
+            text-align: start;
+            padding: 0 0 0  10%;
+            box-sizing: border-box;
+            .dob {
+              margin-top: 0;
+              margin-bottom: 10px;
+            }
+            }
           }
+
         }
         div {
           width: 100%;
@@ -3673,6 +3688,26 @@ img {
         a {
           text-decoration: none;
           color: @fontColor;
+          display: flex;
+          flex-direction: column;
+          span.strqText {
+            display: none;
+            @media @mobile {
+              display: block;
+            }
+          }
+          &.sprfaves {
+            display: none;
+            @media @mobile {
+              display: block;
+            }
+          }
+          &.faves {
+            display: block;
+            @media @mobile {
+              display: none;
+            }
+          }
           div{
           width: 80px;
           color: @fontColor;
@@ -3681,17 +3716,21 @@ img {
           display: flex;
           flex-direction: column;
           font-size: 12px;
-          padding: 5px 0;
+          padding: 14px 0;
           text-decoration: none;
-          margin: 0 50px;
+          // margin: 0 50px;
           @media @mobile {
-            width: 72px;
+          border-radius: 0;
+          padding: 10px 0;
+          width: 55px;
+          margin: 0;
           }
           img{
-            width: 60%;
+            width: 40px;
             height: 30px;
             @media @mobile {
-              height: 15px;
+              height: 21px;
+              width: 36px;
             }
             }
           }
@@ -3707,6 +3746,8 @@ img {
             border-radius: 25px;
             @media @mobile {
               width: 21px;
+              border: 1px solid #fff;
+              border-radius: 0;
             }
           }
           .mzflash-studio{
@@ -3714,7 +3755,9 @@ img {
             padding: 10px 15px;
             border-radius: 25px;
             @media @mobile {
-              width: 21px;
+            border: 1px solid #fff;
+            width: 21px;
+            border-radius: 0;
             }
           }
         }
@@ -4080,7 +4123,9 @@ img {
     width: 60%;
     text-align: center;
     @media @mobile {
-      width: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
     }
     p{
       margin: 0;
@@ -4394,6 +4439,9 @@ img {
     justify-content: center;
     span{
       padding-top: 10px;
+      @media @mobile {
+        display: none;
+      }
     }
     img{
       width: 35px;
@@ -4411,10 +4459,13 @@ img {
     width: 60%;
     text-align: center;
     @media @mobile {
-      width: 50%;
+      width: 100%;
     }
     p{
       margin: 0;
+      &:nth-child(3) {
+        display: none;
+      }
     }
   }
 }
@@ -4432,7 +4483,7 @@ img {
       margin: unset;
       background: unset;
       text-align: start;
-      padding-left: 10%;
+      padding: 0 0 0  10%;
     }
     input{
       background-color: black;
