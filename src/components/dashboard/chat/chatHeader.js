@@ -15,6 +15,7 @@ import { muteUser, blockUser, unMuteUser, unBlockUser } from "./../../../actions
 import { useDispatch } from "react-redux"
 import NoAnswerModal from './noAnswerModal';
 import { endMeeting, startMeeting } from '../../../actions/meetingActions';
+import { toast } from 'react-toastify';
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
@@ -139,29 +140,36 @@ const ChatHeader = ({
   }, [history, hasRendered, conversation, dispatch]);
 
   const handleCall = async () => {
-    rejectedUsers.current = [];
-    noAnswerModal && setNoAnswerModal(false);
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(async (stream) => {
+        stream.getTracks().forEach(track => track.stop());
+        rejectedUsers.current = [];
+        noAnswerModal && setNoAnswerModal(false);
 
-    audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
+        audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
 
-    dispatch(startMeeting(conversation?.id))
+        dispatch(startMeeting(conversation?.id))
 
-    try {
-      await audioRef.current.play();
-    } catch (ex) {
-    }
+        try {
+          await audioRef.current.play();
+        } catch (ex) {
+        }
 
-    socket.emit('outgoing-call', {
-      caller: currentUser,
-      room: conversation?.id,
-      participants: conversation
-        ?.participants
-        ?.filter(p => p.id !== currentUser.id) || []
-    });
+        socket.emit('outgoing-call', {
+          caller: currentUser,
+          room: conversation?.id,
+          participants: conversation
+            ?.participants
+            ?.filter(p => p.id !== currentUser.id) || []
+        });
 
-    interval.current = setInterval(() => {
-      setCountUp(countUp => countUp + 1);
-    }, 1000);
+        interval.current = setInterval(() => {
+          setCountUp(countUp => countUp + 1);
+        }, 1000);
+      })
+      .catch(ex => toast.error('Browser has no permission to access audio & video'));
+
+
   };
 
   const handleDraw = () => {
