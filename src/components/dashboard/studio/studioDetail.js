@@ -62,15 +62,15 @@ const StudioDetail = ({ userStudio, slug }) => {
                   <img src="/assets/images/sprfvs_full.png" alt="Sprfvs here" />
                   <span>SPRFVS</span>
                 </div>
-                <div className="sprfvs-users">16</div>
+                <div className="sprfvs-users">{userStudio?.sprfvs_count}</div>
               </div>
 
               <div className="sprfvs-section">
                 <div className="sprfvs-image">
-                  <img src="/assets/images/fave_icon.png" className="fave" alt="faves here" />
+                  <img src="/assets/images/catfaveon.png" className="fave" alt="faves here" />
                   <span>FAVES</span>
                 </div>
-                <div className="sprfvs-users">326k</div>
+                <div className="sprfvs-users">{userStudio?.fav_by_count}</div>
               </div>
 
               <div className="sprfvs-section">
@@ -78,7 +78,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                   <img src="/assets/images/fave_icon.png" className="fave" alt="faving here" />
                   <span>FAVING</span>
                 </div>
-                <div className="sprfvs-users">46</div>
+                <div className="sprfvs-users">{userStudio?.favs_count}</div>
               </div>
 
               <div className="sprfvs-section">
@@ -86,7 +86,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                   {/* <img src="/assets/images/sprfvs_empty.png" alt="Sprfvs here" /> */}
                   <span>POST</span>
                 </div>
-                <div className="sprfvs-users">1679</div>
+                <div className="sprfvs-users">{userStudio?.user?.posts_count}</div>
               </div>
             </div>
             {/* Fave Action Starts Here */}
@@ -105,11 +105,21 @@ const StudioDetail = ({ userStudio, slug }) => {
                     </>
                   }
                 </span>
-                <div className="dob-studio">DOB: 1193-05-27</div>
-                <div className="dob-studio">Age: 27</div>
+                {/* <div className="dob-studio">DOB: 1193-05-27</div>
+                <div className="dob-studio">Age: 27</div> */}
               </div>
             }
             <form onSubmit={e => e.preventDefault()}>
+              {userStudio?.user?.dob &&
+                <label htmlFor="add-dob" className="add-dob-input">
+                  <span className="labelText"></span>
+                  <div>
+                    <p className="dob">Date of birth: {userStudio.user.dob}</p>
+                    <p className="age">Age: {userStudio && convertDateIntoAge(userStudio.user.dob)}
+                    </p>
+                  </div>
+                </label>
+              }
               {hasAllowedBio() &&
                 <label htmlFor="addbio" className="addbio-input">
                   <span className="labelText"> </span>
@@ -123,17 +133,28 @@ const StudioDetail = ({ userStudio, slug }) => {
                   </div>
                 </label>
               }
-              {userStudio?.user?.dob &&
-                <label htmlFor="add-dob" className="add-dob-input">
-                  <span className="labelText"></span>
-                  <div>
-                    <p className="dob">Date of birth: {userStudio.user.dob}</p>
-                    <p className="age">Age: {userStudio && convertDateIntoAge(userStudio.user.dob)}
-                    </p>
-                  </div>
-                </label>
-              }
+
               <div className="stuion-faved-btn">
+                <Link to={`/studio/fave-galleries/${userStudio?.user?.id}`} className="faves">
+                  <div
+                    className="faved-by-btn faves"
+                    style={{ backgroundColor: userStudio?.user?.feel?.color_code }}
+                  >
+                    <img src="/assets/images/fave_icon.png" alt="" data-for="userFavedGalleries" data-tip="faved galleries" />
+                  Faves
+                  <ToolTip position="bottom" id="userFavedGalleries" />
+                  </div>
+                </Link>
+                <Link to={`/studio/sprfvs/${userStudio?.user?.slug}`} className="sprfaves">
+                  <div
+                    className="faved-by-btn"
+                    style={{ backgroundColor: userStudio?.user?.feel?.color_code }}
+                  >
+                    <img src="/assets/images/sprfvs_full.png" alt="" data-for="userFavedGalleries" data-tip="faved galleries" />
+                    <ToolTip position="bottom" id="userFavedGalleries" />
+                  </div>
+                  Sprfve
+                </Link>
                 <div>
                   <Link to={`/chat/${slug}`}>
                     <img
@@ -143,8 +164,11 @@ const StudioDetail = ({ userStudio, slug }) => {
                       data-for="chatUser"
                       data-tip="strq"
                     />
+                    <span className="strqText"> Strq</span>
                   </Link>
+
                   <ToolTip position="bottom" id="chatUser" />
+
                 </div>
                 {/* <Link to="#" onClick={e => {
                 e.preventDefault();
@@ -156,16 +180,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                 </div>
                 {userStudio && <span>{userStudio.fav_by_count}</span>}
               </Link> */}
-                <Link to={`/studio/fave-galleries/${userStudio?.user?.id}`}>
-                  <div
-                    className="faved-by-btn"
-                    style={{ backgroundColor: userStudio?.user.feel.color_code }}
-                  >
-                    <img src="/assets/images/fave_icon.png" alt="" data-for="userFavedGalleries" data-tip="faved galleries" />
-                  Faves
-                  <ToolTip position="bottom" id="userFavedGalleries" />
-                  </div>
-                </Link>
+
                 <div>
                   <Link to="#" onClick={e => {
                     e.preventDefault();
@@ -180,6 +195,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                       data-tip="mzflash"
                     />
                     <ToolTip position="bottom" id="userMzflash" />
+                    <span className="strqText">Mzflash</span>
                   </Link>
                 </div>
                 {/* <Link to="#" onClick={e => {
