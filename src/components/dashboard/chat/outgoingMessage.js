@@ -48,6 +48,7 @@ const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMe
             {data.web_url &&
               <LinkPreview
                 url={data.web_url}
+                metas={data.metas}
               />
             }
             {data.type === 1 &&

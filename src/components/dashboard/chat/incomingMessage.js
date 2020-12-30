@@ -29,6 +29,7 @@ const IncomingMessage = ({ data }) => {
                 {data.web_url &&
                   <LinkPreview
                     url={data.web_url}
+                    metas={data.metas}
                   />
                 }
 
