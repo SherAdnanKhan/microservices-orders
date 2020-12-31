@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '../../common/modal/modal';
 import ModalHeader from '../../common/modal/modalHeader';
 import ModalBody from '../../common/modal/modalBody';
 import ModalFooter from '../../common/modal/modalFooter';
-import Input from '../../common/input';
+// import Input from '../../common/input';
 
 const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade }) => {
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  // const [message, setMessage] = useState('');
+  // const [error, setError] = useState('');
 
-  const validate = () => {
-    if (!message)
-      return 'Please write something.';
-    return '';
-  }
+  // const validate = () => {
+  //   if (!message)
+  //     return 'Please write something.';
+  //   return '';
+  // }
 
-  const handleLeaveMessage = () => {
-    const error = validate();
+  // const handleLeaveMessage = () => {
+  //   const error = validate();
 
-    if (!error) {
-      onLeaveMessage(message);
-    }
-    setError(error);
-  }
+  //   if (!error) {
+  //     onLeaveMessage(message);
+  //   }
+  //   setError(error);
+  // }
 
   return (
     <div className="no-answer-modal">
@@ -31,11 +31,26 @@ const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade }) => {
         </ModalHeader>
         <ModalBody>
           <div className="no-answer-box">
-            <div className="no-answer-text">
+            {/* <div className="no-answer-text">
               No Answer
-            </div>
+            </div> */}
             <div className="no-answer-actions">
-              <Input
+              <div className="cancel">
+                <i className="far fa-times-circle"></i>
+                <span>Cancel</span>
+              </div>
+              <div className="record">
+                <img src="/assets/images/v-record.png" alt="" />
+                <span>Video<br /> Message</span>
+              </div>
+              <div
+                className="call-again"
+                onClick={onCallMade}
+              >
+                <i className="fas fa-video"></i>
+                <span>Call <br /> Again</span>
+              </div>
+              {/* <Input
                 autoFocus
                 value={message}
                 name="message"
@@ -63,7 +78,7 @@ const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade }) => {
                 <div className="callAgainText">
                   Call Again
                 </div>
-              </Input>
+              </Input> */}
             </div>
           </div>
         </ModalBody>
