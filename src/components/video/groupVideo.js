@@ -19,6 +19,7 @@ import ConfirmationModal from "../dashboard/chat/confirmationModal";
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
 import { endMeeting } from '../../actions/meetingActions';
 import useViewport from '../common/useViewport';
+import TimerLine from '../common/timerLine';
 
 const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
   const ref = useRef();
@@ -141,13 +142,13 @@ const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
         className="grid-item"
         style={{ borderColor: user?.feel?.color_code }}
       >
-        {/* {connection &&
+        {connection &&
           <div className="connection">
             <div className="text">
               {connection}
             </div>
           </div>
-        } */}
+        }
         <div className="add-strq">
           <OtherUserOptions
             onReportModal={handleReportModal}
@@ -201,6 +202,7 @@ const GroupVideoCall = ({ room }) => {
   const breakpoint = 768;
 
   const { conversation: { conversation } } = useSelector(state => state);
+  const { timer } = useSelector(state => state.meeting);
 
 
   const mobileConstraints = {
@@ -535,14 +537,11 @@ const GroupVideoCall = ({ room }) => {
   };
 
   const calculateColumns = length => {
-
     if (length > 2 && length < 5) {
       return 2;
     }
     else if (length >= 5 && length <= 9) {
-      // if (width < breakpoint) {
-      // return 2;
-      // }
+
       return 3;
     } else if (length > 9 && length <= 15) {
       if (width < breakpoint) {
@@ -556,6 +555,11 @@ const GroupVideoCall = ({ room }) => {
       }
       return Math.round(length / 4);
     } else {
+      if (width < breakpoint) {
+        if (length === 2) {
+          return 1;
+        }
+      }
       return length;
     }
   }
@@ -572,6 +576,14 @@ const GroupVideoCall = ({ room }) => {
         className={showActions ? "main show-actions" : "main"}
         onClick={handleShowActions}
       >
+        {timer > 0 &&
+          <TimerLine
+            progress={timer * 6.8}
+            feelColor={'red'}
+            timeerCount={15 - timer}
+          />
+        }
+
         <div className="video-container">
           <div
             className="grid-container"
@@ -579,7 +591,9 @@ const GroupVideoCall = ({ room }) => {
               gridTemplateColumns: `repeat(${calculateColumns(peers.length)}, minmax(0, 1fr))`
             }}
           >
-            <Draggable bounds="parent">
+
+            <Draggable bounds="parent" disabled={!isConnected}>
+
               <div
                 className={isConnected ? "own-Video connected" : "own-Video"}
                 style={{ border: `5px solid ${user?.feel.color_code}` }}>

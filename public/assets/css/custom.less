@@ -340,6 +340,45 @@ input {
             .no-answer-box {
               width: 100%;
               .no-answer-actions {
+                display: flex;
+                justify-content: space-around;
+                .cancel {
+                  display: flex;
+                  flex-direction: column;
+                  cursor: pointer;
+                  i {
+                    font-size: 33px;
+                  }
+                  span {
+                    font-size: 14px;
+                  }
+                }
+                .record {
+                  display: flex;
+                  flex-direction: column;
+                  cursor: pointer;
+                  img {
+                    width: 30px;
+                    border-radius: 50%;
+                  }
+                  span {
+                    font-size: 14px;
+                  }
+                }
+                .call-again {
+                  display: flex;
+                  flex-direction: column;
+                  cursor: pointer;
+                  i {
+                    font-size: 15px;
+                    border: 1px solid #fff;
+                    border-radius: 50%;
+                    padding: 10px;
+                  }
+                  span {
+                    font-size: 14px;
+                  }
+                }
                 label {
                   input {
                     border: 1px solid #999999;
@@ -3895,7 +3934,7 @@ img {
       margin-top: 20px;
      // height: 350px;
       @media @mobile {
-        width:46vw;
+        width:32vw;
         height:33vw;
         a{
           color:white;
@@ -5953,13 +5992,15 @@ img {
   width: 95%;
   margin: 0 auto;
   position: relative;
-  min-height: 35px;
+  min-height: 15px;
   overflow: hidden;
   border-radius: 5px;
+  margin-top: 10px;
   .text {
     position: absolute;
     left: 50%;
-    top: 25%;
+    top: 0;
+    font-size: 10px;
     z-index: 2;
   }
   .percent {
@@ -5968,6 +6009,54 @@ img {
     left: 0;
     width: 25%;
     height: 100%;
+  }
+}
+
+
+.timerLine {
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
+  min-height: 15px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-top: 10px;
+  
+  .startTime {
+    position: absolute;
+    right: 1%;
+    top: 0;
+    z-index: 10;
+  }
+
+  .endTime {
+    position: absolute;
+    left: 1%;
+    top: 0;
+    z-index: 10;
+  }
+  .text {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    font-size: 10px;
+    z-index: 2;
+  }
+
+  .percent {
+    transition-property: width;
+    transition-duration: 1s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100%;
+    .timerCount {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 10;
+    }
   }
 }
 

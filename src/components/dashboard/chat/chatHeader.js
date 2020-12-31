@@ -14,7 +14,7 @@ import ConfirmationModal from './confirmationModal'
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "./../../../actions/userActions";
 import { useDispatch } from "react-redux"
 import NoAnswerModal from './noAnswerModal';
-import { endMeeting, startMeeting } from '../../../actions/meetingActions';
+import { endMeeting, startMeeting, stopTimer, updateTimer } from '../../../actions/meetingActions';
 import { toast } from 'react-toastify';
 
 const ChatHeader = ({
@@ -32,7 +32,7 @@ const ChatHeader = ({
   const [showMuteModal, setShowMuteModal] = useState(false);
   const [showBlockModal, setShowBlockModal] = useState(false);
   const [hasMeeting, sethasMeeting] = useState(null);
-  const [countUp, setCountUp] = useState(0);
+  // const [countUp, setCountUp] = useState(0);
   const [noAnswerModal, setNoAnswerModal] = useState(false);
   const allParticipants = useRef([]);
   const audioRef = useRef();
@@ -40,30 +40,30 @@ const ChatHeader = ({
   const { width } = useViewport();
   const breakPoint = 768;
 
-  const { meeting } = useSelector(state => state.meeting);
+  const { meeting, timer } = useSelector(state => state.meeting);
   const { feelColor } = useSelector(state => state.feelColor)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (!meeting) {
       clearInterval(interval.current);
-
-      // dispatch(endMeeting());
-      setCountUp(countUp => countUp = 0);
+      dispatch(stopTimer());
+      // setCountUp(countUp => countUp = 0);
 
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
       }
     }
-  }, [meeting]);
+  }, [meeting, dispatch]);
 
   const handleDecline = useCallback(() => {
     clearInterval(interval.current);
     setShowCallingModal(false);
 
     dispatch(endMeeting());
-    setCountUp(countUp => countUp = 0);
+    dispatch(stopTimer());
+    // setCountUp(countUp => countUp = 0);
 
     if (audioRef.current) {
       audioRef.current.pause();
@@ -87,11 +87,11 @@ const ChatHeader = ({
   }, true);
 
   useEffect(() => {
-    if (countUp === 15) {
+    if (timer === 15) {
       handleDecline();
       setNoAnswerModal(noAnswerModal => noAnswerModal = true);
     }
-  }, [countUp, handleDecline]);
+  }, [timer, handleDecline]);
 
   useEffect(() => {
     if (conversation?.participants) {
@@ -112,6 +112,7 @@ const ChatHeader = ({
       })
       socket.on('call-accepted', data => {
         clearInterval(interval.current);
+        dispatch(stopTimer());
 
         if (audioRef.current) {
           audioRef.current.pause();
@@ -131,6 +132,7 @@ const ChatHeader = ({
             audioRef.current.currentTime = 0;
           }
           dispatch(endMeeting());
+          dispatch(stopTimer());
           setShowCallingModal(showCallingModal => showCallingModal = false);
           clearInterval(interval.current);
         }
@@ -164,12 +166,11 @@ const ChatHeader = ({
         });
 
         interval.current = setInterval(() => {
-          setCountUp(countUp => countUp + 1);
+          dispatch(updateTimer());
+          // setCountUp(countUp => countUp + 1);
         }, 1000);
       })
       .catch(ex => toast.error('Browser has no permission to access audio & video'));
-
-
   };
 
   const handleDraw = () => {
@@ -387,6 +388,7 @@ const ChatHeader = ({
           onCallMade={handleCall}
         />
       }
+
     </div>
   );
 };

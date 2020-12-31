@@ -180,4 +180,5 @@ export const GET_ALL_FEEL_COLORS = 'GET_ALL_FEEL_COLORS';
 //meeting
 export const START_MEETING = 'START_MEETING';
 export const END_MEETING = 'END_MEETING';
-
+export const UPDATE_TIMER = 'UPDATE_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
