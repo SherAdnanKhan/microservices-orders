@@ -205,13 +205,13 @@ const GroupVideoCall = ({ room }) => {
   const { timer } = useSelector(state => state.meeting);
 
 
-  const mobileConstraints = {
-    video: {
-      width: 480,
-      height: 320
-    },
-    audio: true
-  };
+  // const mobileConstraints = {
+  //   video: {
+  //     width: 480,
+  //     height: 320
+  //   },
+  //   audio: true
+  // };
 
   const desktopConstraints = {
     video: {
@@ -342,11 +342,9 @@ const GroupVideoCall = ({ room }) => {
         return peer;
       };
 
-      const constraints = isMobile() ? mobileConstraints : desktopConstraints;
-
       navigator
         .mediaDevices
-        .getUserMedia(constraints)
+        .getUserMedia(desktopConstraints)
         .then(stream => {
           localVideo.current.srcObject = stream;
           socket.emit('joinVideo', { room, user }, (message) => {
@@ -419,7 +417,7 @@ const GroupVideoCall = ({ room }) => {
         });
       setHasRendered(true);
     }
-  }, [peers, hasRendered, room, user, history, mobileConstraints, desktopConstraints]);
+  }, [peers, hasRendered, room, user, history, desktopConstraints]);
 
   const handleFullScreen = () => {
     if (localVideo.current.requestFullscreen) {
