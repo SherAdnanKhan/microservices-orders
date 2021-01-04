@@ -3280,13 +3280,56 @@ img {
       justify-content: space-around; 
       align-items: center;
       width: 30%;
+      .procu {
+        @media @mobile {
+          -webkit-justify-content: center;
+          justify-content: center;
+          margin: unset;
+        }
+      }
+
       img {
           width: 10%;
           background-color: transparent;
           border-radius: 25px;
           padding: 7px 15px;
       }
+      // Fave Action Own Studio Starts Here
+      .faves-action {
+        display: none;
+        @media @mobile {
+          display: block;
+          width: 110px;
+        }
+        .sprfvs-section {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 15px;
+          align-items: center;
+          .sprfvs-image {
+            display: flex;
+            flex-direction: column;
+            img {
+              width: 40px;
+              padding: 5px;
+              &.fave {
+                width: 47px;
+              }
+            }
+            span {
+              font-size: 16px;
+            }
+          }
+          .sprfvs-users {
+            display: flex;
+            align-items: flex-end;
+            padding-left: 10px;
+          }
+        }
+      }
+      // Fave Action Own Studio Ends Here
     }
+    
     .studioDetail {
       width: 70%;
       @media @mobile {
@@ -3294,6 +3337,11 @@ img {
       }
       @media screen and (max-width: 857px) {
         width: unset;
+      }
+      @media @mobile {
+        .profilebioname {
+          margin-top: 20px;
+        }
       }
     }
     h2 {
@@ -3312,7 +3360,17 @@ img {
         margin-left:8px;
         margin-bottom:25px;
         @media @mobile {
-          width: 93%;
+          width: 100%;
+          margin-left: 0 !important;
+          &.add-dob-input {
+            width: 100%;
+            text-align: start;
+            margin-left: 0;
+          }
+          &.addbio-input {
+            width: 100%;
+            padding: 0;
+          }
         }
         
         div {
@@ -3328,18 +3386,36 @@ img {
           border-radius: 5px;
           border: 1px solid rgba(@grayRGB ,.5);
           margin-top: auto;
+          @media @mobile {
+            width: 100%;
+            &.dobSection {
+              width: 100%;
+              border: 0;
+              padding: 0 0 0 10%;
+            }
+          }
           .dob {
             margin-top: -7px;
+            @media @mobile {
+              text-align: start;
+            }
+            
           }
           .age {
             margin-top: -7px;
             margin-bottom: -4px;
+            @media @mobile {
+              text-align: start;
+            }
           }
         }
       }
       .faved-btn {
         display: flex;
         justify-content: center;
+        @media @mobile {
+          display: none;
+        }
         a {
           text-decoration: none;
           color: @fontColor;
