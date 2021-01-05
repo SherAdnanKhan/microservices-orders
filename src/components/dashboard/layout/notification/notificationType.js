@@ -38,7 +38,6 @@ const NotificationType = ({
   const getNotificationLink = notification => {
     const currentUser = getCurrentUser();
 
-    console.log(notification);
     switch (notification.type) {
       case "REPOST EXHIBIT":
         return `/viewpost/${notification?.notifyable?.slug}`;

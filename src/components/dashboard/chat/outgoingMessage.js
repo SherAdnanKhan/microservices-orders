@@ -1,6 +1,7 @@
 import React from 'react';
 import { convertHexToRGBA, formatDate, formatTime } from '../../../utils/helperFunctions';
 import LinkPreview from '../../common/linkPreview';
+import Video from '../../common/video';
 import MessageOptions from './messageOptions';
 
 const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMessage, feelColor }) => {
@@ -70,6 +71,11 @@ const OutgoingMessage = ({ data, conversation, index, messagesLength, onDeleteMe
                   <source src={data.url} type="video/mpeg" />
                   Your browser does not support the video tag.
               </video>
+              </div>
+            }
+            {data.type === 5 &&
+              <div className="msgVideo">
+                <Video url={data.url} />
               </div>
             }
             {data.type === 3 &&

@@ -11,6 +11,7 @@
     "history": "^4.10.1",
     "jquery": "^3.5.0",
     "moment": "^2.26.0",
+    "numeral": "^2.0.6",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-canvas-draw": "^1.1.1",
@@ -33,13 +34,15 @@
     "react-tiny-link": "^3.6.0",
     "react-toastify": "^6.0.5",
     "react-tooltip": "^4.2.10",
+    "react-video-recorder": "^3.17.1",
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rxjs": "^6.6.3",
     "simple-peer": "^9.7.2",
     "slick-carousel": "^1.8.1",
-    "socket.io-client": "^2.3.0"
+    "socket.io-client": "^2.3.0",
+    "ts-ebml": "^2.0.2"
   },
   "scripts": {
     "start:dev": "env-cmd -f .env.development react-scripts start",

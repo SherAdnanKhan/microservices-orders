@@ -4,6 +4,7 @@ import ProfileCube from '../../common/profileCube';
 import { toast } from 'react-toastify';
 import ToolTip from "../../common/toolTip/toolTip";
 import { convertDateIntoAge } from '../../../utils/helperFunctions';
+import numeral from 'numeral';
 
 const StudioDetail = ({ userStudio, slug }) => {
   const history = useHistory();
@@ -62,7 +63,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                   <img src="/assets/images/sprfvs_full.png" alt="Sprfvs here" />
                   <span>SPRFVS</span>
                 </div>
-                <div className="sprfvs-users">{userStudio?.sprfvs_count}</div>
+                <div className="sprfvs-users">{numeral(userStudio?.sprfvs_count).format('0,a')}</div>
               </div>
 
               <div className="sprfvs-section">
@@ -70,7 +71,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                   <img src="/assets/images/catfaveon.png" className="fave" alt="faves here" />
                   <span>FAVES</span>
                 </div>
-                <div className="sprfvs-users">{userStudio?.fav_by_count}</div>
+                <div className="sprfvs-users">{numeral(userStudio?.fav_by_count).format('0,a')}</div>
               </div>
 
               <div className="sprfvs-section">
@@ -78,7 +79,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                   <img src="/assets/images/fave_icon.png" className="fave" alt="faving here" />
                   <span>FAVING</span>
                 </div>
-                <div className="sprfvs-users">{userStudio?.favs_count}</div>
+                <div className="sprfvs-users">{numeral(userStudio?.favs_count).format('0,a')}</div>
               </div>
 
               <div className="sprfvs-section">
@@ -86,7 +87,8 @@ const StudioDetail = ({ userStudio, slug }) => {
                   {/* <img src="/assets/images/sprfvs_empty.png" alt="Sprfvs here" /> */}
                   <span>POST</span>
                 </div>
-                <div className="sprfvs-users">{userStudio?.user?.posts_count}</div>
+                <div className="sprfvs-users">
+                  {numeral(userStudio?.user?.posts_count).format('0,a')}</div>
               </div>
             </div>
             {/* Fave Action Ends Here */}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProfileCube from '../../common/profileCube';
 import ToolTip from "../../common/toolTip/toolTip";
 import { convertDateIntoAge } from "../../../utils/helperFunctions"
+import numeral from 'numeral';
 
 const EditProfile = ({ myStudio, feelColor }) => {
   return (
@@ -25,7 +26,7 @@ const EditProfile = ({ myStudio, feelColor }) => {
               <div className="sprfvs-image">
                 <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
               </div>
-              <div className="sprfvs-users">326k</div>
+              <div className="sprfvs-users">{numeral(myStudio?.fav_by_count).format('0,a')}</div>
             </div>
 
             <div className="sprfvs-section">
@@ -39,14 +40,14 @@ const EditProfile = ({ myStudio, feelColor }) => {
               <div className="sprfvs-image">
                 <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
               </div>
-              <div className="sprfvs-users">46</div>
+              <div className="sprfvs-users">{numeral(myStudio?.favs_count).format('0,a')}</div>
             </div>
 
             <div className="sprfvs-section">
               <div className="sprfvs-image">
                 <span>POST</span>
               </div>
-              <div className="sprfvs-users">1679</div>
+              <div className="sprfvs-users">{numeral(myStudio?.user?.posts_count).format('0,a')}</div>
             </div>
           </div>
           {/* Fave Action Own Studio Ends Here */}

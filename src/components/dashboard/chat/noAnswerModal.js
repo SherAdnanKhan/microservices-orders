@@ -5,25 +5,7 @@ import ModalBody from '../../common/modal/modalBody';
 import ModalFooter from '../../common/modal/modalFooter';
 // import Input from '../../common/input';
 
-const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade }) => {
-  // const [message, setMessage] = useState('');
-  // const [error, setError] = useState('');
-
-  // const validate = () => {
-  //   if (!message)
-  //     return 'Please write something.';
-  //   return '';
-  // }
-
-  // const handleLeaveMessage = () => {
-  //   const error = validate();
-
-  //   if (!error) {
-  //     onLeaveMessage(message);
-  //   }
-  //   setError(error);
-  // }
-
+const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade, onVideoMessage }) => {
   return (
     <div className="no-answer-modal">
       <Modal>
@@ -35,11 +17,11 @@ const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade }) => {
               No Answer
             </div> */}
             <div className="no-answer-actions">
-              <div className="cancel">
+              <div className="cancel" onClick={onClose}>
                 <i className="far fa-times-circle"></i>
                 <span>Cancel</span>
               </div>
-              <div className="record">
+              <div className="record" onClick={onVideoMessage}>
                 <img src="/assets/images/v-record.png" alt="" />
                 <span>Video<br /> Message</span>
               </div>

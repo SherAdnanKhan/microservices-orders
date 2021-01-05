@@ -2,6 +2,7 @@ import React from 'react';
 import { convertHexToRGBA, formatDate, formatTime } from '../../../utils/helperFunctions';
 import Avatar from '../../common/avatar';
 import LinkPreview from '../../common/linkPreview';
+import Video from '../../common/video';
 
 const IncomingMessage = ({ data }) => {
   return (
@@ -52,6 +53,11 @@ const IncomingMessage = ({ data }) => {
                       <source src={data.url} type="video/mpeg" />
                       Your browser does not support the video tag.
                     </video>
+                  </div>
+                }
+                {data.type === 5 &&
+                  <div className="msgVideo">
+                    <Video url={data.url} />
                   </div>
                 }
                 {data.type === 3 &&
