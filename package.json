@@ -42,6 +42,7 @@
     "simple-peer": "^9.7.2",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^2.3.0",
+    "styled-components": "^4.4.1",
     "ts-ebml": "^2.0.2"
   },
   "scripts": {
