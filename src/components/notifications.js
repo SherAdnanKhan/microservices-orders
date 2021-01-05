@@ -134,7 +134,6 @@ const Notifications = () => {
                 </a>
               )
             });
-            console.log(data);
             dispatch(updateConversationUnreadCount(data.message));
             dispatch(updateUnreadConversations(data.message.conversation_id));
           }

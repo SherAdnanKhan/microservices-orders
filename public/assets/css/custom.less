@@ -6080,6 +6080,8 @@ img {
     z-index: 2;
   }
   .percent {
+    transition-property: width;
+    transition-duration: 1s;
     position: absolute;
     top: 0;
     left: 0;
@@ -6099,7 +6101,6 @@ img {
   margin-top: 10px;
   padding: 9px;
   box-sizing: border-box;
-
   
   .startTime {
     position: absolute;
@@ -6872,12 +6873,13 @@ img {
       color: white;
       font-size: 16px;
       margin-left: 2%;
-      padding: 10px;
+      padding: 5px;
+      box-sizing: border-box;
       @media (min-width: 857px)and(max-width:1200px)  {
         font-size:12px;
       }
       @media @mobile {
-        width: 13%;
+        width: 20%;
         padding: 6px 10px;
       }
       img{

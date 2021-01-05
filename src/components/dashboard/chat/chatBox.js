@@ -42,6 +42,7 @@ class ChatBox extends Component {
     video: '',
     document: '',
     message: '',
+    videoMessage: '',
     hidden: true,
     progress: 0,
     page: 1,
@@ -60,6 +61,7 @@ class ChatBox extends Component {
   bottomRef = createRef();
   footerRef = createRef();
   breakPoint = 768;
+  progressRef = createRef();
 
   handleWindowResize = () => {
     this.setState({ width: window.innerWidth });
@@ -69,7 +71,7 @@ class ChatBox extends Component {
     window.addEventListener("resize", this.handleWindowResize);
 
     const currentUser = getCurrentUser();
-    console.log('did mount called')
+
     this.props.getConversation(this.props.activeConversation.id);
 
     socket.on('recieveMessage', async (data) => {
@@ -170,14 +172,14 @@ class ChatBox extends Component {
   }
 
   sendMessage = async (e) => {
-    const { image, video, message, document } = this.state;
+    const { image, video, message, document, videoMessage } = this.state;
     const { conversation } = this.props.conversation;
     const user = getCurrentUser();
 
     if (conversation) {
       let data = {
-        url: image || video || (document && document.path) || '',
-        message_type: image ? 1 : video ? 2 : document ? 3 : 0,
+        url: image || video || videoMessage || (document && document.path) || '',
+        message_type: image ? 1 : video ? 2 : document ? 3 : videoMessage ? 5 : 0,
         user_id: user.id,
         conversation_id: conversation.id,
         recievers:
@@ -243,8 +245,8 @@ class ChatBox extends Component {
 
   handleUpload = ({ target: input }) => {
     if (input.files[0]) {
-
       this.setState({ hidden: true });
+
       const fileSizeMb = this.convertFileSize(input.files[0].size);
       const fileType = input.files[0].type;
       const isErrors = this.validateFile(fileSizeMb, fileType);
@@ -255,7 +257,10 @@ class ChatBox extends Component {
       if (!isErrors) {
         this.props.uploadFile(data,
           progress => {
-            this.setState({ progress });
+            this.setState({ progress }, () => {
+
+              this.progressRef.current.scrollIntoView({ behavior: 'auto' })
+            });
           },
           result => {
             if (result.doc_type === 'document') {
@@ -313,7 +318,6 @@ class ChatBox extends Component {
     if (scrollTop === 0) {
       this.setState({ page: page + 1, }, () => {
         if (this.props.conversation.messages.next_page_url) {
-          console.log('scroll')
           this.props.getConversation(this.props.activeConversation.id, page + 1, () => {
             element.scrollIntoView({ behavior: 'auto' })
           })
@@ -381,8 +385,37 @@ class ChatBox extends Component {
     socket.emit('stopTyping', data);
   }
 
-  handleLeaveMessage = message => {
-    this.setState({ message }, () => this.sendMessage());
+  handleLeaveVideoMessage = videoFile => {
+    if (videoFile) {
+      this.setState({ hidden: true });
+      const fileSizeMb = this.convertFileSize(videoFile.size);
+      const fileType = videoFile.type;
+      const isErrors = this.validateFile(fileSizeMb, fileType);
+      const data = new FormData();
+
+      data.append('file_upload', videoFile);
+
+      if (!isErrors) {
+        this.props.uploadFile(data,
+          progress => {
+            this.setState({ progress }, () => {
+              this.progressRef.current.scrollIntoView({ behavior: 'auto' })
+            });
+          },
+          result => {
+            this.setState({ videoMessage: result.path, progress: 0 }, () => {
+              this.sendMessage();
+            });
+          },
+          err => {
+            this.setState({ progress: 0 });
+          })
+      }
+      else {
+        this.setState({ hidden: true });
+        toast.error(isErrors)
+      }
+    }
   };
 
   render() {
@@ -408,7 +441,8 @@ class ChatBox extends Component {
               isViewAble={isViewAble}
               isMuted={isMuted}
               onOpenDraw={() => this.setState({ draw: true })}
-              onLeaveMessage={this.handleLeaveMessage}
+              // onLeaveMessage={this.handleLeaveMessage}
+              onLeaveVideoMessage={this.handleLeaveVideoMessage}
             />
           }
 
@@ -467,7 +501,7 @@ class ChatBox extends Component {
                 {data.user.id === currentUser.id
                   ? (
                     data.type !== 4 &&
-                    < OutgoingMessage
+                    <OutgoingMessage
                       data={data}
                       conversation={conversation}
                       index={index}
@@ -481,10 +515,28 @@ class ChatBox extends Component {
                     />
                   )
                 }
+
+
                 <div ref={ref => this.bottomRef.current = ref}></div>
               </div>
             ))
             }
+            {progress > 0 &&
+              <div ref={this.progressRef}>
+                <ProgressBar
+                  progress={progress}
+                  feelColor={currentUser.feel.color_code}
+                />
+              </div>
+            }
+
+            <FilePreview
+              previewRef={this.preview}
+              image={image}
+              video={video}
+              document={document}
+              onDeletePreview={this.handleDeletePreview}
+            />
           </div>
         </>
 
@@ -493,12 +545,6 @@ class ChatBox extends Component {
             {isViewAble && isAllowed
               ? (
                 <div className="chat-footer" ref={this.footerRef} >
-                  {progress > 0 &&
-                    <ProgressBar
-                      progress={progress}
-                      feelColor={currentUser.feel.color_code}
-                    />
-                  }
                   <ChatInput
                     message={message}
                     onChange={this.handleChange}
@@ -516,13 +562,6 @@ class ChatBox extends Component {
                     typingUsers={this.state.typings}
                   />
 
-                  <FilePreview
-                    previewRef={this.preview}
-                    image={image}
-                    video={video}
-                    document={document}
-                    onDeletePreview={this.handleDeletePreview}
-                  />
                   {!hidden &&
                     <FileUploadModal
                       feelColor={currentUser.feel.color_code}

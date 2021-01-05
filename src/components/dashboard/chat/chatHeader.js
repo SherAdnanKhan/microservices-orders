@@ -16,11 +16,12 @@ import { useDispatch } from "react-redux"
 import NoAnswerModal from './noAnswerModal';
 import { endMeeting, startMeeting, stopTimer, updateTimer } from '../../../actions/meetingActions';
 import { toast } from 'react-toastify';
+import MediaRecorder from './mediaRecorder';
 
 const ChatHeader = ({
   conversation, onlineUsers, onOpenInvitationModel,
   onOpenParticipatsModel, currentUser, onBackPress,
-  onOpenDraw, user, isBlocked, isViewAble, isMuted, onLeaveMessage
+  onOpenDraw, user, isBlocked, isViewAble, isMuted, onLeaveVideoMessage
 }) => {
   const filtered = conversation?.participants.filter(p => p.id !== currentUser.id)[0];
   const history = useHistory();
@@ -34,6 +35,8 @@ const ChatHeader = ({
   const [hasMeeting, sethasMeeting] = useState(null);
   // const [countUp, setCountUp] = useState(0);
   const [noAnswerModal, setNoAnswerModal] = useState(false);
+  const [videoMessageModal, setVideoMessageModal] = useState(false);
+
   const allParticipants = useRef([]);
   const audioRef = useRef();
 
@@ -146,7 +149,7 @@ const ChatHeader = ({
       .then(async (stream) => {
         stream.getTracks().forEach(track => track.stop());
         rejectedUsers.current = [];
-        noAnswerModal && setNoAnswerModal(false);
+        // noAnswerModal && setNoAnswerModal(false);
 
         audioRef.current = new Audio('/assets/sounds/Skype Ringtone 2018.mp3');
 
@@ -223,16 +226,22 @@ const ChatHeader = ({
   }
 
   const handleChangeNoAnswerModal = () => {
-    setNoAnswerModal(false);
+    setNoAnswerModal(noAnswerModal => noAnswerModal = false);
   }
 
   const handleJoinMeeting = () => {
     dispatch(startMeeting(conversation?.id))
   }
 
-  const handleLeaveMessage = message => {
-    onLeaveMessage(message);
-    setNoAnswerModal(false);
+  const handleLeaveVideoMessage = message => {
+    onLeaveVideoMessage(message);
+    setNoAnswerModal(noAnswerModal => noAnswerModal = false);
+    setVideoMessageModal(false);
+  }
+
+  const handleVideoMessage = () => {
+    setNoAnswerModal(noAnswerModal => noAnswerModal = false);
+    setVideoMessageModal(true);
   }
 
   return (
@@ -384,11 +393,18 @@ const ChatHeader = ({
         <NoAnswerModal
           onClose={handleChangeNoAnswerModal}
           feelColor={feelColor}
-          onLeaveMessage={handleLeaveMessage}
           onCallMade={handleCall}
+          onVideoMessage={handleVideoMessage}
         />
       }
 
+      {videoMessageModal &&
+        <MediaRecorder
+          onClose={() => setVideoMessageModal(false)}
+          onLeaveVideoMessage={handleLeaveVideoMessage}
+          feelColor={feelColor}
+        />
+      }
     </div>
   );
 };
