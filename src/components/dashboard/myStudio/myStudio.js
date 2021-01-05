@@ -21,6 +21,7 @@ import RepostModal from "../../common/repostModal";
 import MzFlashModal from "../../common/mzFlashModal";
 import { useRouteMatch } from 'react-router-dom';
 import ConfirmationModal from '../chat/confirmationModal';
+import ScrollTop from '../../common/scrollTop';
 
 const MyStudio = () => {
   const [show, setShow] = useState(false);
@@ -179,7 +180,7 @@ const MyStudio = () => {
   }
 
   return (
-    <>
+    <ScrollTop>
       {showDeleteModel &&
         <DeleteModal
           onDelete={handleDelete}
@@ -295,7 +296,7 @@ const MyStudio = () => {
           onAddVault={handleVault}
         />
       </div>
-    </>
+    </ScrollTop>
   );
 };
 
