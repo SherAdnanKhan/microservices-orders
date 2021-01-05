@@ -12,7 +12,46 @@ const EditProfile = ({ myStudio, feelColor }) => {
           <div className="procu">
             {myStudio && <ProfileCube avatars={myStudio.user.avatars} feelColor={feelColor} />}
           </div>
+          {/* Fave Action Own Studio Starts Here */}
+          <div className="faves-action">
+            <div className="sprfvs-section">
+              <div className="sprfvs-image">
+                <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
+              </div>
+              <div className="sprfvs-users">$7.03</div>
+            </div>
+
+            <div className="sprfvs-section">
+              <div className="sprfvs-image">
+                <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
+              </div>
+              <div className="sprfvs-users">326k</div>
+            </div>
+
+            <div className="sprfvs-section">
+              <div className="sprfvs-image">
+                <img src="/assets/images/sprfvs_full.png" className="fave" alt="faves here" />
+              </div>
+              <div className="sprfvs-users">16</div>
+            </div>
+
+            <div className="sprfvs-section">
+              <div className="sprfvs-image">
+                <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
+              </div>
+              <div className="sprfvs-users">46</div>
+            </div>
+
+            <div className="sprfvs-section">
+              <div className="sprfvs-image">
+                <span>POST</span>
+              </div>
+              <div className="sprfvs-users">1679</div>
+            </div>
+          </div>
+          {/* Fave Action Own Studio Ends Here */}
         </div>
+
         <div className="studioDetail">
           {myStudio &&
             <div className="profilebioname">
@@ -29,22 +68,23 @@ const EditProfile = ({ myStudio, feelColor }) => {
             </div>
           }
           <form>
-            {myStudio?.user?.bio &&
-              <label htmlFor="addbio" className="addbio-input">
-                <span className="labelText"></span>
-                <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
-              </label>
-            }
             {myStudio?.user?.dob &&
               <label htmlFor="add-dob" className="add-dob-input">
                 <span className="labelText"></span>
-                <div>
+                <div className="dobSection">
                   <p className="dob">Date of birth: {myStudio.user.dob}</p>
                   <p className="age">Age: {myStudio && convertDateIntoAge(myStudio.user.dob)}
                   </p>
                 </div>
               </label>
             }
+            {myStudio?.user?.bio &&
+              <label htmlFor="addbio" className="addbio-input">
+                <span className="labelText"></span>
+                <div> {myStudio && myStudio.user.bio ? myStudio.user.bio.replace(/<br\s*\/?>/g, '\n') : ''} </div>
+              </label>
+            }
+
             <div className="faved-btn">
               {/* <Link to='/my-studio/fave-by'>
                 <div className="faved-by-btn">

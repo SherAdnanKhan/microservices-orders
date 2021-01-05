@@ -89,7 +89,7 @@ const StudioDetail = ({ userStudio, slug }) => {
                 <div className="sprfvs-users">{userStudio?.user?.posts_count}</div>
               </div>
             </div>
-            {/* Fave Action Starts Here */}
+            {/* Fave Action Ends Here */}
 
           </div>
           <div className="studioDetail">
