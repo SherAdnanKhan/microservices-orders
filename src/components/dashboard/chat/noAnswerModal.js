@@ -65,6 +65,12 @@ const NoAnswerModal = ({ onClose, feelColor, onLeaveMessage, onCallMade, onVideo
           </div>
         </ModalBody>
         <ModalFooter>
+          <div className="recordHold">
+            <span>Hold to REC</span>
+            <div className="recordButton">
+              <button></button>
+            </div>
+          </div>
         </ModalFooter>
       </Modal>
     </div>
