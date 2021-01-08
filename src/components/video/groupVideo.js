@@ -19,7 +19,11 @@ import ConfirmationModal from "../dashboard/chat/confirmationModal";
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
 import { endMeeting } from '../../actions/meetingActions';
 import useViewport from '../common/useViewport';
-import TimerLine from '../common/timerLine';
+// import TimerLine from '../common/timerLine';
+// import MeuzmLogo from '../common/meuzmLogo';
+import UserCube from '../common/userCube';
+import MeuzmLogoMedium from '../common/meuzmLogoMedium';
+
 
 const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
   const ref = useRef();
@@ -203,8 +207,7 @@ const GroupVideoCall = ({ room }) => {
 
   const { conversation: { conversation } } = useSelector(state => state);
   const { timer } = useSelector(state => state.meeting);
-
-
+  const filtered = conversation?.participants?.filter(p => p?.id !== user?.id)
   // const mobileConstraints = {
   //   video: {
   //     width: 480,
@@ -575,12 +578,21 @@ const GroupVideoCall = ({ room }) => {
         onClick={handleShowActions}
       >
         {timer > 0 &&
+          <div className="attender">
+            {filtered?.length > 1
+              ? <MeuzmLogoMedium />
+              : <UserCube user={filtered[0]} />
+            }
+            <div> calling..</div>
+          </div>
+        }
+        {/* {timer > 0 &&
           <TimerLine
             progress={timer * 6.8}
             feelColor={'red'}
             timeerCount={15 - timer}
           />
-        }
+        } */}
 
         <div className="video-container">
           <div
@@ -618,75 +630,80 @@ const GroupVideoCall = ({ room }) => {
               />
             ))}
           </div>
-          <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
-            {microPhone
-              ?
-              <>
-                <i
-                  className="fa fa-microphone"
-                  aria-hidden="true"
-                  data-for="mic"
-                  data-tip="Mic"
-                  onClick={handleToggleMicroPhone}
-                />
-                <ToolTip id="mic" />
-              </>
-              :
-              <>
-                <i
-                  className="fa fa-microphone-slash"
-                  aria-hidden="true"
-                  onClick={handleToggleMicroPhone}
-                  data-for="mic"
-                  data-tip="Mic"
-                />
-                <ToolTip id="mic" />
-              </>
-            }
-            <i
-              className="fa fa-retweet"
-              aria-hidden="true"
-              onClick={handleCameraSwitch}
-              data-for="switchCamera"
-              data-tip="switch camera" />
-            <ToolTip id="switchCamera" />
-            {video
-              ?
-              <>
-                <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} data-for="camera" data-tip="Camera" />
-                <ToolTip id="camera" />
-              </>
-              :
-              <>
-                <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" data-for="camera" data-tip="camera" />
-                <ToolTip id="camera" />
-              </>
-            }
-
-          </div>
+          {peers.length > 0 &&
+            <div className="call-Actions" onClick={(e) => e.stopPropagation()}>
+              {microPhone
+                ?
+                <>
+                  <i
+                    className="fa fa-microphone"
+                    aria-hidden="true"
+                    data-for="mic"
+                    data-tip="Mic"
+                    onClick={handleToggleMicroPhone}
+                  />
+                  <ToolTip id="mic" />
+                </>
+                :
+                <>
+                  <i
+                    className="fa fa-microphone-slash"
+                    aria-hidden="true"
+                    onClick={handleToggleMicroPhone}
+                    data-for="mic"
+                    data-tip="Mic"
+                  />
+                  <ToolTip id="mic" />
+                </>
+              }
+              <i
+                className="fa fa-retweet"
+                aria-hidden="true"
+                onClick={handleCameraSwitch}
+                data-for="switchCamera"
+                data-tip="switch camera" />
+              <ToolTip id="switchCamera" />
+              {video
+                ?
+                <>
+                  <i className="fa fa-camera" aria-hidden="true" onClick={handleToggleVideo} data-for="camera" data-tip="Camera" />
+                  <ToolTip id="camera" />
+                </>
+                :
+                <>
+                  <img className="camera-off" src="/assets/images/camera-off.png" onClick={handleToggleVideo} alt="" data-for="camera" data-tip="camera" />
+                  <ToolTip id="camera" />
+                </>
+              }
+            </div>
+          }
           <div className="call-Actions2">
-            <img
-              className="valut-img"
-              alt="strq"
-              src="/assets/images/strqicon.png"
-              onClick={navigateToSTRQ}
-              data-for="chat"
-              data-tip="strq" />
-            <ToolTip id="chat" />
-            <img
-              src="/assets/images/icons/DrawStrq.png"
-              alt="Draw"
-              data-for="chat" data-tip="draw"
-            ></img>
-            <ToolTip id="draw strq" />
-            <i
-              className="fas fa-user-plus"
-              aria-hidden="true"
-              onClick={handleOpenInvitationModal}
-              data-for="inviteUser"
-              data-tip="invite users"
-            />
-            <ToolTip id="inviteUser" />
+            {peers.length > 0 &&
+              <>
+                <img
+                  className="valut-img"
+                  alt="strq"
+                  src="/assets/images/strqicon.png"
+                  onClick={navigateToSTRQ}
+                  data-for="chat"
+                  data-tip="strq" />
+                <ToolTip id="chat" />
+                <img
+                  src="/assets/images/icons/DrawStrq.png"
+                  alt="Draw"
+                  data-for="chat" data-tip="draw"
+                ></img>
+                <ToolTip id="draw strq" />
+                <i
+                  className="fas fa-user-plus"
+                  aria-hidden="true"
+                  onClick={handleOpenInvitationModal}
+                  data-for="inviteUser"
+                  data-tip="invite users"
+                />
+                <ToolTip id="inviteUser" />
+              </>
+            }
             <i
               className="far fa-times-circle"
               onClick={handleEndCall}
