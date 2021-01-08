@@ -19,7 +19,11 @@ import ConfirmationModal from "../dashboard/chat/confirmationModal";
 import { muteUser, blockUser, unMuteUser, unBlockUser } from "../../actions/userActions";
 import { endMeeting } from '../../actions/meetingActions';
 import useViewport from '../common/useViewport';
-import TimerLine from '../common/timerLine';
+// import TimerLine from '../common/timerLine';
+// import MeuzmLogo from '../common/meuzmLogo';
+import UserCube from '../common/userCube';
+import MeuzmLogoMedium from '../common/meuzmLogoMedium';
+
 
 const Video = ({ peer, user, socketId, onPeerClose, onConnect }) => {
   const ref = useRef();
@@ -203,8 +207,7 @@ const GroupVideoCall = ({ room }) => {
 
   const { conversation: { conversation } } = useSelector(state => state);
   const { timer } = useSelector(state => state.meeting);
-
-
+  const filtered = conversation?.participants?.filter(p => p?.id !== user?.id)
   // const mobileConstraints = {
   //   video: {
   //     width: 480,
@@ -575,12 +578,21 @@ const GroupVideoCall = ({ room }) => {
         onClick={handleShowActions}
       >
         {timer > 0 &&
+          <div className="attender">
+            {filtered?.length > 1
+              ? <MeuzmLogoMedium />
+              : <UserCube user={filtered[0]} />
+            }
+            <div> calling..</div>
+          </div>
+        }
+        {/* {timer > 0 &&
           <TimerLine
             progress={timer * 6.8}
             feelColor={'red'}
             timeerCount={15 - timer}
           />
-        }
+        } */}
 
         <div className="video-container">
           <div
