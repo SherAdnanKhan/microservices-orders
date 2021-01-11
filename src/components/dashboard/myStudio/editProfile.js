@@ -17,16 +17,9 @@ const EditProfile = ({ myStudio, feelColor }) => {
           <div className="faves-action">
             <div className="sprfvs-section">
               <div className="sprfvs-image">
-                <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
+                <img src="/assets/images/sack-dollar.png" className="dollar" alt="Sprfvs here" />
               </div>
               <div className="sprfvs-users">$7.03</div>
-            </div>
-
-            <div className="sprfvs-section">
-              <div className="sprfvs-image">
-                <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
-              </div>
-              <div className="sprfvs-users">{numeral(myStudio?.fav_by_count).format('0,a')}</div>
             </div>
 
             <div className="sprfvs-section">
@@ -38,7 +31,14 @@ const EditProfile = ({ myStudio, feelColor }) => {
 
             <div className="sprfvs-section">
               <div className="sprfvs-image">
-                <img src="/assets/images/catfaveon.png" alt="Sprfvs here" />
+                <img src="/assets/images/heart-arrow2.svg" alt="Sprfvs here" />
+              </div>
+              <div className="sprfvs-users">{numeral(myStudio?.fav_by_count).format('0,a')}</div>
+            </div>
+
+            <div className="sprfvs-section">
+              <div className="sprfvs-image">
+                <img src="/assets/images/heart-arrow.svg" alt="Sprfvs here" />
               </div>
               <div className="sprfvs-users">{numeral(myStudio?.favs_count).format('0,a')}</div>
             </div>
